@@ -3189,6 +3189,7 @@
     <item type="id" name="system_icon_area" />
     <item type="id" name="system_icons" />
     <item type="id" name="system_icons_container" />
+    <item type="id" name="system_setting" />
     <item type="id" name="tab_container" />
     <item type="id" name="tabs" />
     <item type="id" name="tag_accessibility_actions" />

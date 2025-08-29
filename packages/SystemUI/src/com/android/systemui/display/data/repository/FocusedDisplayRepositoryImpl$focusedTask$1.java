@@ -51,7 +51,7 @@ final class FocusedDisplayRepositoryImpl$focusedTask$1 extends SuspendLambda imp
             final ?? r1 = new FocusTransitionListener() { // from class: com.android.systemui.display.data.repository.FocusedDisplayRepositoryImpl$focusedTask$1$listener$1
                 @Override // com.android.wm.shell.shared.FocusTransitionListener
                 public final void onFocusedDisplayChanged(int i2) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Integer.valueOf(i2));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Integer.valueOf(i2));
                 }
             };
             this.$transitions.setFocusTransitionListener(r1, this.this$0.backgroundExecutor);

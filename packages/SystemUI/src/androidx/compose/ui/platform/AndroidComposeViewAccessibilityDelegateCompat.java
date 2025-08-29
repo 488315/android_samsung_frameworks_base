@@ -1579,7 +1579,7 @@ public final class AndroidComposeViewAccessibilityDelegateCompat extends Accessi
 
     public final void notifySubtreeAccessibilityStateChangedIfNeeded(LayoutNode layoutNode) {
         if (this.subtreeChangedLayoutNodes.add(layoutNode)) {
-            this.boundsUpdateChannel.mo3476trySendJP2dKIU(Unit.INSTANCE);
+            this.boundsUpdateChannel.mo3475trySendJP2dKIU(Unit.INSTANCE);
         }
     }
 

@@ -102,7 +102,7 @@ public class SubscreenBrightnessController extends ViewController {
     }
 
     /* renamed from: -$$Nest$monProgressSnap, reason: not valid java name */
-    public static void m2895$$Nest$monProgressSnap(SubscreenBrightnessController subscreenBrightnessController, SeekBar seekBar) {
+    public static void m2893$$Nest$monProgressSnap(SubscreenBrightnessController subscreenBrightnessController, SeekBar seekBar) {
         subscreenBrightnessController.getClass();
         int progress = seekBar.getProgress();
         if (!QpRune.QUICK_SUBSCREEN_PANEL) {
@@ -121,7 +121,7 @@ public class SubscreenBrightnessController extends ViewController {
     }
 
     /* renamed from: -$$Nest$mupdateSlider, reason: not valid java name */
-    public static void m2896$$Nest$mupdateSlider(final SubscreenBrightnessController subscreenBrightnessController, float f) {
+    public static void m2894$$Nest$mupdateSlider(final SubscreenBrightnessController subscreenBrightnessController, float f) {
         StringBuilder sb = new StringBuilder("mMinimumBacklight=");
         float f2 = subscreenBrightnessController.mMinimumBacklight;
         sb.append(f2);
@@ -250,7 +250,7 @@ public class SubscreenBrightnessController extends ViewController {
                     int i = message.what;
                     SubscreenBrightnessController subscreenBrightnessController = SubscreenBrightnessController.this;
                     if (i == 1) {
-                        SubscreenBrightnessController.m2896$$Nest$mupdateSlider(subscreenBrightnessController, Float.intBitsToFloat(message.arg1));
+                        SubscreenBrightnessController.m2894$$Nest$mupdateSlider(subscreenBrightnessController, Float.intBitsToFloat(message.arg1));
                     } else if (i != 10) {
                         super.handleMessage(message);
                     } else {
@@ -314,7 +314,7 @@ public class SubscreenBrightnessController extends ViewController {
                 SubscreenBrightnessController.mTracking = false;
                 SubscreenBrightnessController subscreenBrightnessController = SubscreenBrightnessController.this;
                 subscreenBrightnessController.onChanged(subscreenBrightnessController.mView.mSeekBar.getProgress(), false, true);
-                SubscreenBrightnessController.m2895$$Nest$monProgressSnap(SubscreenBrightnessController.this, seekBar);
+                SubscreenBrightnessController.m2893$$Nest$monProgressSnap(SubscreenBrightnessController.this, seekBar);
                 ValueAnimator valueAnimator = SubscreenBrightnessController.this.mView.mThumbAnimator;
                 if (valueAnimator != null) {
                     valueAnimator.reverse();

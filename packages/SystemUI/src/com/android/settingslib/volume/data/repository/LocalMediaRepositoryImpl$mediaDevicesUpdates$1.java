@@ -51,7 +51,7 @@ final class LocalMediaRepositoryImpl$mediaDevicesUpdates$1 extends SuspendLambda
             final ?? r1 = new LocalMediaManager.DeviceCallback() { // from class: com.android.settingslib.volume.data.repository.LocalMediaRepositoryImpl$mediaDevicesUpdates$1$callback$1
                 @Override // com.android.settingslib.media.LocalMediaManager.DeviceCallback
                 public final void onDeviceAttributesChanged() {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new Object() { // from class: com.android.settingslib.volume.data.repository.LocalMediaRepositoryImpl$DevicesUpdate$DeviceAttributesChanged
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new Object() { // from class: com.android.settingslib.volume.data.repository.LocalMediaRepositoryImpl$DevicesUpdate$DeviceAttributesChanged
                         public final boolean equals(Object obj2) {
                             return this == obj2 || (obj2 instanceof LocalMediaRepositoryImpl$DevicesUpdate$DeviceAttributesChanged);
                         }
@@ -68,7 +68,7 @@ final class LocalMediaRepositoryImpl$mediaDevicesUpdates$1 extends SuspendLambda
 
                 @Override // com.android.settingslib.media.LocalMediaManager.DeviceCallback
                 public final void onDeviceListUpdate(List list) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new Object(list) { // from class: com.android.settingslib.volume.data.repository.LocalMediaRepositoryImpl$DevicesUpdate$DeviceListUpdate
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new Object(list) { // from class: com.android.settingslib.volume.data.repository.LocalMediaRepositoryImpl$DevicesUpdate$DeviceListUpdate
                         public final List newDevices;
 
                         {
@@ -98,7 +98,7 @@ final class LocalMediaRepositoryImpl$mediaDevicesUpdates$1 extends SuspendLambda
 
                 @Override // com.android.settingslib.media.LocalMediaManager.DeviceCallback
                 public final void onSelectedDeviceStateChanged(MediaDevice mediaDevice) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new Object() { // from class: com.android.settingslib.volume.data.repository.LocalMediaRepositoryImpl$DevicesUpdate$SelectedDeviceStateChanged
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new Object() { // from class: com.android.settingslib.volume.data.repository.LocalMediaRepositoryImpl$DevicesUpdate$SelectedDeviceStateChanged
                         public final boolean equals(Object obj2) {
                             return this == obj2 || (obj2 instanceof LocalMediaRepositoryImpl$DevicesUpdate$SelectedDeviceStateChanged);
                         }

@@ -36,9 +36,9 @@ public final class OccludedToGoneTransitionViewModel {
         KeyguardState keyguardState = KeyguardState.OCCLUDED;
         SceneKey sceneKey = Scenes.Gone;
         companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM2615setupVtjQ1oo = keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(DEFAULT_DURATION, new Edge.StateToContent(keyguardState, sceneKey));
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM2613setupVtjQ1oo = keyguardTransitionAnimationFlow.m2613setupVtjQ1oo(DEFAULT_DURATION, new Edge.StateToContent(keyguardState, sceneKey));
         KeyguardState keyguardState2 = KeyguardState.GONE;
         companion.getClass();
-        this.transitionAnimation = flowBuilderM2615setupVtjQ1oo.setupWithoutSceneContainer(new Edge.StateToState(keyguardState, keyguardState2));
+        this.transitionAnimation = flowBuilderM2613setupVtjQ1oo.setupWithoutSceneContainer(new Edge.StateToState(keyguardState, keyguardState2));
     }
 }

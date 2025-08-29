@@ -64,7 +64,7 @@ public final class AodPromotedNotificationSection extends KeyguardSection {
             String str4 = numberHexFormat.suffix;
             long length = str3.length() + i2 + 8 + str4.length();
             if (0 > length || length > 2147483647L) {
-                throw new IllegalArgumentException("The resulting string length is too big: " + ((Object) ULong.m3448toStringimpl(length)));
+                throw new IllegalArgumentException("The resulting string length is too big: " + ((Object) ULong.m3447toStringimpl(length)));
             }
             int i3 = (int) length;
             char[] cArr2 = new char[i3];

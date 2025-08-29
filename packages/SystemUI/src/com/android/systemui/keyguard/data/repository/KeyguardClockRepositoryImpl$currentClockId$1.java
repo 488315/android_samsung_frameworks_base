@@ -50,13 +50,13 @@ final class KeyguardClockRepositoryImpl$currentClockId$1 extends SuspendLambda i
             final ?? r1 = new ClockRegistry.ClockChangeListener() { // from class: com.android.systemui.keyguard.data.repository.KeyguardClockRepositoryImpl$currentClockId$1$listener$1
                 @Override // com.android.systemui.shared.clocks.ClockRegistry.ClockChangeListener
                 public final void onCurrentClockChanged() {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(keyguardClockRepositoryImpl.clockRegistry.getCurrentClockId());
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(keyguardClockRepositoryImpl.clockRegistry.getCurrentClockId());
                 }
             };
             ClockRegistry clockRegistry = this.this$0.clockRegistry;
             clockRegistry.f104assert.isMainThread();
             ((ArrayList) clockRegistry.clockChangeListeners).add(r1);
-            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(this.this$0.clockRegistry.getCurrentClockId());
+            ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(this.this$0.clockRegistry.getCurrentClockId());
             final KeyguardClockRepositoryImpl keyguardClockRepositoryImpl2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.keyguard.data.repository.KeyguardClockRepositoryImpl$currentClockId$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0

@@ -80,9 +80,9 @@ public final class AirplaneModeTileDataInteractor implements QSTileDataInteracto
                     int i2 = anonymousClass1.label;
                     if (i2 == 0) {
                         ResultKt.throwOnFailure(obj2);
-                        AirplaneModeTileModel airplaneModeTileModelM2927boximpl = AirplaneModeTileModel.m2927boximpl(((Boolean) obj).booleanValue());
+                        AirplaneModeTileModel airplaneModeTileModelM2925boximpl = AirplaneModeTileModel.m2925boximpl(((Boolean) obj).booleanValue());
                         anonymousClass1.label = 1;
-                        if (this.$this_unsafeFlow.emit(airplaneModeTileModelM2927boximpl, anonymousClass1) == coroutineSingletons) {
+                        if (this.$this_unsafeFlow.emit(airplaneModeTileModelM2925boximpl, anonymousClass1) == coroutineSingletons) {
                             return coroutineSingletons;
                         }
                     } else {

@@ -13,6 +13,6 @@ public final class DozingToDreamingTransitionViewModel {
 
     public DozingToDreamingTransitionViewModel(KeyguardTransitionAnimationFlow keyguardTransitionAnimationFlow) {
         FromDozingTransitionInteractor.Companion.getClass();
-        this.lockscreenAlpha = keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(FromDozingTransitionInteractor.TO_DREAMING_DURATION, KeyguardInteractor$$ExternalSyntheticOutline0.m(Edge.Companion, KeyguardState.DOZING, KeyguardState.DREAMING)).immediatelyTransitionTo(0.0f);
+        this.lockscreenAlpha = keyguardTransitionAnimationFlow.m2613setupVtjQ1oo(FromDozingTransitionInteractor.TO_DREAMING_DURATION, KeyguardInteractor$$ExternalSyntheticOutline0.m(Edge.Companion, KeyguardState.DOZING, KeyguardState.DREAMING)).immediatelyTransitionTo(0.0f);
     }
 }

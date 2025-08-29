@@ -21,6 +21,6 @@ public abstract class SimpleDigitalClockTextViewKt {
         int length = charSequence.length();
         Rect rect = tempRect;
         paint.getTextBounds(charSequence, 0, length, rect);
-        return VRectF.m2830constructorimpl(rect);
+        return VRectF.m2828constructorimpl(rect);
     }
 }

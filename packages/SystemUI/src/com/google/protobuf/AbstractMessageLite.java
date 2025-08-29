@@ -17,7 +17,7 @@ public abstract class AbstractMessageLite implements MessageLite {
     public abstract class Builder implements MessageLiteOrBuilder, Cloneable {
         @Override // 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public abstract GeneratedMessageLite.Builder mo3287clone();
+        public abstract GeneratedMessageLite.Builder mo3286clone();
     }
 
     public static void addAll(Iterable iterable, List list) {

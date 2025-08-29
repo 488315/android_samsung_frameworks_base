@@ -128,11 +128,11 @@ final class SmartMirroringClient$registerClient$1 extends SuspendLambda implemen
                     int i3 = Result.$r8$clinit;
                     failure = new Result.Failure(th);
                 }
-                Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-                if (thM3442exceptionOrNullimpl != null) {
-                    thM3442exceptionOrNullimpl.printStackTrace();
+                Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+                if (thM3441exceptionOrNullimpl != null) {
+                    thM3441exceptionOrNullimpl.printStackTrace();
                 }
-                Result.m3441boximpl(failure);
+                Result.m3440boximpl(failure);
             }
             final SmartMirroringClient smartMirroringClient = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.media.mediaoutput.controller.device.SmartMirroringClient$registerClient$1$$ExternalSyntheticLambda0
@@ -153,11 +153,11 @@ final class SmartMirroringClient$registerClient$1 extends SuspendLambda implemen
                             int i5 = Result.$r8$clinit;
                             failure2 = new Result.Failure(th2);
                         }
-                        Throwable thM3442exceptionOrNullimpl2 = Result.m3442exceptionOrNullimpl(failure2);
-                        if (thM3442exceptionOrNullimpl2 != null) {
-                            thM3442exceptionOrNullimpl2.printStackTrace();
+                        Throwable thM3441exceptionOrNullimpl2 = Result.m3441exceptionOrNullimpl(failure2);
+                        if (thM3441exceptionOrNullimpl2 != null) {
+                            thM3441exceptionOrNullimpl2.printStackTrace();
                         }
-                        Result.m3441boximpl(failure2);
+                        Result.m3440boximpl(failure2);
                     }
                     return Unit.INSTANCE;
                 }

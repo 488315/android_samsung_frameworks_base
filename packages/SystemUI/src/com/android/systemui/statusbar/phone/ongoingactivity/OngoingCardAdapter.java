@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
+import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
 import androidx.core.os.BundleKt;
 import com.android.internal.util.ContrastColorUtil;
 import com.android.systemui.R;
@@ -219,12 +220,12 @@ public class OngoingCardAdapter extends BaseAdapter {
         return LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.sec_ongoing_card_item_layout, viewGroup, false);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:100:0x01e7  */
-    /* JADX WARN: Removed duplicated region for block: B:101:0x01ec  */
-    /* JADX WARN: Removed duplicated region for block: B:108:0x022a  */
-    /* JADX WARN: Removed duplicated region for block: B:116:0x023e  */
+    /* JADX WARN: Removed duplicated region for block: B:104:0x0215  */
+    /* JADX WARN: Removed duplicated region for block: B:105:0x021a  */
+    /* JADX WARN: Removed duplicated region for block: B:112:0x0258  */
     /* JADX WARN: Removed duplicated region for block: B:11:0x002d  */
-    /* JADX WARN: Removed duplicated region for block: B:122:0x025a  */
+    /* JADX WARN: Removed duplicated region for block: B:120:0x026c  */
+    /* JADX WARN: Removed duplicated region for block: B:126:0x0288  */
     /* JADX WARN: Removed duplicated region for block: B:18:0x003e  */
     /* JADX WARN: Removed duplicated region for block: B:21:0x0045  */
     /* JADX WARN: Removed duplicated region for block: B:27:0x0064  */
@@ -233,11 +234,12 @@ public class OngoingCardAdapter extends BaseAdapter {
     /* JADX WARN: Removed duplicated region for block: B:36:0x009a  */
     /* JADX WARN: Removed duplicated region for block: B:42:0x00d0  */
     /* JADX WARN: Removed duplicated region for block: B:45:0x00d7  */
-    /* JADX WARN: Removed duplicated region for block: B:72:0x0130  */
-    /* JADX WARN: Removed duplicated region for block: B:79:0x0141  */
-    /* JADX WARN: Removed duplicated region for block: B:82:0x0148  */
-    /* JADX WARN: Removed duplicated region for block: B:88:0x016c  */
-    /* JADX WARN: Removed duplicated region for block: B:89:0x0187  */
+    /* JADX WARN: Removed duplicated region for block: B:49:0x00e6  */
+    /* JADX WARN: Removed duplicated region for block: B:76:0x015e  */
+    /* JADX WARN: Removed duplicated region for block: B:83:0x016f  */
+    /* JADX WARN: Removed duplicated region for block: B:86:0x0176  */
+    /* JADX WARN: Removed duplicated region for block: B:92:0x019a  */
+    /* JADX WARN: Removed duplicated region for block: B:93:0x01b5  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
@@ -260,11 +262,10 @@ public class OngoingCardAdapter extends BaseAdapter {
         LinearLayout linearLayout4;
         FrameLayout frameLayout3;
         FrameLayout frameLayout4;
-        View viewApply;
-        float f;
         View viewFindViewWithTag;
         FrameLayout frameLayout5;
         FrameLayout frameLayout6;
+        int iRoundToInt;
         FrameLayout frameLayout7;
         FrameLayout frameLayout8;
         ViewGroup.LayoutParams layoutParams3;
@@ -306,8 +307,8 @@ public class OngoingCardAdapter extends BaseAdapter {
                 }
                 RemoteViews remoteViews = ongoingActivityData.mExpandedChipView;
                 remoteViews.getClass();
-                viewApply = remoteViews.apply(this.mContext, null);
-                f = this.indicatorScaleGardener.getLatestScaleModel(this.mContext).ratio;
+                View viewApply = remoteViews.apply(this.mContext, null);
+                float f = this.indicatorScaleGardener.getLatestScaleModel(this.mContext).ratio;
                 viewApply.setScaleX(f);
                 viewApply.setScaleY(f);
                 viewFindViewWithTag = viewApply.findViewWithTag("chip_sports_score");
@@ -331,9 +332,15 @@ public class OngoingCardAdapter extends BaseAdapter {
                     frameLayout6.setPadding(i, 0, i, 0);
                 }
                 viewApply.measure(0, 0);
+                iRoundToInt = MathKt__MathJVMKt.roundToInt((viewApply.getMeasuredWidth() * (f >= 1.0f ? f : 1.0f)) + (this.customChipSidePadding * 2));
+                StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(viewApply.getMeasuredWidth(), this.customChipSidePadding, "inflateDummyChipView custom chip measuredWidth:", ", padding:", ", ratio:");
+                sbM.append(f);
+                sbM.append(", parentWidth:");
+                sbM.append(iRoundToInt);
+                Log.i("{OngoingActivityCardStackAdapter}", sbM.toString());
                 frameLayout7 = this.mDummyRemoteContainer;
                 if (frameLayout7 != null && (layoutParams4 = frameLayout7.getLayoutParams()) != null) {
-                    layoutParams4.width = MathKt__MathJVMKt.roundToInt(((this.customChipSidePadding * 2) + viewApply.getMeasuredWidth()) * f);
+                    layoutParams4.width = iRoundToInt;
                 }
                 frameLayout8 = this.mDummyRemoteContainer;
                 if (frameLayout8 != null && (layoutParams3 = frameLayout8.getLayoutParams()) != null) {
@@ -366,11 +373,11 @@ public class OngoingCardAdapter extends BaseAdapter {
                 }
                 RemoteViews remoteViews2 = ongoingActivityData.mExpandedChipView;
                 remoteViews2.getClass();
-                viewApply = remoteViews2.apply(this.mContext, null);
-                f = this.indicatorScaleGardener.getLatestScaleModel(this.mContext).ratio;
-                viewApply.setScaleX(f);
-                viewApply.setScaleY(f);
-                viewFindViewWithTag = viewApply.findViewWithTag("chip_sports_score");
+                View viewApply2 = remoteViews2.apply(this.mContext, null);
+                float f2 = this.indicatorScaleGardener.getLatestScaleModel(this.mContext).ratio;
+                viewApply2.setScaleX(f2);
+                viewApply2.setScaleY(f2);
+                viewFindViewWithTag = viewApply2.findViewWithTag("chip_sports_score");
                 if (viewFindViewWithTag instanceof TextView) {
                 }
                 frameLayout5 = this.mDummyRemoteContainer;
@@ -379,10 +386,16 @@ public class OngoingCardAdapter extends BaseAdapter {
                 frameLayout6 = this.mDummyRemoteContainer;
                 if (frameLayout6 != null) {
                 }
-                viewApply.measure(0, 0);
+                viewApply2.measure(0, 0);
+                iRoundToInt = MathKt__MathJVMKt.roundToInt((viewApply2.getMeasuredWidth() * (f2 >= 1.0f ? f2 : 1.0f)) + (this.customChipSidePadding * 2));
+                StringBuilder sbM2 = MutableObjectList$$ExternalSyntheticOutline0.m(viewApply2.getMeasuredWidth(), this.customChipSidePadding, "inflateDummyChipView custom chip measuredWidth:", ", padding:", ", ratio:");
+                sbM2.append(f2);
+                sbM2.append(", parentWidth:");
+                sbM2.append(iRoundToInt);
+                Log.i("{OngoingActivityCardStackAdapter}", sbM2.toString());
                 frameLayout7 = this.mDummyRemoteContainer;
                 if (frameLayout7 != null) {
-                    layoutParams4.width = MathKt__MathJVMKt.roundToInt(((this.customChipSidePadding * 2) + viewApply.getMeasuredWidth()) * f);
+                    layoutParams4.width = iRoundToInt;
                 }
                 frameLayout8 = this.mDummyRemoteContainer;
                 if (frameLayout8 != null) {
@@ -456,12 +469,12 @@ public class OngoingCardAdapter extends BaseAdapter {
                 if ((frameLayout == null ? frameLayout.getChildCount() : 0) > 0 && (frameLayout2 = this.mDummyExpandedInfo) != null) {
                     frameLayout2.removeAllViews();
                 }
-                float f2 = this.indicatorScaleGardener.getLatestScaleModel(this.mContext).ratio;
-                int iRoundToInt = MathKt__MathJVMKt.roundToInt(this.mContext.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_chip_padding_start) * f2);
-                int iRoundToInt2 = MathKt__MathJVMKt.roundToInt(this.mContext.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_chip_padding_end) * f2);
+                float f3 = this.indicatorScaleGardener.getLatestScaleModel(this.mContext).ratio;
+                int iRoundToInt2 = MathKt__MathJVMKt.roundToInt(this.mContext.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_chip_padding_start) * f3);
+                int iRoundToInt3 = MathKt__MathJVMKt.roundToInt(this.mContext.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_chip_padding_end) * f3);
                 linearLayout2 = this.mDummyNotiParentLayout;
                 if (linearLayout2 != null) {
-                    linearLayout2.setPadding(iRoundToInt, 0, iRoundToInt2, 0);
+                    linearLayout2.setPadding(iRoundToInt2, 0, iRoundToInt3, 0);
                 }
                 linearLayout3 = this.mDummyNotiParentLayout;
                 if (linearLayout3 != null && (layoutParams = linearLayout3.getLayoutParams()) != null) {
@@ -520,9 +533,9 @@ public class OngoingCardAdapter extends BaseAdapter {
                 if ((frameLayout == null ? frameLayout.getChildCount() : 0) > 0) {
                     frameLayout2.removeAllViews();
                 }
-                float f22 = this.indicatorScaleGardener.getLatestScaleModel(this.mContext).ratio;
-                int iRoundToInt3 = MathKt__MathJVMKt.roundToInt(this.mContext.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_chip_padding_start) * f22);
-                int iRoundToInt22 = MathKt__MathJVMKt.roundToInt(this.mContext.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_chip_padding_end) * f22);
+                float f32 = this.indicatorScaleGardener.getLatestScaleModel(this.mContext).ratio;
+                int iRoundToInt22 = MathKt__MathJVMKt.roundToInt(this.mContext.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_chip_padding_start) * f32);
+                int iRoundToInt32 = MathKt__MathJVMKt.roundToInt(this.mContext.getResources().getDimensionPixelSize(R.dimen.ongoing_activity_expanded_chip_padding_end) * f32);
                 linearLayout2 = this.mDummyNotiParentLayout;
                 if (linearLayout2 != null) {
                 }

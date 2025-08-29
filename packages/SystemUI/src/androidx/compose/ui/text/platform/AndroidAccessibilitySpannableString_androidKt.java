@@ -65,7 +65,7 @@ public abstract class AndroidAccessibilitySpannableString_androidKt {
                 TextForegroundStyle textForegroundStyleM812from8_81llA = spanStyle.textForegroundStyle;
                 long jMo794getColor0d7_KjU2 = textForegroundStyleM812from8_81llA.mo794getColor0d7_KjU();
                 Color.Companion companion = Color.Companion;
-                if (!ULong.m3447equalsimpl0(jMo794getColor0d7_KjU, jMo794getColor0d7_KjU2)) {
+                if (!ULong.m3446equalsimpl0(jMo794getColor0d7_KjU, jMo794getColor0d7_KjU2)) {
                     TextForegroundStyle.Companion.getClass();
                     textForegroundStyleM812from8_81llA = TextForegroundStyle.Companion.m812from8_81llA(jMo794getColor0d7_KjU);
                 }

@@ -33,9 +33,9 @@ final class SecPinBouncerKt$PinPadButton$2$2$1$2$1$minDuration$1 extends Suspend
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
-            long jM3461plusLRDsOJo = Duration.m3461plusLRDsOJo(SecPinBouncerKt.pinButtonPressedDuration, SecPinBouncerKt.pinButtonHoldTime);
+            long jM3460plusLRDsOJo = Duration.m3460plusLRDsOJo(SecPinBouncerKt.pinButtonPressedDuration, SecPinBouncerKt.pinButtonHoldTime);
             this.label = 1;
-            if (DelayKt.m3469delayVtjQ1oo(jM3461plusLRDsOJo, this) == coroutineSingletons) {
+            if (DelayKt.m3468delayVtjQ1oo(jM3460plusLRDsOJo, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

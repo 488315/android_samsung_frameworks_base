@@ -86,9 +86,9 @@ public final class ReduceBrightColorsTileDataInteractor implements QSTileDataInt
                     int i2 = anonymousClass1.label;
                     if (i2 == 0) {
                         ResultKt.throwOnFailure(obj2);
-                        ReduceBrightColorsTileModel reduceBrightColorsTileModelM2934boximpl = ReduceBrightColorsTileModel.m2934boximpl(((Boolean) obj).booleanValue());
+                        ReduceBrightColorsTileModel reduceBrightColorsTileModelM2932boximpl = ReduceBrightColorsTileModel.m2932boximpl(((Boolean) obj).booleanValue());
                         anonymousClass1.label = 1;
-                        if (this.$this_unsafeFlow.emit(reduceBrightColorsTileModelM2934boximpl, anonymousClass1) == coroutineSingletons) {
+                        if (this.$this_unsafeFlow.emit(reduceBrightColorsTileModelM2932boximpl, anonymousClass1) == coroutineSingletons) {
                             return coroutineSingletons;
                         }
                     } else {

@@ -55,7 +55,7 @@ public final class RotationLockControllerExtKt {
                 final RotationLockController.RotationLockControllerCallback rotationLockControllerCallback = new RotationLockController.RotationLockControllerCallback() { // from class: com.android.systemui.util.kotlin.RotationLockControllerExtKt$isRotationLockEnabled$1$rotationLockCallback$1
                     @Override // com.android.systemui.statusbar.policy.RotationLockController.RotationLockControllerCallback
                     public final void onRotationLockStateChanged(boolean z, boolean z2) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(z));
                     }
                 };
                 this.$this_isRotationLockEnabled.addCallback(rotationLockControllerCallback);

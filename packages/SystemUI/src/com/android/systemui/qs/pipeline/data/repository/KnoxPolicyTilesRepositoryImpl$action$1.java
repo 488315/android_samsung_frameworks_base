@@ -56,7 +56,7 @@ final class KnoxPolicyTilesRepositoryImpl$action$1 extends SuspendLambda impleme
                 public final void onUpdateQuickPanelButtons() {
                     KnoxPolicyTilesRepositoryImpl knoxPolicyTilesRepositoryImpl2 = knoxPolicyTilesRepositoryImpl;
                     Log.d("KnoxPolicyTilesRepository", "onUpdateQuickPanelButtons : " + ((KnoxStateMonitorImpl) knoxPolicyTilesRepositoryImpl2.knoxStateMonitor).isBrightnessControllerEnabled());
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new KnoxPolicyTilesRepositoryImpl.KnoxAction.UpdateEnable(((KnoxStateMonitorImpl) knoxPolicyTilesRepositoryImpl2.knoxStateMonitor).isBrightnessControllerEnabled()));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new KnoxPolicyTilesRepositoryImpl.KnoxAction.UpdateEnable(((KnoxStateMonitorImpl) knoxPolicyTilesRepositoryImpl2.knoxStateMonitor).isBrightnessControllerEnabled()));
                 }
 
                 @Override // com.android.systemui.knox.KnoxStateMonitorCallback
@@ -66,7 +66,7 @@ final class KnoxPolicyTilesRepositoryImpl$action$1 extends SuspendLambda impleme
                         quickPanelItems = EmptyList.INSTANCE;
                     }
                     Log.d("KnoxPolicyTilesRepository", "onUpdateQuickPanelItems : " + quickPanelItems);
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new KnoxPolicyTilesRepositoryImpl.KnoxAction.BlockTile(quickPanelItems));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new KnoxPolicyTilesRepositoryImpl.KnoxAction.BlockTile(quickPanelItems));
                 }
 
                 @Override // com.android.systemui.knox.KnoxStateMonitorCallback
@@ -76,7 +76,7 @@ final class KnoxPolicyTilesRepositoryImpl$action$1 extends SuspendLambda impleme
                         quickPanelUnavailableButtons = EmptyList.INSTANCE;
                     }
                     Log.d("KnoxPolicyTilesRepository", "onUpdateQuickPanelUnavailableButtons : " + quickPanelUnavailableButtons);
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new KnoxPolicyTilesRepositoryImpl.KnoxAction.UnavailableTile(quickPanelUnavailableButtons));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new KnoxPolicyTilesRepositoryImpl.KnoxAction.UnavailableTile(quickPanelUnavailableButtons));
                 }
             };
             ((KnoxStateMonitorImpl) this.this$0.knoxStateMonitor).registerCallback(r1);

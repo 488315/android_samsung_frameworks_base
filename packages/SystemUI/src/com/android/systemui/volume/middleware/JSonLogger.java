@@ -124,10 +124,10 @@ public final class JSonLogger implements VolumeMiddleware {
             int i4 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-        if (thM3442exceptionOrNullimpl != null) {
-            thM3442exceptionOrNullimpl.printStackTrace();
+        Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+        if (thM3441exceptionOrNullimpl != null) {
+            thM3441exceptionOrNullimpl.printStackTrace();
         }
-        Result.m3441boximpl(failure);
+        Result.m3440boximpl(failure);
     }
 }

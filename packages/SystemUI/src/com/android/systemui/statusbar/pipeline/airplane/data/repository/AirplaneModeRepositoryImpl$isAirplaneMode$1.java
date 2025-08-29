@@ -53,11 +53,11 @@ final class AirplaneModeRepositoryImpl$isAirplaneMode$1 extends SuspendLambda im
             final ?? r4 = new SettingObserver(globalSettings, handler) { // from class: com.android.systemui.statusbar.pipeline.airplane.data.repository.AirplaneModeRepositoryImpl$isAirplaneMode$1$observer$1
                 @Override // com.android.systemui.qs.SettingObserver
                 public final void handleValueChanged(int i2, boolean z) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(i2 == 1));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(i2 == 1));
                 }
             };
             r4.setListening(true);
-            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(r4.getValue() == 1));
+            ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(r4.getValue() == 1));
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.airplane.data.repository.AirplaneModeRepositoryImpl$isAirplaneMode$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {

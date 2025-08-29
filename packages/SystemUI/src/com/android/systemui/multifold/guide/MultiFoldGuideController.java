@@ -45,7 +45,7 @@ public class MultiFoldGuideController implements CoreStartable, ConfigurationCon
     public final VibrationEffect mVibrationEffect = VIBRATION_EFFECT_LV1;
 
     /* renamed from: -$$Nest$mhandleContinuityGuideView, reason: not valid java name */
-    public static void m2639$$Nest$mhandleContinuityGuideView(MultiFoldGuideController multiFoldGuideController) {
+    public static void m2637$$Nest$mhandleContinuityGuideView(MultiFoldGuideController multiFoldGuideController) {
         if (multiFoldGuideController.mContinuityGuideView != null) {
             Log.d("MultiFoldGuideController", "mContinuityGuideView is already showing!");
             try {
@@ -100,7 +100,7 @@ public class MultiFoldGuideController implements CoreStartable, ConfigurationCon
                         if (multiFoldGuideController.mDeviceState != 6 || (halfCloseContinuityGuideView2 = multiFoldGuideController.mContinuityGuideView) == null || halfCloseContinuityGuideView2.mGuideVisible) {
                             return;
                         }
-                        MultiFoldGuideController.m2639$$Nest$mhandleContinuityGuideView(multiFoldGuideController);
+                        MultiFoldGuideController.m2637$$Nest$mhandleContinuityGuideView(multiFoldGuideController);
                         return;
                     }
                     return;
@@ -110,7 +110,7 @@ public class MultiFoldGuideController implements CoreStartable, ConfigurationCon
                     if (multiFoldGuideController2.mDeviceState != 6 || (halfCloseContinuityGuideView = multiFoldGuideController2.mContinuityGuideView) == null || halfCloseContinuityGuideView.mGuideVisible) {
                         return;
                     }
-                    MultiFoldGuideController.m2639$$Nest$mhandleContinuityGuideView(multiFoldGuideController2);
+                    MultiFoldGuideController.m2637$$Nest$mhandleContinuityGuideView(multiFoldGuideController2);
                 }
             }
 

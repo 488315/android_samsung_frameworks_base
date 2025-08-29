@@ -88,7 +88,7 @@ public final class ConcurrentHashMapK implements MutableMapK, Map, KMutableMap {
             Pair pair = new Pair(key, value);
             linkedHashMap.put(pair.getFirst(), pair.getSecond());
         }
-        return MapHolder.m2586boximpl(linkedHashMap);
+        return MapHolder.m2584boximpl(linkedHashMap);
     }
 
     @Override // java.util.Map

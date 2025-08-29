@@ -58,7 +58,7 @@ public final class ReduceBrightColorsControllerExtKt {
                 final ?? r1 = new ReduceBrightColorsController.Listener() { // from class: com.android.systemui.util.kotlin.ReduceBrightColorsControllerExtKt$isEnabled$1$callback$1
                     @Override // com.android.systemui.qs.ReduceBrightColorsController.Listener
                     public void onActivated(boolean z) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(z));
                     }
                 };
                 ((ReduceBrightColorsControllerImpl) this.$this_isEnabled).addCallback(r1);

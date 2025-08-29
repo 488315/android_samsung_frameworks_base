@@ -92,7 +92,7 @@ public abstract class VolumePanelRadioButtonsKt {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static final void m3220VolumePanelRadioButtonBarcjTkxnM(Modifier modifier, float f, float f2, float f3, CornerSize cornerSize, CornerSize cornerSize2, VolumePanelRadioButtonBarColors volumePanelRadioButtonBarColors, final Function1 function1, Composer composer, final int i) {
+    public static final void m3219VolumePanelRadioButtonBarcjTkxnM(Modifier modifier, float f, float f2, float f3, CornerSize cornerSize, CornerSize cornerSize2, VolumePanelRadioButtonBarColors volumePanelRadioButtonBarColors, final Function1 function1, Composer composer, final int i) {
         Modifier modifier2;
         float f4;
         float f5;
@@ -720,7 +720,7 @@ public abstract class VolumePanelRadioButtonsKt {
                     CornerSize cornerSize12 = this.f$5;
                     VolumePanelRadioButtonBarColors volumePanelRadioButtonBarColors5 = this.f$6;
                     Function1 function15 = this.f$7;
-                    VolumePanelRadioButtonsKt.m3220VolumePanelRadioButtonBarcjTkxnM(this.f$0, this.f$1, this.f$2, this.f$3, cornerSize11, cornerSize12, volumePanelRadioButtonBarColors5, function15, (Composer) obj8, iUpdateChangedFlags);
+                    VolumePanelRadioButtonsKt.m3219VolumePanelRadioButtonBarcjTkxnM(this.f$0, this.f$1, this.f$2, this.f$3, cornerSize11, cornerSize12, volumePanelRadioButtonBarColors5, function15, (Composer) obj8, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

@@ -43,7 +43,7 @@ public final class DreamingToGlanceableHubTransitionViewModel$special$$inlined$f
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
             final int iIntValue = ((Number) this.L$1).intValue();
-            KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2616sharedFlow74qcysc$default = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(this.this$0.transitionAnimation, DreamingToGlanceableHubTransitionViewModel.TO_GLANCEABLE_HUB_DURATION, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.DreamingToGlanceableHubTransitionViewModel$dreamOverlayTranslationX$1$1
+            KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2614sharedFlow74qcysc$default = KeyguardTransitionAnimationFlow.FlowBuilder.m2614sharedFlow74qcysc$default(this.this$0.transitionAnimation, DreamingToGlanceableHubTransitionViewModel.TO_GLANCEABLE_HUB_DURATION, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.DreamingToGlanceableHubTransitionViewModel$dreamOverlayTranslationX$1$1
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
                 public final Object mo781invoke(Object obj2) {
@@ -56,7 +56,7 @@ public final class DreamingToGlanceableHubTransitionViewModel$special$$inlined$f
                 }
             }, null, Interpolators.EMPHASIZED, "DREAMING->GLANCEABLE_HUB: overlayTranslationX", 44);
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2616sharedFlow74qcysc$default, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2614sharedFlow74qcysc$default, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

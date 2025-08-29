@@ -1350,7 +1350,7 @@ public abstract class BrightnessSliderKt {
             MaterialTheme.INSTANCE.getClass();
             long j = MaterialTheme.getColorScheme(composerImpl2).secondary;
             Dimensions.INSTANCE.getClass();
-            Modifier modifierM2937borderOnFocusPOIbLQ4$default = BorderOnFocusKt.m2937borderOnFocusPOIbLQ4$default(companion3, j, CornerSizeKt.m186CornerSize0680j_4(Dimensions.SliderTrackRoundedCorner));
+            Modifier modifierM2935borderOnFocusPOIbLQ4$default = BorderOnFocusKt.m2935borderOnFocusPOIbLQ4$default(companion3, j, CornerSizeKt.m186CornerSize0680j_4(Dimensions.SliderTrackRoundedCorner));
             composerImpl2.startReplaceGroup(-734781066);
             if (((Boolean) ((SnapshotMutableStateImpl) brightnessSliderViewModel.showMirror$delegate).getValue()).booleanValue()) {
                 composerImpl2.startReplaceGroup(-294285675);
@@ -1414,7 +1414,7 @@ public abstract class BrightnessSliderKt {
                 companion = companion3;
             }
             composerImpl2.end(z);
-            Modifier modifierThen = modifierM2937borderOnFocusPOIbLQ4$default.then(companion);
+            Modifier modifierThen = modifierM2935borderOnFocusPOIbLQ4$default.then(companion);
             final long j2 = ((Color) stateM7animateColorAsStateeuL9pac.getValue()).value;
             Modifier modifierFillMaxWidth = SizeKt.fillMaxWidth(DrawModifierKt.drawWithCache(modifierThen, new Function1() { // from class: com.android.systemui.brightness.ui.compose.BrightnessSliderKt$$ExternalSyntheticLambda15
                 @Override // kotlin.jvm.functions.Function1

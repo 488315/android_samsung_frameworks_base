@@ -54,19 +54,19 @@ final class NightDisplayRepository$colorDisplayManagerChangeEventFlow$1 extends 
             final NightDisplayListener nightDisplayListener = new NightDisplayListener(nightDisplayListenerModule$Builder.mContext, nightDisplayListenerModule$Builder.mUserId, nightDisplayListenerModule$Builder.mBgHandler);
             nightDisplayListener.setCallback(new NightDisplayListener.Callback() { // from class: com.android.systemui.accessibility.data.repository.NightDisplayRepository$colorDisplayManagerChangeEventFlow$1$nightDisplayCallback$1
                 public final void onActivated(boolean z) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new NightDisplayChangeEvent.OnActivatedChanged(z));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new NightDisplayChangeEvent.OnActivatedChanged(z));
                 }
 
                 public final void onAutoModeChanged(int i2) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new NightDisplayChangeEvent.OnAutoModeChanged(i2));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new NightDisplayChangeEvent.OnAutoModeChanged(i2));
                 }
 
                 public final void onCustomEndTimeChanged(LocalTime localTime) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new NightDisplayChangeEvent.OnCustomEndTimeChanged(localTime));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new NightDisplayChangeEvent.OnCustomEndTimeChanged(localTime));
                 }
 
                 public final void onCustomStartTimeChanged(LocalTime localTime) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new NightDisplayChangeEvent.OnCustomStartTimeChanged(localTime));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new NightDisplayChangeEvent.OnCustomStartTimeChanged(localTime));
                 }
             });
             Function0 function0 = new Function0() { // from class: com.android.systemui.accessibility.data.repository.NightDisplayRepository$colorDisplayManagerChangeEventFlow$1$$ExternalSyntheticLambda0

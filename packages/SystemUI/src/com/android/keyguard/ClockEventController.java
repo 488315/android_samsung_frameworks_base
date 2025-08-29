@@ -1033,12 +1033,12 @@ public class ClockEventController {
         Flags.INSTANCE.getClass();
         featureFlagsClassic2.getClass();
         this.dozeAmount = StateFlowKt.MutableStateFlow(Float.valueOf(0.0f));
-        this.onClockBoundsChanged = StateFlowKt.MutableStateFlow(VRectF.m2827boximpl(VRectF.Companion.m2851getZERO3Hl7r_E()));
+        this.onClockBoundsChanged = StateFlowKt.MutableStateFlow(VRectF.m2825boximpl(VRectF.Companion.m2849getZERO3Hl7r_E()));
         this.clockListener = new ClockEventListener() { // from class: com.android.keyguard.ClockEventController$clockListener$1
             @Override // com.android.systemui.plugins.clocks.ClockEventListener
             /* renamed from: onBoundsChanged-TTAm5xc, reason: not valid java name */
             public final void mo947onBoundsChangedTTAm5xc(long j) {
-                this.this$0.onClockBoundsChanged.setValue(VRectF.m2827boximpl(j));
+                this.this$0.onClockBoundsChanged.setValue(VRectF.m2825boximpl(j));
             }
         };
         this.configListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.keyguard.ClockEventController$configListener$1

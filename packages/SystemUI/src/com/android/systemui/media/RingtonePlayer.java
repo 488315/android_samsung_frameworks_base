@@ -54,8 +54,8 @@ public class RingtonePlayer implements CoreStartable {
         }
 
         public final String getTitle(Uri uri) {
-            RingtonePlayer.m2627$$Nest$menforceUriUserId(RingtonePlayer.this, uri);
-            return Ringtone.getTitle(RingtonePlayer.m2628$$Nest$mgetContextForUser(RingtonePlayer.this, Binder.getCallingUserHandle()), uri, false, false);
+            RingtonePlayer.m2625$$Nest$menforceUriUserId(RingtonePlayer.this, uri);
+            return Ringtone.getTitle(RingtonePlayer.m2626$$Nest$mgetContextForUser(RingtonePlayer.this, Binder.getCallingUserHandle()), uri, false, false);
         }
 
         public final boolean isPlaying(IBinder iBinder) {
@@ -72,8 +72,8 @@ public class RingtonePlayer implements CoreStartable {
 
         public final ParcelFileDescriptor openRingtone(Uri uri) {
             Uri uri2;
-            RingtonePlayer.m2627$$Nest$menforceUriUserId(RingtonePlayer.this, uri);
-            ContentResolver contentResolver = RingtonePlayer.m2628$$Nest$mgetContextForUser(RingtonePlayer.this, Binder.getCallingUserHandle()).getContentResolver();
+            RingtonePlayer.m2625$$Nest$menforceUriUserId(RingtonePlayer.this, uri);
+            ContentResolver contentResolver = RingtonePlayer.m2626$$Nest$mgetContextForUser(RingtonePlayer.this, Binder.getCallingUserHandle()).getContentResolver();
             if (uri.toString().startsWith(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI.toString())) {
                 uri2 = uri;
                 Cursor cursorQuery = contentResolver.query(uri2, new String[]{"is_ringtone", "is_alarm", "is_notification"}, null, null, null);
@@ -109,13 +109,13 @@ public class RingtonePlayer implements CoreStartable {
                 userHandle = UserHandle.SYSTEM;
             }
             RingtonePlayer ringtonePlayer = RingtonePlayer.this;
-            ringtonePlayer.mAsyncPlayer.play(RingtonePlayer.m2628$$Nest$mgetContextForUser(ringtonePlayer, userHandle), uri, z, audioAttributes, f);
+            ringtonePlayer.mAsyncPlayer.play(RingtonePlayer.m2626$$Nest$mgetContextForUser(ringtonePlayer, userHandle), uri, z, audioAttributes, f);
         }
 
         public final void playWithVolumeShaping(IBinder iBinder, Uri uri, AudioAttributes audioAttributes, float f, boolean z, VolumeShaper.Configuration configuration) {
             Client client;
             Log.d("RingtonePlayer", "play(token=" + iBinder + ", uri=" + uri + ", uid=" + Binder.getCallingUid() + ")");
-            RingtonePlayer.m2627$$Nest$menforceUriUserId(RingtonePlayer.this, uri);
+            RingtonePlayer.m2625$$Nest$menforceUriUserId(RingtonePlayer.this, uri);
             synchronized (RingtonePlayer.this.mClients) {
                 try {
                     client = (Client) RingtonePlayer.this.mClients.get(iBinder);
@@ -195,7 +195,7 @@ public class RingtonePlayer implements CoreStartable {
 
         public Client(IBinder iBinder, Uri uri, UserHandle userHandle, AudioAttributes audioAttributes, VolumeShaper.Configuration configuration) {
             this.mToken = iBinder;
-            Ringtone ringtone = new Ringtone(RingtonePlayer.m2628$$Nest$mgetContextForUser(RingtonePlayer.this, userHandle), false);
+            Ringtone ringtone = new Ringtone(RingtonePlayer.m2626$$Nest$mgetContextForUser(RingtonePlayer.this, userHandle), false);
             this.mRingtone = ringtone;
             ringtone.setAudioAttributesField(audioAttributes);
             ringtone.setUri(uri, configuration);
@@ -204,7 +204,7 @@ public class RingtonePlayer implements CoreStartable {
     }
 
     /* renamed from: -$$Nest$menforceUriUserId, reason: not valid java name */
-    public static void m2627$$Nest$menforceUriUserId(RingtonePlayer ringtonePlayer, Uri uri) {
+    public static void m2625$$Nest$menforceUriUserId(RingtonePlayer ringtonePlayer, Uri uri) {
         ringtonePlayer.getClass();
         int userIdFromUri = ContentProvider.getUserIdFromUri(uri, UserHandle.myUserId());
         if (!UserHandle.isApp(Binder.getCallingUid()) || UserHandle.myUserId() == userIdFromUri) {
@@ -214,7 +214,7 @@ public class RingtonePlayer implements CoreStartable {
     }
 
     /* renamed from: -$$Nest$mgetContextForUser, reason: not valid java name */
-    public static Context m2628$$Nest$mgetContextForUser(RingtonePlayer ringtonePlayer, UserHandle userHandle) {
+    public static Context m2626$$Nest$mgetContextForUser(RingtonePlayer ringtonePlayer, UserHandle userHandle) {
         ringtonePlayer.getClass();
         try {
             Context context = ringtonePlayer.mContext;

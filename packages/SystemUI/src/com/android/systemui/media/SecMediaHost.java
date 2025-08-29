@@ -164,9 +164,9 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
                     if (mediaType.getSupportPlayLastSong() && (mediaDataFormat = secMediaHost2.mCurrentMediaData) != null && (qSCoverPlayLastSongHelper = secMediaHost2.mQSCoverPlayLastSongHelper) != null) {
                         qSCoverPlayLastSongHelper.lastMediaPlayerKey = mediaDataFormat.data.packageName;
                     }
-                    secMediaPlayerData.m2629getMediaData().remove(str2);
+                    secMediaPlayerData.m2627getMediaData().remove(str2);
                     secMediaHost2.removePlayer(str2, mediaType);
-                    int size = secMediaPlayerData.m2629getMediaData().size();
+                    int size = secMediaPlayerData.m2627getMediaData().size();
                     if (size == 0) {
                         secMediaHost2.onMediaVisibilityChanged(Boolean.FALSE);
                     } else {
@@ -339,7 +339,7 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
             str = null;
         } else {
             str = secMediaPlayerData.getMediaPlayerFromSortedMediaPlayers(0).mPlayerKey;
-            mediaData = str != null ? (MediaData) secMediaPlayerData.m2629getMediaData().get(str) : null;
+            mediaData = str != null ? (MediaData) secMediaPlayerData.m2627getMediaData().get(str) : null;
         }
         if (str == null || mediaData == null) {
             Log.d("SecMediaHost", "addMediaFrame. There is no current media data on QS, exit");
@@ -627,7 +627,7 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
                             Object obj3 = sortedMediaPlayers.get(i3);
                             i3++;
                             SecMediaControlPanel secMediaControlPanel = (SecMediaControlPanel) obj3;
-                            Pair pair = new Pair(secMediaControlPanel.mPlayerKey, secMediaPlayerData2.m2629getMediaData().get(secMediaControlPanel.mPlayerKey));
+                            Pair pair = new Pair(secMediaControlPanel.mPlayerKey, secMediaPlayerData2.m2627getMediaData().get(secMediaControlPanel.mPlayerKey));
                             linkedHashMap.put(pair.getFirst(), pair.getSecond());
                             z6 = z6;
                         }
@@ -873,11 +873,11 @@ public class SecMediaHost implements StatusBarStateController.StateListener, Con
         Log.d("MediaLogger", "Media data loaded key[" + str + "] oldKey[" + str2 + "] title[" + ((Object) charSequenceSubSequence) + "] isActive[" + z + "]");
         SecMediaPlayerData secMediaPlayerData = (SecMediaPlayerData) this.mMediaPlayerData.get(mediaType);
         if (secMediaPlayerData != null && str2 != null) {
-            secMediaPlayerData.m2629getMediaData().remove(str2);
+            secMediaPlayerData.m2627getMediaData().remove(str2);
         }
         if (mediaData.active || Utils.useMediaResumption(this.mContext)) {
             if (secMediaPlayerData != null) {
-                secMediaPlayerData.m2629getMediaData().put(str, mediaData);
+                secMediaPlayerData.m2627getMediaData().put(str, mediaData);
             }
             addOrUpdatePlayer(str, str2, mediaData, mediaType);
         } else {

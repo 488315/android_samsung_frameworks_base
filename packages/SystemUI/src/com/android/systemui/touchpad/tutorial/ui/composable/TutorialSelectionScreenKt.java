@@ -147,13 +147,13 @@ public abstract class TutorialSelectionScreenKt {
             ImageVector.Companion companion = ImageVector.Companion;
             ImageVector imageVectorVectorResource = VectorResources_androidKt.vectorResource(R.drawable.touchpad_tutorial_home_icon, composerImpl2);
             MaterialTheme.INSTANCE.getClass();
-            m3125TutorialButtonD_bmR2Q(strStringResource, imageVectorVectorResource, MaterialTheme.getColorScheme(composerImpl2).onPrimary, function02, MaterialTheme.getColorScheme(composerImpl2).primary, FocusableKt.focusable$default(FocusRequesterModifierKt.focusRequester(modifier, focusRequester), false, null, 3), composerImpl2, (i2 << 6) & 7168);
+            m3124TutorialButtonD_bmR2Q(strStringResource, imageVectorVectorResource, MaterialTheme.getColorScheme(composerImpl2).onPrimary, function02, MaterialTheme.getColorScheme(composerImpl2).primary, FocusableKt.focusable$default(FocusRequesterModifierKt.focusRequester(modifier, focusRequester), false, null, 3), composerImpl2, (i2 << 6) & 7168);
             String strStringResource2 = StringResources_androidKt.stringResource(R.string.touchpad_tutorial_back_gesture_button, composerImpl2);
             Icons.AutoMirrored.Outlined outlined = Icons.AutoMirrored.Outlined.INSTANCE;
-            m3125TutorialButtonD_bmR2Q(strStringResource2, ArrowBackKt.getArrowBack(), MaterialTheme.getColorScheme(composerImpl2).onTertiary, function0, MaterialTheme.getColorScheme(composerImpl2).tertiary, FocusableKt.focusable$default(FocusRequesterModifierKt.focusRequester(modifier, focusRequester2), false, null, 3), composerImpl2, (i2 << 9) & 7168);
-            m3125TutorialButtonD_bmR2Q(StringResources_androidKt.stringResource(R.string.touchpad_tutorial_recent_apps_gesture_button, composerImpl2), VectorResources_androidKt.vectorResource(R.drawable.touchpad_tutorial_recents_icon, composerImpl2), MaterialTheme.getColorScheme(composerImpl2).onSecondary, function05, MaterialTheme.getColorScheme(composerImpl2).secondary, FocusableKt.focusable$default(FocusRequesterModifierKt.focusRequester(modifier, focusRequester3), false, null, 3), composerImpl2, (i2 << 3) & 7168);
+            m3124TutorialButtonD_bmR2Q(strStringResource2, ArrowBackKt.getArrowBack(), MaterialTheme.getColorScheme(composerImpl2).onTertiary, function0, MaterialTheme.getColorScheme(composerImpl2).tertiary, FocusableKt.focusable$default(FocusRequesterModifierKt.focusRequester(modifier, focusRequester2), false, null, 3), composerImpl2, (i2 << 9) & 7168);
+            m3124TutorialButtonD_bmR2Q(StringResources_androidKt.stringResource(R.string.touchpad_tutorial_recent_apps_gesture_button, composerImpl2), VectorResources_androidKt.vectorResource(R.drawable.touchpad_tutorial_recents_icon, composerImpl2), MaterialTheme.getColorScheme(composerImpl2).onSecondary, function05, MaterialTheme.getColorScheme(composerImpl2).secondary, FocusableKt.focusable$default(FocusRequesterModifierKt.focusRequester(modifier, focusRequester3), false, null, 3), composerImpl2, (i2 << 3) & 7168);
             composerImpl = composerImpl2;
-            m3125TutorialButtonD_bmR2Q(StringResources_androidKt.stringResource(R.string.touchpad_tutorial_switch_apps_gesture_button, composerImpl2), VectorResources_androidKt.vectorResource(R.drawable.touchpad_tutorial_apps_icon, composerImpl2), MaterialTheme.getColorScheme(composerImpl2).primary, function06, MaterialTheme.getColorScheme(composerImpl2).onPrimary, FocusableKt.focusable$default(FocusRequesterModifierKt.focusRequester(modifier, focusRequester4), false, null, 3), composerImpl, i2 & 7168);
+            m3124TutorialButtonD_bmR2Q(StringResources_androidKt.stringResource(R.string.touchpad_tutorial_switch_apps_gesture_button, composerImpl2), VectorResources_androidKt.vectorResource(R.drawable.touchpad_tutorial_apps_icon, composerImpl2), MaterialTheme.getColorScheme(composerImpl2).primary, function06, MaterialTheme.getColorScheme(composerImpl2).onPrimary, FocusableKt.focusable$default(FocusRequesterModifierKt.focusRequester(modifier, focusRequester4), false, null, 3), composerImpl, i2 & 7168);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
@@ -303,7 +303,7 @@ public abstract class TutorialSelectionScreenKt {
     }
 
     /* renamed from: TutorialButton-D_bmR2Q, reason: not valid java name */
-    public static final void m3125TutorialButtonD_bmR2Q(final String str, final ImageVector imageVector, final long j, final Function0 function0, final long j2, final Modifier modifier, Composer composer, final int i) {
+    public static final void m3124TutorialButtonD_bmR2Q(final String str, final ImageVector imageVector, final long j, final Function0 function0, final long j2, final Modifier modifier, Composer composer, final int i) {
         int i2;
         Function0 function02;
         ComposerImpl composerImpl = (ComposerImpl) composer;
@@ -424,7 +424,7 @@ public abstract class TutorialSelectionScreenKt {
                     int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
                     long j3 = j2;
                     Modifier modifier2 = modifier;
-                    TutorialSelectionScreenKt.m3125TutorialButtonD_bmR2Q(str, imageVector, j, function0, j3, modifier2, (Composer) obj, iUpdateChangedFlags);
+                    TutorialSelectionScreenKt.m3124TutorialButtonD_bmR2Q(str, imageVector, j, function0, j3, modifier2, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };
@@ -654,13 +654,13 @@ public abstract class TutorialSelectionScreenKt {
             ImageVector.Companion companion2 = ImageVector.Companion;
             ImageVector imageVectorVectorResource = VectorResources_androidKt.vectorResource(R.drawable.touchpad_tutorial_home_icon, composerImpl2);
             MaterialTheme.INSTANCE.getClass();
-            m3125TutorialButtonD_bmR2Q(strStringResource, imageVectorVectorResource, MaterialTheme.getColorScheme(composerImpl2).onPrimary, function02, MaterialTheme.getColorScheme(composerImpl2).primary, SizeKt.fillMaxSize(FocusableKt.focusable$default(FocusRequesterModifierKt.focusRequester(modifier, focusRequester), false, null, 3), 1.0f), composerImpl2, (i2 << 6) & 7168);
+            m3124TutorialButtonD_bmR2Q(strStringResource, imageVectorVectorResource, MaterialTheme.getColorScheme(composerImpl2).onPrimary, function02, MaterialTheme.getColorScheme(composerImpl2).primary, SizeKt.fillMaxSize(FocusableKt.focusable$default(FocusRequesterModifierKt.focusRequester(modifier, focusRequester), false, null, 3), 1.0f), composerImpl2, (i2 << 6) & 7168);
             float f = 16;
             Dp.Companion companion3 = Dp.Companion;
             SpacerKt.Spacer(composerImpl2, SizeKt.m140size3ABfNKs(companion, f));
             String strStringResource2 = StringResources_androidKt.stringResource(R.string.touchpad_tutorial_back_gesture_button, composerImpl2);
             Icons.AutoMirrored.Outlined outlined = Icons.AutoMirrored.Outlined.INSTANCE;
-            m3125TutorialButtonD_bmR2Q(strStringResource2, ArrowBackKt.getArrowBack(), MaterialTheme.getColorScheme(composerImpl2).onTertiary, function0, MaterialTheme.getColorScheme(composerImpl2).tertiary, SizeKt.fillMaxSize(FocusableKt.focusable$default(FocusRequesterModifierKt.focusRequester(modifier, focusRequester2), false, null, 3), 1.0f), composerImpl2, (i2 << 9) & 7168);
+            m3124TutorialButtonD_bmR2Q(strStringResource2, ArrowBackKt.getArrowBack(), MaterialTheme.getColorScheme(composerImpl2).onTertiary, function0, MaterialTheme.getColorScheme(composerImpl2).tertiary, SizeKt.fillMaxSize(FocusableKt.focusable$default(FocusRequesterModifierKt.focusRequester(modifier, focusRequester2), false, null, 3), 1.0f), composerImpl2, (i2 << 9) & 7168);
             composerImpl2.end(true);
             SpacerKt.Spacer(composerImpl2, SizeKt.m140size3ABfNKs(companion, f));
             Modifier modifierWeight2 = columnScopeInstance.weight(companion, 1.0f, true);
@@ -680,9 +680,9 @@ public abstract class TutorialSelectionScreenKt {
                 AnimatedContentKt$$ExternalSyntheticOutline0.m(currentCompositeKeyHash3, composerImpl2, currentCompositeKeyHash3, function23);
             }
             Updater.m337setimpl(composerImpl2, modifierMaterializeModifier3, function24);
-            m3125TutorialButtonD_bmR2Q(StringResources_androidKt.stringResource(R.string.touchpad_tutorial_recent_apps_gesture_button, composerImpl2), VectorResources_androidKt.vectorResource(R.drawable.touchpad_tutorial_recents_icon, composerImpl2), MaterialTheme.getColorScheme(composerImpl2).onSecondary, function03, MaterialTheme.getColorScheme(composerImpl2).secondary, SizeKt.fillMaxSize(FocusableKt.focusable$default(FocusRequesterModifierKt.focusRequester(modifier, focusRequester3), false, null, 3), 1.0f), composerImpl2, (i2 << 3) & 7168);
+            m3124TutorialButtonD_bmR2Q(StringResources_androidKt.stringResource(R.string.touchpad_tutorial_recent_apps_gesture_button, composerImpl2), VectorResources_androidKt.vectorResource(R.drawable.touchpad_tutorial_recents_icon, composerImpl2), MaterialTheme.getColorScheme(composerImpl2).onSecondary, function03, MaterialTheme.getColorScheme(composerImpl2).secondary, SizeKt.fillMaxSize(FocusableKt.focusable$default(FocusRequesterModifierKt.focusRequester(modifier, focusRequester3), false, null, 3), 1.0f), composerImpl2, (i2 << 3) & 7168);
             SpacerKt.Spacer(composerImpl2, SizeKt.m140size3ABfNKs(companion, f));
-            m3125TutorialButtonD_bmR2Q(StringResources_androidKt.stringResource(R.string.touchpad_tutorial_switch_apps_gesture_button, composerImpl2), VectorResources_androidKt.vectorResource(R.drawable.touchpad_tutorial_apps_icon, composerImpl2), MaterialTheme.getColorScheme(composerImpl2).primary, function04, MaterialTheme.getColorScheme(composerImpl2).onPrimary, SizeKt.fillMaxSize(FocusableKt.focusable$default(FocusRequesterModifierKt.focusRequester(modifier, focusRequester4), false, null, 3), 1.0f), composerImpl2, i2 & 7168);
+            m3124TutorialButtonD_bmR2Q(StringResources_androidKt.stringResource(R.string.touchpad_tutorial_switch_apps_gesture_button, composerImpl2), VectorResources_androidKt.vectorResource(R.drawable.touchpad_tutorial_apps_icon, composerImpl2), MaterialTheme.getColorScheme(composerImpl2).primary, function04, MaterialTheme.getColorScheme(composerImpl2).onPrimary, SizeKt.fillMaxSize(FocusableKt.focusable$default(FocusRequesterModifierKt.focusRequester(modifier, focusRequester4), false, null, 3), 1.0f), composerImpl2, i2 & 7168);
             composerImpl = composerImpl2;
             if (AnimatedContentKt$$ExternalSyntheticOutline0.m(composerImpl, true, true)) {
                 ComposerKt.traceEventEnd();

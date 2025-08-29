@@ -49,7 +49,7 @@ import kotlin.jvm.functions.Function2;
 /* loaded from: classes4.dex */
 public abstract class BasicRadioButtonKt {
     /* renamed from: SeslBasicRadioButton-aA_HZ9I, reason: not valid java name */
-    public static final void m3349SeslBasicRadioButtonaA_HZ9I(final SeslBasicRadioButtonColors seslBasicRadioButtonColors, final boolean z, final Function0 function0, final float f, final SeslRecoilNodeFactory seslRecoilNodeFactory, final Modifier modifier, final MutableInteractionSource mutableInteractionSource, Composer composer, final int i) {
+    public static final void m3348SeslBasicRadioButtonaA_HZ9I(final SeslBasicRadioButtonColors seslBasicRadioButtonColors, final boolean z, final Function0 function0, final float f, final SeslRecoilNodeFactory seslRecoilNodeFactory, final Modifier modifier, final MutableInteractionSource mutableInteractionSource, Composer composer, final int i) {
         int i2;
         Modifier modifierM140size3ABfNKs;
         ComposerImpl composerImpl = (ComposerImpl) composer;
@@ -109,7 +109,7 @@ public abstract class BasicRadioButtonKt {
                     SeslRecoilNodeFactory seslRecoilNodeFactory2 = seslRecoilNodeFactory;
                     Modifier modifier2 = modifier;
                     MutableInteractionSource mutableInteractionSource2 = mutableInteractionSource;
-                    BasicRadioButtonKt.m3349SeslBasicRadioButtonaA_HZ9I(seslBasicRadioButtonColors2, z, function0, f, seslRecoilNodeFactory2, modifier2, mutableInteractionSource2, (Composer) obj, iUpdateChangedFlags);
+                    BasicRadioButtonKt.m3348SeslBasicRadioButtonaA_HZ9I(seslBasicRadioButtonColors2, z, function0, f, seslRecoilNodeFactory2, modifier2, mutableInteractionSource2, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

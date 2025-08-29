@@ -47,7 +47,7 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
     public final ArrayList mPositionProcessors = new ArrayList();
 
     /* renamed from: -$$Nest$smhaveSameLeash, reason: not valid java name */
-    public static boolean m3236$$Nest$smhaveSameLeash(InsetsSourceControl insetsSourceControl, InsetsSourceControl insetsSourceControl2) {
+    public static boolean m3235$$Nest$smhaveSameLeash(InsetsSourceControl insetsSourceControl, InsetsSourceControl insetsSourceControl2) {
         if (insetsSourceControl == insetsSourceControl2) {
             return true;
         }
@@ -228,13 +228,13 @@ public class DisplayImeController implements DisplayController.OnDisplaysChanged
                 if (this.mAnimation != null) {
                     DisplayImeController.this.getClass();
                     z2 = !insetsSourceControl.getSurfacePosition().equals(z4 ? this.mImeSourceControl.getSurfacePosition() : null);
-                    if (!DisplayImeController.m3236$$Nest$smhaveSameLeash(this.mImeSourceControl, insetsSourceControl)) {
+                    if (!DisplayImeController.m3235$$Nest$smhaveSameLeash(this.mImeSourceControl, insetsSourceControl)) {
                         Slog.d("DisplayImeController", "insetsControlChanged: leash changed during animation.");
                         z2 = true;
                     }
                     z = false;
                 } else {
-                    if (DisplayImeController.m3236$$Nest$smhaveSameLeash(this.mImeSourceControl, insetsSourceControl)) {
+                    if (DisplayImeController.m3235$$Nest$smhaveSameLeash(this.mImeSourceControl, insetsSourceControl)) {
                         z = false;
                     } else {
                         boolean zIsInitiallyVisible = insetsSourceControl.isInitiallyVisible();

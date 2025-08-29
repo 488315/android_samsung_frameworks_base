@@ -80,11 +80,11 @@ public final class Pool {
     }
 
     public final void recycle(ConnectionWithLock connectionWithLock) {
-        Object objMo3476trySendJP2dKIU = this.channel.mo3476trySendJP2dKIU(connectionWithLock);
+        Object objMo3475trySendJP2dKIU = this.channel.mo3475trySendJP2dKIU(connectionWithLock);
         ChannelResult.Companion companion = ChannelResult.Companion;
-        if (objMo3476trySendJP2dKIU instanceof ChannelResult.Failed) {
+        if (objMo3475trySendJP2dKIU instanceof ChannelResult.Failed) {
             connectionWithLock.close();
-            if (!(objMo3476trySendJP2dKIU instanceof ChannelResult.Closed)) {
+            if (!(objMo3475trySendJP2dKIU instanceof ChannelResult.Closed)) {
                 throw new IllegalStateException("Couldn't recycle connection");
             }
         }
@@ -100,14 +100,14 @@ public final class Pool {
             return;
         }
         ConnectionWithLock connectionWithLock = new ConnectionWithLock((SQLiteConnection) this.connectionFactory.invoke(), null, 2, null);
-        Object objMo3476trySendJP2dKIU = this.channel.mo3476trySendJP2dKIU(connectionWithLock);
+        Object objMo3475trySendJP2dKIU = this.channel.mo3475trySendJP2dKIU(connectionWithLock);
         ChannelResult.Companion companion = ChannelResult.Companion;
-        if (!(objMo3476trySendJP2dKIU instanceof ChannelResult.Failed)) {
+        if (!(objMo3475trySendJP2dKIU instanceof ChannelResult.Failed)) {
             this.connections[i] = connectionWithLock;
             return;
         }
         connectionWithLock.close();
-        if (!(objMo3476trySendJP2dKIU instanceof ChannelResult.Closed)) {
+        if (!(objMo3475trySendJP2dKIU instanceof ChannelResult.Closed)) {
             throw new IllegalStateException("Couldn't send a new connection for acquisition");
         }
     }

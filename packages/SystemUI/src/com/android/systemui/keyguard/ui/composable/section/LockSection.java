@@ -99,7 +99,7 @@ public final class LockSection {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public final void m2620LockIconBAq54LU(final ContentScope contentScope, final Color color, Modifier modifier, Composer composer, final int i, final int i2) {
+    public final void m2618LockIconBAq54LU(final ContentScope contentScope, final Color color, Modifier modifier, Composer composer, final int i, final int i2) {
         int i3;
         int i4;
         ComposerImpl composerImpl = (ComposerImpl) composer;
@@ -153,7 +153,7 @@ public final class LockSection {
                             FalsingManager falsingManager = (FalsingManager) lockSection.falsingManager.get();
                             VibratorHelper vibratorHelper = (VibratorHelper) lockSection.vibratorHelper.get();
                             MSDLPlayer mSDLPlayer = (MSDLPlayer) lockSection.msdlPlayer.get();
-                            DeviceEntryIconViewBinder.m2619bind7D8XEZs(lockSection.applicationScope, lockSection.mainDispatcher, deviceEntryIconView, deviceEntryIconViewModel, deviceEntryForegroundViewModel, deviceEntryBackgroundViewModel, falsingManager, vibratorHelper, mSDLPlayer, color);
+                            DeviceEntryIconViewBinder.m2617bind7D8XEZs(lockSection.applicationScope, lockSection.mainDispatcher, deviceEntryIconView, deviceEntryIconViewModel, deviceEntryForegroundViewModel, deviceEntryBackgroundViewModel, falsingManager, vibratorHelper, mSDLPlayer, color);
                             return deviceEntryIconView;
                         }
                     };
@@ -242,7 +242,7 @@ public final class LockSection {
                     ((Integer) obj2).getClass();
                     int i9 = LockSection.$r8$clinit;
                     int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
-                    this.f$0.m2620LockIconBAq54LU(this.f$1, this.f$2, this.f$3, composer2, iUpdateChangedFlags, this.f$5);
+                    this.f$0.m2618LockIconBAq54LU(this.f$1, this.f$2, this.f$3, composer2, iUpdateChangedFlags, this.f$5);
                     return Unit.INSTANCE;
                 }
             };

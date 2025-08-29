@@ -42,7 +42,7 @@ public class MultiTaskingAppCompatUILayout extends FrameLayout {
     public MultiTaskingAppCompatUIWindowManager mWindowManager;
 
     /* renamed from: $r8$lambda$mCU4zJ-Ek2I7AokD1FchTrCG1cc, reason: not valid java name */
-    public static void m3240$r8$lambda$mCU4zJEk2I7AokD1FchTrCG1cc(MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout) {
+    public static void m3239$r8$lambda$mCU4zJEk2I7AokD1FchTrCG1cc(MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout) {
         multiTaskingAppCompatUILayout.configureTouchableRegion(multiTaskingAppCompatUILayout.mTouchableRegionCalculator);
         multiTaskingAppCompatUILayout.getRootView().getViewTreeObserver().removeOnGlobalLayoutListener(multiTaskingAppCompatUILayout.mLayoutListener);
     }
@@ -66,7 +66,7 @@ public class MultiTaskingAppCompatUILayout extends FrameLayout {
         this.mLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.wm.shell.compatui.MultiTaskingAppCompatUILayout$$ExternalSyntheticLambda1
             @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
             public final void onGlobalLayout() {
-                MultiTaskingAppCompatUILayout.m3240$r8$lambda$mCU4zJEk2I7AokD1FchTrCG1cc(this.f$0);
+                MultiTaskingAppCompatUILayout.m3239$r8$lambda$mCU4zJEk2I7AokD1FchTrCG1cc(this.f$0);
             }
         };
         this.mFrameCommitCallback = new Runnable() { // from class: com.android.wm.shell.compatui.MultiTaskingAppCompatUILayout.1
@@ -290,7 +290,7 @@ public class MultiTaskingAppCompatUILayout extends FrameLayout {
         this.mLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.wm.shell.compatui.MultiTaskingAppCompatUILayout$$ExternalSyntheticLambda1
             @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
             public final void onGlobalLayout() {
-                MultiTaskingAppCompatUILayout.m3240$r8$lambda$mCU4zJEk2I7AokD1FchTrCG1cc(this.f$0);
+                MultiTaskingAppCompatUILayout.m3239$r8$lambda$mCU4zJEk2I7AokD1FchTrCG1cc(this.f$0);
             }
         };
         this.mFrameCommitCallback = new Runnable() { // from class: com.android.wm.shell.compatui.MultiTaskingAppCompatUILayout.1
@@ -353,7 +353,7 @@ public class MultiTaskingAppCompatUILayout extends FrameLayout {
         this.mLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.android.wm.shell.compatui.MultiTaskingAppCompatUILayout$$ExternalSyntheticLambda1
             @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
             public final void onGlobalLayout() {
-                MultiTaskingAppCompatUILayout.m3240$r8$lambda$mCU4zJEk2I7AokD1FchTrCG1cc(this.f$0);
+                MultiTaskingAppCompatUILayout.m3239$r8$lambda$mCU4zJEk2I7AokD1FchTrCG1cc(this.f$0);
             }
         };
         this.mFrameCommitCallback = new Runnable() { // from class: com.android.wm.shell.compatui.MultiTaskingAppCompatUILayout.1

@@ -435,7 +435,7 @@ public final class SmartReplyStateInflaterImpl implements SmartReplyStateInflate
                 public final Object invoke(Object obj5, Object obj6) throws Resources.NotFoundException {
                     Icon icon3;
                     Object failure;
-                    Throwable thM3442exceptionOrNullimpl;
+                    Throwable thM3441exceptionOrNullimpl;
                     Drawable gradientDrawable;
                     SmartReplyStateInflaterImpl smartReplyStateInflaterImpl = this.f$0;
                     SmartReplyView smartReplyView2 = smartReplyView;
@@ -492,8 +492,8 @@ public final class SmartReplyStateInflaterImpl implements SmartReplyStateInflate
                                 th = th;
                                 int i6 = Result.$r8$clinit;
                                 failure = new Result.Failure(th);
-                                thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-                                if (thM3442exceptionOrNullimpl != null) {
+                                thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+                                if (thM3441exceptionOrNullimpl != null) {
                                 }
                                 if (gradientDrawable == null) {
                                 }
@@ -543,8 +543,8 @@ public final class SmartReplyStateInflaterImpl implements SmartReplyStateInflate
                             th = th2;
                             icon3 = icon4;
                         }
-                        thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-                        if (thM3442exceptionOrNullimpl != null) {
+                        thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+                        if (thM3441exceptionOrNullimpl != null) {
                             Drawable bitmapDrawable = new BitmapDrawable(contextThemeWrapper2.getResources(), (Bitmap) failure);
                             if (icon3.getType() == 6) {
                                 bitmapDrawable = new AdaptiveIconDrawable(null, bitmapDrawable);
@@ -556,7 +556,7 @@ public final class SmartReplyStateInflaterImpl implements SmartReplyStateInflate
                             }
                             gradientDrawable = bitmapDrawable;
                         } else {
-                            Log.e("SmartReplyViewInflater", "Failed to load " + icon3 + ": " + thM3442exceptionOrNullimpl);
+                            Log.e("SmartReplyViewInflater", "Failed to load " + icon3 + ": " + thM3441exceptionOrNullimpl);
                             futureTask.cancel(true);
                             gradientDrawable = null;
                         }

@@ -3,6 +3,8 @@ package com.android.systemui.qs.bar;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.Uri;
+import android.provider.Settings;
 import android.widget.LinearLayout;
 import com.android.systemui.Dependency;
 import com.android.systemui.QpRune;
@@ -11,6 +13,7 @@ import com.android.systemui.qs.QSSecurityFooter;
 import com.android.systemui.shade.SecPanelSplitHelper;
 import com.android.systemui.statusbar.phone.datausage.DataUsageLabelView;
 import com.android.systemui.util.SecQsUiDisplayModeInteractor;
+import com.android.systemui.util.SettingsHelper;
 
 /* loaded from: classes2.dex */
 public class DataUsageBar extends BarItemImpl {
@@ -18,13 +21,26 @@ public class DataUsageBar extends BarItemImpl {
     public boolean mIsLandScape;
     public boolean mIsSecurityFooterVisible;
     public final QSSecurityFooter mSecurityFooter;
+    private final SettingsHelper.OnChangedCallback mSplitCallback;
 
     public DataUsageBar(Context context, QSSecurityFooter qSSecurityFooter) {
         super(context);
         this.mIsSecurityFooterVisible = false;
         this.mIsLandScape = false;
+        SettingsHelper.OnChangedCallback onChangedCallback = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.qs.bar.DataUsageBar.1
+            @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
+            public final void onChanged(Uri uri) {
+                if (uri != null && uri.equals(Settings.Secure.getUriFor(SettingsHelper.INDEX_SPLIT_QUICK_PANEL))) {
+                    DataUsageBar dataUsageBar = DataUsageBar.this;
+                    DataUsageLabelView dataUsageLabelView = dataUsageBar.mDataUsageLabelView;
+                    dataUsageBar.showBar(dataUsageLabelView != null && dataUsageLabelView.mDataUsageVisibility && SecPanelSplitHelper.isEnabled());
+                }
+            }
+        };
+        this.mSplitCallback = onChangedCallback;
         this.mContext = context;
         this.mSecurityFooter = qSSecurityFooter;
+        ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).registerCallback(onChangedCallback, Settings.Secure.getUriFor(SettingsHelper.INDEX_SPLIT_QUICK_PANEL));
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
@@ -67,16 +83,12 @@ public class DataUsageBar extends BarItemImpl {
 
     @Override // com.android.systemui.qs.bar.BarItemImpl
     public final void setExpanded(boolean z) throws Resources.NotFoundException {
-        if (QpRune.QUICK_DATA_USAGE_LABEL) {
-            DataUsageLabelView dataUsageLabelView = this.mDataUsageLabelView;
-            showBar(dataUsageLabelView != null && dataUsageLabelView.mDataUsageVisibility && SecPanelSplitHelper.isEnabled());
-            QSSecurityFooter qSSecurityFooter = this.mSecurityFooter;
-            if (qSSecurityFooter == null || !z || this.mIsSecurityFooterVisible == qSSecurityFooter.mIsVisible) {
-                return;
-            }
-            this.mIsSecurityFooterVisible = qSSecurityFooter.mIsVisible;
-            updateHeightMargins();
+        QSSecurityFooter qSSecurityFooter;
+        if (!QpRune.QUICK_DATA_USAGE_LABEL || (qSSecurityFooter = this.mSecurityFooter) == null || !z || this.mIsSecurityFooterVisible == qSSecurityFooter.mIsVisible) {
+            return;
         }
+        this.mIsSecurityFooterVisible = qSSecurityFooter.mIsVisible;
+        updateHeightMargins();
     }
 
     @Override // com.android.systemui.qs.bar.BarItemImpl

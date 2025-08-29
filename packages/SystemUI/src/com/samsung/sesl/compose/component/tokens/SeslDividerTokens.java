@@ -65,7 +65,7 @@ public final class SeslDividerTokens {
         SeslDividerTokens seslDividerTokens = (SeslDividerTokens) obj;
         long j = seslDividerTokens.horizontalDividerColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.horizontalDividerColor, j) && ULong.m3447equalsimpl0(this.verticalDividerColor, seslDividerTokens.verticalDividerColor);
+        return ULong.m3446equalsimpl0(this.horizontalDividerColor, j) && ULong.m3446equalsimpl0(this.verticalDividerColor, seslDividerTokens.verticalDividerColor);
     }
 
     public final int hashCode() {

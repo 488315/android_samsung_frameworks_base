@@ -26,7 +26,7 @@ public final class UInt implements Comparable {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ UInt m3445boximpl(int i) {
+    public static final /* synthetic */ UInt m3444boximpl(int i) {
         return new UInt(i);
     }
 

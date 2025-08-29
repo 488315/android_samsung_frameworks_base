@@ -140,7 +140,7 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
                     break;
                 case NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME /* 524288 */:
                     SomeArgs someArgs3 = (SomeArgs) message.obj;
-                    CommandQueue.m2959$$Nest$mhandleShowImeButton(commandQueue, someArgs3.argi1, someArgs3.argi2, someArgs3.argi3, someArgs3.argi4 != 0);
+                    CommandQueue.m2957$$Nest$mhandleShowImeButton(commandQueue, someArgs3.argi1, someArgs3.argi2, someArgs3.argi3, someArgs3.argi4 != 0);
                     break;
                 case 589824:
                     for (int i14 = 0; i14 < commandQueue.mCallbacks.size(); i14++) {
@@ -650,7 +650,7 @@ public class CommandQueue extends IStatusBar.Stub implements CallbackController 
     }
 
     /* renamed from: -$$Nest$mhandleShowImeButton, reason: not valid java name */
-    public static void m2959$$Nest$mhandleShowImeButton(CommandQueue commandQueue, int i, int i2, int i3, boolean z) {
+    public static void m2957$$Nest$mhandleShowImeButton(CommandQueue commandQueue, int i, int i2, int i3, boolean z) {
         if (i == -1) {
             commandQueue.getClass();
             return;

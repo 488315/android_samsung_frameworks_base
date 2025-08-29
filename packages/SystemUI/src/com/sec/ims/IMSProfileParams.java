@@ -138,7 +138,7 @@ public class IMSProfileParams implements Parcelable, Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public IMSProfileParams m3391clone() throws CloneNotSupportedException {
+    public IMSProfileParams m3390clone() throws CloneNotSupportedException {
         return (IMSProfileParams) super.clone();
     }
 

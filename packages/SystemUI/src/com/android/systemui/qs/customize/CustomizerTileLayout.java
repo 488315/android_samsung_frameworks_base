@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import androidx.appcompat.widget.AbsActionBarView$$ExternalSyntheticOutline0;
 import androidx.appcompat.widget.ActionBarContextView$$ExternalSyntheticOutline0;
 import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import androidx.collection.MutableObjectList$$ExternalSyntheticOutline0;
@@ -345,17 +346,26 @@ public class CustomizerTileLayout extends ViewGroup {
         if (i8 < 0) {
             this.mTileVerticalMargin = 0;
         }
-        this.mSidePadding = panelWidth + i5;
-        int iMin = Math.min(i4 * i7, this.mCustomTilesInfo.size());
-        for (int i9 = 0; i9 < iMin; i9++) {
-            SecCustomizeTileView secCustomizeTileView = ((CustomTileInfo) this.mCustomTilesInfo.get(i9)).customTileView;
+        this.mSidePadding = i5 + panelWidth;
+        int iWithDefaultDensity = withDefaultDensity(R.dimen.qs_edit_tile_icon_size);
+        int i9 = this.mCellWidth;
+        int iM = AbsActionBarView$$ExternalSyntheticOutline0.m(iWithDefaultDensity, i9, 2, panelWidth);
+        if (this.mIsTopEdit && this.mSidePadding < iM) {
+            this.mSidePadding = iM;
+            int i10 = size - (iM * 2);
+            int i11 = this.mColumns;
+            this.mTileHorizontalMargin = (i10 - (i9 * i11)) / (i11 - 1);
+        }
+        int iMin = Math.min(this.mColumns * this.mMaxRows, this.mCustomTilesInfo.size());
+        for (int i12 = 0; i12 < iMin; i12++) {
+            SecCustomizeTileView secCustomizeTileView = ((CustomTileInfo) this.mCustomTilesInfo.get(i12)).customTileView;
             if (secCustomizeTileView != null && secCustomizeTileView.getVisibility() != 8) {
                 secCustomizeTileView.measure(View.MeasureSpec.makeMeasureSpec(this.mCellWidth, 1073741824), View.MeasureSpec.makeMeasureSpec(this.mCellHeight, 1073741824));
             }
         }
         int size3 = this.mBoundaryBox.size();
-        for (int i10 = 0; i10 < size3; i10++) {
-            ((FrameLayout) this.mBoundaryBox.get(i10)).measure(View.MeasureSpec.makeMeasureSpec(this.mCellWidth, 1073741824), View.MeasureSpec.makeMeasureSpec(this.mCellHeight, 1073741824));
+        for (int i13 = 0; i13 < size3; i13++) {
+            ((FrameLayout) this.mBoundaryBox.get(i13)).measure(View.MeasureSpec.makeMeasureSpec(this.mCellWidth, 1073741824), View.MeasureSpec.makeMeasureSpec(this.mCellHeight, 1073741824));
         }
         this.mCircle.measure(View.MeasureSpec.makeMeasureSpec(this.mCellWidth, 1073741824), View.MeasureSpec.makeMeasureSpec(this.mCellHeight, 1073741824));
     }

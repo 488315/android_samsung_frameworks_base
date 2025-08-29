@@ -8,6 +8,10 @@ import kotlin.jvm.functions.Function1;
 public final /* synthetic */ class UnfoldTransitionModule$$ExternalSyntheticLambda0 implements Function1 {
     public final /* synthetic */ int $r8$classId;
 
+    public /* synthetic */ UnfoldTransitionModule$$ExternalSyntheticLambda0(int i) {
+        this.$r8$classId = i;
+    }
+
     @Override // kotlin.jvm.functions.Function1
     /* renamed from: invoke */
     public final Object mo781invoke(Object obj) {

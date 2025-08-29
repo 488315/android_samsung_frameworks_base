@@ -563,7 +563,7 @@ public class NotificationStackScrollLayoutController implements Dumpable {
                     quickPanelLogger.onInterceptTouchEvent(motionEvent);
                 }
                 NotificationStackScrollLayoutController notificationStackScrollLayoutController = NotificationStackScrollLayoutController.this;
-                NotificationStackScrollLayoutController.m3084$$Nest$mupdateEventAvailability(notificationStackScrollLayoutController, motionEvent);
+                NotificationStackScrollLayoutController.m3082$$Nest$mupdateEventAvailability(notificationStackScrollLayoutController, motionEvent);
                 if (!notificationStackScrollLayoutController.mIsStartFromContentsBound) {
                     float rawX = motionEvent.getRawX();
                     motionEvent.getRawY();
@@ -733,7 +733,7 @@ public class NotificationStackScrollLayoutController implements Dumpable {
     }
 
     /* renamed from: -$$Nest$mupdateEventAvailability, reason: not valid java name */
-    public static void m3084$$Nest$mupdateEventAvailability(NotificationStackScrollLayoutController notificationStackScrollLayoutController, MotionEvent motionEvent) {
+    public static void m3082$$Nest$mupdateEventAvailability(NotificationStackScrollLayoutController notificationStackScrollLayoutController, MotionEvent motionEvent) {
         notificationStackScrollLayoutController.getClass();
         int action = motionEvent.getAction();
         if (action == 0) {

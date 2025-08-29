@@ -46,7 +46,7 @@ public abstract class RippleKt {
         Dp.Companion.getClass();
         if (Dp.m838equalsimpl0(f2, Dp.Unspecified)) {
             companion.getClass();
-            if (ULong.m3447equalsimpl0(j, j)) {
+            if (ULong.m3446equalsimpl0(j, j)) {
                 return z2 ? DefaultBoundedRipple : DefaultUnboundedRipple;
             }
         }

@@ -49,17 +49,17 @@ final class UnfoldTransitionRepositoryImpl$transitionStatus$1 extends SuspendLam
             final ?? r1 = new UnfoldTransitionProgressProvider.TransitionProgressListener() { // from class: com.android.systemui.unfold.data.repository.UnfoldTransitionRepositoryImpl$transitionStatus$1$callback$1
                 @Override // com.android.systemui.unfold.UnfoldTransitionProgressProvider.TransitionProgressListener
                 public final void onTransitionFinished() {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(UnfoldTransitionStatus.TransitionFinished.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(UnfoldTransitionStatus.TransitionFinished.INSTANCE);
                 }
 
                 @Override // com.android.systemui.unfold.UnfoldTransitionProgressProvider.TransitionProgressListener
                 public final void onTransitionProgress(float f) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new UnfoldTransitionStatus.TransitionInProgress(f));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new UnfoldTransitionStatus.TransitionInProgress(f));
                 }
 
                 @Override // com.android.systemui.unfold.UnfoldTransitionProgressProvider.TransitionProgressListener
                 public final void onTransitionStarted() {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(UnfoldTransitionStatus.TransitionStarted.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(UnfoldTransitionStatus.TransitionStarted.INSTANCE);
                 }
             };
             this.$provider.addCallback(r1);

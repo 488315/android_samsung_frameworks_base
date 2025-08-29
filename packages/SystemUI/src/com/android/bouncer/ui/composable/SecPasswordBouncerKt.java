@@ -246,7 +246,7 @@ public abstract class SecPasswordBouncerKt {
                                                     long jM580getKeyZmokQxo = KeyEvent_androidKt.m580getKeyZmokQxo(((KeyEvent) obj3).nativeKeyEvent);
                                                     Key.Companion.getClass();
                                                     if (Key.m578equalsimpl0(jM580getKeyZmokQxo, Key.Back)) {
-                                                        passwordBouncerViewModel2.requests.mo3476trySendJP2dKIU(PasswordBouncerViewModel.OnImeDismissed.INSTANCE);
+                                                        passwordBouncerViewModel2.requests.mo3475trySendJP2dKIU(PasswordBouncerViewModel.OnImeDismissed.INSTANCE);
                                                         z = true;
                                                     } else {
                                                         z = false;
@@ -341,7 +341,7 @@ public abstract class SecPasswordBouncerKt {
                                                             Modifier modifierFillMaxWidth = SizeKt.fillMaxWidth(modifier3, 1.0f);
                                                             long j2 = ((Color) state5.getValue()).value;
                                                             Dp.Companion companion3 = Dp.Companion;
-                                                            Modifier modifierM128paddingqDBjuR0 = PaddingKt.m128paddingqDBjuR0(BackgroundKt.m26backgroundbw27NRU(modifierFillMaxWidth, j2, RoundedCornerShapeKt.m3354SeslRoundedCornerShapeD5KLDUw$default(22)), PrimitiveResources_androidKt.dimensionResource(R.dimen.kg_compose_password_entry_padding_horizontal_start, composer3), PrimitiveResources_androidKt.dimensionResource(R.dimen.kg_compose_password_entry_padding_vertical, composer3), PrimitiveResources_androidKt.dimensionResource(R.dimen.kg_compose_password_entry_padding_horizontal_end, composer3), PrimitiveResources_androidKt.dimensionResource(R.dimen.kg_compose_password_entry_padding_vertical, composer3));
+                                                            Modifier modifierM128paddingqDBjuR0 = PaddingKt.m128paddingqDBjuR0(BackgroundKt.m26backgroundbw27NRU(modifierFillMaxWidth, j2, RoundedCornerShapeKt.m3353SeslRoundedCornerShapeD5KLDUw$default(22)), PrimitiveResources_androidKt.dimensionResource(R.dimen.kg_compose_password_entry_padding_horizontal_start, composer3), PrimitiveResources_androidKt.dimensionResource(R.dimen.kg_compose_password_entry_padding_vertical, composer3), PrimitiveResources_androidKt.dimensionResource(R.dimen.kg_compose_password_entry_padding_horizontal_end, composer3), PrimitiveResources_androidKt.dimensionResource(R.dimen.kg_compose_password_entry_padding_vertical, composer3));
                                                             Alignment.Companion.getClass();
                                                             BiasAlignment.Vertical vertical = Alignment.Companion.CenterVertically;
                                                             Arrangement.INSTANCE.getClass();

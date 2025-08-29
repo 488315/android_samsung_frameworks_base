@@ -1,5 +1,6 @@
 package android.app;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -46,7 +47,7 @@ public class ListFragment extends Fragment {
     }
 
     @Override // android.app.Fragment
-    public void onViewCreated(View view, Bundle bundle) {
+    public void onViewCreated(View view, Bundle bundle) throws Resources.NotFoundException {
         super.onViewCreated(view, bundle);
         ensureList();
     }
@@ -63,7 +64,7 @@ public class ListFragment extends Fragment {
         super.onDestroyView();
     }
 
-    public void setListAdapter(ListAdapter listAdapter) {
+    public void setListAdapter(ListAdapter listAdapter) throws Resources.NotFoundException {
         boolean z = this.mAdapter != null;
         this.mAdapter = listAdapter;
         ListView listView = this.mList;
@@ -76,27 +77,27 @@ public class ListFragment extends Fragment {
         }
     }
 
-    public void setSelection(int i) {
+    public void setSelection(int i) throws Resources.NotFoundException {
         ensureList();
         this.mList.setSelection(i);
     }
 
-    public int getSelectedItemPosition() {
+    public int getSelectedItemPosition() throws Resources.NotFoundException {
         ensureList();
         return this.mList.getSelectedItemPosition();
     }
 
-    public long getSelectedItemId() {
+    public long getSelectedItemId() throws Resources.NotFoundException {
         ensureList();
         return this.mList.getSelectedItemId();
     }
 
-    public ListView getListView() {
+    public ListView getListView() throws Resources.NotFoundException {
         ensureList();
         return this.mList;
     }
 
-    public void setEmptyText(CharSequence charSequence) {
+    public void setEmptyText(CharSequence charSequence) throws Resources.NotFoundException {
         ensureList();
         TextView textView = this.mStandardEmptyView;
         if (textView == null) {
@@ -154,7 +155,7 @@ public class ListFragment extends Fragment {
         return this.mAdapter;
     }
 
-    private void ensureList() {
+    private void ensureList() throws Resources.NotFoundException {
         if (this.mList != null) {
             return;
         }

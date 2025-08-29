@@ -268,7 +268,7 @@ public final class SpatialAudioPopup {
                     composerImpl.updateRememberedValue(objRememberedValue2);
                 }
                 composerImpl.end(false);
-                VolumePanelRadioButtonsKt.m3220VolumePanelRadioButtonBarcjTkxnM(null, 0.0f, 0.0f, 0.0f, null, null, null, (Function1) objRememberedValue2, composerImpl, 0);
+                VolumePanelRadioButtonsKt.m3219VolumePanelRadioButtonBarcjTkxnM(null, 0.0f, 0.0f, 0.0f, null, null, null, (Function1) objRememberedValue2, composerImpl, 0);
                 if (ComposerKt.isTraceInProgress()) {
                     ComposerKt.traceEventEnd();
                 }

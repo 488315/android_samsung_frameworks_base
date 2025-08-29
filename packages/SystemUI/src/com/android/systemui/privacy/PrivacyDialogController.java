@@ -10,6 +10,7 @@ import com.android.systemui.privacy.logging.PrivacyLogger;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.shade.domain.interactor.ShadeInteractor;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
+import com.android.systemui.util.SettingsHelper;
 import java.util.concurrent.Executor;
 import kotlin.Lazy;
 import kotlin.LazyKt__LazyJVMKt;
@@ -32,6 +33,7 @@ public final class PrivacyDialogController {
     public final PermissionManager permissionManager;
     public final PrivacyItemController privacyItemController;
     public final PrivacyLogger privacyLogger;
+    private final SettingsHelper settingsHelper;
     public final ShadeInteractor shadeInteractor;
     public final UiEventLogger uiEventLogger;
     public final Executor uiExecutor;
@@ -53,11 +55,11 @@ public final class PrivacyDialogController {
         new Companion(null);
     }
 
-    public PrivacyDialogController(PermissionManager permissionManager, PackageManager packageManager, LocationManager locationManager, PrivacyItemController privacyItemController, UserTracker userTracker, ActivityStarter activityStarter, Executor executor, Executor executor2, PrivacyLogger privacyLogger, KeyguardStateController keyguardStateController, AppOpsController appOpsController, UiEventLogger uiEventLogger, ShadeInteractor shadeInteractor) {
-        this(permissionManager, packageManager, locationManager, privacyItemController, userTracker, activityStarter, executor, executor2, privacyLogger, keyguardStateController, appOpsController, uiEventLogger, shadeInteractor, PrivacyDialogControllerKt.defaultDialogProvider);
+    public PrivacyDialogController(PermissionManager permissionManager, PackageManager packageManager, LocationManager locationManager, PrivacyItemController privacyItemController, UserTracker userTracker, ActivityStarter activityStarter, Executor executor, Executor executor2, PrivacyLogger privacyLogger, KeyguardStateController keyguardStateController, AppOpsController appOpsController, UiEventLogger uiEventLogger, ShadeInteractor shadeInteractor, SettingsHelper settingsHelper) {
+        this(permissionManager, packageManager, locationManager, privacyItemController, userTracker, activityStarter, executor, executor2, privacyLogger, keyguardStateController, appOpsController, uiEventLogger, PrivacyDialogControllerKt.defaultDialogProvider, shadeInteractor, settingsHelper);
     }
 
-    public PrivacyDialogController(PermissionManager permissionManager, PackageManager packageManager, LocationManager locationManager, PrivacyItemController privacyItemController, UserTracker userTracker, ActivityStarter activityStarter, Executor executor, Executor executor2, PrivacyLogger privacyLogger, KeyguardStateController keyguardStateController, AppOpsController appOpsController, UiEventLogger uiEventLogger, ShadeInteractor shadeInteractor, DialogProvider dialogProvider) {
+    public PrivacyDialogController(PermissionManager permissionManager, PackageManager packageManager, LocationManager locationManager, PrivacyItemController privacyItemController, UserTracker userTracker, ActivityStarter activityStarter, Executor executor, Executor executor2, PrivacyLogger privacyLogger, KeyguardStateController keyguardStateController, AppOpsController appOpsController, UiEventLogger uiEventLogger, DialogProvider dialogProvider, ShadeInteractor shadeInteractor, SettingsHelper settingsHelper) {
         this.permissionManager = permissionManager;
         this.packageManager = packageManager;
         this.locationManager = locationManager;
@@ -70,8 +72,9 @@ public final class PrivacyDialogController {
         this.keyguardStateController = keyguardStateController;
         this.appOpsController = appOpsController;
         this.uiEventLogger = uiEventLogger;
-        this.shadeInteractor = shadeInteractor;
         this.dialogProvider = dialogProvider;
+        this.shadeInteractor = shadeInteractor;
+        this.settingsHelper = settingsHelper;
         this.LOCATION_OPS = new int[]{1, 0};
         this.onDialogDismissed = new PrivacyDialogController$onDialogDismissed$1(this);
         this.panelSplitHepler$delegate = LazyKt__LazyJVMKt.lazy(new PrivacyDialogController$$ExternalSyntheticLambda0());

@@ -14,7 +14,7 @@ public final class PrivacyItem {
     public final boolean paused;
     public final PrivacyType privacyType;
     public final long timeStampElapsed;
-    public long timeStampRemoved;
+    public final long timeStampRemoved;
 
     public PrivacyItem(PrivacyType privacyType, PrivacyApplication privacyApplication, long j, boolean z, long j2) {
         this.privacyType = privacyType;
@@ -25,7 +25,6 @@ public final class PrivacyItem {
         String logName = privacyType.getLogName();
         String str = privacyApplication.packageName;
         int i = privacyApplication.uid;
-        long j3 = this.timeStampRemoved;
         StringBuilder sbM = SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("(", logName, ", ", str, "(");
         sbM.append(i);
         sbM.append("), ");
@@ -33,7 +32,7 @@ public final class PrivacyItem {
         sbM.append(", paused=");
         sbM.append(z);
         sbM.append(", removed=");
-        this.log = MediaSessionCompat$QueueItem$$ExternalSyntheticOutline0.m(j3, ")", sbM);
+        this.log = MediaSessionCompat$QueueItem$$ExternalSyntheticOutline0.m(j2, ")", sbM);
     }
 
     public final boolean equals(Object obj) {

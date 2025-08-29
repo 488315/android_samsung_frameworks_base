@@ -26,7 +26,7 @@ public final class RippleConfiguration {
         RippleConfiguration rippleConfiguration = (RippleConfiguration) obj;
         long j = rippleConfiguration.color;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.color, j) && Intrinsics.areEqual(this.rippleAlpha, rippleConfiguration.rippleAlpha);
+        return ULong.m3446equalsimpl0(this.color, j) && Intrinsics.areEqual(this.rippleAlpha, rippleConfiguration.rippleAlpha);
     }
 
     public final int hashCode() {

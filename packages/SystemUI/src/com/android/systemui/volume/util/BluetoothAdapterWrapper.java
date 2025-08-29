@@ -203,9 +203,9 @@ public final class BluetoothAdapterWrapper {
             return EmptyList.INSTANCE;
         } catch (Throwable th) {
             int i2 = Result.$r8$clinit;
-            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(new Result.Failure(th));
-            if (thM3442exceptionOrNullimpl != null) {
-                thM3442exceptionOrNullimpl.printStackTrace();
+            Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(new Result.Failure(th));
+            if (thM3441exceptionOrNullimpl != null) {
+                thM3441exceptionOrNullimpl.printStackTrace();
             }
             return EmptyList.INSTANCE;
         }
@@ -221,9 +221,9 @@ public final class BluetoothAdapterWrapper {
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-        if (thM3442exceptionOrNullimpl != null) {
-            thM3442exceptionOrNullimpl.printStackTrace();
+        Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+        if (thM3441exceptionOrNullimpl != null) {
+            thM3441exceptionOrNullimpl.printStackTrace();
         }
         List list = (List) (failure instanceof Result.Failure ? null : failure);
         if (list == null) {
@@ -274,9 +274,9 @@ public final class BluetoothAdapterWrapper {
             return EmptyList.INSTANCE;
         } catch (Throwable th) {
             int i2 = Result.$r8$clinit;
-            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(new Result.Failure(th));
-            if (thM3442exceptionOrNullimpl != null) {
-                thM3442exceptionOrNullimpl.printStackTrace();
+            Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(new Result.Failure(th));
+            if (thM3441exceptionOrNullimpl != null) {
+                thM3441exceptionOrNullimpl.printStackTrace();
             }
             return EmptyList.INSTANCE;
         }

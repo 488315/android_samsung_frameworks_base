@@ -106,7 +106,7 @@ public class QSSecurityFooter extends ViewController implements View.OnClickList
                 int i = message.what;
                 QSSecurityFooter qSSecurityFooter = QSSecurityFooter.this;
                 if (i == 1) {
-                    QSSecurityFooter.m2898$$Nest$mhandleRefreshState(qSSecurityFooter);
+                    QSSecurityFooter.m2896$$Nest$mhandleRefreshState(qSSecurityFooter);
                 } else if (i == 0) {
                     qSSecurityFooter.mShouldUseSettingsButton.set(false);
                     qSSecurityFooter.mHandler.post(new QSSecurityFooter$$ExternalSyntheticLambda28(qSSecurityFooter));
@@ -147,7 +147,7 @@ public class QSSecurityFooter extends ViewController implements View.OnClickList
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static void m2898$$Nest$mhandleRefreshState(QSSecurityFooter qSSecurityFooter) {
+    public static void m2896$$Nest$mhandleRefreshState(QSSecurityFooter qSSecurityFooter) {
         boolean z;
         boolean z2;
         boolean z3;

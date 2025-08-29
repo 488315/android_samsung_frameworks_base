@@ -356,7 +356,7 @@ public abstract class DragGestureNode extends DelegatingNode implements PointerI
                         } catch (CancellationException e) {
                             BufferedChannel bufferedChannel = this.this$0.channel;
                             if (bufferedChannel != null) {
-                                ChannelResult.m3477boximpl(bufferedChannel.mo3476trySendJP2dKIU(DragEvent.DragCancelled.INSTANCE));
+                                ChannelResult.m3476boximpl(bufferedChannel.mo3475trySendJP2dKIU(DragEvent.DragCancelled.INSTANCE));
                             }
                             if (!CoroutineScopeKt.isActive(r1)) {
                                 throw e;
@@ -395,7 +395,7 @@ public abstract class DragGestureNode extends DelegatingNode implements PointerI
                                 long jM402minusMKHz9U = Offset.m402minusMKHz9U(pointerInputChange2.position, j2);
                                 BufferedChannel bufferedChannel = dragGestureNode.channel;
                                 if (bufferedChannel != null) {
-                                    ChannelResult.m3477boximpl(bufferedChannel.mo3476trySendJP2dKIU(new DragEvent.DragStarted(jM402minusMKHz9U, null)));
+                                    ChannelResult.m3476boximpl(bufferedChannel.mo3475trySendJP2dKIU(new DragEvent.DragStarted(jM402minusMKHz9U, null)));
                                 }
                             }
                             return Unit.INSTANCE;
@@ -416,7 +416,7 @@ public abstract class DragGestureNode extends DelegatingNode implements PointerI
                             BufferedChannel bufferedChannel = dragGestureNode.channel;
                             if (bufferedChannel != null) {
                                 Function3 function3 = DraggableKt.NoOpOnDragStarted;
-                                ChannelResult.m3477boximpl(bufferedChannel.mo3476trySendJP2dKIU(new DragEvent.DragStopped(VelocityKt.Velocity(Float.isNaN(Velocity.m880getXimpl(jM602calculateVelocityAH228Gc)) ? 0.0f : Velocity.m880getXimpl(jM602calculateVelocityAH228Gc), Float.isNaN(Velocity.m881getYimpl(jM602calculateVelocityAH228Gc)) ? 0.0f : Velocity.m881getYimpl(jM602calculateVelocityAH228Gc)), null)));
+                                ChannelResult.m3476boximpl(bufferedChannel.mo3475trySendJP2dKIU(new DragEvent.DragStopped(VelocityKt.Velocity(Float.isNaN(Velocity.m880getXimpl(jM602calculateVelocityAH228Gc)) ? 0.0f : Velocity.m880getXimpl(jM602calculateVelocityAH228Gc), Float.isNaN(Velocity.m881getYimpl(jM602calculateVelocityAH228Gc)) ? 0.0f : Velocity.m881getYimpl(jM602calculateVelocityAH228Gc)), null)));
                             }
                             return Unit.INSTANCE;
                         }
@@ -429,7 +429,7 @@ public abstract class DragGestureNode extends DelegatingNode implements PointerI
                         public final Object invoke() {
                             BufferedChannel bufferedChannel = dragGestureNode.channel;
                             if (bufferedChannel != null) {
-                                ChannelResult.m3477boximpl(bufferedChannel.mo3476trySendJP2dKIU(DragEvent.DragCancelled.INSTANCE));
+                                ChannelResult.m3476boximpl(bufferedChannel.mo3475trySendJP2dKIU(DragEvent.DragCancelled.INSTANCE));
                             }
                             return Unit.INSTANCE;
                         }
@@ -454,7 +454,7 @@ public abstract class DragGestureNode extends DelegatingNode implements PointerI
                             VelocityTrackerKt.addPointerInputChange(velocityTracker, (PointerInputChange) obj);
                             BufferedChannel bufferedChannel = dragGestureNode.channel;
                             if (bufferedChannel != null) {
-                                ChannelResult.m3477boximpl(bufferedChannel.mo3476trySendJP2dKIU(new DragEvent.DragDelta(j2, null)));
+                                ChannelResult.m3476boximpl(bufferedChannel.mo3475trySendJP2dKIU(new DragEvent.DragDelta(j2, null)));
                             }
                             return Unit.INSTANCE;
                         }

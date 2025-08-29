@@ -29,7 +29,7 @@ public class ExtensionControllerImpl implements ExtensionController {
         public final ExtensionImpl build() {
             ExtensionImpl extensionImpl = this.mExtension;
             Collections.sort(extensionImpl.mProducers, Comparator.comparingInt(new ExtensionControllerImpl$ExtensionBuilder$$ExternalSyntheticLambda0()));
-            ExtensionImpl.m3102$$Nest$mnotifyChanged(extensionImpl);
+            ExtensionImpl.m3100$$Nest$mnotifyChanged(extensionImpl);
             return extensionImpl;
         }
 
@@ -85,7 +85,7 @@ public class ExtensionControllerImpl implements ExtensionController {
                 ExtensionImpl extensionImpl = ExtensionImpl.this;
                 extensionImpl.mPluginContext = context;
                 this.mItem = plugin;
-                ExtensionImpl.m3102$$Nest$mnotifyChanged(extensionImpl);
+                ExtensionImpl.m3100$$Nest$mnotifyChanged(extensionImpl);
             }
 
             @Override // com.android.systemui.plugins.PluginListener
@@ -93,7 +93,7 @@ public class ExtensionControllerImpl implements ExtensionController {
                 ExtensionImpl extensionImpl = ExtensionImpl.this;
                 extensionImpl.mPluginContext = null;
                 this.mItem = null;
-                ExtensionImpl.m3102$$Nest$mnotifyChanged(extensionImpl);
+                ExtensionImpl.m3100$$Nest$mnotifyChanged(extensionImpl);
             }
 
             @Override // com.android.systemui.statusbar.policy.ExtensionControllerImpl.Item
@@ -103,7 +103,7 @@ public class ExtensionControllerImpl implements ExtensionController {
         }
 
         /* renamed from: -$$Nest$mnotifyChanged, reason: not valid java name */
-        public static void m3102$$Nest$mnotifyChanged(ExtensionImpl extensionImpl) {
+        public static void m3100$$Nest$mnotifyChanged(ExtensionImpl extensionImpl) {
             Object obj = extensionImpl.mItem;
             if (obj != null) {
                 ExtensionControllerImpl.this.mLeakDetector.trackGarbage(obj);

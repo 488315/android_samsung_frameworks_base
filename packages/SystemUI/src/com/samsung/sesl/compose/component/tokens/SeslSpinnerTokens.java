@@ -65,7 +65,7 @@ public final class SeslSpinnerTokens {
         SeslSpinnerTokens seslSpinnerTokens = (SeslSpinnerTokens) obj;
         long j = seslSpinnerTokens.itemTextColorNormal;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.itemTextColorNormal, j) && ULong.m3447equalsimpl0(this.iconColorDefault, seslSpinnerTokens.iconColorDefault);
+        return ULong.m3446equalsimpl0(this.itemTextColorNormal, j) && ULong.m3446equalsimpl0(this.iconColorDefault, seslSpinnerTokens.iconColorDefault);
     }
 
     public final int hashCode() {

@@ -53,7 +53,7 @@ final class BackgroundNode extends Modifier.Node implements DrawModifierNode, Ob
         if (this.shape == RectangleShapeKt.RectangleShape) {
             long j = this.color;
             Color.Companion.getClass();
-            if (!ULong.m3447equalsimpl0(j, Color.Unspecified)) {
+            if (!ULong.m3446equalsimpl0(j, Color.Unspecified)) {
                 DrawScope.m541drawRectnJ9OG0$default(layoutNodeDrawScope, this.color, 0L, 0L, 0.0f, null, null, 0, 126);
             }
             Brush brush2 = this.brush;
@@ -89,7 +89,7 @@ final class BackgroundNode extends Modifier.Node implements DrawModifierNode, Ob
             outline.getClass();
             long j2 = this.color;
             Color.Companion.getClass();
-            if (ULong.m3447equalsimpl0(j2, Color.Unspecified)) {
+            if (ULong.m3446equalsimpl0(j2, Color.Unspecified)) {
                 outline2 = outline;
             } else {
                 outline2 = outline;

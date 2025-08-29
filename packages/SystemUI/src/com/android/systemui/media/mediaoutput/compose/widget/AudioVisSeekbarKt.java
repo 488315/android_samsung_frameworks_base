@@ -83,7 +83,7 @@ public abstract class AudioVisSeekbarKt {
                 if (ComposerKt.isTraceInProgress()) {
                     ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.widget.AudioVisSeekbarDefaults.waveOptions (AudioVisSeekbar.kt:364)");
                 }
-                WaveOptions waveOptions5 = new WaveOptions(AudioVisSeekbarDefaults.m2633toPx8Feqmps(f2, composerImpl2), 6.2831855f, AudioVisSeekbarDefaults.m2633toPx8Feqmps(f2, composerImpl2));
+                WaveOptions waveOptions5 = new WaveOptions(AudioVisSeekbarDefaults.m2631toPx8Feqmps(f2, composerImpl2), 6.2831855f, AudioVisSeekbarDefaults.m2631toPx8Feqmps(f2, composerImpl2));
                 if (ComposerKt.isTraceInProgress()) {
                     ComposerKt.traceEventEnd();
                 }
@@ -207,7 +207,7 @@ public abstract class AudioVisSeekbarKt {
                                 ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.widget.AudioVisSeekbar.<anonymous> (AudioVisSeekbar.kt:119)");
                             }
                             if (z7) {
-                                AudioVisSeekbarDefaults.INSTANCE.m2634ThumbFJfuzF0(mutableState3, null, audioVisSeekbarColors, z, 0.0f, composer2, 196614);
+                                AudioVisSeekbarDefaults.INSTANCE.m2632ThumbFJfuzF0(mutableState3, null, audioVisSeekbarColors, z, 0.0f, composer2, 196614);
                             }
                             if (ComposerKt.isTraceInProgress()) {
                                 ComposerKt.traceEventEnd();

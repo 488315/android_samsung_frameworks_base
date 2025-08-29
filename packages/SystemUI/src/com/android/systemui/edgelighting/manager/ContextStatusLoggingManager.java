@@ -26,7 +26,7 @@ public class ContextStatusLoggingManager {
         public final Object doInBackground(Object[] objArr) {
             try {
                 sendEdgeLightingSettingsLogging(this.mTaskContext);
-                ContextStatusLoggingManager.m2575$$Nest$msendEdgeLightingStatusLogging(ContextStatusLoggingManager.this, this.mTaskContext);
+                ContextStatusLoggingManager.m2573$$Nest$msendEdgeLightingStatusLogging(ContextStatusLoggingManager.this, this.mTaskContext);
                 return null;
             } catch (Exception e) {
                 ContextStatusLoggingManager.this.getClass();
@@ -75,7 +75,7 @@ public class ContextStatusLoggingManager {
     }
 
     /* renamed from: -$$Nest$msendEdgeLightingStatusLogging, reason: not valid java name */
-    public static void m2575$$Nest$msendEdgeLightingStatusLogging(ContextStatusLoggingManager contextStatusLoggingManager, Context context) {
+    public static void m2573$$Nest$msendEdgeLightingStatusLogging(ContextStatusLoggingManager contextStatusLoggingManager, Context context) {
         contextStatusLoggingManager.getClass();
         ContentValues contentValuesMakeLoggingContentValue = makeLoggingContentValue("EL13", Integer.toString(Settings.System.getIntForUser(context.getContentResolver(), "edge_lighting_color_type", 1, -2) + 1), null);
         ContentValues contentValuesMakeLoggingContentValue2 = makeLoggingContentValue("EL14", Integer.toString(Settings.System.getIntForUser(context.getContentResolver(), "edge_lighting_transparency", 0, -2)), null);

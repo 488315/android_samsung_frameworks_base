@@ -364,7 +364,7 @@ final class SubscreenTilesInteractorImpl$startTileCollection$1 extends SuspendLa
                     Object objAccess$createTile2 = obj;
                     qSTile = (QSTile) objAccess$createTile2;
                     if (qSTile != null) {
-                        map.put(tileSpec, SubscreenTilesInteractorImpl.TileOrNotInstalled.Tile.m2912boximpl(qSTile));
+                        map.put(tileSpec, SubscreenTilesInteractorImpl.TileOrNotInstalled.Tile.m2910boximpl(qSTile));
                     }
                     char c32 = c;
                     i4 = i2;

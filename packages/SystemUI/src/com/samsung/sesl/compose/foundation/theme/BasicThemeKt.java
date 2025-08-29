@@ -75,17 +75,17 @@ public abstract class BasicThemeKt {
                                 ComposerKt.traceEventStart("com.samsung.sesl.compose.foundation.theme.SeslBasicTheme.<anonymous> (BasicTheme.kt:52)");
                             }
                             SeslFeedbackDefaults.INSTANCE.getClass();
-                            long jM3353colorsWaAFU9c = SeslFeedbackDefaults.m3353colorsWaAFU9c(composer2);
+                            long jM3352colorsWaAFU9c = SeslFeedbackDefaults.m3352colorsWaAFU9c(composer2);
                             ComposerImpl composerImpl3 = (ComposerImpl) composer2;
                             composerImpl3.startReplaceGroup(1439547926);
                             Object objRememberedValue = composerImpl3.rememberedValue();
                             Composer.Companion.getClass();
                             if (objRememberedValue == Composer.Companion.Empty) {
-                                objRememberedValue = new SeslRecoilConfiguration(jM3353colorsWaAFU9c, SeslFeedbackDefaults.feedbackAlpha, null);
+                                objRememberedValue = new SeslRecoilConfiguration(jM3352colorsWaAFU9c, SeslFeedbackDefaults.feedbackAlpha, null);
                                 composerImpl3.updateRememberedValue(objRememberedValue);
                             }
                             composerImpl3.end(false);
-                            ProvidedValue[] providedValueArr = {IndicationKt.LocalIndication.defaultProvidedValue$runtime_release(RecoilKt.m3352seslRecoilIndicationbw27NRU$default(null, null, 7)), CompositionLocalsKt.LocalHapticFeedback.defaultProvidedValue$runtime_release(seslHapticFeedback), com.samsung.sesl.compose.ui.platform.CompositionLocalsKt.LocalSeslSoundEffect.defaultProvidedValue$runtime_release(new SeslSoundEffect(view)), RecoilKt.LocalSeslRecoilConfiguration.defaultProvidedValue$runtime_release((SeslRecoilConfiguration) objRememberedValue)};
+                            ProvidedValue[] providedValueArr = {IndicationKt.LocalIndication.defaultProvidedValue$runtime_release(RecoilKt.m3351seslRecoilIndicationbw27NRU$default(null, null, 7)), CompositionLocalsKt.LocalHapticFeedback.defaultProvidedValue$runtime_release(seslHapticFeedback), com.samsung.sesl.compose.ui.platform.CompositionLocalsKt.LocalSeslSoundEffect.defaultProvidedValue$runtime_release(new SeslSoundEffect(view)), RecoilKt.LocalSeslRecoilConfiguration.defaultProvidedValue$runtime_release((SeslRecoilConfiguration) objRememberedValue)};
                             final Function2 function2 = composableLambdaImpl;
                             CompositionLocalKt.CompositionLocalProvider(providedValueArr, ComposableLambdaKt.rememberComposableLambda(-845878905, new Function2() { // from class: com.samsung.sesl.compose.foundation.theme.BasicThemeKt.SeslBasicTheme.1.1
                                 /* JADX WARN: Removed duplicated region for block: B:8:0x001b  */

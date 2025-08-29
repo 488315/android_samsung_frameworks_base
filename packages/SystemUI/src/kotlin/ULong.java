@@ -26,17 +26,17 @@ public final class ULong implements Comparable {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ ULong m3446boximpl(long j) {
+    public static final /* synthetic */ ULong m3445boximpl(long j) {
         return new ULong(j);
     }
 
     /* renamed from: equals-impl0, reason: not valid java name */
-    public static final boolean m3447equalsimpl0(long j, long j2) {
+    public static final boolean m3446equalsimpl0(long j, long j2) {
         return j == j2;
     }
 
     /* renamed from: toString-impl, reason: not valid java name */
-    public static String m3448toStringimpl(long j) {
+    public static String m3447toStringimpl(long j) {
         if (j >= 0) {
             CharsKt__CharJVMKt.checkRadix(10);
             return Long.toString(j, 10);
@@ -76,6 +76,6 @@ public final class ULong implements Comparable {
     }
 
     public final String toString() {
-        return m3448toStringimpl(this.data);
+        return m3447toStringimpl(this.data);
     }
 }

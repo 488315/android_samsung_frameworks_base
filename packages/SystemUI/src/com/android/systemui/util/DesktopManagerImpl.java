@@ -91,7 +91,7 @@ public class DesktopManagerImpl implements DesktopManager {
     };
 
     /* renamed from: -$$Nest$mgetDesktopSettingsValue, reason: not valid java name */
-    public static /* bridge */ /* synthetic */ String m3137$$Nest$mgetDesktopSettingsValue(DesktopManagerImpl desktopManagerImpl, String str) {
+    public static /* bridge */ /* synthetic */ String m3136$$Nest$mgetDesktopSettingsValue(DesktopManagerImpl desktopManagerImpl, String str) {
         return desktopManagerImpl.getDesktopSettingsValue(str, "false");
     }
 
@@ -213,7 +213,7 @@ public class DesktopManagerImpl implements DesktopManager {
                     return;
                 }
                 DesktopManagerImpl desktopManagerImpl = DesktopManagerImpl.this;
-                desktopManagerImpl.mIsTouchpadEnabled = "true".equals(DesktopManagerImpl.m3137$$Nest$mgetDesktopSettingsValue(desktopManagerImpl, lastPathSegment));
+                desktopManagerImpl.mIsTouchpadEnabled = "true".equals(DesktopManagerImpl.m3136$$Nest$mgetDesktopSettingsValue(desktopManagerImpl, lastPathSegment));
             }
         };
         Log.i(TAG, "DesktopManagerImpl started");

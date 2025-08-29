@@ -172,7 +172,7 @@ public class MusicData {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public MusicData m2677clone() throws CloneNotSupportedException {
+    public MusicData m2675clone() throws CloneNotSupportedException {
         return (MusicData) super.clone();
     }
 }

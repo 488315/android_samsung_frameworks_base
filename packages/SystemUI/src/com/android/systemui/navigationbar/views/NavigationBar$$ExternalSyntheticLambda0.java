@@ -22,10 +22,10 @@ public final /* synthetic */ class NavigationBar$$ExternalSyntheticLambda0 imple
                 ((NavigationBar) obj).mNavigationBarTransitions.setAutoDim(true);
                 break;
             case 2:
-                NavigationBar.m2643$r8$lambda$HCBlCcLTUzLXTlWADhtZKsEEs4((NavigationBar) obj);
+                NavigationBar.m2641$r8$lambda$HCBlCcLTUzLXTlWADhtZKsEEs4((NavigationBar) obj);
                 break;
             default:
-                NavigationBar.m2644$r8$lambda$PHzUD06Qyvu_i_ArfJRIF89Blg((NavigationBar) obj);
+                NavigationBar.m2642$r8$lambda$PHzUD06Qyvu_i_ArfJRIF89Blg((NavigationBar) obj);
                 break;
         }
     }

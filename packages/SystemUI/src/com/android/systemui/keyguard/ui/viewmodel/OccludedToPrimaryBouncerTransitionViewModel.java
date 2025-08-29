@@ -21,7 +21,7 @@ public final class OccludedToPrimaryBouncerTransitionViewModel implements Primar
         FromOccludedTransitionInteractor.Companion.getClass();
         long j = FromOccludedTransitionInteractor.TO_PRIMARY_BOUNCER_DURATION;
         Edge.Companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.OCCLUDED, KeyguardState.PRIMARY_BOUNCER, keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, Edge.INVALID));
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.OCCLUDED, KeyguardState.PRIMARY_BOUNCER, keyguardTransitionAnimationFlow.m2613setupVtjQ1oo(j, Edge.INVALID));
         this.lockscreenAlpha = flowBuilderM.immediatelyTransitionTo(0.0f);
         KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1ImmediatelyTransitionTo = flowBuilderM.immediatelyTransitionTo(blurConfig.minBlurRadiusPx);
         float f = blurConfig.maxBlurRadiusPx;

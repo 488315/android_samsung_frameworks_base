@@ -152,9 +152,9 @@ public final class SeekbarDefaults {
                     i3 = -57345;
                     failure = new Result.Failure(th);
                 }
-                Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-                if (thM3442exceptionOrNullimpl != null) {
-                    thM3442exceptionOrNullimpl.printStackTrace();
+                Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+                if (thM3441exceptionOrNullimpl != null) {
+                    thM3441exceptionOrNullimpl.printStackTrace();
                 }
                 if (failure instanceof Result.Failure) {
                     failure = null;
@@ -382,7 +382,7 @@ public final class SeekbarDefaults {
     }
 
     /* renamed from: Thumb-FJfuzF0, reason: not valid java name */
-    public final void m2636ThumbFJfuzF0(State state, Modifier modifier, final SliderColors sliderColors, boolean z, float f, Composer composer, final int i) {
+    public final void m2634ThumbFJfuzF0(State state, Modifier modifier, final SliderColors sliderColors, boolean z, float f, Composer composer, final int i) {
         final boolean z2;
         State state2;
         Modifier modifier2;
@@ -495,7 +495,7 @@ public final class SeekbarDefaults {
                     ((Integer) obj2).getClass();
                     SeekbarDefaults seekbarDefaults = SeekbarDefaults.INSTANCE;
                     int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(221239);
-                    this.f$0.m2636ThumbFJfuzF0(this.f$1, this.f$2, this.f$3, this.f$4, this.f$5, composer2, iUpdateChangedFlags);
+                    this.f$0.m2634ThumbFJfuzF0(this.f$1, this.f$2, this.f$3, this.f$4, this.f$5, composer2, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

@@ -268,7 +268,7 @@ public final class ConnectionPoolImpl implements ConnectionPool {
                             anonymousClass1.L$4 = ref$ObjectRef2;
                             anonymousClass1.Z$0 = z3;
                             anonymousClass1.label = 3;
-                            if (TimeoutKt.m3471withTimeoutKLykuaI(j, connectionPoolImpl$acquireWithTimeout$2, anonymousClass1) != coroutineSingletons) {
+                            if (TimeoutKt.m3470withTimeoutKLykuaI(j, connectionPoolImpl$acquireWithTimeout$2, anonymousClass1) != coroutineSingletons) {
                                 function22 = function23;
                                 ref$ObjectRef3 = ref$ObjectRef;
                                 connectionPoolImpl = connectionPoolImpl2;

@@ -26,7 +26,7 @@ public final class UShort implements Comparable {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ UShort m3449boximpl(short s) {
+    public static final /* synthetic */ UShort m3448boximpl(short s) {
         return new UShort(s);
     }
 

@@ -126,14 +126,14 @@ public abstract class SIPMessage extends MessageObject implements Cloneable, Ser
         if (lowerCase2 == null) {
             throw new NullPointerException("bad name");
         }
-        SIPHeader sIPHeaderMo3439getFirst = this.nameTable.get(lowerCase2);
-        if (sIPHeaderMo3439getFirst instanceof SIPHeaderList) {
-            sIPHeaderMo3439getFirst = ((SIPHeaderList) sIPHeaderMo3439getFirst).mo3439getFirst();
+        SIPHeader sIPHeaderMo3438getFirst = this.nameTable.get(lowerCase2);
+        if (sIPHeaderMo3438getFirst instanceof SIPHeaderList) {
+            sIPHeaderMo3438getFirst = ((SIPHeaderList) sIPHeaderMo3438getFirst).mo3438getFirst();
         }
-        if (sIPHeaderMo3439getFirst != null) {
+        if (sIPHeaderMo3438getFirst != null) {
             Iterator<SIPHeader> it = this.headers.iterator();
             while (it.hasNext()) {
-                if (it.next().equals(sIPHeaderMo3439getFirst)) {
+                if (it.next().equals(sIPHeaderMo3438getFirst)) {
                     it.remove();
                 }
             }
@@ -233,11 +233,11 @@ public abstract class SIPMessage extends MessageObject implements Cloneable, Ser
                         if (str2 == null) {
                             throw new NullPointerException("bad name");
                         }
-                        SIPHeader sIPHeaderMo3439getFirst = this.nameTable.get(str2);
-                        if (sIPHeaderMo3439getFirst instanceof SIPHeaderList) {
-                            sIPHeaderMo3439getFirst = ((SIPHeaderList) sIPHeaderMo3439getFirst).mo3439getFirst();
+                        SIPHeader sIPHeaderMo3438getFirst = this.nameTable.get(str2);
+                        if (sIPHeaderMo3438getFirst instanceof SIPHeaderList) {
+                            sIPHeaderMo3438getFirst = ((SIPHeaderList) sIPHeaderMo3438getFirst).mo3438getFirst();
                         }
-                        ContentType contentType = (ContentType) sIPHeaderMo3439getFirst;
+                        ContentType contentType = (ContentType) sIPHeaderMo3438getFirst;
                         if (contentType == null || (parameter = contentType.getParameter("charset")) == null) {
                             parameter = this.contentEncodingCharset;
                         }

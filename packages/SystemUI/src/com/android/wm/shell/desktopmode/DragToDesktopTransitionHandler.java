@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.os.Debug;
 import android.os.IBinder;
 import android.view.Choreographer;
 import android.view.SurfaceControl;
@@ -42,8 +43,10 @@ import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
 import com.samsung.android.rune.CoreRune;
 import com.sec.ims.volte2.data.VolteConstants;
 import defpackage.ReorderTile$$ExternalSyntheticOutline0;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -67,8 +70,10 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
     public DesktopTasksController$dragToDesktopStateListener$1 dragToDesktopStateListener;
     public final InteractionJankMonitor interactionJankMonitor;
     public final Intent launchHomeIntent;
+    public final LinkedList logHistory;
     public DesktopModeWindowDecorViewModel.DesktopModeOnTaskResizeAnimationListener onTaskResizeAnimationListener;
     public final RectEvaluator rectEvaluator;
+    public final SimpleDateFormat simpleDateFormat;
     public SplitScreenController splitScreenController;
     public final RootTaskDisplayAreaOrganizer taskDisplayAreaOrganizer;
     public final Supplier transactionSupplier;
@@ -169,6 +174,8 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
     }
 
     public abstract class TransitionState {
+        public Boolean isTransitionReversed;
+
         public /* synthetic */ TransitionState(DefaultConstructorMarker defaultConstructorMarker) {
             this();
         }
@@ -869,9 +876,8 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
                 }
                 desktopModeOnTaskResizeAnimationListener2.onAnimationEnd(transitionStateRequireTransitionState.getDraggedTaskId());
                 transitionFinishCallback.onTransitionFinished(null);
-                DragToDesktopTransitionHandler dragToDesktopTransitionHandler = this.this$0;
-                dragToDesktopTransitionHandler.transitionState = null;
-                dragToDesktopTransitionHandler.interactionJankMonitor.end(116);
+                this.this$0.clearState();
+                this.this$0.interactionJankMonitor.end(116);
             }
         });
         duration.start();
@@ -890,7 +896,7 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
         TransitionState transitionStateRequireTransitionState = requireTransitionState();
         if (transitionStateRequireTransitionState.getStartAborted()) {
             logV$4("cancelDragToDesktop: start was aborted, clearing state", new Object[0]);
-            this.transitionState = null;
+            clearState();
             return;
         }
         if (transitionStateRequireTransitionState.getStartInterrupted()) {
@@ -962,6 +968,15 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
         Rect rect2 = new Rect((int) f2, (int) f3, (int) (f2 + fWidth), (int) (f3 + fHeight));
         transitionStateRequireTransitionState3.getDragAnimator().cancelAnimator();
         requestSplitSelect(i, taskInfo, rect2, windowContainerTransaction2);
+        clearState();
+    }
+
+    public final void clearState() {
+        TransitionState transitionState = this.transitionState;
+        if (transitionState != null) {
+            recordLogHistory("[C] " + transitionState);
+            logV$4("clearState: " + this.transitionState + ", c=" + Debug.getCallers(2), new Object[0]);
+        }
         this.transitionState = null;
     }
 
@@ -986,7 +1001,7 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
         final TransitionState transitionStateRequireTransitionState = requireTransitionState();
         if (transitionStateRequireTransitionState.getCancelState() == CancelState.CANCEL_SPLIT_LEFT || transitionStateRequireTransitionState.getCancelState() == CancelState.CANCEL_SPLIT_RIGHT) {
             logV$4("mergeAnimation: cancel through split", new Object[0]);
-            this.transitionState = null;
+            clearState();
             return;
         }
         if (transitionInfo.getType() == 1024) {
@@ -995,14 +1010,14 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
             if (startTransitionFinishCb != null) {
                 startTransitionFinishCb.onTransitionFinished(null);
             }
-            this.transitionState = null;
+            clearState();
             return;
         }
         boolean z = transitionInfo.getType() == 1111 && Intrinsics.areEqual(iBinder, transitionStateRequireTransitionState.getCancelTransitionToken()) && Intrinsics.areEqual(iBinder2, transitionStateRequireTransitionState.getStartTransitionToken());
         boolean z2 = transitionInfo.getType() == 1110 && Intrinsics.areEqual(iBinder2, transitionStateRequireTransitionState.getStartTransitionToken());
         if (transitionInfo.getType() == 1109 && Intrinsics.areEqual(iBinder, transitionStateRequireTransitionState.getStartTransitionToken())) {
-            logV$4("reversed transition. clear DragToDesktop state", new Object[0]);
-            this.transitionState = null;
+            logW$2("mergeAnimation: clear state, reason=reversed_order, " + transitionStateRequireTransitionState, new Object[0]);
+            clearState();
             DesktopTasksController$dragToDesktopStateListener$1 desktopTasksController$dragToDesktopStateListener$1 = this.dragToDesktopStateListener;
             if (desktopTasksController$dragToDesktopStateListener$1 != null) {
                 desktopTasksController$dragToDesktopStateListener$1.removeVisualIndicator();
@@ -1037,7 +1052,7 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
             transaction.apply();
             transitionFinishCallback.onTransitionFinished(null);
             startTransitionFinishCb2.onTransitionFinished(null);
-            this.transitionState = null;
+            clearState();
             return;
         }
         logW$2("unhandled merge transition: transitionInfo=" + transitionInfo, new Object[0]);
@@ -1057,7 +1072,7 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
                         if (startTransitionFinishCb3 != null) {
                             startTransitionFinishCb3.onTransitionFinished(null);
                         }
-                        this.transitionState = null;
+                        this.clearState();
                     }
                 };
                 TransitionInfo.Change homeChange = transitionStateRequireTransitionState.getHomeChange();
@@ -1130,9 +1145,16 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
                 if (startTransitionFinishCb != null) {
                     startTransitionFinishCb.onTransitionFinished(null);
                 }
-                this.transitionState = null;
+                clearState();
             }
         }
+    }
+
+    public final void recordLogHistory(String str) {
+        if (this.logHistory.size() == 6) {
+            this.logHistory.removeFirst();
+        }
+        this.logHistory.add("(" + this.simpleDateFormat.format(Long.valueOf(System.currentTimeMillis())) + ") " + str);
     }
 
     public final void requestSplitSelect(int i, ActivityManager.RunningTaskInfo runningTaskInfo, Rect rect, WindowContainerTransaction windowContainerTransaction) {
@@ -1216,7 +1238,7 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
         transitionStateRequireTransitionState.setFreeformTaskChanges(arrayList);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:54:0x0172  */
+    /* JADX WARN: Removed duplicated region for block: B:67:0x01c1  */
     @Override // com.android.wm.shell.transition.Transitions.TransitionHandler
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1225,6 +1247,18 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
         SurfaceControl surfaceControl;
         TransitionState transitionStateRequireTransitionState = requireTransitionState();
         if (DesktopModeFlags.ENABLE_DRAG_TO_DESKTOP_INCOMING_TRANSITIONS_BUGFIX.isTrue()) {
+            if (transitionInfo.getType() == 1109 && Intrinsics.areEqual(iBinder, transitionStateRequireTransitionState.getStartTransitionToken()) && Intrinsics.areEqual(transitionStateRequireTransitionState.isTransitionReversed, Boolean.TRUE)) {
+                logW$2("handleCancelOrExitAfterInterrupt: clear state, reason=reversed_order, " + transitionStateRequireTransitionState, new Object[0]);
+                transaction.apply();
+                transitionFinishCallback.onTransitionFinished(null);
+                clearState();
+                DesktopTasksController$dragToDesktopStateListener$1 desktopTasksController$dragToDesktopStateListener$1 = this.dragToDesktopStateListener;
+                if (desktopTasksController$dragToDesktopStateListener$1 == null) {
+                    return true;
+                }
+                desktopTasksController$dragToDesktopStateListener$1.removeVisualIndicator();
+                return true;
+            }
             boolean z = transitionInfo.getType() == 1111 && Intrinsics.areEqual(iBinder, transitionStateRequireTransitionState.getCancelTransitionToken());
             boolean z2 = transitionInfo.getType() == 1110 && Intrinsics.areEqual(iBinder, transitionStateRequireTransitionState.getEndTransitionToken());
             if (z || z2) {
@@ -1241,10 +1275,13 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
                     }
                     transaction.apply();
                     transitionFinishCallback.onTransitionFinished(null);
-                    this.transitionState = null;
+                    clearState();
                     return true;
                 }
                 logW$2("Not interrupted, but received startAnimation for cancel/end drag.isCancel=" + z + ", isEnd=" + z2, new Object[0]);
+                if (transitionStateRequireTransitionState.getStartTransitionFinishCb() == null) {
+                    transitionStateRequireTransitionState.isTransitionReversed = Boolean.TRUE;
+                }
             }
         }
         if (transitionInfo.getType() != 1109 || !Intrinsics.areEqual(iBinder, transitionStateRequireTransitionState.getStartTransitionToken())) {
@@ -1483,6 +1520,8 @@ public abstract class DragToDesktopTransitionHandler implements Transitions.Tran
         this.interactionJankMonitor = interactionJankMonitor;
         this.bubbleController = optional;
         this.transactionSupplier = supplier;
+        this.logHistory = new LinkedList();
+        this.simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         this.rectEvaluator = new RectEvaluator(new Rect());
         this.launchHomeIntent = new Intent("android.intent.action.MAIN").addCategory("android.intent.category.HOME");
     }

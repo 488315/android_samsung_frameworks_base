@@ -45,7 +45,7 @@ final class RepeatWhenAttachedKt$isWindowVisible$2 extends SuspendLambda impleme
             ViewTreeObserver.OnWindowVisibilityChangeListener onWindowVisibilityChangeListener = new ViewTreeObserver.OnWindowVisibilityChangeListener() { // from class: com.android.systemui.lifecycle.RepeatWhenAttachedKt$isWindowVisible$2$listener$1
                 @Override // android.view.ViewTreeObserver.OnWindowVisibilityChangeListener
                 public final void onWindowVisibilityChanged(int i2) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(i2 == 0));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(i2 == 0));
                 }
             };
             this.$this_isWindowVisible.addOnWindowVisibilityChangeListener(onWindowVisibilityChangeListener);

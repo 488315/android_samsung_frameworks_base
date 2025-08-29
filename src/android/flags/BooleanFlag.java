@@ -47,7 +47,7 @@ public class BooleanFlag extends BooleanFlagBase {
 
     /* JADX WARN: Can't rename method to resolve collision */
     @Override // android.flags.BooleanFlagBase, android.flags.Flag
-    /* renamed from: defineMetaData */
+    /* renamed from: defineMetaData, reason: merged with bridge method [inline-methods] */
     public Flag<Boolean> defineMetaData2(String str, String str2, String str3) {
         super.defineMetaData2(str, str2, str3);
         return this;

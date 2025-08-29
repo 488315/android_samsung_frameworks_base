@@ -78,7 +78,7 @@ public abstract class AppBarKt {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static final void m3336SeslSingleRowTopAppBariHT50w(final ComposableLambdaImpl composableLambdaImpl, final Function3 function3, final WindowInsets windowInsets, final SeslTopAppBarColors seslTopAppBarColors, final float f, final Modifier.Companion companion, final ComposableLambdaImpl composableLambdaImpl2, Composer composer, final int i) {
+    public static final void m3335SeslSingleRowTopAppBariHT50w(final ComposableLambdaImpl composableLambdaImpl, final Function3 function3, final WindowInsets windowInsets, final SeslTopAppBarColors seslTopAppBarColors, final float f, final Modifier.Companion companion, final ComposableLambdaImpl composableLambdaImpl2, Composer composer, final int i) {
         int i2;
         final ComposableLambdaImpl composableLambdaImpl3;
         ComposerImpl composerImpl = (ComposerImpl) composer;
@@ -132,7 +132,7 @@ public abstract class AppBarKt {
                             Color.Companion.getClass();
                             long j2 = Color.Unspecified;
                             long j3 = j;
-                            if (!ULong.m3447equalsimpl0(j3, j2)) {
+                            if (!ULong.m3446equalsimpl0(j3, j2)) {
                                 DrawScope.m541drawRectnJ9OG0$default(drawScope, j3, 0L, 0L, 0.0f, null, null, 0, 126);
                             }
                             return Unit.INSTANCE;
@@ -400,7 +400,7 @@ public abstract class AppBarKt {
                     SeslTopAppBarColors seslTopAppBarColors2 = seslTopAppBarColors;
                     Modifier.Companion companion4 = companion;
                     ComposableLambdaImpl composableLambdaImpl4 = composableLambdaImpl2;
-                    AppBarKt.m3336SeslSingleRowTopAppBariHT50w(composableLambdaImpl, function3, windowInsets2, seslTopAppBarColors2, f, companion4, composableLambdaImpl4, (Composer) obj, iUpdateChangedFlags);
+                    AppBarKt.m3335SeslSingleRowTopAppBariHT50w(composableLambdaImpl, function3, windowInsets2, seslTopAppBarColors2, f, companion4, composableLambdaImpl4, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };
@@ -408,7 +408,7 @@ public abstract class AppBarKt {
     }
 
     /* renamed from: SeslTopAppBar-au3_HiA, reason: not valid java name */
-    public static final void m3337SeslTopAppBarau3_HiA(final ComposableLambdaImpl composableLambdaImpl, Modifier.Companion companion, final ComposableLambdaImpl composableLambdaImpl2, Function3 function3, final WindowInsets windowInsets, final SeslTopAppBarColors seslTopAppBarColors, float f, Composer composer, final int i, final int i2) {
+    public static final void m3336SeslTopAppBarau3_HiA(final ComposableLambdaImpl composableLambdaImpl, Modifier.Companion companion, final ComposableLambdaImpl composableLambdaImpl2, Function3 function3, final WindowInsets windowInsets, final SeslTopAppBarColors seslTopAppBarColors, float f, Composer composer, final int i, final int i2) {
         Function3 function32;
         int i3;
         Function3 function33;
@@ -458,13 +458,13 @@ public abstract class AppBarKt {
                 SeslDpProducer.Params params = new SeslDpProducer.Params((Configuration) composerImpl2.consume(AndroidCompositionLocals_androidKt.LocalConfiguration));
                 ComputedProvidableCompositionLocal computedProvidableCompositionLocal = TokenSchemeKt.LocalSeslTokenScheme;
                 BasicDimensionSchemeKt.fromToken((SeslTokenScheme) composerImpl2.consume(computedProvidableCompositionLocal), seslAppBarDimensionSchemeKeyTokens);
-                float fMo3335produceu2uoSUM = BasicDimensionSchemeKt.fromToken((SeslTokenScheme) composerImpl2.consume(computedProvidableCompositionLocal), seslAppBarDimensionSchemeKeyTokens).mo3335produceu2uoSUM(params);
+                float fMo3334produceu2uoSUM = BasicDimensionSchemeKt.fromToken((SeslTokenScheme) composerImpl2.consume(computedProvidableCompositionLocal), seslAppBarDimensionSchemeKeyTokens).mo3334produceu2uoSUM(params);
                 if (ComposerKt.isTraceInProgress()) {
                     ComposerKt.traceEventEnd();
                 }
                 i4 = i7 & (-3670017);
                 function34 = function33;
-                f2 = fMo3335produceu2uoSUM;
+                f2 = fMo3334produceu2uoSUM;
                 companion2 = companion4;
             } else {
                 composerImpl2.skipToGroupEnd();
@@ -479,7 +479,7 @@ public abstract class AppBarKt {
             }
             int i8 = i4 >> 6;
             composerImpl = composerImpl2;
-            m3336SeslSingleRowTopAppBariHT50w(composableLambdaImpl, function34, windowInsets, seslTopAppBarColors, f2, companion2, composableLambdaImpl2, composerImpl, (i8 & 7168) | (i8 & 112) | 6 | (i8 & 896) | 196608 | ((i4 << 12) & 3670016));
+            m3335SeslSingleRowTopAppBariHT50w(composableLambdaImpl, function34, windowInsets, seslTopAppBarColors, f2, companion2, composableLambdaImpl2, composerImpl, (i8 & 7168) | (i8 & 112) | 6 | (i8 & 896) | 196608 | ((i4 << 12) & 3670016));
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
@@ -497,7 +497,7 @@ public abstract class AppBarKt {
                     WindowInsets windowInsets2 = windowInsets;
                     SeslTopAppBarColors seslTopAppBarColors2 = seslTopAppBarColors;
                     float f4 = f3;
-                    AppBarKt.m3337SeslTopAppBarau3_HiA(composableLambdaImpl, companion3, composableLambdaImpl2, function35, windowInsets2, seslTopAppBarColors2, f4, (Composer) obj, iUpdateChangedFlags, i2);
+                    AppBarKt.m3336SeslTopAppBarau3_HiA(composableLambdaImpl, companion3, composableLambdaImpl2, function35, windowInsets2, seslTopAppBarColors2, f4, (Composer) obj, iUpdateChangedFlags, i2);
                     return Unit.INSTANCE;
                 }
             };

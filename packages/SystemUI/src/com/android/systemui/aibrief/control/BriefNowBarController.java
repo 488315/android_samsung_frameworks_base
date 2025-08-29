@@ -320,9 +320,9 @@ public final class BriefNowBarController {
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-        if (thM3442exceptionOrNullimpl != null) {
-            Log.e(TAG, "ERROR startFullViewActivity() " + thM3442exceptionOrNullimpl);
+        Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+        if (thM3441exceptionOrNullimpl != null) {
+            Log.e(TAG, "ERROR startFullViewActivity() " + thM3441exceptionOrNullimpl);
         }
     }
 

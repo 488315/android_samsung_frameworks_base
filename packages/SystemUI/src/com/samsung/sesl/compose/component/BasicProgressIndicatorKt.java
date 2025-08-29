@@ -33,7 +33,7 @@ import kotlin.jvm.functions.Function2;
 /* loaded from: classes4.dex */
 public abstract class BasicProgressIndicatorKt {
     /* renamed from: SeslBasicIndeterminateCircularProgressIndicator-ZO3OeZo, reason: not valid java name */
-    public static final void m3338SeslBasicIndeterminateCircularProgressIndicatorZO3OeZo(final float f, final int i, final long j, final long j2, Composer composer, final Modifier.Companion companion) {
+    public static final void m3337SeslBasicIndeterminateCircularProgressIndicatorZO3OeZo(final float f, final int i, final long j, final long j2, Composer composer, final Modifier.Companion companion) {
         int i2;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(188250181);
@@ -57,7 +57,7 @@ public abstract class BasicProgressIndicatorKt {
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslBasicIndeterminateCircularProgressIndicator (BasicProgressIndicator.kt:65)");
             }
-            m3339SeslBasicIndeterminateCircularProgressIndicatoryA8G38M(j, j2, f, companion, 0.0f, 0.0f, 0.0f, composerImpl, i2 & 8190);
+            m3338SeslBasicIndeterminateCircularProgressIndicatoryA8G38M(j, j2, f, companion, 0.0f, 0.0f, 0.0f, composerImpl, i2 & 8190);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
@@ -70,7 +70,7 @@ public abstract class BasicProgressIndicatorKt {
                     ((Integer) obj2).getClass();
                     int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
                     float f2 = f;
-                    BasicProgressIndicatorKt.m3338SeslBasicIndeterminateCircularProgressIndicatorZO3OeZo(f2, iUpdateChangedFlags, j, j2, (Composer) obj, companion);
+                    BasicProgressIndicatorKt.m3337SeslBasicIndeterminateCircularProgressIndicatorZO3OeZo(f2, iUpdateChangedFlags, j, j2, (Composer) obj, companion);
                     return Unit.INSTANCE;
                 }
             };
@@ -83,7 +83,7 @@ public abstract class BasicProgressIndicatorKt {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static final void m3339SeslBasicIndeterminateCircularProgressIndicatoryA8G38M(final long j, final long j2, final float f, final Modifier.Companion companion, float f2, float f3, float f4, Composer composer, final int i) {
+    public static final void m3338SeslBasicIndeterminateCircularProgressIndicatoryA8G38M(final long j, final long j2, final float f, final Modifier.Companion companion, float f2, float f3, float f4, Composer composer, final int i) {
         int i2;
         Modifier.Companion companion2;
         float f5;
@@ -234,7 +234,7 @@ public abstract class BasicProgressIndicatorKt {
                     int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
                     float f12 = f10;
                     float f13 = f9;
-                    BasicProgressIndicatorKt.m3339SeslBasicIndeterminateCircularProgressIndicatoryA8G38M(j, j2, f, companion, f8, f12, f13, (Composer) obj, iUpdateChangedFlags);
+                    BasicProgressIndicatorKt.m3338SeslBasicIndeterminateCircularProgressIndicatoryA8G38M(j, j2, f, companion, f8, f12, f13, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

@@ -61,7 +61,7 @@ public abstract class VolumeDialogSliderTrackKt {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static final void m3219SliderTrackq58E_xs(final SliderState sliderState, final boolean z, Modifier modifier, final SliderColors sliderColors, float f, float f2, float f3, float f4, boolean z2, final ComposableLambdaImpl composableLambdaImpl, final ComposableLambdaImpl composableLambdaImpl2, Composer composer, final int i, final int i2, final int i3) {
+    public static final void m3218SliderTrackq58E_xs(final SliderState sliderState, final boolean z, Modifier modifier, final SliderColors sliderColors, float f, float f2, float f3, float f4, boolean z2, final ComposableLambdaImpl composableLambdaImpl, final ComposableLambdaImpl composableLambdaImpl2, Composer composer, final int i, final int i2, final int i3) {
         int i4;
         boolean z3;
         int i5;
@@ -264,7 +264,7 @@ public abstract class VolumeDialogSliderTrackKt {
                         int iUpdateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(i2);
                         ComposableLambdaImpl composableLambdaImpl3 = composableLambdaImpl2;
                         int i18 = i3;
-                        VolumeDialogSliderTrackKt.m3219SliderTrackq58E_xs(sliderState, z, modifier3, sliderColors, f13, f12, f14, f15, z8, composableLambdaImpl, composableLambdaImpl3, (Composer) obj, iUpdateChangedFlags, iUpdateChangedFlags2, i18);
+                        VolumeDialogSliderTrackKt.m3218SliderTrackq58E_xs(sliderState, z, modifier3, sliderColors, f13, f12, f14, f15, z8, composableLambdaImpl, composableLambdaImpl3, (Composer) obj, iUpdateChangedFlags, iUpdateChangedFlags2, i18);
                         return Unit.INSTANCE;
                     }
                 };

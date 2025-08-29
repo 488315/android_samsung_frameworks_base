@@ -301,7 +301,7 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable, ConfigurationCo
 
         @Override // com.android.systemui.plugins.VolumeDialogController.Callbacks
         public final void onShowRequested(int i, boolean z, int i2) throws Resources.NotFoundException {
-            VolumeDialogImpl.m3215$$Nest$mshowH(VolumeDialogImpl.this, i, z, i2);
+            VolumeDialogImpl.m3214$$Nest$mshowH(VolumeDialogImpl.this, i, z, i2);
         }
 
         /* JADX WARN: Type inference failed for: r0v1, types: [android.app.AlertDialog, com.android.systemui.volume.VolumeDialogImpl$5] */
@@ -439,7 +439,7 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable, ConfigurationCo
             switch (message.what) {
                 case 1:
                     VolumeDialogImpl volumeDialogImpl = VolumeDialogImpl.this;
-                    VolumeDialogImpl.m3215$$Nest$mshowH(volumeDialogImpl, message.arg1, volumeDialogImpl.mKeyguard.isKeyguardLocked(), VolumeDialogImpl.this.mActivityManager.getLockTaskModeState());
+                    VolumeDialogImpl.m3214$$Nest$mshowH(volumeDialogImpl, message.arg1, volumeDialogImpl.mKeyguard.isKeyguardLocked(), VolumeDialogImpl.this.mActivityManager.getLockTaskModeState());
                     return;
                 case 2:
                     VolumeDialogImpl.this.dismissH(message.arg1);
@@ -681,7 +681,7 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable, ConfigurationCo
     }
 
     /* renamed from: -$$Nest$mshowH, reason: not valid java name */
-    public static void m3215$$Nest$mshowH(VolumeDialogImpl volumeDialogImpl, int i, boolean z, int i2) throws Resources.NotFoundException {
+    public static void m3214$$Nest$mshowH(VolumeDialogImpl volumeDialogImpl, int i, boolean z, int i2) throws Resources.NotFoundException {
         volumeDialogImpl.getClass();
         Trace.beginSection("VolumeDialogImpl#showH");
         Log.i(TAG, "showH r=" + Events.SHOW_REASONS[i]);

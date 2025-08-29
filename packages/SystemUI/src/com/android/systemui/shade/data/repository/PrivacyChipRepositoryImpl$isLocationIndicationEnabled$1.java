@@ -45,7 +45,7 @@ final class PrivacyChipRepositoryImpl$isLocationIndicationEnabled$1 extends Susp
             PrivacyConfig.Callback callback = new PrivacyConfig.Callback() { // from class: com.android.systemui.shade.data.repository.PrivacyChipRepositoryImpl$isLocationIndicationEnabled$1$callback$1
                 @Override // com.android.systemui.privacy.PrivacyConfig.Callback
                 public final void onFlagLocationChanged(boolean z) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(z));
                 }
             };
             this.this$0.privacyConfig.addCallback(callback);

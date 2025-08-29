@@ -63,7 +63,7 @@ public final class IssueRecordingDataInteractor implements QSTileDataInteractor 
                 final ?? r1 = new Runnable() { // from class: com.android.systemui.qs.tiles.impl.irecording.domain.interactor.IssueRecordingDataInteractor$tileData$1$listener$1
                     @Override // java.lang.Runnable
                     public final void run() {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(IssueRecordingModel.m2931boximpl(issueRecordingDataInteractor.state.isRecording));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(IssueRecordingModel.m2929boximpl(issueRecordingDataInteractor.state.isRecording));
                     }
                 };
                 IssueRecordingDataInteractor.this.state.addListener(r1);
@@ -122,9 +122,9 @@ public final class IssueRecordingDataInteractor implements QSTileDataInteractor 
             if (i == 0) {
                 ResultKt.throwOnFailure(obj);
                 FlowCollector flowCollector = (FlowCollector) this.L$0;
-                IssueRecordingModel issueRecordingModelM2931boximpl = IssueRecordingModel.m2931boximpl(IssueRecordingDataInteractor.this.state.isRecording);
+                IssueRecordingModel issueRecordingModelM2929boximpl = IssueRecordingModel.m2929boximpl(IssueRecordingDataInteractor.this.state.isRecording);
                 this.label = 1;
-                if (flowCollector.emit(issueRecordingModelM2931boximpl, this) == coroutineSingletons) {
+                if (flowCollector.emit(issueRecordingModelM2929boximpl, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {

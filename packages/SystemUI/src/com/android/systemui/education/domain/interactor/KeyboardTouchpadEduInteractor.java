@@ -70,10 +70,10 @@ public final class KeyboardTouchpadEduInteractor implements CoreStartable {
         }
 
         /* renamed from: access$getDurationForConfig-hgUFU34, reason: not valid java name */
-        public static final long m2580access$getDurationForConfighgUFU34(Companion companion, String str, long j) {
+        public static final long m2578access$getDurationForConfighgUFU34(Companion companion, String str, long j) {
             Duration.Companion companion2 = Duration.Companion;
             DurationUnit durationUnit = DurationUnit.SECONDS;
-            return DurationKt.toDuration(SystemProperties.getLong(str, Duration.m3465toLongimpl(j, durationUnit)), durationUnit);
+            return DurationKt.toDuration(SystemProperties.getLong(str, Duration.m3464toLongimpl(j, durationUnit)), durationUnit);
         }
 
         private Companion() {
@@ -252,7 +252,7 @@ public final class KeyboardTouchpadEduInteractor implements CoreStartable {
                     keyboardTouchpadEduInteractor.getClass();
                     Instant instant2 = gestureEduModel2.usageSessionStartTime;
                     if (instant2 != null) {
-                        Instant instantPlusSeconds = instant2.plusSeconds(Duration.m3465toLongimpl(KeyboardTouchpadEduInteractor.usageSessionDuration, DurationUnit.SECONDS));
+                        Instant instantPlusSeconds = instant2.plusSeconds(Duration.m3464toLongimpl(KeyboardTouchpadEduInteractor.usageSessionDuration, DurationUnit.SECONDS));
                         boolean zIsBefore = instantPlusSeconds != null ? instantPlusSeconds.isBefore(keyboardTouchpadEduInteractor.clock.instant()) : false;
                         ContextualEducationInteractor contextualEducationInteractor = keyboardTouchpadEduInteractor.contextualEducationInteractor;
                         GestureType gestureType = gestureEduModel2.gestureType;
@@ -272,7 +272,7 @@ public final class KeyboardTouchpadEduInteractor implements CoreStartable {
                                 z = z4;
                             } else {
                                 z = z4;
-                                Instant instantPlusSeconds2 = instant.plusSeconds(Duration.m3465toLongimpl(KeyboardTouchpadEduInteractor.minIntervalBetweenEdu, DurationUnit.SECONDS));
+                                Instant instantPlusSeconds2 = instant.plusSeconds(Duration.m3464toLongimpl(KeyboardTouchpadEduInteractor.minIntervalBetweenEdu, DurationUnit.SECONDS));
                                 boolean zIsBefore2 = instantPlusSeconds2 != null ? instantPlusSeconds2.isBefore(keyboardTouchpadEduInteractor.clock.instant()) : true;
                                 if (z2 && z3 && z && zIsBefore2) {
                                     educationUiType = i6 <= 0 ? EducationUiType.Notification : EducationUiType.Toast;
@@ -716,9 +716,9 @@ public final class KeyboardTouchpadEduInteractor implements CoreStartable {
         Companion companion = new Companion(null);
         Duration.Companion companion2 = Duration.Companion;
         DurationUnit durationUnit = DurationUnit.DAYS;
-        usageSessionDuration = Companion.m2580access$getDurationForConfighgUFU34(companion, "persist.contextual_edu.usage_session_sec", DurationKt.toDuration(3, durationUnit));
-        minIntervalBetweenEdu = Companion.m2580access$getDurationForConfighgUFU34(companion, "persist.contextual_edu.edu_interval_sec", DurationKt.toDuration(7, durationUnit));
-        initialDelayDuration = Companion.m2580access$getDurationForConfighgUFU34(companion, "persist.contextual_edu.initial_delay_sec", DurationKt.toDuration(7, durationUnit));
+        usageSessionDuration = Companion.m2578access$getDurationForConfighgUFU34(companion, "persist.contextual_edu.usage_session_sec", DurationKt.toDuration(3, durationUnit));
+        minIntervalBetweenEdu = Companion.m2578access$getDurationForConfighgUFU34(companion, "persist.contextual_edu.edu_interval_sec", DurationKt.toDuration(7, durationUnit));
+        initialDelayDuration = Companion.m2578access$getDurationForConfighgUFU34(companion, "persist.contextual_edu.initial_delay_sec", DurationKt.toDuration(7, durationUnit));
     }
 
     public KeyboardTouchpadEduInteractor(CoroutineScope coroutineScope, ContextualEducationInteractor contextualEducationInteractor, UserInputDeviceRepository userInputDeviceRepository, TutorialSchedulerRepository tutorialSchedulerRepository, LauncherProxyService launcherProxyService, ContextualEducationMetricsLogger contextualEducationMetricsLogger, Clock clock) {
@@ -886,7 +886,7 @@ public final class KeyboardTouchpadEduInteractor implements CoreStartable {
             if (instant == null) {
                 return Boolean.FALSE;
             }
-            return Boolean.valueOf(this.clock.instant().isAfter(instant.plusSeconds(Duration.m3465toLongimpl(initialDelayDuration, DurationUnit.SECONDS))));
+            return Boolean.valueOf(this.clock.instant().isAfter(instant.plusSeconds(Duration.m3464toLongimpl(initialDelayDuration, DurationUnit.SECONDS))));
         }
         deviceType = (DeviceType) anonymousClass1.L$1;
         this = (KeyboardTouchpadEduInteractor) anonymousClass1.L$0;
@@ -899,7 +899,7 @@ public final class KeyboardTouchpadEduInteractor implements CoreStartable {
             anonymousClass1.label = 2;
             scheduledTutorialLaunchTime = tutorialSchedulerRepository.getNotifiedTime(deviceType, anonymousClass1);
         }
-        return Boolean.valueOf(this.clock.instant().isAfter(instant.plusSeconds(Duration.m3465toLongimpl(initialDelayDuration, DurationUnit.SECONDS))));
+        return Boolean.valueOf(this.clock.instant().isAfter(instant.plusSeconds(Duration.m3464toLongimpl(initialDelayDuration, DurationUnit.SECONDS))));
     }
 
     /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
@@ -972,13 +972,13 @@ public final class KeyboardTouchpadEduInteractor implements CoreStartable {
             }
             Object obj3 = arrayList2.get(i3);
             i3++;
-            if (((Instant) obj3).compareTo(this.clock.instant().minusSeconds(Duration.m3465toLongimpl(j, DurationUnit.SECONDS))) >= 0) {
+            if (((Instant) obj3).compareTo(this.clock.instant().minusSeconds(Duration.m3464toLongimpl(j, DurationUnit.SECONDS))) >= 0) {
                 arrayList3.add(obj3);
             }
         }
         if (arrayList3.size() >= 2) {
             Instant instant2 = (Instant) CollectionsKt___CollectionsKt.maxOrNull((Iterable) arrayList3);
-            zIsAfter = this.clock.instant().isAfter(instant2 != null ? instant2.plusSeconds(Duration.m3465toLongimpl(j, DurationUnit.SECONDS)) : null);
+            zIsAfter = this.clock.instant().isAfter(instant2 != null ? instant2.plusSeconds(Duration.m3464toLongimpl(j, DurationUnit.SECONDS)) : null);
         }
         return Boolean.valueOf(zIsAfter);
     }

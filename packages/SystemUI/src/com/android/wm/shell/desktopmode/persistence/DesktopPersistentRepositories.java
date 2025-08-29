@@ -78,7 +78,7 @@ public final class DesktopPersistentRepositories extends GeneratedMessageLite im
     }
 
     /* renamed from: -$$Nest$mgetMutableDesktopRepoByUserMap, reason: not valid java name */
-    public static MapFieldLite m3257$$Nest$mgetMutableDesktopRepoByUserMap(DesktopPersistentRepositories desktopPersistentRepositories) {
+    public static MapFieldLite m3256$$Nest$mgetMutableDesktopRepoByUserMap(DesktopPersistentRepositories desktopPersistentRepositories) {
         if (!desktopPersistentRepositories.desktopRepoByUser_.isMutable()) {
             desktopPersistentRepositories.desktopRepoByUser_ = desktopPersistentRepositories.desktopRepoByUser_.mutableCopy();
         }

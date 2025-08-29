@@ -49,10 +49,10 @@ final class NavigationRepository$isGesturalMode$1 extends SuspendLambda implemen
             final ?? r1 = new NavigationModeController.ModeChangedListener() { // from class: com.android.systemui.navigation.data.repository.NavigationRepository$isGesturalMode$1$listener$1
                 @Override // com.android.systemui.navigationbar.NavigationModeController.ModeChangedListener
                 public final void onNavigationModeChanged(int i2) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(QuickStepContract.isGesturalMode(i2)));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(QuickStepContract.isGesturalMode(i2)));
                 }
             };
-            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(QuickStepContract.isGesturalMode(this.this$0.controller.addListener(r1))));
+            ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(QuickStepContract.isGesturalMode(this.this$0.controller.addListener(r1))));
             final NavigationRepository navigationRepository = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.navigation.data.repository.NavigationRepository$isGesturalMode$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0

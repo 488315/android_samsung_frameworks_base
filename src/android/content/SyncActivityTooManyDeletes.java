@@ -2,6 +2,7 @@ package android.content;
 
 import android.accounts.Account;
 import android.app.Activity;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
@@ -22,7 +23,7 @@ public class SyncActivityTooManyDeletes extends Activity implements AdapterView.
     private String mProvider;
 
     @Override // android.app.Activity
-    protected void onCreate(Bundle bundle) {
+    protected void onCreate(Bundle bundle) throws Resources.NotFoundException {
         super.onCreate(bundle);
         Bundle extras = getIntent().getExtras();
         if (extras == null) {

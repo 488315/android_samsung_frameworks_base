@@ -66,7 +66,7 @@ public class DividerResizeController {
         public int mTouchPosition;
 
         /* renamed from: -$$Nest$mupdate, reason: not valid java name */
-        public static void m3237$$Nest$mupdate(ResizeAlgorithm resizeAlgorithm, int i) {
+        public static void m3236$$Nest$mupdate(ResizeAlgorithm resizeAlgorithm, int i) {
             if (resizeAlgorithm.mTouchPosition != i) {
                 resizeAlgorithm.mTouchPosition = i;
                 int i2 = i < resizeAlgorithm.mDismissStartThreshold ? 1 : i > resizeAlgorithm.mDismissEndThreshold ? 2 : 0;
@@ -167,7 +167,7 @@ public class DividerResizeController {
             i = this.mCurrentDividerPosition;
         }
         ResizeAlgorithm resizeAlgorithm = this.mResizeAlgorithm;
-        ResizeAlgorithm.m3237$$Nest$mupdate(resizeAlgorithm, i);
+        ResizeAlgorithm.m3236$$Nest$mupdate(resizeAlgorithm, i);
         int i2 = resizeAlgorithm.mTouchPosition;
         if (i2 < resizeAlgorithm.mDismissStartThreshold) {
             snapTargetCalculateSnapTarget = resizeAlgorithm.mDividerSnapAlgorithm.mDismissStartTarget;

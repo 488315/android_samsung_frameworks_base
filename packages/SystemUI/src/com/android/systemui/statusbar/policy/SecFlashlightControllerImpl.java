@@ -21,6 +21,7 @@ import android.os.Looper;
 import android.os.PowerManager;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
@@ -124,10 +125,23 @@ public class SecFlashlightControllerImpl {
         }
     }
 
+    /* renamed from: -$$Nest$mupdateTaskStackRegister, reason: not valid java name */
+    public static void m3105$$Nest$mupdateTaskStackRegister(SecFlashlightControllerImpl secFlashlightControllerImpl, boolean z) {
+        secFlashlightControllerImpl.getClass();
+        Log.d("SecFlashlightController", "updateTaskStackRegister: " + z);
+        AnonymousClass2 anonymousClass2 = secFlashlightControllerImpl.mTaskStackListener;
+        if (z) {
+            TaskStackChangeListeners.INSTANCE.registerTaskStackListener(anonymousClass2);
+        } else {
+            TaskStackChangeListeners.INSTANCE.unregisterTaskStackListener(anonymousClass2);
+        }
+    }
+
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r11v0, types: [android.content.BroadcastReceiver, com.android.systemui.statusbar.policy.SecFlashlightControllerImpl$3] */
-    /* JADX WARN: Type inference failed for: r13v0, types: [android.hardware.camera2.CameraManager$SemCameraDeviceStateCallback, com.android.systemui.statusbar.policy.SecFlashlightControllerImpl$5] */
+    /* JADX WARN: Type inference failed for: r12v0, types: [android.hardware.camera2.CameraManager$SemCameraDeviceStateCallback, com.android.systemui.statusbar.policy.SecFlashlightControllerImpl$5] */
+    /* JADX WARN: Type inference failed for: r8v4, types: [android.content.BroadcastReceiver, com.android.systemui.statusbar.policy.SecFlashlightControllerImpl$3] */
     public SecFlashlightControllerImpl(CameraManager cameraManager, Context context, SecureSettings secureSettings, SettingsHelper settingsHelper, PackageManager packageManager, FlashlightControllerImpl flashlightControllerImpl) {
+        boolean z;
         this.mIsThermalRestricted = false;
         Uri uriFor = Settings.System.getUriFor(SettingsHelper.INDEX_FLASH_LIGHT_BRIGHTNESS_LEVEL);
         this.FLASHLIGHT_BRIGHTNESS_URI = uriFor;
@@ -138,9 +152,8 @@ public class SecFlashlightControllerImpl {
         Uri[] uriArr = {uriFor, uriFor2, uriFor3};
         this.mIsCameraFlashNotiOn = false;
         this.mIsFlashlightTaskInStack = new AtomicBoolean(false);
-        AnonymousClass2 anonymousClass2 = new AnonymousClass2();
-        this.mTaskStackListener = anonymousClass2;
-        ?? r11 = new BroadcastReceiver() { // from class: com.android.systemui.statusbar.policy.SecFlashlightControllerImpl.3
+        this.mTaskStackListener = new AnonymousClass2();
+        ?? r8 = new BroadcastReceiver() { // from class: com.android.systemui.statusbar.policy.SecFlashlightControllerImpl.3
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context2, Intent intent) {
                 if ("android.intent.action.LOCALE_CHANGED".equals(intent.getAction())) {
@@ -149,9 +162,22 @@ public class SecFlashlightControllerImpl {
                         secFlashlightControllerImpl.updateFlashlightNotification(true);
                     }
                 }
+                if ("android.intent.action.SIM_STATE_CHANGED".equals(intent.getAction())) {
+                    String simOperator = ((TelephonyManager) SecFlashlightControllerImpl.this.mContext.getSystemService("phone")).getSimOperator();
+                    if (simOperator == null || simOperator.length() < 3) {
+                        SecFlashlightControllerImpl.m3105$$Nest$mupdateTaskStackRegister(SecFlashlightControllerImpl.this, false);
+                        return;
+                    }
+                    Log.d("SecFlashlightController", "SIM operator MCC: " + simOperator.substring(0, 3));
+                    if ("530".equals(simOperator) || "230".equals(simOperator)) {
+                        SecFlashlightControllerImpl.m3105$$Nest$mupdateTaskStackRegister(SecFlashlightControllerImpl.this, true);
+                    } else {
+                        SecFlashlightControllerImpl.m3105$$Nest$mupdateTaskStackRegister(SecFlashlightControllerImpl.this, false);
+                    }
+                }
             }
         };
-        this.mReceiver = r11;
+        this.mReceiver = r8;
         SettingsHelper.OnChangedCallback onChangedCallback = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.statusbar.policy.SecFlashlightControllerImpl.4
             @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
             public final void onChanged(Uri uri) {
@@ -190,21 +216,21 @@ public class SecFlashlightControllerImpl {
             }
         };
         this.mSettingsCallback = onChangedCallback;
-        ?? r13 = new CameraManager.SemCameraDeviceStateCallback() { // from class: com.android.systemui.statusbar.policy.SecFlashlightControllerImpl.5
+        ?? r12 = new CameraManager.SemCameraDeviceStateCallback() { // from class: com.android.systemui.statusbar.policy.SecFlashlightControllerImpl.5
             public final void onCameraDeviceStateChanged(String str, int i, int i2, String str2) {
                 if (i2 == 1) {
                     SecFlashlightControllerImpl.this.mClientName = str2;
                 }
             }
         };
-        this.mCameraDeviceStateCallback = r13;
+        this.mCameraDeviceStateCallback = r12;
         UserTracker.Callback callback = new UserTracker.Callback() { // from class: com.android.systemui.statusbar.policy.SecFlashlightControllerImpl.6
             @Override // com.android.systemui.settings.UserTracker.Callback
             public final void onUserChanged(int i, Context context2) {
                 SecFlashlightControllerImpl secFlashlightControllerImpl = SecFlashlightControllerImpl.this;
-                boolean z = secFlashlightControllerImpl.mSecureSettings.getIntForUser("flashlight_enabled", 0, i) == 1;
-                KeyguardSecSecurityContainerController$$ExternalSyntheticOutline0.m("onUserChanged user: ", i, ", enabled: ", z, "SecFlashlightController");
-                secFlashlightControllerImpl.mFlashlightController.setFlashlight(z);
+                boolean z2 = secFlashlightControllerImpl.mSecureSettings.getIntForUser("flashlight_enabled", 0, i) == 1;
+                KeyguardSecSecurityContainerController$$ExternalSyntheticOutline0.m("onUserChanged user: ", i, ", enabled: ", z2, "SecFlashlightController");
+                secFlashlightControllerImpl.mFlashlightController.setFlashlight(z2);
             }
         };
         this.mUserChangedCallback = callback;
@@ -216,20 +242,23 @@ public class SecFlashlightControllerImpl {
         this.mUserTracker = userTracker;
         synchronized (this) {
             if (this.mHandler == null) {
+                z = true;
                 HandlerThread handlerThread = new HandlerThread("SecFlashlightController", 10);
                 handlerThread.start();
                 this.mHandler = new Handler(handlerThread.getLooper());
+            } else {
+                z = true;
             }
         }
         settingsHelper.registerCallback(onChangedCallback, uriArr);
         onChangedCallback.onChanged(uriFor);
         this.mFlashlightController = flashlightControllerImpl;
         PowerManager powerManager = (PowerManager) context.getSystemService(PowerManager.class);
-        cameraManager.registerSemCameraDeviceStateCallback(r13, this.mHandler);
-        boolean z = powerManager.getCurrentThermalStatus() >= 5;
-        if (this.mIsThermalRestricted != z) {
-            this.mIsThermalRestricted = z;
-            if (z) {
+        cameraManager.registerSemCameraDeviceStateCallback(r12, this.mHandler);
+        boolean z2 = powerManager.getCurrentThermalStatus() >= 5 ? z : false;
+        if (this.mIsThermalRestricted != z2) {
+            this.mIsThermalRestricted = z2;
+            if (z2) {
                 flashlightControllerImpl.setFlashlight(false);
             }
             flashlightControllerImpl.dispatchListeners(2, !this.mIsThermalRestricted);
@@ -238,14 +267,14 @@ public class SecFlashlightControllerImpl {
         powerManager.addThermalStatusListener(new PowerManager.OnThermalStatusChangedListener() { // from class: com.android.systemui.statusbar.policy.SecFlashlightControllerImpl.1
             @Override // android.os.PowerManager.OnThermalStatusChangedListener
             public final void onThermalStatusChanged(int i) {
-                boolean z2 = i >= 5;
+                boolean z3 = i >= 5;
                 SecFlashlightControllerImpl secFlashlightControllerImpl = SecFlashlightControllerImpl.this;
-                if (secFlashlightControllerImpl.mIsThermalRestricted == z2) {
+                if (secFlashlightControllerImpl.mIsThermalRestricted == z3) {
                     return;
                 }
-                secFlashlightControllerImpl.mIsThermalRestricted = z2;
+                secFlashlightControllerImpl.mIsThermalRestricted = z3;
                 FlashlightControllerImpl flashlightControllerImpl2 = secFlashlightControllerImpl.mFlashlightController;
-                if (z2) {
+                if (z3) {
                     flashlightControllerImpl2.setFlashlight(false);
                 }
                 flashlightControllerImpl2.dispatchListeners(2, !secFlashlightControllerImpl.mIsThermalRestricted);
@@ -256,14 +285,13 @@ public class SecFlashlightControllerImpl {
         this.mNotiManager = (NotificationManager) context.getSystemService(SubRoom.EXTRA_VALUE_NOTIFICATION);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.LOCALE_CHANGED");
-        broadcastDispatcher.registerReceiver(intentFilter, r11);
+        intentFilter.addAction("android.intent.action.SIM_STATE_CHANGED");
+        broadcastDispatcher.registerReceiver(intentFilter, r8);
         this.mPackageManager = packageManager;
         if (QpRune.QUICK_SUBSCREEN_SETTINGS) {
             this.mSubscreenFlashlightController = SubscreenFlashLightController.getInstance(context);
             this.mDisplayLifecycle = (DisplayLifecycle) Dependency.sDependency.getDependencyInner(DisplayLifecycle.class);
         }
-        Log.d("SecFlashlightController", "updateTaskStackRegister: true");
-        TaskStackChangeListeners.INSTANCE.registerTaskStackListener(anonymousClass2);
         this.mIsCameraFlashNotiOn = settingsHelper.isCameraFlashNotificationOn();
     }
 

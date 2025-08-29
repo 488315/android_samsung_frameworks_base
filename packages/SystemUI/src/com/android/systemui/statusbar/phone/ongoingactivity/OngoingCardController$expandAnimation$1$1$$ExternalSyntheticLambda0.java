@@ -24,9 +24,6 @@ public final /* synthetic */ class OngoingCardController$expandAnimation$1$1$$Ex
                 if (oaCardState == OngoingCardController.OaCardState.EXPAND) {
                     Log.d("{OngoingExpandedPipController}", "expandAnimation startExpandAnimation endListener run");
                     ongoingCardController.onAllowStateChanged(false);
-                    Log.d("{OngoingExpandedPipController}", "watchSelfValidation stop");
-                    ongoingCardController.isWatchSelfValidationProc = false;
-                    ongoingCardController.selfValidationHandler.removeCallbacks(ongoingCardController.selfDestroyRunnable);
                     ongoingCardController.setCardState(OngoingCardController.OaCardState.DISPLAY);
                     OngoingActivityDataHelper.INSTANCE.getClass();
                     OngoingActivityDataHelper.updateMediaProgressAndMarqueeStateIfNeeded(null, null);

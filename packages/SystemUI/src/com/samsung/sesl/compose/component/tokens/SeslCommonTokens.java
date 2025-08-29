@@ -93,7 +93,7 @@ public final class SeslCommonTokens {
         SeslCommonTokens seslCommonTokens = (SeslCommonTokens) obj;
         long j = seslCommonTokens.primaryColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.primaryColor, j) && ULong.m3447equalsimpl0(this.windowBackgroundColor, seslCommonTokens.windowBackgroundColor) && ULong.m3447equalsimpl0(this.rippleColor, seslCommonTokens.rippleColor) && ULong.m3447equalsimpl0(this.roundedCornerColor, seslCommonTokens.roundedCornerColor) && ULong.m3447equalsimpl0(this.mainTextColor, seslCommonTokens.mainTextColor) && ULong.m3447equalsimpl0(this.subTextColor, seslCommonTokens.subTextColor) && ULong.m3447equalsimpl0(this.pointTextColor, seslCommonTokens.pointTextColor);
+        return ULong.m3446equalsimpl0(this.primaryColor, j) && ULong.m3446equalsimpl0(this.windowBackgroundColor, seslCommonTokens.windowBackgroundColor) && ULong.m3446equalsimpl0(this.rippleColor, seslCommonTokens.rippleColor) && ULong.m3446equalsimpl0(this.roundedCornerColor, seslCommonTokens.roundedCornerColor) && ULong.m3446equalsimpl0(this.mainTextColor, seslCommonTokens.mainTextColor) && ULong.m3446equalsimpl0(this.subTextColor, seslCommonTokens.subTextColor) && ULong.m3446equalsimpl0(this.pointTextColor, seslCommonTokens.pointTextColor);
     }
 
     public final int hashCode() {

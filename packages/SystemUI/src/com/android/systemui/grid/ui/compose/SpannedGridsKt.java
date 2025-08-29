@@ -67,7 +67,7 @@ public abstract class SpannedGridsKt {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static final void m2583SpannedGrideWuZFaY(final int i, final float f, final float f2, final List list, final Modifier modifier, final Function1 function1, final ComposableLambdaImpl composableLambdaImpl, Composer composer, final int i2) {
+    public static final void m2581SpannedGrideWuZFaY(final int i, final float f, final float f2, final List list, final Modifier modifier, final Function1 function1, final ComposableLambdaImpl composableLambdaImpl, Composer composer, final int i2) {
         boolean z;
         Object obj;
         int i3;
@@ -477,7 +477,7 @@ public abstract class SpannedGridsKt {
                     ((Integer) obj6).getClass();
                     int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i2 | 1);
                     ComposableLambdaImpl composableLambdaImpl2 = composableLambdaImpl;
-                    SpannedGridsKt.m2583SpannedGrideWuZFaY(i, f, f2, list, modifier, function1, composableLambdaImpl2, (Composer) obj5, iUpdateChangedFlags);
+                    SpannedGridsKt.m2581SpannedGrideWuZFaY(i, f, f2, list, modifier, function1, composableLambdaImpl2, (Composer) obj5, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };
@@ -497,7 +497,7 @@ public abstract class SpannedGridsKt {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static final void m2584VerticalSpannedGridKhTvWYU(final int i, final float f, final float f2, final List list, Modifier modifier, final Function1 function1, final ComposableLambdaImpl composableLambdaImpl, Composer composer, final int i2, final int i3) {
+    public static final void m2582VerticalSpannedGridKhTvWYU(final int i, final float f, final float f2, final List list, Modifier modifier, final Function1 function1, final ComposableLambdaImpl composableLambdaImpl, Composer composer, final int i2, final int i3) {
         Modifier modifier2;
         int i4;
         ComposerImpl composerImpl;
@@ -521,7 +521,7 @@ public abstract class SpannedGridsKt {
                 int i7 = (i4 & 14) | 24576 | (i4 & 112) | (i4 & 896) | (i4 & 7168);
                 int i8 = i4 << 3;
                 composerImpl = composerImpl2;
-                m2583SpannedGrideWuZFaY(i, f, f2, list, modifier4, function1, composableLambdaImpl, composerImpl, (i8 & 3670016) | i7 | (458752 & i8) | 12582912);
+                m2581SpannedGrideWuZFaY(i, f, f2, list, modifier4, function1, composableLambdaImpl, composerImpl, (i8 & 3670016) | i7 | (458752 & i8) | 12582912);
                 if (ComposerKt.isTraceInProgress()) {
                     ComposerKt.traceEventEnd();
                 }
@@ -539,7 +539,7 @@ public abstract class SpannedGridsKt {
                         ((Integer) obj2).getClass();
                         int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i2 | 1);
                         ComposableLambdaImpl composableLambdaImpl2 = composableLambdaImpl;
-                        SpannedGridsKt.m2584VerticalSpannedGridKhTvWYU(i, f, f2, list, modifier3, function1, composableLambdaImpl2, (Composer) obj, iUpdateChangedFlags, i3);
+                        SpannedGridsKt.m2582VerticalSpannedGridKhTvWYU(i, f, f2, list, modifier3, function1, composableLambdaImpl2, (Composer) obj, iUpdateChangedFlags, i3);
                         return Unit.INSTANCE;
                     }
                 };
@@ -558,7 +558,7 @@ public abstract class SpannedGridsKt {
             int i72 = (i4 & 14) | 24576 | (i4 & 112) | (i4 & 896) | (i4 & 7168);
             int i82 = i4 << 3;
             composerImpl = composerImpl2;
-            m2583SpannedGrideWuZFaY(i, f, f2, list, modifier4, function1, composableLambdaImpl, composerImpl, (i82 & 3670016) | i72 | (458752 & i82) | 12582912);
+            m2581SpannedGrideWuZFaY(i, f, f2, list, modifier4, function1, composableLambdaImpl, composerImpl, (i82 & 3670016) | i72 | (458752 & i82) | 12582912);
             if (ComposerKt.isTraceInProgress()) {
             }
             modifier3 = modifier4;

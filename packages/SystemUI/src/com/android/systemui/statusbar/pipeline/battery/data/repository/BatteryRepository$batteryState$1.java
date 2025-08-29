@@ -50,7 +50,7 @@ final class BatteryRepository$batteryState$1 extends SuspendLambda implements Fu
             final ?? r1 = new BatteryController.BatteryStateChangeCallback() { // from class: com.android.systemui.statusbar.pipeline.battery.data.repository.BatteryRepository$batteryState$1$callback$1
                 @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
                 public final void onBatteryLevelChanged(final int i2, final boolean z, boolean z2) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new Function1() { // from class: com.android.systemui.statusbar.pipeline.battery.data.repository.BatteryRepository$batteryState$1$callback$1$$ExternalSyntheticLambda2
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new Function1() { // from class: com.android.systemui.statusbar.pipeline.battery.data.repository.BatteryRepository$batteryState$1$callback$1$$ExternalSyntheticLambda2
                         @Override // kotlin.jvm.functions.Function1
                         /* renamed from: invoke */
                         public final Object mo781invoke(Object obj2) {
@@ -61,17 +61,17 @@ final class BatteryRepository$batteryState$1 extends SuspendLambda implements Fu
 
                 @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
                 public final void onBatteryUnknownStateChanged(boolean z) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new BatteryRepository$batteryState$1$callback$1$$ExternalSyntheticLambda0(z, 1));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new BatteryRepository$batteryState$1$callback$1$$ExternalSyntheticLambda0(z, 1));
                 }
 
                 @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
                 public final void onIsBatteryDefenderChanged(boolean z) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new BatteryRepository$batteryState$1$callback$1$$ExternalSyntheticLambda0(z, 2));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new BatteryRepository$batteryState$1$callback$1$$ExternalSyntheticLambda0(z, 2));
                 }
 
                 @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
                 public final void onPowerSaveChanged(boolean z) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new BatteryRepository$batteryState$1$callback$1$$ExternalSyntheticLambda0(z, 0));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new BatteryRepository$batteryState$1$callback$1$$ExternalSyntheticLambda0(z, 0));
                 }
             };
             ((BatteryControllerImpl) this.this$0.controller).addCallback(r1);

@@ -1117,8 +1117,7 @@ public class InputMethodService extends AbstractInputMethodService {
                 this.mShowImeWithHardKeyboard = Settings.Secure.getInt(this.mService.getContentResolver(), Settings.Secure.SHOW_IME_WITH_HARD_KEYBOARD, 0) != 0 ? 2 : 1;
             }
             if (sDesktopModeManagerWrapper.isDexDesktopDisplay(this.mService)) {
-                Log.i(InputMethodService.TAG, "shouldShowImeWithHardKeyboard is false when a desktop display app is focused.");
-                return false;
+                return Settings.Global.getInt(this.mService.getContentResolver(), Settings.Global.SEM_DEX_SHOW_VIRTUAL_KEYBOARD, 0) == 1;
             }
             int i = this.mShowImeWithHardKeyboard;
             if (i == 1) {

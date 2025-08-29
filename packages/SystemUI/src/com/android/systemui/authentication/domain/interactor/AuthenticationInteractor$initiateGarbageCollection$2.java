@@ -38,7 +38,7 @@ final class AuthenticationInteractor$initiateGarbageCollection$2 extends Suspend
             ResultKt.throwOnFailure(obj);
             long j = this.$delay;
             this.label = 1;
-            if (DelayKt.m3469delayVtjQ1oo(j, this) == coroutineSingletons) {
+            if (DelayKt.m3468delayVtjQ1oo(j, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

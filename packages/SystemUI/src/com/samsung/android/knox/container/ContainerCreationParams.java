@@ -321,7 +321,7 @@ public class ContainerCreationParams implements Parcelable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public ContainerCreationParams m3290clone() {
+    public ContainerCreationParams m3289clone() {
         ContainerCreationParams containerCreationParams = new ContainerCreationParams();
         containerCreationParams.setRequestId(this.mRequestId);
         containerCreationParams.setName(this.mName);

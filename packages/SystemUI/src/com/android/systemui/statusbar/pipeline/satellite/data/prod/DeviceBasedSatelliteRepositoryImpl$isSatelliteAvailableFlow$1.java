@@ -63,7 +63,7 @@ final class DeviceBasedSatelliteRepositoryImpl$isSatelliteAvailableFlow$1 extend
                     logMessageObtain.setBool1(z);
                     Unit unit = Unit.INSTANCE;
                     logBuffer.commit(logMessageObtain);
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(z));
                 }
             };
             Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();

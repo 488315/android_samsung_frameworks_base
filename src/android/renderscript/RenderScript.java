@@ -671,7 +671,7 @@ public class RenderScript {
         }
     }
 
-    synchronized void nElementGetNativeData(long j, int[] iArr) {
+    synchronized void nElementGetNativeData(long j, int[] iArr) throws Throwable {
         try {
             try {
                 validate();
@@ -686,7 +686,7 @@ public class RenderScript {
         }
     }
 
-    synchronized void nElementGetSubElements(long j, long[] jArr, String[] strArr, int[] iArr) {
+    synchronized void nElementGetSubElements(long j, long[] jArr, String[] strArr, int[] iArr) throws Throwable {
         try {
             try {
                 validate();

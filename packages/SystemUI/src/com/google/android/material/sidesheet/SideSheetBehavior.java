@@ -1,10 +1,7 @@
 package com.google.android.material.sidesheet;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
@@ -32,10 +29,8 @@ import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.core.view.accessibility.AccessibilityViewCommand;
 import androidx.customview.view.AbsSavedState;
 import androidx.customview.widget.ViewDragHelper;
-import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 import com.android.systemui.R;
 import com.google.android.material.R$styleable;
-import com.google.android.material.animation.AnimationUtils;
 import com.google.android.material.motion.MaterialBackHandler;
 import com.google.android.material.motion.MaterialSideContainerBackHelper;
 import com.google.android.material.resources.MaterialResources;
@@ -264,94 +259,153 @@ public class SideSheetBehavior<V extends View> extends CoordinatorLayout.Behavio
         return this.sideContainerBackHelper;
     }
 
+    /*  JADX ERROR: JadxRuntimeException in pass: ProcessVariables
+        jadx.core.utils.exceptions.JadxRuntimeException: Method arg registers not loaded: com.google.android.material.motion.MaterialSideContainerBackHelper.1.<init>(com.google.android.material.motion.MaterialSideContainerBackHelper, boolean, int):void, class status: GENERATED_AND_UNLOADED
+        	at jadx.core.dex.nodes.MethodNode.getArgRegs(MethodNode.java:291)
+        	at jadx.core.dex.visitors.regions.variables.ProcessVariables$1.isArgUnused(ProcessVariables.java:146)
+        	at jadx.core.dex.visitors.regions.variables.ProcessVariables$1.lambda$isVarUnused$0(ProcessVariables.java:131)
+        	at jadx.core.utils.ListUtils.allMatch(ListUtils.java:194)
+        	at jadx.core.dex.visitors.regions.variables.ProcessVariables$1.isVarUnused(ProcessVariables.java:131)
+        	at jadx.core.dex.visitors.regions.variables.ProcessVariables$1.processBlock(ProcessVariables.java:82)
+        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(DepthRegionTraversal.java:64)
+        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.lambda$traverseInternal$0(DepthRegionTraversal.java:68)
+        	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(DepthRegionTraversal.java:68)
+        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.lambda$traverseInternal$0(DepthRegionTraversal.java:68)
+        	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(DepthRegionTraversal.java:68)
+        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.lambda$traverseInternal$0(DepthRegionTraversal.java:68)
+        	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(DepthRegionTraversal.java:68)
+        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.lambda$traverseInternal$0(DepthRegionTraversal.java:68)
+        	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(DepthRegionTraversal.java:68)
+        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.lambda$traverseInternal$0(DepthRegionTraversal.java:68)
+        	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseInternal(DepthRegionTraversal.java:68)
+        	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverse(DepthRegionTraversal.java:19)
+        	at jadx.core.dex.visitors.regions.variables.ProcessVariables.removeUnusedResults(ProcessVariables.java:73)
+        	at jadx.core.dex.visitors.regions.variables.ProcessVariables.visit(ProcessVariables.java:48)
+        */
     @Override // com.google.android.material.motion.MaterialBackHandler
     public final void handleBackInvoked() {
-        int i;
-        final ViewGroup.MarginLayoutParams marginLayoutParams;
-        MaterialSideContainerBackHelper materialSideContainerBackHelper = this.sideContainerBackHelper;
-        if (materialSideContainerBackHelper == null) {
-            return;
-        }
-        BackEventCompat backEventCompat = materialSideContainerBackHelper.backEvent;
-        ValueAnimator.AnimatorUpdateListener animatorUpdateListener = null;
-        materialSideContainerBackHelper.backEvent = null;
-        int i2 = 5;
-        if (backEventCompat == null) {
-            setState$1(5);
-            return;
-        }
-        SheetDelegate sheetDelegate = this.sheetDelegate;
-        if (sheetDelegate != null && sheetDelegate.getSheetEdge() != 0) {
-            i2 = 3;
-        }
-        AnimatorListenerAdapter animatorListenerAdapter = new AnimatorListenerAdapter() { // from class: com.google.android.material.sidesheet.SideSheetBehavior.2
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public final void onAnimationEnd(Animator animator) {
-                SideSheetBehavior.this.setStateInternal(5);
-                WeakReference weakReference = SideSheetBehavior.this.viewRef;
-                if (weakReference == null || weakReference.get() == null) {
-                    return;
-                }
-                ((View) SideSheetBehavior.this.viewRef.get()).requestLayout();
-            }
-        };
-        WeakReference weakReference = this.coplanarSiblingViewRef;
-        final View view = weakReference != null ? (View) weakReference.get() : null;
-        if (view != null && (marginLayoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams()) != null) {
-            final int coplanarSiblingAdjacentMargin = this.sheetDelegate.getCoplanarSiblingAdjacentMargin(marginLayoutParams);
-            animatorUpdateListener = new ValueAnimator.AnimatorUpdateListener() { // from class: com.google.android.material.sidesheet.SideSheetBehavior$$ExternalSyntheticLambda2
-                @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    SideSheetBehavior sideSheetBehavior = this.f$0;
-                    ViewGroup.MarginLayoutParams marginLayoutParams2 = marginLayoutParams;
-                    int i3 = coplanarSiblingAdjacentMargin;
-                    View view2 = view;
-                    sideSheetBehavior.sheetDelegate.updateCoplanarSiblingAdjacentMargin(marginLayoutParams2, AnimationUtils.lerp(valueAnimator.getAnimatedFraction(), i3, 0));
-                    view2.requestLayout();
-                }
-            };
-        }
-        boolean z = backEventCompat.swipeEdge == 0;
-        View view2 = materialSideContainerBackHelper.view;
-        WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        boolean z2 = (Gravity.getAbsoluteGravity(i2, view2.getLayoutDirection()) & 3) == 3;
-        float scaleX = materialSideContainerBackHelper.view.getScaleX() * materialSideContainerBackHelper.view.getWidth();
-        ViewGroup.LayoutParams layoutParams = materialSideContainerBackHelper.view.getLayoutParams();
-        if (layoutParams instanceof ViewGroup.MarginLayoutParams) {
-            ViewGroup.MarginLayoutParams marginLayoutParams2 = (ViewGroup.MarginLayoutParams) layoutParams;
-            i = z2 ? marginLayoutParams2.leftMargin : marginLayoutParams2.rightMargin;
-        } else {
-            i = 0;
-        }
-        float f = scaleX + i;
-        View view3 = materialSideContainerBackHelper.view;
-        Property property = View.TRANSLATION_X;
-        if (z2) {
-            f = -f;
-        }
-        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(view3, (Property<View, Float>) property, f);
-        if (animatorUpdateListener != null) {
-            objectAnimatorOfFloat.addUpdateListener(animatorUpdateListener);
-        }
-        objectAnimatorOfFloat.setInterpolator(new FastOutSlowInInterpolator());
-        objectAnimatorOfFloat.setDuration(AnimationUtils.lerp(backEventCompat.progress, materialSideContainerBackHelper.hideDurationMax, materialSideContainerBackHelper.hideDurationMin));
-        objectAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.google.android.material.motion.MaterialSideContainerBackHelper.1
-            public final /* synthetic */ int val$gravity;
-            public final /* synthetic */ boolean val$leftSwipeEdge;
-
-            public AnonymousClass1(boolean z3, int i22) {
-                z = z3;
-                i = i22;
-            }
-
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public final void onAnimationEnd(Animator animator) {
-                MaterialSideContainerBackHelper.this.view.setTranslationX(0.0f);
-                MaterialSideContainerBackHelper.this.updateBackProgress(0.0f, z, i);
-            }
-        });
-        objectAnimatorOfFloat.addListener(animatorListenerAdapter);
-        objectAnimatorOfFloat.start();
+        /*
+            r11 = this;
+            r0 = 0
+            r1 = 1
+            com.google.android.material.motion.MaterialSideContainerBackHelper r2 = r11.sideContainerBackHelper
+            if (r2 != 0) goto L7
+            return
+        L7:
+            androidx.activity.BackEventCompat r3 = r2.backEvent
+            r4 = 0
+            r2.backEvent = r4
+            r5 = 5
+            if (r3 == 0) goto Lbc
+            com.google.android.material.sidesheet.SheetDelegate r6 = r11.sheetDelegate
+            r7 = 3
+            if (r6 == 0) goto L1c
+            int r6 = r6.getSheetEdge()
+            if (r6 != 0) goto L1b
+            goto L1c
+        L1b:
+            r5 = r7
+        L1c:
+            com.google.android.material.sidesheet.SideSheetBehavior$2 r6 = new com.google.android.material.sidesheet.SideSheetBehavior$2
+            r6.<init>()
+            java.lang.ref.WeakReference r8 = r11.coplanarSiblingViewRef
+            if (r8 == 0) goto L2c
+            java.lang.Object r8 = r8.get()
+            android.view.View r8 = (android.view.View) r8
+            goto L2d
+        L2c:
+            r8 = r4
+        L2d:
+            if (r8 != 0) goto L30
+            goto L45
+        L30:
+            android.view.ViewGroup$LayoutParams r9 = r8.getLayoutParams()
+            android.view.ViewGroup$MarginLayoutParams r9 = (android.view.ViewGroup.MarginLayoutParams) r9
+            if (r9 != 0) goto L39
+            goto L45
+        L39:
+            com.google.android.material.sidesheet.SheetDelegate r4 = r11.sheetDelegate
+            int r4 = r4.getCoplanarSiblingAdjacentMargin(r9)
+            com.google.android.material.sidesheet.SideSheetBehavior$$ExternalSyntheticLambda2 r10 = new com.google.android.material.sidesheet.SideSheetBehavior$$ExternalSyntheticLambda2
+            r10.<init>()
+            r4 = r10
+        L45:
+            int r11 = r3.swipeEdge
+            if (r11 != 0) goto L4b
+            r11 = r1
+            goto L4c
+        L4b:
+            r11 = r0
+        L4c:
+            android.view.View r8 = r2.view
+            java.util.WeakHashMap r9 = androidx.core.view.ViewCompat.sViewPropertyAnimatorMap
+            int r8 = r8.getLayoutDirection()
+            int r8 = android.view.Gravity.getAbsoluteGravity(r5, r8)
+            r8 = r8 & r7
+            if (r8 != r7) goto L5d
+            r7 = r1
+            goto L5e
+        L5d:
+            r7 = r0
+        L5e:
+            android.view.View r8 = r2.view
+            int r8 = r8.getWidth()
+            float r8 = (float) r8
+            android.view.View r9 = r2.view
+            float r9 = r9.getScaleX()
+            float r9 = r9 * r8
+            android.view.View r8 = r2.view
+            android.view.ViewGroup$LayoutParams r8 = r8.getLayoutParams()
+            boolean r10 = r8 instanceof android.view.ViewGroup.MarginLayoutParams
+            if (r10 == 0) goto L80
+            android.view.ViewGroup$MarginLayoutParams r8 = (android.view.ViewGroup.MarginLayoutParams) r8
+            if (r7 == 0) goto L7d
+            int r8 = r8.leftMargin
+            goto L81
+        L7d:
+            int r8 = r8.rightMargin
+            goto L81
+        L80:
+            r8 = r0
+        L81:
+            float r8 = (float) r8
+            float r9 = r9 + r8
+            android.view.View r8 = r2.view
+            android.util.Property r10 = android.view.View.TRANSLATION_X
+            if (r7 == 0) goto L8a
+            float r9 = -r9
+        L8a:
+            float[] r1 = new float[r1]
+            r1[r0] = r9
+            android.animation.ObjectAnimator r0 = android.animation.ObjectAnimator.ofFloat(r8, r10, r1)
+            if (r4 == 0) goto L97
+            r0.addUpdateListener(r4)
+        L97:
+            androidx.interpolator.view.animation.FastOutSlowInInterpolator r1 = new androidx.interpolator.view.animation.FastOutSlowInInterpolator
+            r1.<init>()
+            r0.setInterpolator(r1)
+            float r1 = r3.progress
+            int r3 = r2.hideDurationMax
+            int r4 = r2.hideDurationMin
+            int r1 = com.google.android.material.animation.AnimationUtils.lerp(r1, r3, r4)
+            long r3 = (long) r1
+            r0.setDuration(r3)
+            com.google.android.material.motion.MaterialSideContainerBackHelper$1 r1 = new com.google.android.material.motion.MaterialSideContainerBackHelper$1
+            r1.<init>()
+            r0.addListener(r1)
+            r0.addListener(r6)
+            r0.start()
+            return
+        Lbc:
+            r11.setState$1(r5)
+            return
+        */
+        throw new UnsupportedOperationException("Method not decompiled: com.google.android.material.sidesheet.SideSheetBehavior.handleBackInvoked():void");
     }
 
     @Override // androidx.coordinatorlayout.widget.CoordinatorLayout.Behavior

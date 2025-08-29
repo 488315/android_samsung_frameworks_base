@@ -13,7 +13,7 @@ import kotlin.jvm.functions.Function3;
 public final /* synthetic */ class MergeKt$$ExternalSyntheticLambda1 implements Function3 {
     @Override // kotlin.jvm.functions.Function3
     public final Object invoke(Object obj, Object obj2, Object obj3) {
-        Object objM2590boximpl;
+        Object objM2588boximpl;
         EvalScope evalScope = (EvalScope) obj;
         Map map = (Map) obj2;
         ((Integer) obj3).intValue();
@@ -25,14 +25,14 @@ public final /* synthetic */ class MergeKt$$ExternalSyntheticLambda1 implements 
                 Maybe.Companion companion = Maybe.Companion;
                 EventsImpl eventsImpl = (EventsImpl) EventsKt.getInit((Events) ((Maybe.Present) maybe).value).connect(evalScope);
                 companion.getClass();
-                objM2590boximpl = Maybe.Present.m2590boximpl(eventsImpl);
+                objM2588boximpl = Maybe.Present.m2588boximpl(eventsImpl);
             } else {
                 if (!(maybe instanceof Maybe.Absent)) {
                     throw new NoWhenBranchMatchedException();
                 }
-                objM2590boximpl = Maybe.Absent.INSTANCE;
+                objM2588boximpl = Maybe.Absent.INSTANCE;
             }
-            linkedHashMap.put(key, objM2590boximpl);
+            linkedHashMap.put(key, objM2588boximpl);
         }
         return linkedHashMap.entrySet();
     }

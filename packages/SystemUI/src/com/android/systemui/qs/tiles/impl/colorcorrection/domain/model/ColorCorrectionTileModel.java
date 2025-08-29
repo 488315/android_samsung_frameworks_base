@@ -11,7 +11,7 @@ public final class ColorCorrectionTileModel {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ ColorCorrectionTileModel m2928boximpl(boolean z) {
+    public static final /* synthetic */ ColorCorrectionTileModel m2926boximpl(boolean z) {
         return new ColorCorrectionTileModel(z);
     }
 

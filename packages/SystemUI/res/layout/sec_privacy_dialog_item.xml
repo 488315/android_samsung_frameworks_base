@@ -3,4 +3,8 @@
   xmlns:android="http://schemas.android.com/apk/res/android">
     <ImageView android:layout_gravity="center_vertical" android:id="@id/icon" android:layout_width="wrap_content" android:layout_height="wrap_content" />
     <TextView android:textAppearance="@style/TextAppearance.PrivacyDialog" android:gravity="start|center" android:layout_gravity="center_vertical" android:id="@id/text" android:layout_width="0.0dip" android:layout_height="wrap_content" android:minHeight="@dimen/sec_privacy_dialog_item_height" android:layout_weight="1.0" android:textDirection="locale" android:textAlignment="viewStart" android:layout_marginStart="@dimen/sec_privacy_dialog_item_icon_text_interval" android:lineHeight="14.0sp" />
+    <FrameLayout android:id="@id/system_setting" android:background="@drawable/sec_qs_ripple_drawable" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="fill_parent">
+        <ImageView android:layout_gravity="center_vertical" android:background="@color/sec_privacy_dialog_system_setting_divider" android:layout_width="1.0dip" android:layout_height="22.0dip" />
+        <ImageView android:layout_width="wrap_content" android:layout_height="fill_parent" android:src="@drawable/privacy_list_setting" android:scaleType="center" android:layout_marginStart="@dimen/sec_privacy_dialog_system_setting_padding_start" />
+    </FrameLayout>
 </LinearLayout>

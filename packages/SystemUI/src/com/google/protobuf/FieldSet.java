@@ -594,7 +594,7 @@ public final class FieldSet {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public final FieldSet m3288clone() {
+    public final FieldSet m3287clone() {
         SmallSortedMap smallSortedMap;
         FieldSet fieldSet = new FieldSet();
         int i = 0;

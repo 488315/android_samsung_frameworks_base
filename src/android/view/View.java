@@ -13029,7 +13029,7 @@ public class View implements Drawable.Callback, KeyEvent.Callback, Accessibility
         sTraceRequestLayoutClass = str;
     }
 
-    private boolean setOpticalFrame(int i, int i2, int i3, int i4) {
+    private boolean setOpticalFrame(int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         Object obj = this.mParent;
         Insets opticalInsets = obj instanceof View ? ((View) obj).getOpticalInsets() : Insets.NONE;
         Insets opticalInsets2 = getOpticalInsets();

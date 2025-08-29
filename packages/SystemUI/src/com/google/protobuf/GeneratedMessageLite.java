@@ -335,7 +335,7 @@ public abstract class GeneratedMessageLite extends AbstractMessageLite {
 
         @Override // com.google.protobuf.AbstractMessageLite.Builder
         /* renamed from: clone */
-        public final Builder mo3287clone() {
+        public final Builder mo3286clone() {
             GeneratedMessageLite generatedMessageLite = this.defaultInstance;
             generatedMessageLite.getClass();
             Builder builder = (Builder) generatedMessageLite.dynamicMethod(MethodToInvoke.NEW_BUILDER);
@@ -367,7 +367,7 @@ public abstract class GeneratedMessageLite extends AbstractMessageLite {
 
         @Override // com.google.protobuf.AbstractMessageLite.Builder
         /* renamed from: clone */
-        public final Object mo3287clone() {
+        public final Object mo3286clone() {
             GeneratedMessageLite generatedMessageLite = this.defaultInstance;
             generatedMessageLite.getClass();
             Builder builder = (Builder) generatedMessageLite.dynamicMethod(MethodToInvoke.NEW_BUILDER);

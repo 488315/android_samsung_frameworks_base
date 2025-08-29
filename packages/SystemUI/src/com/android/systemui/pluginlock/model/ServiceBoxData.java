@@ -174,7 +174,7 @@ public class ServiceBoxData {
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public ClockInfo m2683clone() throws CloneNotSupportedException {
+        public ClockInfo m2681clone() throws CloneNotSupportedException {
             return (ClockInfo) super.clone();
         }
     }
@@ -247,7 +247,7 @@ public class ServiceBoxData {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public ServiceBoxData m2682clone() throws CloneNotSupportedException {
+    public ServiceBoxData m2680clone() throws CloneNotSupportedException {
         return (ServiceBoxData) super.clone();
     }
 }

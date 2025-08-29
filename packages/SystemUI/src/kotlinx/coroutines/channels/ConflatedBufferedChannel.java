@@ -29,11 +29,11 @@ public class ConflatedBufferedChannel extends BufferedChannel {
     @Override // kotlinx.coroutines.channels.BufferedChannel, kotlinx.coroutines.channels.SendChannel
     public final Object send(Object obj, Continuation continuation) throws Throwable {
         UndeliveredElementException undeliveredElementExceptionCallUndeliveredElementCatchingException;
-        Object objM3481trySendImplMj0NB7M = m3481trySendImplMj0NB7M(obj, true);
-        if (!(objM3481trySendImplMj0NB7M instanceof ChannelResult.Closed)) {
+        Object objM3480trySendImplMj0NB7M = m3480trySendImplMj0NB7M(obj, true);
+        if (!(objM3480trySendImplMj0NB7M instanceof ChannelResult.Closed)) {
             return Unit.INSTANCE;
         }
-        ChannelResult.m3478exceptionOrNullimpl((ChannelResult.Failed) objM3481trySendImplMj0NB7M);
+        ChannelResult.m3477exceptionOrNullimpl((ChannelResult.Failed) objM3480trySendImplMj0NB7M);
         Function1 function1 = this.onUndeliveredElement;
         if (function1 == null || (undeliveredElementExceptionCallUndeliveredElementCatchingException = OnUndeliveredElementKt.callUndeliveredElementCatchingException(function1, obj, null)) == null) {
             throw getSendException();
@@ -44,19 +44,19 @@ public class ConflatedBufferedChannel extends BufferedChannel {
 
     @Override // kotlinx.coroutines.channels.BufferedChannel, kotlinx.coroutines.channels.SendChannel
     /* renamed from: trySend-JP2dKIU */
-    public final Object mo3476trySendJP2dKIU(Object obj) {
-        return m3481trySendImplMj0NB7M(obj, false);
+    public final Object mo3475trySendJP2dKIU(Object obj) {
+        return m3480trySendImplMj0NB7M(obj, false);
     }
 
     /* renamed from: trySendImpl-Mj0NB7M, reason: not valid java name */
-    public final Object m3481trySendImplMj0NB7M(Object obj, boolean z) {
+    public final Object m3480trySendImplMj0NB7M(Object obj, boolean z) {
         Function1 function1;
         UndeliveredElementException undeliveredElementExceptionCallUndeliveredElementCatchingException;
         if (this.onBufferOverflow == BufferOverflow.DROP_LATEST) {
-            Object objMo3476trySendJP2dKIU = super.mo3476trySendJP2dKIU(obj);
+            Object objMo3475trySendJP2dKIU = super.mo3475trySendJP2dKIU(obj);
             ChannelResult.Companion companion = ChannelResult.Companion;
-            if (!(objMo3476trySendJP2dKIU instanceof ChannelResult.Failed) || (objMo3476trySendJP2dKIU instanceof ChannelResult.Closed)) {
-                return objMo3476trySendJP2dKIU;
+            if (!(objMo3475trySendJP2dKIU instanceof ChannelResult.Failed) || (objMo3475trySendJP2dKIU instanceof ChannelResult.Closed)) {
+                return objMo3475trySendJP2dKIU;
             }
             if (z && (function1 = this.onUndeliveredElement) != null && (undeliveredElementExceptionCallUndeliveredElementCatchingException = OnUndeliveredElementKt.callUndeliveredElementCatchingException(function1, obj, null)) != null) {
                 throw undeliveredElementExceptionCallUndeliveredElementCatchingException;
@@ -129,7 +129,7 @@ public class ConflatedBufferedChannel extends BufferedChannel {
         ChannelResult.Companion companion6 = ChannelResult.Companion;
         Throwable sendException = getSendException();
         companion6.getClass();
-        return ChannelResult.Companion.m3480closedJP2dKIU(sendException);
+        return ChannelResult.Companion.m3479closedJP2dKIU(sendException);
     }
 
     public ConflatedBufferedChannel(int i, BufferOverflow bufferOverflow, Function1 function1) {

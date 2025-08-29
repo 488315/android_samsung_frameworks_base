@@ -45,7 +45,7 @@ public final class ShadowGraphicsLayerElement extends ModifierNodeElement<BlockG
             return false;
         }
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.ambientColor, shadowGraphicsLayerElement.ambientColor) && ULong.m3447equalsimpl0(this.spotColor, shadowGraphicsLayerElement.spotColor);
+        return ULong.m3446equalsimpl0(this.ambientColor, shadowGraphicsLayerElement.ambientColor) && ULong.m3446equalsimpl0(this.spotColor, shadowGraphicsLayerElement.spotColor);
     }
 
     public final int hashCode() {

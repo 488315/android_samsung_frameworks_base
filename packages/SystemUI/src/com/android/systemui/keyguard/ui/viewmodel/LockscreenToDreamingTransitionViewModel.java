@@ -37,17 +37,17 @@ public final class LockscreenToDreamingTransitionViewModel implements DeviceEntr
     static {
         new Companion(null);
         FromLockscreenTransitionInteractor.Companion.getClass();
-        DREAMING_ANIMATION_DURATION_MS = Duration.m3457getInWholeMillisecondsimpl(FromLockscreenTransitionInteractor.TO_DREAMING_DURATION);
+        DREAMING_ANIMATION_DURATION_MS = Duration.m3456getInWholeMillisecondsimpl(FromLockscreenTransitionInteractor.TO_DREAMING_DURATION);
     }
 
     public LockscreenToDreamingTransitionViewModel(ShadeDependentFlows shadeDependentFlows, KeyguardTransitionAnimationFlow keyguardTransitionAnimationFlow) {
         final int i = 0;
         final int i2 = 1;
         FromLockscreenTransitionInteractor.Companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM2615setupVtjQ1oo = keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(FromLockscreenTransitionInteractor.TO_DREAMING_DURATION, KeyguardInteractor$$ExternalSyntheticOutline0.m(Edge.Companion, KeyguardState.LOCKSCREEN, KeyguardState.DREAMING));
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM2613setupVtjQ1oo = keyguardTransitionAnimationFlow.m2613setupVtjQ1oo(FromLockscreenTransitionInteractor.TO_DREAMING_DURATION, KeyguardInteractor$$ExternalSyntheticOutline0.m(Edge.Companion, KeyguardState.LOCKSCREEN, KeyguardState.DREAMING));
         Duration.Companion companion = Duration.Companion;
         DurationUnit durationUnit = DurationUnit.MILLISECONDS;
-        this.lockscreenAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilderM2615setupVtjQ1oo, DurationKt.toDuration(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend, durationUnit), new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToDreamingTransitionViewModel$$ExternalSyntheticLambda0
+        this.lockscreenAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2614sharedFlow74qcysc$default(flowBuilderM2613setupVtjQ1oo, DurationKt.toDuration(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend, durationUnit), new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToDreamingTransitionViewModel$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
             public final Object mo781invoke(Object obj) {
@@ -68,7 +68,7 @@ public final class LockscreenToDreamingTransitionViewModel implements DeviceEntr
                 }
             }
         }, 0L, null, null, null, null, null, IKnoxCustomManager.Stub.TRANSACTION_setDexForegroundModePackageList);
-        this.shortcutsAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilderM2615setupVtjQ1oo, DurationKt.toDuration(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend, durationUnit), new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToDreamingTransitionViewModel$$ExternalSyntheticLambda0
+        this.shortcutsAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2614sharedFlow74qcysc$default(flowBuilderM2613setupVtjQ1oo, DurationKt.toDuration(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend, durationUnit), new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToDreamingTransitionViewModel$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
             public final Object mo781invoke(Object obj) {
@@ -114,7 +114,7 @@ public final class LockscreenToDreamingTransitionViewModel implements DeviceEntr
             }
         }, null, null, 204);
         final int i3 = 2;
-        this.deviceEntryParentViewAlpha = shadeDependentFlows.transitionFlow(flowBuilderM2615setupVtjQ1oo.immediatelyTransitionTo(0.0f), KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilderM2615setupVtjQ1oo, DurationKt.toDuration(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend, durationUnit), new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToDreamingTransitionViewModel$$ExternalSyntheticLambda0
+        this.deviceEntryParentViewAlpha = shadeDependentFlows.transitionFlow(flowBuilderM2613setupVtjQ1oo.immediatelyTransitionTo(0.0f), KeyguardTransitionAnimationFlow.FlowBuilder.m2614sharedFlow74qcysc$default(flowBuilderM2613setupVtjQ1oo, DurationKt.toDuration(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend, durationUnit), new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToDreamingTransitionViewModel$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
             public final Object mo781invoke(Object obj) {

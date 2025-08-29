@@ -13,7 +13,7 @@ public interface FlashlightTileModel {
         }
 
         /* renamed from: box-impl, reason: not valid java name */
-        public static final /* synthetic */ FlashlightAvailable m2929boximpl(boolean z) {
+        public static final /* synthetic */ FlashlightAvailable m2927boximpl(boolean z) {
             return new FlashlightAvailable(z);
         }
 

@@ -29,7 +29,7 @@ final class FlowKt__DelayKt$timeoutInternal$1$1$1 extends SuspendLambda implemen
 
     @Override // kotlin.jvm.functions.Function2
     public final Object invoke(Object obj, Object obj2) {
-        return ((FlowKt__DelayKt$timeoutInternal$1$1$1) create(ChannelResult.m3477boximpl(((ChannelResult) obj).holder), (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+        return ((FlowKt__DelayKt$timeoutInternal$1$1$1) create(ChannelResult.m3476boximpl(((ChannelResult) obj).holder), (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
     /* JADX WARN: Removed duplicated region for block: B:17:0x0037  */
@@ -58,11 +58,11 @@ final class FlowKt__DelayKt$timeoutInternal$1$1$1 extends SuspendLambda implemen
             if (obj2 instanceof ChannelResult.Closed) {
                 return Boolean.TRUE;
             }
-            Throwable thM3478exceptionOrNullimpl = ChannelResult.m3478exceptionOrNullimpl((ChannelResult.Failed) obj2);
-            if (thM3478exceptionOrNullimpl == null) {
+            Throwable thM3477exceptionOrNullimpl = ChannelResult.m3477exceptionOrNullimpl((ChannelResult.Failed) obj2);
+            if (thM3477exceptionOrNullimpl == null) {
                 return Boolean.FALSE;
             }
-            throw thM3478exceptionOrNullimpl;
+            throw thM3477exceptionOrNullimpl;
         }
         if (i != 1) {
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");

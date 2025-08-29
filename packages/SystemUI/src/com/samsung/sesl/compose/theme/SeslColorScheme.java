@@ -27,7 +27,7 @@ public final class SeslColorScheme {
     }
 
     /* renamed from: copy-FD3wquc$default, reason: not valid java name */
-    public static SeslColorScheme m3358copyFD3wquc$default(SeslColorScheme seslColorScheme, long j, long j2) {
+    public static SeslColorScheme m3357copyFD3wquc$default(SeslColorScheme seslColorScheme, long j, long j2) {
         long j3 = seslColorScheme.mainText;
         long j4 = seslColorScheme.subText;
         long j5 = seslColorScheme.pointText;
@@ -48,7 +48,7 @@ public final class SeslColorScheme {
         SeslColorScheme seslColorScheme = (SeslColorScheme) obj;
         long j = seslColorScheme.primary;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.primary, j) && ULong.m3447equalsimpl0(this.mainText, seslColorScheme.mainText) && ULong.m3447equalsimpl0(this.subText, seslColorScheme.subText) && ULong.m3447equalsimpl0(this.pointText, seslColorScheme.pointText) && ULong.m3447equalsimpl0(this.background, seslColorScheme.background) && ULong.m3447equalsimpl0(this.roundedCorner, seslColorScheme.roundedCorner) && ULong.m3447equalsimpl0(this.ripple, seslColorScheme.ripple) && ULong.m3447equalsimpl0(this.controlNormal, seslColorScheme.controlNormal);
+        return ULong.m3446equalsimpl0(this.primary, j) && ULong.m3446equalsimpl0(this.mainText, seslColorScheme.mainText) && ULong.m3446equalsimpl0(this.subText, seslColorScheme.subText) && ULong.m3446equalsimpl0(this.pointText, seslColorScheme.pointText) && ULong.m3446equalsimpl0(this.background, seslColorScheme.background) && ULong.m3446equalsimpl0(this.roundedCorner, seslColorScheme.roundedCorner) && ULong.m3446equalsimpl0(this.ripple, seslColorScheme.ripple) && ULong.m3446equalsimpl0(this.controlNormal, seslColorScheme.controlNormal);
     }
 
     public final int hashCode() {

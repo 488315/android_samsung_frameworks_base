@@ -4705,7 +4705,11 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
                     typeface = Typeface.DEFAULT;
                 }
             } else {
-                typeface = Typeface.create(typeface, Math.min(Math.max(typeface.getWeight() + this.mFontWeightAdjustment, 1), 1000), ((typeface != null ? typeface.getStyle() : 0) & 2) != 0);
+                int iMin = Math.min(Math.max(typeface.getWeight() + this.mFontWeightAdjustment, 1), 1000);
+                boolean z = ((typeface != null ? typeface.getStyle() : 0) & 2) != 0;
+                if (!typeface.mCustomBuilder) {
+                    typeface = Typeface.create(typeface, iMin, z);
+                }
             }
         }
         if (this.mTextPaint.getTypeface() != typeface) {
@@ -4719,10 +4723,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     public Typeface getTypeface() {
-        if (Typeface.semIsDefaultFontStyle()) {
-            return this.mOriginalTypeface;
-        }
-        return Typeface.defaultFromStyle(0);
+        return this.mOriginalTypeface;
     }
 
     public void setElegantTextHeight(boolean z) {
@@ -13151,7 +13152,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
         int inputType;
         int inputType2;
         int i;
-        if (isFlipCoverClosed() || this.mDisableWritingToolkitMenu || isAnyPasswordInputType() || hasPasswordTransformationMethod() || (getImeOptions() & 255) == 3 || (inputType2 = (inputType = getInputType()) & 4095) == 17 || inputType2 == 33 || inputType2 == 49 || inputType2 == 209 || inputType2 == 4 || inputType2 == 20 || inputType2 == 36 || inputType2 == 2 || inputType2 == 3 || (i = inputType & 16773135) == 4098 || i == 8194) {
+        if (isFlipCoverClosed() || isKeyguardLocked() || this.mDisableWritingToolkitMenu || isAnyPasswordInputType() || hasPasswordTransformationMethod() || (getImeOptions() & 255) == 3 || (inputType2 = (inputType = getInputType()) & 4095) == 17 || inputType2 == 33 || inputType2 == 49 || inputType2 == 209 || inputType2 == 4 || inputType2 == 20 || inputType2 == 36 || inputType2 == 2 || inputType2 == 3 || (i = inputType & 16773135) == 4098 || i == 8194) {
             return true;
         }
         String privateImeOptions = getPrivateImeOptions();

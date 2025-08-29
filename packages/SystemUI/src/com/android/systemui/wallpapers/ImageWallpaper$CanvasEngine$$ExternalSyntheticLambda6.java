@@ -98,7 +98,7 @@ public final /* synthetic */ class ImageWallpaper$CanvasEngine$$ExternalSyntheti
                     Log.i(canvasEngine2.TAG, " mPluginHomeWallpaperConsumer " + ImageWallpaper.this.mSubWallpaperType + " -> " + ((CoverWallpaperController) ImageWallpaper.this.mCoverWallpaper).getWallpaperType() + " , " + bool);
                     ImageWallpaper imageWallpaper = ImageWallpaper.this;
                     imageWallpaper.mSubWallpaperType = ((CoverWallpaperController) imageWallpaper.mCoverWallpaper).getWallpaperType();
-                    ImageWallpaper.CanvasEngine.m3230$$Nest$mupdatePluginWallpaper(ImageWallpaper.CanvasEngine.this);
+                    ImageWallpaper.CanvasEngine.m3229$$Nest$mupdatePluginWallpaper(ImageWallpaper.CanvasEngine.this);
                     break;
                 }
             default:

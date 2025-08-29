@@ -179,7 +179,7 @@ public class DividerView extends FrameLayout implements View.OnTouchListener {
     }
 
     /* renamed from: -$$Nest$msendTalkBackFeedback, reason: not valid java name */
-    public static void m3239$$Nest$msendTalkBackFeedback(DividerView dividerView, int i) {
+    public static void m3238$$Nest$msendTalkBackFeedback(DividerView dividerView, int i) {
         AccessibilityManager accessibilityManager = AccessibilityManager.getInstance(((FrameLayout) dividerView).mContext);
         if (accessibilityManager.isEnabled()) {
             AccessibilityEvent accessibilityEventObtain = AccessibilityEvent.obtain(NetworkAnalyticsConstants.DataPoints.FLAG_SOURCE_PORT);
@@ -350,41 +350,41 @@ public class DividerView extends FrameLayout implements View.OnTouchListener {
                         snapTarget = cellSnapAlgorithm.mDismissEndTarget;
                         DividerView dividerView2 = DividerView.this;
                         if (dividerView2.mSplitLayout.mIsLeftRightSplit) {
-                            DividerView.m3239$$Nest$msendTalkBackFeedback(dividerView2, R.string.accessibility_action_divider_left_full);
+                            DividerView.m3238$$Nest$msendTalkBackFeedback(dividerView2, R.string.accessibility_action_divider_left_full);
                         } else {
-                            DividerView.m3239$$Nest$msendTalkBackFeedback(dividerView2, R.string.accessibility_action_divider_top_full);
+                            DividerView.m3238$$Nest$msendTalkBackFeedback(dividerView2, R.string.accessibility_action_divider_top_full);
                         }
                     } else if (i == R.id.action_move_tl_70) {
                         snapTarget = cellSnapAlgorithm.mLastSplitTarget;
                         DividerView dividerView3 = DividerView.this;
                         if (dividerView3.mSplitLayout.mIsLeftRightSplit) {
-                            DividerView.m3239$$Nest$msendTalkBackFeedback(dividerView3, R.string.accessibility_action_divider_left_70);
+                            DividerView.m3238$$Nest$msendTalkBackFeedback(dividerView3, R.string.accessibility_action_divider_left_70);
                         } else {
-                            DividerView.m3239$$Nest$msendTalkBackFeedback(dividerView3, R.string.accessibility_action_divider_top_70);
+                            DividerView.m3238$$Nest$msendTalkBackFeedback(dividerView3, R.string.accessibility_action_divider_top_70);
                         }
                     } else if (i == R.id.action_move_tl_50) {
                         snapTarget = cellSnapAlgorithm.mMiddleTarget;
                         DividerView dividerView4 = DividerView.this;
                         if (dividerView4.mSplitLayout.mIsLeftRightSplit) {
-                            DividerView.m3239$$Nest$msendTalkBackFeedback(dividerView4, R.string.accessibility_action_divider_left_50);
+                            DividerView.m3238$$Nest$msendTalkBackFeedback(dividerView4, R.string.accessibility_action_divider_left_50);
                         } else {
-                            DividerView.m3239$$Nest$msendTalkBackFeedback(dividerView4, R.string.accessibility_action_divider_top_50);
+                            DividerView.m3238$$Nest$msendTalkBackFeedback(dividerView4, R.string.accessibility_action_divider_top_50);
                         }
                     } else if (i == R.id.action_move_tl_30) {
                         snapTarget = cellSnapAlgorithm.mFirstSplitTarget;
                         DividerView dividerView5 = DividerView.this;
                         if (dividerView5.mSplitLayout.mIsLeftRightSplit) {
-                            DividerView.m3239$$Nest$msendTalkBackFeedback(dividerView5, R.string.accessibility_action_divider_left_30);
+                            DividerView.m3238$$Nest$msendTalkBackFeedback(dividerView5, R.string.accessibility_action_divider_left_30);
                         } else {
-                            DividerView.m3239$$Nest$msendTalkBackFeedback(dividerView5, R.string.accessibility_action_divider_top_30);
+                            DividerView.m3238$$Nest$msendTalkBackFeedback(dividerView5, R.string.accessibility_action_divider_top_30);
                         }
                     } else if (i == R.id.action_move_rb_full) {
                         snapTarget = cellSnapAlgorithm.mDismissStartTarget;
                         DividerView dividerView6 = DividerView.this;
                         if (dividerView6.mSplitLayout.mIsLeftRightSplit) {
-                            DividerView.m3239$$Nest$msendTalkBackFeedback(dividerView6, R.string.accessibility_action_divider_right_full);
+                            DividerView.m3238$$Nest$msendTalkBackFeedback(dividerView6, R.string.accessibility_action_divider_right_full);
                         } else {
-                            DividerView.m3239$$Nest$msendTalkBackFeedback(dividerView6, R.string.accessibility_action_divider_bottom_full);
+                            DividerView.m3238$$Nest$msendTalkBackFeedback(dividerView6, R.string.accessibility_action_divider_bottom_full);
                         }
                     }
                     snapTarget2 = snapTarget;
@@ -944,7 +944,7 @@ public class DividerView extends FrameLayout implements View.OnTouchListener {
                         if (dividerResizeController3.mResizingRequested && !dividerResizeController3.mIsFinishing) {
                             if (dividerResizeController3.mIsResizing) {
                                 resizeAlgorithm = dividerResizeController3.mResizeAlgorithm;
-                                DividerResizeController.ResizeAlgorithm.m3237$$Nest$mupdate(resizeAlgorithm, currentPosition);
+                                DividerResizeController.ResizeAlgorithm.m3236$$Nest$mupdate(resizeAlgorithm, currentPosition);
                                 if (DividerResizeController.USE_GUIDE_VIEW_EFFECTS) {
                                 }
                                 iMin = resizeAlgorithm.mTouchPosition;
@@ -968,7 +968,7 @@ public class DividerView extends FrameLayout implements View.OnTouchListener {
                                     CoreSaLogger.logForAdvanced("1000", "From Mouse snapping");
                                 }
                                 resizeAlgorithm = dividerResizeController3.mResizeAlgorithm;
-                                DividerResizeController.ResizeAlgorithm.m3237$$Nest$mupdate(resizeAlgorithm, currentPosition);
+                                DividerResizeController.ResizeAlgorithm.m3236$$Nest$mupdate(resizeAlgorithm, currentPosition);
                                 if (DividerResizeController.USE_GUIDE_VIEW_EFFECTS) {
                                     i = resizeAlgorithm.mTouchPosition;
                                     int i11 = resizeAlgorithm.mDismissStartThreshold;
@@ -1316,41 +1316,41 @@ public class DividerView extends FrameLayout implements View.OnTouchListener {
                         snapTarget = cellSnapAlgorithm.mDismissEndTarget;
                         DividerView dividerView2 = DividerView.this;
                         if (dividerView2.mSplitLayout.mIsLeftRightSplit) {
-                            DividerView.m3239$$Nest$msendTalkBackFeedback(dividerView2, R.string.accessibility_action_divider_left_full);
+                            DividerView.m3238$$Nest$msendTalkBackFeedback(dividerView2, R.string.accessibility_action_divider_left_full);
                         } else {
-                            DividerView.m3239$$Nest$msendTalkBackFeedback(dividerView2, R.string.accessibility_action_divider_top_full);
+                            DividerView.m3238$$Nest$msendTalkBackFeedback(dividerView2, R.string.accessibility_action_divider_top_full);
                         }
                     } else if (i3 == R.id.action_move_tl_70) {
                         snapTarget = cellSnapAlgorithm.mLastSplitTarget;
                         DividerView dividerView3 = DividerView.this;
                         if (dividerView3.mSplitLayout.mIsLeftRightSplit) {
-                            DividerView.m3239$$Nest$msendTalkBackFeedback(dividerView3, R.string.accessibility_action_divider_left_70);
+                            DividerView.m3238$$Nest$msendTalkBackFeedback(dividerView3, R.string.accessibility_action_divider_left_70);
                         } else {
-                            DividerView.m3239$$Nest$msendTalkBackFeedback(dividerView3, R.string.accessibility_action_divider_top_70);
+                            DividerView.m3238$$Nest$msendTalkBackFeedback(dividerView3, R.string.accessibility_action_divider_top_70);
                         }
                     } else if (i3 == R.id.action_move_tl_50) {
                         snapTarget = cellSnapAlgorithm.mMiddleTarget;
                         DividerView dividerView4 = DividerView.this;
                         if (dividerView4.mSplitLayout.mIsLeftRightSplit) {
-                            DividerView.m3239$$Nest$msendTalkBackFeedback(dividerView4, R.string.accessibility_action_divider_left_50);
+                            DividerView.m3238$$Nest$msendTalkBackFeedback(dividerView4, R.string.accessibility_action_divider_left_50);
                         } else {
-                            DividerView.m3239$$Nest$msendTalkBackFeedback(dividerView4, R.string.accessibility_action_divider_top_50);
+                            DividerView.m3238$$Nest$msendTalkBackFeedback(dividerView4, R.string.accessibility_action_divider_top_50);
                         }
                     } else if (i3 == R.id.action_move_tl_30) {
                         snapTarget = cellSnapAlgorithm.mFirstSplitTarget;
                         DividerView dividerView5 = DividerView.this;
                         if (dividerView5.mSplitLayout.mIsLeftRightSplit) {
-                            DividerView.m3239$$Nest$msendTalkBackFeedback(dividerView5, R.string.accessibility_action_divider_left_30);
+                            DividerView.m3238$$Nest$msendTalkBackFeedback(dividerView5, R.string.accessibility_action_divider_left_30);
                         } else {
-                            DividerView.m3239$$Nest$msendTalkBackFeedback(dividerView5, R.string.accessibility_action_divider_top_30);
+                            DividerView.m3238$$Nest$msendTalkBackFeedback(dividerView5, R.string.accessibility_action_divider_top_30);
                         }
                     } else if (i3 == R.id.action_move_rb_full) {
                         snapTarget = cellSnapAlgorithm.mDismissStartTarget;
                         DividerView dividerView6 = DividerView.this;
                         if (dividerView6.mSplitLayout.mIsLeftRightSplit) {
-                            DividerView.m3239$$Nest$msendTalkBackFeedback(dividerView6, R.string.accessibility_action_divider_right_full);
+                            DividerView.m3238$$Nest$msendTalkBackFeedback(dividerView6, R.string.accessibility_action_divider_right_full);
                         } else {
-                            DividerView.m3239$$Nest$msendTalkBackFeedback(dividerView6, R.string.accessibility_action_divider_bottom_full);
+                            DividerView.m3238$$Nest$msendTalkBackFeedback(dividerView6, R.string.accessibility_action_divider_bottom_full);
                         }
                     }
                     snapTarget2 = snapTarget;

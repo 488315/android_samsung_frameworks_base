@@ -26,7 +26,7 @@ public final class UByte implements Comparable {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ UByte m3444boximpl(byte b) {
+    public static final /* synthetic */ UByte m3443boximpl(byte b) {
         return new UByte(b);
     }
 

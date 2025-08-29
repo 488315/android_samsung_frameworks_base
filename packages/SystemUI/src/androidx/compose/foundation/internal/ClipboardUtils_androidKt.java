@@ -265,7 +265,7 @@ public abstract class ClipboardUtils_androidKt {
                 long jMo794getColor0d7_KjU = spanStyle.textForegroundStyle.mo794getColor0d7_KjU();
                 Color.Companion.getClass();
                 long j = Color.Unspecified;
-                if (!ULong.m3447equalsimpl0(jMo794getColor0d7_KjU, j)) {
+                if (!ULong.m3446equalsimpl0(jMo794getColor0d7_KjU, j)) {
                     encodeHelper.encode(b);
                     encodeHelper.parcel.writeLong(spanStyle.textForegroundStyle.mo794getColor0d7_KjU());
                 }
@@ -321,7 +321,7 @@ public abstract class ClipboardUtils_androidKt {
                     encodeHelper.encode(textGeometricTransform.skewX);
                 }
                 long j5 = spanStyle.background;
-                if (!ULong.m3447equalsimpl0(j5, j)) {
+                if (!ULong.m3446equalsimpl0(j5, j)) {
                     encodeHelper.encode((byte) 10);
                     encodeHelper.parcel.writeLong(j5);
                 }

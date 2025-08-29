@@ -36,7 +36,7 @@ public final class SolidColor extends Brush {
         }
         long j = ((SolidColor) obj).value;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.value, j);
+        return ULong.m3446equalsimpl0(this.value, j);
     }
 
     public final int hashCode() {

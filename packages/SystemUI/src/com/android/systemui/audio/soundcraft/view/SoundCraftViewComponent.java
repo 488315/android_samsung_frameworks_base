@@ -2454,9 +2454,9 @@ public final class SoundCraftViewComponent implements LifecycleOwner, ViewModelS
                     int i12 = Result.$r8$clinit;
                     failure = new Result.Failure(th);
                 }
-                Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-                if (thM3442exceptionOrNullimpl != null) {
-                    Log.d("SoundCraft.AudioEffectBoxViewModel", "jumpToDetailPage : onFailure, e=" + thM3442exceptionOrNullimpl);
+                Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+                if (thM3441exceptionOrNullimpl != null) {
+                    Log.d("SoundCraft.AudioEffectBoxViewModel", "jumpToDetailPage : onFailure, e=" + thM3441exceptionOrNullimpl);
                 }
             }
         });
@@ -2680,9 +2680,9 @@ public final class SoundCraftViewComponent implements LifecycleOwner, ViewModelS
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-        if (thM3442exceptionOrNullimpl != null) {
-            thM3442exceptionOrNullimpl.printStackTrace();
+        Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+        if (thM3441exceptionOrNullimpl != null) {
+            thM3441exceptionOrNullimpl.printStackTrace();
         }
         this.registry.removeObserver(this.lifecycleObserver);
         SoundCraftViewBinding soundCraftViewBinding = this.binding;
@@ -2881,9 +2881,9 @@ public final class SoundCraftViewComponent implements LifecycleOwner, ViewModelS
                 }
                 cursorQuery.close();
                 failure = Unit.INSTANCE;
-                Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-                if (thM3442exceptionOrNullimpl != null) {
-                    Log.e(str2, "Error, SoundAlive query : e=" + thM3442exceptionOrNullimpl);
+                Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+                if (thM3441exceptionOrNullimpl != null) {
+                    Log.e(str2, "Error, SoundAlive query : e=" + thM3441exceptionOrNullimpl);
                 }
                 Log.d(str2, "soundAliveEffectModel=" + phoneEffectModel);
                 modelProvider2.phoneModel = phoneEffectModel;

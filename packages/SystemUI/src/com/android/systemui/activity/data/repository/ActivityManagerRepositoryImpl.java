@@ -149,7 +149,7 @@ public final class ActivityManagerRepositoryImpl implements ActivityManagerRepos
                         logMessageObtain.setInt1(i4);
                         logMessageObtain.setBool1(z);
                         logger2.getBuffer().commit(logMessageObtain);
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(z));
                     }
                 };
                 try {

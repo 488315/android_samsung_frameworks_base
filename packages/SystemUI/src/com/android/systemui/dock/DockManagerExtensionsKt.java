@@ -55,7 +55,7 @@ public abstract class DockManagerExtensionsKt {
                 };
                 this.$this_retrieveIsDocked.getClass();
                 this.$this_retrieveIsDocked.getClass();
-                ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.FALSE);
+                ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.FALSE);
                 final DockManager dockManager2 = this.$this_retrieveIsDocked;
                 Function0 function0 = new Function0() { // from class: com.android.systemui.dock.DockManagerExtensionsKt$retrieveIsDocked$1$$ExternalSyntheticLambda0
                     @Override // kotlin.jvm.functions.Function0

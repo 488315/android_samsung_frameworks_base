@@ -94,7 +94,7 @@ public class SplashscreenWindowCreator extends AbsSplashWindowCreator {
             SplashscreenWindowCreator splashscreenWindowCreator = SplashscreenWindowCreator.this;
             if (splashScreenView != null) {
                 if (z || this.mSuggestType == 4) {
-                    SplashscreenWindowCreator.m3281$$Nest$mremoveWindowInner(splashscreenWindowCreator, view, startingWindowRemovalInfo, false);
+                    SplashscreenWindowCreator.m3280$$Nest$mremoveWindowInner(splashscreenWindowCreator, view, startingWindowRemovalInfo, false);
                     return true;
                 }
                 if (startingWindowRemovalInfo.playRevealAnimation) {
@@ -103,12 +103,12 @@ public class SplashscreenWindowCreator extends AbsSplashWindowCreator {
                         public final void run() {
                             SplashscreenWindowCreator.SplashWindowRecord splashWindowRecord = this.f$0;
                             StartingWindowRemovalInfo startingWindowRemovalInfo2 = startingWindowRemovalInfo;
-                            SplashscreenWindowCreator.m3281$$Nest$mremoveWindowInner(SplashscreenWindowCreator.this, splashWindowRecord.mRootView, startingWindowRemovalInfo2, true);
+                            SplashscreenWindowCreator.m3280$$Nest$mremoveWindowInner(SplashscreenWindowCreator.this, splashWindowRecord.mRootView, startingWindowRemovalInfo2, true);
                         }
                     }, this.mCreateTime, startingWindowRemovalInfo.roundedCornerRadius);
                     return true;
                 }
-                SplashscreenWindowCreator.m3281$$Nest$mremoveWindowInner(splashscreenWindowCreator, view, startingWindowRemovalInfo, true);
+                SplashscreenWindowCreator.m3280$$Nest$mremoveWindowInner(splashscreenWindowCreator, view, startingWindowRemovalInfo, true);
                 return true;
             }
             if (!view.isAttachedToWindow()) {
@@ -124,13 +124,13 @@ public class SplashscreenWindowCreator extends AbsSplashWindowCreator {
                 }
             }
             Slog.e("ShellStartingWindow", "Found empty splash screen, remove!");
-            SplashscreenWindowCreator.m3281$$Nest$mremoveWindowInner(splashscreenWindowCreator, this.mRootView, startingWindowRemovalInfo, false);
+            SplashscreenWindowCreator.m3280$$Nest$mremoveWindowInner(splashscreenWindowCreator, this.mRootView, startingWindowRemovalInfo, false);
             return true;
         }
     }
 
     /* renamed from: -$$Nest$mremoveWindowInner, reason: not valid java name */
-    public static void m3281$$Nest$mremoveWindowInner(SplashscreenWindowCreator splashscreenWindowCreator, View view, StartingWindowRemovalInfo startingWindowRemovalInfo, boolean z) {
+    public static void m3280$$Nest$mremoveWindowInner(SplashscreenWindowCreator splashscreenWindowCreator, View view, StartingWindowRemovalInfo startingWindowRemovalInfo, boolean z) {
         CentralSurfacesImpl$$ExternalSyntheticLambda24 centralSurfacesImpl$$ExternalSyntheticLambda24 = splashscreenWindowCreator.mSysuiProxy;
         boolean z2 = false;
         if (centralSurfacesImpl$$ExternalSyntheticLambda24 != null) {

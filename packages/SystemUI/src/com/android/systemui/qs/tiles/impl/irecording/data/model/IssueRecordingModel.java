@@ -11,7 +11,7 @@ public final class IssueRecordingModel {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ IssueRecordingModel m2931boximpl(boolean z) {
+    public static final /* synthetic */ IssueRecordingModel m2929boximpl(boolean z) {
         return new IssueRecordingModel(z);
     }
 

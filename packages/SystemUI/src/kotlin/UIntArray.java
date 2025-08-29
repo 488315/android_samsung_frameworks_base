@@ -33,7 +33,7 @@ public final class UIntArray implements Collection, KMappedMarker {
                 throw new NoSuchElementException(String.valueOf(this.index));
             }
             this.index = i + 1;
-            return UInt.m3445boximpl(iArr[i]);
+            return UInt.m3444boximpl(iArr[i]);
         }
 
         @Override // java.util.Iterator

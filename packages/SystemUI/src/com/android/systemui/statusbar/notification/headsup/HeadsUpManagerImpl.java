@@ -177,12 +177,12 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
             if (!zHasFullScreenIntent && zHasFullScreenIntent2) {
                 return 1;
             }
-            boolean zM3081$$Nest$smisCriticalCallNotif = HeadsUpManagerImpl.m3081$$Nest$smisCriticalCallNotif(this.mEntry);
-            boolean zM3081$$Nest$smisCriticalCallNotif2 = HeadsUpManagerImpl.m3081$$Nest$smisCriticalCallNotif(headsUpEntry.mEntry);
-            if (zM3081$$Nest$smisCriticalCallNotif && !zM3081$$Nest$smisCriticalCallNotif2) {
+            boolean zM3079$$Nest$smisCriticalCallNotif = HeadsUpManagerImpl.m3079$$Nest$smisCriticalCallNotif(this.mEntry);
+            boolean zM3079$$Nest$smisCriticalCallNotif2 = HeadsUpManagerImpl.m3079$$Nest$smisCriticalCallNotif(headsUpEntry.mEntry);
+            if (zM3079$$Nest$smisCriticalCallNotif && !zM3079$$Nest$smisCriticalCallNotif2) {
                 return -1;
             }
-            if (!zM3081$$Nest$smisCriticalCallNotif && zM3081$$Nest$smisCriticalCallNotif2) {
+            if (!zM3079$$Nest$smisCriticalCallNotif && zM3079$$Nest$smisCriticalCallNotif2) {
                 return 1;
             }
             boolean z = this.mRemoteInputActive;
@@ -399,7 +399,7 @@ public class HeadsUpManagerImpl implements HeadsUpManager, HeadsUpRepository, On
     }
 
     /* renamed from: -$$Nest$smisCriticalCallNotif, reason: not valid java name */
-    public static boolean m3081$$Nest$smisCriticalCallNotif(NotificationEntry notificationEntry) {
+    public static boolean m3079$$Nest$smisCriticalCallNotif(NotificationEntry notificationEntry) {
         Notification notification2 = notificationEntry.mSbn.getNotification();
         return (notification2.isStyle(Notification.CallStyle.class) && notification2.extras.getInt("android.callType") == 1) || (notificationEntry.mSbn.isOngoing() && "call".equals(notification2.category));
     }

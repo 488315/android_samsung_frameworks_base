@@ -24,7 +24,7 @@ public class PipAlphaAnimator extends ValueAnimator {
     public PipSurfaceTransactionHelper.SurfaceControlTransactionFactory mSurfaceControlTransactionFactory;
 
     /* renamed from: -$$Nest$monAlphaAnimationUpdate, reason: not valid java name */
-    public static void m3274$$Nest$monAlphaAnimationUpdate(PipAlphaAnimator pipAlphaAnimator, float f, SurfaceControl.Transaction transaction) {
+    public static void m3273$$Nest$monAlphaAnimationUpdate(PipAlphaAnimator pipAlphaAnimator, float f, SurfaceControl.Transaction transaction) {
         transaction.setAlpha(pipAlphaAnimator.mLeash, f).setCornerRadius(pipAlphaAnimator.mLeash, pipAlphaAnimator.mCornerRadius).setShadowRadius(pipAlphaAnimator.mLeash, pipAlphaAnimator.mDirection == 0 ? pipAlphaAnimator.mShadowRadius : 0.0f);
         transaction.apply();
     }
@@ -40,7 +40,7 @@ public class PipAlphaAnimator extends ValueAnimator {
                 PipAlphaAnimator pipAlphaAnimator = PipAlphaAnimator.this;
                 SurfaceControl.Transaction transaction3 = pipAlphaAnimator.mFinishTransaction;
                 if (transaction3 != null) {
-                    PipAlphaAnimator.m3274$$Nest$monAlphaAnimationUpdate(pipAlphaAnimator, pipAlphaAnimator.mDirection == 0 ? 1.0f : 0.0f, transaction3);
+                    PipAlphaAnimator.m3273$$Nest$monAlphaAnimationUpdate(pipAlphaAnimator, pipAlphaAnimator.mDirection == 0 ? 1.0f : 0.0f, transaction3);
                     PipAlphaAnimator.this.mFinishTransaction.apply();
                 }
                 Runnable runnable = PipAlphaAnimator.this.mAnimationEndCallback;
@@ -58,7 +58,7 @@ public class PipAlphaAnimator extends ValueAnimator {
                 PipAlphaAnimator pipAlphaAnimator2 = PipAlphaAnimator.this;
                 SurfaceControl.Transaction transaction3 = pipAlphaAnimator2.mStartTransaction;
                 if (transaction3 != null) {
-                    PipAlphaAnimator.m3274$$Nest$monAlphaAnimationUpdate(pipAlphaAnimator2, pipAlphaAnimator2.mDirection == 0 ? 0.0f : 1.0f, transaction3);
+                    PipAlphaAnimator.m3273$$Nest$monAlphaAnimationUpdate(pipAlphaAnimator2, pipAlphaAnimator2.mDirection == 0 ? 0.0f : 1.0f, transaction3);
                     PipAlphaAnimator.this.mStartTransaction.apply();
                 }
             }
@@ -67,7 +67,7 @@ public class PipAlphaAnimator extends ValueAnimator {
         ?? r1 = new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.pip2.animation.PipAlphaAnimator.2
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                PipAlphaAnimator.m3274$$Nest$monAlphaAnimationUpdate(PipAlphaAnimator.this, ((Float) valueAnimator.getAnimatedValue()).floatValue(), ((PipSurfaceTransactionHelper.VsyncSurfaceControlTransactionFactory) PipAlphaAnimator.this.mSurfaceControlTransactionFactory).getTransaction());
+                PipAlphaAnimator.m3273$$Nest$monAlphaAnimationUpdate(PipAlphaAnimator.this, ((Float) valueAnimator.getAnimatedValue()).floatValue(), ((PipSurfaceTransactionHelper.VsyncSurfaceControlTransactionFactory) PipAlphaAnimator.this.mSurfaceControlTransactionFactory).getTransaction());
             }
         };
         this.mAnimatorUpdateListener = r1;

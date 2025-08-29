@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -28,7 +29,7 @@ public class AccessibilityButtonChooserActivity extends Activity {
     private final List<AccessibilityTarget> mTargets = new ArrayList();
 
     @Override // android.app.Activity
-    protected void onCreate(Bundle bundle) {
+    protected void onCreate(Bundle bundle) throws Resources.NotFoundException {
         int i;
         if (Settings.System.getIntForUser(getContentResolver(), Settings.System.SEM_ACCESS_CONTROL_ENABLED, 0, -2) != 1) {
             Intent intent = new Intent(AccessibilityManager.ACTION_CHOOSE_ACCESSIBILITY_BUTTON);

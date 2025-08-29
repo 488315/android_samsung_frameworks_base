@@ -37,7 +37,7 @@ public final class TaskSwitcherNotificationViewModel {
         }
 
         /* renamed from: getNOTIFICATION_MAX_SHOW_DURATION-UwyO8pc$annotations, reason: not valid java name */
-        public static /* synthetic */ void m2638getNOTIFICATION_MAX_SHOW_DURATIONUwyO8pc$annotations() {
+        public static /* synthetic */ void m2636getNOTIFICATION_MAX_SHOW_DURATIONUwyO8pc$annotations() {
         }
     }
 

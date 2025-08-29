@@ -107,14 +107,14 @@ final class FlowKt$slidingWindow$1 extends SuspendLambda implements Function2 {
                                 Duration.Companion companion = Duration.Companion;
                                 long jCurrentTimeMillis = this.$clock.currentTimeMillis();
                                 DurationUnit durationUnit = DurationUnit.MILLISECONDS;
-                                Duration durationM3454boximpl = Duration.m3454boximpl(Duration.m3461plusLRDsOJo(((Duration) this.$buffer.getFirst().getFirst()).rawValue, Duration.m3467unaryMinusUwyO8pc(Duration.m3461plusLRDsOJo(DurationKt.toDuration(jCurrentTimeMillis, durationUnit), Duration.m3467unaryMinusUwyO8pc(this.$windowDuration)))));
-                                Duration durationM3454boximpl2 = Duration.m3454boximpl(DurationKt.toDuration(0, durationUnit));
-                                if (durationM3454boximpl.compareTo(durationM3454boximpl2) < 0) {
-                                    durationM3454boximpl = durationM3454boximpl2;
+                                Duration durationM3453boximpl = Duration.m3453boximpl(Duration.m3460plusLRDsOJo(((Duration) this.$buffer.getFirst().getFirst()).rawValue, Duration.m3466unaryMinusUwyO8pc(Duration.m3460plusLRDsOJo(DurationKt.toDuration(jCurrentTimeMillis, durationUnit), Duration.m3466unaryMinusUwyO8pc(this.$windowDuration)))));
+                                Duration durationM3453boximpl2 = Duration.m3453boximpl(DurationKt.toDuration(0, durationUnit));
+                                if (durationM3453boximpl.compareTo(durationM3453boximpl2) < 0) {
+                                    durationM3453boximpl = durationM3453boximpl2;
                                 }
-                                long j = durationM3454boximpl.rawValue;
+                                long j = durationM3453boximpl.rawValue;
                                 this.label = 1;
-                                if (DelayKt.m3469delayVtjQ1oo(j, this) != coroutineSingletons) {
+                                if (DelayKt.m3468delayVtjQ1oo(j, this) != coroutineSingletons) {
                                     this.$buffer.removeFirst();
                                     SendChannel sendChannel2 = this.$$this$channelFlow;
                                     LinkedList<Pair<Duration, Object>> linkedList2 = this.$buffer;
@@ -180,8 +180,8 @@ final class FlowKt$slidingWindow$1 extends SuspendLambda implements Function2 {
                     }
                     Duration.Companion companion = Duration.Companion;
                     long duration = DurationKt.toDuration(this.$clock.currentTimeMillis(), DurationUnit.MILLISECONDS);
-                    this.$buffer.addLast(new Pair<>(Duration.m3454boximpl(duration), t));
-                    while (!this.$buffer.isEmpty() && Duration.m3455compareToLRDsOJo(Duration.m3461plusLRDsOJo(((Duration) this.$buffer.getFirst().getFirst()).rawValue, this.$windowDuration), duration) <= 0) {
+                    this.$buffer.addLast(new Pair<>(Duration.m3453boximpl(duration), t));
+                    while (!this.$buffer.isEmpty() && Duration.m3454compareToLRDsOJo(Duration.m3460plusLRDsOJo(((Duration) this.$buffer.getFirst().getFirst()).rawValue, this.$windowDuration), duration) <= 0) {
                         this.$buffer.removeFirst();
                     }
                     SendChannel sendChannel = this.$$this$channelFlow;

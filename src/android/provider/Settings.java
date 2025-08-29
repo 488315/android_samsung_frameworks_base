@@ -2458,6 +2458,9 @@ public final class Settings {
         public static final String SHOW_ROTARY_INPUT = "show_rotary_input";
 
         @Readable
+        public static final String SHOW_STATUS_BAR_LOCATION_ICON = "show_status_bar_location_icon";
+
+        @Readable
         public static final String SHOW_TOUCHES = "show_touches";
 
         @Readable

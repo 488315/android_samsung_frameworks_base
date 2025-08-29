@@ -55,7 +55,7 @@ final class SecBlurSettingsRepositoryImpl$minimalBatteryUse$1 extends SuspendLam
                     if (uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_ULTRA_POWERSAVING_MODE)) || uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_MINIMAL_BATTERY_USE))) {
                         SecBlurSettingsRepositoryImpl.Companion.getClass();
                         EmergencyButtonController$$ExternalSyntheticOutline0.m("isUltraPowerSavingMode changed ", SecBlurSettingsRepositoryImpl.TAG, settingsHelper.isUltraPowerSavingMode());
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(settingsHelper.isUltraPowerSavingMode()));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(settingsHelper.isUltraPowerSavingMode()));
                     }
                 }
             };

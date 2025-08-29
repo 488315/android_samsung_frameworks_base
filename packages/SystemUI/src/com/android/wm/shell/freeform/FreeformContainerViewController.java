@@ -348,7 +348,7 @@ public class FreeformContainerViewController {
                         public final void onAnimationEnd(Animation animation) {
                             FreeformContainerView.this.mPointerGroupView.setElevation(0.0f);
                             FreeformContainerView.this.mViewController.closeFullscreenMode("fullscreen_mode_request_folder");
-                            FreeformContainerView.m3269$$Nest$msettleDownPointerEffect(FreeformContainerView.this);
+                            FreeformContainerView.m3268$$Nest$msettleDownPointerEffect(FreeformContainerView.this);
                         }
 
                         @Override // android.view.animation.Animation.AnimationListener

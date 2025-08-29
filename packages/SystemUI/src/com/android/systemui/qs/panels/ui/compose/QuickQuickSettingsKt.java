@@ -162,7 +162,7 @@ public abstract class QuickQuickSettingsKt {
                 }
                 composerImpl2.end(false);
                 function02 = function0;
-                SpannedGridsKt.m2584VerticalSpannedGridKhTvWYU(columns, fDimensionResource, fDimensionResource2, list3, modifierSysuiResTag, (Function1) objRememberedValue4, ComposableLambdaKt.rememberComposableLambda(-1384616666, new Function7() { // from class: com.android.systemui.qs.panels.ui.compose.QuickQuickSettingsKt$QuickQuickSettings$1$2
+                SpannedGridsKt.m2582VerticalSpannedGridKhTvWYU(columns, fDimensionResource, fDimensionResource2, list3, modifierSysuiResTag, (Function1) objRememberedValue4, ComposableLambdaKt.rememberComposableLambda(-1384616666, new Function7() { // from class: com.android.systemui.qs.panels.ui.compose.QuickQuickSettingsKt$QuickQuickSettings$1$2
                     /* JADX WARN: Removed duplicated region for block: B:37:0x0098  */
                     @Override // kotlin.jvm.functions.Function7
                     /*

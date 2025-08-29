@@ -394,6 +394,9 @@ public final class DisplayManager {
     }
 
     public static boolean isHDPlusResolutionDisplay(DisplayInfo displayInfo) {
+        if (displayInfo.type == 4) {
+            return false;
+        }
         return Math.max(displayInfo.logicalWidth, displayInfo.logicalHeight) == 1600 && Math.min(displayInfo.logicalWidth, displayInfo.logicalHeight) == 900;
     }
 

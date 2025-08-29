@@ -293,7 +293,7 @@ public class NotificationContentInflater implements NotificationRowContentBinder
                             notificationContentView.mExpandedSmartReplyView = null;
                         }
                         expandableNotificationRow2.mExpandable = remoteViews != null;
-                        expandableNotificationRow2.mPrivateLayout.updateExpandButtonsDuringLayout(expandableNotificationRow2.isExpandable(), false);
+                        expandableNotificationRow2.mPrivateLayout.updateExpandButtons(expandableNotificationRow2.isExpandable());
                         expandableNotificationRow2.mIsCustomBigNotification = NotificationContentInflater.isCustomNotification(notificationEntry2.mSbn.getNotification(), notificationContentView.mExpandedChild, notificationEntry2.mSbn.getNotification().bigContentView);
                     }
                     if ((i3 & 256) != 0) {

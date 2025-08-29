@@ -41,7 +41,7 @@ public interface Maybe {
         }
 
         /* renamed from: box-impl, reason: not valid java name */
-        public static final /* synthetic */ Present m2590boximpl(Object obj) {
+        public static final /* synthetic */ Present m2588boximpl(Object obj) {
             return new Present(obj);
         }
 

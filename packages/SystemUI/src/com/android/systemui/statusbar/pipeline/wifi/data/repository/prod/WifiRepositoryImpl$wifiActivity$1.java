@@ -61,7 +61,7 @@ final class WifiRepositoryImpl$wifiActivity$1 extends SuspendLambda implements F
                     LogMessage logMessageObtain = logBuffer.obtain("WifiRepo", logLevel, wifiRepositoryImpl$$ExternalSyntheticLambda3, null);
                     ((LogMessageImpl) logMessageObtain).str1 = i2 != 0 ? i2 != 1 ? i2 != 2 ? i2 != 3 ? "INVALID" : "INOUT" : "OUT" : "IN" : PeripheralBarcodeConstants.Symbology.Type.TYPE_NONE;
                     logBuffer.commit(logMessageObtain);
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(i2 != 1 ? i2 != 2 ? i2 != 3 ? new DataActivityModel(false, false) : new DataActivityModel(true, true) : new DataActivityModel(false, true) : new DataActivityModel(true, false));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(i2 != 1 ? i2 != 2 ? i2 != 3 ? new DataActivityModel(false, false) : new DataActivityModel(true, true) : new DataActivityModel(false, true) : new DataActivityModel(true, false));
                 }
             };
             WifiRepositoryImpl wifiRepositoryImpl2 = this.this$0;

@@ -53,7 +53,7 @@ public final class DragAndDropTargetStateV1 {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public final Object processScrollRequests(Continuation continuation) throws Throwable {
+    public final Object processScrollRequests(Continuation continuation) {
         AnonymousClass1 anonymousClass1;
         BufferedChannel.BufferedChannelIterator bufferedChannelIterator;
         BufferedChannel.BufferedChannelIterator bufferedChannelIterator2;

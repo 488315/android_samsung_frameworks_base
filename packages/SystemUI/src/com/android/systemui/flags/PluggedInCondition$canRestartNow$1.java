@@ -49,11 +49,11 @@ final class PluggedInCondition$canRestartNow$1 extends SuspendLambda implements 
             final ?? r1 = new BatteryController.BatteryStateChangeCallback() { // from class: com.android.systemui.flags.PluggedInCondition$canRestartNow$1$batteryCallback$1
                 @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
                 public final void onBatteryLevelChanged(int i2, boolean z, boolean z2) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(z));
                 }
             };
             ((BatteryControllerImpl) ((BatteryController) this.this$0.batteryControllerLazy.get())).addCallback(r1);
-            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(((BatteryControllerImpl) ((BatteryController) this.this$0.batteryControllerLazy.get())).mPluggedIn));
+            ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(((BatteryControllerImpl) ((BatteryController) this.this$0.batteryControllerLazy.get())).mPluggedIn));
             final PluggedInCondition pluggedInCondition = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.flags.PluggedInCondition$canRestartNow$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0

@@ -120,7 +120,7 @@ final class AnimateAsStateKt$animateValueAsState$3$1 extends SuspendLambda imple
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public final Object invokeSuspend(Object obj) throws Throwable {
+    public final Object invokeSuspend(Object obj) {
         BufferedChannel.BufferedChannelIterator it;
         CoroutineScope coroutineScope;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
@@ -147,8 +147,8 @@ final class AnimateAsStateKt$animateValueAsState$3$1 extends SuspendLambda imple
             ResultKt.throwOnFailure(obj);
             if (((Boolean) obj).booleanValue()) {
                 Object next = it.next();
-                Object objM3479getOrNullimpl = ChannelResult.m3479getOrNullimpl(this.$channel.mo3475tryReceivePtdJZtk());
-                BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass1(objM3479getOrNullimpl == null ? next : objM3479getOrNullimpl, this.$animatable, this.$animSpec$delegate, this.$listener$delegate, null), 3);
+                Object objM3478getOrNullimpl = ChannelResult.m3478getOrNullimpl(this.$channel.mo3474tryReceivePtdJZtk());
+                BuildersKt.launch$default(coroutineScope, null, null, new AnonymousClass1(objM3478getOrNullimpl == null ? next : objM3478getOrNullimpl, this.$animatable, this.$animSpec$delegate, this.$listener$delegate, null), 3);
                 this.L$0 = coroutineScope;
                 this.L$1 = it;
                 this.label = 1;

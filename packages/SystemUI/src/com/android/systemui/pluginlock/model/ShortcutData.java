@@ -89,7 +89,7 @@ public class ShortcutData {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public ShortcutData m2684clone() throws CloneNotSupportedException {
+    public ShortcutData m2682clone() throws CloneNotSupportedException {
         return (ShortcutData) super.clone();
     }
 }

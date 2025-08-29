@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.DevicePolicyResources;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -69,7 +70,7 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
     private Parcelable[] mExistingAccounts = null;
 
     @Override // android.app.Activity
-    public void onCreate(Bundle bundle) {
+    public void onCreate(Bundle bundle) throws Resources.NotFoundException {
         if (Log.isLoggable(TAG, 2)) {
             Log.v(TAG, "ChooseTypeAndAccountActivity.onCreate(savedInstanceState=" + bundle + NavigationBarInflaterView.KEY_CODE_END);
         }
@@ -431,7 +432,7 @@ public class ChooseTypeAndAccountActivity extends Activity implements AccountMan
         }
     }
 
-    private final void populateUIAccountList(String[] strArr) {
+    private final void populateUIAccountList(String[] strArr) throws Resources.NotFoundException {
         ListView listView = (ListView) findViewById(16908298);
         listView.setAdapter((ListAdapter) new ArrayAdapter(this, 17367055, strArr));
         listView.setChoiceMode(1);

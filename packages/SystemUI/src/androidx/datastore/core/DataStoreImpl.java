@@ -201,16 +201,16 @@ public final class DataStoreImpl implements DataStore {
             CompletableDeferredImpl completableDeferredImplCompletableDeferred$default = CompletableDeferredKt.CompletableDeferred$default();
             Message.Update update = new Message.Update(this.$transform, completableDeferredImplCompletableDeferred$default, DataStoreImpl.this.inMemoryCache.getCurrentState(), coroutineScope.getCoroutineContext());
             SimpleActor simpleActor = DataStoreImpl.this.writeActor;
-            Object objMo3476trySendJP2dKIU = simpleActor.messageQueue.mo3476trySendJP2dKIU(update);
-            if (objMo3476trySendJP2dKIU instanceof ChannelResult.Closed) {
-                Throwable thM3478exceptionOrNullimpl = ChannelResult.m3478exceptionOrNullimpl((ChannelResult.Failed) objMo3476trySendJP2dKIU);
-                if (thM3478exceptionOrNullimpl == null) {
+            Object objMo3475trySendJP2dKIU = simpleActor.messageQueue.mo3475trySendJP2dKIU(update);
+            if (objMo3475trySendJP2dKIU instanceof ChannelResult.Closed) {
+                Throwable thM3477exceptionOrNullimpl = ChannelResult.m3477exceptionOrNullimpl((ChannelResult.Failed) objMo3475trySendJP2dKIU);
+                if (thM3477exceptionOrNullimpl == null) {
                     throw new ClosedSendChannelException("Channel was closed normally");
                 }
-                throw thM3478exceptionOrNullimpl;
+                throw thM3477exceptionOrNullimpl;
             }
             ChannelResult.Companion companion = ChannelResult.Companion;
-            if (objMo3476trySendJP2dKIU instanceof ChannelResult.Failed) {
+            if (objMo3475trySendJP2dKIU instanceof ChannelResult.Failed) {
                 throw new IllegalStateException("Check failed.");
             }
             if (simpleActor.remainingMessages.delegate.getAndIncrement() == 0) {
@@ -388,7 +388,7 @@ public final class DataStoreImpl implements DataStore {
     public static final Object access$handleUpdate(DataStoreImpl dataStoreImpl, Message.Update update, ContinuationImpl continuationImpl) {
         DataStoreImpl$handleUpdate$1 dataStoreImpl$handleUpdate$1;
         CompletableDeferredImpl completableDeferredImpl;
-        Throwable thM3442exceptionOrNullimpl;
+        Throwable thM3441exceptionOrNullimpl;
         CompletableDeferred completableDeferred;
         Object objLock;
         DataStoreImpl dataStoreImpl2;
@@ -431,12 +431,12 @@ public final class DataStoreImpl implements DataStore {
             dataStoreImpl = completableDeferred2;
             int i3 = Result.$r8$clinit;
             completableDeferredImpl = dataStoreImpl;
-            thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+            thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
             CompletableDeferredImpl completableDeferredImpl2 = completableDeferredImpl;
-            if (thM3442exceptionOrNullimpl != null) {
+            if (thM3441exceptionOrNullimpl != null) {
                 completableDeferredImpl2.makeCompleting$external__kotlinx_coroutines__linux_glibc_common__kotlinx_coroutines_host(failure);
             } else {
-                completableDeferredImpl2.completeExceptionally(thM3442exceptionOrNullimpl);
+                completableDeferredImpl2.completeExceptionally(thM3441exceptionOrNullimpl);
             }
             return Unit.INSTANCE;
         }
@@ -459,9 +459,9 @@ public final class DataStoreImpl implements DataStore {
                     int i5 = Result.$r8$clinit;
                     failure = new Result.Failure(th);
                     completableDeferredImpl = dataStoreImpl;
-                    thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+                    thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
                     CompletableDeferredImpl completableDeferredImpl22 = completableDeferredImpl;
-                    if (thM3442exceptionOrNullimpl != null) {
+                    if (thM3441exceptionOrNullimpl != null) {
                     }
                     return Unit.INSTANCE;
                 }
@@ -491,9 +491,9 @@ public final class DataStoreImpl implements DataStore {
             int i52 = Result.$r8$clinit;
             failure = new Result.Failure(th);
             completableDeferredImpl = dataStoreImpl;
-            thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+            thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
             CompletableDeferredImpl completableDeferredImpl222 = completableDeferredImpl;
-            if (thM3442exceptionOrNullimpl != null) {
+            if (thM3441exceptionOrNullimpl != null) {
             }
             return Unit.INSTANCE;
         }

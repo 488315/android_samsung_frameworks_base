@@ -142,7 +142,7 @@ public final class FlexClockFaceController implements ClockFaceController {
         */
         public final void onTargetRegionChanged(Rect rect) {
             FrameLayout.LayoutParams layoutParams;
-            long jM2717minusb2IjXjg;
+            long jM2715minusb2IjXjg;
             FlexClockFaceController flexClockFaceController = FlexClockFaceController.this;
             flexClockFaceController.layerController.getFaceEvents().onTargetRegionChanged(rect);
             SimpleClockLayerController simpleClockLayerController = flexClockFaceController.layerController;
@@ -163,10 +163,10 @@ public final class FlexClockFaceController implements ClockFaceController {
                 Object parent = view.getParent();
                 if (parent instanceof View) {
                     View view2 = (View) parent;
-                    jM2717minusb2IjXjg = (view2.isLaidOut() && flexClockFaceController.isLargeClock) ? VPoint.m2717minusb2IjXjg(VPoint.Companion.m2734getCenterDO4cnVw(rect), VPointF.m2755divAsyRdg(VPointF.m2752constructorimpl(view2.getWidth(), view2.getHeight()), 2.0f)) : VPointF.Companion.m2790getZEROJv7bpU8();
+                    jM2715minusb2IjXjg = (view2.isLaidOut() && flexClockFaceController.isLargeClock) ? VPoint.m2715minusb2IjXjg(VPoint.Companion.m2732getCenterDO4cnVw(rect), VPointF.m2753divAsyRdg(VPointF.m2750constructorimpl(view2.getWidth(), view2.getHeight()), 2.0f)) : VPointF.Companion.m2788getZEROJv7bpU8();
                 }
-                simpleClockLayerController.getView().setTranslationX(VPointF.m2762getXimpl(jM2717minusb2IjXjg));
-                simpleClockLayerController.getView().setTranslationY(VPointF.m2763getYimpl(jM2717minusb2IjXjg));
+                simpleClockLayerController.getView().setTranslationX(VPointF.m2760getXimpl(jM2715minusb2IjXjg));
+                simpleClockLayerController.getView().setTranslationY(VPointF.m2761getYimpl(jM2715minusb2IjXjg));
             }
         }
 

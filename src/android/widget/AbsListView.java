@@ -1081,7 +1081,7 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     @Override // android.widget.AdapterView
-    public void setAdapter(ListAdapter listAdapter) {
+    public void setAdapter(ListAdapter listAdapter) throws Resources.NotFoundException {
         if (listAdapter != null) {
             boolean zHasStableIds = this.mAdapter.hasStableIds();
             this.mAdapterHasStableIds = zHasStableIds;
@@ -6122,7 +6122,7 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
         }
     }
 
-    public void setRemoteViewsAdapter(Intent intent) {
+    public void setRemoteViewsAdapter(Intent intent) throws Resources.NotFoundException {
         setRemoteViewsAdapter(intent, false);
     }
 
@@ -6131,7 +6131,7 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
     }
 
     @Override // android.widget.RemoteViewsAdapter.RemoteAdapterConnectionCallback
-    public void setRemoteViewsAdapter(Intent intent, boolean z) {
+    public void setRemoteViewsAdapter(Intent intent, boolean z) throws Resources.NotFoundException {
         if (this.mRemoteAdapter != null && new Intent.FilterComparison(intent).equals(new Intent.FilterComparison(this.mRemoteAdapter.getRemoteViewsServiceIntent()))) {
             Log.i(TAG, "Equals previous remoteAadpter");
             return;
@@ -9240,7 +9240,7 @@ public abstract class AbsListView extends AdapterView<ListAdapter> implements Te
         return Settings.Global.getInt(getContext().getContentResolver(), "remove_animations", 0) == 1;
     }
 
-    private void initIndicator() {
+    private void initIndicator() throws Resources.NotFoundException {
         this.mIndicatorItemCnt = 0;
         this.mIndicatorAnimatedSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.sem_indicator_radius_focused);
         this.mIndicatorRectSize = this.mContext.getResources().getDimensionPixelSize(R.dimen.sem_indicator_rect_size);

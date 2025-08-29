@@ -746,7 +746,7 @@ public final class AuthenticationRepositoryImpl implements AuthenticationReposit
         return BuildersKt.withContext(MainDispatcherLoader.dispatcher, new AnonymousClass3(i, null), continuationImpl);
     }
 
-    public final Object getMaxFailedUnlockAttemptsForWipe(AuthenticationInteractor$special$$inlined$map$2.AnonymousClass2.AnonymousClass1 anonymousClass1) {
+    public final Object getMaxFailedUnlockAttemptsForWipe(AuthenticationInteractor$special$$inlined$map$2.AnonymousClass2.AnonymousClass1 anonymousClass1) throws Throwable {
         return BuildersKt.withContext(this.backgroundDispatcher, new C07942(null), anonymousClass1);
     }
 

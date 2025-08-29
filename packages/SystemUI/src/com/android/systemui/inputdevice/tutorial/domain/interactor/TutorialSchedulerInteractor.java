@@ -244,7 +244,7 @@ public final class TutorialSchedulerInteractor {
 
     static {
         Duration.Companion companion = Duration.Companion;
-        DEFAULT_LAUNCH_DELAY_SEC = Duration.m3465toLongimpl(DurationKt.toDuration(72, DurationUnit.HOURS), DurationUnit.SECONDS);
+        DEFAULT_LAUNCH_DELAY_SEC = Duration.m3464toLongimpl(DurationKt.toDuration(72, DurationUnit.HOURS), DurationUnit.SECONDS);
     }
 
     /* JADX WARN: Type inference failed for: r2v3, types: [com.android.systemui.inputdevice.tutorial.domain.interactor.TutorialSchedulerInteractor$special$$inlined$map$2] */
@@ -672,7 +672,7 @@ public final class TutorialSchedulerInteractor {
         DeviceType deviceType2;
         Object objUpdateData;
         TutorialSchedulerInteractor tutorialSchedulerInteractor3;
-        long jM3461plusLRDsOJo;
+        long jM3460plusLRDsOJo;
         DeviceType deviceType3;
         TutorialSchedulerInteractor tutorialSchedulerInteractor4;
         tutorialSchedulerInteractor.getClass();
@@ -711,9 +711,9 @@ public final class TutorialSchedulerInteractor {
                             java.time.Duration durationMinus = java.time.Duration.ofSeconds(SystemProperties.getLong("persist.peripheral_tutorial_delay_sec", DEFAULT_LAUNCH_DELAY_SEC)).minus(durationBetween);
                             long seconds = durationMinus.getSeconds();
                             DurationUnit durationUnit = DurationUnit.SECONDS;
-                            jM3461plusLRDsOJo = Duration.m3461plusLRDsOJo(DurationKt.toDuration(seconds, durationUnit), DurationKt.toDuration(durationMinus.getNano(), DurationUnit.NANOSECONDS));
+                            jM3460plusLRDsOJo = Duration.m3460plusLRDsOJo(DurationKt.toDuration(seconds, durationUnit), DurationKt.toDuration(durationMinus.getNano(), DurationUnit.NANOSECONDS));
                             InputDeviceTutorialLogger inputDeviceTutorialLogger = tutorialSchedulerInteractor3.logger;
-                            String str = "Tutorial is scheduled in " + Duration.m3465toLongimpl(jM3461plusLRDsOJo, durationUnit) + " seconds";
+                            String str = "Tutorial is scheduled in " + Duration.m3464toLongimpl(jM3460plusLRDsOJo, durationUnit) + " seconds";
                             ConstantStringsLoggerImpl constantStringsLoggerImpl = inputDeviceTutorialLogger.$$delegate_0;
                             constantStringsLoggerImpl.getClass();
                             LogBuffer.log$default(constantStringsLoggerImpl.buffer, constantStringsLoggerImpl.tag, LogLevel.DEBUG, str);
@@ -721,7 +721,7 @@ public final class TutorialSchedulerInteractor {
                             tutorialSchedulerInteractor$schedule$1.L$1 = deviceType;
                             tutorialSchedulerInteractor$schedule$1.L$2 = null;
                             tutorialSchedulerInteractor$schedule$1.label = 5;
-                            if (DelayKt.m3469delayVtjQ1oo(jM3461plusLRDsOJo, tutorialSchedulerInteractor$schedule$1) != coroutineSingletons) {
+                            if (DelayKt.m3468delayVtjQ1oo(jM3460plusLRDsOJo, tutorialSchedulerInteractor$schedule$1) != coroutineSingletons) {
                                 deviceType3 = deviceType;
                                 tutorialSchedulerInteractor4 = tutorialSchedulerInteractor3;
                                 tutorialSchedulerInteractor$schedule$1.L$0 = null;
@@ -898,9 +898,9 @@ public final class TutorialSchedulerInteractor {
                 java.time.Duration durationMinus2 = java.time.Duration.ofSeconds(SystemProperties.getLong("persist.peripheral_tutorial_delay_sec", DEFAULT_LAUNCH_DELAY_SEC)).minus(durationBetween2);
                 long seconds2 = durationMinus2.getSeconds();
                 DurationUnit durationUnit2 = DurationUnit.SECONDS;
-                jM3461plusLRDsOJo = Duration.m3461plusLRDsOJo(DurationKt.toDuration(seconds2, durationUnit2), DurationKt.toDuration(durationMinus2.getNano(), DurationUnit.NANOSECONDS));
+                jM3460plusLRDsOJo = Duration.m3460plusLRDsOJo(DurationKt.toDuration(seconds2, durationUnit2), DurationKt.toDuration(durationMinus2.getNano(), DurationUnit.NANOSECONDS));
                 InputDeviceTutorialLogger inputDeviceTutorialLogger3 = tutorialSchedulerInteractor3.logger;
-                String str2 = "Tutorial is scheduled in " + Duration.m3465toLongimpl(jM3461plusLRDsOJo, durationUnit2) + " seconds";
+                String str2 = "Tutorial is scheduled in " + Duration.m3464toLongimpl(jM3460plusLRDsOJo, durationUnit2) + " seconds";
                 ConstantStringsLoggerImpl constantStringsLoggerImpl3 = inputDeviceTutorialLogger3.$$delegate_0;
                 constantStringsLoggerImpl3.getClass();
                 LogBuffer.log$default(constantStringsLoggerImpl3.buffer, constantStringsLoggerImpl3.tag, LogLevel.DEBUG, str2);
@@ -908,7 +908,7 @@ public final class TutorialSchedulerInteractor {
                 tutorialSchedulerInteractor$schedule$1.L$1 = deviceType;
                 tutorialSchedulerInteractor$schedule$1.L$2 = null;
                 tutorialSchedulerInteractor$schedule$1.label = 5;
-                if (DelayKt.m3469delayVtjQ1oo(jM3461plusLRDsOJo, tutorialSchedulerInteractor$schedule$1) != coroutineSingletons) {
+                if (DelayKt.m3468delayVtjQ1oo(jM3460plusLRDsOJo, tutorialSchedulerInteractor$schedule$1) != coroutineSingletons) {
                 }
                 return coroutineSingletons;
             case 5:

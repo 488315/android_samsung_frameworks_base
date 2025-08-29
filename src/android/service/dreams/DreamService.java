@@ -561,7 +561,7 @@ public class DreamService extends Service implements Window.Callback {
             try {
                 Slog.v(this.mTag, "UpdateDoze mDozeScreenState=" + this.mDozeScreenState + " mDozeScreenBrightness=" + this.mDozeScreenBrightness + " mDozeScreenBrightnessFloat=" + this.mDozeScreenBrightnessFloat);
                 if (Flags.startAndStopDozingInBackground()) {
-                    this.mDreamManager.startDozingOneway(this.mDreamToken, this.mDozeScreenState, this.mDozeScreenStateReason, this.mDozeScreenBrightnessFloat, this.mDozeScreenBrightness, this.mUseNormalBrightnessForDoze);
+                    this.mDreamManager.semStartDozingOneWay(this.mDreamToken, this.mDozeScreenState, this.mDozeScreenStateReason, this.mDozeScreenBrightnessFloat, this.mDozeScreenBrightness, this.mUseNormalBrightnessForDoze, this.mDozeScreenMode, this.mShouldWaitForTransitionToAodUi);
                 } else {
                     this.mDreamManager.startDozing(this.mDreamToken, this.mDozeScreenState, this.mDozeScreenStateReason, this.mDozeScreenBrightnessFloat, this.mDozeScreenBrightness, this.mUseNormalBrightnessForDoze);
                 }

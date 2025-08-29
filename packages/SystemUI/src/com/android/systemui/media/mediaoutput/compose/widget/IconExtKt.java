@@ -36,7 +36,7 @@ public abstract class IconExtKt {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static final void m2635IconExtww6aTOc(final Painter painter, final String str, Modifier modifier, final long j, Composer composer, final int i, final int i2) {
+    public static final void m2633IconExtww6aTOc(final Painter painter, final String str, Modifier modifier, final long j, Composer composer, final int i, final int i2) {
         String str2;
         Modifier modifier2;
         int i3;
@@ -93,13 +93,13 @@ public abstract class IconExtKt {
                                                 ((Integer) obj2).getClass();
                                                 int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
                                                 long j2 = j;
-                                                IconExtKt.m2635IconExtww6aTOc(painter, str, modifier4, j2, (Composer) obj, iUpdateChangedFlags, i2);
+                                                IconExtKt.m2633IconExtww6aTOc(painter, str, modifier4, j2, (Composer) obj, iUpdateChangedFlags, i2);
                                                 break;
                                             default:
                                                 ((Integer) obj2).getClass();
                                                 int iUpdateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(i | 1);
                                                 long j3 = j;
-                                                IconExtKt.m2635IconExtww6aTOc(painter, str, modifier4, j3, (Composer) obj, iUpdateChangedFlags2, i2);
+                                                IconExtKt.m2633IconExtww6aTOc(painter, str, modifier4, j3, (Composer) obj, iUpdateChangedFlags2, i2);
                                                 break;
                                         }
                                         return Unit.INSTANCE;
@@ -145,13 +145,13 @@ public abstract class IconExtKt {
                                 ((Integer) obj2).getClass();
                                 int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
                                 long j2 = j;
-                                IconExtKt.m2635IconExtww6aTOc(painter, str, modifier5, j2, (Composer) obj, iUpdateChangedFlags, i2);
+                                IconExtKt.m2633IconExtww6aTOc(painter, str, modifier5, j2, (Composer) obj, iUpdateChangedFlags, i2);
                                 break;
                             default:
                                 ((Integer) obj2).getClass();
                                 int iUpdateChangedFlags2 = RecomposeScopeImplKt.updateChangedFlags(i | 1);
                                 long j3 = j;
-                                IconExtKt.m2635IconExtww6aTOc(painter, str, modifier5, j3, (Composer) obj, iUpdateChangedFlags2, i2);
+                                IconExtKt.m2633IconExtww6aTOc(painter, str, modifier5, j3, (Composer) obj, iUpdateChangedFlags2, i2);
                                 break;
                         }
                         return Unit.INSTANCE;

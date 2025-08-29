@@ -13,7 +13,7 @@ import kotlin.jvm.internal.Intrinsics;
 /* loaded from: classes2.dex */
 public abstract class MapPatchKt {
     public static final Map mapPatchFromFullDiff(Map map, Map map2) {
-        Object objM2590boximpl;
+        Object objM2588boximpl;
         Set setMinus = SetsKt___SetsKt.minus(map.keySet(), (Iterable) map2.keySet());
         MapBuilder mapBuilder = new MapBuilder();
         for (Map.Entry entry : map2.entrySet()) {
@@ -21,13 +21,13 @@ public abstract class MapPatchKt {
             Object value = entry.getValue();
             if (map.containsKey(key) && Intrinsics.areEqual(value, map.get(key))) {
                 Maybe.Companion.getClass();
-                objM2590boximpl = Maybe.Companion.absent;
+                objM2588boximpl = Maybe.Companion.absent;
             } else {
                 Maybe.Companion.getClass();
-                objM2590boximpl = Maybe.Present.m2590boximpl(value);
+                objM2588boximpl = Maybe.Present.m2588boximpl(value);
             }
-            if (objM2590boximpl instanceof Maybe.Present) {
-                mapBuilder.put(entry.getKey(), ((Maybe.Present) objM2590boximpl).value);
+            if (objM2588boximpl instanceof Maybe.Present) {
+                mapBuilder.put(entry.getKey(), ((Maybe.Present) objM2588boximpl).value);
             }
         }
         MapBuilder mapBuilderBuild = mapBuilder.build();
@@ -42,7 +42,7 @@ public abstract class MapPatchKt {
             Object key2 = entry2.getKey();
             Object value2 = entry2.getValue();
             Maybe.Companion.getClass();
-            map3.put(key2, Maybe.Present.m2590boximpl(value2));
+            map3.put(key2, Maybe.Present.m2588boximpl(value2));
         }
         return map3;
     }

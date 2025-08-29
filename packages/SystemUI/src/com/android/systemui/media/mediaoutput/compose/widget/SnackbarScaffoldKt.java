@@ -140,7 +140,7 @@ public abstract class SnackbarScaffoldKt {
                     Color.Companion.getClass();
                     composerImpl = composerImpl2;
                     ComposableLambdaImpl composableLambdaImpl10 = composableLambdaImpl6;
-                    ScaffoldKt.m3341SeslScaffold5k0As8s(modifierFillMaxWidth, composableLambdaImpl10, null, composableLambdaImplRememberComposableLambda, null, composableLambdaImpl8, 0, Color.Transparent, null, ComposableLambdaKt.rememberComposableLambda(-1633598269, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SnackbarScaffoldKt.SnackbarScaffold.2
+                    ScaffoldKt.m3340SeslScaffold5k0As8s(modifierFillMaxWidth, composableLambdaImpl10, null, composableLambdaImplRememberComposableLambda, null, composableLambdaImpl8, 0, Color.Transparent, null, ComposableLambdaKt.rememberComposableLambda(-1633598269, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SnackbarScaffoldKt.SnackbarScaffold.2
                         /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
                         /* JADX WARN: Removed duplicated region for block: B:25:0x007d  */
                         @Override // kotlin.jvm.functions.Function3
@@ -292,7 +292,7 @@ public abstract class SnackbarScaffoldKt {
                 Color.Companion.getClass();
                 composerImpl = composerImpl2;
                 ComposableLambdaImpl composableLambdaImpl102 = composableLambdaImpl6;
-                ScaffoldKt.m3341SeslScaffold5k0As8s(modifierFillMaxWidth2, composableLambdaImpl102, null, composableLambdaImplRememberComposableLambda2, null, composableLambdaImpl8, 0, Color.Transparent, null, ComposableLambdaKt.rememberComposableLambda(-1633598269, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SnackbarScaffoldKt.SnackbarScaffold.2
+                ScaffoldKt.m3340SeslScaffold5k0As8s(modifierFillMaxWidth2, composableLambdaImpl102, null, composableLambdaImplRememberComposableLambda2, null, composableLambdaImpl8, 0, Color.Transparent, null, ComposableLambdaKt.rememberComposableLambda(-1633598269, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.widget.SnackbarScaffoldKt.SnackbarScaffold.2
                     /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
                     /* JADX WARN: Removed duplicated region for block: B:25:0x007d  */
                     @Override // kotlin.jvm.functions.Function3

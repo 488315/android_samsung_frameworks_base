@@ -50,7 +50,7 @@ final class ScreenBrightnessDisplayManagerRepository$brightnessInfo$1 extends Su
                 @Override // android.hardware.display.DisplayManager.DisplayListener
                 public final void onDisplayChanged(int i2) {
                     if (i2 == screenBrightnessDisplayManagerRepository.displayId) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                     }
                 }
 

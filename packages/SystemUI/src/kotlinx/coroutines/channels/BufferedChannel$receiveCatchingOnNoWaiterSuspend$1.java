@@ -24,7 +24,7 @@ final class BufferedChannel$receiveCatchingOnNoWaiterSuspend$1 extends Continuat
     public final Object invokeSuspend(Object obj) {
         this.result = obj;
         this.label |= Integer.MIN_VALUE;
-        Object objM3474receiveCatchingOnNoWaiterSuspendGKJJFZk = this.this$0.m3474receiveCatchingOnNoWaiterSuspendGKJJFZk(null, 0, 0L, this);
-        return objM3474receiveCatchingOnNoWaiterSuspendGKJJFZk == CoroutineSingletons.COROUTINE_SUSPENDED ? objM3474receiveCatchingOnNoWaiterSuspendGKJJFZk : ChannelResult.m3477boximpl(objM3474receiveCatchingOnNoWaiterSuspendGKJJFZk);
+        Object objM3473receiveCatchingOnNoWaiterSuspendGKJJFZk = this.this$0.m3473receiveCatchingOnNoWaiterSuspendGKJJFZk(null, 0, 0L, this);
+        return objM3473receiveCatchingOnNoWaiterSuspendGKJJFZk == CoroutineSingletons.COROUTINE_SUSPENDED ? objM3473receiveCatchingOnNoWaiterSuspendGKJJFZk : ChannelResult.m3476boximpl(objM3473receiveCatchingOnNoWaiterSuspendGKJJFZk);
     }
 }

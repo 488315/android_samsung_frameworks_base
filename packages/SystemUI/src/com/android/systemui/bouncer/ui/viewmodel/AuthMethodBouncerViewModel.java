@@ -198,7 +198,7 @@ public abstract class AuthMethodBouncerViewModel extends ExclusiveActivatable {
         if ((i & 2) != 0) {
             z = false;
         }
-        authMethodBouncerViewModel.authenticationRequests.mo3476trySendJP2dKIU(new AuthenticationRequest(list, z));
+        authMethodBouncerViewModel.authenticationRequests.mo3475trySendJP2dKIU(new AuthenticationRequest(list, z));
     }
 
     public abstract void clearInput();

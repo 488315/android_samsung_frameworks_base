@@ -49,7 +49,7 @@ final class KeyguardStatusBarViewModel$isBatteryCharging$1 extends SuspendLambda
             final ?? r1 = new BatteryController.BatteryStateChangeCallback() { // from class: com.android.systemui.statusbar.ui.viewmodel.KeyguardStatusBarViewModel$isBatteryCharging$1$callback$1
                 @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
                 public final void onBatteryLevelChanged(int i2, boolean z, boolean z2) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z2));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(z2));
                 }
             };
             ((BatteryControllerImpl) this.$batteryController).addCallback(r1);

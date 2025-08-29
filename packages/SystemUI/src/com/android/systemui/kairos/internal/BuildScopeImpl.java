@@ -157,7 +157,7 @@ public final class BuildScopeImpl implements EvalScope, StateScope, BuildScope {
         final Function3 function3 = new Function3() { // from class: com.android.systemui.kairos.internal.BuildScopeImpl$$ExternalSyntheticLambda2
             @Override // kotlin.jvm.functions.Function3
             public final Object invoke(Object obj, Object obj2, Object obj3) {
-                Object objM2590boximpl;
+                Object objM2588boximpl;
                 Map map = (Map) obj2;
                 ((Integer) obj3).getClass();
                 BuildScopeImpl buildScopeImpl = new BuildScopeImpl(new StateScopeImpl((EvalScope) obj, this.f$0.stateScope.endSignalLazy), contextScopeChildScope$default);
@@ -178,14 +178,14 @@ public final class BuildScopeImpl implements EvalScope, StateScope, BuildScope {
                         }
                         Object objMo781invoke = function1.mo781invoke(buildScopeImpl.childBuildScope(eventsInitSwitchEvents));
                         companion.getClass();
-                        objM2590boximpl = Maybe.Present.m2590boximpl(objMo781invoke);
+                        objM2588boximpl = Maybe.Present.m2588boximpl(objMo781invoke);
                     } else {
                         if (!(maybe instanceof Maybe.Absent)) {
                             throw new NoWhenBranchMatchedException();
                         }
-                        objM2590boximpl = Maybe.Absent.INSTANCE;
+                        objM2588boximpl = Maybe.Absent.INSTANCE;
                     }
-                    linkedHashMap.put(key, objM2590boximpl);
+                    linkedHashMap.put(key, objM2588boximpl);
                 }
                 return linkedHashMap;
             }
@@ -322,7 +322,7 @@ public final class BuildScopeImpl implements EvalScope, StateScope, BuildScope {
                     boolean z = activationResultActivate.needsEval;
                     output2.upstream = nodeConnection;
                     Maybe.Companion.getClass();
-                    if (!atomicReference2.compareAndSet(null, Maybe.Present.m2590boximpl(output2))) {
+                    if (!atomicReference2.compareAndSet(null, Maybe.Present.m2588boximpl(output2))) {
                         buildScopeImpl.scheduleDeactivation(output2);
                     } else if (z) {
                         EvalScope evalScope = buildScopeImpl.stateScope.evalScope;

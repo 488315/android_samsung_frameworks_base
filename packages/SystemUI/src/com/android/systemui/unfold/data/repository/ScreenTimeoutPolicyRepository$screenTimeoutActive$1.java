@@ -47,7 +47,7 @@ final class ScreenTimeoutPolicyRepository$screenTimeoutActive$1 extends SuspendL
             final ProducerScope producerScope = (ProducerScope) this.L$0;
             final ?? r1 = new PowerManager.ScreenTimeoutPolicyListener() { // from class: com.android.systemui.unfold.data.repository.ScreenTimeoutPolicyRepository$screenTimeoutActive$1$listener$1
                 public final void onScreenTimeoutPolicyChanged(int i2) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(i2 == 0));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(i2 == 0));
                 }
             };
             ScreenTimeoutPolicyRepository screenTimeoutPolicyRepository = this.this$0;

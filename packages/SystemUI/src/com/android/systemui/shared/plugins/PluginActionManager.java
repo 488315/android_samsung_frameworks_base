@@ -73,7 +73,7 @@ public class PluginActionManager {
     }
 
     /* renamed from: $r8$lambda$5F1fdvH66AX-KG-8BByIAWoLe8U, reason: not valid java name */
-    public static void m2954$r8$lambda$5F1fdvH66AXKG8BByIAWoLe8U(PluginActionManager pluginActionManager) {
+    public static void m2952$r8$lambda$5F1fdvH66AXKG8BByIAWoLe8U(PluginActionManager pluginActionManager) {
         ExifInterface$$ExternalSyntheticOutline0.m(new StringBuilder("queryAll "), pluginActionManager.mAction, "PluginActionManager");
         for (int size = pluginActionManager.mPluginInstances.size() - 1; size >= 0; size--) {
             pluginActionManager.mMainExecutor.execute(new PluginActionManager$$ExternalSyntheticLambda2(pluginActionManager, pluginActionManager.mPluginInstances.get(size), 3));
@@ -83,7 +83,7 @@ public class PluginActionManager {
     }
 
     /* renamed from: $r8$lambda$e2-SW2bOJhdGs27PogmcioXOXds, reason: not valid java name */
-    public static void m2955$r8$lambda$e2SW2bOJhdGs27PogmcioXOXds(PluginActionManager pluginActionManager, String str) {
+    public static void m2953$r8$lambda$e2SW2bOJhdGs27PogmcioXOXds(PluginActionManager pluginActionManager, String str) {
         pluginActionManager.removePkg(str);
         StringBuilder sb = new StringBuilder("queryPkg ");
         sb.append(str);
@@ -254,7 +254,7 @@ public class PluginActionManager {
         this.mBgExecutor.execute(new Runnable() { // from class: com.android.systemui.shared.plugins.PluginActionManager$$ExternalSyntheticLambda3
             @Override // java.lang.Runnable
             public final void run() {
-                PluginActionManager.m2954$r8$lambda$5F1fdvH66AXKG8BByIAWoLe8U(this.f$0);
+                PluginActionManager.m2952$r8$lambda$5F1fdvH66AXKG8BByIAWoLe8U(this.f$0);
             }
         });
     }

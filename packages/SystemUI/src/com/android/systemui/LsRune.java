@@ -201,6 +201,7 @@ public class LsRune extends Rune {
         WALLPAPER_ROTATABLE_WALLPAPER = BasicRune$$ExternalSyntheticOutline0.m("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_WALLPAPER_STYLE", "ROTATABLE") || DeviceType.isTablet();
         WALLPAPER_SUB_DISPLAY_MODE = BasicRune$$ExternalSyntheticOutline0.m("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_WALLPAPER_STYLE", "LID");
         WALLPAPER_FESTIVAL_WALLPAPER = BasicRune$$ExternalSyntheticOutline0.m("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_WALLPAPER_STYLE", "FESTIVAL");
+        boolean zM = BasicRune$$ExternalSyntheticOutline0.m("SEC_FLOATING_FEATURE_LOCKSCREEN_CONFIG_WALLPAPER_STYLE", "FLIPSUIT_LOCK");
         boolean zContains5 = string.contains("WATCHFACE");
         WALLPAPER_SUB_WATCHFACE = zContains5;
         boolean zContains6 = string.contains("VIRTUAL_DISPLAY");
@@ -208,7 +209,7 @@ public class LsRune extends Rune {
         boolean zContains7 = string.contains("LARGESCREEN");
         WALLPAPER_PLAY_GIF = zContains5 || zContains6;
         WALLPAPER_DESKTOP_STANDALONE_MODE_WALLPAPER = SystemProperties.getInt("ro.build.version.oneui", 0) < 50100;
-        WALLPAPER_SUPPORT_SUIT_CASE = zContains7 || z9;
+        WALLPAPER_SUPPORT_SUIT_CASE = zContains7 || z9 || zM;
         SemCscFeature.getInstance().getString("CscFeature_Common_ConfigSpecialEdition").contains("MaisonMargiela");
         if (!zContains5 && !zContains6) {
             z = false;

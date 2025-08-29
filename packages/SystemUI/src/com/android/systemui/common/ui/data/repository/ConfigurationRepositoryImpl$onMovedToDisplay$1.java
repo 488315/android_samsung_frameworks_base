@@ -47,7 +47,7 @@ final class ConfigurationRepositoryImpl$onMovedToDisplay$1 extends SuspendLambda
             ConfigurationController.ConfigurationListener configurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.common.ui.data.repository.ConfigurationRepositoryImpl$onMovedToDisplay$1$callback$1
                 @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
                 public final void onMovedToDisplay(int i2, Configuration configuration) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Integer.valueOf(i2));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Integer.valueOf(i2));
                 }
             };
             ((ConfigurationControllerImpl) this.this$0.configurationController).addCallback(configurationListener);

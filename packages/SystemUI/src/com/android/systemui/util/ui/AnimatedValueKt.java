@@ -36,12 +36,12 @@ public final class AnimatedValueKt {
 
         @Override // kotlin.jvm.functions.Function0
         public /* bridge */ /* synthetic */ Object invoke() {
-            m3208invoke();
+            m3207invoke();
             return Unit.INSTANCE;
         }
 
         /* renamed from: invoke, reason: collision with other method in class */
-        public final void m3208invoke() {
+        public final void m3207invoke() {
             ((AnimatedValue.Animating) this.$this_flatMap).getOnStopAnimating().invoke();
             ((AnimatedValue.Animating) this.$inner).getOnStopAnimating().invoke();
         }
@@ -55,12 +55,12 @@ public final class AnimatedValueKt {
 
         @Override // kotlin.jvm.functions.Function0
         public /* bridge */ /* synthetic */ Object invoke() {
-            m3209invoke();
+            m3208invoke();
             return Unit.INSTANCE;
         }
 
         /* renamed from: invoke, reason: collision with other method in class */
-        public final void m3209invoke() {
+        public final void m3208invoke() {
             AnimatedValue animatedValue = (AnimatedValue) this.receiver;
             if (animatedValue instanceof AnimatedValue.Animating) {
                 ((AnimatedValue.Animating) animatedValue).getOnStopAnimating().invoke();
@@ -195,12 +195,12 @@ public final class AnimatedValueKt {
 
         @Override // kotlin.jvm.functions.Function0
         public /* bridge */ /* synthetic */ Object invoke() {
-            m3211invoke();
+            m3210invoke();
             return Unit.INSTANCE;
         }
 
         /* renamed from: invoke, reason: collision with other method in class */
-        public final void m3211invoke() {
+        public final void m3210invoke() {
             ((AnimatedValue.Animating) this.$valueA).getOnStopAnimating().invoke();
             ((AnimatedValue.Animating) this.$valueB).getOnStopAnimating().invoke();
         }

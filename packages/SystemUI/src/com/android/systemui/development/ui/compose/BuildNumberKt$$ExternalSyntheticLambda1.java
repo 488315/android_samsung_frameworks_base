@@ -35,7 +35,7 @@ public final /* synthetic */ class BuildNumberKt$$ExternalSyntheticLambda1 imple
                 ((HapticFeedback) this.f$0).mo572performHapticFeedbackCdsT49E(0);
                 BufferedChannel bufferedChannel = this.f$1.copyRequests;
                 Unit unit = Unit.INSTANCE;
-                bufferedChannel.mo3476trySendJP2dKIU(unit);
+                bufferedChannel.mo3475trySendJP2dKIU(unit);
                 return unit;
         }
     }

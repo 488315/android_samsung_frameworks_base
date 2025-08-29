@@ -137,7 +137,7 @@ public abstract class PeopleScreenKt {
                 }
                 PeopleTileViewModel peopleTileViewModel = (PeopleTileViewModel) obj;
                 composerImpl.startMovableGroup(1174402744, peopleTileViewModel.key.toString());
-                m2646Tilevz2T9sI(peopleTileViewModel, function1, i5 == 0 ? fDimensionResource : f, i5 == CollectionsKt__CollectionsKt.getLastIndex(list) ? fDimensionResource : f, null, composerImpl, (i4 >> 3) & 112);
+                m2644Tilevz2T9sI(peopleTileViewModel, function1, i5 == 0 ? fDimensionResource : f, i5 == CollectionsKt__CollectionsKt.getLastIndex(list) ? fDimensionResource : f, null, composerImpl, (i4 >> 3) & 112);
                 composerImpl.end(false);
                 i5 = i6;
             }
@@ -404,7 +404,7 @@ public abstract class PeopleScreenKt {
     }
 
     /* renamed from: Tile-vz2T9sI, reason: not valid java name */
-    public static final void m2646Tilevz2T9sI(final PeopleTileViewModel peopleTileViewModel, final Function1 function1, final float f, final float f2, Modifier.Companion companion, Composer composer, final int i) {
+    public static final void m2644Tilevz2T9sI(final PeopleTileViewModel peopleTileViewModel, final Function1 function1, final float f, final float f2, Modifier.Companion companion, Composer composer, final int i) {
         int i2;
         ComposerImpl composerImpl;
         final Modifier.Companion companion2;
@@ -537,7 +537,7 @@ public abstract class PeopleScreenKt {
                     PeopleTileViewModel peopleTileViewModel2 = peopleTileViewModel;
                     float f3 = f2;
                     Modifier.Companion companion4 = companion2;
-                    PeopleScreenKt.m2646Tilevz2T9sI(peopleTileViewModel2, function1, f, f3, companion4, (Composer) obj, iUpdateChangedFlags);
+                    PeopleScreenKt.m2644Tilevz2T9sI(peopleTileViewModel2, function1, f, f3, companion4, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

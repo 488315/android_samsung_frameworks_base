@@ -48,7 +48,7 @@ public class UnintentionalLcdOnView extends LinearLayout {
     public VelocityTracker mVelocityTracker;
 
     /* renamed from: -$$Nest$monLockerActionMove, reason: not valid java name */
-    public static void m2893$$Nest$monLockerActionMove(UnintentionalLcdOnView unintentionalLcdOnView, MotionEvent motionEvent) {
+    public static void m2891$$Nest$monLockerActionMove(UnintentionalLcdOnView unintentionalLcdOnView, MotionEvent motionEvent) {
         if (unintentionalLcdOnView.mIsLockerSelected) {
             unintentionalLcdOnView.mDragDistanceY = unintentionalLcdOnView.mStartY - motionEvent.getRawY();
             if (motionEvent.getRawX() < unintentionalLcdOnView.mCenterXOnScreen || motionEvent.getRawX() > unintentionalLcdOnView.mCenterXOnScreen + unintentionalLcdOnView.mLockerRing.getWidth()) {
@@ -132,7 +132,7 @@ public class UnintentionalLcdOnView extends LinearLayout {
                 if (action != 0) {
                     if (action != 1) {
                         if (action == 2) {
-                            UnintentionalLcdOnView.m2893$$Nest$monLockerActionMove(UnintentionalLcdOnView.this, motionEvent);
+                            UnintentionalLcdOnView.m2891$$Nest$monLockerActionMove(UnintentionalLcdOnView.this, motionEvent);
                             VelocityTracker velocityTracker = UnintentionalLcdOnView.this.mVelocityTracker;
                             if (velocityTracker != null) {
                                 velocityTracker.addMovement(motionEvent);

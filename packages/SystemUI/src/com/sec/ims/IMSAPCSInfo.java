@@ -36,7 +36,7 @@ public class IMSAPCSInfo implements Parcelable, Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public IMSAPCSInfo m3390clone() throws CloneNotSupportedException {
+    public IMSAPCSInfo m3389clone() throws CloneNotSupportedException {
         return (IMSAPCSInfo) super.clone();
     }
 }

@@ -71,7 +71,7 @@ public class SecQSPanelResourceNormalPicker {
 
     public int getBrightnessTileLayoutBetweenMargin(Context context) {
         SecQSPanelResourceCommon.Companion.getClass();
-        return (int) (SecQSPanelResourceCommon.Companion.m2903float(R.dimen.sec_brightness_tile_between_margin, context) * DeviceState.getDisplayWidth(context));
+        return (int) (SecQSPanelResourceCommon.Companion.m2901float(R.dimen.sec_brightness_tile_between_margin, context) * DeviceState.getDisplayWidth(context));
     }
 
     public int getButtonsWidth(Context context) {
@@ -202,31 +202,31 @@ public class SecQSPanelResourceNormalPicker {
 
     public int getQSGuideContainerMargin(Context context) {
         SecQSPanelResourceCommon.Companion.getClass();
-        return (int) (SecQSPanelResourceCommon.Companion.m2903float(R.dimen.qs_guide_dialog_container_margin, context) * DeviceState.getDisplayWidth(context));
+        return (int) (SecQSPanelResourceCommon.Companion.m2901float(R.dimen.qs_guide_dialog_container_margin, context) * DeviceState.getDisplayWidth(context));
     }
 
     public int getQSGuideImageHeight(Context context) {
         SecQSPanelResourceCommon.Companion.getClass();
-        return (int) (SecQSPanelResourceCommon.Companion.m2903float(R.dimen.qs_guide_dialog_image_height_ratio, context) * DeviceState.getDisplayHeight(context));
+        return (int) (SecQSPanelResourceCommon.Companion.m2901float(R.dimen.qs_guide_dialog_image_height_ratio, context) * DeviceState.getDisplayHeight(context));
     }
 
     public int getQSGuideImageWidth(Context context) {
         SecQSPanelResourceCommon.Companion.getClass();
-        return (int) (SecQSPanelResourceCommon.Companion.m2903float(R.dimen.qs_guide_dialog_image_width_ratio, context) * DeviceState.getDisplayWidth(context));
+        return (int) (SecQSPanelResourceCommon.Companion.m2901float(R.dimen.qs_guide_dialog_image_width_ratio, context) * DeviceState.getDisplayWidth(context));
     }
 
     public int getQSGuideWidth(Context context) {
         SecQSPanelResourceCommon.Companion.getClass();
-        return (int) (SecQSPanelResourceCommon.Companion.m2903float(R.dimen.qs_guide_dialog_width_ratio, context) * DeviceState.getDisplayWidth(context));
+        return (int) (SecQSPanelResourceCommon.Companion.m2901float(R.dimen.qs_guide_dialog_width_ratio, context) * DeviceState.getDisplayWidth(context));
     }
 
     public int getQsTileColumn(Context context) {
         if (this.common.isEmergencyMode) {
             SecQSPanelResourceCommon.Companion.getClass();
-            return Math.max(1, SecQSPanelResourceCommon.Companion.m2904int(R.integer.sec_quick_settings_num_columns_power_saving, context));
+            return Math.max(1, SecQSPanelResourceCommon.Companion.m2902int(R.integer.sec_quick_settings_num_columns_power_saving, context));
         }
         SecQSPanelResourceCommon.Companion.getClass();
-        return SecQSPanelResourceCommon.Companion.m2904int(R.integer.sec_quick_settings_num_columns, context);
+        return SecQSPanelResourceCommon.Companion.m2902int(R.integer.sec_quick_settings_num_columns, context);
     }
 
     public int getQuickSettingExtraSidePadding(Context context) {

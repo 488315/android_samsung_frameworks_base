@@ -11,7 +11,7 @@ public final class ColorInversionTileModel {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ ColorInversionTileModel m2930boximpl(boolean z) {
+    public static final /* synthetic */ ColorInversionTileModel m2928boximpl(boolean z) {
         return new ColorInversionTileModel(z);
     }
 

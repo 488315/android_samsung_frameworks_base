@@ -55,11 +55,11 @@ public final class DataSaverTileDataInteractor implements QSTileDataInteractor {
             if (i == 0) {
                 ResultKt.throwOnFailure(obj);
                 final ProducerScope producerScope = (ProducerScope) this.L$0;
-                ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(DataSaverTileModel.m2935boximpl(((DataSaverControllerImpl) DataSaverTileDataInteractor.this.dataSaverController).isDataSaverEnabled$1()));
+                ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(DataSaverTileModel.m2933boximpl(((DataSaverControllerImpl) DataSaverTileDataInteractor.this.dataSaverController).isDataSaverEnabled$1()));
                 final ?? r1 = new DataSaverController.Listener() { // from class: com.android.systemui.qs.tiles.impl.saver.domain.interactor.DataSaverTileDataInteractor$tileData$1$callback$1
                     @Override // com.android.systemui.statusbar.policy.DataSaverController.Listener
                     public final void onDataSaverChanged(boolean z) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(DataSaverTileModel.m2935boximpl(z));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(DataSaverTileModel.m2933boximpl(z));
                     }
                 };
                 ((DataSaverControllerImpl) DataSaverTileDataInteractor.this.dataSaverController).addCallback(r1);

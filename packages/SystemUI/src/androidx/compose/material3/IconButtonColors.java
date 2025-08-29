@@ -30,7 +30,7 @@ public final class IconButtonColors {
         }
         IconButtonColors iconButtonColors = (IconButtonColors) obj;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.containerColor, iconButtonColors.containerColor) && ULong.m3447equalsimpl0(this.contentColor, iconButtonColors.contentColor) && ULong.m3447equalsimpl0(this.disabledContainerColor, iconButtonColors.disabledContainerColor) && ULong.m3447equalsimpl0(this.disabledContentColor, iconButtonColors.disabledContentColor);
+        return ULong.m3446equalsimpl0(this.containerColor, iconButtonColors.containerColor) && ULong.m3446equalsimpl0(this.contentColor, iconButtonColors.contentColor) && ULong.m3446equalsimpl0(this.disabledContainerColor, iconButtonColors.disabledContainerColor) && ULong.m3446equalsimpl0(this.disabledContentColor, iconButtonColors.disabledContentColor);
     }
 
     public final int hashCode() {

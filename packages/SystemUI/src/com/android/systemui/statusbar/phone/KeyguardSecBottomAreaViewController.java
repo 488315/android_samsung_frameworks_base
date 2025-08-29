@@ -171,12 +171,12 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
     }
 
     /* renamed from: $r8$lambda$D4kp5cmGQ_rGLdyL6o-XY1kQhJo, reason: not valid java name */
-    public static ViewGroup m3087$r8$lambda$D4kp5cmGQ_rGLdyL6oXY1kQhJo(KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController) {
+    public static ViewGroup m3085$r8$lambda$D4kp5cmGQ_rGLdyL6oXY1kQhJo(KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController) {
         return (ViewGroup) ((KeyguardSecBottomAreaView) keyguardSecBottomAreaViewController.mView).indicationArea$delegate.getValue();
     }
 
     /* renamed from: $r8$lambda$Jgv21cVoSLZlA51xet8mwVw-iBs, reason: not valid java name */
-    public static View m3088$r8$lambda$Jgv21cVoSLZlA51xet8mwVwiBs(KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController) {
+    public static View m3086$r8$lambda$Jgv21cVoSLZlA51xet8mwVwiBs(KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController) {
         return (View) ((KeyguardSecBottomAreaView) keyguardSecBottomAreaViewController.mView).leftShortcutArea$delegate.getValue();
     }
 
@@ -185,7 +185,7 @@ public final class KeyguardSecBottomAreaViewController extends ViewController im
     }
 
     /* renamed from: $r8$lambda$YOkFmR-iWxOyhXrD-zbAm3sPmT8, reason: not valid java name */
-    public static TextView m3089$r8$lambda$YOkFmRiWxOyhXrDzbAm3sPmT8(KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController) {
+    public static TextView m3087$r8$lambda$YOkFmRiWxOyhXrDzbAm3sPmT8(KeyguardSecBottomAreaViewController keyguardSecBottomAreaViewController) {
         return (TextView) ((KeyguardSecBottomAreaView) keyguardSecBottomAreaViewController.mView).indicationText$delegate.getValue();
     }
 

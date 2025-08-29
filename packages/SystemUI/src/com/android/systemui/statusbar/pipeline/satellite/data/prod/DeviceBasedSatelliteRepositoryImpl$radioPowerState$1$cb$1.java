@@ -13,6 +13,6 @@ public final class DeviceBasedSatelliteRepositoryImpl$radioPowerState$1$cb$1 ext
     }
 
     public final void onRadioPowerStateChanged(int i) {
-        ((ChannelCoroutine) this.$$this$conflatedCallbackFlow).mo3476trySendJP2dKIU(Integer.valueOf(i));
+        ((ChannelCoroutine) this.$$this$conflatedCallbackFlow).mo3475trySendJP2dKIU(Integer.valueOf(i));
     }
 }

@@ -434,7 +434,7 @@ public final class ZenModeInteractor {
     }
 
     /* renamed from: activeModesBlockingStream-tLTdkI8, reason: not valid java name */
-    public final Flow m3108activeModesBlockingStreamtLTdkI8(int i) {
+    public final Flow m3107activeModesBlockingStreamtLTdkI8(int i) {
         final Function1 function1 = (Function1) this.zenModeByStreamPredicates.get(Integer.valueOf(i));
         if (function1 == null) {
             AudioStream.Companion companion = AudioStream.Companion;

@@ -273,7 +273,7 @@ public class SafeUIKeyguardViewMediator extends KeyguardViewMediator {
             switch (message.what) {
                 case 1:
                     str = "SHOW";
-                    SafeUIKeyguardViewMediator.m2613$$Nest$mhandleShow(SafeUIKeyguardViewMediator.this, (Bundle) message.obj);
+                    SafeUIKeyguardViewMediator.m2611$$Nest$mhandleShow(SafeUIKeyguardViewMediator.this, (Bundle) message.obj);
                     break;
                 case 2:
                     str = "HIDE";
@@ -283,11 +283,11 @@ public class SafeUIKeyguardViewMediator extends KeyguardViewMediator {
                     break;
                 case 3:
                     str = "RESET";
-                    SafeUIKeyguardViewMediator.m2611$$Nest$mhandleReset(SafeUIKeyguardViewMediator.this, message.arg1 != 0);
+                    SafeUIKeyguardViewMediator.m2609$$Nest$mhandleReset(SafeUIKeyguardViewMediator.this, message.arg1 != 0);
                     break;
                 case 5:
                     str = "NOTIFY_FINISHED_GOING_TO_SLEEP";
-                    SafeUIKeyguardViewMediator.m2609$$Nest$mhandleNotifyFinishedGoingToSleep(SafeUIKeyguardViewMediator.this);
+                    SafeUIKeyguardViewMediator.m2607$$Nest$mhandleNotifyFinishedGoingToSleep(SafeUIKeyguardViewMediator.this);
                     break;
                 case 7:
                     str = "KEYGUARD_DONE";
@@ -300,13 +300,13 @@ public class SafeUIKeyguardViewMediator extends KeyguardViewMediator {
                 case 8:
                     str = "KEYGUARD_DONE_DRAWING";
                     Trace.beginSection("KeyguardViewMediator#handleMessage KEYGUARD_DONE_DRAWING");
-                    SafeUIKeyguardViewMediator.m2608$$Nest$mhandleKeyguardDoneDrawing(SafeUIKeyguardViewMediator.this);
+                    SafeUIKeyguardViewMediator.m2606$$Nest$mhandleKeyguardDoneDrawing(SafeUIKeyguardViewMediator.this);
                     Trace.endSection();
                     break;
                 case 9:
                     str = "SET_OCCLUDED";
                     Trace.beginSection("KeyguardViewMediator#handleMessage SET_OCCLUDED");
-                    SafeUIKeyguardViewMediator.m2612$$Nest$mhandleSetOccluded(SafeUIKeyguardViewMediator.this, message.arg1 != 0, message.arg2 != 0);
+                    SafeUIKeyguardViewMediator.m2610$$Nest$mhandleSetOccluded(SafeUIKeyguardViewMediator.this, message.arg1 != 0, message.arg2 != 0);
                     Trace.endSection();
                     break;
                 case 10:
@@ -404,7 +404,7 @@ public class SafeUIKeyguardViewMediator extends KeyguardViewMediator {
                 case 14:
                     str = "NOTIFY_STARTED_WAKING_UP";
                     Trace.beginSection("KeyguardViewMediator#handleMessage NOTIFY_STARTED_WAKING_UP");
-                    SafeUIKeyguardViewMediator.m2610$$Nest$mhandleNotifyStartedWakingUp(SafeUIKeyguardViewMediator.this);
+                    SafeUIKeyguardViewMediator.m2608$$Nest$mhandleNotifyStartedWakingUp(SafeUIKeyguardViewMediator.this);
                     Trace.endSection();
                     break;
                 case 17:
@@ -928,7 +928,7 @@ public class SafeUIKeyguardViewMediator extends KeyguardViewMediator {
                                 public final void onAnimationEnd(Animator animator) {
                                     try {
                                         if (!this.mIsCancelled) {
-                                            SafeUIKeyguardViewMediator.m2612$$Nest$mhandleSetOccluded(SafeUIKeyguardViewMediator.this, true, false);
+                                            SafeUIKeyguardViewMediator.m2610$$Nest$mhandleSetOccluded(SafeUIKeyguardViewMediator.this, true, false);
                                         }
                                         iRemoteAnimationFinishedCallback2.onAnimationFinished();
                                         AnonymousClass7.this.mOccludeByDreamAnimator = null;
@@ -1024,7 +1024,7 @@ public class SafeUIKeyguardViewMediator extends KeyguardViewMediator {
     }
 
     /* renamed from: -$$Nest$mhandleKeyguardDoneDrawing, reason: not valid java name */
-    public static void m2608$$Nest$mhandleKeyguardDoneDrawing(SafeUIKeyguardViewMediator safeUIKeyguardViewMediator) {
+    public static void m2606$$Nest$mhandleKeyguardDoneDrawing(SafeUIKeyguardViewMediator safeUIKeyguardViewMediator) {
         safeUIKeyguardViewMediator.getClass();
         Trace.beginSection("KeyguardViewMediator#handleKeyguardDoneDrawing");
         synchronized (safeUIKeyguardViewMediator) {
@@ -1044,7 +1044,7 @@ public class SafeUIKeyguardViewMediator extends KeyguardViewMediator {
     }
 
     /* renamed from: -$$Nest$mhandleNotifyFinishedGoingToSleep, reason: not valid java name */
-    public static void m2609$$Nest$mhandleNotifyFinishedGoingToSleep(SafeUIKeyguardViewMediator safeUIKeyguardViewMediator) {
+    public static void m2607$$Nest$mhandleNotifyFinishedGoingToSleep(SafeUIKeyguardViewMediator safeUIKeyguardViewMediator) {
         synchronized (safeUIKeyguardViewMediator) {
             android.util.Log.d("SafeUIKeyguardViewMediator", "handleNotifyFinishedGoingToSleep");
             ((KeyguardViewController) safeUIKeyguardViewMediator.mKeyguardViewControllerLazy.get()).onFinishedGoingToSleep();
@@ -1052,7 +1052,7 @@ public class SafeUIKeyguardViewMediator extends KeyguardViewMediator {
     }
 
     /* renamed from: -$$Nest$mhandleNotifyStartedWakingUp, reason: not valid java name */
-    public static void m2610$$Nest$mhandleNotifyStartedWakingUp(SafeUIKeyguardViewMediator safeUIKeyguardViewMediator) {
+    public static void m2608$$Nest$mhandleNotifyStartedWakingUp(SafeUIKeyguardViewMediator safeUIKeyguardViewMediator) {
         safeUIKeyguardViewMediator.getClass();
         Trace.beginSection("KeyguardViewMediator#handleMotifyStartedWakingUp");
         synchronized (safeUIKeyguardViewMediator) {
@@ -1063,7 +1063,7 @@ public class SafeUIKeyguardViewMediator extends KeyguardViewMediator {
     }
 
     /* renamed from: -$$Nest$mhandleReset, reason: not valid java name */
-    public static void m2611$$Nest$mhandleReset(SafeUIKeyguardViewMediator safeUIKeyguardViewMediator, boolean z) {
+    public static void m2609$$Nest$mhandleReset(SafeUIKeyguardViewMediator safeUIKeyguardViewMediator, boolean z) {
         synchronized (safeUIKeyguardViewMediator) {
             android.util.Log.d("SafeUIKeyguardViewMediator", "handleReset");
             ((KeyguardViewController) safeUIKeyguardViewMediator.mKeyguardViewControllerLazy.get()).reset(z);
@@ -1072,7 +1072,7 @@ public class SafeUIKeyguardViewMediator extends KeyguardViewMediator {
     }
 
     /* renamed from: -$$Nest$mhandleSetOccluded, reason: not valid java name */
-    public static void m2612$$Nest$mhandleSetOccluded(SafeUIKeyguardViewMediator safeUIKeyguardViewMediator, boolean z, boolean z2) {
+    public static void m2610$$Nest$mhandleSetOccluded(SafeUIKeyguardViewMediator safeUIKeyguardViewMediator, boolean z, boolean z2) {
         safeUIKeyguardViewMediator.getClass();
         Trace.beginSection("KeyguardViewMediator#handleSetOccluded");
         android.util.Log.d("SafeUIKeyguardViewMediator", "handleSetOccluded(" + z + ")");
@@ -1104,7 +1104,7 @@ public class SafeUIKeyguardViewMediator extends KeyguardViewMediator {
     }
 
     /* renamed from: -$$Nest$mhandleShow, reason: not valid java name */
-    public static void m2613$$Nest$mhandleShow(SafeUIKeyguardViewMediator safeUIKeyguardViewMediator, Bundle bundle) {
+    public static void m2611$$Nest$mhandleShow(SafeUIKeyguardViewMediator safeUIKeyguardViewMediator, Bundle bundle) {
         safeUIKeyguardViewMediator.getClass();
         Trace.beginSection("KeyguardViewMediator#handleShow");
         boolean z = bundle != null && bundle.getBoolean("show_dismissible", false);

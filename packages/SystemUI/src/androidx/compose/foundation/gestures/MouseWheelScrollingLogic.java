@@ -335,7 +335,7 @@ public final class MouseWheelScrollingLogic {
 
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return (MouseWheelScrollDelta) ChannelResult.m3479getOrNullimpl(bufferedChannel.mo3475tryReceivePtdJZtk());
+                return (MouseWheelScrollDelta) ChannelResult.m3478getOrNullimpl(bufferedChannel.mo3474tryReceivePtdJZtk());
             }
         }, null)).$block$inlined);
         while (it.hasNext()) {

@@ -31,7 +31,7 @@ public class CaptureData {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public CaptureData m2672clone() throws CloneNotSupportedException {
+    public CaptureData m2670clone() throws CloneNotSupportedException {
         return (CaptureData) super.clone();
     }
 }

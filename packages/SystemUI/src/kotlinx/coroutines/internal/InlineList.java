@@ -8,7 +8,7 @@ public final class InlineList {
     public final Object holder;
 
     /* renamed from: plus-FjFbRPM, reason: not valid java name */
-    public static final Object m3484plusFjFbRPM(Object obj, Object obj2) {
+    public static final Object m3483plusFjFbRPM(Object obj, Object obj2) {
         if (obj == null) {
             return obj2;
         }

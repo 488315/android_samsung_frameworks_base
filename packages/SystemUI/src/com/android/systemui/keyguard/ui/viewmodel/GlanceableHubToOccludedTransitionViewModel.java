@@ -25,7 +25,7 @@ public final class GlanceableHubToOccludedTransitionViewModel implements DeviceE
         SceneKey sceneKey = Scenes.Communal;
         KeyguardState keyguardState = KeyguardState.OCCLUDED;
         companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.GLANCEABLE_HUB, keyguardState, keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, new Edge.ContentToState(sceneKey, keyguardState)));
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.GLANCEABLE_HUB, keyguardState, keyguardTransitionAnimationFlow.m2613setupVtjQ1oo(j, new Edge.ContentToState(sceneKey, keyguardState)));
         this.deviceEntryParentViewAlpha = flowBuilderM.immediatelyTransitionTo(0.0f);
         this.windowBlurRadius = ((DaggerReferenceGlobalRootComponent.GlanceableHubBlurComponentImpl) factory.create(flowBuilderM)).getBlurProvider().exitBlurRadius;
     }

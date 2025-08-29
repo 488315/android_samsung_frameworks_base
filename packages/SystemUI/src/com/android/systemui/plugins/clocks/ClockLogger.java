@@ -77,7 +77,7 @@ public final class ClockLogger extends Logger {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static final String animateFidget$lambda$18(LogMessage logMessage) {
-        return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("animateFidget(", VPointF.m2782toStringimpl(VPointF.Companion.m2787fromLongAsyRdg(logMessage.getLong1())), ")");
+        return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("animateFidget(", VPointF.m2780toStringimpl(VPointF.Companion.m2785fromLongAsyRdg(logMessage.getLong1())), ")");
     }
 
     public static final String escapeTime(String str) {
@@ -110,7 +110,7 @@ public final class ClockLogger extends Logger {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static final String onLayout$lambda$2(LogMessage logMessage) {
-        return "onLayout(" + logMessage.getBool1() + ", " + VRect.m2820toStringimpl(VRect.Companion.m2824fromLongqYjogQA(logMessage.getLong1())) + ")";
+        return "onLayout(" + logMessage.getBool1() + ", " + VRect.m2818toStringimpl(VRect.Companion.m2822fromLongqYjogQA(logMessage.getLong1())) + ")";
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -156,7 +156,7 @@ public final class ClockLogger extends Logger {
     public final void animateFidget(float f, float f2) {
         ClockLogger$$ExternalSyntheticLambda0 clockLogger$$ExternalSyntheticLambda0 = new ClockLogger$$ExternalSyntheticLambda0(8);
         LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, clockLogger$$ExternalSyntheticLambda0, null);
-        logMessageObtain.setLong1(VPointF.m2780toLongimpl(VPointF.m2749constructorimpl(f, f2)));
+        logMessageObtain.setLong1(VPointF.m2778toLongimpl(VPointF.m2747constructorimpl(f, f2)));
         getBuffer().commit(logMessageObtain);
     }
 
@@ -175,7 +175,7 @@ public final class ClockLogger extends Logger {
         ClockLogger$$ExternalSyntheticLambda0 clockLogger$$ExternalSyntheticLambda0 = new ClockLogger$$ExternalSyntheticLambda0(4);
         LogMessage logMessageObtain = getBuffer().obtain(getTag(), LogLevel.DEBUG, clockLogger$$ExternalSyntheticLambda0, null);
         logMessageObtain.setBool1(z);
-        logMessageObtain.setLong1(VRect.m2818toLongimpl(VRect.m2803constructorimpl(i, i2, i3, i4)));
+        logMessageObtain.setLong1(VRect.m2816toLongimpl(VRect.m2801constructorimpl(i, i2, i3, i4)));
         getBuffer().commit(logMessageObtain);
     }
 

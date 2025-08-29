@@ -20,6 +20,6 @@ public final class StateImplKt$activatedStateSource$$inlined$filterImpl$1 implem
             return Maybe.Companion.absent;
         }
         Maybe.Companion.getClass();
-        return Maybe.Present.m2590boximpl(obj2);
+        return Maybe.Present.m2588boximpl(obj2);
     }
 }

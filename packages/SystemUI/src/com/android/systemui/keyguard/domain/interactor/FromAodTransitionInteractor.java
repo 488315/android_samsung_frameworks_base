@@ -89,7 +89,7 @@ public final class FromAodTransitionInteractor extends TransitionInteractor {
         ValueAnimator valueAnimator = new ValueAnimator();
         valueAnimator.setInterpolator(Interpolators.LINEAR);
         int i = WhenMappings.$EnumSwitchMapping$0[keyguardState.ordinal()];
-        valueAnimator.setDuration(Duration.m3457getInWholeMillisecondsimpl(i != 1 ? i != 2 ? i != 3 ? i != 4 ? DEFAULT_DURATION : TO_PRIMARY_BOUNCER_DURATION : TO_OCCLUDED_DURATION : TO_LOCKSCREEN_DURATION : TO_GONE_DURATION));
+        valueAnimator.setDuration(Duration.m3456getInWholeMillisecondsimpl(i != 1 ? i != 2 ? i != 3 ? i != 4 ? DEFAULT_DURATION : TO_PRIMARY_BOUNCER_DURATION : TO_OCCLUDED_DURATION : TO_LOCKSCREEN_DURATION : TO_GONE_DURATION));
         return valueAnimator;
     }
 

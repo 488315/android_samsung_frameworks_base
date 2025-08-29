@@ -649,15 +649,15 @@ public class KeyguardService extends Service {
         }
 
         public final void startAnimation(final IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, IRemoteTransitionFinishedCallback iRemoteTransitionFinishedCallback) {
-            RemoteAnimationTarget[] remoteAnimationTargetArrM2602$$Nest$smwrap;
-            RemoteAnimationTarget[] remoteAnimationTargetArrM2602$$Nest$smwrap2;
+            RemoteAnimationTarget[] remoteAnimationTargetArrM2600$$Nest$smwrap;
+            RemoteAnimationTarget[] remoteAnimationTargetArrM2600$$Nest$smwrap2;
             ActivityManager.RunningTaskInfo runningTaskInfo;
             Slog.d("KeyguardService", "Starts IRemoteAnimationRunner: info=" + transitionInfo);
             int i = 0;
             RemoteAnimationTarget[] remoteAnimationTargetArr = new RemoteAnimationTarget[0];
             synchronized (this.mLeashMap) {
-                remoteAnimationTargetArrM2602$$Nest$smwrap = KeyguardService.m2602$$Nest$smwrap(transitionInfo, false, transaction, this.mLeashMap);
-                remoteAnimationTargetArrM2602$$Nest$smwrap2 = KeyguardService.m2602$$Nest$smwrap(transitionInfo, true, transaction, this.mLeashMap);
+                remoteAnimationTargetArrM2600$$Nest$smwrap = KeyguardService.m2600$$Nest$smwrap(transitionInfo, false, transaction, this.mLeashMap);
+                remoteAnimationTargetArrM2600$$Nest$smwrap2 = KeyguardService.m2600$$Nest$smwrap(transitionInfo, true, transaction, this.mLeashMap);
                 ((WeakHashMap) this.mFinishCallbacks).put(iBinder, iRemoteTransitionFinishedCallback);
             }
             boolean z = false;
@@ -676,13 +676,13 @@ public class KeyguardService extends Service {
             }
             KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl = this.val$keyguardViewMediator.mHelper;
             keyguardViewMediatorHelperImpl.isTaskWithEmbeddedOrStartingWindow = z;
-            if (!keyguardViewMediatorHelperImpl.initAlphaForAnimationTargets(this.val$runner, transaction, remoteAnimationTargetArrM2602$$Nest$smwrap, remoteAnimationTargetArrM2602$$Nest$smwrap2)) {
-                for (RemoteAnimationTarget remoteAnimationTarget : remoteAnimationTargetArrM2602$$Nest$smwrap) {
+            if (!keyguardViewMediatorHelperImpl.initAlphaForAnimationTargets(this.val$runner, transaction, remoteAnimationTargetArrM2600$$Nest$smwrap, remoteAnimationTargetArrM2600$$Nest$smwrap2)) {
+                for (RemoteAnimationTarget remoteAnimationTarget : remoteAnimationTargetArrM2600$$Nest$smwrap) {
                     if (remoteAnimationTarget.mode == 0) {
                         transaction.setAlpha(remoteAnimationTarget.leash, 0.0f);
                     }
                 }
-                for (RemoteAnimationTarget remoteAnimationTarget2 : remoteAnimationTargetArrM2602$$Nest$smwrap2) {
+                for (RemoteAnimationTarget remoteAnimationTarget2 : remoteAnimationTargetArrM2600$$Nest$smwrap2) {
                     if (remoteAnimationTarget2.mode == 0) {
                         transaction.setAlpha(remoteAnimationTarget2.leash, 0.0f);
                     }
@@ -691,20 +691,20 @@ public class KeyguardService extends Service {
             boolean z3 = (transitionInfo.getFlags() & 2048) != 0;
             boolean z4 = (transitionInfo.getFlags() & NetworkAnalyticsConstants.DataPoints.FLAG_UID) != 0;
             if (z3 && !z4) {
-                for (RemoteAnimationTarget remoteAnimationTarget3 : remoteAnimationTargetArrM2602$$Nest$smwrap) {
+                for (RemoteAnimationTarget remoteAnimationTarget3 : remoteAnimationTargetArrM2600$$Nest$smwrap) {
                     if (remoteAnimationTarget3.mode == 1) {
                         transaction.setAlpha(remoteAnimationTarget3.leash, 0.0f);
                     }
                 }
             }
             if ((transitionInfo.getFlags() & 256) != 0) {
-                int length = remoteAnimationTargetArrM2602$$Nest$smwrap.length;
+                int length = remoteAnimationTargetArrM2600$$Nest$smwrap.length;
                 int i2 = 0;
                 while (true) {
                     if (i2 >= length) {
                         break;
                     }
-                    RemoteAnimationTarget remoteAnimationTarget4 = remoteAnimationTargetArrM2602$$Nest$smwrap[i2];
+                    RemoteAnimationTarget remoteAnimationTarget4 = remoteAnimationTargetArrM2600$$Nest$smwrap[i2];
                     ActivityManager.RunningTaskInfo runningTaskInfo2 = remoteAnimationTarget4.taskInfo;
                     if (runningTaskInfo2 != null && runningTaskInfo2.getActivityType() == 5 && remoteAnimationTarget4.mode == 1) {
                         transaction.hide(remoteAnimationTarget4.leash);
@@ -718,15 +718,15 @@ public class KeyguardService extends Service {
             int type = transitionInfo.getType();
             int flags = transitionInfo.getFlags();
             if (type == 7 || (flags & 256) != 0) {
-                i = remoteAnimationTargetArrM2602$$Nest$smwrap.length == 0 ? 21 : 20;
+                i = remoteAnimationTargetArrM2600$$Nest$smwrap.length == 0 ? 21 : 20;
             } else if (type == 8) {
-                i = (remoteAnimationTargetArrM2602$$Nest$smwrap.length <= 0 || (runningTaskInfo = remoteAnimationTargetArrM2602$$Nest$smwrap[0].taskInfo) == null || runningTaskInfo.topActivityType != 5) ? 22 : 33;
+                i = (remoteAnimationTargetArrM2600$$Nest$smwrap.length <= 0 || (runningTaskInfo = remoteAnimationTargetArrM2600$$Nest$smwrap[0].taskInfo) == null || runningTaskInfo.topActivityType != 5) ? 22 : 33;
             } else if (type == 9) {
                 i = 23;
             } else {
                 Slog.d("KeyguardService", "Unexpected transit type: " + type);
             }
-            iRemoteAnimationRunner.onAnimationStart(i, remoteAnimationTargetArrM2602$$Nest$smwrap, remoteAnimationTargetArrM2602$$Nest$smwrap2, remoteAnimationTargetArr, new IRemoteAnimationFinishedCallback.Stub() { // from class: com.android.systemui.keyguard.KeyguardService.1.1
+            iRemoteAnimationRunner.onAnimationStart(i, remoteAnimationTargetArrM2600$$Nest$smwrap, remoteAnimationTargetArrM2600$$Nest$smwrap2, remoteAnimationTargetArr, new IRemoteAnimationFinishedCallback.Stub() { // from class: com.android.systemui.keyguard.KeyguardService.1.1
                 public final void onAnimationFinished() {
                     Slog.d("KeyguardService", "Finish IRemoteAnimationRunner.");
                     AnonymousClass1 anonymousClass1 = AnonymousClass1.this;
@@ -743,7 +743,7 @@ public class KeyguardService extends Service {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static RemoteAnimationTarget[] m2602$$Nest$smwrap(TransitionInfo transitionInfo, boolean z, SurfaceControl.Transaction transaction, ArrayMap arrayMap) {
+    public static RemoteAnimationTarget[] m2600$$Nest$smwrap(TransitionInfo transitionInfo, boolean z, SurfaceControl.Transaction transaction, ArrayMap arrayMap) {
         TransitionInfo transitionInfo2;
         SurfaceControl.Transaction transaction2;
         ArrayMap arrayMap2;

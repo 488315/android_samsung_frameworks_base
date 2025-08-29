@@ -89,7 +89,7 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
     public final AnonymousClass3 mWorkHandler;
 
     /* renamed from: -$$Nest$mhandleWallpaperMessage, reason: not valid java name */
-    public static void m3222$$Nest$mhandleWallpaperMessage(final KeyguardWallpaperController keyguardWallpaperController, Message message) {
+    public static void m3221$$Nest$mhandleWallpaperMessage(final KeyguardWallpaperController keyguardWallpaperController, Message message) {
         keyguardWallpaperController.getClass();
         int i = message.what;
         if (i == 607) {
@@ -346,7 +346,7 @@ public class KeyguardWallpaperController extends IWallpaperManagerCallback.Stub 
         final ?? r6 = new Handler(handlerThread.getLooper()) { // from class: com.android.systemui.wallpaper.KeyguardWallpaperController.3
             @Override // android.os.Handler
             public final void handleMessage(Message message) {
-                KeyguardWallpaperController.m3222$$Nest$mhandleWallpaperMessage(KeyguardWallpaperController.this, message);
+                KeyguardWallpaperController.m3221$$Nest$mhandleWallpaperMessage(KeyguardWallpaperController.this, message);
             }
         };
         this.mWorkHandler = r6;

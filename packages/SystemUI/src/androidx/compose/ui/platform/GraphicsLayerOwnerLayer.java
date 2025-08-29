@@ -465,7 +465,7 @@ public final class GraphicsLayerOwnerLayer implements OwnedLayer {
             GraphicsLayerImpl graphicsLayerImpl6 = graphicsLayer6.impl;
             long jMo551getAmbientShadowColor0d7_KjU = graphicsLayerImpl6.mo551getAmbientShadowColor0d7_KjU();
             Color.Companion companion = Color.Companion;
-            if (!ULong.m3447equalsimpl0(j, jMo551getAmbientShadowColor0d7_KjU)) {
+            if (!ULong.m3446equalsimpl0(j, jMo551getAmbientShadowColor0d7_KjU)) {
                 graphicsLayerImpl6.mo555setAmbientShadowColor8_81llA(j);
             }
         }
@@ -475,7 +475,7 @@ public final class GraphicsLayerOwnerLayer implements OwnedLayer {
             GraphicsLayerImpl graphicsLayerImpl7 = graphicsLayer7.impl;
             long jMo554getSpotShadowColor0d7_KjU = graphicsLayerImpl7.mo554getSpotShadowColor0d7_KjU();
             Color.Companion companion2 = Color.Companion;
-            if (!ULong.m3447equalsimpl0(j2, jMo554getSpotShadowColor0d7_KjU)) {
+            if (!ULong.m3446equalsimpl0(j2, jMo554getSpotShadowColor0d7_KjU)) {
                 graphicsLayerImpl7.mo561setSpotShadowColor8_81llA(j2);
             }
         }

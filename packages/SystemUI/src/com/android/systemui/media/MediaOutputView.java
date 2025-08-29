@@ -190,10 +190,10 @@ public final class MediaOutputView extends CustomComposeView {
                     int i2 = Result.$r8$clinit;
                     failure = new Result.Failure(th);
                 }
-                Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-                if (thM3442exceptionOrNullimpl != null) {
+                Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+                if (thM3441exceptionOrNullimpl != null) {
                     DLog.Companion companion = DLog.Companion;
-                    String string = thM3442exceptionOrNullimpl.toString();
+                    String string = thM3441exceptionOrNullimpl.toString();
                     companion.getClass();
                     DLog.Companion.i("MediaSdkSupportServiceClient", "bindMediaSdkSupportService.onFailure", string);
                 }
@@ -266,10 +266,10 @@ public final class MediaOutputView extends CustomComposeView {
                     int i2 = Result.$r8$clinit;
                     failure = new Result.Failure(th);
                 }
-                Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-                if (thM3442exceptionOrNullimpl != null) {
+                Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+                if (thM3441exceptionOrNullimpl != null) {
                     DLog.Companion companion = DLog.Companion;
-                    String string = thM3442exceptionOrNullimpl.toString();
+                    String string = thM3441exceptionOrNullimpl.toString();
                     companion.getClass();
                     DLog.Companion.i("MediaSdkSupportServiceClient", "unbindMediaSdkSupportService.onFailure", string);
                 }

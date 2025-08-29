@@ -239,7 +239,7 @@ public final class AndroidContentCaptureManager implements ContentCaptureManager
                                         } else {
                                             j9 = j12;
                                             ((ArrayList) androidContentCaptureManager.bufferedEvents).add(new ContentCaptureEvent(i9, androidContentCaptureManager.currentSemanticsNodesSnapshotTimestampMillis, ContentCaptureEventType.VIEW_DISAPPEAR, null));
-                                            androidContentCaptureManager.boundsUpdateChannel.mo3476trySendJP2dKIU(Unit.INSTANCE);
+                                            androidContentCaptureManager.boundsUpdateChannel.mo3475trySendJP2dKIU(Unit.INSTANCE);
                                         }
                                     } else {
                                         z2 = z3;
@@ -560,7 +560,7 @@ public final class AndroidContentCaptureManager implements ContentCaptureManager
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public final Object boundsUpdatesEventLoop$ui_release(ContinuationImpl continuationImpl) throws Throwable {
+    public final Object boundsUpdatesEventLoop$ui_release(ContinuationImpl continuationImpl) {
         AndroidContentCaptureManager$boundsUpdatesEventLoop$1 androidContentCaptureManager$boundsUpdatesEventLoop$1;
         BufferedChannel.BufferedChannelIterator bufferedChannelIterator;
         BufferedChannel.BufferedChannelIterator bufferedChannelIterator2;
@@ -864,7 +864,7 @@ public final class AndroidContentCaptureManager implements ContentCaptureManager
                     AndroidContentCaptureManager androidContentCaptureManager = this;
                     int i = AndroidContentCaptureManager.$r8$clinit;
                     androidContentCaptureManager.updateBuffersOnAppeared(iIntValue, semanticsNode2);
-                    this.boundsUpdateChannel.mo3476trySendJP2dKIU(Unit.INSTANCE);
+                    this.boundsUpdateChannel.mo3475trySendJP2dKIU(Unit.INSTANCE);
                 }
                 return Unit.INSTANCE;
             }

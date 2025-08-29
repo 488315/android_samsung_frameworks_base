@@ -83,7 +83,7 @@ public final class EditTileListState implements DragAndDropState {
     public final void onDrop() {
         ((SnapshotMutableStateImpl) this.draggedCell$delegate).setValue(null);
         Offset.Companion.getClass();
-        m2905setDraggedPositionk4lQ0M(Offset.Unspecified);
+        m2903setDraggedPositionk4lQ0M(Offset.Unspecified);
         ((SnapshotMutableStateImpl) this.dragType$delegate).setValue(null);
         regenerateGrid();
     }
@@ -105,7 +105,7 @@ public final class EditTileListState implements DragAndDropState {
     }
 
     /* renamed from: setDraggedPosition-k-4lQ0M, reason: not valid java name */
-    public final void m2905setDraggedPositionk4lQ0M(long j) {
+    public final void m2903setDraggedPositionk4lQ0M(long j) {
         ((SnapshotMutableStateImpl) this.draggedPosition$delegate).setValue(Offset.m395boximpl(j));
     }
 

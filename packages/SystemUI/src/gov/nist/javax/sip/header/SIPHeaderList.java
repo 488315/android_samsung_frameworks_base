@@ -242,7 +242,7 @@ public abstract class SIPHeaderList<HDR extends SIPHeader> extends SIPHeader imp
 
     @Override // 
     /* renamed from: getFirst, reason: merged with bridge method [inline-methods] */
-    public SIPHeader mo3439getFirst() {
+    public SIPHeader mo3438getFirst() {
         List<HDR> list = this.hlist;
         if (list == null || list.isEmpty()) {
             return null;
@@ -252,7 +252,7 @@ public abstract class SIPHeaderList<HDR extends SIPHeader> extends SIPHeader imp
 
     @Override // 
     /* renamed from: getLast, reason: merged with bridge method [inline-methods] */
-    public SIPHeader mo3440getLast() {
+    public SIPHeader mo3439getLast() {
         List<HDR> list = this.hlist;
         if (list == null || list.isEmpty()) {
             return null;

@@ -1087,10 +1087,6 @@ public final class OngoingActivityController implements IOngoingObserver, CoreSt
                             if (ongoingCardController3 != null) {
                                 Log.d("{OngoingExpandedPipController}", "expandAnimation oaCardState:" + ongoingCardController3.oaCardState);
                                 ongoingCardController3.setCardState(OngoingCardController.OaCardState.EXPAND);
-                                Log.d("{OngoingExpandedPipController}", "watchSelfValidation start");
-                                ongoingCardController3.isWatchSelfValidationProc = true;
-                                ongoingCardController3.selfValidationHandler.removeCallbacks(ongoingCardController3.selfDestroyRunnable);
-                                ongoingCardController3.selfValidationHandler.postDelayed(ongoingCardController3.selfDestroyRunnable, 4000L);
                                 ongoingCardController3.mCardStackView.setVisibility(4);
                                 CardStackView cardStackView = ongoingCardController3.mCardStackView;
                                 ViewGroup viewGroup3 = ongoingCardController3.mExpandedView;

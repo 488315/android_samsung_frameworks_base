@@ -20,7 +20,7 @@ public abstract class LottieHelpersKt {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static final LottieDynamicProperty m2585rememberColorFilterPropertyRPmYEkk(String str, long j, Composer composer) {
+    public static final LottieDynamicProperty m2583rememberColorFilterPropertyRPmYEkk(String str, long j, Composer composer) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startReplaceGroup(-886109170);
         if (ComposerKt.isTraceInProgress()) {

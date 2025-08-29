@@ -31,7 +31,7 @@ public class TransitionInflater {
         return new TransitionInflater(context);
     }
 
-    public Transition inflateTransition(int i) throws Resources.NotFoundException {
+    public Transition inflateTransition(int i) {
         XmlResourceParser xml = this.mContext.getResources().getXml(i);
         try {
             try {

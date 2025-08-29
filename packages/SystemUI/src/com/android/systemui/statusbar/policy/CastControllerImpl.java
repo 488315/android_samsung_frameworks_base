@@ -47,7 +47,7 @@ public class CastControllerImpl implements CastController {
             CastControllerLogger.Companion.getClass();
             ((LogMessageImpl) logMessageObtain).str1 = CastControllerLogger.Companion.toLogString(routeInfo);
             logBuffer.commit(logMessageObtain);
-            CastControllerImpl.m3101$$Nest$mupdateRemoteDisplays(CastControllerImpl.this);
+            CastControllerImpl.m3099$$Nest$mupdateRemoteDisplays(CastControllerImpl.this);
         }
 
         @Override // android.media.MediaRouter.SimpleCallback, android.media.MediaRouter.Callback
@@ -61,7 +61,7 @@ public class CastControllerImpl implements CastController {
             CastControllerLogger.Companion.getClass();
             ((LogMessageImpl) logMessageObtain).str1 = CastControllerLogger.Companion.toLogString(routeInfo);
             logBuffer.commit(logMessageObtain);
-            CastControllerImpl.m3101$$Nest$mupdateRemoteDisplays(CastControllerImpl.this);
+            CastControllerImpl.m3099$$Nest$mupdateRemoteDisplays(CastControllerImpl.this);
         }
 
         @Override // android.media.MediaRouter.SimpleCallback, android.media.MediaRouter.Callback
@@ -75,7 +75,7 @@ public class CastControllerImpl implements CastController {
             CastControllerLogger.Companion.getClass();
             ((LogMessageImpl) logMessageObtain).str1 = CastControllerLogger.Companion.toLogString(routeInfo);
             logBuffer.commit(logMessageObtain);
-            CastControllerImpl.m3101$$Nest$mupdateRemoteDisplays(CastControllerImpl.this);
+            CastControllerImpl.m3099$$Nest$mupdateRemoteDisplays(CastControllerImpl.this);
         }
 
         @Override // android.media.MediaRouter.SimpleCallback, android.media.MediaRouter.Callback
@@ -91,7 +91,7 @@ public class CastControllerImpl implements CastController {
             logMessageImpl.str1 = CastControllerLogger.Companion.toLogString(routeInfo);
             logMessageImpl.int1 = i;
             logBuffer.commit(logMessageObtain);
-            CastControllerImpl.m3101$$Nest$mupdateRemoteDisplays(CastControllerImpl.this);
+            CastControllerImpl.m3099$$Nest$mupdateRemoteDisplays(CastControllerImpl.this);
         }
 
         @Override // android.media.MediaRouter.SimpleCallback, android.media.MediaRouter.Callback
@@ -107,12 +107,12 @@ public class CastControllerImpl implements CastController {
             logMessageImpl.str1 = CastControllerLogger.Companion.toLogString(routeInfo);
             logMessageImpl.int1 = i;
             logBuffer.commit(logMessageObtain);
-            CastControllerImpl.m3101$$Nest$mupdateRemoteDisplays(CastControllerImpl.this);
+            CastControllerImpl.m3099$$Nest$mupdateRemoteDisplays(CastControllerImpl.this);
         }
     };
 
     /* renamed from: -$$Nest$msetProjection, reason: not valid java name */
-    public static void m3100$$Nest$msetProjection(CastControllerImpl castControllerImpl, MediaProjectionInfo mediaProjectionInfo, boolean z) {
+    public static void m3098$$Nest$msetProjection(CastControllerImpl castControllerImpl, MediaProjectionInfo mediaProjectionInfo, boolean z) {
         boolean z2;
         MediaProjectionInfo mediaProjectionInfo2 = castControllerImpl.mProjection;
         synchronized (castControllerImpl.mProjectionLock) {
@@ -147,7 +147,7 @@ public class CastControllerImpl implements CastController {
     }
 
     /* renamed from: -$$Nest$mupdateRemoteDisplays, reason: not valid java name */
-    public static void m3101$$Nest$mupdateRemoteDisplays(CastControllerImpl castControllerImpl) {
+    public static void m3099$$Nest$mupdateRemoteDisplays(CastControllerImpl castControllerImpl) {
         synchronized (castControllerImpl.mRoutes) {
             try {
                 castControllerImpl.mRoutes.clear();
@@ -181,11 +181,11 @@ public class CastControllerImpl implements CastController {
     public CastControllerImpl(Context context, PackageManager packageManager, DumpManager dumpManager, CastControllerLogger castControllerLogger) {
         ?? r0 = new MediaProjectionManager.Callback() { // from class: com.android.systemui.statusbar.policy.CastControllerImpl.2
             public final void onStart(MediaProjectionInfo mediaProjectionInfo) {
-                CastControllerImpl.m3100$$Nest$msetProjection(CastControllerImpl.this, mediaProjectionInfo, true);
+                CastControllerImpl.m3098$$Nest$msetProjection(CastControllerImpl.this, mediaProjectionInfo, true);
             }
 
             public final void onStop(MediaProjectionInfo mediaProjectionInfo) {
-                CastControllerImpl.m3100$$Nest$msetProjection(CastControllerImpl.this, mediaProjectionInfo, false);
+                CastControllerImpl.m3098$$Nest$msetProjection(CastControllerImpl.this, mediaProjectionInfo, false);
             }
         };
         this.mProjectionCallback = r0;

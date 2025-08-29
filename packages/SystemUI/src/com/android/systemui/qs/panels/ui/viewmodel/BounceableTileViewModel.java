@@ -103,7 +103,7 @@ public final class BounceableTileViewModel implements Bounceable {
     }
 
     /* renamed from: getBounce-D9Ej5fM, reason: not valid java name */
-    public final float m2909getBounceD9Ej5fM() {
+    public final float m2907getBounceD9Ej5fM() {
         return ((Dp) this.animatableBounce.internalState.getValue()).value;
     }
 }

@@ -83,7 +83,7 @@ public final class SeslPopupTokens {
         SeslPopupTokens seslPopupTokens = (SeslPopupTokens) obj;
         long j = seslPopupTokens.backgroundColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.backgroundColor, j) && ULong.m3447equalsimpl0(this.borderColor, seslPopupTokens.borderColor) && Intrinsics.areEqual(this.menuBackground, seslPopupTokens.menuBackground);
+        return ULong.m3446equalsimpl0(this.backgroundColor, j) && ULong.m3446equalsimpl0(this.borderColor, seslPopupTokens.borderColor) && Intrinsics.areEqual(this.menuBackground, seslPopupTokens.menuBackground);
     }
 
     public final int hashCode() {

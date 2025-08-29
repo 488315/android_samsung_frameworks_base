@@ -11,7 +11,7 @@ public final class LogIndent {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ LogIndent m2587boximpl() {
+    public static final /* synthetic */ LogIndent m2585boximpl() {
         return new LogIndent(0);
     }
 

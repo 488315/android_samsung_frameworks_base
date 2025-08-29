@@ -26,7 +26,7 @@ public final class DeviceEntryIconViewBinder {
     }
 
     /* renamed from: bind-7D8XEZs, reason: not valid java name */
-    public static final void m2619bind7D8XEZs(CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, DeviceEntryIconView deviceEntryIconView, DeviceEntryIconViewModel deviceEntryIconViewModel, DeviceEntryForegroundViewModel deviceEntryForegroundViewModel, DeviceEntryBackgroundViewModel deviceEntryBackgroundViewModel, FalsingManager falsingManager, VibratorHelper vibratorHelper, MSDLPlayer mSDLPlayer, Color color) {
+    public static final void m2617bind7D8XEZs(CoroutineScope coroutineScope, CoroutineDispatcher coroutineDispatcher, DeviceEntryIconView deviceEntryIconView, DeviceEntryIconViewModel deviceEntryIconViewModel, DeviceEntryForegroundViewModel deviceEntryForegroundViewModel, DeviceEntryBackgroundViewModel deviceEntryBackgroundViewModel, FalsingManager falsingManager, VibratorHelper vibratorHelper, MSDLPlayer mSDLPlayer, Color color) {
         DisposableHandles disposableHandles = new DisposableHandles();
         TouchHandlingView touchHandlingView = deviceEntryIconView.touchHandlingView;
         ImageView imageView = deviceEntryIconView.iconView;

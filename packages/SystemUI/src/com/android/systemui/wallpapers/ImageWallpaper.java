@@ -313,7 +313,7 @@ public class ImageWallpaper extends LiveWallpaperService {
         }
 
         /* renamed from: -$$Nest$mrecreateSurfaceControl, reason: not valid java name */
-        public static void m3231$$Nest$mrecreateSurfaceControl(IntegratedEngine integratedEngine) {
+        public static void m3230$$Nest$mrecreateSurfaceControl(IntegratedEngine integratedEngine) {
             integratedEngine.getClass();
             WallpaperService.Engine.SurfaceData surfaceDataSemCreateSurface = super.semCreateSurface(true, 1.0f);
             if (surfaceDataSemCreateSurface != null) {
@@ -711,7 +711,7 @@ public class ImageWallpaper extends LiveWallpaperService {
         }
 
         /* renamed from: -$$Nest$mupdatePluginWallpaper, reason: not valid java name */
-        public static void m3230$$Nest$mupdatePluginWallpaper(CanvasEngine canvasEngine) {
+        public static void m3229$$Nest$mupdatePluginWallpaper(CanvasEngine canvasEngine) {
             int iSemGetWallpaperFlags = canvasEngine.semGetWallpaperFlags();
             if (!WhichChecker.isWatchFace(iSemGetWallpaperFlags)) {
                 if (((PluginWallpaperController) ImageWallpaper.this.mPluginWallpaper).isPluginWallpaperRequired(canvasEngine.mWhich)) {

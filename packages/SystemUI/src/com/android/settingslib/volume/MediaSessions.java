@@ -112,7 +112,7 @@ public final class MediaSessions {
             boolean zShouldShowUI = volumeDialogControllerImpl.shouldShowUI(i2);
             String str4 = VolumeDialogControllerImpl.TAG;
             Slog.d(str4, "onRemoteVolumeChanged: stream: " + iIntValue + " showui? " + zShouldShowUI);
-            VolumeDialogControllerImpl.m3213$$Nest$mupdateRemoteFixedVolumeSession(VolumeDialogControllerImpl.this, iIntValue, VolumeDialogControllerImpl.m3212$$Nest$mgetMediaControllerFromSessionId(VolumeDialogControllerImpl.this, media).getPlaybackInfo());
+            VolumeDialogControllerImpl.m3212$$Nest$mupdateRemoteFixedVolumeSession(VolumeDialogControllerImpl.this, iIntValue, VolumeDialogControllerImpl.m3211$$Nest$mgetMediaControllerFromSessionId(VolumeDialogControllerImpl.this, media).getPlaybackInfo());
             boolean zUpdateActiveStreamW = VolumeDialogControllerImpl.this.updateActiveStreamW(iIntValue);
             if (zShouldShowUI) {
                 zUpdateActiveStreamW |= VolumeDialogControllerImpl.this.checkRoutedToBluetoothW(3);
@@ -488,7 +488,7 @@ public final class MediaSessions {
         StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(iIntValue, "onRemoteUpdate: stream: ", " volume: ");
         sbM.append(volumeInfo.currentVolume);
         Slog.d(str2, sbM.toString());
-        VolumeDialogControllerImpl.m3213$$Nest$mupdateRemoteFixedVolumeSession(VolumeDialogControllerImpl.this, iIntValue, VolumeDialogControllerImpl.m3212$$Nest$mgetMediaControllerFromSessionId(VolumeDialogControllerImpl.this, media).getPlaybackInfo());
+        VolumeDialogControllerImpl.m3212$$Nest$mupdateRemoteFixedVolumeSession(VolumeDialogControllerImpl.this, iIntValue, VolumeDialogControllerImpl.m3211$$Nest$mgetMediaControllerFromSessionId(VolumeDialogControllerImpl.this, media).getPlaybackInfo());
         VolumeDialogControllerImpl volumeDialogControllerImpl = VolumeDialogControllerImpl.this;
         VolumeDialogController.StreamState streamStateStreamStateW = volumeDialogControllerImpl.streamStateW(iIntValue);
         Iterator it = volumeDialogControllerImpl.mRouter2Manager.getAllRoutes().iterator();

@@ -53,9 +53,9 @@ final class ConditionExtensionsKt$toFlow$1 extends SuspendLambda implements Func
                     boolean z = bool != null;
                     SendChannel sendChannel = producerScope;
                     if (z) {
-                        ((ChannelCoroutine) sendChannel).mo3476trySendJP2dKIU(Boolean.valueOf(Boolean.TRUE.equals(bool)));
+                        ((ChannelCoroutine) sendChannel).mo3475trySendJP2dKIU(Boolean.valueOf(Boolean.TRUE.equals(bool)));
                     } else {
-                        ((ChannelCoroutine) sendChannel).mo3476trySendJP2dKIU(null);
+                        ((ChannelCoroutine) sendChannel).mo3475trySendJP2dKIU(null);
                     }
                 }
             };

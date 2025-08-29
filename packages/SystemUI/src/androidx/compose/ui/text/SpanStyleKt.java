@@ -79,7 +79,7 @@ public abstract class SpanStyleKt {
                         }
                         if (j4 != 16) {
                             Color.Companion companion2 = Color.Companion;
-                            if (ULong.m3447equalsimpl0(j4, spanStyle.background)) {
+                            if (ULong.m3446equalsimpl0(j4, spanStyle.background)) {
                             }
                             platformSpanStyle2 = platformSpanStyle;
                             drawStyle2 = drawStyle;
@@ -111,7 +111,7 @@ public abstract class SpanStyleKt {
             } else {
                 long jMo794getColor0d7_KjU = spanStyle.textForegroundStyle.mo794getColor0d7_KjU();
                 Color.Companion companion3 = Color.Companion;
-                if (ULong.m3447equalsimpl0(j, jMo794getColor0d7_KjU)) {
+                if (ULong.m3446equalsimpl0(j, jMo794getColor0d7_KjU)) {
                 }
             }
         }

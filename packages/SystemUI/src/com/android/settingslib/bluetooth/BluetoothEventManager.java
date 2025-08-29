@@ -501,6 +501,7 @@ public class BluetoothEventManager {
                             Intent intent2 = new Intent("com.samsung.settings.bluetooth.restoredialog.LAUNCH");
                             intent2.setFlags(335544320);
                             intent2.putExtra("cachedAddress", cachedBluetoothDeviceFindDevice.mAddress);
+                            intent2.putExtra("cachedName", cachedBluetoothDeviceFindDevice.mDeviceName);
                             cachedBluetoothDeviceFindDevice.mContext.startActivityAsUser(intent2, UserHandle.CURRENT);
                         }
                     } else if (i3 == 12) {

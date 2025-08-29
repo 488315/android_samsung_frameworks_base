@@ -68,10 +68,10 @@ public class ChannelCoroutine extends AbstractCoroutine implements Channel {
 
     @Override // kotlinx.coroutines.channels.ReceiveChannel
     /* renamed from: receiveCatching-JP2dKIU */
-    public final Object mo3473receiveCatchingJP2dKIU(Continuation continuation) {
-        Object objMo3473receiveCatchingJP2dKIU = this._channel.mo3473receiveCatchingJP2dKIU(continuation);
+    public final Object mo3472receiveCatchingJP2dKIU(Continuation continuation) {
+        Object objMo3472receiveCatchingJP2dKIU = this._channel.mo3472receiveCatchingJP2dKIU(continuation);
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
-        return objMo3473receiveCatchingJP2dKIU;
+        return objMo3472receiveCatchingJP2dKIU;
     }
 
     @Override // kotlinx.coroutines.channels.SendChannel
@@ -81,13 +81,13 @@ public class ChannelCoroutine extends AbstractCoroutine implements Channel {
 
     @Override // kotlinx.coroutines.channels.ReceiveChannel
     /* renamed from: tryReceive-PtdJZtk */
-    public final Object mo3475tryReceivePtdJZtk() {
-        return this._channel.mo3475tryReceivePtdJZtk();
+    public final Object mo3474tryReceivePtdJZtk() {
+        return this._channel.mo3474tryReceivePtdJZtk();
     }
 
     @Override // kotlinx.coroutines.channels.SendChannel
     /* renamed from: trySend-JP2dKIU */
-    public final Object mo3476trySendJP2dKIU(Object obj) {
-        return this._channel.mo3476trySendJP2dKIU(obj);
+    public final Object mo3475trySendJP2dKIU(Object obj) {
+        return this._channel.mo3475trySendJP2dKIU(obj);
     }
 }

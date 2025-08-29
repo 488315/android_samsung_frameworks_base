@@ -14,7 +14,7 @@ import kotlin.jvm.functions.Function2;
 /* loaded from: classes4.dex */
 public abstract class ProgressIndicatorKt {
     /* renamed from: SeslIndeterminateCircularProgressIndicator-h1eT-Ww, reason: not valid java name */
-    public static final void m3340SeslIndeterminateCircularProgressIndicatorh1eTWw(float f, final int i, long j, long j2, Composer composer, final Modifier.Companion companion) {
+    public static final void m3339SeslIndeterminateCircularProgressIndicatorh1eTWw(float f, final int i, long j, long j2, Composer composer, final Modifier.Companion companion) {
         int i2;
         float f2;
         final long j3;
@@ -48,7 +48,7 @@ public abstract class ProgressIndicatorKt {
                 ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslIndeterminateCircularProgressIndicator (ProgressIndicator.kt:99)");
             }
             f2 = f;
-            BasicProgressIndicatorKt.m3338SeslBasicIndeterminateCircularProgressIndicatorZO3OeZo(f2, ((i2 >> 3) & 1022) | 3072, j5, j6, composerImpl, companion2);
+            BasicProgressIndicatorKt.m3337SeslBasicIndeterminateCircularProgressIndicatorZO3OeZo(f2, ((i2 >> 3) & 1022) | 3072, j5, j6, composerImpl, companion2);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
@@ -78,7 +78,7 @@ public abstract class ProgressIndicatorKt {
                     long j7 = this.f$2;
                     float f4 = this.f$3;
                     Modifier.Companion companion3 = this.f$0;
-                    ProgressIndicatorKt.m3340SeslIndeterminateCircularProgressIndicatorh1eTWw(f4, iUpdateChangedFlags, this.f$1, j7, (Composer) obj, companion3);
+                    ProgressIndicatorKt.m3339SeslIndeterminateCircularProgressIndicatorh1eTWw(f4, iUpdateChangedFlags, this.f$1, j7, (Composer) obj, companion3);
                     return Unit.INSTANCE;
                 }
             };

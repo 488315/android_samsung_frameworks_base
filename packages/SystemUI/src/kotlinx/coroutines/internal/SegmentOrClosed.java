@@ -7,7 +7,7 @@ public final class SegmentOrClosed {
     public final Object value;
 
     /* renamed from: getSegment-impl, reason: not valid java name */
-    public static final Segment m3485getSegmentimpl(Object obj) {
+    public static final Segment m3484getSegmentimpl(Object obj) {
         if (obj != ConcurrentLinkedListKt.CLOSED) {
             return (Segment) obj;
         }
@@ -15,7 +15,7 @@ public final class SegmentOrClosed {
     }
 
     /* renamed from: isClosed-impl, reason: not valid java name */
-    public static final boolean m3486isClosedimpl(Object obj) {
+    public static final boolean m3485isClosedimpl(Object obj) {
         return obj == ConcurrentLinkedListKt.CLOSED;
     }
 

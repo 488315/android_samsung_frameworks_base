@@ -53,7 +53,7 @@ public final class DeviceStateRepositoryImpl implements DeviceStateRepository {
                 final ?? r1 = new FoldProvider.FoldCallback() { // from class: com.android.systemui.unfold.system.DeviceStateRepositoryImpl$isFolded$1$callback$1
                     @Override // com.android.systemui.unfold.updates.FoldProvider.FoldCallback
                     public final void onFoldUpdated(boolean z) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(z));
                     }
                 };
                 DeviceStateRepositoryImpl deviceStateRepositoryImpl = DeviceStateRepositoryImpl.this;

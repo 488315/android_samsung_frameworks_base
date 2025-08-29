@@ -13,5 +13,5 @@ public interface SendChannel {
     Object send(Object obj, Continuation continuation);
 
     /* renamed from: trySend-JP2dKIU */
-    Object mo3476trySendJP2dKIU(Object obj);
+    Object mo3475trySendJP2dKIU(Object obj);
 }

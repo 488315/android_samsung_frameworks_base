@@ -137,7 +137,7 @@ public class SubscreenBrightnessDetailActivity extends Activity implements Wakef
     }
 
     /* renamed from: -$$Nest$msetBrightness, reason: not valid java name */
-    public static void m2897$$Nest$msetBrightness(SubscreenBrightnessDetailActivity subscreenBrightnessDetailActivity, Boolean bool, Boolean bool2) {
+    public static void m2895$$Nest$msetBrightness(SubscreenBrightnessDetailActivity subscreenBrightnessDetailActivity, Boolean bool, Boolean bool2) {
         subscreenBrightnessDetailActivity.getClass();
         if (((KnoxStateMonitorImpl) ((KnoxStateMonitor) Dependency.sDependency.getDependencyInner(KnoxStateMonitor.class))).isBrightnessBlocked()) {
             Log.d("SubscreenBrightnessDetailActivity", "Auto brightness options are not available by KnoxStateMonitor.");
@@ -225,7 +225,7 @@ public class SubscreenBrightnessDetailActivity extends Activity implements Wakef
                     SubscreenBrightnessDetailActivity subscreenBrightnessDetailActivity3;
                     int i2;
                     boolean zIsChecked = SubscreenBrightnessDetailActivity.this.mAutoBrightnessSwitch.isChecked();
-                    SubscreenBrightnessDetailActivity.m2897$$Nest$msetBrightness(SubscreenBrightnessDetailActivity.this, Boolean.valueOf(zIsChecked), Boolean.valueOf(!zIsChecked));
+                    SubscreenBrightnessDetailActivity.m2895$$Nest$msetBrightness(SubscreenBrightnessDetailActivity.this, Boolean.valueOf(zIsChecked), Boolean.valueOf(!zIsChecked));
                     if (SubscreenBrightnessDetailActivity.this.mAutoBrightnessSwitch.isChecked()) {
                         subscreenBrightnessDetailActivity3 = SubscreenBrightnessDetailActivity.this.mContext;
                         i2 = com.android.systemui.R.string.switch_bar_on;
@@ -246,7 +246,7 @@ public class SubscreenBrightnessDetailActivity extends Activity implements Wakef
             this.mAutoBrightnessSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() { // from class: com.android.systemui.qp.SubscreenBrightnessDetailActivity.5
                 @Override // android.widget.CompoundButton.OnCheckedChangeListener
                 public final void onCheckedChanged(CompoundButton compoundButton, boolean z2) {
-                    SubscreenBrightnessDetailActivity.m2897$$Nest$msetBrightness(SubscreenBrightnessDetailActivity.this, Boolean.valueOf(!z2), Boolean.valueOf(z2));
+                    SubscreenBrightnessDetailActivity.m2895$$Nest$msetBrightness(SubscreenBrightnessDetailActivity.this, Boolean.valueOf(!z2), Boolean.valueOf(z2));
                     if (QpRune.QUICK_SUBSCREEN_PANEL) {
                         SystemUIAnalytics.sendEventLog(SystemUIAnalytics.getCurrentScreenID(), SystemUIAnalytics.STID_ADAPTIVE_BRIGHTNESS, z2 ? 1L : 0L);
                     }

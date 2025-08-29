@@ -38,7 +38,7 @@ public final class DreamingToAodTransitionViewModel$special$$inlined$flatMapLate
 
     @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
     public final Object invokeSuspend(Object obj) {
-        Flow flowM2616sharedFlow74qcysc$default;
+        Flow flowM2614sharedFlow74qcysc$default;
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         int i = this.label;
         if (i == 0) {
@@ -47,7 +47,7 @@ public final class DreamingToAodTransitionViewModel$special$$inlined$flatMapLate
             if (((Boolean) this.L$1).booleanValue()) {
                 KeyguardTransitionAnimationFlow.FlowBuilder flowBuilder = this.this$0.transitionAnimation;
                 FromDreamingTransitionInteractor.Companion.getClass();
-                flowM2616sharedFlow74qcysc$default = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilder, FromDreamingTransitionInteractor.TO_AOD_DURATION, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.DreamingToAodTransitionViewModel$deviceEntryParentViewAlpha$1$1
+                flowM2614sharedFlow74qcysc$default = KeyguardTransitionAnimationFlow.FlowBuilder.m2614sharedFlow74qcysc$default(flowBuilder, FromDreamingTransitionInteractor.TO_AOD_DURATION, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.DreamingToAodTransitionViewModel$deviceEntryParentViewAlpha$1$1
                     @Override // kotlin.jvm.functions.Function1
                     /* renamed from: invoke */
                     public final Object mo781invoke(Object obj2) {
@@ -65,10 +65,10 @@ public final class DreamingToAodTransitionViewModel$special$$inlined$flatMapLate
                     }
                 }, null, null, 204);
             } else {
-                flowM2616sharedFlow74qcysc$default = EmptyFlow.INSTANCE;
+                flowM2614sharedFlow74qcysc$default = EmptyFlow.INSTANCE;
             }
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, flowM2616sharedFlow74qcysc$default, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, flowM2614sharedFlow74qcysc$default, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

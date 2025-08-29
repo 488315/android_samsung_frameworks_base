@@ -55,7 +55,7 @@ final class CustomizationProviderClientImpl$observeUri$1 extends SuspendLambda i
 
                 @Override // android.database.ContentObserver
                 public final void onChange(boolean z) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
             this.this$0.context.getContentResolver().registerContentObserver(this.$uri, true, r1);

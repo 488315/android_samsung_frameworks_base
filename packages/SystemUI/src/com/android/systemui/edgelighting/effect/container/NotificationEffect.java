@@ -201,7 +201,7 @@ public class NotificationEffect extends AbsEdgeLightingView {
                             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
                             public final void onAnimationEnd(Animator animator) throws PendingIntent.CanceledException {
                                 super.onAnimationEnd(animator);
-                                NotificationEffect.m2574$$Nest$mlaunchPopupWindow(NotificationEffect.this, true);
+                                NotificationEffect.m2572$$Nest$mlaunchPopupWindow(NotificationEffect.this, true);
                             }
                         });
                         animatorSet.start();
@@ -283,7 +283,7 @@ public class NotificationEffect extends AbsEdgeLightingView {
             if (!notificationEffect.mIsActionEnable || (keyguardManager = notificationEffect.mKgm) == null || keyguardManager.isKeyguardLocked() || Utils.isLargeCoverFlipFolded()) {
                 return;
             }
-            NotificationEffect.m2574$$Nest$mlaunchPopupWindow(NotificationEffect.this, false);
+            NotificationEffect.m2572$$Nest$mlaunchPopupWindow(NotificationEffect.this, false);
         }
 
         @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnDoubleTapListener
@@ -338,7 +338,7 @@ public class NotificationEffect extends AbsEdgeLightingView {
     }
 
     /* renamed from: -$$Nest$mfreeformLaunchBounds, reason: not valid java name */
-    public static Rect m2573$$Nest$mfreeformLaunchBounds(NotificationEffect notificationEffect) {
+    public static Rect m2571$$Nest$mfreeformLaunchBounds(NotificationEffect notificationEffect) {
         notificationEffect.getClass();
         if (Feature.FEATURE_IS_TABLET_DEVICE) {
             notificationEffect.FREEFORM_WIDTH_RATIO = 0.5f;
@@ -363,7 +363,7 @@ public class NotificationEffect extends AbsEdgeLightingView {
     }
 
     /* renamed from: -$$Nest$mlaunchPopupWindow, reason: not valid java name */
-    public static void m2574$$Nest$mlaunchPopupWindow(NotificationEffect notificationEffect, boolean z) throws PendingIntent.CanceledException {
+    public static void m2572$$Nest$mlaunchPopupWindow(NotificationEffect notificationEffect, boolean z) throws PendingIntent.CanceledException {
         if (!z) {
             notificationEffect.getClass();
             if (Build.VERSION.SEM_PLATFORM_INT >= 120000) {
@@ -395,8 +395,8 @@ public class NotificationEffect extends AbsEdgeLightingView {
                 try {
                     ActivityOptions activityOptionsMakeBasic = ActivityOptions.makeBasic();
                     activityOptionsMakeBasic.setPendingIntentBackgroundActivityStartMode(1);
-                    Rect rectM2573$$Nest$mfreeformLaunchBounds = NotificationEffect.m2573$$Nest$mfreeformLaunchBounds(NotificationEffect.this);
-                    Slog.i(NotificationEffect.this.TAG, "launchPopupWindow: bounds=" + rectM2573$$Nest$mfreeformLaunchBounds);
+                    Rect rectM2571$$Nest$mfreeformLaunchBounds = NotificationEffect.m2571$$Nest$mfreeformLaunchBounds(NotificationEffect.this);
+                    Slog.i(NotificationEffect.this.TAG, "launchPopupWindow: bounds=" + rectM2571$$Nest$mfreeformLaunchBounds);
                     NotificationEffect notificationEffect2 = NotificationEffect.this;
                     notificationEffect2.mIsActivity = false;
                     PendingIntent pendingIntent2 = notificationEffect2.mPendingIntent;
@@ -406,8 +406,8 @@ public class NotificationEffect extends AbsEdgeLightingView {
                         } else {
                             Slog.i(NotificationEffect.this.TAG, "isActivity: false " + NotificationEffect.this.mPendingIntent.getCreatorPackage());
                         }
-                        if (!rectM2573$$Nest$mfreeformLaunchBounds.isEmpty()) {
-                            activityOptionsMakeBasic.setLaunchBounds(rectM2573$$Nest$mfreeformLaunchBounds);
+                        if (!rectM2571$$Nest$mfreeformLaunchBounds.isEmpty()) {
+                            activityOptionsMakeBasic.setLaunchBounds(rectM2571$$Nest$mfreeformLaunchBounds);
                             NotificationEffect.this.mPendingIntent.send(null, 0, null, null, null, null, activityOptionsMakeBasic.toBundle());
                         }
                     }
@@ -936,7 +936,7 @@ public class NotificationEffect extends AbsEdgeLightingView {
                     if (iEdgeLightingWindowCallback2 != null) {
                         iEdgeLightingWindowCallback2.onClickExpandButton(str8);
                     }
-                    EdgeLightingDialog.m2571$$Nest$mdismissInternal(edgeLightingDialog);
+                    EdgeLightingDialog.m2569$$Nest$mdismissInternal(edgeLightingDialog);
                 }
                 NotificationEffect notificationEffect2 = NotificationEffect.this;
                 boolean z6 = NotificationEffect.mBlockNotiTouch_for_NA;

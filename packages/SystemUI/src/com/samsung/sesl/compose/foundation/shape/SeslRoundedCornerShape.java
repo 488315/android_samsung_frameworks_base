@@ -45,7 +45,7 @@ public final class SeslRoundedCornerShape implements Shape {
     }
 
     /* renamed from: getSmoothCornerPathNodes-1ivO6K8, reason: not valid java name */
-    public static List m3355getSmoothCornerPathNodes1ivO6K8(float f, long j, float f2, long j2) {
+    public static List m3354getSmoothCornerPathNodes1ivO6K8(float f, long j, float f2, long j2) {
         Iterable iterable;
         if (Size.m420isEmptyimpl(j)) {
             iterable = EmptyList.INSTANCE;
@@ -126,21 +126,21 @@ public final class SeslRoundedCornerShape implements Shape {
         listArr[0] = Collections.singletonList(new PathNode.MoveTo(0.0f, fMo185toPxTmRCtEA));
         if (fMo185toPxTmRCtEA > 0.0f) {
             Offset.Companion.getClass();
-            listSingletonList = m3355getSmoothCornerPathNodes1ivO6K8(fMo185toPxTmRCtEA, j, 0.0f, 0L);
+            listSingletonList = m3354getSmoothCornerPathNodes1ivO6K8(fMo185toPxTmRCtEA, j, 0.0f, 0L);
         } else {
             listSingletonList = Collections.singletonList(new PathNode.LineTo(0.0f, 0.0f));
         }
         listArr[1] = listSingletonList;
         float f4 = fM419getWidthimpl - fMin2;
         listArr[2] = Collections.singletonList(new PathNode.LineTo(f4, 0.0f));
-        listArr[3] = fMin2 > 0.0f ? m3355getSmoothCornerPathNodes1ivO6K8(fMin2, j, 90.0f, OffsetKt.Offset(f4, 0.0f)) : Collections.singletonList(new PathNode.LineTo(fM419getWidthimpl, 0.0f));
+        listArr[3] = fMin2 > 0.0f ? m3354getSmoothCornerPathNodes1ivO6K8(fMin2, j, 90.0f, OffsetKt.Offset(f4, 0.0f)) : Collections.singletonList(new PathNode.LineTo(fM419getWidthimpl, 0.0f));
         float f5 = fM417getHeightimpl - f3;
         listArr[4] = Collections.singletonList(new PathNode.LineTo(fM419getWidthimpl, f5));
-        listArr[5] = f3 > 0.0f ? m3355getSmoothCornerPathNodes1ivO6K8(f3, j, 180.0f, OffsetKt.Offset(fM419getWidthimpl - f3, f5)) : Collections.singletonList(new PathNode.LineTo(fM419getWidthimpl, fM417getHeightimpl));
+        listArr[5] = f3 > 0.0f ? m3354getSmoothCornerPathNodes1ivO6K8(f3, j, 180.0f, OffsetKt.Offset(fM419getWidthimpl - f3, f5)) : Collections.singletonList(new PathNode.LineTo(fM419getWidthimpl, fM417getHeightimpl));
         listArr[6] = Collections.singletonList(new PathNode.LineTo(fMin3, fM417getHeightimpl));
         if (fMin3 > 0.0f) {
             f = fMin3;
-            listSingletonList2 = m3355getSmoothCornerPathNodes1ivO6K8(f, j, 270.0f, OffsetKt.Offset(0.0f, fM417getHeightimpl - fMin3));
+            listSingletonList2 = m3354getSmoothCornerPathNodes1ivO6K8(f, j, 270.0f, OffsetKt.Offset(0.0f, fM417getHeightimpl - fMin3));
         } else {
             f = fMin3;
             listSingletonList2 = Collections.singletonList(new PathNode.LineTo(0.0f, fM417getHeightimpl));

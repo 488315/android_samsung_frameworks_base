@@ -36,7 +36,7 @@ public abstract class ShaderBrush extends Brush {
         long jColor = ColorKt.Color(androidPaint.internalPaint.getColor());
         Color.Companion.getClass();
         long j2 = Color.Black;
-        if (!ULong.m3447equalsimpl0(jColor, j2)) {
+        if (!ULong.m3446equalsimpl0(jColor, j2)) {
             androidPaint.m440setColor8_81llA(j2);
         }
         if (!Intrinsics.areEqual(androidPaint.internalShader, shaderMo453createShaderuvyYCjk)) {

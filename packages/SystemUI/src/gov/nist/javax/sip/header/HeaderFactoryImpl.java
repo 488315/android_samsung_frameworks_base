@@ -119,7 +119,7 @@ public class HeaderFactoryImpl {
                 throw new ParseException("Only singleton allowed ".concat(string), 0);
             }
             if (sIPHeaderList.hlist.size() != 0) {
-                return sIPHeaderList.mo3439getFirst();
+                return sIPHeaderList.mo3438getFirst();
             }
             try {
                 header = (Header) ((SIPHeaderList) header).getMyClass().newInstance();

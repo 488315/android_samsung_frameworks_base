@@ -31,7 +31,7 @@ public final class SchedulerImpl {
             if (pair == null) {
                 throw new IllegalStateException("Unexpected empty scheduler");
             }
-            new SchedulerImpl$drain$1(((Number) pair.getFirst()).intValue(), this, ref$IntRef).invoke(LogIndent.m2587boximpl(), new Function2() { // from class: com.android.systemui.kairos.internal.SchedulerImpl$drainCompact$1$1
+            new SchedulerImpl$drain$1(((Number) pair.getFirst()).intValue(), this, ref$IntRef).invoke(LogIndent.m2585boximpl(), new Function2() { // from class: com.android.systemui.kairos.internal.SchedulerImpl$drainCompact$1$1
                 @Override // kotlin.jvm.functions.Function2
                 public final Object invoke(Object obj, Object obj2) {
                     int i = ((LogIndent) obj).currentLogIndent;

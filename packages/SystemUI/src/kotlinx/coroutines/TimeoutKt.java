@@ -75,8 +75,8 @@ public abstract class TimeoutKt {
     }
 
     /* renamed from: withTimeout-KLykuaI, reason: not valid java name */
-    public static final Object m3471withTimeoutKLykuaI(long j, Function2 function2, ContinuationImpl continuationImpl) {
-        return withTimeout(DelayKt.m3470toDelayMillisLRDsOJo(j), function2, continuationImpl);
+    public static final Object m3470withTimeoutKLykuaI(long j, Function2 function2, ContinuationImpl continuationImpl) {
+        return withTimeout(DelayKt.m3469toDelayMillisLRDsOJo(j), function2, continuationImpl);
     }
 
     /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */

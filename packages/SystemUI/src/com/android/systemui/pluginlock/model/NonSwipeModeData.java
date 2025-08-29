@@ -45,7 +45,7 @@ public class NonSwipeModeData {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public NonSwipeModeData m2678clone() throws CloneNotSupportedException {
+    public NonSwipeModeData m2676clone() throws CloneNotSupportedException {
         return (NonSwipeModeData) super.clone();
     }
 }

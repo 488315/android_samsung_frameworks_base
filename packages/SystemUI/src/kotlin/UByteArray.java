@@ -32,7 +32,7 @@ public final class UByteArray implements Collection, KMappedMarker {
                 throw new NoSuchElementException(String.valueOf(this.index));
             }
             this.index = i + 1;
-            return UByte.m3444boximpl(bArr[i]);
+            return UByte.m3443boximpl(bArr[i]);
         }
 
         @Override // java.util.Iterator

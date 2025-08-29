@@ -35,11 +35,11 @@ public abstract class AbstractMediaSdkManager {
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-        if (thM3442exceptionOrNullimpl != null) {
+        Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+        if (thM3441exceptionOrNullimpl != null) {
             DLog.Companion companion = DLog.Companion;
             companion.getClass();
-            DLog.Companion.i(getTag(), "useSafeMediaSdkSupportService.onFailure", "throwable: " + thM3442exceptionOrNullimpl);
+            DLog.Companion.i(getTag(), "useSafeMediaSdkSupportService.onFailure", "throwable: " + thM3441exceptionOrNullimpl);
         }
         return failure instanceof Result.Failure ? obj : failure;
     }

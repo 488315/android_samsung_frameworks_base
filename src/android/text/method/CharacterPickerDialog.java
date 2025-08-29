@@ -2,6 +2,7 @@ package android.text.method;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Selection;
@@ -35,7 +36,7 @@ public class CharacterPickerDialog extends Dialog implements AdapterView.OnItemC
     }
 
     @Override // android.app.Dialog
-    protected void onCreate(Bundle bundle) {
+    protected void onCreate(Bundle bundle) throws Resources.NotFoundException {
         super.onCreate(bundle);
         WindowManager.LayoutParams attributes = getWindow().getAttributes();
         attributes.token = this.mView.getApplicationWindowToken();

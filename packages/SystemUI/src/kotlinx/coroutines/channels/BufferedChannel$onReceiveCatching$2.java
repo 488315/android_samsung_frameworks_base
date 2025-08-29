@@ -20,10 +20,10 @@ final /* synthetic */ class BufferedChannel$onReceiveCatching$2 extends Function
             ChannelResult.Companion companion = ChannelResult.Companion;
             Throwable closeCause = bufferedChannel.getCloseCause();
             companion.getClass();
-            obj3 = ChannelResult.Companion.m3480closedJP2dKIU(closeCause);
+            obj3 = ChannelResult.Companion.m3479closedJP2dKIU(closeCause);
         } else {
             ChannelResult.Companion.getClass();
         }
-        return ChannelResult.m3477boximpl(obj3);
+        return ChannelResult.m3476boximpl(obj3);
     }
 }

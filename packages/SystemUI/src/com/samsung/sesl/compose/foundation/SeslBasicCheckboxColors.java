@@ -24,7 +24,7 @@ public final class SeslBasicCheckboxColors {
         SeslBasicCheckboxColors seslBasicCheckboxColors = (SeslBasicCheckboxColors) obj;
         long j = seslBasicCheckboxColors.checkColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.checkColor, j) && ULong.m3447equalsimpl0(this.circleStrokeColor, seslBasicCheckboxColors.circleStrokeColor);
+        return ULong.m3446equalsimpl0(this.checkColor, j) && ULong.m3446equalsimpl0(this.circleStrokeColor, seslBasicCheckboxColors.circleStrokeColor);
     }
 
     public final int hashCode() {

@@ -24,8 +24,8 @@ public final class TextSelectionColors {
         TextSelectionColors textSelectionColors = (TextSelectionColors) obj;
         long j = textSelectionColors.handleColor;
         Color.Companion companion = Color.Companion;
-        if (ULong.m3447equalsimpl0(this.handleColor, j)) {
-            return ULong.m3447equalsimpl0(this.backgroundColor, textSelectionColors.backgroundColor);
+        if (ULong.m3446equalsimpl0(this.handleColor, j)) {
+            return ULong.m3446equalsimpl0(this.backgroundColor, textSelectionColors.backgroundColor);
         }
         return false;
     }

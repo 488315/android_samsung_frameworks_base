@@ -247,7 +247,7 @@ public final class AODPromotedNotificationViewModel extends ExclusiveActivatable
                 */
                 public final Object emit(Object obj, Continuation continuation) {
                     AnonymousClass1 anonymousClass1;
-                    Duration durationM3454boximpl;
+                    Duration durationM3453boximpl;
                     if (continuation instanceof AnonymousClass1) {
                         anonymousClass1 = (AnonymousClass1) continuation;
                         int i = anonymousClass1.label;
@@ -265,12 +265,12 @@ public final class AODPromotedNotificationViewModel extends ExclusiveActivatable
                         PromotedNotificationContentModel promotedNotificationContentModel = (PromotedNotificationContentModel) obj;
                         if (promotedNotificationContentModel != null) {
                             Duration.Companion companion = Duration.Companion;
-                            durationM3454boximpl = Duration.m3454boximpl(Duration.m3461plusLRDsOJo(DurationKt.toDuration(promotedNotificationContentModel.lastAudiblyAlertedMs, DurationUnit.MILLISECONDS), AODPromotedNotificationViewModel.RECENTLY_ALERTED_THRESHOLD));
+                            durationM3453boximpl = Duration.m3453boximpl(Duration.m3460plusLRDsOJo(DurationKt.toDuration(promotedNotificationContentModel.lastAudiblyAlertedMs, DurationUnit.MILLISECONDS), AODPromotedNotificationViewModel.RECENTLY_ALERTED_THRESHOLD));
                         } else {
-                            durationM3454boximpl = null;
+                            durationM3453boximpl = null;
                         }
                         anonymousClass1.label = 1;
-                        if (this.$this_unsafeFlow.emit(durationM3454boximpl, anonymousClass1) == coroutineSingletons) {
+                        if (this.$this_unsafeFlow.emit(durationM3453boximpl, anonymousClass1) == coroutineSingletons) {
                             return coroutineSingletons;
                         }
                     } else {

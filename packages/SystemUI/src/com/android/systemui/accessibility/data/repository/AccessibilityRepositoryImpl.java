@@ -26,6 +26,6 @@ public final class AccessibilityRepositoryImpl implements AccessibilityRepositor
     /* renamed from: getRecommendedTimeout-UqaQ4Hc, reason: not valid java name */
     public final long m1003getRecommendedTimeoutUqaQ4Hc(int i, long j) {
         Duration.Companion companion = Duration.Companion;
-        return DurationKt.toDuration(this.manager.getRecommendedTimeoutMillis((int) Duration.m3457getInWholeMillisecondsimpl(j), i), DurationUnit.MILLISECONDS);
+        return DurationKt.toDuration(this.manager.getRecommendedTimeoutMillis((int) Duration.m3456getInWholeMillisecondsimpl(j), i), DurationUnit.MILLISECONDS);
     }
 }

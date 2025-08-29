@@ -40,7 +40,7 @@ public class ViewTransformationHelper implements TransformableView {
     }
 
     /* renamed from: -$$Nest$mabortTransformations, reason: not valid java name */
-    public static void m2964$$Nest$mabortTransformations(ViewTransformationHelper viewTransformationHelper) {
+    public static void m2962$$Nest$mabortTransformations(ViewTransformationHelper viewTransformationHelper) {
         Iterator it = viewTransformationHelper.mTransformedViews.keySet().iterator();
         while (it.hasNext()) {
             TransformState currentState = viewTransformationHelper.getCurrentState(((Integer) it.next()).intValue());
@@ -151,7 +151,7 @@ public class ViewTransformationHelper implements TransformableView {
                     ViewTransformationHelper.this.setVisible(true);
                     return;
                 }
-                ViewTransformationHelper.m2964$$Nest$mabortTransformations(ViewTransformationHelper.this);
+                ViewTransformationHelper.m2962$$Nest$mabortTransformations(ViewTransformationHelper.this);
                 CustomTransformation customTransformation = (CustomTransformation) ViewTransformationHelper.this.mCustomTransformations.get(6);
                 TransformState currentState = ViewTransformationHelper.this.getCurrentState(6);
                 if (customTransformation == null || currentState == null || !customTransformation.transformFrom(currentState, transformableView, 1.0f)) {
@@ -187,7 +187,7 @@ public class ViewTransformationHelper implements TransformableView {
             @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
             public final void onAnimationEnd(Animator animator) {
                 if (this.mCancelled) {
-                    ViewTransformationHelper.m2964$$Nest$mabortTransformations(ViewTransformationHelper.this);
+                    ViewTransformationHelper.m2962$$Nest$mabortTransformations(ViewTransformationHelper.this);
                     return;
                 }
                 Runnable runnable2 = runnable;

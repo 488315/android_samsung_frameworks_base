@@ -55,7 +55,7 @@ final class MobileConnectionsRepositoryImpl$simSettingsChangeEvent$1 extends Sus
                 public final void onChanged(Uri uri) {
                     MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl2 = mobileConnectionsRepositoryImpl;
                     mobileConnectionsRepositoryImpl2.logger.logSimSettingChanged(0, mobileConnectionsRepositoryImpl2.settingsHelper.isSimSettingOn(0));
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
             final MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl2 = this.this$0;
@@ -64,7 +64,7 @@ final class MobileConnectionsRepositoryImpl$simSettingsChangeEvent$1 extends Sus
                 public final void onChanged(Uri uri) {
                     MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl3 = mobileConnectionsRepositoryImpl2;
                     mobileConnectionsRepositoryImpl3.logger.logSimSettingChanged(1, mobileConnectionsRepositoryImpl3.settingsHelper.isSimSettingOn(1));
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
             this.this$0.settingsHelper.registerCallback(r1, Settings.Global.getUriFor(SettingsHelper.INDEX_MULTI_SIM_DEVICE_SIM1_ON));

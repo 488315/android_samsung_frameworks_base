@@ -130,7 +130,7 @@ final class UserTileSpecRepository$startFlowCollections$1 extends SuspendLambda 
 
                         @Override // android.database.ContentObserver
                         public final void onChange(boolean z) {
-                            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                            ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                         }
                     };
                     UserTileSpecRepository userTileSpecRepository = this.this$0;

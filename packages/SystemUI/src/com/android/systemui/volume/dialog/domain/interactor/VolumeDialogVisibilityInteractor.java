@@ -66,7 +66,7 @@ public final class VolumeDialogVisibilityInteractor {
 
         /* JADX WARN: Code restructure failed: missing block: B:14:0x0034, code lost:
         
-            if (kotlinx.coroutines.DelayKt.m3469delayVtjQ1oo(r3, r5) == r0) goto L15;
+            if (kotlinx.coroutines.DelayKt.m3468delayVtjQ1oo(r3, r5) == r0) goto L15;
          */
         @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
         /*
@@ -79,7 +79,7 @@ public final class VolumeDialogVisibilityInteractor {
                 ResultKt.throwOnFailure(obj);
                 VolumeDialogVisibilityInteractor volumeDialogVisibilityInteractor = VolumeDialogVisibilityInteractor.this;
                 this.label = 1;
-                obj = VolumeDialogVisibilityInteractor.m3216access$computeTimeout5sfh64U(volumeDialogVisibilityInteractor, this);
+                obj = VolumeDialogVisibilityInteractor.m3215access$computeTimeout5sfh64U(volumeDialogVisibilityInteractor, this);
                 if (obj != coroutineSingletons) {
                 }
                 return coroutineSingletons;
@@ -252,7 +252,7 @@ public final class VolumeDialogVisibilityInteractor {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static final Object m3216access$computeTimeout5sfh64U(VolumeDialogVisibilityInteractor volumeDialogVisibilityInteractor, ContinuationImpl continuationImpl) {
+    public static final Object m3215access$computeTimeout5sfh64U(VolumeDialogVisibilityInteractor volumeDialogVisibilityInteractor, ContinuationImpl continuationImpl) {
         VolumeDialogVisibilityInteractor$computeTimeout$1 volumeDialogVisibilityInteractor$computeTimeout$1;
         long j;
         long jM1003getRecommendedTimeoutUqaQ4Hc;
@@ -272,10 +272,10 @@ public final class VolumeDialogVisibilityInteractor {
         if (i2 == 0) {
             ResultKt.throwOnFailure(objFirst);
             Duration.Companion companion = Duration.Companion;
-            int iM3464toIntimpl = Duration.m3464toIntimpl(volumeDialogVisibilityInteractor.defaultTimeout, DurationUnit.MILLISECONDS);
+            int iM3463toIntimpl = Duration.m3463toIntimpl(volumeDialogVisibilityInteractor.defaultTimeout, DurationUnit.MILLISECONDS);
             volumeDialogVisibilityInteractor$computeTimeout$1.L$0 = volumeDialogVisibilityInteractor;
             volumeDialogVisibilityInteractor$computeTimeout$1.label = 1;
-            objFirst = volumeDialogVisibilityInteractor.secureSettingsRepository.getInt("volume_dialog_dismiss_timeout", iM3464toIntimpl, volumeDialogVisibilityInteractor$computeTimeout$1);
+            objFirst = volumeDialogVisibilityInteractor.secureSettingsRepository.getInt("volume_dialog_dismiss_timeout", iM3463toIntimpl, volumeDialogVisibilityInteractor$computeTimeout$1);
             if (objFirst != coroutineSingletons) {
             }
             return coroutineSingletons;
@@ -289,7 +289,7 @@ public final class VolumeDialogVisibilityInteractor {
             ResultKt.throwOnFailure(objFirst);
             VolumeDialogStateModel volumeDialogStateModel = (VolumeDialogStateModel) objFirst;
             jM1003getRecommendedTimeoutUqaQ4Hc = (volumeDialogStateModel.isHovering && (volumeDialogStateModel.isShowingSafetyWarning instanceof VolumeDialogSafetyWarningModel.Visible)) ? ((AccessibilityRepositoryImpl) volumeDialogVisibilityInteractor.accessibilityRepository).m1003getRecommendedTimeoutUqaQ4Hc(6, j) : ((AccessibilityRepositoryImpl) volumeDialogVisibilityInteractor.accessibilityRepository).m1003getRecommendedTimeoutUqaQ4Hc(4, j);
-            return Duration.m3454boximpl(jM1003getRecommendedTimeoutUqaQ4Hc);
+            return Duration.m3453boximpl(jM1003getRecommendedTimeoutUqaQ4Hc);
         }
         volumeDialogVisibilityInteractor = (VolumeDialogVisibilityInteractor) volumeDialogVisibilityInteractor$computeTimeout$1.L$0;
         ResultKt.throwOnFailure(objFirst);
@@ -305,7 +305,7 @@ public final class VolumeDialogVisibilityInteractor {
             if (volumeDialogStateModel2.isHovering) {
                 jM1003getRecommendedTimeoutUqaQ4Hc = ((AccessibilityRepositoryImpl) volumeDialogVisibilityInteractor.accessibilityRepository).m1003getRecommendedTimeoutUqaQ4Hc(4, j);
             }
-            return Duration.m3454boximpl(jM1003getRecommendedTimeoutUqaQ4Hc);
+            return Duration.m3453boximpl(jM1003getRecommendedTimeoutUqaQ4Hc);
         }
         return coroutineSingletons;
     }

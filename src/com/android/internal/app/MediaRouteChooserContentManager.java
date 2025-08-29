@@ -39,7 +39,7 @@ public class MediaRouteChooserContentManager {
         this.mAdapter = new RouteAdapter(this.mContext);
     }
 
-    public void bindViews(View view) {
+    public void bindViews(View view) throws Resources.NotFoundException {
         View viewFindViewById = view.findViewById(16908292);
         ListView listView = (ListView) view.findViewById(R.id.media_route_list);
         listView.setAdapter((ListAdapter) this.mAdapter);

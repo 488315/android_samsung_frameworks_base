@@ -141,7 +141,7 @@ public abstract class StackedMobileIconKt {
                 IconKt.m1074IconFNF3uiM(networkTypeIcon, fillElement, j, composerImpl, 48, 0);
             }
             composerImpl.end(false);
-            m3098StackedMobileIcon3IgeMak(dualSim, j, null, composerImpl, 0);
+            m3096StackedMobileIcon3IgeMak(dualSim, j, null, composerImpl, 0);
             composerImpl.end(true);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
@@ -182,7 +182,7 @@ public abstract class StackedMobileIconKt {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static final void m3098StackedMobileIcon3IgeMak(final StackedMobileIconViewModel.DualSim dualSim, final long j, Modifier modifier, Composer composer, final int i) {
+    public static final void m3096StackedMobileIcon3IgeMak(final StackedMobileIconViewModel.DualSim dualSim, final long j, Modifier modifier, Composer composer, final int i) {
         final Modifier modifier2;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(-410697635);
@@ -253,7 +253,7 @@ public abstract class StackedMobileIconKt {
                                         Size.Companion companion3 = Size.Companion;
                                         dualSim2 = dualSim3;
                                         cellular = cellular3;
-                                        StackedMobileIconKt.m3099drawMobileIconBarn3YQ8UE$default(drawScope, cellular4.level, i5, jFloatToRawIntBits, jFloatToRawIntBits2, j3);
+                                        StackedMobileIconKt.m3097drawMobileIconBarn3YQ8UE$default(drawScope, cellular4.level, i5, jFloatToRawIntBits, jFloatToRawIntBits2, j3);
                                     } else {
                                         f = f3;
                                         z = z2;
@@ -272,7 +272,7 @@ public abstract class StackedMobileIconKt {
                                         long jFloatToRawIntBits4 = (Float.floatToRawIntBits(f2) << c) | (Float.floatToRawIntBits(fMo57toPxR2X_6o3) & 4294967295L);
                                         Size.Companion companion5 = Size.Companion;
                                         i3 = i6;
-                                        StackedMobileIconKt.m3099drawMobileIconBarn3YQ8UE$default(drawScope, cellular.level, i3, jFloatToRawIntBits3, jFloatToRawIntBits4, j4);
+                                        StackedMobileIconKt.m3097drawMobileIconBarn3YQ8UE$default(drawScope, cellular.level, i3, jFloatToRawIntBits3, jFloatToRawIntBits4, j4);
                                         j2 = j4;
                                     } else {
                                         j2 = j4;
@@ -353,7 +353,7 @@ public abstract class StackedMobileIconKt {
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).getClass();
                     int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
-                    StackedMobileIconKt.m3098StackedMobileIcon3IgeMak(this.f$0, this.f$1, this.f$2, (Composer) obj, iUpdateChangedFlags);
+                    StackedMobileIconKt.m3096StackedMobileIcon3IgeMak(this.f$0, this.f$1, this.f$2, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };
@@ -361,7 +361,7 @@ public abstract class StackedMobileIconKt {
     }
 
     /* renamed from: drawMobileIconBar-n3YQ8UE$default, reason: not valid java name */
-    public static void m3099drawMobileIconBarn3YQ8UE$default(DrawScope drawScope, int i, int i2, long j, long j2, long j3) {
+    public static void m3097drawMobileIconBarn3YQ8UE$default(DrawScope drawScope, int i, int i2, long j, long j2, long j3) {
         long jColor = ColorKt.Color(Color.m463getRedimpl(j3), Color.m462getGreenimpl(j3), Color.m460getBlueimpl(j3), 0.3f, Color.m461getColorSpaceimpl(j3));
         float fIntBitsToFloat = Float.intBitsToFloat((int) (j2 >> 32)) / 2;
         long jFloatToRawIntBits = (Float.floatToRawIntBits(fIntBitsToFloat) << 32) | (Float.floatToRawIntBits(fIntBitsToFloat) & 4294967295L);

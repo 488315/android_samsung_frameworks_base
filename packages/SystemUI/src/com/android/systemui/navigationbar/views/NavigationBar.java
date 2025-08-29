@@ -325,14 +325,14 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
     }
 
     /* renamed from: $r8$lambda$HCBlCcLTUzLXTlWADh-tZKsEEs4, reason: not valid java name */
-    public static void m2643$r8$lambda$HCBlCcLTUzLXTlWADhtZKsEEs4(NavigationBar navigationBar) {
+    public static void m2641$r8$lambda$HCBlCcLTUzLXTlWADhtZKsEEs4(NavigationBar navigationBar) {
         NavigationBarView navigationBarView = (NavigationBarView) navigationBar.mView;
         navigationBarView.mLayoutTransitionsEnabled = true;
         navigationBarView.updateLayoutTransitionsEnabled();
     }
 
     /* renamed from: $r8$lambda$PHzUD06Qyv-u_i_ArfJRIF89Blg, reason: not valid java name */
-    public static void m2644$r8$lambda$PHzUD06Qyvu_i_ArfJRIF89Blg(NavigationBar navigationBar) {
+    public static void m2642$r8$lambda$PHzUD06Qyvu_i_ArfJRIF89Blg(NavigationBar navigationBar) {
         if (navigationBar.onHomeLongClick(((NavigationBarView) navigationBar.mView).getHomeButton().mCurrentView) && navigationBar.mHomeButtonLongPressHapticEnabled) {
             ((NavigationBarView) navigationBar.mView).getHomeButton().mCurrentView.performHapticFeedback(0, 1);
         }
@@ -358,7 +358,7 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
     }
 
     /* renamed from: -$$Nest$mcalculateSamplingRect, reason: not valid java name */
-    public static Rect m2645$$Nest$mcalculateSamplingRect(NavigationBar navigationBar) throws Resources.NotFoundException {
+    public static Rect m2643$$Nest$mcalculateSamplingRect(NavigationBar navigationBar) throws Resources.NotFoundException {
         int i;
         int i2;
         int i3;
@@ -816,7 +816,7 @@ public class NavigationBar extends ViewController implements CommandQueue.Callba
             public final Rect getSampledRegion() {
                 NavigationBar navigationBar = NavigationBar.this;
                 Rect rect = navigationBar.mOrientedHandleSamplingRegion;
-                return rect != null ? rect : NavigationBar.m2645$$Nest$mcalculateSamplingRect(navigationBar);
+                return rect != null ? rect : NavigationBar.m2643$$Nest$mcalculateSamplingRect(navigationBar);
             }
 
             @Override // com.android.wm.shell.shared.handles.RegionSamplingHelper.SamplingCallback

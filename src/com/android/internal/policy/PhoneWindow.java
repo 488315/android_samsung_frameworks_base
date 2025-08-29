@@ -1377,7 +1377,7 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         }
         if (drawable != null) {
             drawable.setAlpha(i2);
-            rightIconView.setImageDrawable(drawable);
+            rightIconView.lambda$setImageURIAsync$2(drawable);
             rightIconView.setVisibility(0);
             return;
         }
@@ -2347,7 +2347,7 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         }
     }
 
-    private Transition getTransition(Transition transition, Transition transition2, int i) throws Resources.NotFoundException {
+    private Transition getTransition(Transition transition, Transition transition2, int i) {
         if (transition != transition2) {
             return transition;
         }

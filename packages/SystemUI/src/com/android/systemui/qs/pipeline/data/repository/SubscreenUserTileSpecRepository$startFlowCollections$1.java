@@ -130,7 +130,7 @@ final class SubscreenUserTileSpecRepository$startFlowCollections$1 extends Suspe
 
                         @Override // android.database.ContentObserver
                         public final void onChange(boolean z) {
-                            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                            ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                         }
                     };
                     SubscreenUserTileSpecRepository subscreenUserTileSpecRepository = this.this$0;

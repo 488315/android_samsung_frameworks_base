@@ -54,7 +54,7 @@ public abstract class DevicePostureControllerExtKt {
                 final ?? r1 = new DevicePostureController.Callback() { // from class: com.android.systemui.statusbar.policy.DevicePostureControllerExtKt$devicePosture$1$callback$1
                     @Override // com.android.systemui.statusbar.policy.DevicePostureController.Callback
                     public final void onPostureChanged(int i2) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Integer.valueOf(i2));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Integer.valueOf(i2));
                     }
                 };
                 ((DevicePostureControllerImpl) this.$this_devicePosture).addCallback(r1);

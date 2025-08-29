@@ -20,6 +20,6 @@ public final class MobileConnectionsRepositoryImpl$deviceOnTheCall$1$callback$1 
         if (i != 2 && i != 1) {
             z = false;
         }
-        ((ChannelCoroutine) sendChannel).mo3476trySendJP2dKIU(Boolean.valueOf(z));
+        ((ChannelCoroutine) sendChannel).mo3475trySendJP2dKIU(Boolean.valueOf(z));
     }
 }

@@ -82,9 +82,9 @@ public final class VideoCallEffect implements VideoCallMicModeBar.VideoCallMicMo
                     int i2 = Result.$r8$clinit;
                     failure = new Result.Failure(th);
                 }
-                Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-                if (thM3442exceptionOrNullimpl != null) {
-                    Log.e("VideoCallEffect", "onChange: exception occurred: " + thM3442exceptionOrNullimpl.getMessage());
+                Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+                if (thM3441exceptionOrNullimpl != null) {
+                    Log.e("VideoCallEffect", "onChange: exception occurred: " + thM3441exceptionOrNullimpl.getMessage());
                 }
             }
         };
@@ -131,9 +131,9 @@ public final class VideoCallEffect implements VideoCallMicModeBar.VideoCallMicMo
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-        if (thM3442exceptionOrNullimpl != null) {
-            Log.e("VideoCallEffect", "registerContentObserver: exception occurred: " + thM3442exceptionOrNullimpl.getMessage());
+        Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+        if (thM3441exceptionOrNullimpl != null) {
+            Log.e("VideoCallEffect", "registerContentObserver: exception occurred: " + thM3441exceptionOrNullimpl.getMessage());
         }
     }
 

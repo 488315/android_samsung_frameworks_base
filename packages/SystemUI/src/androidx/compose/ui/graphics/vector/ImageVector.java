@@ -216,7 +216,7 @@ public final class ImageVector {
         }
         long j = imageVector.tintColor;
         Color.Companion companion = Color.Companion;
-        if (!ULong.m3447equalsimpl0(this.tintColor, j)) {
+        if (!ULong.m3446equalsimpl0(this.tintColor, j)) {
             return false;
         }
         int i = imageVector.tintBlendMode;

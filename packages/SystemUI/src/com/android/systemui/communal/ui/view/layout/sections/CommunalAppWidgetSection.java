@@ -253,10 +253,10 @@ public final class CommunalAppWidgetSection {
                                     CommunalAppWidgetViewModel communalAppWidgetViewModel2 = communalAppWidgetViewModel;
                                     int i5 = widget2.appWidgetId;
                                     if (num == null || num.intValue() != i5) {
-                                        communalAppWidgetViewModel2.requests.mo3476trySendJP2dKIU(new SetListener(i5, communalAppWidgetHostView));
+                                        communalAppWidgetViewModel2.requests.mo3475trySendJP2dKIU(new SetListener(i5, communalAppWidgetHostView));
                                         communalAppWidgetHostView.setTag(i4, Integer.valueOf(i5));
                                     }
-                                    communalAppWidgetViewModel2.requests.mo3476trySendJP2dKIU(new UpdateSize(sizeF2, communalAppWidgetHostView));
+                                    communalAppWidgetViewModel2.requests.mo3475trySendJP2dKIU(new UpdateSize(sizeF2, communalAppWidgetHostView));
                                     return Unit.INSTANCE;
                                 }
                             };

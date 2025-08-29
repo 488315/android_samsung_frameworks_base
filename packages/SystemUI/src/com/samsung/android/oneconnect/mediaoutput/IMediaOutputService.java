@@ -19,7 +19,7 @@ public interface IMediaOutputService extends IInterface {
 
     public class _Parcel {
         /* renamed from: -$$Nest$smwriteTypedList, reason: not valid java name */
-        public static void m3309$$Nest$smwriteTypedList(Parcel parcel, List list) {
+        public static void m3308$$Nest$smwriteTypedList(Parcel parcel, List list) {
             if (list == null) {
                 parcel.writeInt(-1);
                 return;
@@ -437,12 +437,12 @@ public interface IMediaOutputService extends IInterface {
                 case 1:
                     List devices = getDevices();
                     parcel2.writeNoException();
-                    _Parcel.m3309$$Nest$smwriteTypedList(parcel2, devices);
+                    _Parcel.m3308$$Nest$smwriteTypedList(parcel2, devices);
                     return true;
                 case 2:
                     List mediaOutputDevices = getMediaOutputDevices(parcel.readString());
                     parcel2.writeNoException();
-                    _Parcel.m3309$$Nest$smwriteTypedList(parcel2, mediaOutputDevices);
+                    _Parcel.m3308$$Nest$smwriteTypedList(parcel2, mediaOutputDevices);
                     return true;
                 case 3:
                     IBinder strongBinder = parcel.readStrongBinder();
@@ -570,7 +570,7 @@ public interface IMediaOutputService extends IInterface {
                 case 21:
                     List mediaOutputDevicesV2 = getMediaOutputDevicesV2(parcel.readString());
                     parcel2.writeNoException();
-                    _Parcel.m3309$$Nest$smwriteTypedList(parcel2, mediaOutputDevicesV2);
+                    _Parcel.m3308$$Nest$smwriteTypedList(parcel2, mediaOutputDevicesV2);
                     return true;
                 case 22:
                     MediaOutputDeviceV2 currentMediaOutputV2 = getCurrentMediaOutputV2(parcel.readString());

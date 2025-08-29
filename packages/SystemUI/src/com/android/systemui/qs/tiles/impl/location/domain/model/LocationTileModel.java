@@ -11,7 +11,7 @@ public final class LocationTileModel {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ LocationTileModel m2932boximpl(boolean z) {
+    public static final /* synthetic */ LocationTileModel m2930boximpl(boolean z) {
         return new LocationTileModel(z);
     }
 

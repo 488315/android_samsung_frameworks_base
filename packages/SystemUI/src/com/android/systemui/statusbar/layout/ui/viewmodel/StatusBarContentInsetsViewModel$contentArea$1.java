@@ -52,7 +52,7 @@ final class StatusBarContentInsetsViewModel$contentArea$1 extends SuspendLambda 
                 @Override // com.android.systemui.statusbar.layout.StatusBarContentInsetsChangedListener
                 public final void onStatusBarContentInsetsChanged() {
                     StatusBarContentInsetsProviderImpl statusBarContentInsetsProviderImpl = (StatusBarContentInsetsProviderImpl) statusBarContentInsetsViewModel.statusBarContentInsetsProvider;
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(statusBarContentInsetsProviderImpl.getStatusBarContentAreaForRotation(RotationUtils.getExactRotation(statusBarContentInsetsProviderImpl.context)));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(statusBarContentInsetsProviderImpl.getStatusBarContentAreaForRotation(RotationUtils.getExactRotation(statusBarContentInsetsProviderImpl.context)));
                 }
             };
             ((StatusBarContentInsetsProviderImpl) this.this$0.statusBarContentInsetsProvider).addCallback(r1);

@@ -201,7 +201,7 @@ public abstract class CombineKt {
             BufferedChannel bufferedChannelChannel$default;
             byte[] bArr;
             byte b;
-            Object objMo3473receiveCatchingJP2dKIU;
+            Object objMo3472receiveCatchingJP2dKIU;
             IndexedValue indexedValue;
             CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
             int i = this.label;
@@ -228,12 +228,12 @@ public abstract class CombineKt {
                 ?? r9 = (Channel) this.L$1;
                 Object[] objArr2 = (Object[]) this.L$0;
                 ResultKt.throwOnFailure(obj);
-                objMo3473receiveCatchingJP2dKIU = ((ChannelResult) obj).holder;
+                objMo3472receiveCatchingJP2dKIU = ((ChannelResult) obj).holder;
                 bufferedChannelChannel$default = r9;
                 b = r2;
                 bArr = bArr2;
                 objArr = objArr2;
-                indexedValue = (IndexedValue) ChannelResult.m3479getOrNullimpl(objMo3473receiveCatchingJP2dKIU);
+                indexedValue = (IndexedValue) ChannelResult.m3478getOrNullimpl(objMo3472receiveCatchingJP2dKIU);
                 if (indexedValue != null) {
                     return Unit.INSTANCE;
                 }
@@ -246,7 +246,7 @@ public abstract class CombineKt {
                     }
                     if (bArr[i3] != b) {
                         bArr[i3] = b;
-                        indexedValue = (IndexedValue) ChannelResult.m3479getOrNullimpl(bufferedChannelChannel$default.mo3475tryReceivePtdJZtk());
+                        indexedValue = (IndexedValue) ChannelResult.m3478getOrNullimpl(bufferedChannelChannel$default.mo3474tryReceivePtdJZtk());
                         if (indexedValue != null) {
                         }
                     }
@@ -302,9 +302,9 @@ public abstract class CombineKt {
             this.I$0 = length;
             this.I$1 = b;
             this.label = 1;
-            objMo3473receiveCatchingJP2dKIU = bufferedChannelChannel$default.mo3473receiveCatchingJP2dKIU(this);
-            if (objMo3473receiveCatchingJP2dKIU != coroutineSingletons) {
-                indexedValue = (IndexedValue) ChannelResult.m3479getOrNullimpl(objMo3473receiveCatchingJP2dKIU);
+            objMo3472receiveCatchingJP2dKIU = bufferedChannelChannel$default.mo3472receiveCatchingJP2dKIU(this);
+            if (objMo3472receiveCatchingJP2dKIU != coroutineSingletons) {
+                indexedValue = (IndexedValue) ChannelResult.m3478getOrNullimpl(objMo3472receiveCatchingJP2dKIU);
                 if (indexedValue != null) {
                 }
             }

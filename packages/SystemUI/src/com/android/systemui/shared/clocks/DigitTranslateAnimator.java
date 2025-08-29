@@ -19,9 +19,9 @@ public final class DigitTranslateAnimator {
     public DigitTranslateAnimator(Function1 function1) {
         this.updateCallback = function1;
         VPointF.Companion companion = VPointF.Companion;
-        this.currentTranslation = companion.m2790getZEROJv7bpU8();
-        this.baseTranslation = companion.m2790getZEROJv7bpU8();
-        this.targetTranslation = companion.m2790getZEROJv7bpU8();
+        this.currentTranslation = companion.m2788getZEROJv7bpU8();
+        this.baseTranslation = companion.m2788getZEROJv7bpU8();
+        this.targetTranslation = companion.m2788getZEROJv7bpU8();
         ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(1.0f);
         valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.systemui.shared.clocks.DigitTranslateAnimator$bounceAnimator$1$1
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
@@ -30,7 +30,7 @@ public final class DigitTranslateAnimator {
                 Function1 function12 = digitTranslateAnimator.updateCallback;
                 float animatedFraction = valueAnimator.getAnimatedFraction();
                 long j = digitTranslateAnimator.baseTranslation;
-                function12.mo781invoke(VPointF.m2746boximpl(VPointF.m2774plusb2IjXjg(j, VPointF.Companion.m2796timesNvxBqkk(animatedFraction, VPointF.m2769minusb2IjXjg(digitTranslateAnimator.targetTranslation, j)))));
+                function12.mo781invoke(VPointF.m2744boximpl(VPointF.m2772plusb2IjXjg(j, VPointF.Companion.m2794timesNvxBqkk(animatedFraction, VPointF.m2767minusb2IjXjg(digitTranslateAnimator.targetTranslation, j)))));
             }
         });
         valueAnimatorOfFloat.addListener(new AnimatorListenerAdapter() { // from class: com.android.systemui.shared.clocks.DigitTranslateAnimator$bounceAnimator$1$2
@@ -50,7 +50,7 @@ public final class DigitTranslateAnimator {
     }
 
     /* renamed from: animatePosition-WofAHi4$default, reason: not valid java name */
-    public static void m2949animatePositionWofAHi4$default(final DigitTranslateAnimator digitTranslateAnimator, boolean z, long j, TimeInterpolator timeInterpolator, long j2, final FlexClockView$animateCharge$2$1$1 flexClockView$animateCharge$2$1$1, int i) {
+    public static void m2947animatePositionWofAHi4$default(final DigitTranslateAnimator digitTranslateAnimator, boolean z, long j, TimeInterpolator timeInterpolator, long j2, final FlexClockView$animateCharge$2$1$1 flexClockView$animateCharge$2$1$1, int i) {
         if ((i & 32) != 0) {
             flexClockView$animateCharge$2$1$1 = null;
         }
@@ -58,7 +58,7 @@ public final class DigitTranslateAnimator {
         if (!z) {
             digitTranslateAnimator.currentTranslation = j2;
             digitTranslateAnimator.baseTranslation = j2;
-            digitTranslateAnimator.updateCallback.mo781invoke(VPointF.m2746boximpl(j2));
+            digitTranslateAnimator.updateCallback.mo781invoke(VPointF.m2744boximpl(j2));
             return;
         }
         digitTranslateAnimator.bounceAnimator.cancel();

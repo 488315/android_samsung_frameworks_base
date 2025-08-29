@@ -64,7 +64,7 @@ public final class SpanStyle implements AnnotatedString.Annotation {
             return false;
         }
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.background, spanStyle.background) && Intrinsics.areEqual(this.platformStyle, spanStyle.platformStyle);
+        return ULong.m3446equalsimpl0(this.background, spanStyle.background) && Intrinsics.areEqual(this.platformStyle, spanStyle.platformStyle);
     }
 
     public final boolean hasSameNonLayoutAttributes$ui_text_release(SpanStyle spanStyle) {

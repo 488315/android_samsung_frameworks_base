@@ -16,8 +16,8 @@ public interface ReceiveChannel {
     Object receive(Continuation continuation);
 
     /* renamed from: receiveCatching-JP2dKIU */
-    Object mo3473receiveCatchingJP2dKIU(Continuation continuation);
+    Object mo3472receiveCatchingJP2dKIU(Continuation continuation);
 
     /* renamed from: tryReceive-PtdJZtk */
-    Object mo3475tryReceivePtdJZtk();
+    Object mo3474tryReceivePtdJZtk();
 }

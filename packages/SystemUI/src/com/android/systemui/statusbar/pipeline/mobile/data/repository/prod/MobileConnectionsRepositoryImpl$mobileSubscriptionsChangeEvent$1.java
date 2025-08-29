@@ -57,7 +57,7 @@ final class MobileConnectionsRepositoryImpl$mobileSubscriptionsChangeEvent$1 ext
                     MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda0 = new MobileInputLogger$$ExternalSyntheticLambda0(9);
                     LogBuffer logBuffer = mobileInputLogger.buffer;
                     logBuffer.commit(logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null));
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
             MobileConnectionsRepositoryImpl mobileConnectionsRepositoryImpl2 = this.this$0;

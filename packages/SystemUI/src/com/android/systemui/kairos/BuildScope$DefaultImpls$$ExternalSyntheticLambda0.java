@@ -24,7 +24,7 @@ public final /* synthetic */ class BuildScope$DefaultImpls$$ExternalSyntheticLam
             case 1:
                 Unit unit = Unit.INSTANCE;
                 Maybe.Companion.getClass();
-                Pair pair = new Pair(unit, Maybe.Present.m2590boximpl((Function1) obj2));
+                Pair pair = new Pair(unit, Maybe.Present.m2588boximpl((Function1) obj2));
                 return Collections.singletonMap(pair.getFirst(), pair.getSecond());
             case 2:
                 Map map = (Map) obj2;

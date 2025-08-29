@@ -57,7 +57,7 @@ final class MobileConnectionsRepositoryKairosImpl$mobileSubscriptionsChangeEvent
                     MobileInputLogger$$ExternalSyntheticLambda0 mobileInputLogger$$ExternalSyntheticLambda0 = new MobileInputLogger$$ExternalSyntheticLambda0(9);
                     LogBuffer logBuffer = mobileInputLogger.buffer;
                     logBuffer.commit(logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null));
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
             this.this$0.subscriptionManager.addOnSubscriptionsChangedListener(new Executor() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionsRepositoryKairosImpl$mobileSubscriptionsChangeEvent$1$1.1

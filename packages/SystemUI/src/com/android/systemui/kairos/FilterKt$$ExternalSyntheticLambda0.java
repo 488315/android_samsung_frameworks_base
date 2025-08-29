@@ -11,6 +11,6 @@ public final /* synthetic */ class FilterKt$$ExternalSyntheticLambda0 implements
             return Maybe.Absent.INSTANCE;
         }
         Maybe.Companion.getClass();
-        return Maybe.Present.m2590boximpl(obj2);
+        return Maybe.Present.m2588boximpl(obj2);
     }
 }

@@ -27,7 +27,7 @@ public final class OverscrollConfiguration {
         OverscrollConfiguration overscrollConfiguration = (OverscrollConfiguration) obj;
         long j = overscrollConfiguration.glowColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.glowColor, j) && Intrinsics.areEqual(this.drawPadding, overscrollConfiguration.drawPadding);
+        return ULong.m3446equalsimpl0(this.glowColor, j) && Intrinsics.areEqual(this.drawPadding, overscrollConfiguration.drawPadding);
     }
 
     public final int hashCode() {

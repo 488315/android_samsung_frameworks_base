@@ -2555,6 +2555,9 @@ public class KeyguardSecUpdateMonitorImpl extends KeyguardUpdateMonitor {
         if (this.mPhoneState == 0) {
             this.mIsFPCanceledByProximity = false;
         }
+        if (LsRune.SECURITY_FINGERPRINT_IN_DISPLAY) {
+            sendScreenStatus(false);
+        }
         super.handleStartedWakingUp(i);
     }
 

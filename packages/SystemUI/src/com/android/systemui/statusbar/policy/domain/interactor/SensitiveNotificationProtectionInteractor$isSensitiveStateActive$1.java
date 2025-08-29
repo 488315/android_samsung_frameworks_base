@@ -49,11 +49,11 @@ final class SensitiveNotificationProtectionInteractor$isSensitiveStateActive$1 e
             final ?? r1 = new Runnable() { // from class: com.android.systemui.statusbar.policy.domain.interactor.SensitiveNotificationProtectionInteractor$isSensitiveStateActive$1$listener$1
                 @Override // java.lang.Runnable
                 public final void run() {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(((SensitiveNotificationProtectionControllerImpl) sensitiveNotificationProtectionInteractor.controller).isSensitiveStateActive()));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(((SensitiveNotificationProtectionControllerImpl) sensitiveNotificationProtectionInteractor.controller).isSensitiveStateActive()));
                 }
             };
             ((SensitiveNotificationProtectionControllerImpl) this.this$0.controller).mListeners.addIfAbsent(r1);
-            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(((SensitiveNotificationProtectionControllerImpl) this.this$0.controller).isSensitiveStateActive()));
+            ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(((SensitiveNotificationProtectionControllerImpl) this.this$0.controller).isSensitiveStateActive()));
             final SensitiveNotificationProtectionInteractor sensitiveNotificationProtectionInteractor2 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.policy.domain.interactor.SensitiveNotificationProtectionInteractor$isSensitiveStateActive$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0

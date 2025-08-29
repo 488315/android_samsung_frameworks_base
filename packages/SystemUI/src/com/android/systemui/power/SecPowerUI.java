@@ -262,13 +262,13 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
             String action = intent.getAction();
             if (!"android.intent.action.BATTERY_CHANGED".equals(action)) {
                 if ("android.intent.action.LOCALE_CHANGED".equals(action)) {
-                    SecPowerUI.m2892$$Nest$mupdateBatteryNotificationLanguage(SecPowerUI.this);
+                    SecPowerUI.m2890$$Nest$mupdateBatteryNotificationLanguage(SecPowerUI.this);
                     return;
                 }
                 if ("com.samsung.server.BatteryService.action.SEC_BATTERY_EVENT".equals(action)) {
-                    SecPowerUI.m2889$$Nest$mcheckWirelessChargingFodStatus(SecPowerUI.this, intent);
-                    SecPowerUI.m2888$$Nest$mcheckWaterDetectionStatus(SecPowerUI.this, intent);
-                    SecPowerUI.m2887$$Nest$mcheckUsbDamageDetectionStatus(SecPowerUI.this, intent);
+                    SecPowerUI.m2887$$Nest$mcheckWirelessChargingFodStatus(SecPowerUI.this, intent);
+                    SecPowerUI.m2886$$Nest$mcheckWaterDetectionStatus(SecPowerUI.this, intent);
+                    SecPowerUI.m2885$$Nest$mcheckUsbDamageDetectionStatus(SecPowerUI.this, intent);
                     return;
                 }
                 if ("com.samsung.intent.action.KSO_SHOW_POPUP".equals(action)) {
@@ -291,7 +291,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
                     return;
                 }
                 if ("com.samsung.CHECK_COOLDOWN_LEVEL".equals(action)) {
-                    SecPowerUI.m2881$$Nest$mcheckCoolDownStatus(SecPowerUI.this, intent);
+                    SecPowerUI.m2879$$Nest$mcheckCoolDownStatus(SecPowerUI.this, intent);
                     return;
                 }
                 if (PopupUIUtil.ACTION_BOOT_COMPLETED.equals(action) || "com.sec.android.intent.action.SAFEMODE_ENABLE".equals(action)) {
@@ -365,9 +365,9 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
             SecPowerUI secPowerUI11 = SecPowerUI.this;
             boolean z5 = secPowerUI11.mPlugType != 0;
             boolean z6 = i18 != 0;
-            int iM2891$$Nest$mfindBatteryLevelBucket = SecPowerUI.m2891$$Nest$mfindBatteryLevelBucket(secPowerUI11, i16);
+            int iM2889$$Nest$mfindBatteryLevelBucket = SecPowerUI.m2889$$Nest$mfindBatteryLevelBucket(secPowerUI11, i16);
             SecPowerUI secPowerUI12 = SecPowerUI.this;
-            int iM2891$$Nest$mfindBatteryLevelBucket2 = SecPowerUI.m2891$$Nest$mfindBatteryLevelBucket(secPowerUI12, secPowerUI12.mBatteryLevel);
+            int iM2889$$Nest$mfindBatteryLevelBucket2 = SecPowerUI.m2889$$Nest$mfindBatteryLevelBucket(secPowerUI12, secPowerUI12.mBatteryLevel);
             SecPowerUI secPowerUI13 = SecPowerUI.this;
             int i19 = secPowerUI13.mBatteryOnline;
             boolean z7 = secPowerUI13.mFullyConnected;
@@ -464,7 +464,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
                 Slog.d("PowerUI", sb2.toString());
                 Slog.d("PowerUI", "status         " + i17 + " --> " + SecPowerUI.this.mBatteryStatus);
                 Slog.d("PowerUI", "plugType       " + i18 + " --> " + SecPowerUI.this.mPlugType);
-                Slog.d("PowerUI", "bucket         " + iM2891$$Nest$mfindBatteryLevelBucket + " --> " + iM2891$$Nest$mfindBatteryLevelBucket2);
+                Slog.d("PowerUI", "bucket         " + iM2889$$Nest$mfindBatteryLevelBucket + " --> " + iM2889$$Nest$mfindBatteryLevelBucket2);
                 Slog.d("PowerUI", "plugged        " + z6 + " --> " + z5);
                 StringBuilder sbM = MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i25, "current_Event  ", " ---> ");
                 sbM.append(SecPowerUI.this.mBatteryCurrentEvent);
@@ -477,16 +477,16 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
             SecPowerNotificationWarnings secPowerNotificationWarnings6 = (SecPowerNotificationWarnings) secWarningsUI2;
             secPowerNotificationWarnings6.mOldBatteryLevel = secPowerNotificationWarnings6.mBatteryLevel;
             secPowerNotificationWarnings6.mBatteryLevel = i29;
-            if (iM2891$$Nest$mfindBatteryLevelBucket2 >= 0) {
+            if (iM2889$$Nest$mfindBatteryLevelBucket2 >= 0) {
                 i = i25;
                 secPowerNotificationWarnings6.mWarningTriggerTimeMs = 0L;
             } else {
                 i = i25;
-                if (iM2891$$Nest$mfindBatteryLevelBucket2 < secPowerNotificationWarnings6.mBucket) {
+                if (iM2889$$Nest$mfindBatteryLevelBucket2 < secPowerNotificationWarnings6.mBucket) {
                     secPowerNotificationWarnings6.mWarningTriggerTimeMs = System.currentTimeMillis();
                 }
             }
-            secPowerNotificationWarnings6.mBucket = iM2891$$Nest$mfindBatteryLevelBucket2;
+            secPowerNotificationWarnings6.mBucket = iM2889$$Nest$mfindBatteryLevelBucket2;
             ListenableFuture listenableFuture = SecPowerUI.this.mLastShowWarningTask;
             if (listenableFuture != null) {
                 listenableFuture.cancel(true);
@@ -496,7 +496,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
             }
             SecPowerUI secPowerUI22 = SecPowerUI.this;
             secPowerUI22.mLastBatteryStateData = secPowerUI22.mCurrentBatteryStateData;
-            secPowerUI22.mCurrentBatteryStateData = new BatteryStateData(secPowerUI22.mBatteryLevel, z5, iM2891$$Nest$mfindBatteryLevelBucket2, secPowerUI22.mBatteryStatus);
+            secPowerUI22.mCurrentBatteryStateData = new BatteryStateData(secPowerUI22.mBatteryLevel, z5, iM2889$$Nest$mfindBatteryLevelBucket2, secPowerUI22.mBatteryStatus);
             SecPowerUI.this.mLastShowWarningTask = ThreadUtils.postOnBackgroundThread(new SecPowerUI$$ExternalSyntheticLambda0(this, 1));
             SecPowerUI secPowerUI23 = SecPowerUI.this;
             if (secPowerUI23.mBatteryStatus == 2) {
@@ -647,9 +647,9 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
                         int i36 = i3;
                         SecPowerUI.this.checkChargingNotification(i10, i12, i36);
                         if (z10) {
-                            SecPowerUI.m2880$$Nest$mcheckBatterySwellingStatus(SecPowerUI.this, i26, i12);
+                            SecPowerUI.m2878$$Nest$mcheckBatterySwellingStatus(SecPowerUI.this, i26, i12);
                         }
-                        SecPowerUI.m2878$$Nest$mcheckBatteryHealthInterruptionStatus(SecPowerUI.this, i36, z8);
+                        SecPowerUI.m2876$$Nest$mcheckBatteryHealthInterruptionStatus(SecPowerUI.this, i36, z8);
                         if (PowerUiRune.INCOMPATIBLE_CHARGER_CHECK) {
                             SecPowerUI secPowerUI24 = SecPowerUI.this;
                             int i37 = secPowerUI24.mBatteryOnline;
@@ -692,25 +692,25 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
                             i13 = i5;
                         }
                         if (z) {
-                            SecPowerUI.m2882$$Nest$mcheckHVchargerEnableConnection(SecPowerUI.this, i2);
+                            SecPowerUI.m2880$$Nest$mcheckHVchargerEnableConnection(SecPowerUI.this, i2);
                         }
-                        SecPowerUI.m2877$$Nest$mcheckAbnormalChargingPad(SecPowerUI.this, i11);
+                        SecPowerUI.m2875$$Nest$mcheckAbnormalChargingPad(SecPowerUI.this, i11);
                         if (PowerUiRune.TIPS_NOTIFICATION) {
-                            SecPowerUI.m2883$$Nest$mcheckTipsNotification(SecPowerUI.this, i13);
+                            SecPowerUI.m2881$$Nest$mcheckTipsNotification(SecPowerUI.this, i13);
                         }
                         if (PowerUiRune.CHN_SMART_MANAGER) {
-                            SecPowerUI.m2884$$Nest$mcheckTurnOffPsmNotification(SecPowerUI.this, i13);
+                            SecPowerUI.m2882$$Nest$mcheckTurnOffPsmNotification(SecPowerUI.this, i13);
                         }
                         if (PowerUiRune.TURN_ON_PROTECT_BATTERY_BY_LONG_TERM_CHARGE) {
-                            SecPowerUI.m2885$$Nest$mcheckTurnOnBatteryProtectionByLongTermCharge(SecPowerUI.this);
+                            SecPowerUI.m2883$$Nest$mcheckTurnOnBatteryProtectionByLongTermCharge(SecPowerUI.this);
                         } else if (PowerUiRune.TURN_ON_PROTECT_BATTERY_BY_LONG_TERM_TA) {
-                            SecPowerUI.m2886$$Nest$mcheckTurnOnProtectBatteryByLongTa(SecPowerUI.this);
+                            SecPowerUI.m2884$$Nest$mcheckTurnOnProtectBatteryByLongTa(SecPowerUI.this);
                         }
                         if (PowerUiRune.BATTERY_PROTECTION_NOTIFICATION) {
                             SecPowerUI.this.checkBatteryProtectionNotification();
                         }
                         if (PowerUiRune.BATTERY_PROTECTION_TIPS_NOTIFICATION) {
-                            SecPowerUI.m2879$$Nest$mcheckBatteryProtectionTipsNotification(SecPowerUI.this, i10);
+                            SecPowerUI.m2877$$Nest$mcheckBatteryProtectionTipsNotification(SecPowerUI.this, i10);
                             return;
                         }
                         return;
@@ -758,12 +758,12 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
                     }
                     switch (c) {
                         case 0:
-                            i4 = iM2891$$Nest$mfindBatteryLevelBucket;
+                            i4 = iM2889$$Nest$mfindBatteryLevelBucket;
                             i5 = i16;
                             z3 = z7;
                             i6 = i17;
                             i7 = i18;
-                            i8 = iM2891$$Nest$mfindBatteryLevelBucket2;
+                            i8 = iM2889$$Nest$mfindBatteryLevelBucket2;
                             i9 = i21;
                             str3 = "PowerUI";
                             NowBarItem nowBarItem = PowerUtils.getNowBarItem();
@@ -781,13 +781,13 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
                             secPowerUI23.mCurrentChargingAnimation = "now_bar_charging_vi";
                             break;
                         case 1:
-                            i4 = iM2891$$Nest$mfindBatteryLevelBucket;
+                            i4 = iM2889$$Nest$mfindBatteryLevelBucket;
                             i5 = i16;
                             z3 = z7;
                             i6 = i17;
                             i7 = i18;
                             i9 = i21;
-                            i8 = iM2891$$Nest$mfindBatteryLevelBucket2;
+                            i8 = iM2889$$Nest$mfindBatteryLevelBucket2;
                             str3 = "PowerUI";
                             if (secPowerUI23.mChargerAnimationWindowLp == null) {
                                 WindowManager.LayoutParams layoutParam = SecPowerUI.getLayoutParam("PowerUI.ChargerAnimationViewLp");
@@ -813,12 +813,12 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
                             secPowerUI23.mCurrentChargingAnimation = "flip_cover_charging_vi";
                             break;
                         case 2:
-                            i4 = iM2891$$Nest$mfindBatteryLevelBucket;
+                            i4 = iM2889$$Nest$mfindBatteryLevelBucket;
                             i5 = i16;
                             z3 = z7;
                             i6 = i17;
                             i7 = i18;
-                            i8 = iM2891$$Nest$mfindBatteryLevelBucket2;
+                            i8 = iM2889$$Nest$mfindBatteryLevelBucket2;
                             i9 = i21;
                             str3 = "PowerUI";
                             int i44 = secPowerUI23.mBatteryLevel;
@@ -834,7 +834,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
                             }
                             break;
                         case 3:
-                            i4 = iM2891$$Nest$mfindBatteryLevelBucket;
+                            i4 = iM2889$$Nest$mfindBatteryLevelBucket;
                             if (secPowerUI23.mChargerAnimationWindowLp == null) {
                                 WindowManager.LayoutParams layoutParam2 = SecPowerUI.getLayoutParam("PowerUI.ChargerAnimationViewLp");
                                 secPowerUI23.mChargerAnimationWindowLp = layoutParam2;
@@ -902,7 +902,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
                                 z3 = z7;
                                 i6 = i17;
                                 i7 = i18;
-                                i8 = iM2891$$Nest$mfindBatteryLevelBucket2;
+                                i8 = iM2889$$Nest$mfindBatteryLevelBucket2;
                                 i9 = i21;
                                 str3 = "PowerUI";
                             } else {
@@ -964,7 +964,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
                                 int i48 = chargerAnimationView3.mSuperFastChargingType;
                                 imageView.setImageDrawable(context3.getDrawable((i48 == 3 || i48 == 4 || i48 == 5) ? R.drawable.ic_icon_superfast : R.drawable.ic_icon_charging));
                                 PathInterpolator pathInterpolator = new PathInterpolator(0.33f, 0.0f, 0.67f, 1.0f);
-                                i8 = iM2891$$Nest$mfindBatteryLevelBucket2;
+                                i8 = iM2889$$Nest$mfindBatteryLevelBucket2;
                                 PathInterpolator pathInterpolator2 = new PathInterpolator(0.33f, 0.0f, 0.4f, 1.0f);
                                 ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(chargerAnimationView3.mChargingIconView, "scaleX", 0.5f, 1.05f);
                                 objectAnimatorOfFloat.setDuration(233L);
@@ -1004,7 +1004,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
                             break;
                         case 4:
                             NowBarItem nowBarItem2 = PowerUtils.getNowBarItem();
-                            i4 = iM2891$$Nest$mfindBatteryLevelBucket;
+                            i4 = iM2889$$Nest$mfindBatteryLevelBucket;
                             ChargerNowBarView chargerNowBarView2 = (ChargerNowBarView) View.inflate(secPowerUI23.mContext, R.layout.charger_nowbar_view, null);
                             int i49 = secPowerUI23.mBatteryLevel;
                             int i50 = secPowerUI23.mSuperFastCharger;
@@ -1037,17 +1037,17 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
                             z3 = z7;
                             i6 = i17;
                             i7 = i18;
-                            i8 = iM2891$$Nest$mfindBatteryLevelBucket2;
+                            i8 = iM2889$$Nest$mfindBatteryLevelBucket2;
                             i9 = i21;
                             str3 = "PowerUI";
                             break;
                         default:
-                            i4 = iM2891$$Nest$mfindBatteryLevelBucket;
+                            i4 = iM2889$$Nest$mfindBatteryLevelBucket;
                             i5 = i16;
                             z3 = z7;
                             i6 = i17;
                             i7 = i18;
-                            i8 = iM2891$$Nest$mfindBatteryLevelBucket2;
+                            i8 = iM2889$$Nest$mfindBatteryLevelBucket2;
                             i9 = i21;
                             str3 = "PowerUI";
                             break;
@@ -1080,7 +1080,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
                     SecPowerUI.this.checkChargingNotification(i10, i12, i362);
                     if (z10) {
                     }
-                    SecPowerUI.m2878$$Nest$mcheckBatteryHealthInterruptionStatus(SecPowerUI.this, i362, z8);
+                    SecPowerUI.m2876$$Nest$mcheckBatteryHealthInterruptionStatus(SecPowerUI.this, i362, z8);
                     if (PowerUiRune.INCOMPATIBLE_CHARGER_CHECK) {
                     }
                     if (PowerUiRune.FULL_BATTERY_CHECK) {
@@ -1091,7 +1091,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
                     }
                     if (z) {
                     }
-                    SecPowerUI.m2877$$Nest$mcheckAbnormalChargingPad(SecPowerUI.this, i11);
+                    SecPowerUI.m2875$$Nest$mcheckAbnormalChargingPad(SecPowerUI.this, i11);
                     if (PowerUiRune.TIPS_NOTIFICATION) {
                     }
                     if (PowerUiRune.CHN_SMART_MANAGER) {
@@ -1110,14 +1110,14 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
                     Slog.d("PowerUI", "Skip charging animation - by cover state");
                 }
             }
-            i4 = iM2891$$Nest$mfindBatteryLevelBucket;
+            i4 = iM2889$$Nest$mfindBatteryLevelBucket;
             i2 = i;
             i3 = i20;
             i5 = i16;
             z3 = z7;
             i6 = i17;
             i7 = i18;
-            i8 = iM2891$$Nest$mfindBatteryLevelBucket2;
+            i8 = iM2889$$Nest$mfindBatteryLevelBucket2;
             i9 = i21;
             str3 = "PowerUI";
             secPowerUI = SecPowerUI.this;
@@ -1142,7 +1142,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
             SecPowerUI.this.checkChargingNotification(i10, i12, i3622);
             if (z10) {
             }
-            SecPowerUI.m2878$$Nest$mcheckBatteryHealthInterruptionStatus(SecPowerUI.this, i3622, z8);
+            SecPowerUI.m2876$$Nest$mcheckBatteryHealthInterruptionStatus(SecPowerUI.this, i3622, z8);
             if (PowerUiRune.INCOMPATIBLE_CHARGER_CHECK) {
             }
             if (PowerUiRune.FULL_BATTERY_CHECK) {
@@ -1152,7 +1152,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
             }
             if (z) {
             }
-            SecPowerUI.m2877$$Nest$mcheckAbnormalChargingPad(SecPowerUI.this, i11);
+            SecPowerUI.m2875$$Nest$mcheckAbnormalChargingPad(SecPowerUI.this, i11);
             if (PowerUiRune.TIPS_NOTIFICATION) {
             }
             if (PowerUiRune.CHN_SMART_MANAGER) {
@@ -1167,7 +1167,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
     }
 
     /* renamed from: -$$Nest$mcheckAbnormalChargingPad, reason: not valid java name */
-    public static void m2877$$Nest$mcheckAbnormalChargingPad(SecPowerUI secPowerUI, int i) {
+    public static void m2875$$Nest$mcheckAbnormalChargingPad(SecPowerUI secPowerUI, int i) {
         int i2 = i & 2097152;
         SecWarningsUI secWarningsUI = secPowerUI.mWarnings;
         if (i2 == 0 && (secPowerUI.mBatteryMiscEvent & 2097152) != 0) {
@@ -1187,7 +1187,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
     }
 
     /* renamed from: -$$Nest$mcheckBatteryHealthInterruptionStatus, reason: not valid java name */
-    public static void m2878$$Nest$mcheckBatteryHealthInterruptionStatus(SecPowerUI secPowerUI, int i, boolean z) {
+    public static void m2876$$Nest$mcheckBatteryHealthInterruptionStatus(SecPowerUI secPowerUI, int i, boolean z) {
         int i2;
         int i3 = secPowerUI.mBatteryStatus;
         SecWarningsUI secWarningsUI = secPowerUI.mWarnings;
@@ -1294,7 +1294,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static void m2879$$Nest$mcheckBatteryProtectionTipsNotification(SecPowerUI secPowerUI, int i) {
+    public static void m2877$$Nest$mcheckBatteryProtectionTipsNotification(SecPowerUI secPowerUI, int i) {
         NetworkInfo activeNetworkInfo;
         ComponentName componentNameStartForegroundService;
         secPowerUI.getClass();
@@ -1340,7 +1340,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
     }
 
     /* renamed from: -$$Nest$mcheckBatterySwellingStatus, reason: not valid java name */
-    public static void m2880$$Nest$mcheckBatterySwellingStatus(SecPowerUI secPowerUI, int i, int i2) {
+    public static void m2878$$Nest$mcheckBatterySwellingStatus(SecPowerUI secPowerUI, int i, int i2) {
         if (i == secPowerUI.mBatterySwellingMode && i2 == secPowerUI.mBatteryStatus) {
             return;
         }
@@ -1388,7 +1388,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
     }
 
     /* renamed from: -$$Nest$mcheckCoolDownStatus, reason: not valid java name */
-    public static void m2881$$Nest$mcheckCoolDownStatus(SecPowerUI secPowerUI, Intent intent) {
+    public static void m2879$$Nest$mcheckCoolDownStatus(SecPowerUI secPowerUI, Intent intent) {
         int i = secPowerUI.mBatteryOverheatLevel;
         secPowerUI.mBatteryOverheatLevel = intent.getIntExtra("battery_overheat_level", 0);
         TooltipPopup$$ExternalSyntheticOutline0.m(secPowerUI.mBatteryOverheatLevel, "PowerUI", new StringBuilder("Battery overheat Level = "));
@@ -1437,7 +1437,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
     }
 
     /* renamed from: -$$Nest$mcheckHVchargerEnableConnection, reason: not valid java name */
-    public static void m2882$$Nest$mcheckHVchargerEnableConnection(SecPowerUI secPowerUI, int i) {
+    public static void m2880$$Nest$mcheckHVchargerEnableConnection(SecPowerUI secPowerUI, int i) {
         int i2 = secPowerUI.mBatteryCurrentEvent & 67108864;
         SecWarningsUI secWarningsUI = secPowerUI.mWarnings;
         if (i2 == 0 || (i & 67108864) != 0) {
@@ -1487,7 +1487,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static void m2883$$Nest$mcheckTipsNotification(SecPowerUI secPowerUI, int i) {
+    public static void m2881$$Nest$mcheckTipsNotification(SecPowerUI secPowerUI, int i) {
         int i2;
         ComponentName componentNameStartForegroundService;
         secPowerUI.getClass();
@@ -1582,7 +1582,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
     }
 
     /* renamed from: -$$Nest$mcheckTurnOffPsmNotification, reason: not valid java name */
-    public static void m2884$$Nest$mcheckTurnOffPsmNotification(SecPowerUI secPowerUI, int i) {
+    public static void m2882$$Nest$mcheckTurnOffPsmNotification(SecPowerUI secPowerUI, int i) {
         if (secPowerUI.mTurnOffPsmLevel == -1) {
             secPowerUI.mTurnOffPsmLevel = SettingsUtils.globalGetInt(secPowerUI.mContext, "turn_off_psm_trigger_level", 50);
             secPowerUI.mResolver.registerContentObserver(Settings.Global.getUriFor("turn_off_psm_trigger_level"), false, new ContentObserver(secPowerUI.mHandler) { // from class: com.android.systemui.power.SecPowerUI.8
@@ -1603,7 +1603,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
     }
 
     /* renamed from: -$$Nest$mcheckTurnOnBatteryProtectionByLongTermCharge, reason: not valid java name */
-    public static void m2885$$Nest$mcheckTurnOnBatteryProtectionByLongTermCharge(SecPowerUI secPowerUI) {
+    public static void m2883$$Nest$mcheckTurnOnBatteryProtectionByLongTermCharge(SecPowerUI secPowerUI) {
         if (secPowerUI.mBatteryLevel >= secPowerUI.mLtcHighSocThreshold && secPowerUI.mProtectBatteryValue != 2) {
             secPowerUI.startScheduling();
             return;
@@ -1622,7 +1622,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
     }
 
     /* renamed from: -$$Nest$mcheckTurnOnProtectBatteryByLongTa, reason: not valid java name */
-    public static void m2886$$Nest$mcheckTurnOnProtectBatteryByLongTa(SecPowerUI secPowerUI) {
+    public static void m2884$$Nest$mcheckTurnOnProtectBatteryByLongTa(SecPowerUI secPowerUI) {
         if (secPowerUI.mPlugType != 0 && !BatteryProtectionUtils.isMaximumProtectionEnabled(secPowerUI.mContext)) {
             secPowerUI.startScheduling();
             return;
@@ -1639,7 +1639,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
     }
 
     /* renamed from: -$$Nest$mcheckUsbDamageDetectionStatus, reason: not valid java name */
-    public static void m2887$$Nest$mcheckUsbDamageDetectionStatus(SecPowerUI secPowerUI, Intent intent) {
+    public static void m2885$$Nest$mcheckUsbDamageDetectionStatus(SecPowerUI secPowerUI, Intent intent) {
         boolean z = secPowerUI.mTemperatureHiccupState;
         secPowerUI.mTemperatureHiccupState = (intent.getIntExtra("misc_event", 0) & 8192) == 8192;
         ActionBarContextView$$ExternalSyntheticOutline0.m(RowView$$ExternalSyntheticOutline0.m("USB damage detection - oldTemperatureHiccupState : ", ", mTemperatureHiccupState : ", z), secPowerUI.mTemperatureHiccupState, "PowerUI");
@@ -1654,7 +1654,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
     }
 
     /* renamed from: -$$Nest$mcheckWaterDetectionStatus, reason: not valid java name */
-    public static void m2888$$Nest$mcheckWaterDetectionStatus(SecPowerUI secPowerUI, Intent intent) {
+    public static void m2886$$Nest$mcheckWaterDetectionStatus(SecPowerUI secPowerUI, Intent intent) {
         boolean z = secPowerUI.mBatteryWaterConnector;
         boolean z2 = secPowerUI.mIsHiccupState;
         secPowerUI.mBatteryWaterConnector = (intent.getIntExtra("misc_event", 0) & 1) == 1;
@@ -1699,7 +1699,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
     }
 
     /* renamed from: -$$Nest$mcheckWirelessChargingFodStatus, reason: not valid java name */
-    public static void m2889$$Nest$mcheckWirelessChargingFodStatus(SecPowerUI secPowerUI, Intent intent) {
+    public static void m2887$$Nest$mcheckWirelessChargingFodStatus(SecPowerUI secPowerUI, Intent intent) {
         boolean z = secPowerUI.mWirelessFodState;
         secPowerUI.mWirelessFodState = (intent.getIntExtra("misc_event", 0) & 256) == 256;
         ActionBarContextView$$ExternalSyntheticOutline0.m(RowView$$ExternalSyntheticOutline0.m("SUPPORT_WIRELESS_CHARGER_FOD_POPUP - oldWirelessFodState : ", ", mWirelessFodState : ", z), secPowerUI.mWirelessFodState, "PowerUI");
@@ -1730,7 +1730,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
     }
 
     /* renamed from: -$$Nest$mfindBatteryLevelBucket, reason: not valid java name */
-    public static int m2891$$Nest$mfindBatteryLevelBucket(SecPowerUI secPowerUI, int i) {
+    public static int m2889$$Nest$mfindBatteryLevelBucket(SecPowerUI secPowerUI, int i) {
         if (i >= secPowerUI.mLowBatteryAlertCloseLevel) {
             return 1;
         }
@@ -1747,7 +1747,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
     }
 
     /* renamed from: -$$Nest$mupdateBatteryNotificationLanguage, reason: not valid java name */
-    public static void m2892$$Nest$mupdateBatteryNotificationLanguage(SecPowerUI secPowerUI) throws NumberFormatException {
+    public static void m2890$$Nest$mupdateBatteryNotificationLanguage(SecPowerUI secPowerUI) throws NumberFormatException {
         SecPowerNotificationWarnings secPowerNotificationWarnings = (SecPowerNotificationWarnings) secPowerUI.mWarnings;
         if (secPowerNotificationWarnings.mWarning) {
             secPowerNotificationWarnings.updateNotification();
@@ -1997,9 +1997,9 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
                     }
                 }
                 if (PowerUiRune.TURN_ON_PROTECT_BATTERY_BY_LONG_TERM_CHARGE) {
-                    SecPowerUI.m2885$$Nest$mcheckTurnOnBatteryProtectionByLongTermCharge(SecPowerUI.this);
+                    SecPowerUI.m2883$$Nest$mcheckTurnOnBatteryProtectionByLongTermCharge(SecPowerUI.this);
                 } else if (PowerUiRune.TURN_ON_PROTECT_BATTERY_BY_LONG_TERM_TA) {
-                    SecPowerUI.m2886$$Nest$mcheckTurnOnProtectBatteryByLongTa(SecPowerUI.this);
+                    SecPowerUI.m2884$$Nest$mcheckTurnOnProtectBatteryByLongTa(SecPowerUI.this);
                 }
                 SecPowerUI secPowerUI4 = SecPowerUI.this;
                 int i3 = secPowerUI4.mProtectBatteryValue;
@@ -2019,7 +2019,7 @@ public class SecPowerUI implements CoreStartable, ConfigurationController.Config
                 SecPowerUI secPowerUI2 = SecPowerUI.this;
                 secPowerUI2.mIsChangedBatteryProtectionOnCharging = true;
                 if (PowerUiRune.TURN_ON_PROTECT_BATTERY_BY_LONG_TERM_CHARGE) {
-                    SecPowerUI.m2885$$Nest$mcheckTurnOnBatteryProtectionByLongTermCharge(secPowerUI2);
+                    SecPowerUI.m2883$$Nest$mcheckTurnOnBatteryProtectionByLongTermCharge(secPowerUI2);
                 }
             }
         };

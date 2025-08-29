@@ -60,11 +60,11 @@ public final class BluetoothIconUtil {
             return cachedBluetoothDeviceFindDevice.getIconDrawableForSolid();
         } catch (Throwable th) {
             int i2 = Result.$r8$clinit;
-            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(new Result.Failure(th));
-            if (thM3442exceptionOrNullimpl == null) {
+            Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(new Result.Failure(th));
+            if (thM3441exceptionOrNullimpl == null) {
                 return null;
             }
-            thM3442exceptionOrNullimpl.printStackTrace();
+            thM3441exceptionOrNullimpl.printStackTrace();
             return null;
         }
     }

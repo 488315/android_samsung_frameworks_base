@@ -11,7 +11,7 @@ public final class AirplaneModeTileModel {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ AirplaneModeTileModel m2927boximpl(boolean z) {
+    public static final /* synthetic */ AirplaneModeTileModel m2925boximpl(boolean z) {
         return new AirplaneModeTileModel(z);
     }
 

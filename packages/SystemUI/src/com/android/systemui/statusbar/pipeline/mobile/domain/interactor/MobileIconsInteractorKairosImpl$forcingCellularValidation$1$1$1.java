@@ -39,7 +39,7 @@ final class MobileIconsInteractorKairosImpl$forcingCellularValidation$1$1$1 exte
             Duration.Companion companion = Duration.Companion;
             long duration = DurationKt.toDuration(2, DurationUnit.SECONDS);
             this.label = 1;
-            if (DelayKt.m3469delayVtjQ1oo(duration, this) == coroutineSingletons) {
+            if (DelayKt.m3468delayVtjQ1oo(duration, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

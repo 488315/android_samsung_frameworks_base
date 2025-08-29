@@ -23,7 +23,7 @@ public enum MultiTaskingAppCompatUIUtil$TipPopupAdapter {
             String str = MultiTaskingAppCompatUIUtil$TipPopupAdapter.TAG;
             Log.d(str, "onViewAttachedToWindow: v=" + view);
             if (view.equals(MultiTaskingAppCompatUIUtil$TipPopupAdapter.this.mViewHost)) {
-                MultiTaskingAppCompatUIUtil$TipPopupAdapter.m3243$$Nest$mshowTipPopup(MultiTaskingAppCompatUIUtil$TipPopupAdapter.this);
+                MultiTaskingAppCompatUIUtil$TipPopupAdapter.m3242$$Nest$mshowTipPopup(MultiTaskingAppCompatUIUtil$TipPopupAdapter.this);
                 return;
             }
             Log.e(str, "HostView is not matched with the view attached, hostView=" + MultiTaskingAppCompatUIUtil$TipPopupAdapter.this.mViewHost);
@@ -42,7 +42,7 @@ public enum MultiTaskingAppCompatUIUtil$TipPopupAdapter {
     private WindowManager mWindowManager;
 
     /* renamed from: -$$Nest$mbuild, reason: not valid java name */
-    public static MultiTaskingAppCompatUIUtil$TipPopupAdapter m3242$$Nest$mbuild(MultiTaskingAppCompatUIUtil$TipPopupAdapter multiTaskingAppCompatUIUtil$TipPopupAdapter, MultiTaskingAppCompatUIUtil$TipPopupBuilder multiTaskingAppCompatUIUtil$TipPopupBuilder) {
+    public static MultiTaskingAppCompatUIUtil$TipPopupAdapter m3241$$Nest$mbuild(MultiTaskingAppCompatUIUtil$TipPopupAdapter multiTaskingAppCompatUIUtil$TipPopupAdapter, MultiTaskingAppCompatUIUtil$TipPopupBuilder multiTaskingAppCompatUIUtil$TipPopupBuilder) {
         multiTaskingAppCompatUIUtil$TipPopupAdapter.getClass();
         String str = TAG;
         MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = multiTaskingAppCompatUIUtil$TipPopupBuilder.mMultiTaskingAppCompatUILayout;
@@ -70,7 +70,7 @@ public enum MultiTaskingAppCompatUIUtil$TipPopupAdapter {
     }
 
     /* renamed from: -$$Nest$mshowTipPopup, reason: not valid java name */
-    public static void m3243$$Nest$mshowTipPopup(final MultiTaskingAppCompatUIUtil$TipPopupAdapter multiTaskingAppCompatUIUtil$TipPopupAdapter) {
+    public static void m3242$$Nest$mshowTipPopup(final MultiTaskingAppCompatUIUtil$TipPopupAdapter multiTaskingAppCompatUIUtil$TipPopupAdapter) {
         MultiTaskingAppCompatUILayout multiTaskingAppCompatUILayout = multiTaskingAppCompatUIUtil$TipPopupAdapter.mMultiTaskingAppCompatUILayout;
         FrameLayout frameLayout = multiTaskingAppCompatUILayout != null ? multiTaskingAppCompatUILayout.mSwitchableButtonContainer : null;
         FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) (frameLayout != null ? frameLayout.getLayoutParams() : null);

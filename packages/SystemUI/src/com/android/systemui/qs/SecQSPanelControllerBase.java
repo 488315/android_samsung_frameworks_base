@@ -107,7 +107,7 @@ public abstract class SecQSPanelControllerBase extends ViewController implements
     }
 
     /* renamed from: $r8$lambda$DEp4l-o7MDBmfDD2MwoTLB3AMIw, reason: not valid java name */
-    public static void m2899$r8$lambda$DEp4lo7MDBmfDD2MwoTLB3AMIw(SecQSPanelControllerBase secQSPanelControllerBase, final BarItemImpl barItemImpl) {
+    public static void m2897$r8$lambda$DEp4lo7MDBmfDD2MwoTLB3AMIw(SecQSPanelControllerBase secQSPanelControllerBase, final BarItemImpl barItemImpl) {
         secQSPanelControllerBase.getClass();
         if (barItemImpl instanceof TileChunkLayoutBar) {
             ((SecQSPanel) secQSPanelControllerBase.mView).getHandler().postDelayed(new Runnable() { // from class: com.android.systemui.qs.SecQSPanelControllerBase$$ExternalSyntheticLambda6

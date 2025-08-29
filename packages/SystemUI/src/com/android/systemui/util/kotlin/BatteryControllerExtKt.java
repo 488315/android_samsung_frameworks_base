@@ -67,7 +67,7 @@ public final class BatteryControllerExtKt {
 
                     @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
                     public void onBatteryLevelChanged(int i2, boolean z, boolean z2) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Integer.valueOf(i2));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Integer.valueOf(i2));
                     }
 
                     @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
@@ -204,7 +204,7 @@ public final class BatteryControllerExtKt {
 
                     @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
                     public void onPowerSaveChanged(boolean z) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(z));
                     }
 
                     public /* bridge */ /* synthetic */ void onBatteryLevelChanged(int i2, boolean z, boolean z2, int i3, int i4, int i5, boolean z3) {
@@ -350,7 +350,7 @@ public final class BatteryControllerExtKt {
 
                     @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
                     public void onBatteryLevelChanged(int i2, boolean z, boolean z2) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(z));
                     }
 
                     @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
@@ -489,7 +489,7 @@ public final class BatteryControllerExtKt {
                     }
 
                     public void onExtremeBatterySaverChanged(boolean z) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(z));
                     }
 
                     public /* bridge */ /* synthetic */ void onBatteryLevelChanged(int i2, boolean z, boolean z2, int i3, int i4, int i5, boolean z3) {

@@ -89,7 +89,7 @@ final class DeviceBasedSatelliteRepositoryImpl$connectionStateFlow$1 extends Sus
                             satelliteConnectionState = SatelliteConnectionState.Unknown;
                             break;
                     }
-                    ((ChannelCoroutine) sendChannel).mo3476trySendJP2dKIU(satelliteConnectionState);
+                    ((ChannelCoroutine) sendChannel).mo3475trySendJP2dKIU(satelliteConnectionState);
                 }
             };
             Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();

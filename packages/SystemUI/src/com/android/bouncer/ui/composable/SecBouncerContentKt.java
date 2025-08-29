@@ -688,7 +688,7 @@ public abstract class SecBouncerContentKt {
                                     composerImpl3.updateRememberedValue(objRememberedValue3);
                                 }
                                 composerImpl3.end(false);
-                                Modifier modifierM3351seslRecoilfWhpE4E = RecoilKt.m3351seslRecoilfWhpE4E(ClipKt.clip(DrawModifierKt.drawBehind(modifierM34clickableO2vRcR0$default, (Function1) objRememberedValue3), RoundedCornerShapeKt.m187RoundedCornerShape0680j_4(f)), true, composer2, 24576);
+                                Modifier modifierM3350seslRecoilfWhpE4E = RecoilKt.m3350seslRecoilfWhpE4E(ClipKt.clip(DrawModifierKt.drawBehind(modifierM34clickableO2vRcR0$default, (Function1) objRememberedValue3), RoundedCornerShapeKt.m187RoundedCornerShape0680j_4(f)), true, composer2, 24576);
                                 composerImpl3.startReplaceGroup(232617846);
                                 if (ComposerKt.isTraceInProgress()) {
                                     ComposerKt.traceEventStart("com.android.bouncer.ui.compose.theme.HintMessageTextSytle (BouncerStyle.kt:20)");
@@ -712,7 +712,7 @@ public abstract class SecBouncerContentKt {
                                 TextOverflow.Companion.getClass();
                                 int i4 = TextOverflow.Ellipsis;
                                 TextAlign.Companion.getClass();
-                                TextKt.m317Text4IGK_g(strStringResource, modifierM3351seslRecoilfWhpE4E, j, 0L, null, null, null, 0L, textDecoration2, TextAlign.m807boximpl(TextAlign.Center), 0L, i4, false, 1, 0, null, textStyleM756copyp1EtxEg$default, composer2, 0, 3120, 54520);
+                                TextKt.m317Text4IGK_g(strStringResource, modifierM3350seslRecoilfWhpE4E, j, 0L, null, null, null, 0L, textDecoration2, TextAlign.m807boximpl(TextAlign.Center), 0L, i4, false, 1, 0, null, textStyleM756copyp1EtxEg$default, composer2, 0, 3120, 54520);
                                 composerImpl3.end(true);
                                 if (ComposerKt.isTraceInProgress()) {
                                     ComposerKt.traceEventEnd();

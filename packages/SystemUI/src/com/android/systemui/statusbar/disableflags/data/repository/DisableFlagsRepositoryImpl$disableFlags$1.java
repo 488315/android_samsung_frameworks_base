@@ -60,7 +60,7 @@ final class DisableFlagsRepositoryImpl$disableFlags$1 extends SuspendLambda impl
                         return;
                     }
                     remoteInputQuickSettingsDisabler.getClass();
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new DisableFlagsModel(i3, i4, z));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new DisableFlagsModel(i3, i4, z));
                 }
             };
             this.$commandQueue.addCallback((CommandQueue.Callbacks) r1);

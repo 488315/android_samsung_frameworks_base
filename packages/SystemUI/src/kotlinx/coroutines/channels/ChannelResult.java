@@ -40,7 +40,7 @@ public final class ChannelResult {
         }
 
         /* renamed from: closed-JP2dKIU, reason: not valid java name */
-        public static Closed m3480closedJP2dKIU(Throwable th) {
+        public static Closed m3479closedJP2dKIU(Throwable th) {
             Closed closed = new Closed(th);
             Companion companion = ChannelResult.Companion;
             return closed;
@@ -61,12 +61,12 @@ public final class ChannelResult {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ ChannelResult m3477boximpl(Object obj) {
+    public static final /* synthetic */ ChannelResult m3476boximpl(Object obj) {
         return new ChannelResult(obj);
     }
 
     /* renamed from: exceptionOrNull-impl, reason: not valid java name */
-    public static final Throwable m3478exceptionOrNullimpl(Failed failed2) {
+    public static final Throwable m3477exceptionOrNullimpl(Failed failed2) {
         Closed closed = failed2 instanceof Closed ? (Closed) failed2 : null;
         if (closed != null) {
             return closed.cause;
@@ -75,7 +75,7 @@ public final class ChannelResult {
     }
 
     /* renamed from: getOrNull-impl, reason: not valid java name */
-    public static final Object m3479getOrNullimpl(Object obj) {
+    public static final Object m3478getOrNullimpl(Object obj) {
         if (obj instanceof Failed) {
             return null;
         }

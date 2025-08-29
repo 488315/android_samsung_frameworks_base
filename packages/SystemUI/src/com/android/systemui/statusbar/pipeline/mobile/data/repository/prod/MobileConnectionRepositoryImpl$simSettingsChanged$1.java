@@ -59,7 +59,7 @@ final class MobileConnectionRepositoryImpl$simSettingsChanged$1 extends SuspendL
                 public final void onChanged(Uri uri) {
                     MobileConnectionRepositoryImpl mobileConnectionRepositoryImpl2 = mobileConnectionRepositoryImpl;
                     mobileInputLogger.logSimSettingChanged(0, mobileConnectionRepositoryImpl2.settingsHelper.isSimSettingOn(0));
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(mobileConnectionRepositoryImpl2.settingsHelper.isSimSettingOn(0)));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(mobileConnectionRepositoryImpl2.settingsHelper.isSimSettingOn(0)));
                 }
             };
             final MobileInputLogger mobileInputLogger2 = this.$logger;
@@ -69,7 +69,7 @@ final class MobileConnectionRepositoryImpl$simSettingsChanged$1 extends SuspendL
                 public final void onChanged(Uri uri) {
                     MobileConnectionRepositoryImpl mobileConnectionRepositoryImpl3 = mobileConnectionRepositoryImpl2;
                     mobileInputLogger2.logSimSettingChanged(1, mobileConnectionRepositoryImpl3.settingsHelper.isSimSettingOn(1));
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(mobileConnectionRepositoryImpl3.settingsHelper.isSimSettingOn(1)));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(mobileConnectionRepositoryImpl3.settingsHelper.isSimSettingOn(1)));
                 }
             };
             this.this$0.settingsHelper.registerCallback(r1, Settings.Global.getUriFor(SettingsHelper.INDEX_MULTI_SIM_DEVICE_SIM1_ON));
@@ -78,7 +78,7 @@ final class MobileConnectionRepositoryImpl$simSettingsChanged$1 extends SuspendL
                 this.this$0.settingsHelper.registerCallback(r3, Settings.Global.getUriFor(SettingsHelper.INDEX_MULTI_SIM_DEVICE_SIM2_ON));
                 this.$logger.logSimSettingChanged(1, this.this$0.isSimSettingOn(1));
             }
-            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.TRUE);
+            ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.TRUE);
             final MobileConnectionRepositoryImpl mobileConnectionRepositoryImpl3 = this.this$0;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.prod.MobileConnectionRepositoryImpl$simSettingsChanged$1$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function0

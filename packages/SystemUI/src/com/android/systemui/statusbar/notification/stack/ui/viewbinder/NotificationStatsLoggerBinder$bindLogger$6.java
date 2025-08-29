@@ -103,7 +103,7 @@ final class NotificationStatsLoggerBinder$bindLogger$6 extends SuspendLambda imp
                             Integer num = (Integer) map.get(entry.getKey());
                             linkedHashMap.put(key, new NotificationStatsLoggerImpl.VisibilityState(str, iIntValue, num != null ? num.intValue() : -1));
                         }
-                        bufferedChannel.mo3476trySendJP2dKIU(new NotificationStatsLoggerImpl.VisibilityAction.Change(linkedHashMap, map.size()));
+                        bufferedChannel.mo3475trySendJP2dKIU(new NotificationStatsLoggerImpl.VisibilityAction.Change(linkedHashMap, map.size()));
                         return Unit.INSTANCE;
                     }
                 };
@@ -112,7 +112,7 @@ final class NotificationStatsLoggerBinder$bindLogger$6 extends SuspendLambda imp
                     return coroutineSingletons;
                 }
             } else {
-                ((NotificationStatsLoggerImpl) this.$logger).visibilityLogger.mo3476trySendJP2dKIU(new NotificationStatsLoggerImpl.VisibilityAction.Clear(list.size()));
+                ((NotificationStatsLoggerImpl) this.$logger).visibilityLogger.mo3475trySendJP2dKIU(new NotificationStatsLoggerImpl.VisibilityAction.Clear(list.size()));
             }
         } else {
             if (i != 1) {

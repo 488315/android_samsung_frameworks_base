@@ -3,6 +3,7 @@ package android.preference;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -80,13 +81,13 @@ public final class PreferenceScreen extends PreferenceGroup implements AdapterVi
     }
 
     @Override // android.preference.Preference
-    protected void onClick() {
+    protected void onClick() throws Resources.NotFoundException {
         if (getIntent() == null && getFragment() == null && getPreferenceCount() != 0) {
             showDialog(null);
         }
     }
 
-    private void showDialog(Bundle bundle) {
+    private void showDialog(Bundle bundle) throws Resources.NotFoundException {
         Context context = getContext();
         ListView listView = this.mListView;
         if (listView != null) {
@@ -161,7 +162,7 @@ public final class PreferenceScreen extends PreferenceGroup implements AdapterVi
     }
 
     @Override // android.preference.Preference
-    protected void onRestoreInstanceState(Parcelable parcelable) {
+    protected void onRestoreInstanceState(Parcelable parcelable) throws Resources.NotFoundException {
         if (parcelable == null || !parcelable.getClass().equals(SavedState.class)) {
             super.onRestoreInstanceState(parcelable);
             return;

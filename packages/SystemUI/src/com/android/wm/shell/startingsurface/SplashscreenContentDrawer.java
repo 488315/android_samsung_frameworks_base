@@ -454,7 +454,7 @@ public class SplashscreenContentDrawer {
 
         public final Drawable getIcon(ActivityInfo activityInfo, int i, int i2, int i3) {
             this.mLoadInDetail = false;
-            return (i >= i2 || i >= 320) ? this.mSharedIconProvider.getIcon(activityInfo, i2) : SplashscreenContentDrawer.isExternalDesktopMode(i3, this.mSharedContext) ? loadFromStandalone(activityInfo, i, i2, i3) : (CoreRune.BAIDU_CARLIFE && SplashscreenContentDrawer.m3279$$Nest$smisCarLifeDisplay(i3, this.mSharedContext)) ? loadFromStandalone(activityInfo, i, i2, i3) : loadFromStandalone(activityInfo, i, i2, -1);
+            return (i >= i2 || i >= 320) ? this.mSharedIconProvider.getIcon(activityInfo, i2) : SplashscreenContentDrawer.isExternalDesktopMode(i3, this.mSharedContext) ? loadFromStandalone(activityInfo, i, i2, i3) : (CoreRune.BAIDU_CARLIFE && SplashscreenContentDrawer.m3278$$Nest$smisCarLifeDisplay(i3, this.mSharedContext)) ? loadFromStandalone(activityInfo, i, i2, i3) : loadFromStandalone(activityInfo, i, i2, -1);
         }
 
         public final Drawable loadFromStandalone(ActivityInfo activityInfo, int i, int i2, int i3) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
@@ -463,7 +463,7 @@ public class SplashscreenContentDrawer {
                 this.mStandaloneIconProvider = new IconProvider(this.mStandaloneContext);
             }
             Resources resourcesForApplication = null;
-            if (!SplashscreenContentDrawer.isExternalDesktopMode(i3, this.mSharedContext) && (!CoreRune.BAIDU_CARLIFE || !SplashscreenContentDrawer.m3279$$Nest$smisCarLifeDisplay(i3, this.mSharedContext))) {
+            if (!SplashscreenContentDrawer.isExternalDesktopMode(i3, this.mSharedContext) && (!CoreRune.BAIDU_CARLIFE || !SplashscreenContentDrawer.m3278$$Nest$smisCarLifeDisplay(i3, this.mSharedContext))) {
                 try {
                     resourcesForApplication = this.mStandaloneContext.getPackageManager().getResourcesForApplication(activityInfo.applicationInfo);
                 } catch (PackageManager.NameNotFoundException | Resources.NotFoundException unused) {
@@ -702,7 +702,7 @@ public class SplashscreenContentDrawer {
                     } else if (SplashscreenContentDrawer.isExternalDesktopMode(this.mDisplayId, this.mContext)) {
                         icon = highResIconProvider.getIcon(this.mActivityInfo, i5, i6, this.mDisplayId);
                     } else if (CoreRune.BAIDU_CARLIFE) {
-                        icon = SplashscreenContentDrawer.m3279$$Nest$smisCarLifeDisplay(this.mDisplayId, this.mContext) ? highResIconProvider.getIcon(this.mActivityInfo, i5, i6, this.mDisplayId) : highResIconProvider.getIcon(this.mActivityInfo, i5, i6, -1);
+                        icon = SplashscreenContentDrawer.m3278$$Nest$smisCarLifeDisplay(this.mDisplayId, this.mContext) ? highResIconProvider.getIcon(this.mActivityInfo, i5, i6, this.mDisplayId) : highResIconProvider.getIcon(this.mActivityInfo, i5, i6, -1);
                     }
                     Trace.traceEnd(32L);
                     if (icon instanceof AdaptiveIconDrawable) {
@@ -740,7 +740,7 @@ public class SplashscreenContentDrawer {
                                 }
                                 ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_STARTING_WINDOW, -75961434200786365L, IKnoxCustomManager.Stub.TRANSACTION_getFavoriteApp, strValueOf, strValueOf2, Boolean.valueOf(z4), Boolean.valueOf(z3), String.valueOf(Integer.toHexString(this.mThemeColor)));
                             }
-                            if (foreground != null || z4 || splashscreenContentDrawer.mTmpAttrs.mIconBgColor != 0 || (!SplashscreenContentDrawer.m3280$$Nest$smisRgbSimilarInHsv(this.mThemeColor, i9) && (!iconColor.mIsBgGrayscale || SplashscreenContentDrawer.m3280$$Nest$smisRgbSimilarInHsv(this.mThemeColor, i10)))) {
+                            if (foreground != null || z4 || splashscreenContentDrawer.mTmpAttrs.mIconBgColor != 0 || (!SplashscreenContentDrawer.m3279$$Nest$smisRgbSimilarInHsv(this.mThemeColor, i9) && (!iconColor.mIsBgGrayscale || SplashscreenContentDrawer.m3279$$Nest$smisRgbSimilarInHsv(this.mThemeColor, i10)))) {
                                 if (ProtoLogImpl_1771455215.Cache.WM_SHELL_STARTING_WINDOW_enabled[i]) {
                                     ProtoLogImpl_1771455215.v(ShellProtoLogGroup.WM_SHELL_STARTING_WINDOW, 5477106358074685500L, 0, null);
                                 }
@@ -870,13 +870,13 @@ public class SplashscreenContentDrawer {
     }
 
     /* renamed from: -$$Nest$smisCarLifeDisplay, reason: not valid java name */
-    public static boolean m3279$$Nest$smisCarLifeDisplay(int i, Context context) {
+    public static boolean m3278$$Nest$smisCarLifeDisplay(int i, Context context) {
         Display display = ((DisplayManager) context.getSystemService("display")).getDisplay(i);
         return (display == null || (display.getFlags() & 1048576) == 0) ? false : true;
     }
 
     /* renamed from: -$$Nest$smisRgbSimilarInHsv, reason: not valid java name */
-    public static boolean m3280$$Nest$smisRgbSimilarInHsv(int i, int i2) {
+    public static boolean m3279$$Nest$smisRgbSimilarInHsv(int i, int i2) {
         boolean z;
         boolean z2;
         double d;

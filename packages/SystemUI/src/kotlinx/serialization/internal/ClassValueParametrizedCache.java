@@ -24,7 +24,7 @@ public final class ClassValueParametrizedCache implements ParametrizedSerializer
 
     @Override // kotlinx.serialization.internal.ParametrizedSerializerCache
     /* renamed from: get-gIAlu-s, reason: not valid java name */
-    public final Object mo3487getgIAlus(KClass kClass, List list) {
+    public final Object mo3486getgIAlus(KClass kClass, List list) {
         Object failure;
         MutableSoftReference mutableSoftReference = (MutableSoftReference) this.classValue.get(((ClassBasedDeclarationContainer) kClass).getJClass());
         Object orSetWithLock = mutableSoftReference.reference.get();
@@ -52,10 +52,10 @@ public final class ClassValueParametrizedCache implements ParametrizedSerializer
                 int i2 = Result.$r8$clinit;
                 failure = new Result.Failure(th);
             }
-            Result resultM3441boximpl = Result.m3441boximpl(failure);
-            Object objPutIfAbsent = concurrentHashMap.putIfAbsent(arrayList, resultM3441boximpl);
-            obj = objPutIfAbsent == null ? resultM3441boximpl : objPutIfAbsent;
+            Result resultM3440boximpl = Result.m3440boximpl(failure);
+            Object objPutIfAbsent = concurrentHashMap.putIfAbsent(arrayList, resultM3440boximpl);
+            obj = objPutIfAbsent == null ? resultM3440boximpl : objPutIfAbsent;
         }
-        return ((Result) obj).m3443unboximpl();
+        return ((Result) obj).m3442unboximpl();
     }
 }

@@ -23,6 +23,7 @@ import android.hardware.display.DisplayManager;
 import android.net.Uri;
 import android.os.BadParcelableException;
 import android.os.Binder;
+import android.os.Debug;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Parcel;
@@ -64,6 +65,7 @@ import com.android.internal.policy.DesktopModeCompatUtils;
 import com.android.internal.policy.SystemBarUtils;
 import com.android.internal.protolog.ProtoLog;
 import com.android.keyguard.ActiveUnlockConfig$$ExternalSyntheticOutline0;
+import com.android.keyguard.CarrierTextController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardSecPinBasedInputViewController$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
 import com.android.systemui.deviceentry.data.repository.DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0;
@@ -976,7 +978,7 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:134:0x02c3  */
+    /* JADX WARN: Removed duplicated region for block: B:134:0x02c4  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
@@ -1085,7 +1087,7 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                 shellTaskOrganizer = shellTaskOrganizer2;
             }
             if (desktopTasksController.visualIndicator == null) {
-                desktopTasksController.visualIndicator = desktopModeVisualIndicator;
+                desktopTasksController.setVisualIndicator(desktopModeVisualIndicator);
             }
             DesktopModeVisualIndicator desktopModeVisualIndicator2 = desktopTasksController.visualIndicator;
             if (desktopModeVisualIndicator2 != null) {
@@ -2189,6 +2191,22 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
             CharsKt__CharJVMKt.checkRadix(16);
             printWriter.println(strM + "desktopDisabledOnDefaultDisplay=0x" + Integer.toString(i, 16));
         }
+        DesktopModeVisualIndicator desktopModeVisualIndicator = this.visualIndicator;
+        if (desktopModeVisualIndicator != null) {
+            printWriter.println(str + "visualIndicator=" + desktopModeVisualIndicator);
+        }
+        DragToDesktopTransitionHandler dragToDesktopTransitionHandler = this.dragToDesktopTransitionHandler;
+        dragToDesktopTransitionHandler.getClass();
+        String str4 = strM + "    ";
+        QSTileViewModelAdapter$$ExternalSyntheticOutline0.m(printWriter, strM, "[DragToDesktopTransitionHandler]");
+        printWriter.println(str4 + "transitionState=" + dragToDesktopTransitionHandler.transitionState);
+        StringBuilder sb = new StringBuilder();
+        sb.append(str4);
+        CarrierTextController$$ExternalSyntheticOutline0.m(sb, "(LogHistory)", printWriter);
+        Iterator it = dragToDesktopTransitionHandler.logHistory.iterator();
+        while (it.hasNext()) {
+            QSTileViewModelAdapter$$ExternalSyntheticOutline0.m(printWriter, str4, (String) it.next());
+        }
         DesktopConfigImpl desktopConfigImpl = (DesktopConfigImpl) this.desktopConfig;
         desktopConfigImpl.getClass();
         new IndentingPrintWriter(printWriter, "  ", strM).increaseIndent();
@@ -2203,9 +2221,9 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         DeviceEntryFaceAuthRepositoryImpl$$ExternalSyntheticOutline0.m("desktopExternalDisplayId=", DesktopStateImpl.desktopExternalDisplayId, printWriter);
         DesktopUserRepositories desktopUserRepositories = this.userRepositories;
         desktopUserRepositories.getClass();
-        String str4 = strM + "    ";
+        String str5 = strM + "    ";
         QSTileViewModelAdapter$$ExternalSyntheticOutline0.m(printWriter, strM, "DesktopUserRepositories:");
-        printWriter.println(str4 + "currentUserId=" + desktopUserRepositories.userId);
+        printWriter.println(str5 + "currentUserId=" + desktopUserRepositories.userId);
         DesktopUserRepositories$desktopRepoByUserId$1 desktopUserRepositories$desktopRepoByUserId$1 = desktopUserRepositories.desktopRepoByUserId;
         int size = desktopUserRepositories$desktopRepoByUserId$1.size();
         int i2 = 0;
@@ -2213,13 +2231,13 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
             desktopUserRepositories$desktopRepoByUserId$1.keyAt(i2);
             DesktopRepository desktopRepository = (DesktopRepository) desktopUserRepositories$desktopRepoByUserId$1.valueAt(i2);
             desktopRepository.getClass();
-            String str5 = str4 + str3;
-            printWriter.println(str4 + "DesktopRepository");
-            printWriter.println(str5 + "userId=" + desktopRepository.userId);
-            StringBuilder sb = new StringBuilder();
-            sb.append(str5);
-            sb.append(str3);
-            String string = sb.toString();
+            String str6 = str5 + str3;
+            printWriter.println(str5 + "DesktopRepository");
+            printWriter.println(str6 + "userId=" + desktopRepository.userId);
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append(str6);
+            sb2.append(str3);
+            String string = sb2.toString();
             DesktopRepository.DesktopData desktopData = desktopRepository.desktopData;
             Sequence sequenceDesksSequence = desktopData.desksSequence();
             LinkedHashMap linkedHashMap = new LinkedHashMap();
@@ -2228,30 +2246,30 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                 Integer numValueOf = Integer.valueOf(((DesktopRepository.Desk) obj).displayId);
                 Object obj2 = linkedHashMap.get(numValueOf);
                 if (obj2 == null) {
-                    str2 = str4;
+                    str2 = str5;
                     ArrayList arrayList = new ArrayList();
                     linkedHashMap.put(numValueOf, arrayList);
                     obj2 = arrayList;
                 } else {
-                    str2 = str4;
+                    str2 = str5;
                 }
                 ((List) obj2).add(obj);
                 desktopUserRepositories$desktopRepoByUserId$1 = desktopUserRepositories$desktopRepoByUserId$12;
-                str4 = str2;
+                str5 = str2;
             }
             DesktopUserRepositories$desktopRepoByUserId$1 desktopUserRepositories$desktopRepoByUserId$13 = desktopUserRepositories$desktopRepoByUserId$1;
-            String str6 = str4;
+            String str7 = str5;
             ArrayList arrayList2 = new ArrayList(linkedHashMap.size());
-            Iterator it = linkedHashMap.entrySet().iterator();
-            while (it.hasNext()) {
-                Map.Entry entry = (Map.Entry) it.next();
+            Iterator it2 = linkedHashMap.entrySet().iterator();
+            while (it2.hasNext()) {
+                Map.Entry entry = (Map.Entry) it2.next();
                 int iIntValue = ((Number) entry.getKey()).intValue();
                 List list = (List) entry.getValue();
-                Iterator it2 = it;
+                Iterator it3 = it2;
                 Integer numValueOf2 = Integer.valueOf(iIntValue);
                 DesktopRepository.Desk activeDesk = desktopData.getActiveDesk(iIntValue);
                 arrayList2.add(new Triple(numValueOf2, activeDesk != null ? Integer.valueOf(activeDesk.deskId) : null, list));
-                it = it2;
+                it2 = it3;
             }
             int size2 = arrayList2.size();
             int i3 = 0;
@@ -2263,46 +2281,46 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                 Integer num = (Integer) triple.component2();
                 List<DesktopRepository.Desk> list2 = (List) triple.component3();
                 ArrayList arrayList3 = arrayList2;
-                StringBuilder sb2 = new StringBuilder();
-                sb2.append(str5);
-                int i4 = size2;
-                sb2.append("Display #");
-                sb2.append(iIntValue2);
-                sb2.append(":");
-                printWriter.println(sb2.toString());
-                int size3 = list2.size();
                 StringBuilder sb3 = new StringBuilder();
-                sb3.append(string);
-                int i5 = size;
-                sb3.append("numOfDesks=");
-                sb3.append(size3);
+                sb3.append(str6);
+                int i4 = size2;
+                sb3.append("Display #");
+                sb3.append(iIntValue2);
+                sb3.append(":");
                 printWriter.println(sb3.toString());
+                int size3 = list2.size();
+                StringBuilder sb4 = new StringBuilder();
+                sb4.append(string);
+                int i5 = size;
+                sb4.append("numOfDesks=");
+                sb4.append(size3);
+                printWriter.println(sb4.toString());
                 printWriter.println(string + "activeDesk=" + num);
                 printWriter.println(string + "desks:");
-                String str7 = string + str3;
+                String str8 = string + str3;
                 for (DesktopRepository.Desk desk : list2) {
                     int i6 = desk.deskId;
-                    StringBuilder sb4 = new StringBuilder();
-                    sb4.append(str7);
-                    sb4.append("Desk #");
-                    sb4.append(i6);
-                    sb4.append(":");
-                    printWriter.println(sb4.toString());
-                    printWriter.print(str7 + "  activeTasks=");
+                    StringBuilder sb5 = new StringBuilder();
+                    sb5.append(str8);
+                    sb5.append("Desk #");
+                    sb5.append(i6);
+                    sb5.append(":");
+                    printWriter.println(sb5.toString());
+                    printWriter.print(str8 + "  activeTasks=");
                     printWriter.println(CollectionsKt___CollectionsKt.joinToString$default(desk.activeTasks, ", ", "[", "]", null, 56));
-                    printWriter.print(str7 + "  visibleTasks=");
+                    printWriter.print(str8 + "  visibleTasks=");
                     printWriter.println(CollectionsKt___CollectionsKt.joinToString$default(desk.visibleTasks, ", ", "[", "]", null, 56));
-                    printWriter.print(str7 + "  freeformTasksInZOrder=");
+                    printWriter.print(str8 + "  freeformTasksInZOrder=");
                     printWriter.println(CollectionsKt___CollectionsKt.joinToString$default(desk.freeformTasksInZOrder, ", ", "[", "]", null, 56));
-                    printWriter.print(str7 + "  minimizedTasks=");
+                    printWriter.print(str8 + "  minimizedTasks=");
                     printWriter.println(CollectionsKt___CollectionsKt.joinToString$default(desk.minimizedTasks, ", ", "[", "]", null, 56));
-                    printWriter.print(str7 + "  fullImmersiveTaskId=");
+                    printWriter.print(str8 + "  fullImmersiveTaskId=");
                     printWriter.println(desk.fullImmersiveTaskId);
-                    printWriter.print(str7 + "  topTransparentFullscreenTaskId=");
+                    printWriter.print(str8 + "  topTransparentFullscreenTaskId=");
                     printWriter.println(desk.topTransparentFullscreenTaskId);
-                    printWriter.print(str7 + "  usedDesk=");
+                    printWriter.print(str8 + "  usedDesk=");
                     printWriter.println(desk.usedDesk);
-                    printWriter.print(str7 + "  deskLabel=");
+                    printWriter.print(str8 + "  deskLabel=");
                     printWriter.println(desk.deskLabel);
                     str3 = str3;
                 }
@@ -2310,11 +2328,11 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                 size2 = i4;
                 size = i5;
             }
-            printWriter.println(str5 + "activeTasksListeners=" + desktopRepository.activeTasksListeners.size());
-            printWriter.println(str5 + "visibleTasksListeners=" + desktopRepository.visibleTasksListeners.size());
+            printWriter.println(str6 + "activeTasksListeners=" + desktopRepository.activeTasksListeners.size());
+            printWriter.println(str6 + "visibleTasksListeners=" + desktopRepository.visibleTasksListeners.size());
             i2++;
             desktopUserRepositories$desktopRepoByUserId$1 = desktopUserRepositories$desktopRepoByUserId$13;
-            str4 = str6;
+            str5 = str7;
             size = size;
             str3 = str3;
         }
@@ -3139,7 +3157,7 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         minimizeTasks(CollectionsKt___CollectionsKt.toList(activeTaskIdsInDesk), activeDeskId.intValue(), i);
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0071  */
+    /* JADX WARN: Removed duplicated region for block: B:27:0x0073  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
@@ -3184,13 +3202,16 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
         if (z) {
             windowContainerTransaction.merge((WindowContainerTransaction) this.transitions.dispatchRequest(SYNTHETIC_TRANSITION, new TransitionRequestInfo(10, (ActivityManager.RunningTaskInfo) null, runningTaskInfo, (RemoteTransition) null, (TransitionRequestInfo.DisplayChange) null, 0), null).second, true);
             FreeformTaskTransitionStarter freeformTaskTransitionStarter = this.freeformTaskTransitionStarter;
-            IBinder iBinderStartPipTransition = (freeformTaskTransitionStarter != null ? freeformTaskTransitionStarter : null).startPipTransition(windowContainerTransaction);
+            if (freeformTaskTransitionStarter == null) {
+                freeformTaskTransitionStarter = null;
+            }
+            IBinder iBinderStartPipTransition = freeformTaskTransitionStarter.startPipTransition(windowContainerTransaction);
             if (!PipUtils.isPip2ExperimentEnabled()) {
                 this.desktopTasksLimiter.ifPresent(new DesktopTasksControllerKt$sam$java_util_function_Consumer$0(new DesktopTasksController$$ExternalSyntheticLambda8(iBinderStartPipTransition, i4, Collections.singletonList(Integer.valueOf(i3)), minimizeReason)));
             }
+            desktopTasksController = this;
             i2 = i3;
             i = i4;
-            desktopTasksController = this;
         } else {
             DesktopModeWindowDecorViewModel desktopModeWindowDecorViewModel = this.snapEventHandler;
             if (desktopModeWindowDecorViewModel == null) {
@@ -3200,7 +3221,7 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
             DesktopTasksController$$ExternalSyntheticLambda3 desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default = performDesktopExitCleanUp$default(this, windowContainerTransaction, num, i4, willExitDesktop(i3, false), false, 48);
             desktopTasksController = this;
             i = i4;
-            DesktopImmersiveController.ExitResult exitResultExitImmersiveIfApplicable = desktopTasksController.desktopImmersiveController.exitImmersiveIfApplicable(windowContainerTransaction, runningTaskInfo, DesktopImmersiveController.ExitReason.MINIMIZED);
+            DesktopImmersiveController.ExitResult exitResultExitImmersiveIfApplicable = minimizeReason == DesktopModeEventLogger.Companion.MinimizeReason.MINIMIZE_BUTTON ? DesktopImmersiveController.ExitResult.NoExit.INSTANCE : desktopTasksController.desktopImmersiveController.exitImmersiveIfApplicable(windowContainerTransaction, runningTaskInfo, DesktopImmersiveController.ExitReason.MINIMIZED);
             if (!desktopExperienceFlags.isTrue()) {
                 windowContainerTransaction.reorder(runningTaskInfo.token, false).getClass();
             } else {
@@ -3210,7 +3231,10 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                 ((RootTaskDesksOrganizer) desktopTasksController.desksOrganizer).minimizeTask(windowContainerTransaction, num.intValue(), runningTaskInfo);
             }
             FreeformTaskTransitionStarter freeformTaskTransitionStarter2 = desktopTasksController.freeformTaskTransitionStarter;
-            IBinder iBinderStartMinimizedModeTransition = (freeformTaskTransitionStarter2 != null ? freeformTaskTransitionStarter2 : null).startMinimizedModeTransition(i3, windowContainerTransaction, z2);
+            if (freeformTaskTransitionStarter2 == null) {
+                freeformTaskTransitionStarter2 = null;
+            }
+            IBinder iBinderStartMinimizedModeTransition = freeformTaskTransitionStarter2.startMinimizedModeTransition(i3, windowContainerTransaction, z2);
             i2 = i3;
             desktopTasksController.desktopTasksLimiter.ifPresent(new DesktopTasksControllerKt$sam$java_util_function_Consumer$0(new DesktopTasksController$$ExternalSyntheticLambda7(iBinderStartMinimizedModeTransition, i, i2, minimizeReason, 1)));
             DesktopImmersiveController.ExitResult.Exit exitAsExit = exitResultExitImmersiveIfApplicable.asExit();
@@ -3788,7 +3812,11 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
     public final void releaseVisualIndicator() {
         DesktopModeVisualIndicator desktopModeVisualIndicator = this.visualIndicator;
         if (desktopModeVisualIndicator != null) {
-            desktopModeVisualIndicator.mVisualIndicatorViewContainer.releaseVisualIndicator();
+            logV$1("releaseVisualIndicator: " + desktopModeVisualIndicator + ", c=" + Debug.getCallers(3), new Object[0]);
+        }
+        DesktopModeVisualIndicator desktopModeVisualIndicator2 = this.visualIndicator;
+        if (desktopModeVisualIndicator2 != null) {
+            desktopModeVisualIndicator2.mVisualIndicatorViewContainer.releaseVisualIndicator();
         }
         this.visualIndicator = null;
     }
@@ -3994,6 +4022,13 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
                 return;
             }
             desktopTasksController$$ExternalSyntheticLambda3PerformDesktopExitCleanUp$default.mo781invoke(iBinderRequestEnterSplitSelect);
+        }
+    }
+
+    public final void setVisualIndicator(DesktopModeVisualIndicator desktopModeVisualIndicator) {
+        if (this.visualIndicator == null) {
+            this.visualIndicator = desktopModeVisualIndicator;
+            logV$1("setVisualIndicator: " + desktopModeVisualIndicator + ", c=" + Debug.getCallers(3), new Object[0]);
         }
     }
 
@@ -4367,7 +4402,7 @@ public final class DesktopTasksController implements RemoteCallable, Transitions
             desktopModeVisualIndicator = desktopModeVisualIndicator3;
         }
         if (this.visualIndicator == null) {
-            this.visualIndicator = desktopModeVisualIndicator;
+            setVisualIndicator(desktopModeVisualIndicator);
         }
         return desktopModeVisualIndicator.updateIndicatorType(new PointF(f, f2), runningTaskInfo, z, false, z2, z3);
     }

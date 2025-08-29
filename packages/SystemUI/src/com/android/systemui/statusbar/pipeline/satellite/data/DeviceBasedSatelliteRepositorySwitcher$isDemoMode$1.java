@@ -55,7 +55,7 @@ final class DeviceBasedSatelliteRepositorySwitcher$isDemoMode$1 extends SuspendL
                     if (standaloneCoroutine != null) {
                         standaloneCoroutine.cancel(null);
                     }
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.FALSE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.FALSE);
                 }
 
                 @Override // com.android.systemui.demomode.DemoModeCommandReceiver

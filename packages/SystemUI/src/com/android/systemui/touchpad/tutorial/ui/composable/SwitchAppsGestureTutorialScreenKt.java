@@ -71,7 +71,7 @@ public abstract class SwitchAppsGestureTutorialScreenKt {
             long j3 = ((AndroidColorScheme) composerImpl.consume(staticProvidableCompositionLocal)).onTertiaryFixedVariant;
             long j4 = ((AndroidColorScheme) composerImpl.consume(staticProvidableCompositionLocal)).tertiaryFixedDim;
             int i3 = i2;
-            LottieDynamicProperties lottieDynamicPropertiesRememberLottieDynamicProperties = LottieDynamicPropertiesKt.rememberLottieDynamicProperties(new LottieDynamicProperty[]{LottieHelpersKt.m2585rememberColorFilterPropertyRPmYEkk(".tertiaryFixedDim", j4, composerImpl), LottieHelpersKt.m2585rememberColorFilterPropertyRPmYEkk(".onTertiaryFixed", j2, composerImpl), LottieHelpersKt.m2585rememberColorFilterPropertyRPmYEkk(".onTertiary", j, composerImpl), LottieHelpersKt.m2585rememberColorFilterPropertyRPmYEkk(".onTertiaryFixedVariant", j3, composerImpl)}, composerImpl);
+            LottieDynamicProperties lottieDynamicPropertiesRememberLottieDynamicProperties = LottieDynamicPropertiesKt.rememberLottieDynamicProperties(new LottieDynamicProperty[]{LottieHelpersKt.m2583rememberColorFilterPropertyRPmYEkk(".tertiaryFixedDim", j4, composerImpl), LottieHelpersKt.m2583rememberColorFilterPropertyRPmYEkk(".onTertiaryFixed", j2, composerImpl), LottieHelpersKt.m2583rememberColorFilterPropertyRPmYEkk(".onTertiary", j, composerImpl), LottieHelpersKt.m2583rememberColorFilterPropertyRPmYEkk(".onTertiaryFixedVariant", j3, composerImpl)}, composerImpl);
             composerImpl.startReplaceGroup(1152973840);
             boolean zChanged = composerImpl.changed(lottieDynamicPropertiesRememberLottieDynamicProperties);
             Object objRememberedValue = composerImpl.rememberedValue();

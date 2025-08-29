@@ -54,7 +54,7 @@ final class SharedNotificationContainerViewModel$aboutToTransitionToHub$1 extend
                 @Override // com.android.systemui.communal.domain.interactor.CommunalSceneInteractor.OnSceneAboutToChangeListener
                 public final void onSceneAboutToChange(SceneKey sceneKey, KeyguardState keyguardState) {
                     if (Intrinsics.areEqual(sceneKey, CommunalScenes.Communal)) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                     }
                 }
             };

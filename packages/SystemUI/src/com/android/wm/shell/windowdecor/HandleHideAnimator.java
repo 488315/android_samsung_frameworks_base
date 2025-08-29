@@ -186,14 +186,26 @@ public class HandleHideAnimator {
         this.mHandleHideState = i;
         if (isHandleHideEnabled()) {
             delayedHide(false);
-        } else if (this.mIsStatusBarVisible) {
+        } else if (this.taskInfo.getWindowingMode() != 1 || this.mIsStatusBarVisible) {
             cancelAllHandleAnim();
             show(null, false, false, false);
         }
     }
 
+    /* JADX WARN: Removed duplicated region for block: B:19:0x0031  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+    */
     public final void show(final Runnable runnable, final boolean z, boolean z2, boolean z3) {
-        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mHandleView, (Property<View, Float>) View.ALPHA, (z2 || !isHandleHideEnabled() || z3) ? (this.mHandleHideState == 1 && z2) ? this.mIsNightMode ? 0.3f : 0.2f : 1.0f : this.mIsNightMode ? 0.9f : 0.7f);
+        float f;
+        if (this.taskInfo.getWindowingMode() != 1) {
+            f = 1.0f;
+        } else if (!z2 && isHandleHideEnabled() && !z3) {
+            f = this.mIsNightMode ? 0.9f : 0.7f;
+        } else if (this.mHandleHideState == 1 && z2) {
+            f = this.mIsNightMode ? 0.3f : 0.2f;
+        }
+        ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(this.mHandleView, (Property<View, Float>) View.ALPHA, f);
         this.mShowHandleAnim = objectAnimatorOfFloat;
         objectAnimatorOfFloat.setDuration(200L).setInterpolator(z ? Interpolators.FAST_OUT_SLOW_IN : Interpolators.LINEAR);
         setHandleVisibility(true);

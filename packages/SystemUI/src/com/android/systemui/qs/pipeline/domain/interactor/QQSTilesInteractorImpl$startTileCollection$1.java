@@ -367,7 +367,7 @@ final class QQSTilesInteractorImpl$startTileCollection$1 extends SuspendLambda i
                     Object objAccess$createTile2 = obj;
                     qSTile = (QSTile) objAccess$createTile2;
                     if (qSTile != null) {
-                        map.put(tileSpec, QQSTilesInteractorImpl.TileOrNotInstalled.Tile.m2911boximpl(qSTile));
+                        map.put(tileSpec, QQSTilesInteractorImpl.TileOrNotInstalled.Tile.m2909boximpl(qSTile));
                     }
                     char c32 = c;
                     i4 = i2;
@@ -438,10 +438,10 @@ final class QQSTilesInteractorImpl$startTileCollection$1 extends SuspendLambda i
                                                             Context context = (Context) qQSTilesInteractorImpl4.userContext.$$delegate_0.getValue();
                                                             secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getClass();
                                                             SecQSPanelResourceCommon.Companion.getClass();
-                                                            int iM2904int = SecQSPanelResourceCommon.Companion.m2904int(R.integer.sec_quick_qs_panel_max_columns, context);
-                                                            List listTake = CollectionsKt___CollectionsKt.take(CollectionsKt___CollectionsKt.toList(map.keySet()), iM2904int);
+                                                            int iM2902int = SecQSPanelResourceCommon.Companion.m2902int(R.integer.sec_quick_qs_panel_max_columns, context);
+                                                            List listTake = CollectionsKt___CollectionsKt.take(CollectionsKt___CollectionsKt.toList(map.keySet()), iM2902int);
                                                             ((LinkedHashMap) this.this$0.specsToTiles).clear();
-                                                            MapsKt__MapsKt.putAll(this.this$0.specsToTiles, CollectionsKt___CollectionsKt.take(MapsKt___MapsKt.toList(map), iM2904int));
+                                                            MapsKt__MapsKt.putAll(this.this$0.specsToTiles, CollectionsKt___CollectionsKt.take(MapsKt___MapsKt.toList(map), iM2902int));
                                                             LinkedHashMap linkedHashMap3 = new LinkedHashMap();
                                                             for (Map.Entry entry3 : map.entrySet()) {
                                                                 if (entry3.getValue() instanceof QQSTilesInteractorImpl.TileOrNotInstalled.Tile) {

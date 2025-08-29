@@ -113,7 +113,7 @@ public final class ExtensionSchemaLite extends ExtensionSchema {
         GeneratedMessageLite.ExtendableMessage extendableMessage = (GeneratedMessageLite.ExtendableMessage) obj;
         FieldSet fieldSet = extendableMessage.extensions;
         if (fieldSet.isImmutable) {
-            extendableMessage.extensions = fieldSet.m3288clone();
+            extendableMessage.extensions = fieldSet.m3287clone();
         }
         return extendableMessage.extensions;
     }

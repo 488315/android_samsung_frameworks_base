@@ -51,7 +51,7 @@ final class GestureRecognizerAdapter$gestureStateAsFlow$1 extends SuspendLambda 
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
                 public final Object mo781invoke(Object obj2) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU((GestureState) obj2);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU((GestureState) obj2);
                     return Unit.INSTANCE;
                 }
             });

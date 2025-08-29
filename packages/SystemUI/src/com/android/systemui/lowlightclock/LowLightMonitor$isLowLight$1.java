@@ -49,7 +49,7 @@ final class LowLightMonitor$isLowLight$1 extends SuspendLambda implements Functi
             Monitor.Subscription.Builder builder = new Monitor.Subscription.Builder(new Monitor.Callback() { // from class: com.android.systemui.lowlightclock.LowLightMonitor$isLowLight$1$token$1
                 @Override // com.android.systemui.shared.condition.Monitor.Callback
                 public final void onConditionsChanged(boolean z) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(z));
                 }
             });
             Set set = (Set) this.this$0.lowLightConditions.get();

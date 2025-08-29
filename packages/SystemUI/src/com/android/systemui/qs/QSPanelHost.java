@@ -258,7 +258,7 @@ public class QSPanelHost implements QSHost.Callback {
         if (zIsHeader) {
             this.mResourcePicker.resourcePickHelper.getTargetPicker().getClass();
             SecQSPanelResourceCommon.Companion.getClass();
-            arrayList = (List) qSHost.getTiles().stream().limit(SecQSPanelResourceCommon.Companion.m2904int(R.integer.sec_quick_qs_panel_max_columns, context)).collect(Collectors.toList());
+            arrayList = (List) qSHost.getTiles().stream().limit(SecQSPanelResourceCommon.Companion.m2902int(R.integer.sec_quick_qs_panel_max_columns, context)).collect(Collectors.toList());
         } else {
             arrayList = new ArrayList(qSHost.getTiles());
         }

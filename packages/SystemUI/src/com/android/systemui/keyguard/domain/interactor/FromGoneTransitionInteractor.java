@@ -125,7 +125,7 @@ public final class FromGoneTransitionInteractor extends TransitionInteractor {
                 j = DEFAULT_DURATION;
                 break;
         }
-        valueAnimator.setDuration(Duration.m3457getInWholeMillisecondsimpl(j));
+        valueAnimator.setDuration(Duration.m3456getInWholeMillisecondsimpl(j));
         return valueAnimator;
     }
 

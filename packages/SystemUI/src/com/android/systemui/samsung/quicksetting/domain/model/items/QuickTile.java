@@ -26,7 +26,7 @@ public final class QuickTile extends IdAssignedGridTileItem {
 
     @Override // com.android.systemui.samsung.quicksetting.domain.model.items.GridTileItem
     /* renamed from: getDefaultSpanSize-YbymL2g */
-    public final long mo2938getDefaultSpanSizeYbymL2g() {
+    public final long mo2936getDefaultSpanSizeYbymL2g() {
         return this.defaultSpanSize;
     }
 

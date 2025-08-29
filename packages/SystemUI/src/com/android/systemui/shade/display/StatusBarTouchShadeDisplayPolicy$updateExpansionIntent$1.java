@@ -39,7 +39,7 @@ final class StatusBarTouchShadeDisplayPolicy$updateExpansionIntent$1 extends Sus
             StatusBarTouchShadeDisplayPolicy.Companion.getClass();
             long j = StatusBarTouchShadeDisplayPolicy.EXPANSION_INTENT_EXPIRY;
             this.label = 1;
-            if (DelayKt.m3469delayVtjQ1oo(j, this) == coroutineSingletons) {
+            if (DelayKt.m3468delayVtjQ1oo(j, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

@@ -226,7 +226,7 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
     }
 
     /* renamed from: -$$Nest$mresetOnTimeout, reason: not valid java name */
-    public static void m2960$$Nest$mresetOnTimeout(KeyguardSecAffordanceView keyguardSecAffordanceView) {
+    public static void m2958$$Nest$mresetOnTimeout(KeyguardSecAffordanceView keyguardSecAffordanceView) {
         keyguardSecAffordanceView.getClass();
         Log.d("KeyguardSecAffordanceView", "resetOnTimeout");
         keyguardSecAffordanceView.mIsShortcutLaunching = false;
@@ -1806,7 +1806,7 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
                     if (keyguardSecAffordanceView.mBlurPanelView != null) {
                         KeyguardSecAffordanceView.mIsShowBouncerAnimation = false;
                         if (keyguardSecAffordanceView.mShortcutManager.isUnlockWaitNeeded(keyguardSecAffordanceView.mRight ? 1 : 0)) {
-                            KeyguardSecAffordanceView.m2960$$Nest$mresetOnTimeout(keyguardSecAffordanceView);
+                            KeyguardSecAffordanceView.m2958$$Nest$mresetOnTimeout(keyguardSecAffordanceView);
                         } else {
                             keyguardSecAffordanceView.mHandler.sendEmptyMessageDelayed(1001, 150L);
                         }
@@ -1992,7 +1992,7 @@ public class KeyguardSecAffordanceView extends KeyguardAffordanceView implements
                     return;
                 }
                 Log.d("KeyguardSecAffordanceView", "reset timeout");
-                KeyguardSecAffordanceView.m2960$$Nest$mresetOnTimeout(KeyguardSecAffordanceView.this);
+                KeyguardSecAffordanceView.m2958$$Nest$mresetOnTimeout(KeyguardSecAffordanceView.this);
             }
         };
         this.delegate = new LaunchableViewDelegate(this, new Function1() { // from class: com.android.systemui.statusbar.KeyguardSecAffordanceView$$ExternalSyntheticLambda1

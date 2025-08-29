@@ -62,7 +62,7 @@ public final class AlarmTileDataInteractor implements QSTileDataInteractor {
                 final ?? r1 = new NextAlarmController.NextAlarmChangeCallback() { // from class: com.android.systemui.qs.tiles.impl.alarm.domain.interactor.AlarmTileDataInteractor$tileData$1$alarmCallback$1
                     @Override // com.android.systemui.statusbar.policy.NextAlarmController.NextAlarmChangeCallback
                     public final void onNextAlarmChanged(AlarmManager.AlarmClockInfo alarmClockInfo) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(alarmClockInfo == null ? AlarmTileModel.NoAlarmSet.INSTANCE : new AlarmTileModel.NextAlarmSet(alarmTileDataInteractor.dateFormatUtil.is24HourFormat(), alarmClockInfo));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(alarmClockInfo == null ? AlarmTileModel.NoAlarmSet.INSTANCE : new AlarmTileModel.NextAlarmSet(alarmTileDataInteractor.dateFormatUtil.is24HourFormat(), alarmClockInfo));
                     }
                 };
                 ((NextAlarmControllerImpl) AlarmTileDataInteractor.this.alarmController).addCallback(r1);

@@ -18,7 +18,7 @@ public final class AudioVisSeekbarColors {
     }
 
     /* renamed from: trackColor-WaAFU9c$frameworks__base__packages__SystemUI__android_common__SystemUI_core, reason: not valid java name */
-    public final long m2631x119e4b41(boolean z, boolean z2) {
+    public final long m2629x119e4b41(boolean z, boolean z2) {
         return z ? z2 ? this.activeTrackColor : this.inactiveTrackColor : z2 ? this.disabledActiveTrackColor : this.disabledInactiveTrackColor;
     }
 

@@ -201,10 +201,10 @@ public abstract class BaseRoomConnectionManager {
                 if (!(failure instanceof Result.Failure)) {
                     SQLite.execSQL(sQLiteConnection, "END TRANSACTION");
                 }
-                Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-                if (thM3442exceptionOrNullimpl != null) {
+                Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+                if (thM3441exceptionOrNullimpl != null) {
                     SQLite.execSQL(sQLiteConnection, "ROLLBACK TRANSACTION");
-                    throw thM3442exceptionOrNullimpl;
+                    throw thM3441exceptionOrNullimpl;
                 }
             }
             baseRoomConnectionManager.onOpen(sQLiteConnection);
@@ -445,12 +445,12 @@ public abstract class BaseRoomConnectionManager {
                 if (!(failure instanceof Result.Failure)) {
                     SQLite.execSQL(sQLiteConnection, "END TRANSACTION");
                 }
-                Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-                if (thM3442exceptionOrNullimpl != null) {
+                Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+                if (thM3441exceptionOrNullimpl != null) {
                     SQLite.execSQL(sQLiteConnection, "ROLLBACK TRANSACTION");
-                    throw thM3442exceptionOrNullimpl;
+                    throw thM3441exceptionOrNullimpl;
                 }
-                Result.m3441boximpl(failure);
+                Result.m3440boximpl(failure);
             }
             getOpenDelegate().onOpen(sQLiteConnection);
             for (RoomDatabase.Callback callback : getCallbacks()) {

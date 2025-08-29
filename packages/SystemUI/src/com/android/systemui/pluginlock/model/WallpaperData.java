@@ -73,7 +73,7 @@ public class WallpaperData {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public WallpaperData m2685clone() throws CloneNotSupportedException {
+    public WallpaperData m2683clone() throws CloneNotSupportedException {
         return (WallpaperData) super.clone();
     }
 }

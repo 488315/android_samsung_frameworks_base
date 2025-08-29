@@ -39,7 +39,7 @@ public final class DeviceBasedSatelliteViewModelImpl$special$$inlined$flatMapLat
 
     /* JADX WARN: Code restructure failed: missing block: B:13:0x005b, code lost:
     
-        if (kotlinx.coroutines.DelayKt.m3469delayVtjQ1oo(r5, r10) == r0) goto L19;
+        if (kotlinx.coroutines.DelayKt.m3468delayVtjQ1oo(r5, r10) == r0) goto L19;
      */
     /* JADX WARN: Code restructure failed: missing block: B:18:0x0075, code lost:
     
@@ -71,7 +71,7 @@ public final class DeviceBasedSatelliteViewModelImpl$special$$inlined$flatMapLat
                 }, null);
                 long j = DeviceBasedSatelliteViewModelImpl.DELAY_DURATION;
                 Duration.Companion companion = Duration.Companion;
-                ((LogMessageImpl) logMessageObtain).long1 = Duration.m3465toLongimpl(j, DurationUnit.SECONDS);
+                ((LogMessageImpl) logMessageObtain).long1 = Duration.m3464toLongimpl(j, DurationUnit.SECONDS);
                 this.$logBuffer$inlined.commit(logMessageObtain);
                 this.L$0 = flowCollector;
                 this.label = 1;

@@ -28,7 +28,7 @@ public final class AodToPrimaryBouncerTransitionViewModel implements DeviceEntry
         KeyguardState keyguardState = KeyguardState.AOD;
         OverlayKey overlayKey = Overlays.Bouncer;
         companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(keyguardState, KeyguardState.PRIMARY_BOUNCER, keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, new Edge.StateToContent(keyguardState, overlayKey)));
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(keyguardState, KeyguardState.PRIMARY_BOUNCER, keyguardTransitionAnimationFlow.m2613setupVtjQ1oo(j, new Edge.StateToContent(keyguardState, overlayKey)));
         this.deviceEntryParentViewAlpha = flowBuilderM.immediatelyTransitionTo(0.0f);
         this.windowBlurRadius = flowBuilderM.immediatelyTransitionTo(blurConfig.maxBlurRadiusPx);
         EmptyFlow emptyFlow = EmptyFlow.INSTANCE;

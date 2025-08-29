@@ -75,7 +75,7 @@ public class SecurityControllerImpl implements SecurityController {
     }
 
     /* renamed from: -$$Nest$mupdateState, reason: not valid java name */
-    public static void m3107$$Nest$mupdateState(SecurityControllerImpl securityControllerImpl) {
+    public static void m3106$$Nest$mupdateState(SecurityControllerImpl securityControllerImpl) {
         LegacyVpnInfo legacyVpnInfo;
         securityControllerImpl.getClass();
         SparseArray sparseArray = new SparseArray();
@@ -113,7 +113,7 @@ public class SecurityControllerImpl implements SecurityController {
                 if (SecurityControllerImpl.DEBUG) {
                     Log.d("SecurityController", "onAvailable " + network.getNetId());
                 }
-                SecurityControllerImpl.m3107$$Nest$mupdateState(SecurityControllerImpl.this);
+                SecurityControllerImpl.m3106$$Nest$mupdateState(SecurityControllerImpl.this);
                 SecurityControllerImpl.this.fireCallbacks();
             }
 
@@ -166,7 +166,7 @@ public class SecurityControllerImpl implements SecurityController {
                 synchronized (SecurityControllerImpl.this.mNetworkProperties) {
                     SecurityControllerImpl.this.mNetworkProperties.delete(network.getNetId());
                 }
-                SecurityControllerImpl.m3107$$Nest$mupdateState(SecurityControllerImpl.this);
+                SecurityControllerImpl.m3106$$Nest$mupdateState(SecurityControllerImpl.this);
                 SecurityControllerImpl.this.fireCallbacks();
             }
         };

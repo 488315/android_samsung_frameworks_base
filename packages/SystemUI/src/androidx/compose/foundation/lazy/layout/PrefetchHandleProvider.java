@@ -345,10 +345,10 @@ public final class PrefetchHandleProvider {
             TimeSource$Monotonic.INSTANCE.getClass();
             MonotonicTimeSource.INSTANCE.getClass();
             long j = MonotonicTimeSource.read();
-            long jM3468minus6eNON_k = TimeSource$Monotonic.ValueTimeMark.m3468minus6eNON_k(j, this.startTime);
-            long j2 = jM3468minus6eNON_k >> 1;
+            long jM3467minus6eNON_k = TimeSource$Monotonic.ValueTimeMark.m3467minus6eNON_k(j, this.startTime);
+            long j2 = jM3467minus6eNON_k >> 1;
             Duration.Companion companion = Duration.Companion;
-            if ((((int) jM3468minus6eNON_k) & 1) != 0) {
+            if ((((int) jM3467minus6eNON_k) & 1) != 0) {
                 j2 = j2 > 9223372036854L ? Long.MAX_VALUE : j2 < -9223372036854L ? Long.MIN_VALUE : j2 * 1000000;
             }
             this.elapsedTimeNanos = j2;

@@ -46,7 +46,7 @@ public final class LockscreenToOccludedTransitionViewModel$special$$inlined$flat
             final int iIntValue = ((Number) this.L$1).intValue();
             KeyguardTransitionAnimationFlow.FlowBuilder flowBuilder = this.this$0.transitionAnimation;
             FromLockscreenTransitionInteractor.Companion.getClass();
-            KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2616sharedFlow74qcysc$default = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilder, FromLockscreenTransitionInteractor.TO_OCCLUDED_DURATION, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToOccludedTransitionViewModel$lockscreenTranslationY$1$1
+            KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2614sharedFlow74qcysc$default = KeyguardTransitionAnimationFlow.FlowBuilder.m2614sharedFlow74qcysc$default(flowBuilder, FromLockscreenTransitionInteractor.TO_OCCLUDED_DURATION, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToOccludedTransitionViewModel$lockscreenTranslationY$1$1
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
                 public final Object mo781invoke(Object obj2) {
@@ -64,7 +64,7 @@ public final class LockscreenToOccludedTransitionViewModel$special$$inlined$flat
                 }
             }, Interpolators.EMPHASIZED_ACCELERATE, null, 140);
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2616sharedFlow74qcysc$default, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2614sharedFlow74qcysc$default, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

@@ -50,7 +50,7 @@ public final /* synthetic */ class ScaffoldKt$$ExternalSyntheticLambda0 implemen
                 WindowInsets windowInsets = this.f$8;
                 ComposableLambdaImpl composableLambdaImpl = this.f$10;
                 int i = this.f$13;
-                ScaffoldKt.m3341SeslScaffold5k0As8s(this.f$0, this.f$1, this.f$2, this.f$3, this.f$4, this.f$5, this.f$6, this.f$7, windowInsets, composableLambdaImpl, (Composer) obj, iUpdateChangedFlags, i);
+                ScaffoldKt.m3340SeslScaffold5k0As8s(this.f$0, this.f$1, this.f$2, this.f$3, this.f$4, this.f$5, this.f$6, this.f$7, windowInsets, composableLambdaImpl, (Composer) obj, iUpdateChangedFlags, i);
                 break;
             default:
                 ((Integer) obj2).getClass();
@@ -58,7 +58,7 @@ public final /* synthetic */ class ScaffoldKt$$ExternalSyntheticLambda0 implemen
                 int iUpdateChangedFlags3 = RecomposeScopeImplKt.updateChangedFlags(this.f$13);
                 WindowInsets windowInsets2 = this.f$8;
                 ComposableLambdaImpl composableLambdaImpl2 = this.f$10;
-                ScaffoldKt.m3342SeslScaffoldImpl5k0As8s(this.f$0, this.f$1, this.f$2, this.f$3, this.f$4, this.f$5, this.f$6, this.f$7, windowInsets2, composableLambdaImpl2, (Composer) obj, iUpdateChangedFlags2, iUpdateChangedFlags3);
+                ScaffoldKt.m3341SeslScaffoldImpl5k0As8s(this.f$0, this.f$1, this.f$2, this.f$3, this.f$4, this.f$5, this.f$6, this.f$7, windowInsets2, composableLambdaImpl2, (Composer) obj, iUpdateChangedFlags2, iUpdateChangedFlags3);
                 break;
         }
         return Unit.INSTANCE;

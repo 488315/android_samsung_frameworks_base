@@ -86,7 +86,7 @@ public abstract class Wrapper_androidKt {
                 /* renamed from: invoke */
                 public final Object mo781invoke(Object obj) {
                     if (GlobalSnapshotManager.sent.compareAndSet(false, true)) {
-                        bufferedChannelChannel$default.mo3476trySendJP2dKIU(Unit.INSTANCE);
+                        bufferedChannelChannel$default.mo3475trySendJP2dKIU(Unit.INSTANCE);
                     }
                     return Unit.INSTANCE;
                 }

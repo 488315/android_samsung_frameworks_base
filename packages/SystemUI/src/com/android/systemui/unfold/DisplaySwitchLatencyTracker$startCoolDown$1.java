@@ -63,7 +63,7 @@ final class DisplaySwitchLatencyTracker$startCoolDown$1 extends SuspendLambda im
             try {
                 ChannelLimitedFlowMerge channelLimitedFlowMerge = this.this$0.startOrEndEvent;
                 DisplaySwitchLatencyTracker.Companion.getClass();
-                FlowCoroutineKt$scopedFlow$$inlined$unsafeFlow$1 flowCoroutineKt$scopedFlow$$inlined$unsafeFlow$1M3483timeoutHG0u8IE = FlowKt.m3483timeoutHG0u8IE(channelLimitedFlowMerge, DisplaySwitchLatencyTracker.COOL_DOWN_DURATION);
+                FlowCoroutineKt$scopedFlow$$inlined$unsafeFlow$1 flowCoroutineKt$scopedFlow$$inlined$unsafeFlow$1M3482timeoutHG0u8IE = FlowKt.m3482timeoutHG0u8IE(channelLimitedFlowMerge, DisplaySwitchLatencyTracker.COOL_DOWN_DURATION);
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.unfold.DisplaySwitchLatencyTracker$startCoolDown$1.1
                     /* JADX WARN: Multi-variable type inference failed */
                     @Override // kotlinx.coroutines.flow.FlowCollector
@@ -78,7 +78,7 @@ final class DisplaySwitchLatencyTracker$startCoolDown$1 extends SuspendLambda im
                 this.L$0 = ref$ObjectRef2;
                 this.J$0 = jElapsedRealtime;
                 this.label = 1;
-                if (flowCoroutineKt$scopedFlow$$inlined$unsafeFlow$1M3483timeoutHG0u8IE.collect(flowCollector, this) == coroutineSingletons) {
+                if (flowCoroutineKt$scopedFlow$$inlined$unsafeFlow$1M3482timeoutHG0u8IE.collect(flowCollector, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } catch (TimeoutCancellationException unused) {

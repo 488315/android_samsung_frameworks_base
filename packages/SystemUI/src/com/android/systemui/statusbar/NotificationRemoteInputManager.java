@@ -376,7 +376,7 @@ public class NotificationRemoteInputManager implements CoreStartable {
             }
             if (expandableNotificationRow.mPrivateLayout.mExpandedChild.isShown()) {
                 View view3 = expandableNotificationRow.mPrivateLayout.mExpandedChild;
-                RemoteInputView remoteInputView = view3 == null ? null : (RemoteInputView) view3.findViewWithTag(RemoteInputView.VIEW_TAG);
+                final RemoteInputView remoteInputView = view3 == null ? null : (RemoteInputView) view3.findViewWithTag(RemoteInputView.VIEW_TAG);
                 if (remoteInputView != null && remoteInputView.isAttachedToWindow()) {
                     RemoteInputViewControllerImpl remoteInputViewControllerImpl = (RemoteInputViewControllerImpl) remoteInputView.mViewController;
                     remoteInputViewControllerImpl.pendingIntent = pendingIntent;
@@ -413,7 +413,7 @@ public class NotificationRemoteInputManager implements CoreStartable {
                             animatorSet.addListener(new AnimatorListenerAdapter(remoteInputView, viewFindViewById) { // from class: com.android.systemui.statusbar.policy.RemoteInputView.4
                                 public final /* synthetic */ View val$fadeOutView;
 
-                                public AnonymousClass4(RemoteInputView remoteInputView2, View viewFindViewById2) {
+                                public AnonymousClass4(final RemoteInputView remoteInputView2, View viewFindViewById2) {
                                     this.val$fadeOutView = viewFindViewById2;
                                 }
 

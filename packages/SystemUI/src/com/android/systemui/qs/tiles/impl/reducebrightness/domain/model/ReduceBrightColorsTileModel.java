@@ -11,7 +11,7 @@ public final class ReduceBrightColorsTileModel {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ ReduceBrightColorsTileModel m2934boximpl(boolean z) {
+    public static final /* synthetic */ ReduceBrightColorsTileModel m2932boximpl(boolean z) {
         return new ReduceBrightColorsTileModel(z);
     }
 

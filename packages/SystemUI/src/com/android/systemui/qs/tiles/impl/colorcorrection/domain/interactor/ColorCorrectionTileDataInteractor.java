@@ -80,9 +80,9 @@ public final class ColorCorrectionTileDataInteractor implements QSTileDataIntera
                     int i2 = anonymousClass1.label;
                     if (i2 == 0) {
                         ResultKt.throwOnFailure(obj2);
-                        ColorCorrectionTileModel colorCorrectionTileModelM2928boximpl = ColorCorrectionTileModel.m2928boximpl(((Boolean) obj).booleanValue());
+                        ColorCorrectionTileModel colorCorrectionTileModelM2926boximpl = ColorCorrectionTileModel.m2926boximpl(((Boolean) obj).booleanValue());
                         anonymousClass1.label = 1;
-                        if (this.$this_unsafeFlow.emit(colorCorrectionTileModelM2928boximpl, anonymousClass1) == coroutineSingletons) {
+                        if (this.$this_unsafeFlow.emit(colorCorrectionTileModelM2926boximpl, anonymousClass1) == coroutineSingletons) {
                             return coroutineSingletons;
                         }
                     } else {

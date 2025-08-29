@@ -19,10 +19,10 @@ public final class KeyguardBottomAreaVibrations {
         ShakeAnimationDuration = DurationKt.toDuration(300, DurationUnit.MILLISECONDS);
         ShakeAnimationCycles = 5.0f;
         VibrationEffect.Composition compositionStartComposition = VibrationEffect.startComposition();
-        int iM3457getInWholeMillisecondsimpl = (int) (Duration.m3457getInWholeMillisecondsimpl(r0) / (2 * 5.0f));
+        int iM3456getInWholeMillisecondsimpl = (int) (Duration.m3456getInWholeMillisecondsimpl(r0) / (2 * 5.0f));
         int i = ((int) 5.0f) * 2;
         for (int i2 = 0; i2 < i; i2++) {
-            compositionStartComposition.addPrimitive(7, 0.3f, iM3457getInWholeMillisecondsimpl);
+            compositionStartComposition.addPrimitive(7, 0.3f, iM3456getInWholeMillisecondsimpl);
         }
         Shake = compositionStartComposition.compose();
         Activated = VibrationEffect.startComposition().addPrimitive(7, 0.6f, 0).addPrimitive(4, 0.1f, 0).compose();

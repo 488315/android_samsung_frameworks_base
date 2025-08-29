@@ -50,28 +50,28 @@ final class DefaultDrawerItemsColor implements NavigationDrawerItemColors {
         DefaultDrawerItemsColor defaultDrawerItemsColor = (DefaultDrawerItemsColor) obj;
         long j = defaultDrawerItemsColor.selectedIconColor;
         Color.Companion companion = Color.Companion;
-        if (!ULong.m3447equalsimpl0(this.selectedIconColor, j)) {
+        if (!ULong.m3446equalsimpl0(this.selectedIconColor, j)) {
             return false;
         }
-        if (!ULong.m3447equalsimpl0(this.unselectedIconColor, defaultDrawerItemsColor.unselectedIconColor)) {
+        if (!ULong.m3446equalsimpl0(this.unselectedIconColor, defaultDrawerItemsColor.unselectedIconColor)) {
             return false;
         }
-        if (!ULong.m3447equalsimpl0(this.selectedTextColor, defaultDrawerItemsColor.selectedTextColor)) {
+        if (!ULong.m3446equalsimpl0(this.selectedTextColor, defaultDrawerItemsColor.selectedTextColor)) {
             return false;
         }
-        if (!ULong.m3447equalsimpl0(this.unselectedTextColor, defaultDrawerItemsColor.unselectedTextColor)) {
+        if (!ULong.m3446equalsimpl0(this.unselectedTextColor, defaultDrawerItemsColor.unselectedTextColor)) {
             return false;
         }
-        if (!ULong.m3447equalsimpl0(this.selectedContainerColor, defaultDrawerItemsColor.selectedContainerColor)) {
+        if (!ULong.m3446equalsimpl0(this.selectedContainerColor, defaultDrawerItemsColor.selectedContainerColor)) {
             return false;
         }
-        if (!ULong.m3447equalsimpl0(this.unselectedContainerColor, defaultDrawerItemsColor.unselectedContainerColor)) {
+        if (!ULong.m3446equalsimpl0(this.unselectedContainerColor, defaultDrawerItemsColor.unselectedContainerColor)) {
             return false;
         }
-        if (!ULong.m3447equalsimpl0(this.selectedBadgeColor, defaultDrawerItemsColor.selectedBadgeColor)) {
+        if (!ULong.m3446equalsimpl0(this.selectedBadgeColor, defaultDrawerItemsColor.selectedBadgeColor)) {
             return false;
         }
-        return ULong.m3447equalsimpl0(this.unselectedBadgeColor, defaultDrawerItemsColor.unselectedBadgeColor);
+        return ULong.m3446equalsimpl0(this.unselectedBadgeColor, defaultDrawerItemsColor.unselectedBadgeColor);
     }
 
     public final int hashCode() {

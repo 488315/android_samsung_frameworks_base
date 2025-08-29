@@ -51,7 +51,7 @@ final class QSFragmentComposeViewModelKt$mediaHostVisible$1 extends SuspendLambd
                 public final Object mo781invoke(Object obj2) {
                     Boolean bool = (Boolean) obj2;
                     bool.booleanValue();
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(bool);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(bool);
                     return Unit.INSTANCE;
                 }
             };

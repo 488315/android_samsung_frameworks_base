@@ -106,7 +106,7 @@ public final class DemoModeController implements CallbackController, Dumpable {
 
                     @Override // com.android.systemui.demomode.DemoModeCommandReceiver
                     public final void dispatchDemoCommand(Bundle bundle, String str2) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(bundle);
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(bundle);
                     }
                 };
                 DemoModeController.this.addCallback((DemoMode) r1);

@@ -36,7 +36,7 @@ public class HideDisplayCutoutOrganizer extends DisplayAreaOrganizer {
     public int mStatusBarHeight;
 
     /* renamed from: -$$Nest$monDisplayChanged, reason: not valid java name */
-    public static void m3270$$Nest$monDisplayChanged(HideDisplayCutoutOrganizer hideDisplayCutoutOrganizer, int i) {
+    public static void m3269$$Nest$monDisplayChanged(HideDisplayCutoutOrganizer hideDisplayCutoutOrganizer, int i) {
         if (i != 0) {
             hideDisplayCutoutOrganizer.getClass();
             return;
@@ -72,12 +72,12 @@ public class HideDisplayCutoutOrganizer extends DisplayAreaOrganizer {
         this.mListener = new DisplayController.OnDisplaysChangedListener() { // from class: com.android.wm.shell.hidedisplaycutout.HideDisplayCutoutOrganizer.1
             @Override // com.android.wm.shell.common.DisplayController.OnDisplaysChangedListener
             public final void onDisplayAdded(int i) {
-                HideDisplayCutoutOrganizer.m3270$$Nest$monDisplayChanged(HideDisplayCutoutOrganizer.this, i);
+                HideDisplayCutoutOrganizer.m3269$$Nest$monDisplayChanged(HideDisplayCutoutOrganizer.this, i);
             }
 
             @Override // com.android.wm.shell.common.DisplayController.OnDisplaysChangedListener
             public final void onDisplayConfigurationChanged(int i, Configuration configuration) {
-                HideDisplayCutoutOrganizer.m3270$$Nest$monDisplayChanged(HideDisplayCutoutOrganizer.this, i);
+                HideDisplayCutoutOrganizer.m3269$$Nest$monDisplayChanged(HideDisplayCutoutOrganizer.this, i);
             }
         };
         this.mContext = context;

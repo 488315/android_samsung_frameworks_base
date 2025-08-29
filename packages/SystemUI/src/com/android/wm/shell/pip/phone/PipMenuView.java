@@ -106,7 +106,7 @@ public class PipMenuView extends FrameLayout {
     public final View mViewRoot;
 
     /* renamed from: $r8$lambda$kh7O-2Rmd0Daiu_MbPcAw5t76mc, reason: not valid java name */
-    public static void m3272$r8$lambda$kh7O2Rmd0Daiu_MbPcAw5t76mc(PipMenuView pipMenuView, View view) {
+    public static void m3271$r8$lambda$kh7O2Rmd0Daiu_MbPcAw5t76mc(PipMenuView pipMenuView, View view) {
         if (view.getAlpha() != 0.0f) {
             Log.d("PipMenuView", "showSettings");
             Pair topPipActivity = PipUtils.getTopPipActivity(((FrameLayout) pipMenuView).mContext);
@@ -120,7 +120,7 @@ public class PipMenuView extends FrameLayout {
     }
 
     /* renamed from: -$$Nest$mnotifyMenuStateChangeFinish, reason: not valid java name */
-    public static void m3273$$Nest$mnotifyMenuStateChangeFinish(PipMenuView pipMenuView, final int i) {
+    public static void m3272$$Nest$mnotifyMenuStateChangeFinish(PipMenuView pipMenuView, final int i) {
         StringBuilder sb = new StringBuilder("notifyMenuStateChangeFinish: ");
         ViewPager$$ExternalSyntheticOutline0.m(sb, pipMenuView.mMenuState, "->", i, ", Callers=");
         KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m(5, "PipMenuView", sb);
@@ -209,7 +209,7 @@ public class PipMenuView extends FrameLayout {
                 PipMenuView pipMenuView = this.f$0;
                 switch (i4) {
                     case 0:
-                        PipMenuView.m3272$r8$lambda$kh7O2Rmd0Daiu_MbPcAw5t76mc(pipMenuView, view);
+                        PipMenuView.m3271$r8$lambda$kh7O2Rmd0Daiu_MbPcAw5t76mc(pipMenuView, view);
                         break;
                     case 1:
                         int i5 = PipMenuView.$r8$clinit;
@@ -290,7 +290,7 @@ public class PipMenuView extends FrameLayout {
                 PipMenuView pipMenuView = this.f$0;
                 switch (i4) {
                     case 0:
-                        PipMenuView.m3272$r8$lambda$kh7O2Rmd0Daiu_MbPcAw5t76mc(pipMenuView, view);
+                        PipMenuView.m3271$r8$lambda$kh7O2Rmd0Daiu_MbPcAw5t76mc(pipMenuView, view);
                         break;
                     case 1:
                         int i5 = PipMenuView.$r8$clinit;
@@ -371,7 +371,7 @@ public class PipMenuView extends FrameLayout {
                 PipMenuView pipMenuView = this.f$0;
                 switch (i4) {
                     case 0:
-                        PipMenuView.m3272$r8$lambda$kh7O2Rmd0Daiu_MbPcAw5t76mc(pipMenuView, view);
+                        PipMenuView.m3271$r8$lambda$kh7O2Rmd0Daiu_MbPcAw5t76mc(pipMenuView, view);
                         break;
                     case 1:
                         int i5 = PipMenuView.$r8$clinit;
@@ -455,7 +455,7 @@ public class PipMenuView extends FrameLayout {
                 PipMenuView pipMenuView = this.f$0;
                 switch (i42) {
                     case 0:
-                        PipMenuView.m3272$r8$lambda$kh7O2Rmd0Daiu_MbPcAw5t76mc(pipMenuView, view);
+                        PipMenuView.m3271$r8$lambda$kh7O2Rmd0Daiu_MbPcAw5t76mc(pipMenuView, view);
                         break;
                     case 1:
                         int i5 = PipMenuView.$r8$clinit;
@@ -635,7 +635,7 @@ public class PipMenuView extends FrameLayout {
                 public final void onAnimationEnd(Animator animator) {
                     PipMenuView.this.setVisibility(8);
                     if (z) {
-                        PipMenuView.m3273$$Nest$mnotifyMenuStateChangeFinish(PipMenuView.this, 0);
+                        PipMenuView.m3272$$Nest$mnotifyMenuStateChangeFinish(PipMenuView.this, 0);
                     }
                     Runnable runnable2 = runnable;
                     if (runnable2 != null) {
@@ -837,7 +837,7 @@ public class PipMenuView extends FrameLayout {
             public final void onAnimationEnd(Animator animator) {
                 PipMenuView pipMenuView = PipMenuView.this;
                 pipMenuView.mAllowTouches = true;
-                PipMenuView.m3273$$Nest$mnotifyMenuStateChangeFinish(pipMenuView, i2);
+                PipMenuView.m3272$$Nest$mnotifyMenuStateChangeFinish(pipMenuView, i2);
                 if (c2) {
                     PipMenuView.this.repostDelayedHide(3000);
                 }

@@ -24,7 +24,7 @@ public final class SeslBasicRadioButtonColors {
         SeslBasicRadioButtonColors seslBasicRadioButtonColors = (SeslBasicRadioButtonColors) obj;
         long j = seslBasicRadioButtonColors.checkedColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.checkedColor, j) && ULong.m3447equalsimpl0(this.uncheckedColor, seslBasicRadioButtonColors.uncheckedColor);
+        return ULong.m3446equalsimpl0(this.checkedColor, j) && ULong.m3446equalsimpl0(this.uncheckedColor, seslBasicRadioButtonColors.uncheckedColor);
     }
 
     public final int hashCode() {

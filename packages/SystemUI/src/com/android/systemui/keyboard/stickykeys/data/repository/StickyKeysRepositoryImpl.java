@@ -102,34 +102,34 @@ public final class StickyKeysRepositoryImpl implements StickyKeysRepository {
                         this.this$0.getClass();
                         LinkedHashMap linkedHashMap = new LinkedHashMap();
                         if (stickyModifierState.isAltGrModifierOn()) {
-                            linkedHashMap.put(ModifierKey.ALT_GR, Locked.m2600boximpl(false));
+                            linkedHashMap.put(ModifierKey.ALT_GR, Locked.m2598boximpl(false));
                         }
                         if (stickyModifierState.isAltGrModifierLocked()) {
-                            linkedHashMap.put(ModifierKey.ALT_GR, Locked.m2600boximpl(true));
+                            linkedHashMap.put(ModifierKey.ALT_GR, Locked.m2598boximpl(true));
                         }
                         if (stickyModifierState.isAltModifierOn()) {
-                            linkedHashMap.put(ModifierKey.ALT, Locked.m2600boximpl(false));
+                            linkedHashMap.put(ModifierKey.ALT, Locked.m2598boximpl(false));
                         }
                         if (stickyModifierState.isAltModifierLocked()) {
-                            linkedHashMap.put(ModifierKey.ALT, Locked.m2600boximpl(true));
+                            linkedHashMap.put(ModifierKey.ALT, Locked.m2598boximpl(true));
                         }
                         if (stickyModifierState.isCtrlModifierOn()) {
-                            linkedHashMap.put(ModifierKey.CTRL, Locked.m2600boximpl(false));
+                            linkedHashMap.put(ModifierKey.CTRL, Locked.m2598boximpl(false));
                         }
                         if (stickyModifierState.isCtrlModifierLocked()) {
-                            linkedHashMap.put(ModifierKey.CTRL, Locked.m2600boximpl(true));
+                            linkedHashMap.put(ModifierKey.CTRL, Locked.m2598boximpl(true));
                         }
                         if (stickyModifierState.isMetaModifierOn()) {
-                            linkedHashMap.put(ModifierKey.META, Locked.m2600boximpl(false));
+                            linkedHashMap.put(ModifierKey.META, Locked.m2598boximpl(false));
                         }
                         if (stickyModifierState.isMetaModifierLocked()) {
-                            linkedHashMap.put(ModifierKey.META, Locked.m2600boximpl(true));
+                            linkedHashMap.put(ModifierKey.META, Locked.m2598boximpl(true));
                         }
                         if (stickyModifierState.isShiftModifierOn()) {
-                            linkedHashMap.put(ModifierKey.SHIFT, Locked.m2600boximpl(false));
+                            linkedHashMap.put(ModifierKey.SHIFT, Locked.m2598boximpl(false));
                         }
                         if (stickyModifierState.isShiftModifierLocked()) {
-                            linkedHashMap.put(ModifierKey.SHIFT, Locked.m2600boximpl(true));
+                            linkedHashMap.put(ModifierKey.SHIFT, Locked.m2598boximpl(true));
                         }
                         anonymousClass1.label = 1;
                         if (this.$this_unsafeFlow.emit(linkedHashMap, anonymousClass1) == coroutineSingletons) {

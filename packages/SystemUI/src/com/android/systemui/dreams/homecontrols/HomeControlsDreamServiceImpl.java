@@ -82,7 +82,7 @@ public final class HomeControlsDreamServiceImpl implements LifecycleOwner {
                 HomeControlsDreamServiceImpl.Companion.getClass();
                 long j = HomeControlsDreamServiceImpl.ACTIVITY_RESTART_DELAY;
                 this.label = 1;
-                if (DelayKt.m3469delayVtjQ1oo(j, this) == coroutineSingletons) {
+                if (DelayKt.m3468delayVtjQ1oo(j, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {

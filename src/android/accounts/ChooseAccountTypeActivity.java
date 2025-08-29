@@ -31,7 +31,7 @@ public class ChooseAccountTypeActivity extends Activity {
     private HashMap<String, AuthInfo> mTypeToAuthenticatorInfo = new HashMap<>();
 
     @Override // android.app.Activity
-    public void onCreate(Bundle bundle) {
+    public void onCreate(Bundle bundle) throws Resources.NotFoundException {
         HashSet hashSet;
         super.onCreate(bundle);
         getWindow().addSystemFlags(524288);

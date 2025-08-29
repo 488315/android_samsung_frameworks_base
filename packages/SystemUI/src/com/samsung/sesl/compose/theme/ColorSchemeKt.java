@@ -9,7 +9,7 @@ import com.samsung.sesl.compose.component.tokens.SeslPaletteTokens;
 public abstract class ColorSchemeKt {
     public static final StaticProvidableCompositionLocal LocalSeslColorScheme;
     public static final SeslColorScheme seslDefaultDarkColorScheme;
-    public static final SeslColorScheme seslDefaultLightColorScheme = m3357seslLightColorSchemeFD3wquc$default();
+    public static final SeslColorScheme seslDefaultLightColorScheme = m3356seslLightColorSchemeFD3wquc$default();
 
     static {
         Color.Companion.getClass();
@@ -21,7 +21,7 @@ public abstract class ColorSchemeKt {
     }
 
     /* renamed from: seslLightColorScheme-FD3wquc$default, reason: not valid java name */
-    public static SeslColorScheme m3357seslLightColorSchemeFD3wquc$default() {
+    public static SeslColorScheme m3356seslLightColorSchemeFD3wquc$default() {
         Color.Companion companion = Color.Companion;
         companion.getClass();
         long j = Color.Unspecified;

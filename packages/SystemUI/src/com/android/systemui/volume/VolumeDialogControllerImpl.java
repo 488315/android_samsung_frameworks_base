@@ -193,7 +193,7 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
                         String str2 = VolumeDialogControllerImpl.TAG;
                         Log.d(str2, str + ": added stream " + this.mNextStream + " from token + " + media.toString());
                         this.mNextStream = this.mNextStream + 1;
-                        if ("com.samsung.android.audiomirroring".equals(VolumeDialogControllerImpl.m3212$$Nest$mgetMediaControllerFromSessionId(VolumeDialogControllerImpl.this, media).getPackageName())) {
+                        if ("com.samsung.android.audiomirroring".equals(VolumeDialogControllerImpl.m3211$$Nest$mgetMediaControllerFromSessionId(VolumeDialogControllerImpl.this, media).getPackageName())) {
                             VolumeDialogControllerImpl.this.mIsAudioMirroringEnabled = true;
                             Log.d(str2, str.concat(": - AudioMirroring is on"));
                         }
@@ -213,7 +213,7 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
                     }
                     int iIntValue = ((Integer) this.mRemoteStreams.get(media)).intValue();
                     VolumeDialogControllerImpl volumeDialogControllerImpl = VolumeDialogControllerImpl.this;
-                    if (volumeDialogControllerImpl.mIsAudioMirroringEnabled && "com.samsung.android.audiomirroring".equals(VolumeDialogControllerImpl.m3212$$Nest$mgetMediaControllerFromSessionId(volumeDialogControllerImpl, media).getPackageName())) {
+                    if (volumeDialogControllerImpl.mIsAudioMirroringEnabled && "com.samsung.android.audiomirroring".equals(VolumeDialogControllerImpl.m3211$$Nest$mgetMediaControllerFromSessionId(volumeDialogControllerImpl, media).getPackageName())) {
                         VolumeDialogControllerImpl.this.mIsAudioMirroringEnabled = false;
                         NotificationManagerCompat$SideChannelManager$$ExternalSyntheticOutline0.m(iIntValue, "onRemoteRemoved ", " - AudioMirroring is off", VolumeDialogControllerImpl.TAG);
                     }
@@ -268,13 +268,13 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
                     String str2 = VolumeDialogControllerImpl.TAG;
                     zUpdateEffectsSuppressorW = volumeDialogControllerImpl2.updateStreamMuteW(intExtra4, booleanExtra);
                 }
-                VolumeDialogControllerImpl.m3214$$Nest$mupdateStreamVolume(VolumeDialogControllerImpl.this, intExtra4);
+                VolumeDialogControllerImpl.m3213$$Nest$mupdateStreamVolume(VolumeDialogControllerImpl.this, intExtra4);
                 if (intExtra4 == 3) {
                     VolumeDialogControllerImpl.this.updateStreamMuteW(21, booleanExtra);
-                    VolumeDialogControllerImpl.m3214$$Nest$mupdateStreamVolume(VolumeDialogControllerImpl.this, 21);
+                    VolumeDialogControllerImpl.m3213$$Nest$mupdateStreamVolume(VolumeDialogControllerImpl.this, 21);
                     ActionBarContextView$$ExternalSyntheticOutline0.m(KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutline0.m("onReceive STREAM_MUTE_CHANGED_ACTION : stream=", intExtra4, ", muted=", booleanExtra, ", mState.dualAudio="), VolumeDialogControllerImpl.this.mState.dualAudio, VolumeDialogControllerImpl.TAG);
                     VolumeDialogControllerImpl.this.updateStreamMuteW(22, booleanExtra);
-                    VolumeDialogControllerImpl.m3214$$Nest$mupdateStreamVolume(VolumeDialogControllerImpl.this, 22);
+                    VolumeDialogControllerImpl.m3213$$Nest$mupdateStreamVolume(VolumeDialogControllerImpl.this, 22);
                 }
             } else if (action.equals("android.bluetooth.headset.profile.action.AUDIO_STATE_CHANGED")) {
                 VolumeDialogControllerImpl volumeDialogControllerImpl3 = VolumeDialogControllerImpl.this;
@@ -747,7 +747,7 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
     }
 
     /* renamed from: -$$Nest$mgetMediaControllerFromSessionId, reason: not valid java name */
-    public static MediaController m3212$$Nest$mgetMediaControllerFromSessionId(VolumeDialogControllerImpl volumeDialogControllerImpl, MediaSessions.SessionId.Media media) {
+    public static MediaController m3211$$Nest$mgetMediaControllerFromSessionId(VolumeDialogControllerImpl volumeDialogControllerImpl, MediaSessions.SessionId.Media media) {
         volumeDialogControllerImpl.getClass();
         return new MediaController(volumeDialogControllerImpl.mContext, media.token);
     }
@@ -757,7 +757,7 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static void m3213$$Nest$mupdateRemoteFixedVolumeSession(VolumeDialogControllerImpl volumeDialogControllerImpl, int i, MediaController.PlaybackInfo playbackInfo) {
+    public static void m3212$$Nest$mupdateRemoteFixedVolumeSession(VolumeDialogControllerImpl volumeDialogControllerImpl, int i, MediaController.PlaybackInfo playbackInfo) {
         boolean z;
         if (playbackInfo != null) {
             volumeDialogControllerImpl.getClass();
@@ -774,7 +774,7 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
     }
 
     /* renamed from: -$$Nest$mupdateStreamVolume, reason: not valid java name */
-    public static void m3214$$Nest$mupdateStreamVolume(VolumeDialogControllerImpl volumeDialogControllerImpl, int i) {
+    public static void m3213$$Nest$mupdateStreamVolume(VolumeDialogControllerImpl volumeDialogControllerImpl, int i) {
         volumeDialogControllerImpl.updateStreamLevelW(i, volumeDialogControllerImpl.getLastAudibleStreamVolume(i));
     }
 

@@ -300,7 +300,7 @@ public abstract class SystemUIDialogFactoryExtKt {
     }
 
     /* renamed from: createBottomSheet-6ZxE2Lo$default, reason: not valid java name */
-    public static ComponentSystemUIDialog m3095createBottomSheet6ZxE2Lo$default(SystemUIDialogFactory systemUIDialogFactory, final ComposableLambdaImpl composableLambdaImpl, final boolean z, final float f, int i) {
+    public static ComponentSystemUIDialog m3093createBottomSheet6ZxE2Lo$default(SystemUIDialogFactory systemUIDialogFactory, final ComposableLambdaImpl composableLambdaImpl, final boolean z, final float f, int i) {
         Context context = systemUIDialogFactory.applicationContext;
         if ((i & 16) != 0) {
             z = true;

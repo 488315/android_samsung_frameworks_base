@@ -1612,9 +1612,11 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
             boolean z3 = false;
             for (int i3 = 0; i3 < i2; i3++) {
                 View view = viewArr[i3];
-                view.mPrivateFlags2 &= -4;
-                if (view.getVisibility() == 0 && notifyChildOfDragStart(viewArr[i3])) {
-                    z3 = true;
+                if (view != null) {
+                    view.mPrivateFlags2 &= -4;
+                    if (view.getVisibility() == 0 && notifyChildOfDragStart(viewArr[i3])) {
+                        z3 = true;
+                    }
                 }
             }
             boolean zDispatchDragEvent = super.dispatchDragEvent(dragEvent);

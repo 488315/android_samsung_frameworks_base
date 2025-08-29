@@ -452,7 +452,7 @@ class CalendarViewLegacyDelegate extends CalendarView.AbstractCalendarViewDelega
         return calendar.get(6) == calendar2.get(6) && calendar.get(1) == calendar2.get(1);
     }
 
-    private void setUpAdapter() {
+    private void setUpAdapter() throws Resources.NotFoundException {
         if (this.mAdapter == null) {
             WeeksAdapter weeksAdapter = new WeeksAdapter(this.mContext);
             this.mAdapter = weeksAdapter;

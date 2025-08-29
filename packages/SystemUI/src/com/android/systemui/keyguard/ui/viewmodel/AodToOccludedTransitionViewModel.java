@@ -25,9 +25,9 @@ public final class AodToOccludedTransitionViewModel implements DeviceEntryIconTr
 
     public AodToOccludedTransitionViewModel(KeyguardTransitionAnimationFlow keyguardTransitionAnimationFlow) {
         FromAodTransitionInteractor.Companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM2615setupVtjQ1oo = keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(FromAodTransitionInteractor.TO_OCCLUDED_DURATION, KeyguardInteractor$$ExternalSyntheticOutline0.m(Edge.Companion, KeyguardState.AOD, KeyguardState.OCCLUDED));
-        this.transitionAnimation = flowBuilderM2615setupVtjQ1oo;
-        this.deviceEntryParentViewAlpha = flowBuilderM2615setupVtjQ1oo.immediatelyTransitionTo(0.0f);
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM2613setupVtjQ1oo = keyguardTransitionAnimationFlow.m2613setupVtjQ1oo(FromAodTransitionInteractor.TO_OCCLUDED_DURATION, KeyguardInteractor$$ExternalSyntheticOutline0.m(Edge.Companion, KeyguardState.AOD, KeyguardState.OCCLUDED));
+        this.transitionAnimation = flowBuilderM2613setupVtjQ1oo;
+        this.deviceEntryParentViewAlpha = flowBuilderM2613setupVtjQ1oo.immediatelyTransitionTo(0.0f);
     }
 
     @Override // com.android.systemui.keyguard.ui.transitions.DeviceEntryIconTransition
@@ -41,7 +41,7 @@ public final class AodToOccludedTransitionViewModel implements DeviceEntryIconTr
         DurationUnit durationUnit = DurationUnit.MILLISECONDS;
         long duration = DurationKt.toDuration(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend, durationUnit);
         long duration2 = DurationKt.toDuration(0, durationUnit);
-        return KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(this.transitionAnimation, duration, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.AodToOccludedTransitionViewModel$$ExternalSyntheticLambda0
+        return KeyguardTransitionAnimationFlow.FlowBuilder.m2614sharedFlow74qcysc$default(this.transitionAnimation, duration, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.AodToOccludedTransitionViewModel$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
             public final Object mo781invoke(Object obj) {

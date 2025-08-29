@@ -97,7 +97,7 @@ public final class ScheduledAction {
             objInvoke = obj;
         }
         companion.getClass();
-        this.result = Maybe.Present.m2590boximpl(objInvoke);
+        this.result = Maybe.Present.m2588boximpl(objInvoke);
         return Unit.INSTANCE;
     }
 

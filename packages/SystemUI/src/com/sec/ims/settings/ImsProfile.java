@@ -3199,7 +3199,7 @@ public class ImsProfile implements Parcelable, Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public ImsProfile m3437clone() throws CloneNotSupportedException {
+    public ImsProfile m3436clone() throws CloneNotSupportedException {
         return (ImsProfile) super.clone();
     }
 

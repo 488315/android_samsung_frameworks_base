@@ -11,7 +11,7 @@ public final class SensorPrivacyToggleTileModel {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ SensorPrivacyToggleTileModel m2936boximpl(boolean z) {
+    public static final /* synthetic */ SensorPrivacyToggleTileModel m2934boximpl(boolean z) {
         return new SensorPrivacyToggleTileModel(z);
     }
 

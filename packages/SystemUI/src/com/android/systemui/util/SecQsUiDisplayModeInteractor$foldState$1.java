@@ -75,7 +75,7 @@ final class SecQsUiDisplayModeInteractor$foldState$1 extends SuspendLambda imple
                     RecyclerView$$ExternalSyntheticOutline0.m(identifier2, "SecQsUiDisplayModeInteractor", sb);
                     SecQsUiDisplayModeInteractor secQsUiDisplayModeInteractor2 = secQsUiDisplayModeInteractor;
                     Boolean boolValueOf = Boolean.valueOf(z);
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(z ? SecQsUiDisplayModeInteractor.FoldState.FOLD : SecQsUiDisplayModeInteractor.FoldState.UNFOLD);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(z ? SecQsUiDisplayModeInteractor.FoldState.FOLD : SecQsUiDisplayModeInteractor.FoldState.UNFOLD);
                     secQsUiDisplayModeInteractor2.wasFolded = boolValueOf;
                 }
             };

@@ -120,7 +120,7 @@ public final class SubFullLayoutVolumeRowView extends FrameLayout implements Vol
     }
 
     /* renamed from: $r8$lambda$oovOMvrowRvnsb1_qcZm9-hq0lo, reason: not valid java name */
-    public static SpringAnimation m3221$r8$lambda$oovOMvrowRvnsb1_qcZm9hq0lo(final SubFullLayoutVolumeRowView subFullLayoutVolumeRowView) {
+    public static SpringAnimation m3220$r8$lambda$oovOMvrowRvnsb1_qcZm9hq0lo(final SubFullLayoutVolumeRowView subFullLayoutVolumeRowView) {
         SpringAnimation springAnimation = new SpringAnimation(new FloatValueHolder());
         SpringForce springForce = new SpringForce();
         springForce.setDampingRatio(1.0f);
@@ -166,7 +166,7 @@ public final class SubFullLayoutVolumeRowView extends FrameLayout implements Vol
         this.progressBarSpring$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumeRowView$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return SubFullLayoutVolumeRowView.m3221$r8$lambda$oovOMvrowRvnsb1_qcZm9hq0lo(this.f$0);
+                return SubFullLayoutVolumeRowView.m3220$r8$lambda$oovOMvrowRvnsb1_qcZm9hq0lo(this.f$0);
             }
         });
     }
@@ -809,7 +809,7 @@ public final class SubFullLayoutVolumeRowView extends FrameLayout implements Vol
         this.progressBarSpring$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.volume.view.subscreen.full.SubFullLayoutVolumeRowView$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return SubFullLayoutVolumeRowView.m3221$r8$lambda$oovOMvrowRvnsb1_qcZm9hq0lo(this.f$0);
+                return SubFullLayoutVolumeRowView.m3220$r8$lambda$oovOMvrowRvnsb1_qcZm9hq0lo(this.f$0);
             }
         });
     }

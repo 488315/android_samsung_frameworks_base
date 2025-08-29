@@ -72,7 +72,7 @@ public interface IDreamManager extends IInterface {
         }
 
         @Override // android.service.dreams.IDreamManager
-        public void semStartDozing(IBinder iBinder, int i, int i2, int i3, int i4, boolean z) throws RemoteException {
+        public void semStartDozingOneWay(IBinder iBinder, int i, int i2, float f, int i3, boolean z, int i4, boolean z2) throws RemoteException {
         }
 
         @Override // android.service.dreams.IDreamManager
@@ -145,7 +145,7 @@ public interface IDreamManager extends IInterface {
 
     void registerDreamOverlayService(ComponentName componentName) throws RemoteException;
 
-    void semStartDozing(IBinder iBinder, int i, int i2, int i3, int i4, boolean z) throws RemoteException;
+    void semStartDozingOneWay(IBinder iBinder, int i, int i2, float f, int i3, boolean z, int i4, boolean z2) throws RemoteException;
 
     void setDevicePostured(boolean z) throws RemoteException;
 
@@ -184,7 +184,7 @@ public interface IDreamManager extends IInterface {
         static final int TRANSACTION_isDreaming = 7;
         static final int TRANSACTION_isDreamingOrInPreview = 8;
         static final int TRANSACTION_registerDreamOverlayService = 17;
-        static final int TRANSACTION_semStartDozing = 24;
+        static final int TRANSACTION_semStartDozingOneWay = 24;
         static final int TRANSACTION_setDevicePostured = 20;
         static final int TRANSACTION_setDreamComponents = 3;
         static final int TRANSACTION_setDreamComponentsForUser = 15;
@@ -271,7 +271,7 @@ public interface IDreamManager extends IInterface {
                 case 23:
                     return "setScreensaverEnabled";
                 case 24:
-                    return "semStartDozing";
+                    return "semStartDozingOneWay";
                 default:
                     return null;
             }
@@ -440,12 +440,13 @@ public interface IDreamManager extends IInterface {
                     IBinder strongBinder6 = parcel.readStrongBinder();
                     int i13 = parcel.readInt();
                     int i14 = parcel.readInt();
+                    float f3 = parcel.readFloat();
                     int i15 = parcel.readInt();
-                    int i16 = parcel.readInt();
                     boolean z10 = parcel.readBoolean();
+                    int i16 = parcel.readInt();
+                    boolean z11 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    semStartDozing(strongBinder6, i13, i14, i15, i16, z10);
-                    parcel2.writeNoException();
+                    semStartDozingOneWay(strongBinder6, i13, i14, f3, i15, z10, i16, z11);
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -817,21 +818,20 @@ public interface IDreamManager extends IInterface {
             }
 
             @Override // android.service.dreams.IDreamManager
-            public void semStartDozing(IBinder iBinder, int i, int i2, int i3, int i4, boolean z) throws RemoteException {
+            public void semStartDozingOneWay(IBinder iBinder, int i, int i2, float f, int i3, boolean z, int i4, boolean z2) throws RemoteException {
                 Parcel parcelObtain = Parcel.obtain(asBinder());
-                Parcel parcelObtain2 = Parcel.obtain();
                 try {
                     parcelObtain.writeInterfaceToken(Stub.DESCRIPTOR);
                     parcelObtain.writeStrongBinder(iBinder);
                     parcelObtain.writeInt(i);
                     parcelObtain.writeInt(i2);
+                    parcelObtain.writeFloat(f);
                     parcelObtain.writeInt(i3);
-                    parcelObtain.writeInt(i4);
                     parcelObtain.writeBoolean(z);
-                    this.mRemote.transact(24, parcelObtain, parcelObtain2, 0);
-                    parcelObtain2.readException();
+                    parcelObtain.writeInt(i4);
+                    parcelObtain.writeBoolean(z2);
+                    this.mRemote.transact(24, parcelObtain, null, 1);
                 } finally {
-                    parcelObtain2.recycle();
                     parcelObtain.recycle();
                 }
             }

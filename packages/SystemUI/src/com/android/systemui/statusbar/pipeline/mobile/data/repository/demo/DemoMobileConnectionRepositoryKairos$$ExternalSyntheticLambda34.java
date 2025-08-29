@@ -25,7 +25,7 @@ public final /* synthetic */ class DemoMobileConnectionRepositoryKairos$$Externa
         TransactionScope transactionScope = (TransactionScope) obj;
         switch (this.$r8$classId) {
             case 0:
-                return Either.First.m2588boximpl(transactionScope.sample(demoMobileConnectionRepositoryKairos.lastMobileEvent));
+                return Either.First.m2586boximpl(transactionScope.sample(demoMobileConnectionRepositoryKairos.lastMobileEvent));
             default:
                 Either either = (Either) obj2;
                 int i = DemoMobileConnectionRepositoryKairos.$r8$clinit;

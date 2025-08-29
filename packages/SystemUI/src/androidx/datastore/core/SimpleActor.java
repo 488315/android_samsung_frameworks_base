@@ -30,11 +30,11 @@ public final class SimpleActor {
                     BufferedChannel bufferedChannel = this.messageQueue;
                     bufferedChannel.closeOrCancelImpl(th, false);
                     while (true) {
-                        Object objM3479getOrNullimpl = ChannelResult.m3479getOrNullimpl(bufferedChannel.mo3475tryReceivePtdJZtk());
-                        if (objM3479getOrNullimpl == null) {
+                        Object objM3478getOrNullimpl = ChannelResult.m3478getOrNullimpl(bufferedChannel.mo3474tryReceivePtdJZtk());
+                        if (objM3478getOrNullimpl == null) {
                             return Unit.INSTANCE;
                         }
-                        function2.invoke(objM3479getOrNullimpl, th);
+                        function2.invoke(objM3478getOrNullimpl, th);
                     }
                 }
             });

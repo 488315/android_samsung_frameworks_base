@@ -72,7 +72,7 @@ public final class AsyncSensorManagerExtKt {
                 final ?? r3 = new TriggerEventListener() { // from class: com.android.systemui.util.kotlin.AsyncSensorManagerExtKt$observeTriggerSensor$1$callback$1
                     @Override // android.hardware.TriggerEventListener
                     public void onTrigger(TriggerEvent triggerEvent) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                         if (atomicBoolean.getAndSet(false)) {
                             AsyncSensorManagerExtKt.AnonymousClass1.invokeSuspend$registerCallbackInternal(atomicBoolean, asyncSensorManager, sensor, this);
                         }

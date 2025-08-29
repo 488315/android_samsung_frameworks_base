@@ -4426,6 +4426,7 @@
     <dimen name="sec_privacy_dialog_item_height">50.0dip</dimen>
     <dimen name="sec_privacy_dialog_item_icon_text_interval">13.0dip</dimen>
     <dimen name="sec_privacy_dialog_item_padding_left">22.0dip</dimen>
+    <dimen name="sec_privacy_dialog_system_setting_padding_start">12.0dip</dimen>
     <dimen name="sec_privacy_dialog_top_bottom_padding">2.0dip</dimen>
     <dimen name="sec_privacy_dialog_top_margin">26.0dip</dimen>
     <dimen name="sec_qqs_media_player_top_margin">8.0dip</dimen>

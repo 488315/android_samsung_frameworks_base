@@ -20,12 +20,12 @@ public abstract class LongSaturatedMathKt {
         }
         DurationUnit durationUnit2 = DurationUnit.MILLISECONDS;
         if (durationUnit.compareTo(durationUnit2) >= 0) {
-            return Duration.m3467unaryMinusUwyO8pc(infinityOfSign(j3));
+            return Duration.m3466unaryMinusUwyO8pc(infinityOfSign(j3));
         }
         long jConvert = durationUnit.getTimeUnit$kotlin_stdlib().convert(1L, durationUnit2.getTimeUnit$kotlin_stdlib());
         long j4 = (j / jConvert) - (j2 / jConvert);
         long j5 = (j % jConvert) - (j2 % jConvert);
         Duration.Companion companion = Duration.Companion;
-        return Duration.m3461plusLRDsOJo(DurationKt.toDuration(j4, durationUnit2), DurationKt.toDuration(j5, durationUnit));
+        return Duration.m3460plusLRDsOJo(DurationKt.toDuration(j4, durationUnit2), DurationKt.toDuration(j5, durationUnit));
     }
 }

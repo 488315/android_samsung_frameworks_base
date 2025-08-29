@@ -30,7 +30,7 @@ public final class TileColors {
         TileColors tileColors = (TileColors) obj;
         long j = tileColors.background;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.background, j) && ULong.m3447equalsimpl0(this.iconBackground, tileColors.iconBackground) && ULong.m3447equalsimpl0(this.label, tileColors.label) && ULong.m3447equalsimpl0(this.secondaryLabel, tileColors.secondaryLabel) && ULong.m3447equalsimpl0(this.icon, tileColors.icon) && Float.compare(this.alpha, tileColors.alpha) == 0;
+        return ULong.m3446equalsimpl0(this.background, j) && ULong.m3446equalsimpl0(this.iconBackground, tileColors.iconBackground) && ULong.m3446equalsimpl0(this.label, tileColors.label) && ULong.m3446equalsimpl0(this.secondaryLabel, tileColors.secondaryLabel) && ULong.m3446equalsimpl0(this.icon, tileColors.icon) && Float.compare(this.alpha, tileColors.alpha) == 0;
     }
 
     public final int hashCode() {

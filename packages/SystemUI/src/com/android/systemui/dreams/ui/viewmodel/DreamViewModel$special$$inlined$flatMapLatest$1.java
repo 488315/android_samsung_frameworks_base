@@ -47,7 +47,7 @@ public final class DreamViewModel$special$$inlined$flatMapLatest$1 extends Suspe
             DreamingToLockscreenTransitionViewModel dreamingToLockscreenTransitionViewModel = this.this$0.toLockscreenTransitionViewModel;
             dreamingToLockscreenTransitionViewModel.getClass();
             FromDreamingTransitionInteractor.Companion.getClass();
-            KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2616sharedFlow74qcysc$default = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(dreamingToLockscreenTransitionViewModel.transitionAnimation, FromDreamingTransitionInteractor.TO_LOCKSCREEN_DURATION, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.DreamingToLockscreenTransitionViewModel$$ExternalSyntheticLambda0
+            KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2614sharedFlow74qcysc$default = KeyguardTransitionAnimationFlow.FlowBuilder.m2614sharedFlow74qcysc$default(dreamingToLockscreenTransitionViewModel.transitionAnimation, FromDreamingTransitionInteractor.TO_LOCKSCREEN_DURATION, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.DreamingToLockscreenTransitionViewModel$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
                 public final Object mo781invoke(Object obj2) {
@@ -55,7 +55,7 @@ public final class DreamViewModel$special$$inlined$flatMapLatest$1 extends Suspe
                 }
             }, 0L, null, null, null, Interpolators.EMPHASIZED, null, 188);
             this.label = 1;
-            if (FlowKt.emitAll(flowCollector, keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2616sharedFlow74qcysc$default, this) == coroutineSingletons) {
+            if (FlowKt.emitAll(flowCollector, keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2614sharedFlow74qcysc$default, this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

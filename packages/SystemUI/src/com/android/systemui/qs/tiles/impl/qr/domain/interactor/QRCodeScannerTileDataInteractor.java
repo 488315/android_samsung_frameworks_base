@@ -67,7 +67,7 @@ public final class QRCodeScannerTileDataInteractor implements QSTileDataInteract
                     public final void onQRCodeScannerActivityChanged() {
                         QRCodeScannerController qRCodeScannerController = qRCodeScannerTileDataInteractor.qrController;
                         Intent intent = qRCodeScannerController.mIntent;
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU((!qRCodeScannerController.isAbleToLaunchScannerActivity() || intent == null) ? QRCodeScannerTileModel.TemporarilyUnavailable.INSTANCE : new QRCodeScannerTileModel.Available(intent));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU((!qRCodeScannerController.isAbleToLaunchScannerActivity() || intent == null) ? QRCodeScannerTileModel.TemporarilyUnavailable.INSTANCE : new QRCodeScannerTileModel.Available(intent));
                     }
                 };
                 QRCodeScannerTileDataInteractor.this.qrController.addCallback((QRCodeScannerController.Callback) r1);

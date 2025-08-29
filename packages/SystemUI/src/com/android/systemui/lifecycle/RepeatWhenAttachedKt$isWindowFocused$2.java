@@ -45,7 +45,7 @@ final class RepeatWhenAttachedKt$isWindowFocused$2 extends SuspendLambda impleme
             ViewTreeObserver.OnWindowFocusChangeListener onWindowFocusChangeListener = new ViewTreeObserver.OnWindowFocusChangeListener() { // from class: com.android.systemui.lifecycle.RepeatWhenAttachedKt$isWindowFocused$2$listener$1
                 @Override // android.view.ViewTreeObserver.OnWindowFocusChangeListener
                 public final void onWindowFocusChanged(boolean z) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(z));
                 }
             };
             this.$this_isWindowFocused.addOnWindowFocusChangeListener(onWindowFocusChangeListener);

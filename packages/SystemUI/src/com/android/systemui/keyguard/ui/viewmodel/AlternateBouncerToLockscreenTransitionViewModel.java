@@ -16,10 +16,10 @@ public final class AlternateBouncerToLockscreenTransitionViewModel implements De
 
     public AlternateBouncerToLockscreenTransitionViewModel(KeyguardTransitionAnimationFlow keyguardTransitionAnimationFlow) {
         FromAlternateBouncerTransitionInteractor.Companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM2615setupVtjQ1oo = keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(FromAlternateBouncerTransitionInteractor.TO_LOCKSCREEN_DURATION, KeyguardInteractor$$ExternalSyntheticOutline0.m(Edge.Companion, KeyguardState.ALTERNATE_BOUNCER, KeyguardState.LOCKSCREEN));
-        this.transitionAnimation = flowBuilderM2615setupVtjQ1oo;
-        flowBuilderM2615setupVtjQ1oo.immediatelyTransitionTo(1.0f);
-        this.deviceEntryParentViewAlpha = flowBuilderM2615setupVtjQ1oo.immediatelyTransitionTo(1.0f);
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM2613setupVtjQ1oo = keyguardTransitionAnimationFlow.m2613setupVtjQ1oo(FromAlternateBouncerTransitionInteractor.TO_LOCKSCREEN_DURATION, KeyguardInteractor$$ExternalSyntheticOutline0.m(Edge.Companion, KeyguardState.ALTERNATE_BOUNCER, KeyguardState.LOCKSCREEN));
+        this.transitionAnimation = flowBuilderM2613setupVtjQ1oo;
+        flowBuilderM2613setupVtjQ1oo.immediatelyTransitionTo(1.0f);
+        this.deviceEntryParentViewAlpha = flowBuilderM2613setupVtjQ1oo.immediatelyTransitionTo(1.0f);
     }
 
     @Override // com.android.systemui.keyguard.ui.transitions.DeviceEntryIconTransition

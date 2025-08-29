@@ -50,7 +50,7 @@ final class MobileConnectionRepositoryImpl$mobileDataEnabledChanged$1 extends Su
                 @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
                 public final void onChanged(Uri uri) {
                     Log.d("MobileConnectionRepositoryImpl", "onChange: MOBILE_DATA");
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(mobileConnectionRepositoryImpl.settingsHelper.isMobileDataEnabled()));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(mobileConnectionRepositoryImpl.settingsHelper.isMobileDataEnabled()));
                 }
             };
             this.this$0.settingsHelper.registerCallback(onChangedCallback, Settings.Global.getUriFor(SettingsHelper.INDEX_MOBILE_DATA));

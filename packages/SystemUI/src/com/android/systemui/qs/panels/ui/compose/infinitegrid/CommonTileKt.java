@@ -313,11 +313,11 @@ public abstract class CommonTileKt {
                                 composerImpl.end(false);
                                 Modifier modifierDrawBehind = DrawModifierKt.drawBehind(modifierApproachLayout, (Function1) objRememberedValue);
                                 if (function07 != null) {
-                                    Modifier modifierM2937borderOnFocusPOIbLQ4$default = BorderOnFocusKt.m2937borderOnFocusPOIbLQ4$default(companion3, j, roundedCornerShape4.topEnd);
+                                    Modifier modifierM2935borderOnFocusPOIbLQ4$default = BorderOnFocusKt.m2935borderOnFocusPOIbLQ4$default(companion3, j, roundedCornerShape4.topEnd);
                                     function07.getClass();
                                     Function0 function017 = function07;
                                     Function0 function018 = function06;
-                                    Modifier modifierM39combinedClickablef5TDLPQ$default = ClickableKt.m39combinedClickablef5TDLPQ$default(modifierM2937borderOnFocusPOIbLQ4$default, null, strLongPressLabel, function018, function017, 39);
+                                    Modifier modifierM39combinedClickablef5TDLPQ$default = ClickableKt.m39combinedClickablef5TDLPQ$default(modifierM2935borderOnFocusPOIbLQ4$default, null, strLongPressLabel, function018, function017, 39);
                                     function010 = function018;
                                     function09 = function017;
                                     if (accessibilityUiState2 != null) {
@@ -374,7 +374,7 @@ public abstract class CommonTileKt {
                                 composerImpl.end(false);
                                 int i18 = i10 >> 6;
                                 AccessibilityUiState accessibilityUiState4 = accessibilityUiState2;
-                                m2906SmallTileContent8V94_ZQ(function1, tileColors.icon, modifierAlign, (Function0) objM2, false, composerImpl, (i18 & 14) | 3072, 16);
+                                m2904SmallTileContent8V94_ZQ(function1, tileColors.icon, modifierAlign, (Function0) objM2, false, composerImpl, (i18 & 14) | 3072, 16);
                                 composerImpl.end(true);
                                 LargeTileLabels(str, str2, tileColors, rowScopeInstance.weight(companion3, 1.0f, true), function015, accessibilityUiState4, composerImpl, (i10 & 126) | (i18 & 896) | (57344 & i18) | (i18 & 458752), 0);
                                 ComposerImpl composerImpl2 = composerImpl;
@@ -766,7 +766,7 @@ public abstract class CommonTileKt {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static final void m2906SmallTileContent8V94_ZQ(final Function1 function1, final long j, final Modifier modifier, Function0 function0, boolean z, Composer composer, final int i, final int i2) {
+    public static final void m2904SmallTileContent8V94_ZQ(final Function1 function1, final long j, final Modifier modifier, Function0 function0, boolean z, Composer composer, final int i, final int i2) {
         int i3;
         long j2;
         Function0 function02;
@@ -994,7 +994,7 @@ public abstract class CommonTileKt {
                             ((Integer) obj2).getClass();
                             int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
                             boolean z8 = z4;
-                            CommonTileKt.m2906SmallTileContent8V94_ZQ(function1, j, modifier, function04, z8, (Composer) obj, iUpdateChangedFlags, i2);
+                            CommonTileKt.m2904SmallTileContent8V94_ZQ(function1, j, modifier, function04, z8, (Composer) obj, iUpdateChangedFlags, i2);
                             return Unit.INSTANCE;
                         }
                     };

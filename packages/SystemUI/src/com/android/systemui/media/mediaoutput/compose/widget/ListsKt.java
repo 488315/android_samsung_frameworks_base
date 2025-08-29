@@ -427,7 +427,7 @@ public abstract class ListsKt {
                 SeslColorScheme colorScheme = SeslTheme.getColorScheme(composerImpl);
                 SeslPaletteTokens.INSTANCE.getClass();
                 long j = SeslPaletteTokens.GRAYSCALE_L1;
-                ThemeKt.SeslTheme(false, SeslColorScheme.m3358copyFD3wquc$default(colorScheme, j, j), ComposableLambdaKt.rememberComposableLambda(1164702771, new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ListsKt$SecRadioListItem$2$1
+                ThemeKt.SeslTheme(false, SeslColorScheme.m3357copyFD3wquc$default(colorScheme, j, j), ComposableLambdaKt.rememberComposableLambda(1164702771, new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ListsKt$SecRadioListItem$2$1
                     /* JADX WARN: Removed duplicated region for block: B:17:0x005a  */
                     /* JADX WARN: Removed duplicated region for block: B:23:0x0093  */
                     /* JADX WARN: Removed duplicated region for block: B:8:0x0022  */
@@ -716,7 +716,7 @@ public abstract class ListsKt {
                         SeslSwitchDefaults seslSwitchDefaults = SeslSwitchDefaults.INSTANCE;
                         long jColor = ColorKt.Color(4281891583L);
                         seslSwitchDefaults.getClass();
-                        SwitchKt.SeslSwitch(zBooleanValue, (Function1) objRememberedValue2, null, false, SeslSwitchDefaults.m3344colorsoq7We08(jColor, composerImpl), null, composerImpl, (i6 >> 9) & 14, 44);
+                        SwitchKt.SeslSwitch(zBooleanValue, (Function1) objRememberedValue2, null, false, SeslSwitchDefaults.m3343colorsoq7We08(jColor, composerImpl), null, composerImpl, (i6 >> 9) & 14, 44);
                         composerImpl.end(false);
                     }
                 } else {

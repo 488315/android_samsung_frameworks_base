@@ -69,12 +69,12 @@ public final class UiModeNightTileDataInteractor implements QSTileDataInteractor
             if (i == 0) {
                 ResultKt.throwOnFailure(obj);
                 final ProducerScope producerScope = (ProducerScope) this.L$0;
-                ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(UiModeNightTileDataInteractor.access$createModel(UiModeNightTileDataInteractor.this));
+                ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(UiModeNightTileDataInteractor.access$createModel(UiModeNightTileDataInteractor.this));
                 final UiModeNightTileDataInteractor uiModeNightTileDataInteractor = UiModeNightTileDataInteractor.this;
                 final ?? r1 = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.qs.tiles.impl.uimodenight.domain.interactor.UiModeNightTileDataInteractor$tileData$1$configurationCallback$1
                     @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
                     public final void onUiModeChanged() {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(UiModeNightTileDataInteractor.access$createModel(uiModeNightTileDataInteractor));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(UiModeNightTileDataInteractor.access$createModel(uiModeNightTileDataInteractor));
                     }
                 };
                 ((ConfigurationControllerImpl) UiModeNightTileDataInteractor.this.configurationController).addCallback(r1);
@@ -82,7 +82,7 @@ public final class UiModeNightTileDataInteractor implements QSTileDataInteractor
                 final ?? r3 = new BatteryController.BatteryStateChangeCallback() { // from class: com.android.systemui.qs.tiles.impl.uimodenight.domain.interactor.UiModeNightTileDataInteractor$tileData$1$batteryCallback$1
                     @Override // com.android.systemui.statusbar.policy.BatteryController.BatteryStateChangeCallback
                     public final void onPowerSaveChanged(boolean z) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(UiModeNightTileDataInteractor.access$createModel(uiModeNightTileDataInteractor2));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(UiModeNightTileDataInteractor.access$createModel(uiModeNightTileDataInteractor2));
                     }
                 };
                 ((BatteryControllerImpl) UiModeNightTileDataInteractor.this.batteryController).addCallback(r3);
@@ -90,7 +90,7 @@ public final class UiModeNightTileDataInteractor implements QSTileDataInteractor
                 final ?? r4 = new LocationController.LocationChangeCallback() { // from class: com.android.systemui.qs.tiles.impl.uimodenight.domain.interactor.UiModeNightTileDataInteractor$tileData$1$locationCallback$1
                     @Override // com.android.systemui.statusbar.policy.LocationController.LocationChangeCallback
                     public final void onLocationSettingsChanged(boolean z) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(UiModeNightTileDataInteractor.access$createModel(uiModeNightTileDataInteractor3));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(UiModeNightTileDataInteractor.access$createModel(uiModeNightTileDataInteractor3));
                     }
                 };
                 ((LocationControllerImpl) UiModeNightTileDataInteractor.this.locationController).addCallback(r4);

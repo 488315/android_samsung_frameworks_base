@@ -994,7 +994,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         }
 
         @Override // android.widget.RemoteViews.Action
-        public void apply(View view, ViewGroup viewGroup, final ActionApplyParams actionApplyParams) throws ActionException {
+        public void apply(View view, ViewGroup viewGroup, final ActionApplyParams actionApplyParams) throws Resources.NotFoundException, ActionException {
             RemoteCollectionItems itemsForId;
             ActionException actionException;
             View viewFindViewById = view.findViewById(this.mViewId);
@@ -1438,7 +1438,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         }
 
         @Override // android.widget.RemoteViews.Action
-        public void apply(View view, ViewGroup viewGroup, final ActionApplyParams actionApplyParams) {
+        public void apply(View view, ViewGroup viewGroup, final ActionApplyParams actionApplyParams) throws Resources.NotFoundException {
             View viewFindViewById = view.findViewById(this.mViewId);
             if (viewFindViewById == null) {
                 return;

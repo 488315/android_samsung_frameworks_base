@@ -56,10 +56,10 @@ public class NotificationPlayer implements MediaPlayer.OnCompletionListener, Med
                     int i = command.code;
                     if (i == 1) {
                         Log.d(NotificationPlayer.this.mTag, "PLAY");
-                        NotificationPlayer.m2625$$Nest$mstartSound(NotificationPlayer.this, command);
+                        NotificationPlayer.m2623$$Nest$mstartSound(NotificationPlayer.this, command);
                     } else if (i == 2) {
                         Log.d(NotificationPlayer.this.mTag, "STOP");
-                        NotificationPlayer.m2626$$Nest$mstopSound(NotificationPlayer.this, command);
+                        NotificationPlayer.m2624$$Nest$mstopSound(NotificationPlayer.this, command);
                     }
                     synchronized (NotificationPlayer.this.mCmdQueue) {
                         try {
@@ -165,7 +165,7 @@ public class NotificationPlayer implements MediaPlayer.OnCompletionListener, Med
                             mediaPlayer.setOnErrorListener(NotificationPlayer.this);
                             mediaPlayer.prepare();
                             Command command3 = this.mCmd;
-                            if (command3.uri != null && NotificationPlayer.m2623$$Nest$misNotBatteryPowerSound(NotificationPlayer.this, command3) && this.mCmd.uri.getEncodedPath() != null && this.mCmd.uri.getEncodedPath().length() > 0 && !audioManager.isMusicActiveRemotely()) {
+                            if (command3.uri != null && NotificationPlayer.m2621$$Nest$misNotBatteryPowerSound(NotificationPlayer.this, command3) && this.mCmd.uri.getEncodedPath() != null && this.mCmd.uri.getEncodedPath().length() > 0 && !audioManager.isMusicActiveRemotely()) {
                                 synchronized (NotificationPlayer.this.mQueueAudioFocusLock) {
                                     try {
                                         NotificationPlayer notificationPlayer = NotificationPlayer.this;
@@ -203,7 +203,7 @@ public class NotificationPlayer implements MediaPlayer.OnCompletionListener, Med
                                 NotificationPlayer.this.getClass();
                                 int defaultType = RingtoneManager.getDefaultType(command5.uri);
                                 if (defaultType == -1 || RingtoneManager.getActualDefaultRingtoneUri(command5.context, defaultType) != null) {
-                                    NotificationPlayer.m2624$$Nest$mplayFallbackRingtone(NotificationPlayer.this, this.mCmd);
+                                    NotificationPlayer.m2622$$Nest$mplayFallbackRingtone(NotificationPlayer.this, this.mCmd);
                                 } else {
                                     Log.w(NotificationPlayer.this.mTag, "error loading sound for " + this.mCmd.uri, e);
                                     NotificationPlayer.this.abandonAudioFocusAfterError();
@@ -252,7 +252,7 @@ public class NotificationPlayer implements MediaPlayer.OnCompletionListener, Med
     }
 
     /* renamed from: -$$Nest$misNotBatteryPowerSound, reason: not valid java name */
-    public static boolean m2623$$Nest$misNotBatteryPowerSound(NotificationPlayer notificationPlayer, Command command) {
+    public static boolean m2621$$Nest$misNotBatteryPowerSound(NotificationPlayer notificationPlayer, Command command) {
         notificationPlayer.getClass();
         return (command.uri.toString().contains("ChargingStarted") || command.uri.toString().contains("LowBattery") || command.uri.toString().contains("Water_Protection") || command.uri.toString().contains("ChargingStarted_Fast")) ? false : true;
     }
@@ -269,16 +269,16 @@ public class NotificationPlayer implements MediaPlayer.OnCompletionListener, Med
     /* JADX WARN: Type inference failed for: r11v4 */
     /* JADX WARN: Type inference failed for: r11v6, types: [java.lang.String] */
     /* renamed from: -$$Nest$mplayFallbackRingtone, reason: not valid java name */
-    public static void m2624$$Nest$mplayFallbackRingtone(com.android.systemui.media.NotificationPlayer r11, com.android.systemui.media.NotificationPlayer.Command r12) {
+    public static void m2622$$Nest$mplayFallbackRingtone(com.android.systemui.media.NotificationPlayer r11, com.android.systemui.media.NotificationPlayer.Command r12) {
         /*
             Method dump skipped, instructions count: 229
             To view this dump add '--comments-level debug' option
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.NotificationPlayer.m2624$$Nest$mplayFallbackRingtone(com.android.systemui.media.NotificationPlayer, com.android.systemui.media.NotificationPlayer$Command):void");
+        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.media.NotificationPlayer.m2622$$Nest$mplayFallbackRingtone(com.android.systemui.media.NotificationPlayer, com.android.systemui.media.NotificationPlayer$Command):void");
     }
 
     /* renamed from: -$$Nest$mstartSound, reason: not valid java name */
-    public static void m2625$$Nest$mstartSound(NotificationPlayer notificationPlayer, Command command) {
+    public static void m2623$$Nest$mstartSound(NotificationPlayer notificationPlayer, Command command) {
         notificationPlayer.getClass();
         try {
             Log.d(notificationPlayer.mTag, "startSound()");
@@ -310,7 +310,7 @@ public class NotificationPlayer implements MediaPlayer.OnCompletionListener, Med
     }
 
     /* renamed from: -$$Nest$mstopSound, reason: not valid java name */
-    public static void m2626$$Nest$mstopSound(NotificationPlayer notificationPlayer, Command command) throws IllegalStateException {
+    public static void m2624$$Nest$mstopSound(NotificationPlayer notificationPlayer, Command command) throws IllegalStateException {
         MediaPlayer mediaPlayer;
         synchronized (notificationPlayer.mPlayerLock) {
             mediaPlayer = notificationPlayer.mPlayer;

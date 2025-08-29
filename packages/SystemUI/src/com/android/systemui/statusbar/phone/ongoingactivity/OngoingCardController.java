@@ -50,7 +50,6 @@ import com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragment;
 import com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView;
 import com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CardStackView$$ExternalSyntheticLambda0;
 import com.android.systemui.statusbar.phone.ongoingactivity.CardStackview.CustomAnimationSet;
-import com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController;
 import com.android.systemui.statusbar.phone.ongoingactivity.animation.ViewPropertyCapture;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.window.StatusBarWindowStateController;
@@ -83,7 +82,6 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
     public OngoingActivityController$$ExternalSyntheticLambda2 isMediaPlaying;
     public boolean isOrientationChanged;
     public boolean isScreenTurnedOn;
-    public boolean isWatchSelfValidationProc;
     public final View mCapsule;
     public final CardStackView mCardStackView;
     public final Context mContext;
@@ -101,8 +99,6 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
     public OaCardState oaCardState;
     public final AnonymousClass7 onBackInvokedCallback;
     public final ArrayList onStateEventListeners;
-    public final OngoingCardController$selfDestroyRunnable$1 selfDestroyRunnable;
-    public final Handler selfValidationHandler;
     public OngoingActivityController$$ExternalSyntheticLambda2 setMediaCardView;
     public int statusBarVisibility;
     public final StatusBarWindowStateController statusBarWindowStateController;
@@ -190,8 +186,7 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
 
     /* JADX WARN: Type inference failed for: r10v0, types: [com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$statusBarWindowStateListener$1, java.lang.Object] */
     /* JADX WARN: Type inference failed for: r10v1, types: [android.content.BroadcastReceiver, com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$8] */
-    /* JADX WARN: Type inference failed for: r1v26, types: [com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$7] */
-    /* JADX WARN: Type inference failed for: r1v28, types: [com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$selfDestroyRunnable$1] */
+    /* JADX WARN: Type inference failed for: r1v25, types: [com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$7] */
     /* JADX WARN: Type inference failed for: r2v7, types: [com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$9, com.samsung.android.view.SemWindowManager$FoldStateListener] */
     public OngoingCardController(Context context, ActivityStarter activityStarter, View view, IndicatorGardenPresenter indicatorGardenPresenter, IndicatorScaleGardener indicatorScaleGardener, ConfigurationController configurationController, BroadcastDispatcher broadcastDispatcher, NotifCollection notifCollection, NotificationRemoteInputManager notificationRemoteInputManager, StatusBarWindowStateController statusBarWindowStateController, Function1 function1, SecMediaHost secMediaHost, MediaDataManager mediaDataManager, FaceWidgetNotificationControllerWrapper faceWidgetNotificationControllerWrapper) {
         this.mContext = context;
@@ -214,9 +209,6 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
         this.onStateEventListeners = new ArrayList();
         this.oaCardState = OaCardState.INIT;
         this.isScreenTurnedOn = true;
-        Looper looperMyLooper = Looper.myLooper();
-        looperMyLooper.getClass();
-        this.selfValidationHandler = new Handler(looperMyLooper);
         LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService("layout_inflater");
         WindowManager windowManager = (WindowManager) context.getSystemService("window");
         this.mWindowManager = windowManager;
@@ -310,33 +302,6 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
         SemWindowManager.getInstance().registerFoldStateListener((SemWindowManager.FoldStateListener) r2, (Handler) Dependency.sDependency.getDependencyInner(Dependency.MAIN_HANDLER));
         OngoingActivityDataHelper.cardIsShown = true;
         ((HashSet) statusBarWindowStateController.listeners).add(r10);
-        this.selfDestroyRunnable = new Runnable() { // from class: com.android.systemui.statusbar.phone.ongoingactivity.OngoingCardController$selfDestroyRunnable$1
-            @Override // java.lang.Runnable
-            public final void run() throws Exception {
-                OngoingCardController ongoingCardController = this.this$0;
-                if (!ongoingCardController.isWatchSelfValidationProc) {
-                    Log.i("{OngoingExpandedPipController}", "selfDestroyRunnable: discard..");
-                    return;
-                }
-                ongoingCardController.isWatchSelfValidationProc = false;
-                OngoingCardController.OaCardState oaCardState = ongoingCardController.oaCardState;
-                if (oaCardState == OngoingCardController.OaCardState.EXPAND) {
-                    Log.e("{OngoingExpandedPipController}", "selfDestroyRunnable: request fadeOut");
-                    this.this$0.fadeOutCard();
-                    return;
-                }
-                if (oaCardState != OngoingCardController.OaCardState.FADEOUT && oaCardState != OngoingCardController.OaCardState.COLLAPSE) {
-                    Log.e("{OngoingExpandedPipController}", "selfDestroyRunnable: discard.. oaCardState:" + oaCardState);
-                    return;
-                }
-                Log.e("{OngoingExpandedPipController}", "selfDestroyRunnable: remove window. mParentView.isAttachedToWindow:" + ongoingCardController.mParentView.isAttachedToWindow() + ", mParentView.parent != null:" + (this.this$0.mParentView.getParent() != null));
-                OngoingCardController ongoingCardController2 = this.this$0;
-                WindowManager windowManager2 = ongoingCardController2.mWindowManager;
-                if (windowManager2 != null) {
-                    windowManager2.removeViewImmediate(ongoingCardController2.mParentView);
-                }
-            }
-        };
         this.mainUIHandler = new Handler(Looper.getMainLooper());
     }
 
@@ -394,10 +359,6 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
             Log.i("{OngoingExpandedPipController}", "collapseAnimation discard");
             return;
         }
-        Log.d("{OngoingExpandedPipController}", "watchSelfValidation start");
-        this.isWatchSelfValidationProc = true;
-        this.selfValidationHandler.removeCallbacks(this.selfDestroyRunnable);
-        this.selfValidationHandler.postDelayed(this.selfDestroyRunnable, 4000L);
         setCardState(oaCardState2);
         RecyclerView.Adapter adapter = ((RecyclerView) this.mCapsule).mAdapter;
         if (adapter != null) {
@@ -702,9 +663,6 @@ public final class OngoingCardController implements View.OnTouchListener, IOngoi
             if (windowManager != null) {
                 windowManager.removeViewImmediate(this.mParentView);
             }
-            Log.d("{OngoingExpandedPipController}", "watchSelfValidation stop");
-            this.isWatchSelfValidationProc = false;
-            this.selfValidationHandler.removeCallbacks(this.selfDestroyRunnable);
         } else {
             KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m("onDestroy() do not remove view. mParentView.isAttachedToWindow:", ", mParentView.parent != null?:", "{OngoingExpandedPipController}", this.mParentView.isAttachedToWindow(), this.mParentView.getParent() != null);
         }

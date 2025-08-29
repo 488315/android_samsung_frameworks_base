@@ -962,7 +962,7 @@ public class Element extends BaseObj {
     }
 
     @Override // android.renderscript.BaseObj
-    void updateFromNative() {
+    void updateFromNative() throws Throwable {
         super.updateFromNative();
         int[] iArr = new int[5];
         this.mRS.nElementGetNativeData(getID(this.mRS), iArr);

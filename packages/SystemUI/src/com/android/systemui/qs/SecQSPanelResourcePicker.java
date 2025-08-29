@@ -92,7 +92,7 @@ public final class SecQSPanelResourcePicker {
     public final int getQsTileMinNum(Context context) {
         this.resourcePickHelper.getTargetPicker().getClass();
         SecQSPanelResourceCommon.Companion.getClass();
-        return SecQSPanelResourceCommon.Companion.m2904int(R.integer.quick_qs_tile_min_num, context);
+        return SecQSPanelResourceCommon.Companion.m2902int(R.integer.quick_qs_tile_min_num, context);
     }
 
     public final int getQuickQSCommonBottomMargin(Context context) {

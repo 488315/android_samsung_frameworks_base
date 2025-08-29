@@ -68,21 +68,21 @@ public final class DesktopTask extends GeneratedMessageLite implements MessageLi
     }
 
     /* renamed from: -$$Nest$msetDesktopTaskState, reason: not valid java name */
-    public static void m3261$$Nest$msetDesktopTaskState(DesktopTask desktopTask, DesktopTaskState desktopTaskState) {
+    public static void m3260$$Nest$msetDesktopTaskState(DesktopTask desktopTask, DesktopTaskState desktopTaskState) {
         desktopTask.getClass();
         desktopTask.desktopTaskState_ = desktopTaskState.getNumber();
         desktopTask.bitField0_ |= 2;
     }
 
     /* renamed from: -$$Nest$msetDesktopTaskTilingState, reason: not valid java name */
-    public static void m3262$$Nest$msetDesktopTaskTilingState(DesktopTask desktopTask, DesktopTaskTilingState desktopTaskTilingState) {
+    public static void m3261$$Nest$msetDesktopTaskTilingState(DesktopTask desktopTask, DesktopTaskTilingState desktopTaskTilingState) {
         desktopTask.getClass();
         desktopTask.desktopTaskTilingState_ = desktopTaskTilingState.getNumber();
         desktopTask.bitField0_ |= 4;
     }
 
     /* renamed from: -$$Nest$msetTaskId, reason: not valid java name */
-    public static void m3263$$Nest$msetTaskId(DesktopTask desktopTask, int i) {
+    public static void m3262$$Nest$msetTaskId(DesktopTask desktopTask, int i) {
         desktopTask.bitField0_ |= 1;
         desktopTask.taskId_ = i;
     }

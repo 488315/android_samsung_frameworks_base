@@ -24,7 +24,7 @@ public final class SeslTooltipColor {
         SeslTooltipColor seslTooltipColor = (SeslTooltipColor) obj;
         long j = seslTooltipColor.containerColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.containerColor, j) && ULong.m3447equalsimpl0(this.contentColor, seslTooltipColor.contentColor);
+        return ULong.m3446equalsimpl0(this.containerColor, j) && ULong.m3446equalsimpl0(this.contentColor, seslTooltipColor.contentColor);
     }
 
     public final int hashCode() {

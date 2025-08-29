@@ -53,7 +53,7 @@ final class RetailModeSettingsRepository$retailMode$1 extends SuspendLambda impl
 
                 @Override // android.database.ContentObserver
                 public final void onChange(boolean z) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
             this.$globalSettings.registerContentObserverSync("device_demo_mode", (ContentObserver) r1);

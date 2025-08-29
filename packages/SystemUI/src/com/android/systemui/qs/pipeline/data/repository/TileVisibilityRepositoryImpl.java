@@ -69,7 +69,7 @@ public final class TileVisibilityRepositoryImpl implements TileVisibilityReposit
                         tileVisibilityRepositoryImpl.removedTileListByAppIntent.add(customTileSpecCreate);
                     }
                 }
-                this.this$0.visibilityFlowEmitter.mo3476trySendJP2dKIU(intent);
+                this.this$0.visibilityFlowEmitter.mo3475trySendJP2dKIU(intent);
             }
         }, new IntentFilter("com.samsung.systemui.qs.action.ACTION_UPDATE_CUSTOMTILE_VISIBILITY"), 2);
         dumpManager.registerNormalDumpable("TileVisibilityRepository", this);

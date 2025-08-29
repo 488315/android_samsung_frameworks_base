@@ -64,7 +64,7 @@ public class NonDragTarget extends FrameLayout {
     public static final float[] DARK_BLUR_PRESET = {250.0f, 0.0f, 8.0f, 29.4f, 255.0f, 0.0f, 216.8f};
 
     /* renamed from: -$$Nest$mupdateImageMatrix, reason: not valid java name */
-    public static void m3271$$Nest$mupdateImageMatrix(NonDragTarget nonDragTarget, ImageView imageView) {
+    public static void m3270$$Nest$mupdateImageMatrix(NonDragTarget nonDragTarget, ImageView imageView) {
         nonDragTarget.getClass();
         Matrix imageMatrix = imageView.getImageMatrix();
         int i = nonDragTarget.mCurrentOutlineInsets.top - nonDragTarget.mInitialOutlineInsets.top;
@@ -164,9 +164,9 @@ public class NonDragTarget extends FrameLayout {
                 NonDragTarget.this.mView.setLayoutParams(marginLayoutParams8);
                 NonDragTarget.this.mBlurView.setLayoutParams(marginLayoutParams2);
                 NonDragTarget nonDragTarget = NonDragTarget.this;
-                NonDragTarget.m3271$$Nest$mupdateImageMatrix(nonDragTarget, nonDragTarget.mView);
+                NonDragTarget.m3270$$Nest$mupdateImageMatrix(nonDragTarget, nonDragTarget.mView);
                 NonDragTarget nonDragTarget2 = NonDragTarget.this;
-                NonDragTarget.m3271$$Nest$mupdateImageMatrix(nonDragTarget2, nonDragTarget2.mBlurView);
+                NonDragTarget.m3270$$Nest$mupdateImageMatrix(nonDragTarget2, nonDragTarget2.mBlurView);
             }
         });
         this.mAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.naturalswitching.NonDragTarget.3
@@ -370,9 +370,9 @@ public class NonDragTarget extends FrameLayout {
                     return;
                 }
                 NonDragTarget nonDragTarget = NonDragTarget.this;
-                NonDragTarget.m3271$$Nest$mupdateImageMatrix(nonDragTarget, nonDragTarget.mView);
+                NonDragTarget.m3270$$Nest$mupdateImageMatrix(nonDragTarget, nonDragTarget.mView);
                 NonDragTarget nonDragTarget2 = NonDragTarget.this;
-                NonDragTarget.m3271$$Nest$mupdateImageMatrix(nonDragTarget2, nonDragTarget2.mBlurView);
+                NonDragTarget.m3270$$Nest$mupdateImageMatrix(nonDragTarget2, nonDragTarget2.mBlurView);
             }
         });
         this.mOutlineInsetsAnimator.addListener(new AnimatorListenerAdapter() { // from class: com.android.wm.shell.naturalswitching.NonDragTarget.7

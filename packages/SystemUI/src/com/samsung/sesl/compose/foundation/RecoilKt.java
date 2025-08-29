@@ -50,15 +50,15 @@ public abstract class RecoilKt {
     }
 
     /* renamed from: seslRecoil-3f6hBDE, reason: not valid java name */
-    public static final Modifier m3350seslRecoil3f6hBDE(Modifier modifier, MutableInteractionSource mutableInteractionSource, SeslRecoilPreset seslRecoilPreset, Shape shape, long j, boolean z, PaddingValuesImpl paddingValuesImpl, Composer composer, int i, int i2) {
-        long jM3353colorsWaAFU9c;
+    public static final Modifier m3349seslRecoil3f6hBDE(Modifier modifier, MutableInteractionSource mutableInteractionSource, SeslRecoilPreset seslRecoilPreset, Shape shape, long j, boolean z, PaddingValuesImpl paddingValuesImpl, Composer composer, int i, int i2) {
+        long jM3352colorsWaAFU9c;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startReplaceGroup(1179904992);
         if ((i2 & 8) != 0) {
             Color.Companion.getClass();
-            jM3353colorsWaAFU9c = Color.Unspecified;
+            jM3352colorsWaAFU9c = Color.Unspecified;
         } else {
-            jM3353colorsWaAFU9c = j;
+            jM3352colorsWaAFU9c = j;
         }
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventStart("com.samsung.sesl.compose.foundation.seslRecoil (Recoil.kt:283)");
@@ -73,11 +73,11 @@ public abstract class RecoilKt {
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventStart("com.samsung.sesl.compose.foundation.seslRecoil (Recoil.kt:336)");
         }
-        if (jM3353colorsWaAFU9c == 16) {
+        if (jM3352colorsWaAFU9c == 16) {
             SeslFeedbackDefaults.INSTANCE.getClass();
-            jM3353colorsWaAFU9c = SeslFeedbackDefaults.m3353colorsWaAFU9c(composerImpl);
+            jM3352colorsWaAFU9c = SeslFeedbackDefaults.m3352colorsWaAFU9c(composerImpl);
         }
-        long j2 = jM3353colorsWaAFU9c;
+        long j2 = jM3352colorsWaAFU9c;
         Modifier modifierFocusable = FocusableKt.focusable(mutableInteractionSource, HoverableKt.hoverable(mutableInteractionSource, modifier.then(new SeslTouchableModifierElement(z, mutableInteractionSource, new SeslTouchableKt$$ExternalSyntheticLambda0())), z), z);
         SeslFeedbackAlpha.Companion.getClass();
         Modifier modifierThen = modifierFocusable.then(new SeslRecoilModifierElement(mutableInteractionSource, z, f, j2, shape, paddingValuesImpl, SeslFeedbackAlpha.Unspecified, parameter$sesl8_compose_core_release.drawStrategy, null));
@@ -97,7 +97,7 @@ public abstract class RecoilKt {
     }
 
     /* renamed from: seslRecoil-fWhpE4E, reason: not valid java name */
-    public static final Modifier m3351seslRecoilfWhpE4E(Modifier modifier, boolean z, Composer composer, int i) {
+    public static final Modifier m3350seslRecoilfWhpE4E(Modifier modifier, boolean z, Composer composer, int i) {
         SeslRecoilPreset seslRecoilPreset;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startReplaceGroup(244001007);
@@ -137,7 +137,7 @@ public abstract class RecoilKt {
             }
             seslRecoilPreset = SeslRecoilPreset.IconButton;
         }
-        Modifier modifierM3350seslRecoil3f6hBDE = m3350seslRecoil3f6hBDE(modifier, mutableInteractionSource, seslRecoilPreset, rectangleShapeKt$RectangleShape$1, j, z, paddingValuesImplM120PaddingValues0680j_4, composerImpl, 48 | (i2 & 458752), 0);
+        Modifier modifierM3349seslRecoil3f6hBDE = m3349seslRecoil3f6hBDE(modifier, mutableInteractionSource, seslRecoilPreset, rectangleShapeKt$RectangleShape$1, j, z, paddingValuesImplM120PaddingValues0680j_4, composerImpl, 48 | (i2 & 458752), 0);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
@@ -146,11 +146,11 @@ public abstract class RecoilKt {
             ComposerKt.traceEventEnd();
         }
         composerImpl.end(false);
-        return modifierM3350seslRecoil3f6hBDE;
+        return modifierM3349seslRecoil3f6hBDE;
     }
 
     /* renamed from: seslRecoilIndication-bw27NRU$default, reason: not valid java name */
-    public static SeslRecoilNodeFactory m3352seslRecoilIndicationbw27NRU$default(SeslRecoilPreset seslRecoilPreset, SeslRoundedCornerShape seslRoundedCornerShape, int i) {
+    public static SeslRecoilNodeFactory m3351seslRecoilIndicationbw27NRU$default(SeslRecoilPreset seslRecoilPreset, SeslRoundedCornerShape seslRoundedCornerShape, int i) {
         if ((i & 1) != 0) {
             seslRecoilPreset = SeslRecoilPreset.Button;
         }

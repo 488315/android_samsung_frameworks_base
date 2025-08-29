@@ -32,7 +32,7 @@ public final class TopAppBarColors {
         }
         TopAppBarColors topAppBarColors = (TopAppBarColors) obj;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.containerColor, topAppBarColors.containerColor) && ULong.m3447equalsimpl0(this.scrolledContainerColor, topAppBarColors.scrolledContainerColor) && ULong.m3447equalsimpl0(this.navigationIconContentColor, topAppBarColors.navigationIconContentColor) && ULong.m3447equalsimpl0(this.titleContentColor, topAppBarColors.titleContentColor) && ULong.m3447equalsimpl0(this.actionIconContentColor, topAppBarColors.actionIconContentColor) && ULong.m3447equalsimpl0(this.subtitleContentColor, topAppBarColors.subtitleContentColor);
+        return ULong.m3446equalsimpl0(this.containerColor, topAppBarColors.containerColor) && ULong.m3446equalsimpl0(this.scrolledContainerColor, topAppBarColors.scrolledContainerColor) && ULong.m3446equalsimpl0(this.navigationIconContentColor, topAppBarColors.navigationIconContentColor) && ULong.m3446equalsimpl0(this.titleContentColor, topAppBarColors.titleContentColor) && ULong.m3446equalsimpl0(this.actionIconContentColor, topAppBarColors.actionIconContentColor) && ULong.m3446equalsimpl0(this.subtitleContentColor, topAppBarColors.subtitleContentColor);
     }
 
     public final int hashCode() {

@@ -112,7 +112,7 @@ public final class DemoMobileConnectionRepositoryKairos implements MobileConnect
                 EventsInit eventsInitMapCheap = EventsKt.mapCheap(events, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(15));
                 EventsInit eventsInitMapCheap2 = EventsKt.mapCheap(events3, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda3(16));
                 DemoMobileConnectionRepositoryKairos demoMobileConnectionRepositoryKairos = this;
-                return ((BuildScopeImpl) ((BuildScope) obj)).stateScope.holdState(MergeKt.mergeLeft(eventsInitMapCheap, eventsInitMapCheap2, EventsKt.mapCheap(events2, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda34(demoMobileConnectionRepositoryKairos, 0))), Either.First.m2588boximpl(demoMobileConnectionRepositoryKairos.initialState));
+                return ((BuildScopeImpl) ((BuildScope) obj)).stateScope.holdState(MergeKt.mergeLeft(eventsInitMapCheap, eventsInitMapCheap2, EventsKt.mapCheap(events2, new DemoMobileConnectionRepositoryKairos$$ExternalSyntheticLambda34(demoMobileConnectionRepositoryKairos, 0))), Either.First.m2586boximpl(demoMobileConnectionRepositoryKairos.initialState));
             }
         });
         this.lastEvent = stateBuildState;

@@ -55,6 +55,7 @@ import kotlin.jvm.internal.Intrinsics;
 
 /* loaded from: classes2.dex */
 public final class PrivacyDialog extends SystemUIDialog {
+    public final Function4 activityStarter;
     public final PrivacyDialog$clickListener$1 clickListener;
     public final List dismissListeners;
     public final AtomicBoolean dismissed;
@@ -185,9 +186,10 @@ public final class PrivacyDialog extends SystemUIDialog {
     }
 
     /* JADX WARN: Type inference failed for: r2v2, types: [com.android.systemui.privacy.PrivacyDialog$clickListener$1] */
-    public PrivacyDialog(Context context, List<PrivacyElement> list, final Function4 function4) {
+    public PrivacyDialog(Context context, List<PrivacyElement> list, Function4 function4) {
         super(context, R.style.SecPrivacyDialog);
         this.list = list;
+        this.activityStarter = function4;
         this.dismissListeners = new ArrayList();
         this.dismissed = new AtomicBoolean(false);
         this.iconColorSolid = context.getColor(R.color.privacy_chip_icon_color);
@@ -201,14 +203,15 @@ public final class PrivacyDialog extends SystemUIDialog {
                 Object tag = view.getTag();
                 if (tag != null) {
                     PrivacyDialog.PrivacyElement privacyElement = (PrivacyDialog.PrivacyElement) tag;
-                    function4.invoke(privacyElement.packageName, Integer.valueOf(privacyElement.userId), privacyElement.attributionTag, privacyElement.navigationIntent);
+                    this.this$0.activityStarter.invoke(privacyElement.packageName, Integer.valueOf(privacyElement.userId), privacyElement.attributionTag, privacyElement.navigationIntent);
                 }
             }
         };
     }
 
-    public final View createView(PrivacyElement privacyElement) {
+    public final View createView(final PrivacyElement privacyElement) {
         int i;
+        View viewRequireViewById;
         LayoutInflater layoutInflaterFrom = LayoutInflater.from(getContext());
         ViewGroup viewGroup = this.rootView;
         String string = null;
@@ -274,6 +277,21 @@ public final class PrivacyDialog extends SystemUIDialog {
         viewGroup2.setTag(privacyElement);
         if (!z) {
             viewGroup2.setOnClickListener(this.clickListener);
+        }
+        if (z2 && z3 && (viewRequireViewById = viewGroup2.requireViewById(R.id.system_setting)) != null) {
+            viewRequireViewById.setVisibility(0);
+            viewRequireViewById.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.privacy.PrivacyDialog$createView$2$1$1
+                @Override // android.view.View.OnClickListener
+                public final void onClick(View view) {
+                    Intent intent = new Intent("android.settings.LOCATION_SCANNING_SETTINGS");
+                    Bundle bundle = new Bundle();
+                    bundle.putString(":settings:fragment_args_key", "key_show_status_bar_location_icon");
+                    intent.putExtra(":settings:show_fragment_args", bundle);
+                    Function4 function4 = this.this$0.activityStarter;
+                    PrivacyDialog.PrivacyElement privacyElement2 = privacyElement;
+                    function4.invoke(privacyElement2.packageName, Integer.valueOf(privacyElement2.userId), privacyElement.attributionTag, intent);
+                }
+            });
         }
         return viewGroup2;
     }

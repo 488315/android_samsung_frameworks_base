@@ -56,7 +56,7 @@ public final class AuthenticationInteractor$special$$inlined$map$2 implements Fl
         /*
             Code decompiled incorrectly, please refer to instructions dump.
         */
-        public final Object emit(Object obj, Continuation continuation) {
+        public final Object emit(Object obj, Continuation continuation) throws Throwable {
             AnonymousClass1 anonymousClass1;
             int iIntValue;
             FlowCollector flowCollector;

@@ -124,6 +124,11 @@ public class SecQSDetail extends LinearLayout {
                 if (secQSDetailController.oldOrientation == configuration2.orientation) {
                     return;
                 }
+                SecQSDetailContentView secQSDetailContentView2 = secQSDetailController.detailContentParent;
+                SecQSPanelResourcePicker secQSPanelResourcePicker = secQSDetailController.resourcePicker;
+                if (secQSDetailContentView2 != null) {
+                    secQSDetailContentView2.setMinimumHeight(secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getDetailContentViewMinHeight(secQSDetailController.getContext()));
+                }
                 if (secQSDetailController.qsAnimatorManager != null && SecQSImplAnimatorBase.isDetailVisible()) {
                     ((SecQSDetail) ((ViewController) secQSDetailController).mView).postDelayed(new Runnable() { // from class: com.android.systemui.qs.SecQSDetailController$onConfigurationChangedListener$1$updateResources$1
                         @Override // java.lang.Runnable
@@ -146,7 +151,7 @@ public class SecQSDetail extends LinearLayout {
                     secQSDetailController.currentRecord = tileRecord;
                 }
                 secQSDetailController.oldOrientation = configuration2.orientation;
-                secQSDetail.setTranslationX(SecQSDetailController.isLargeScreen$6() ? secQSDetailController.resourcePicker.getQsFrameX() : 0.0f);
+                secQSDetail.setTranslationX(SecQSDetailController.isLargeScreen$6() ? secQSPanelResourcePicker.getQsFrameX() : 0.0f);
                 secQSDetailController.updateMarginAndPadding();
             }
         });

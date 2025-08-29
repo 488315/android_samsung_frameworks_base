@@ -18,7 +18,7 @@ public final class SeslFeedbackDefaults {
     }
 
     /* renamed from: colors-WaAFU9c, reason: not valid java name */
-    public static long m3353colorsWaAFU9c(Composer composer) {
+    public static long m3352colorsWaAFU9c(Composer composer) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startReplaceGroup(970554861);
         if (ComposerKt.isTraceInProgress()) {

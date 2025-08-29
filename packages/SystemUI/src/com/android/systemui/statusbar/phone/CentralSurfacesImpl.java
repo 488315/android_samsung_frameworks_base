@@ -617,7 +617,7 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces, SecB
             CentralSurfacesImpl centralSurfacesImpl = CentralSurfacesImpl.this;
             centralSurfacesImpl.updateScrimController();
             if (z) {
-                CentralSurfacesImpl.m3085$$Nest$mmaybeEscalateHeadsUp(centralSurfacesImpl);
+                CentralSurfacesImpl.m3083$$Nest$mmaybeEscalateHeadsUp(centralSurfacesImpl);
             }
         }
     };
@@ -849,7 +849,7 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces, SecB
                 if (remoteInputCoordinator != null) {
                     remoteInputCoordinator.onPanelCollapsed();
                 }
-                CentralSurfacesImpl.m3085$$Nest$mmaybeEscalateHeadsUp(centralSurfacesImpl);
+                CentralSurfacesImpl.m3083$$Nest$mmaybeEscalateHeadsUp(centralSurfacesImpl);
             }
         }
     };
@@ -1218,9 +1218,9 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces, SecB
             UiEventLogger uiEventLogger = CentralSurfacesImpl.sUiEventLogger;
             CentralSurfacesImpl centralSurfacesImpl = CentralSurfacesImpl.this;
             centralSurfacesImpl.getClass();
-            CentralSurfacesImpl.m3086$$Nest$mupdateRevealEffect(centralSurfacesImpl, false);
+            CentralSurfacesImpl.m3084$$Nest$mupdateRevealEffect(centralSurfacesImpl, false);
             centralSurfacesImpl.updateNotificationPanelTouchState();
-            CentralSurfacesImpl.m3085$$Nest$mmaybeEscalateHeadsUp(centralSurfacesImpl);
+            CentralSurfacesImpl.m3083$$Nest$mmaybeEscalateHeadsUp(centralSurfacesImpl);
             VolumeComponent volumeComponent = centralSurfacesImpl.mVolumeComponent;
             if (volumeComponent != null) {
                 ((VolumeDialogComponent) volumeComponent).mController.mCallbacks.onDismissRequested(2);
@@ -1244,7 +1244,7 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces, SecB
         public final void startLockscreenTransitionFromAod() {
             CentralSurfacesImpl centralSurfacesImpl = CentralSurfacesImpl.this;
             centralSurfacesImpl.mDozeServiceHost.stopDozing();
-            CentralSurfacesImpl.m3086$$Nest$mupdateRevealEffect(centralSurfacesImpl, true);
+            CentralSurfacesImpl.m3084$$Nest$mupdateRevealEffect(centralSurfacesImpl, true);
             centralSurfacesImpl.updateNotificationPanelTouchState();
             centralSurfacesImpl.mShadeTouchableRegionManager.updateTouchableRegion();
             if (centralSurfacesImpl.mScreenOffAnimationController.shouldHideLightRevealScrimOnWakeUp()) {
@@ -1291,14 +1291,14 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces, SecB
     }
 
     /* renamed from: -$$Nest$mmaybeEscalateHeadsUp, reason: not valid java name */
-    public static void m3085$$Nest$mmaybeEscalateHeadsUp(CentralSurfacesImpl centralSurfacesImpl) {
+    public static void m3083$$Nest$mmaybeEscalateHeadsUp(CentralSurfacesImpl centralSurfacesImpl) {
         HeadsUpManagerImpl headsUpManagerImpl = (HeadsUpManagerImpl) centralSurfacesImpl.mHeadsUpManager;
         headsUpManagerImpl.getAllEntries().forEach(new CentralSurfacesImpl$$ExternalSyntheticLambda2(centralSurfacesImpl, 1));
         headsUpManagerImpl.releaseAllImmediately();
     }
 
     /* renamed from: -$$Nest$mupdateRevealEffect, reason: not valid java name */
-    public static void m3086$$Nest$mupdateRevealEffect(CentralSurfacesImpl centralSurfacesImpl, boolean z) {
+    public static void m3084$$Nest$mupdateRevealEffect(CentralSurfacesImpl centralSurfacesImpl, boolean z) {
         boolean z2;
         LightRevealScrim lightRevealScrim = centralSurfacesImpl.mLightRevealScrim;
         if (lightRevealScrim == null) {

@@ -51,7 +51,7 @@ public class HearingDevicesToolItemParser {
         int size = arrayList.size();
         boolean z = size == arrayList2.size();
         for (int i = 0; i < size; i++) {
-            builder.m3285add((Object) new ToolItem(((ActivityInfo) arrayList.get(i)).loadLabel(packageManager).toString(), z ? (Drawable) arrayList2.get(i) : ((ActivityInfo) arrayList.get(i)).loadIcon(packageManager), new Intent("android.intent.action.MAIN").setComponent(((ActivityInfo) arrayList.get(i)).getComponentName()), z));
+            builder.m3284add((Object) new ToolItem(((ActivityInfo) arrayList.get(i)).loadLabel(packageManager).toString(), z ? (Drawable) arrayList2.get(i) : ((ActivityInfo) arrayList.get(i)).loadIcon(packageManager), new Intent("android.intent.action.MAIN").setComponent(((ActivityInfo) arrayList.get(i)).getComponentName()), z));
         }
         return builder.build();
     }

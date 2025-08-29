@@ -134,7 +134,7 @@ public class MediaSwitchingController implements LocalMediaManager.DeviceCallbac
 
         public final void onInputDeviceListUpdated(List list) {
             synchronized (MediaSwitchingController.this.mInputMediaDevicesLock) {
-                MediaSwitchingController.m2630$$Nest$mbuildInputMediaItems(MediaSwitchingController.this, list);
+                MediaSwitchingController.m2628$$Nest$mbuildInputMediaItems(MediaSwitchingController.this, list);
                 MediaOutputBaseDialog mediaOutputBaseDialog = (MediaOutputBaseDialog) MediaSwitchingController.this.mCallback;
                 mediaOutputBaseDialog.mMainThreadHandler.post(new MediaOutputBaseDialog$$ExternalSyntheticLambda0(mediaOutputBaseDialog, 0));
             }
@@ -156,7 +156,7 @@ public class MediaSwitchingController implements LocalMediaManager.DeviceCallbac
     }
 
     /* renamed from: -$$Nest$mbuildInputMediaItems, reason: not valid java name */
-    public static void m2630$$Nest$mbuildInputMediaItems(MediaSwitchingController mediaSwitchingController, List list) {
+    public static void m2628$$Nest$mbuildInputMediaItems(MediaSwitchingController mediaSwitchingController, List list) {
         synchronized (mediaSwitchingController.mInputMediaDevicesLock) {
             List list2 = list.stream().map(new MediaSwitchingController$$ExternalSyntheticLambda0(1)).toList();
             ((CopyOnWriteArrayList) mediaSwitchingController.mInputMediaItemList).clear();

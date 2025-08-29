@@ -886,10 +886,6 @@
         <item>255,255,255</item>
     </string-array>
     <string-array name="config_EadWhiteRGB_Offset_Natural">
-        <item>255,229,197</item>
-        <item>255,230,199</item>
-        <item>255,231,201</item>
-        <item>255,232,203</item>
         <item>255,233,206</item>
         <item>255,234,208</item>
         <item>255,236,210</item>
@@ -907,6 +903,10 @@
         <item>255,250,239</item>
         <item>255,251,242</item>
         <item>255,252,244</item>
+        <item>255,253,246</item>
+        <item>255,254,248</item>
+        <item>255,255,251</item>
+        <item>255,255,253</item>
     </string-array>
     <string-array name="config_EadWhiteRGB_Offset_Sub">
         <item>255,210,147</item>
@@ -935,9 +935,6 @@
         <item>255,255,255</item>
     </string-array>
     <string-array name="config_EadWhiteRGB_Offset_Sub_Natural">
-        <item>255,204,139</item>
-        <item>255,207,143</item>
-        <item>255,210,147</item>
         <item>255,213,153</item>
         <item>255,216,158</item>
         <item>255,219,164</item>
@@ -956,6 +953,9 @@
         <item>255,244,227</item>
         <item>255,245,232</item>
         <item>255,247,236</item>
+        <item>255,249,241</item>
+        <item>255,250,246</item>
+        <item>255,252,250</item>
     </string-array>
     <integer-array name="config_EadWhiteRGB_TargetCCT">
         <item>4700</item>
@@ -5068,6 +5068,8 @@
         <item>ce-RU</item>
         <item>cgg-UG</item>
         <item>chr-US</item>
+        <item>ckb-IQ</item>
+        <item>ckb-IR</item>
         <item>cs-CZ</item>
         <item>cy-GB</item>
         <item>da-DK</item>

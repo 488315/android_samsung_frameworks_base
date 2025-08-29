@@ -188,7 +188,7 @@ public final /* synthetic */ class LegacyScreenshotController$$ExternalSynthetic
                     public final void run() {
                         Object obj;
                         Object failure;
-                        Throwable thM3442exceptionOrNullimpl;
+                        Throwable thM3441exceptionOrNullimpl;
                         ScrollCaptureExecutor scrollCaptureExecutor2 = scrollCaptureExecutor;
                         ListenableFuture listenableFuture = future;
                         listenableFuture.getClass();
@@ -205,8 +205,8 @@ public final /* synthetic */ class LegacyScreenshotController$$ExternalSynthetic
                                 th = th;
                                 int i4 = Result.$r8$clinit;
                                 failure = new Result.Failure(th);
-                                thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-                                if (thM3442exceptionOrNullimpl == null) {
+                                thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+                                if (thM3441exceptionOrNullimpl == null) {
                                 }
                                 if (longScreenshot == null) {
                                 }
@@ -215,9 +215,9 @@ public final /* synthetic */ class LegacyScreenshotController$$ExternalSynthetic
                             th = th2;
                             obj = null;
                         }
-                        thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-                        if (thM3442exceptionOrNullimpl == null) {
-                            Log.e("ScrollCaptureExecutor", "Caught exception", thM3442exceptionOrNullimpl);
+                        thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+                        if (thM3441exceptionOrNullimpl == null) {
+                            Log.e("ScrollCaptureExecutor", "Caught exception", thM3441exceptionOrNullimpl);
                             runnable.run();
                         } else {
                             ScrollCaptureController.LongScreenshot longScreenshot2 = (ScrollCaptureController.LongScreenshot) obj;

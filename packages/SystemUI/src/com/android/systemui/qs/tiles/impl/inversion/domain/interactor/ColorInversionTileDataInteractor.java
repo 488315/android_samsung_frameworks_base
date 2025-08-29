@@ -80,9 +80,9 @@ public final class ColorInversionTileDataInteractor implements QSTileDataInterac
                     int i2 = anonymousClass1.label;
                     if (i2 == 0) {
                         ResultKt.throwOnFailure(obj2);
-                        ColorInversionTileModel colorInversionTileModelM2930boximpl = ColorInversionTileModel.m2930boximpl(((Boolean) obj).booleanValue());
+                        ColorInversionTileModel colorInversionTileModelM2928boximpl = ColorInversionTileModel.m2928boximpl(((Boolean) obj).booleanValue());
                         anonymousClass1.label = 1;
-                        if (this.$this_unsafeFlow.emit(colorInversionTileModelM2930boximpl, anonymousClass1) == coroutineSingletons) {
+                        if (this.$this_unsafeFlow.emit(colorInversionTileModelM2928boximpl, anonymousClass1) == coroutineSingletons) {
                             return coroutineSingletons;
                         }
                     } else {

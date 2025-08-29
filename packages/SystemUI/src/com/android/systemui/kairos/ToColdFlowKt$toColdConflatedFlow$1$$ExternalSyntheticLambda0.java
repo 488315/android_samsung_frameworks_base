@@ -33,10 +33,10 @@ public final /* synthetic */ class ToColdFlowKt$toColdConflatedFlow$1$$ExternalS
                     public final Object invoke(Object obj2, Object obj3) {
                         switch (i) {
                             case 0:
-                                ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(obj3);
+                                ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(obj3);
                                 break;
                             default:
-                                ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(obj3);
+                                ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(obj3);
                                 break;
                         }
                         return Unit.INSTANCE;
@@ -50,10 +50,10 @@ public final /* synthetic */ class ToColdFlowKt$toColdConflatedFlow$1$$ExternalS
                     public final Object invoke(Object obj2, Object obj3) {
                         switch (i2) {
                             case 0:
-                                ((ChannelCoroutine) producerScope2).mo3476trySendJP2dKIU(obj3);
+                                ((ChannelCoroutine) producerScope2).mo3475trySendJP2dKIU(obj3);
                                 break;
                             default:
-                                ((ChannelCoroutine) producerScope2).mo3476trySendJP2dKIU(obj3);
+                                ((ChannelCoroutine) producerScope2).mo3475trySendJP2dKIU(obj3);
                                 break;
                         }
                         return Unit.INSTANCE;

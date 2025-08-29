@@ -38,7 +38,7 @@ final class AndroidEdgeEffectOverscrollFactory implements OverscrollFactory {
         }
         long j = androidEdgeEffectOverscrollFactory.glowColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.glowColor, j) && Intrinsics.areEqual(this.glowDrawPadding, androidEdgeEffectOverscrollFactory.glowDrawPadding);
+        return ULong.m3446equalsimpl0(this.glowColor, j) && Intrinsics.areEqual(this.glowDrawPadding, androidEdgeEffectOverscrollFactory.glowDrawPadding);
     }
 
     public final int hashCode() {

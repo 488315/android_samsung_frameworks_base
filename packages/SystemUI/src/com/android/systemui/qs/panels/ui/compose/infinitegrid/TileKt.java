@@ -287,7 +287,7 @@ public abstract class TileKt {
                                 composerImpl.end(false);
                                 RoundedCornerShape roundedCornerShape = (RoundedCornerShape) mutableStateAnimateTileShapeAsState.getValue();
                                 MaterialTheme.INSTANCE.getClass();
-                                Modifier modifierBounceable = BounceableKt.bounceable(SizeKt.fillMaxWidth(BorderOnFocusKt.m2937borderOnFocusPOIbLQ4$default(companion, MaterialTheme.getColorScheme(composerImpl).secondary, ((RoundedCornerShape) mutableStateAnimateTileShapeAsState.getValue()).topEnd), 1.0f), ((BounceableInfo) mutableStateRememberUpdatedState.getValue()).bounceable, ((BounceableInfo) mutableStateRememberUpdatedState.getValue()).previousTile, ((BounceableInfo) mutableStateRememberUpdatedState.getValue()).nextTile, Orientation.Horizontal, ((BounceableInfo) mutableStateRememberUpdatedState.getValue()).bounceEnd);
+                                Modifier modifierBounceable = BounceableKt.bounceable(SizeKt.fillMaxWidth(BorderOnFocusKt.m2935borderOnFocusPOIbLQ4$default(companion, MaterialTheme.getColorScheme(composerImpl).secondary, ((RoundedCornerShape) mutableStateAnimateTileShapeAsState.getValue()).topEnd), 1.0f), ((BounceableInfo) mutableStateRememberUpdatedState.getValue()).bounceable, ((BounceableInfo) mutableStateRememberUpdatedState.getValue()).previousTile, ((BounceableInfo) mutableStateRememberUpdatedState.getValue()).nextTile, Orientation.Horizontal, ((BounceableInfo) mutableStateRememberUpdatedState.getValue()).bounceEnd);
                                 composerImpl.startReplaceGroup(-225088362);
                                 boolean zChanged2 = composerImpl.changed(stateAnimateFloatAsState);
                                 Object objRememberedValue5 = composerImpl.rememberedValue();
@@ -441,7 +441,7 @@ public abstract class TileKt {
                                                                     long j = tileColors.icon;
                                                                     Modifier.Companion companion5 = Modifier.Companion;
                                                                     Alignment.Companion.getClass();
-                                                                    CommonTileKt.m2906SmallTileContent8V94_ZQ(function1, j, boxScope.align(companion5, Alignment.Companion.Center), null, false, composerImpl4, 0, 24);
+                                                                    CommonTileKt.m2904SmallTileContent8V94_ZQ(function1, j, boxScope.align(companion5, Alignment.Companion.Center), null, false, composerImpl4, 0, 24);
                                                                     composerImpl4.end(false);
                                                                 } else {
                                                                     composerImpl4.startReplaceGroup(1882012638);
@@ -453,7 +453,7 @@ public abstract class TileKt {
                                                                     if (ComposerKt.isTraceInProgress()) {
                                                                         ComposerKt.traceEventStart("com.android.systemui.qs.panels.ui.compose.infinitegrid.TileDefaults.animateIconShapeAsState (Tile.kt:470)");
                                                                     }
-                                                                    MutableState mutableStateM2907animateShapeAsStaterAjV9yQ = TileDefaults.m2907animateShapeAsStaterAjV9yQ(i6, TileDefaults.ActiveIconCornerRadius, "QSTileCornerRadius", composerImpl4, 3456);
+                                                                    MutableState mutableStateM2905animateShapeAsStaterAjV9yQ = TileDefaults.m2905animateShapeAsStaterAjV9yQ(i6, TileDefaults.ActiveIconCornerRadius, "QSTileCornerRadius", composerImpl4, 3456);
                                                                     if (ComposerKt.isTraceInProgress()) {
                                                                         ComposerKt.traceEventEnd();
                                                                     }
@@ -489,7 +489,7 @@ public abstract class TileKt {
                                                                         String str = ((TileUiState) state7.getValue()).label;
                                                                         String str2 = ((TileUiState) state7.getValue()).secondaryLabel;
                                                                         Drawable drawable = ((TileUiState) state7.getValue()).sideDrawable;
-                                                                        RoundedCornerShape roundedCornerShape2 = (RoundedCornerShape) mutableStateM2907animateShapeAsStaterAjV9yQ.getValue();
+                                                                        RoundedCornerShape roundedCornerShape2 = (RoundedCornerShape) mutableStateM2905animateShapeAsStaterAjV9yQ.getValue();
                                                                         CommonTileKt.LargeTileContent(str, str2, function1, drawable, tileColors, function09, function08, ((TileUiState) state7.getValue()).accessibilityUiState, roundedCornerShape2, function011, function05, composerImpl4, 0, 0);
                                                                         composerImpl4.end(false);
                                                                     }
@@ -667,7 +667,7 @@ public abstract class TileKt {
                                                                         long j = tileColors.icon;
                                                                         Modifier.Companion companion5 = Modifier.Companion;
                                                                         Alignment.Companion.getClass();
-                                                                        CommonTileKt.m2906SmallTileContent8V94_ZQ(function1, j, boxScope.align(companion5, Alignment.Companion.Center), null, false, composerImpl4, 0, 24);
+                                                                        CommonTileKt.m2904SmallTileContent8V94_ZQ(function1, j, boxScope.align(companion5, Alignment.Companion.Center), null, false, composerImpl4, 0, 24);
                                                                         composerImpl4.end(false);
                                                                     } else {
                                                                         composerImpl4.startReplaceGroup(1882012638);
@@ -679,7 +679,7 @@ public abstract class TileKt {
                                                                         if (ComposerKt.isTraceInProgress()) {
                                                                             ComposerKt.traceEventStart("com.android.systemui.qs.panels.ui.compose.infinitegrid.TileDefaults.animateIconShapeAsState (Tile.kt:470)");
                                                                         }
-                                                                        MutableState mutableStateM2907animateShapeAsStaterAjV9yQ = TileDefaults.m2907animateShapeAsStaterAjV9yQ(i6, TileDefaults.ActiveIconCornerRadius, "QSTileCornerRadius", composerImpl4, 3456);
+                                                                        MutableState mutableStateM2905animateShapeAsStaterAjV9yQ = TileDefaults.m2905animateShapeAsStaterAjV9yQ(i6, TileDefaults.ActiveIconCornerRadius, "QSTileCornerRadius", composerImpl4, 3456);
                                                                         if (ComposerKt.isTraceInProgress()) {
                                                                             ComposerKt.traceEventEnd();
                                                                         }
@@ -715,7 +715,7 @@ public abstract class TileKt {
                                                                             String str = ((TileUiState) state7.getValue()).label;
                                                                             String str2 = ((TileUiState) state7.getValue()).secondaryLabel;
                                                                             Drawable drawable = ((TileUiState) state7.getValue()).sideDrawable;
-                                                                            RoundedCornerShape roundedCornerShape2 = (RoundedCornerShape) mutableStateM2907animateShapeAsStaterAjV9yQ.getValue();
+                                                                            RoundedCornerShape roundedCornerShape2 = (RoundedCornerShape) mutableStateM2905animateShapeAsStaterAjV9yQ.getValue();
                                                                             CommonTileKt.LargeTileContent(str, str2, function1, drawable, tileColors, function09, function08, ((TileUiState) state7.getValue()).accessibilityUiState, roundedCornerShape2, function011, function05, composerImpl4, 0, 0);
                                                                             composerImpl4.end(false);
                                                                         }
@@ -890,7 +890,7 @@ public abstract class TileKt {
                                                                         long j = tileColors.icon;
                                                                         Modifier.Companion companion5 = Modifier.Companion;
                                                                         Alignment.Companion.getClass();
-                                                                        CommonTileKt.m2906SmallTileContent8V94_ZQ(function1, j, boxScope.align(companion5, Alignment.Companion.Center), null, false, composerImpl4, 0, 24);
+                                                                        CommonTileKt.m2904SmallTileContent8V94_ZQ(function1, j, boxScope.align(companion5, Alignment.Companion.Center), null, false, composerImpl4, 0, 24);
                                                                         composerImpl4.end(false);
                                                                     } else {
                                                                         composerImpl4.startReplaceGroup(1882012638);
@@ -902,7 +902,7 @@ public abstract class TileKt {
                                                                         if (ComposerKt.isTraceInProgress()) {
                                                                             ComposerKt.traceEventStart("com.android.systemui.qs.panels.ui.compose.infinitegrid.TileDefaults.animateIconShapeAsState (Tile.kt:470)");
                                                                         }
-                                                                        MutableState mutableStateM2907animateShapeAsStaterAjV9yQ = TileDefaults.m2907animateShapeAsStaterAjV9yQ(i6, TileDefaults.ActiveIconCornerRadius, "QSTileCornerRadius", composerImpl4, 3456);
+                                                                        MutableState mutableStateM2905animateShapeAsStaterAjV9yQ = TileDefaults.m2905animateShapeAsStaterAjV9yQ(i6, TileDefaults.ActiveIconCornerRadius, "QSTileCornerRadius", composerImpl4, 3456);
                                                                         if (ComposerKt.isTraceInProgress()) {
                                                                             ComposerKt.traceEventEnd();
                                                                         }
@@ -938,7 +938,7 @@ public abstract class TileKt {
                                                                             String str = ((TileUiState) state7.getValue()).label;
                                                                             String str2 = ((TileUiState) state7.getValue()).secondaryLabel;
                                                                             Drawable drawable = ((TileUiState) state7.getValue()).sideDrawable;
-                                                                            RoundedCornerShape roundedCornerShape2 = (RoundedCornerShape) mutableStateM2907animateShapeAsStaterAjV9yQ.getValue();
+                                                                            RoundedCornerShape roundedCornerShape2 = (RoundedCornerShape) mutableStateM2905animateShapeAsStaterAjV9yQ.getValue();
                                                                             CommonTileKt.LargeTileContent(str, str2, function1, drawable, tileColors, function09, function08, ((TileUiState) state7.getValue()).accessibilityUiState, roundedCornerShape2, function011, function05, composerImpl4, 0, 0);
                                                                             composerImpl4.end(false);
                                                                         }

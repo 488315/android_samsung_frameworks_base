@@ -57,7 +57,7 @@ final class MuteQuickAffordanceConfig$asFlow$1 extends SuspendLambda implements 
             observer = new Observer() { // from class: com.android.systemui.keyguard.data.quickaffordance.MuteQuickAffordanceConfig$asFlow$1$observer$1
                 @Override // androidx.lifecycle.Observer
                 public final void onChanged(Object obj2) {
-                    ((ChannelCoroutine) producerScope2).mo3476trySendJP2dKIU(obj2);
+                    ((ChannelCoroutine) producerScope2).mo3475trySendJP2dKIU(obj2);
                 }
             };
             this.$this_asFlow.observeForever(observer);

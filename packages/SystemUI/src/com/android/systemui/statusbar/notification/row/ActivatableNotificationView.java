@@ -75,7 +75,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
     public Gefingerpoken mTouchHandler;
 
     /* renamed from: -$$Nest$mgetCujType, reason: not valid java name */
-    public static int m3082$$Nest$mgetCujType(ActivatableNotificationView activatableNotificationView, boolean z) {
+    public static int m3080$$Nest$mgetCujType(ActivatableNotificationView activatableNotificationView, boolean z) {
         return activatableNotificationView.mIsHeadsUpAnimation ? z ? 12 : 13 : z ? 14 : 15;
     }
 
@@ -499,9 +499,9 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
                 }
                 ActivatableNotificationView.this.onAppearAnimationFinished(z, !this.mRunWithoutInterruptions);
                 if (this.mRunWithoutInterruptions) {
-                    InteractionJankMonitor.getInstance().end(ActivatableNotificationView.m3082$$Nest$mgetCujType(ActivatableNotificationView.this, z));
+                    InteractionJankMonitor.getInstance().end(ActivatableNotificationView.m3080$$Nest$mgetCujType(ActivatableNotificationView.this, z));
                 } else {
-                    InteractionJankMonitor.getInstance().cancel(ActivatableNotificationView.m3082$$Nest$mgetCujType(ActivatableNotificationView.this, z));
+                    InteractionJankMonitor.getInstance().cancel(ActivatableNotificationView.m3080$$Nest$mgetCujType(ActivatableNotificationView.this, z));
                 }
             }
 
@@ -513,7 +513,7 @@ public abstract class ActivatableNotificationView extends ExpandableOutlineView 
                 }
                 ActivatableNotificationView.this.onAppearAnimationStarted(z);
                 this.mRunWithoutInterruptions = true;
-                InteractionJankMonitor.getInstance().begin(InteractionJankMonitor.Configuration.Builder.withView(ActivatableNotificationView.m3082$$Nest$mgetCujType(ActivatableNotificationView.this, z), ActivatableNotificationView.this));
+                InteractionJankMonitor.getInstance().begin(InteractionJankMonitor.Configuration.Builder.withView(ActivatableNotificationView.m3080$$Nest$mgetCujType(ActivatableNotificationView.this, z), ActivatableNotificationView.this));
             }
         });
         final ValueAnimator valueAnimator2 = this.mAppearAnimator;

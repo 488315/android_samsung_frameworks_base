@@ -51,17 +51,17 @@ final class DisplayRepositoryImpl$allDisplayEvents$1 extends SuspendLambda imple
             ?? r1 = new DisplayManager.DisplayListener() { // from class: com.android.app.displaylib.DisplayRepositoryImpl$allDisplayEvents$1$callback$1
                 @Override // android.hardware.display.DisplayManager.DisplayListener
                 public final void onDisplayAdded(int i2) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new DisplayEvent.Added(i2));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new DisplayEvent.Added(i2));
                 }
 
                 @Override // android.hardware.display.DisplayManager.DisplayListener
                 public final void onDisplayChanged(int i2) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new DisplayEvent.Changed(i2));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new DisplayEvent.Changed(i2));
                 }
 
                 @Override // android.hardware.display.DisplayManager.DisplayListener
                 public final void onDisplayRemoved(int i2) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new DisplayEvent.Removed(i2));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new DisplayEvent.Removed(i2));
                 }
             };
             this.this$0.displayManager.registerDisplayListener(r1, this.$backgroundHandler, 7L);

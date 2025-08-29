@@ -16,7 +16,7 @@ final /* synthetic */ class BackGestureTutorialScreenKt$BackGestureTutorialScree
     public final Object invoke() {
         BufferedChannel bufferedChannel = ((EasterEggGestureViewModel) this.receiver).easterEggFinished;
         Unit unit = Unit.INSTANCE;
-        bufferedChannel.mo3476trySendJP2dKIU(unit);
+        bufferedChannel.mo3475trySendJP2dKIU(unit);
         return unit;
     }
 }

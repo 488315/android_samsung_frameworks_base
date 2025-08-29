@@ -1417,6 +1417,11 @@ public class NotificationContentView extends FrameLayout implements Notification
         }
     }
 
+    public final void updateExpandButtons(boolean z) {
+        updateExpandButtonsDuringLayout(z, false);
+        updateSystemActionsMargin();
+    }
+
     /* JADX WARN: Removed duplicated region for block: B:40:0x009f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1424,6 +1429,7 @@ public class NotificationContentView extends FrameLayout implements Notification
     public final void updateExpandButtonsDuringLayout(boolean z, boolean z2) {
         boolean z3;
         NotificationEntry notificationEntry = this.mNotificationEntry;
+        boolean z4 = false;
         if (notificationEntry != null) {
             z &= (notificationEntry.isPromotedState() && this.mNotificationEntry.isOngoingActivity()) ? false : true;
         }
@@ -1462,38 +1468,27 @@ public class NotificationContentView extends FrameLayout implements Notification
                 }
             }
         }
-        boolean z4 = z2 && this.mIsContentExpandable != z;
-        if (z4) {
+        boolean z5 = z2 && this.mIsContentExpandable != z;
+        if (z5) {
             CarrierTextManager$$ExternalSyntheticOutline0.m(new StringBuilder("we relayout notification header by value : "), this.mIsContentExpandable, " : ", z, "NotificationContentView");
         }
         if (this.mExpandedChild != null) {
-            this.mExpandedWrapper.updateExpandability(z && z3, this.mExpandClickListener, z4);
+            this.mExpandedWrapper.updateExpandability(z && z3, this.mExpandClickListener, z5);
         }
         if (this.mContractedChild != null) {
-            this.mContractedWrapper.updateExpandability(z, this.mExpandClickListener, z4);
+            this.mContractedWrapper.updateExpandability(z, this.mExpandClickListener, z5);
         }
         if (this.mHeadsUpChild != null) {
-            this.mHeadsUpWrapper.updateExpandability(z && z3, this.mExpandClickListener, z4);
+            NotificationViewWrapper notificationViewWrapper = this.mHeadsUpWrapper;
+            if (z && z3) {
+                z4 = true;
+            }
+            notificationViewWrapper.updateExpandability(z4, this.mExpandClickListener, z5);
         }
-        if (z4) {
+        if (z5) {
             EmergencyButtonController$$ExternalSyntheticOutline0.m("we update IsContentExpandable : ", "NotificationContentView", z);
         }
         this.mIsContentExpandable = z;
-        if (this.mContainingNotification == null) {
-            return;
-        }
-        View view5 = this.mContractedChild;
-        if (view5 != null) {
-            updateContentViewMarginBottom(view5, false);
-        }
-        View view6 = this.mExpandedChild;
-        if (view6 != null) {
-            updateContentViewMarginBottom(view6, true);
-        }
-        View view7 = this.mHeadsUpChild;
-        if (view7 != null) {
-            updateContentViewMarginBottom(view7, false);
-        }
     }
 
     public final void updateLegacy() {
@@ -1519,6 +1514,17 @@ public class NotificationContentView extends FrameLayout implements Notification
             if (visibleWrapper != null) {
                 visibleWrapper.onContentShown(true);
             }
+        }
+    }
+
+    public final void updateSystemActionsMargin() throws Resources.NotFoundException {
+        View view = this.mExpandedChild;
+        if (view != null) {
+            updateContentViewMarginBottom(view, true);
+        }
+        View view2 = this.mHeadsUpChild;
+        if (view2 != null) {
+            updateContentViewMarginBottom(view2, false);
         }
     }
 

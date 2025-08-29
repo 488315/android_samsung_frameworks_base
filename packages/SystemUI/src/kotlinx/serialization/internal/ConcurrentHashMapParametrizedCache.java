@@ -23,7 +23,7 @@ public final class ConcurrentHashMapParametrizedCache implements ParametrizedSer
 
     @Override // kotlinx.serialization.internal.ParametrizedSerializerCache
     /* renamed from: get-gIAlu-s */
-    public final Object mo3487getgIAlus(KClass kClass, List list) {
+    public final Object mo3486getgIAlus(KClass kClass, List list) {
         Object failure;
         Object objPutIfAbsent;
         ConcurrentHashMap concurrentHashMap = this.cache;
@@ -48,10 +48,10 @@ public final class ConcurrentHashMapParametrizedCache implements ParametrizedSer
                 int i2 = Result.$r8$clinit;
                 failure = new Result.Failure(th);
             }
-            Result resultM3441boximpl = Result.m3441boximpl(failure);
-            Object objPutIfAbsent2 = concurrentHashMap2.putIfAbsent(arrayList, resultM3441boximpl);
-            obj = objPutIfAbsent2 == null ? resultM3441boximpl : objPutIfAbsent2;
+            Result resultM3440boximpl = Result.m3440boximpl(failure);
+            Object objPutIfAbsent2 = concurrentHashMap2.putIfAbsent(arrayList, resultM3440boximpl);
+            obj = objPutIfAbsent2 == null ? resultM3440boximpl : objPutIfAbsent2;
         }
-        return ((Result) obj).m3443unboximpl();
+        return ((Result) obj).m3442unboximpl();
     }
 }

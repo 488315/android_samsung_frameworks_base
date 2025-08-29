@@ -55,7 +55,7 @@ public final class SharedPreferencesExt {
                 final SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() { // from class: com.android.systemui.util.kotlin.SharedPreferencesExt$observe$1$listener$1
                     @Override // android.content.SharedPreferences.OnSharedPreferenceChangeListener
                     public final void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String str) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                     }
                 };
                 this.$this_observe.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);

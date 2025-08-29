@@ -65,7 +65,7 @@ public final class AudioVisSeekbarDefaults {
     }
 
     /* renamed from: drawTrack-Imwu3XQ, reason: not valid java name */
-    public static void m2632drawTrackImwu3XQ(DrawScope drawScope, int i, float f, float f2, float f3, float f4, double d, float f5, float f6, float f7, long j, boolean z) {
+    public static void m2630drawTrackImwu3XQ(DrawScope drawScope, int i, float f, float f2, float f3, float f4, double d, float f5, float f6, float f7, long j, boolean z) {
         IntProgression intRange;
         float f8 = (i + 1) * f3;
         float f9 = f5 / 2;
@@ -101,7 +101,7 @@ public final class AudioVisSeekbarDefaults {
     }
 
     /* renamed from: toPx-8Feqmps, reason: not valid java name */
-    public static float m2633toPx8Feqmps(float f, Composer composer) {
+    public static float m2631toPx8Feqmps(float f, Composer composer) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startReplaceGroup(194299629);
         if (ComposerKt.isTraceInProgress()) {
@@ -116,7 +116,7 @@ public final class AudioVisSeekbarDefaults {
     }
 
     /* renamed from: Thumb-FJfuzF0, reason: not valid java name */
-    public final void m2634ThumbFJfuzF0(State state, Modifier modifier, final AudioVisSeekbarColors audioVisSeekbarColors, final boolean z, float f, Composer composer, final int i) {
+    public final void m2632ThumbFJfuzF0(State state, Modifier modifier, final AudioVisSeekbarColors audioVisSeekbarColors, final boolean z, float f, Composer composer, final int i) {
         Modifier modifier2;
         float f2;
         State state2;
@@ -223,7 +223,7 @@ public final class AudioVisSeekbarDefaults {
                     ((Integer) obj2).getClass();
                     AudioVisSeekbarDefaults audioVisSeekbarDefaults = AudioVisSeekbarDefaults.INSTANCE;
                     int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(196615);
-                    this.f$0.m2634ThumbFJfuzF0(this.f$1, this.f$2, this.f$3, this.f$4, this.f$5, composer2, iUpdateChangedFlags);
+                    this.f$0.m2632ThumbFJfuzF0(this.f$1, this.f$2, this.f$3, this.f$4, this.f$5, composer2, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };
@@ -364,15 +364,15 @@ public final class AudioVisSeekbarDefaults {
                                 audioVisSeekbarColors2 = audioVisSeekbarColors3;
                                 f4 = 0.0f;
                                 waveOptions2 = waveOptions3;
-                                DrawScope.m537drawLineNGM6Ib0$default(drawScope, audioVisSeekbarColors3.m2631x119e4b41(z7, true), (Float.floatToRawIntBits(f5) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L), (Float.floatToRawIntBits(f6) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L), f7, i4, 0.0f, VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE);
+                                DrawScope.m537drawLineNGM6Ib0$default(drawScope, audioVisSeekbarColors3.m2629x119e4b41(z7, true), (Float.floatToRawIntBits(f5) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L), (Float.floatToRawIntBits(f6) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L), f7, i4, 0.0f, VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE);
                                 DrawScope.m537drawLineNGM6Ib0$default(drawScope, z5 ? audioVisSeekbarColors2.activeTrackSecondaryColor : audioVisSeekbarColors2.disabledActiveTrackSecondaryColor, (Float.floatToRawIntBits(f5) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L), (Float.floatToRawIntBits(f6) << 32) | (Float.floatToRawIntBits(0.0f) & 4294967295L), waveOptions2.trackWidth, i4, 0.0f, VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE);
                             }
-                            long jM2631x119e4b41 = audioVisSeekbarColors2.m2631x119e4b41(z5, false);
+                            long jM2629x119e4b41 = audioVisSeekbarColors2.m2629x119e4b41(z5, false);
                             long jFloatToRawIntBits = (Float.floatToRawIntBits(f6) << c) | (Float.floatToRawIntBits(f4) & 4294967295L);
                             Offset.Companion companion7 = Offset.Companion;
                             float f8 = waveOptions2.trackWidth;
                             StrokeCap.Companion.getClass();
-                            DrawScope.m537drawLineNGM6Ib0$default(drawScope, jM2631x119e4b41, jFloatToRawIntBits, (Float.floatToRawIntBits(z6 ? f4 : f3) << c) | (Float.floatToRawIntBits(f4) & 4294967295L), f8, StrokeCap.Round, 0.0f, VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE);
+                            DrawScope.m537drawLineNGM6Ib0$default(drawScope, jM2629x119e4b41, jFloatToRawIntBits, (Float.floatToRawIntBits(z6 ? f4 : f3) << c) | (Float.floatToRawIntBits(f4) & 4294967295L), f8, StrokeCap.Round, 0.0f, VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE);
                             return Unit.INSTANCE;
                         }
                     };
@@ -506,7 +506,7 @@ public final class AudioVisSeekbarDefaults {
                         WaveOptions waveOptions2 = this.f$5;
                         float f7 = waveOptions2.trackWidth;
                         AudioVisSeekbarColors audioVisSeekbarColors2 = this.f$6;
-                        long jM2631x119e4b41 = audioVisSeekbarColors2.m2631x119e4b41(z7, true);
+                        long jM2629x119e4b41 = audioVisSeekbarColors2.m2629x119e4b41(z7, true);
                         if (z7) {
                             drawScope = drawScope2;
                             f4 = f5;
@@ -522,14 +522,14 @@ public final class AudioVisSeekbarDefaults {
                         float f8 = fFloatValue;
                         DrawScope drawScope3 = drawScope;
                         float f9 = f4;
-                        AudioVisSeekbarDefaults.m2632drawTrackImwu3XQ(drawScope3, 0, f9, value, f8, f6, dAbs, f7, fFloatValue3, fFloatValue2, jM2631x119e4b41, z6);
-                        AudioVisSeekbarDefaults.m2632drawTrackImwu3XQ(drawScope3, 1, f9, value, f8, f6, dAbs, f7, ((Number) state3.getValue()).floatValue(), fFloatValue2, j2, z6);
-                        long jM2631x119e4b412 = audioVisSeekbarColors2.m2631x119e4b41(z7, false);
+                        AudioVisSeekbarDefaults.m2630drawTrackImwu3XQ(drawScope3, 0, f9, value, f8, f6, dAbs, f7, fFloatValue3, fFloatValue2, jM2629x119e4b41, z6);
+                        AudioVisSeekbarDefaults.m2630drawTrackImwu3XQ(drawScope3, 1, f9, value, f8, f6, dAbs, f7, ((Number) state3.getValue()).floatValue(), fFloatValue2, j2, z6);
+                        long jM2629x119e4b412 = audioVisSeekbarColors2.m2629x119e4b41(z7, false);
                         long jFloatToRawIntBits = (Float.floatToRawIntBits(Float.intBitsToFloat((int) (drawScope3.mo546getCenterF1C5BW0() & 4294967295L))) & 4294967295L) | (Float.floatToRawIntBits(value) << 32);
                         Offset.Companion companion6 = Offset.Companion;
                         float f10 = z6 ? 0.0f : fIntBitsToFloat;
                         StrokeCap.Companion.getClass();
-                        DrawScope.m537drawLineNGM6Ib0$default(drawScope3, jM2631x119e4b412, jFloatToRawIntBits, (Float.floatToRawIntBits(Float.intBitsToFloat((int) (drawScope3.mo546getCenterF1C5BW0() & 4294967295L))) & 4294967295L) | (Float.floatToRawIntBits(f10) << 32), waveOptions2.trackWidth, StrokeCap.Round, 0.0f, VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE);
+                        DrawScope.m537drawLineNGM6Ib0$default(drawScope3, jM2629x119e4b412, jFloatToRawIntBits, (Float.floatToRawIntBits(Float.intBitsToFloat((int) (drawScope3.mo546getCenterF1C5BW0() & 4294967295L))) & 4294967295L) | (Float.floatToRawIntBits(f10) << 32), waveOptions2.trackWidth, StrokeCap.Round, 0.0f, VolteConstants.ErrorCode.TEMPORARILY_UNAVAILABLE);
                         return Unit.INSTANCE;
                     }
                 };

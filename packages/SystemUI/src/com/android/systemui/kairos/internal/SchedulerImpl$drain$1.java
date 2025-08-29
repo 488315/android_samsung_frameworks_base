@@ -48,7 +48,7 @@ public final class SchedulerImpl$drain$1 implements Function2 {
         while (i3 < size) {
             Object obj3 = arrayList.get(i3);
             i3++;
-            function2.invoke(LogIndent.m2587boximpl(), (MuxNode) obj3);
+            function2.invoke(LogIndent.m2585boximpl(), (MuxNode) obj3);
         }
         ref$IntRef.element += i4;
         return Unit.INSTANCE;

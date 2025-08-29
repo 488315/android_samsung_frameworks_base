@@ -406,7 +406,13 @@ public final class OngoingChipAdapter extends RecyclerView.Adapter {
             int i3 = this.customChipSidePadding;
             frameLayout.setPadding(i3, 0, i3, 0);
             viewApply.measure(0, 0);
-            chipViewHolder.mRemoteContainer.getLayoutParams().width = MathKt__MathJVMKt.roundToInt(((this.customChipSidePadding * 2) + viewApply.getMeasuredWidth()) * f);
+            int iRoundToInt = MathKt__MathJVMKt.roundToInt((viewApply.getMeasuredWidth() * (f >= 1.0f ? f : 1.0f)) + (this.customChipSidePadding * 2));
+            StringBuilder sbM = MutableObjectList$$ExternalSyntheticOutline0.m(viewApply.getMeasuredWidth(), this.customChipSidePadding, "onBindViewHolder custom chip measuredWidth:", ", padding:", ", ratio:");
+            sbM.append(f);
+            sbM.append(", parentWidth:");
+            sbM.append(iRoundToInt);
+            Log.i(str, sbM.toString());
+            chipViewHolder.mRemoteContainer.getLayoutParams().width = iRoundToInt;
             chipViewHolder.mRemoteContainer.getLayoutParams().height = this.topHeight;
             setChipBg(chipViewHolder.mRemoteContainer, i, getChipBg(i, dataByIndex.mChipBackground));
             return;

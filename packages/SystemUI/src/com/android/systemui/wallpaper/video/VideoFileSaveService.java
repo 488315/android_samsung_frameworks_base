@@ -56,7 +56,7 @@ public class VideoFileSaveService extends Service {
 
         public final String getVideoFilePath(String str, boolean z) {
             VideoFileSaveService videoFileSaveService = VideoFileSaveService.this;
-            return z ? VideoFileSaveService.m3228$$Nest$mgetTempFilePath(videoFileSaveService, str, videoFileSaveService.mVideoFileExt, videoFileSaveService.mUserId, videoFileSaveService.mCurentWhich) : VideoFileSaveService.m3227$$Nest$mgetSavedFilePath(videoFileSaveService, str, videoFileSaveService.mVideoFileExt, videoFileSaveService.mUserId, videoFileSaveService.mCurentWhich);
+            return z ? VideoFileSaveService.m3227$$Nest$mgetTempFilePath(videoFileSaveService, str, videoFileSaveService.mVideoFileExt, videoFileSaveService.mUserId, videoFileSaveService.mCurentWhich) : VideoFileSaveService.m3226$$Nest$mgetSavedFilePath(videoFileSaveService, str, videoFileSaveService.mVideoFileExt, videoFileSaveService.mUserId, videoFileSaveService.mCurentWhich);
         }
 
         public final boolean isVideoFileExistsWithFilename(String str, boolean z) {
@@ -76,12 +76,12 @@ public class VideoFileSaveService extends Service {
                 throw new IllegalStateException("This service must be run from the owner(" + UserHandle.semGetMyUserId() + ")");
             }
             VideoFileSaveService videoFileSaveService = VideoFileSaveService.this;
-            String strM3228$$Nest$mgetTempFilePath = VideoFileSaveService.m3228$$Nest$mgetTempFilePath(videoFileSaveService, str, videoFileSaveService.mVideoFileExt, videoFileSaveService.mUserId, videoFileSaveService.mCurentWhich);
+            String strM3227$$Nest$mgetTempFilePath = VideoFileSaveService.m3227$$Nest$mgetTempFilePath(videoFileSaveService, str, videoFileSaveService.mVideoFileExt, videoFileSaveService.mUserId, videoFileSaveService.mCurentWhich);
             VideoFileSaveService videoFileSaveService2 = VideoFileSaveService.this;
-            String strM3227$$Nest$mgetSavedFilePath = VideoFileSaveService.m3227$$Nest$mgetSavedFilePath(videoFileSaveService2, str, videoFileSaveService2.mVideoFileExt, videoFileSaveService2.mUserId, videoFileSaveService2.mCurentWhich);
+            String strM3226$$Nest$mgetSavedFilePath = VideoFileSaveService.m3226$$Nest$mgetSavedFilePath(videoFileSaveService2, str, videoFileSaveService2.mVideoFileExt, videoFileSaveService2.mUserId, videoFileSaveService2.mCurentWhich);
             boolean z = WallpaperUtils.mIsExternalLiveWallpaper;
-            File file = new File(strM3228$$Nest$mgetTempFilePath);
-            File file2 = new File(strM3227$$Nest$mgetSavedFilePath);
+            File file = new File(strM3227$$Nest$mgetTempFilePath);
+            File file2 = new File(strM3226$$Nest$mgetSavedFilePath);
             return file.exists() && !file2.exists() && file.renameTo(file2);
         }
 
@@ -108,7 +108,7 @@ public class VideoFileSaveService extends Service {
     }
 
     /* renamed from: -$$Nest$mgetSavedFilePath, reason: not valid java name */
-    public static String m3227$$Nest$mgetSavedFilePath(VideoFileSaveService videoFileSaveService, String str, String str2, int i, int i2) {
+    public static String m3226$$Nest$mgetSavedFilePath(VideoFileSaveService videoFileSaveService, String str, String str2, int i, int i2) {
         String absolutePath;
         File filesDir = videoFileSaveService.getFilesDir();
         if (filesDir != null) {
@@ -127,7 +127,7 @@ public class VideoFileSaveService extends Service {
     }
 
     /* renamed from: -$$Nest$mgetTempFilePath, reason: not valid java name */
-    public static String m3228$$Nest$mgetTempFilePath(VideoFileSaveService videoFileSaveService, String str, String str2, int i, int i2) {
+    public static String m3227$$Nest$mgetTempFilePath(VideoFileSaveService videoFileSaveService, String str, String str2, int i, int i2) {
         String absolutePath;
         File filesDir = videoFileSaveService.getFilesDir();
         if (filesDir != null) {

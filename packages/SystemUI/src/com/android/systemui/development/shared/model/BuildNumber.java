@@ -12,7 +12,7 @@ public final class BuildNumber {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ BuildNumber m2566boximpl(String str) {
+    public static final /* synthetic */ BuildNumber m2564boximpl(String str) {
         return new BuildNumber(str);
     }
 

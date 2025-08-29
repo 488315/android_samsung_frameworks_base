@@ -51,7 +51,7 @@ final class CameraSensorPrivacyRepositoryKt$isEnabled$1 extends SuspendLambda im
             final ?? r1 = new SensorPrivacyManager.OnSensorPrivacyChangedListener() { // from class: com.android.systemui.camera.data.repository.CameraSensorPrivacyRepositoryKt$isEnabled$1$privacyCallback$1
                 public final void onSensorPrivacyChanged(int i2, boolean z) {
                     if (i2 == 2) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(z));
                     }
                 }
             };

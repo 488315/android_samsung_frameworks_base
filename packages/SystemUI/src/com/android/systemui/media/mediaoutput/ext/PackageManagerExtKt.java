@@ -35,9 +35,9 @@ public abstract class PackageManagerExtKt {
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-        if (thM3442exceptionOrNullimpl != null) {
-            Log.e("PackageManagerExt", "isPackageInstalled() failed: " + thM3442exceptionOrNullimpl);
+        Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+        if (thM3441exceptionOrNullimpl != null) {
+            Log.e("PackageManagerExt", "isPackageInstalled() failed: " + thM3441exceptionOrNullimpl);
         }
         Boolean bool = Boolean.FALSE;
         if (failure instanceof Result.Failure) {

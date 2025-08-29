@@ -233,7 +233,7 @@ public class QSMediaPlayerBar extends BarItemImpl implements StatusBarStateContr
         SecMediaHost secMediaHost = this.mMediaHost;
         if (secMediaHost != null) {
             SecMediaPlayerData secMediaPlayerData = (SecMediaPlayerData) secMediaHost.mMediaPlayerData.get(MediaType.QS);
-            if ((secMediaPlayerData != null ? secMediaPlayerData.m2629getMediaData().size() : 0) > 0) {
+            if ((secMediaPlayerData != null ? secMediaPlayerData.m2627getMediaData().size() : 0) > 0) {
                 Context context = this.mContext;
                 secQSPanelResourcePicker.resourcePickHelper.getTargetPicker().getClass();
                 SecQSPanelResourceCommon.Companion.getClass();
@@ -284,7 +284,7 @@ public class QSMediaPlayerBar extends BarItemImpl implements StatusBarStateContr
             } else {
                 SecMediaPlayerData secMediaPlayerData2 = (SecMediaPlayerData) secMediaHost.mMediaPlayerData.get(mediaType);
                 if ((secMediaPlayerData2 != null ? secMediaPlayerData2.getMediaPlayerSize$1() : 0) > 0 && (currentPage = secMediaHost.mViewPagerHelper.getCurrentPage(mediaType)) >= 0 && currentPage < secMediaPlayerData.getSortedMediaPlayersSize()) {
-                    mediaData = (MediaData) secMediaPlayerData.m2629getMediaData().get(secMediaPlayerData.getMediaPlayerFromSortedMediaPlayers(currentPage).mPlayerKey);
+                    mediaData = (MediaData) secMediaPlayerData.m2627getMediaData().get(secMediaPlayerData.getMediaPlayerFromSortedMediaPlayers(currentPage).mPlayerKey);
                 }
             }
         }

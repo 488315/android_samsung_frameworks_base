@@ -166,7 +166,7 @@ public class InternetDetailsContentController implements AccessPointController.A
             String action = intent.getAction();
             if (!"android.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED".equals(action)) {
                 if ("android.net.wifi.supplicant.CONNECTION_CHANGE".equals(action)) {
-                    InternetDetailsContentController.m2926$$Nest$mupdateListener(InternetDetailsContentController.this);
+                    InternetDetailsContentController.m2924$$Nest$mupdateListener(InternetDetailsContentController.this);
                 }
             } else {
                 if (InternetDetailsContentController.DEBUG) {
@@ -174,7 +174,7 @@ public class InternetDetailsContentController implements AccessPointController.A
                 }
                 InternetDetailsContentController.this.mConfig = MobileMappings.Config.readConfig(context);
                 InternetDetailsContentController.this.refreshHasActiveSubIdOnDds();
-                InternetDetailsContentController.m2926$$Nest$mupdateListener(InternetDetailsContentController.this);
+                InternetDetailsContentController.m2924$$Nest$mupdateListener(InternetDetailsContentController.this);
             }
         }
     };
@@ -299,7 +299,7 @@ public class InternetDetailsContentController implements AccessPointController.A
             InternetDetailsContentController internetDetailsContentController = InternetDetailsContentController.this;
             Drawable drawable = InternetDetailsContentController.EMPTY_DRAWABLE;
             internetDetailsContentController.refreshHasActiveSubIdOnDds();
-            InternetDetailsContentController.m2926$$Nest$mupdateListener(InternetDetailsContentController.this);
+            InternetDetailsContentController.m2924$$Nest$mupdateListener(InternetDetailsContentController.this);
         }
     }
 
@@ -415,7 +415,7 @@ public class InternetDetailsContentController implements AccessPointController.A
     }
 
     /* renamed from: -$$Nest$mupdateListener, reason: not valid java name */
-    public static void m2926$$Nest$mupdateListener(InternetDetailsContentController internetDetailsContentController) {
+    public static void m2924$$Nest$mupdateListener(InternetDetailsContentController internetDetailsContentController) {
         internetDetailsContentController.getClass();
         int defaultDataSubscriptionId = SubscriptionManager.getDefaultDataSubscriptionId();
         int i = internetDetailsContentController.mDefaultDataSubId;

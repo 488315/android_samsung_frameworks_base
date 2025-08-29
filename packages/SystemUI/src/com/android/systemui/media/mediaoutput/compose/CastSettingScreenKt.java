@@ -99,9 +99,9 @@ public abstract class CastSettingScreenKt {
                     int i4 = Result.$r8$clinit;
                     failure = new Result.Failure(th);
                 }
-                Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-                if (thM3442exceptionOrNullimpl != null) {
-                    thM3442exceptionOrNullimpl.printStackTrace();
+                Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+                if (thM3441exceptionOrNullimpl != null) {
+                    thM3441exceptionOrNullimpl.printStackTrace();
                 }
                 if (failure instanceof Result.Failure) {
                     failure = null;

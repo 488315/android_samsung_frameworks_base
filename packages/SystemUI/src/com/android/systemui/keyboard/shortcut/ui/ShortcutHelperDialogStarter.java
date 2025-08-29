@@ -195,7 +195,7 @@ public final class ShortcutHelperDialogStarter implements CoreStartable {
                                 com.android.systemui.statusbar.phone.SystemUIDialogFactory r4 = r9.dialogFactory
                                 r5 = 0
                                 r6 = 23
-                                com.android.systemui.statusbar.phone.ComponentSystemUIDialog r8 = com.android.systemui.statusbar.phone.SystemUIDialogFactoryExtKt.m3095createBottomSheet6ZxE2Lo$default(r4, r2, r5, r8, r6)
+                                com.android.systemui.statusbar.phone.ComponentSystemUIDialog r8 = com.android.systemui.statusbar.phone.SystemUIDialogFactoryExtKt.m3093createBottomSheet6ZxE2Lo$default(r4, r2, r5, r8, r6)
                                 r8.show()
                                 r9.dialog = r8
                                 kotlin.Unit r8 = kotlin.Unit.INSTANCE

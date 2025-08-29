@@ -309,7 +309,7 @@ public class EdgeBackGestureHandler implements PluginListener {
             this.mInputEventReceiver = inputMonitorCompat.getInputReceiver(edgeBackGestureHandler.mUiThreadContext.getLooper(), edgeBackGestureHandler.mUiThreadContext.getChoreographer(), new InputChannelCompat$InputEventListener() { // from class: com.android.systemui.navigationbar.gestural.EdgeBackGestureHandler$InputMonitorResource$$ExternalSyntheticLambda0
                 @Override // com.android.systemui.shared.system.InputChannelCompat$InputEventListener
                 public final void onInputEvent(InputEvent inputEvent) {
-                    EdgeBackGestureHandler.m2641$$Nest$monInputEvent(edgeBackGestureHandler, inputEvent);
+                    EdgeBackGestureHandler.m2639$$Nest$monInputEvent(edgeBackGestureHandler, inputEvent);
                 }
             });
         }
@@ -335,7 +335,7 @@ public class EdgeBackGestureHandler implements PluginListener {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static void m2641$$Nest$monInputEvent(EdgeBackGestureHandler edgeBackGestureHandler, InputEvent inputEvent) {
+    public static void m2639$$Nest$monInputEvent(EdgeBackGestureHandler edgeBackGestureHandler, InputEvent inputEvent) {
         boolean z;
         if (inputEvent instanceof MotionEvent) {
             MotionEvent motionEvent = (MotionEvent) inputEvent;
@@ -516,7 +516,7 @@ public class EdgeBackGestureHandler implements PluginListener {
     }
 
     /* renamed from: -$$Nest$msendEvent, reason: not valid java name */
-    public static void m2642$$Nest$msendEvent(EdgeBackGestureHandler edgeBackGestureHandler, int i) {
+    public static void m2640$$Nest$msendEvent(EdgeBackGestureHandler edgeBackGestureHandler, int i) {
         edgeBackGestureHandler.getClass();
         if (BasicRune.NAVBAR_GESTURE) {
             edgeBackGestureHandler.mMetricsLogger.write(new LogMaker(1931).setType(4).setSubtype(4).addTaggedData(933, Integer.valueOf(i)).addTaggedData(932, 0));
@@ -593,8 +593,8 @@ public class EdgeBackGestureHandler implements PluginListener {
                 edgeBackGestureHandler.mFalsingManager.isFalseTouch(16);
                 BackAnimationController.BackAnimationImpl backAnimationImpl = edgeBackGestureHandler.mBackAnimation;
                 if (backAnimationImpl == null) {
-                    EdgeBackGestureHandler.m2642$$Nest$msendEvent(edgeBackGestureHandler, 0);
-                    EdgeBackGestureHandler.m2642$$Nest$msendEvent(edgeBackGestureHandler, 1);
+                    EdgeBackGestureHandler.m2640$$Nest$msendEvent(edgeBackGestureHandler, 0);
+                    EdgeBackGestureHandler.m2640$$Nest$msendEvent(edgeBackGestureHandler, 1);
                 } else {
                     backAnimationImpl.setTriggerBack(true);
                 }

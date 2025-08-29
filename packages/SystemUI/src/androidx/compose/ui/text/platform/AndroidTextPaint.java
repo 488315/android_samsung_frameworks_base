@@ -120,7 +120,7 @@ public final class AndroidTextPaint extends TextPaint {
     /* renamed from: setColor-8_81llA, reason: not valid java name */
     public final void m785setColor8_81llA(long j) {
         Color color = this.lastColor;
-        if (color == null ? false : ULong.m3447equalsimpl0(color.value, j)) {
+        if (color == null ? false : ULong.m3446equalsimpl0(color.value, j)) {
             return;
         }
         if (j != 16) {

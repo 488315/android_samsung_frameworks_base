@@ -46,7 +46,7 @@ import kotlin.jvm.internal.Intrinsics;
 /* loaded from: classes2.dex */
 public abstract class StickyKeysIndicatorKt {
     /* renamed from: StickyKeyText-GLLOLKI, reason: not valid java name */
-    public static final void m2601StickyKeyTextGLLOLKI(final ModifierKey modifierKey, final boolean z, Modifier.Companion companion, Composer composer, final int i) {
+    public static final void m2599StickyKeyTextGLLOLKI(final ModifierKey modifierKey, final boolean z, Modifier.Companion companion, Composer composer, final int i) {
         final Modifier.Companion companion2;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(1454168994);
@@ -82,7 +82,7 @@ public abstract class StickyKeysIndicatorKt {
                     int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
                     boolean z2 = this.f$1;
                     Modifier.Companion companion4 = this.f$2;
-                    StickyKeysIndicatorKt.m2601StickyKeyTextGLLOLKI(this.f$0, z2, companion4, (Composer) obj, iUpdateChangedFlags);
+                    StickyKeysIndicatorKt.m2599StickyKeyTextGLLOLKI(this.f$0, z2, companion4, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };
@@ -220,7 +220,7 @@ public abstract class StickyKeysIndicatorKt {
                                     }
                                     Updater.m337setimpl(composer2, modifierMaterializeModifier2, ComposeUiNode.Companion.SetModifier);
                                     RowScopeInstance rowScopeInstance2 = RowScopeInstance.INSTANCE;
-                                    StickyKeysIndicatorKt.m2601StickyKeyTextGLLOLKI(modifierKey, z, null, composer2, 0);
+                                    StickyKeysIndicatorKt.m2599StickyKeyTextGLLOLKI(modifierKey, z, null, composer2, 0);
                                     composerImpl3.end(true);
                                     if (ComposerKt.isTraceInProgress()) {
                                         ComposerKt.traceEventEnd();

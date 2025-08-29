@@ -189,7 +189,7 @@ public class LocalePickerWithRegion extends ListFragment implements SearchView.O
     }
 
     @Override // android.app.ListFragment, android.app.Fragment
-    public void onViewCreated(View view, Bundle bundle) {
+    public void onViewCreated(View view, Bundle bundle) throws Resources.NotFoundException {
         super.onViewCreated(view, bundle);
         getListView().setNestedScrollingEnabled(true);
         getListView().setDivider(null);

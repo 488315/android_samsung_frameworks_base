@@ -14,7 +14,7 @@ public interface IRecognitionListener extends IInterface {
 
     public class _Parcel {
         /* renamed from: -$$Nest$smreadTypedObject, reason: not valid java name */
-        public static /* bridge */ /* synthetic */ Object m3324$$Nest$smreadTypedObject(Parcel parcel) {
+        public static /* bridge */ /* synthetic */ Object m3323$$Nest$smreadTypedObject(Parcel parcel) {
             return readTypedObject(parcel, Bundle.CREATOR);
         }
 
@@ -132,13 +132,13 @@ public interface IRecognitionListener extends IInterface {
             }
             if (i == 1) {
                 Parcelable.Creator creator = Bundle.CREATOR;
-                onError((Bundle) _Parcel.m3324$$Nest$smreadTypedObject(parcel));
+                onError((Bundle) _Parcel.m3323$$Nest$smreadTypedObject(parcel));
                 parcel2.writeNoException();
                 return true;
             }
             if (i == 2) {
                 Parcelable.Creator creator2 = Bundle.CREATOR;
-                onResults((Bundle) _Parcel.m3324$$Nest$smreadTypedObject(parcel));
+                onResults((Bundle) _Parcel.m3323$$Nest$smreadTypedObject(parcel));
                 parcel2.writeNoException();
                 return true;
             }
@@ -146,7 +146,7 @@ public interface IRecognitionListener extends IInterface {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
             Parcelable.Creator creator3 = Bundle.CREATOR;
-            onPartialResults((Bundle) _Parcel.m3324$$Nest$smreadTypedObject(parcel));
+            onPartialResults((Bundle) _Parcel.m3323$$Nest$smreadTypedObject(parcel));
             parcel2.writeNoException();
             return true;
         }

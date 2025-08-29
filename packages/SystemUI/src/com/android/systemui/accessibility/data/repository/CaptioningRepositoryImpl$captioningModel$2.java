@@ -48,12 +48,12 @@ final class CaptioningRepositoryImpl$captioningModel$2 extends SuspendLambda imp
             final ?? r1 = new CaptioningManager.CaptioningChangeListener() { // from class: com.android.systemui.accessibility.data.repository.CaptioningRepositoryImpl$captioningModel$2$listener$1
                 @Override // android.view.accessibility.CaptioningManager.CaptioningChangeListener
                 public final void onSystemAudioCaptioningChanged(boolean z) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                 }
 
                 @Override // android.view.accessibility.CaptioningManager.CaptioningChangeListener
                 public final void onSystemAudioCaptioningUiChanged(boolean z) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
             this.$this_captioningModel.addCaptioningChangeListener(r1);

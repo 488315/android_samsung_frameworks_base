@@ -100,7 +100,7 @@ final class FromPrimaryBouncerTransitionInteractor$listenForPrimaryBouncerToGone
                 KeyguardState keyguardState = KeyguardState.GONE;
                 long j2 = j;
                 ValueAnimator defaultAnimatorForTransitionsToState = fromPrimaryBouncerTransitionInteractor.getDefaultAnimatorForTransitionsToState(keyguardState);
-                defaultAnimatorForTransitionsToState.setDuration(Duration.m3457getInWholeMillisecondsimpl(j2));
+                defaultAnimatorForTransitionsToState.setDuration(Duration.m3456getInWholeMillisecondsimpl(j2));
                 Unit unit = Unit.INSTANCE;
                 TransitionModeOnCanceled transitionModeOnCanceled = TransitionModeOnCanceled.RESET;
                 fromPrimaryBouncerTransitionInteractor$listenForPrimaryBouncerToGone$1$2$emit$12.L$0 = this;

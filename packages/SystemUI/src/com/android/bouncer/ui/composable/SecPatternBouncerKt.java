@@ -502,7 +502,7 @@ public abstract class SecPatternBouncerKt {
                     AudioVisSeekbarDefaults audioVisSeekbarDefaults = AudioVisSeekbarDefaults.INSTANCE;
                     float fDimensionResource2 = PrimitiveResources_androidKt.dimensionResource(R.dimen.kg_compose_pattern_dot_spacing, composerImpl);
                     audioVisSeekbarDefaults.getClass();
-                    ref$FloatRef2.element = AudioVisSeekbarDefaults.m2633toPx8Feqmps(fDimensionResource2, composerImpl);
+                    ref$FloatRef2.element = AudioVisSeekbarDefaults.m2631toPx8Feqmps(fDimensionResource2, composerImpl);
                     Modifier modifier7 = modifier4;
                     Modifier modifierSysuiResTag = SysuiTestTagKt.sysuiResTag(modifier7, "bouncer_pattern_root");
                     composerImpl.startReplaceGroup(1511790374);

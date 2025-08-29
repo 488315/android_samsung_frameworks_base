@@ -102,8 +102,8 @@ final class ScreenshotSoundControllerImpl$releaseScreenshotSound$2 extends Suspe
             long duration = DurationKt.toDuration(1, DurationUnit.SECONDS);
             AnonymousClass1 anonymousClass1 = new AnonymousClass1(this.this$0, null);
             this.label = 1;
-            Object objM3471withTimeoutKLykuaI = TimeoutKt.m3471withTimeoutKLykuaI(duration, anonymousClass1, this);
-            return objM3471withTimeoutKLykuaI == coroutineSingletons ? coroutineSingletons : objM3471withTimeoutKLykuaI;
+            Object objM3470withTimeoutKLykuaI = TimeoutKt.m3470withTimeoutKLykuaI(duration, anonymousClass1, this);
+            return objM3470withTimeoutKLykuaI == coroutineSingletons ? coroutineSingletons : objM3470withTimeoutKLykuaI;
         } catch (TimeoutCancellationException e) {
             this.this$0.player.cancel(null);
             return new Integer(Log.w("ScreenshotSoundControllerImpl", "Error releasing shutter sound", e));

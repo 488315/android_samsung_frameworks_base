@@ -16,7 +16,7 @@ public final /* synthetic */ class UserAspectRatioSettingsWindowManager$$Externa
         UserAspectRatioSettingsWindowManager userAspectRatioSettingsWindowManager = this.f$0;
         switch (i) {
             case 0:
-                UserAspectRatioSettingsWindowManager.m3244$r8$lambda$qcC5U0asMBEasgAnScT0e3jtE0(userAspectRatioSettingsWindowManager);
+                UserAspectRatioSettingsWindowManager.m3243$r8$lambda$qcC5U0asMBEasgAnScT0e3jtE0(userAspectRatioSettingsWindowManager);
                 break;
             default:
                 UserAspectRatioSettingsWindowManager.$r8$lambda$mgsdsccZUsXLSfO5dZyQ22DCT6g(userAspectRatioSettingsWindowManager);

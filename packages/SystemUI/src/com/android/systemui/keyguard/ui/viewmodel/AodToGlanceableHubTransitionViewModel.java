@@ -34,7 +34,7 @@ public final class AodToGlanceableHubTransitionViewModel implements DeviceEntryI
         KeyguardState keyguardState = KeyguardState.AOD;
         SceneKey sceneKey = Scenes.Communal;
         companion2.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(keyguardState, KeyguardState.GLANCEABLE_HUB, keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(duration, new Edge.StateToContent(keyguardState, sceneKey)));
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(keyguardState, KeyguardState.GLANCEABLE_HUB, keyguardTransitionAnimationFlow.m2613setupVtjQ1oo(duration, new Edge.StateToContent(keyguardState, sceneKey)));
         this.transitionAnimation = flowBuilderM;
         this.deviceEntryParentViewAlpha = flowBuilderM.immediatelyTransitionTo(1.0f);
         this.windowBlurRadius = ((DaggerReferenceGlobalRootComponent.GlanceableHubBlurComponentImpl) factory.create(flowBuilderM)).getBlurProvider().enterBlurRadius;
@@ -51,7 +51,7 @@ public final class AodToGlanceableHubTransitionViewModel implements DeviceEntryI
         DurationUnit durationUnit = DurationUnit.MILLISECONDS;
         long duration = DurationKt.toDuration(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend, durationUnit);
         long duration2 = DurationKt.toDuration(0, durationUnit);
-        return KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(this.transitionAnimation, duration, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.AodToGlanceableHubTransitionViewModel$$ExternalSyntheticLambda0
+        return KeyguardTransitionAnimationFlow.FlowBuilder.m2614sharedFlow74qcysc$default(this.transitionAnimation, duration, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.AodToGlanceableHubTransitionViewModel$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
             public final Object mo781invoke(Object obj) {

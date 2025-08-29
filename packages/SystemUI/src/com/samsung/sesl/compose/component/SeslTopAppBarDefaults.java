@@ -56,7 +56,7 @@ public final class SeslTopAppBarDefaults {
     }
 
     /* renamed from: topAppBarColors-5tl4gsc, reason: not valid java name */
-    public static SeslTopAppBarColors m3345topAppBarColors5tl4gsc(long j, Composer composer) {
+    public static SeslTopAppBarColors m3344topAppBarColors5tl4gsc(long j, Composer composer) {
         long j2;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startReplaceGroup(2117422296);

@@ -13,7 +13,7 @@ public class AlphaOptimizedButton extends Button implements LaunchableView {
     public final LaunchableViewDelegate mDelegate;
 
     /* renamed from: $r8$lambda$Lb2Gbc-N9LM2UnIz4YKjbm0rnFQ, reason: not valid java name */
-    public static /* synthetic */ Unit m2957$r8$lambda$Lb2GbcN9LM2UnIz4YKjbm0rnFQ(AlphaOptimizedButton alphaOptimizedButton, Integer num) {
+    public static /* synthetic */ Unit m2955$r8$lambda$Lb2GbcN9LM2UnIz4YKjbm0rnFQ(AlphaOptimizedButton alphaOptimizedButton, Integer num) {
         super.setVisibility(num.intValue());
         return Unit.INSTANCE;
     }
@@ -24,7 +24,7 @@ public class AlphaOptimizedButton extends Button implements LaunchableView {
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
             public final Object mo781invoke(Object obj) {
-                return AlphaOptimizedButton.m2957$r8$lambda$Lb2GbcN9LM2UnIz4YKjbm0rnFQ(this.f$0, (Integer) obj);
+                return AlphaOptimizedButton.m2955$r8$lambda$Lb2GbcN9LM2UnIz4YKjbm0rnFQ(this.f$0, (Integer) obj);
             }
         });
     }
@@ -50,7 +50,7 @@ public class AlphaOptimizedButton extends Button implements LaunchableView {
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
             public final Object mo781invoke(Object obj) {
-                return AlphaOptimizedButton.m2957$r8$lambda$Lb2GbcN9LM2UnIz4YKjbm0rnFQ(this.f$0, (Integer) obj);
+                return AlphaOptimizedButton.m2955$r8$lambda$Lb2GbcN9LM2UnIz4YKjbm0rnFQ(this.f$0, (Integer) obj);
             }
         });
     }
@@ -61,7 +61,7 @@ public class AlphaOptimizedButton extends Button implements LaunchableView {
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
             public final Object mo781invoke(Object obj) {
-                return AlphaOptimizedButton.m2957$r8$lambda$Lb2GbcN9LM2UnIz4YKjbm0rnFQ(this.f$0, (Integer) obj);
+                return AlphaOptimizedButton.m2955$r8$lambda$Lb2GbcN9LM2UnIz4YKjbm0rnFQ(this.f$0, (Integer) obj);
             }
         });
     }
@@ -72,7 +72,7 @@ public class AlphaOptimizedButton extends Button implements LaunchableView {
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
             public final Object mo781invoke(Object obj) {
-                return AlphaOptimizedButton.m2957$r8$lambda$Lb2GbcN9LM2UnIz4YKjbm0rnFQ(this.f$0, (Integer) obj);
+                return AlphaOptimizedButton.m2955$r8$lambda$Lb2GbcN9LM2UnIz4YKjbm0rnFQ(this.f$0, (Integer) obj);
             }
         });
     }

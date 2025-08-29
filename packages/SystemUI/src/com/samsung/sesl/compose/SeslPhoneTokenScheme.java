@@ -82,7 +82,7 @@ public final class SeslPhoneTokenScheme implements SeslTokenScheme {
                         SeslDpProducer seslDpProducer = new SeslDpProducer() { // from class: com.samsung.sesl.compose.SeslPhoneTokenScheme$appBarTokens$2$1
                             @Override // com.samsung.sesl.compose.component.tokens.SeslDpProducer
                             /* renamed from: produce-u2uoSUM, reason: not valid java name */
-                            public final float mo3335produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
+                            public final float mo3334produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
                                 Context context3 = seslPhoneTokenScheme.context;
                                 try {
                                     float dimension = context3.getResources().getDimension(R.dimen.sesl_action_bar_top_padding);
@@ -223,7 +223,7 @@ public final class SeslPhoneTokenScheme implements SeslTokenScheme {
                         SeslDpProducer seslDpProducer = new SeslDpProducer() { // from class: com.samsung.sesl.compose.SeslPhoneTokenScheme$appBarTokens$2$1
                             @Override // com.samsung.sesl.compose.component.tokens.SeslDpProducer
                             /* renamed from: produce-u2uoSUM, reason: not valid java name */
-                            public final float mo3335produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
+                            public final float mo3334produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
                                 Context context3 = seslPhoneTokenScheme.context;
                                 try {
                                     float dimension = context3.getResources().getDimension(R.dimen.sesl_action_bar_top_padding);
@@ -364,7 +364,7 @@ public final class SeslPhoneTokenScheme implements SeslTokenScheme {
                         SeslDpProducer seslDpProducer = new SeslDpProducer() { // from class: com.samsung.sesl.compose.SeslPhoneTokenScheme$appBarTokens$2$1
                             @Override // com.samsung.sesl.compose.component.tokens.SeslDpProducer
                             /* renamed from: produce-u2uoSUM, reason: not valid java name */
-                            public final float mo3335produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
+                            public final float mo3334produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
                                 Context context3 = seslPhoneTokenScheme.context;
                                 try {
                                     float dimension = context3.getResources().getDimension(R.dimen.sesl_action_bar_top_padding);
@@ -505,7 +505,7 @@ public final class SeslPhoneTokenScheme implements SeslTokenScheme {
                         SeslDpProducer seslDpProducer = new SeslDpProducer() { // from class: com.samsung.sesl.compose.SeslPhoneTokenScheme$appBarTokens$2$1
                             @Override // com.samsung.sesl.compose.component.tokens.SeslDpProducer
                             /* renamed from: produce-u2uoSUM, reason: not valid java name */
-                            public final float mo3335produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
+                            public final float mo3334produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
                                 Context context3 = seslPhoneTokenScheme.context;
                                 try {
                                     float dimension = context3.getResources().getDimension(R.dimen.sesl_action_bar_top_padding);
@@ -646,7 +646,7 @@ public final class SeslPhoneTokenScheme implements SeslTokenScheme {
                         SeslDpProducer seslDpProducer = new SeslDpProducer() { // from class: com.samsung.sesl.compose.SeslPhoneTokenScheme$appBarTokens$2$1
                             @Override // com.samsung.sesl.compose.component.tokens.SeslDpProducer
                             /* renamed from: produce-u2uoSUM, reason: not valid java name */
-                            public final float mo3335produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
+                            public final float mo3334produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
                                 Context context3 = seslPhoneTokenScheme.context;
                                 try {
                                     float dimension = context3.getResources().getDimension(R.dimen.sesl_action_bar_top_padding);
@@ -787,7 +787,7 @@ public final class SeslPhoneTokenScheme implements SeslTokenScheme {
                         SeslDpProducer seslDpProducer = new SeslDpProducer() { // from class: com.samsung.sesl.compose.SeslPhoneTokenScheme$appBarTokens$2$1
                             @Override // com.samsung.sesl.compose.component.tokens.SeslDpProducer
                             /* renamed from: produce-u2uoSUM, reason: not valid java name */
-                            public final float mo3335produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
+                            public final float mo3334produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
                                 Context context3 = seslPhoneTokenScheme.context;
                                 try {
                                     float dimension = context3.getResources().getDimension(R.dimen.sesl_action_bar_top_padding);
@@ -928,7 +928,7 @@ public final class SeslPhoneTokenScheme implements SeslTokenScheme {
                         SeslDpProducer seslDpProducer = new SeslDpProducer() { // from class: com.samsung.sesl.compose.SeslPhoneTokenScheme$appBarTokens$2$1
                             @Override // com.samsung.sesl.compose.component.tokens.SeslDpProducer
                             /* renamed from: produce-u2uoSUM, reason: not valid java name */
-                            public final float mo3335produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
+                            public final float mo3334produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
                                 Context context3 = seslPhoneTokenScheme.context;
                                 try {
                                     float dimension = context3.getResources().getDimension(R.dimen.sesl_action_bar_top_padding);
@@ -1069,7 +1069,7 @@ public final class SeslPhoneTokenScheme implements SeslTokenScheme {
                         SeslDpProducer seslDpProducer = new SeslDpProducer() { // from class: com.samsung.sesl.compose.SeslPhoneTokenScheme$appBarTokens$2$1
                             @Override // com.samsung.sesl.compose.component.tokens.SeslDpProducer
                             /* renamed from: produce-u2uoSUM, reason: not valid java name */
-                            public final float mo3335produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
+                            public final float mo3334produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
                                 Context context3 = seslPhoneTokenScheme.context;
                                 try {
                                     float dimension = context3.getResources().getDimension(R.dimen.sesl_action_bar_top_padding);
@@ -1210,7 +1210,7 @@ public final class SeslPhoneTokenScheme implements SeslTokenScheme {
                         SeslDpProducer seslDpProducer = new SeslDpProducer() { // from class: com.samsung.sesl.compose.SeslPhoneTokenScheme$appBarTokens$2$1
                             @Override // com.samsung.sesl.compose.component.tokens.SeslDpProducer
                             /* renamed from: produce-u2uoSUM, reason: not valid java name */
-                            public final float mo3335produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
+                            public final float mo3334produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
                                 Context context3 = seslPhoneTokenScheme.context;
                                 try {
                                     float dimension = context3.getResources().getDimension(R.dimen.sesl_action_bar_top_padding);
@@ -1351,7 +1351,7 @@ public final class SeslPhoneTokenScheme implements SeslTokenScheme {
                         SeslDpProducer seslDpProducer = new SeslDpProducer() { // from class: com.samsung.sesl.compose.SeslPhoneTokenScheme$appBarTokens$2$1
                             @Override // com.samsung.sesl.compose.component.tokens.SeslDpProducer
                             /* renamed from: produce-u2uoSUM, reason: not valid java name */
-                            public final float mo3335produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
+                            public final float mo3334produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
                                 Context context3 = seslPhoneTokenScheme.context;
                                 try {
                                     float dimension = context3.getResources().getDimension(R.dimen.sesl_action_bar_top_padding);
@@ -1492,7 +1492,7 @@ public final class SeslPhoneTokenScheme implements SeslTokenScheme {
                         SeslDpProducer seslDpProducer = new SeslDpProducer() { // from class: com.samsung.sesl.compose.SeslPhoneTokenScheme$appBarTokens$2$1
                             @Override // com.samsung.sesl.compose.component.tokens.SeslDpProducer
                             /* renamed from: produce-u2uoSUM, reason: not valid java name */
-                            public final float mo3335produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
+                            public final float mo3334produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
                                 Context context3 = seslPhoneTokenScheme.context;
                                 try {
                                     float dimension = context3.getResources().getDimension(R.dimen.sesl_action_bar_top_padding);
@@ -1633,7 +1633,7 @@ public final class SeslPhoneTokenScheme implements SeslTokenScheme {
                         SeslDpProducer seslDpProducer = new SeslDpProducer() { // from class: com.samsung.sesl.compose.SeslPhoneTokenScheme$appBarTokens$2$1
                             @Override // com.samsung.sesl.compose.component.tokens.SeslDpProducer
                             /* renamed from: produce-u2uoSUM, reason: not valid java name */
-                            public final float mo3335produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
+                            public final float mo3334produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
                                 Context context3 = seslPhoneTokenScheme.context;
                                 try {
                                     float dimension = context3.getResources().getDimension(R.dimen.sesl_action_bar_top_padding);
@@ -1774,7 +1774,7 @@ public final class SeslPhoneTokenScheme implements SeslTokenScheme {
                         SeslDpProducer seslDpProducer = new SeslDpProducer() { // from class: com.samsung.sesl.compose.SeslPhoneTokenScheme$appBarTokens$2$1
                             @Override // com.samsung.sesl.compose.component.tokens.SeslDpProducer
                             /* renamed from: produce-u2uoSUM, reason: not valid java name */
-                            public final float mo3335produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
+                            public final float mo3334produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
                                 Context context3 = seslPhoneTokenScheme.context;
                                 try {
                                     float dimension = context3.getResources().getDimension(R.dimen.sesl_action_bar_top_padding);
@@ -1915,7 +1915,7 @@ public final class SeslPhoneTokenScheme implements SeslTokenScheme {
                         SeslDpProducer seslDpProducer = new SeslDpProducer() { // from class: com.samsung.sesl.compose.SeslPhoneTokenScheme$appBarTokens$2$1
                             @Override // com.samsung.sesl.compose.component.tokens.SeslDpProducer
                             /* renamed from: produce-u2uoSUM, reason: not valid java name */
-                            public final float mo3335produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
+                            public final float mo3334produceu2uoSUM(SeslDpProducer.Params params) throws Resources.NotFoundException {
                                 Context context3 = seslPhoneTokenScheme.context;
                                 try {
                                     float dimension = context3.getResources().getDimension(R.dimen.sesl_action_bar_top_padding);

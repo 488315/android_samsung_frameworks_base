@@ -68,7 +68,7 @@ public class HotspotControllerImpl implements HotspotController, WifiManager.Sof
     }
 
     /* renamed from: -$$Nest$mfireHotspotAvailabilityChanged, reason: not valid java name */
-    public static void m3103$$Nest$mfireHotspotAvailabilityChanged(HotspotControllerImpl hotspotControllerImpl) {
+    public static void m3101$$Nest$mfireHotspotAvailabilityChanged(HotspotControllerImpl hotspotControllerImpl) {
         ArrayList arrayList;
         synchronized (hotspotControllerImpl.mCallbacks) {
             arrayList = new ArrayList(hotspotControllerImpl.mCallbacks);
@@ -90,7 +90,7 @@ public class HotspotControllerImpl implements HotspotController, WifiManager.Sof
                 if (HotspotControllerImpl.this.mHasTetherableWifiRegexs != z) {
                     HotspotControllerImpl.this.mHasTetherableWifiRegexs = z;
                     KeyguardSecPasswordViewController$$ExternalSyntheticOutline0.m(new StringBuilder("mHasTetherableWifiRegexs:"), HotspotControllerImpl.this.mHasTetherableWifiRegexs, "HotspotController");
-                    HotspotControllerImpl.m3103$$Nest$mfireHotspotAvailabilityChanged(HotspotControllerImpl.this);
+                    HotspotControllerImpl.m3101$$Nest$mfireHotspotAvailabilityChanged(HotspotControllerImpl.this);
                 }
             }
 
@@ -98,7 +98,7 @@ public class HotspotControllerImpl implements HotspotController, WifiManager.Sof
                 if (HotspotControllerImpl.this.mIsTetheringSupported != z) {
                     HotspotControllerImpl.this.mIsTetheringSupported = z;
                     KeyguardSecPasswordViewController$$ExternalSyntheticOutline0.m(new StringBuilder("mIsTetheringSupported:"), HotspotControllerImpl.this.mIsTetheringSupported, "HotspotController");
-                    HotspotControllerImpl.m3103$$Nest$mfireHotspotAvailabilityChanged(HotspotControllerImpl.this);
+                    HotspotControllerImpl.m3101$$Nest$mfireHotspotAvailabilityChanged(HotspotControllerImpl.this);
                 }
             }
         };

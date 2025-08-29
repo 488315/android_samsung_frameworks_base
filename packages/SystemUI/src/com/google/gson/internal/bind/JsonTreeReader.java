@@ -182,7 +182,7 @@ public final class JsonTreeReader extends JsonReader {
     }
 
     @Override // com.google.gson.stream.JsonReader
-    public double nextDouble() throws IOException, NumberFormatException {
+    public double nextDouble() throws IOException {
         JsonToken jsonTokenPeek = peek();
         JsonToken jsonToken = JsonToken.NUMBER;
         if (jsonTokenPeek != jsonToken && jsonTokenPeek != JsonToken.STRING) {
@@ -203,7 +203,7 @@ public final class JsonTreeReader extends JsonReader {
     }
 
     @Override // com.google.gson.stream.JsonReader
-    public int nextInt() throws IOException, NumberFormatException {
+    public int nextInt() throws IOException {
         JsonToken jsonTokenPeek = peek();
         JsonToken jsonToken = JsonToken.NUMBER;
         if (jsonTokenPeek != jsonToken && jsonTokenPeek != JsonToken.STRING) {
@@ -231,7 +231,7 @@ public final class JsonTreeReader extends JsonReader {
     }
 
     @Override // com.google.gson.stream.JsonReader
-    public long nextLong() throws IOException, NumberFormatException {
+    public long nextLong() throws IOException {
         JsonToken jsonTokenPeek = peek();
         JsonToken jsonToken = JsonToken.NUMBER;
         if (jsonTokenPeek != jsonToken && jsonTokenPeek != JsonToken.STRING) {

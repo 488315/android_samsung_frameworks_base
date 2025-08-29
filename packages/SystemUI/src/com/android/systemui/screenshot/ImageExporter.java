@@ -119,36 +119,36 @@ public class ImageExporter {
         }
 
         public final Result execute() {
-            Uri uriM2940$$Nest$smsemCreateEntry;
+            Uri uriM2938$$Nest$smsemCreateEntry;
             String str = this.mFileName;
             Trace.beginSection("ImageExporter_execute");
             Result result = new Result();
             try {
                 try {
-                    uriM2940$$Nest$smsemCreateEntry = ImageExporter.m2940$$Nest$smsemCreateEntry(this.mResolver, this.mOwner);
+                    uriM2938$$Nest$smsemCreateEntry = ImageExporter.m2938$$Nest$smsemCreateEntry(this.mResolver, this.mOwner);
                     try {
                         if (Thread.currentThread().isInterrupted()) {
                             throw new InterruptedException();
                         }
-                        ImageExporter.m2942$$Nest$smwriteImage(this.mResolver, this.mBitmap, this.mFormat, this.mQuality, uriM2940$$Nest$smsemCreateEntry);
+                        ImageExporter.m2940$$Nest$smwriteImage(this.mResolver, this.mBitmap, this.mFormat, this.mQuality, uriM2938$$Nest$smsemCreateEntry);
                         if (Thread.currentThread().isInterrupted()) {
                             throw new InterruptedException();
                         }
-                        ImageExporter.m2941$$Nest$smwriteExif(this.mResolver, uriM2940$$Nest$smsemCreateEntry, this.mRequestId, this.mBitmap.getWidth(), this.mBitmap.getHeight(), this.mCaptureTime);
+                        ImageExporter.m2939$$Nest$smwriteExif(this.mResolver, uriM2938$$Nest$smsemCreateEntry, this.mRequestId, this.mBitmap.getWidth(), this.mBitmap.getHeight(), this.mCaptureTime);
                         if (Thread.currentThread().isInterrupted()) {
                             throw new InterruptedException();
                         }
-                        ImageExporter.m2939$$Nest$smpublishEntry(this.mResolver, uriM2940$$Nest$smsemCreateEntry, this.mOwner);
+                        ImageExporter.m2937$$Nest$smpublishEntry(this.mResolver, uriM2938$$Nest$smsemCreateEntry, this.mOwner);
                         result.timestamp = this.mCaptureTime.toInstant().toEpochMilli();
                         result.requestId = this.mRequestId;
-                        result.uri = uriM2940$$Nest$smsemCreateEntry;
+                        result.uri = uriM2938$$Nest$smsemCreateEntry;
                         result.fileName = str;
                         result.format = this.mFormat;
                         return result;
                     } catch (ImageExportException e) {
                         e = e;
-                        if (uriM2940$$Nest$smsemCreateEntry != null) {
-                            this.mResolver.delete(uriM2940$$Nest$smsemCreateEntry, null);
+                        if (uriM2938$$Nest$smsemCreateEntry != null) {
+                            this.mResolver.delete(uriM2938$$Nest$smsemCreateEntry, null);
                         }
                         throw e;
                     }
@@ -157,7 +157,7 @@ public class ImageExporter {
                 }
             } catch (ImageExportException e2) {
                 e = e2;
-                uriM2940$$Nest$smsemCreateEntry = null;
+                uriM2938$$Nest$smsemCreateEntry = null;
             }
         }
 
@@ -178,7 +178,7 @@ public class ImageExporter {
     }
 
     /* renamed from: -$$Nest$smpublishEntry, reason: not valid java name */
-    public static void m2939$$Nest$smpublishEntry(ContentResolver contentResolver, Uri uri, UserHandle userHandle) {
+    public static void m2937$$Nest$smpublishEntry(ContentResolver contentResolver, Uri uri, UserHandle userHandle) {
         Trace.beginSection("ImageExporter_publishEntry");
         try {
             ContentValues contentValues = new ContentValues();
@@ -196,7 +196,7 @@ public class ImageExporter {
     }
 
     /* renamed from: -$$Nest$smsemCreateEntry, reason: not valid java name */
-    public static Uri m2940$$Nest$smsemCreateEntry(ContentResolver contentResolver, UserHandle userHandle) {
+    public static Uri m2938$$Nest$smsemCreateEntry(ContentResolver contentResolver, UserHandle userHandle) {
         Trace.beginSection("ImageExporter_semCreateEntry");
         try {
             Uri uriInsert = contentResolver.insert(ContentProvider.maybeAddUserId(MediaStore.Images.Media.getContentUri(mVolumeName), userHandle.getIdentifier()), semCreateMetadata());
@@ -211,7 +211,7 @@ public class ImageExporter {
     }
 
     /* renamed from: -$$Nest$smwriteExif, reason: not valid java name */
-    public static void m2941$$Nest$smwriteExif(ContentResolver contentResolver, Uri uri, UUID uuid, int i, int i2, ZonedDateTime zonedDateTime) {
+    public static void m2939$$Nest$smwriteExif(ContentResolver contentResolver, Uri uri, UUID uuid, int i, int i2, ZonedDateTime zonedDateTime) {
         Trace.beginSection("ImageExporter_writeExif");
         try {
             try {
@@ -246,7 +246,7 @@ public class ImageExporter {
     }
 
     /* renamed from: -$$Nest$smwriteImage, reason: not valid java name */
-    public static void m2942$$Nest$smwriteImage(ContentResolver contentResolver, Bitmap bitmap, Bitmap.CompressFormat compressFormat, int i, Uri uri) {
+    public static void m2940$$Nest$smwriteImage(ContentResolver contentResolver, Bitmap bitmap, Bitmap.CompressFormat compressFormat, int i, Uri uri) {
         Trace.beginSection("ImageExporter_writeImage");
         try {
             try {

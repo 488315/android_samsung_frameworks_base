@@ -244,7 +244,7 @@ public class DynamicLockData {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public DynamicLockData m2673clone() throws CloneNotSupportedException {
+    public DynamicLockData m2671clone() throws CloneNotSupportedException {
         return (DynamicLockData) super.clone();
     }
 }

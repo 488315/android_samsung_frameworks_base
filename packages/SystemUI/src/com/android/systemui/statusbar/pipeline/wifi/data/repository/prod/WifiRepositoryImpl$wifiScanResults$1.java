@@ -71,7 +71,7 @@ final class WifiRepositoryImpl$wifiScanResults$1 extends SuspendLambda implement
                     while (it.hasNext()) {
                         arrayList.add(new WifiScanEntry(((ScanResult) it.next()).SSID));
                     }
-                    ((ChannelCoroutine) sendChannel).mo3476trySendJP2dKIU(arrayList);
+                    ((ChannelCoroutine) sendChannel).mo3475trySendJP2dKIU(arrayList);
                 }
             };
             WifiRepositoryImpl wifiRepositoryImpl2 = this.this$0;

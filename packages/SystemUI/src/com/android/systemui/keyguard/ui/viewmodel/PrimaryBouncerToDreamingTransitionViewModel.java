@@ -29,7 +29,7 @@ public final class PrimaryBouncerToDreamingTransitionViewModel implements Primar
         OverlayKey overlayKey = Overlays.Bouncer;
         KeyguardState keyguardState = KeyguardState.DREAMING;
         companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.PRIMARY_BOUNCER, keyguardState, keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, new Edge.ContentToState(overlayKey, keyguardState)));
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.PRIMARY_BOUNCER, keyguardState, keyguardTransitionAnimationFlow.m2613setupVtjQ1oo(j, new Edge.ContentToState(overlayKey, keyguardState)));
         Function1 function1 = new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToDreamingTransitionViewModel$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
@@ -55,7 +55,7 @@ public final class PrimaryBouncerToDreamingTransitionViewModel implements Primar
             }
         };
         final int i2 = 1;
-        this.windowBlurRadius = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilderM, 0L, function1, 0L, function0, null, new Function0() { // from class: com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToDreamingTransitionViewModel$$ExternalSyntheticLambda1
+        this.windowBlurRadius = KeyguardTransitionAnimationFlow.FlowBuilder.m2614sharedFlow74qcysc$default(flowBuilderM, 0L, function1, 0L, function0, null, new Function0() { // from class: com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToDreamingTransitionViewModel$$ExternalSyntheticLambda1
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
                 switch (i2) {

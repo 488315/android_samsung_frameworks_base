@@ -4276,7 +4276,7 @@ public class SubscreenDeviceModelB5 extends SubscreenDeviceModelCommon {
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Result.m3442exceptionOrNullimpl(failure);
+        Result.m3441exceptionOrNullimpl(failure);
     }
 
     public final void showSmartReplyResultFailure(String str) {

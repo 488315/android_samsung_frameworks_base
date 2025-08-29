@@ -20,10 +20,10 @@ public final /* synthetic */ class SimpleDigitalClockTextView$$ExternalSynthetic
         switch (this.$r8$classId) {
             case 0:
                 SimpleDigitalClockTextView.Companion companion = SimpleDigitalClockTextView.Companion;
-                return MotionLayout$$ExternalSyntheticOutline0.m("setInterpolatedSize(size=", VPointF.m2782toStringimpl(VPointF.Companion.m2787fromLongAsyRdg(logMessage.getLong1())), ", mode=", VPoint.m2728toStringimpl(VPoint.Companion.m2733fromLongDO4cnVw(logMessage.getLong2())), ")");
+                return MotionLayout$$ExternalSyntheticOutline0.m("setInterpolatedSize(size=", VPointF.m2780toStringimpl(VPointF.Companion.m2785fromLongAsyRdg(logMessage.getLong1())), ", mode=", VPoint.m2726toStringimpl(VPoint.Companion.m2731fromLongDO4cnVw(logMessage.getLong2())), ")");
             default:
                 SimpleDigitalClockTextView.Companion companion2 = SimpleDigitalClockTextView.Companion;
-                return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("setInterpolatedLocation(", VRectF.m2845toStringimpl(VRectF.Companion.m2849fromLongWMibXUk(logMessage.getLong1())), ")");
+                return ContentInViewNode$Request$$ExternalSyntheticOutline0.m("setInterpolatedLocation(", VRectF.m2843toStringimpl(VRectF.Companion.m2847fromLongWMibXUk(logMessage.getLong1())), ")");
         }
     }
 }

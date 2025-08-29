@@ -1,6 +1,7 @@
 package com.android.internal.app;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.UserHandle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +50,7 @@ public class ResolverMultiProfilePagerAdapter extends AbstractMultiProfilePagerA
     }
 
     @Override // com.android.internal.app.AbstractMultiProfilePagerAdapter
-    void setupListAdapter(int i) {
+    void setupListAdapter(int i) throws Resources.NotFoundException {
         getItem(i).listView.setAdapter((ListAdapter) getItem(i).resolverListAdapter);
     }
 
@@ -59,7 +60,7 @@ public class ResolverMultiProfilePagerAdapter extends AbstractMultiProfilePagerA
     }
 
     @Override // com.android.internal.app.AbstractMultiProfilePagerAdapter, com.android.internal.widget.PagerAdapter
-    public ViewGroup instantiateItem(ViewGroup viewGroup, int i) {
+    public ViewGroup instantiateItem(ViewGroup viewGroup, int i) throws Resources.NotFoundException {
         setupListAdapter(i);
         return super.instantiateItem(viewGroup, i);
     }

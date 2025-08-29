@@ -879,7 +879,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
 
         @Override // com.android.systemui.statusbar.notification.headsup.HeadsUpTouchHelper.HeadsUpNotificationViewController
         public final void startExpand(float f, float f2, float f3) {
-            NotificationPanelViewController.m2946$$Nest$mstartExpandMotion(NotificationPanelViewController.this, f, f2, true, f3);
+            NotificationPanelViewController.m2944$$Nest$mstartExpandMotion(NotificationPanelViewController.this, f, f2, true, f3);
         }
 
         private HeadsUpNotificationViewControllerImpl() {
@@ -1611,7 +1611,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                                 }
                                 NotificationPanelViewController.this.mShadeLog.logMotionEvent(motionEvent, "onTouch: down action");
                                 NotificationPanelViewController notificationPanelViewController7 = NotificationPanelViewController.this;
-                                NotificationPanelViewController.m2946$$Nest$mstartExpandMotion(notificationPanelViewController7, x, y, false, notificationPanelViewController7.mExpandedHeight);
+                                NotificationPanelViewController.m2944$$Nest$mstartExpandMotion(notificationPanelViewController7, x, y, false, notificationPanelViewController7.mExpandedHeight);
                                 NotificationPanelViewController notificationPanelViewController8 = NotificationPanelViewController.this;
                                 notificationPanelViewController8.getClass();
                                 notificationPanelViewController8.mPanelClosedOnDown = notificationPanelViewController8.isFullyCollapsed();
@@ -1626,7 +1626,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                                 notificationPanelViewController11.getClass();
                                 notificationPanelViewController11.mTouchAboveFalsingThreshold = false;
                                 notificationPanelViewController11.mCollapsedAndHeadsUpOnDown = notificationPanelViewController11.isFullyCollapsed() && ((HeadsUpManagerImpl) NotificationPanelViewController.this.mHeadsUpManager).mHasPinnedNotification;
-                                NotificationPanelViewController.m2943$$Nest$maddMovement(NotificationPanelViewController.this, motionEvent);
+                                NotificationPanelViewController.m2941$$Nest$maddMovement(NotificationPanelViewController.this, motionEvent);
                                 NotificationPanelViewController notificationPanelViewController12 = NotificationPanelViewController.this;
                                 boolean z2 = (notificationPanelViewController12.mHeightAnimator == null || notificationPanelViewController12.mIsSpringBackAnimation) ? false : true;
                                 if (!notificationPanelViewController12.mGestureWaitForTouchSlop || z2) {
@@ -1664,8 +1664,8 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                             case 3:
                             case 4:
                                 NotificationPanelViewController.this.mShadeLog.logMotionEvent(motionEvent, "onTouch: up/cancel action");
-                                NotificationPanelViewController.m2943$$Nest$maddMovement(NotificationPanelViewController.this, motionEvent);
-                                NotificationPanelViewController.m2944$$Nest$mendMotionEvent(NotificationPanelViewController.this, motionEvent, x, y, false);
+                                NotificationPanelViewController.m2941$$Nest$maddMovement(NotificationPanelViewController.this, motionEvent);
+                                NotificationPanelViewController.m2942$$Nest$mendMotionEvent(NotificationPanelViewController.this, motionEvent, x, y, false);
                                 if (NotificationPanelViewController.this.mHeightAnimator == null) {
                                     if (motionEvent.getActionMasked() == 1) {
                                         InteractionJankMonitor interactionJankMonitor = (InteractionJankMonitor) NotificationPanelViewController.this.mQsController.mInteractionJankMonitorLazy.get();
@@ -1716,7 +1716,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                                     logMessageImpl.double1 = f;
                                     logBuffer.commit(logMessageObtain);
                                 }
-                                NotificationPanelViewController.m2943$$Nest$maddMovement(NotificationPanelViewController.this, motionEvent);
+                                NotificationPanelViewController.m2941$$Nest$maddMovement(NotificationPanelViewController.this, motionEvent);
                                 if (!NotificationPanelViewController.this.isFullyCollapsed()) {
                                     NotificationPanelViewController.this.maybeVibrateOnOpening(true);
                                 }
@@ -1727,7 +1727,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                                     if (notificationPanelViewController16.mGestureWaitForTouchSlop && !notificationPanelViewController16.isTracking() && !NotificationPanelViewController.this.mCollapsedAndHeadsUpOnDown && (motionEvent.getSource() != 8194 || motionEvent.getToolType(0) != 1 || motionEvent.getClassification() != 3)) {
                                         NotificationPanelViewController notificationPanelViewController17 = NotificationPanelViewController.this;
                                         if (notificationPanelViewController17.mInitialOffsetOnTouch != 0.0f) {
-                                            NotificationPanelViewController.m2946$$Nest$mstartExpandMotion(notificationPanelViewController17, x, y, false, notificationPanelViewController17.mExpandedHeight);
+                                            NotificationPanelViewController.m2944$$Nest$mstartExpandMotion(notificationPanelViewController17, x, y, false, notificationPanelViewController17.mExpandedHeight);
                                             f2 = 0.0f;
                                         }
                                         NotificationPanelViewController.this.cancelHeightAnimator();
@@ -1768,7 +1768,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                                 if (!zIsTrackpadThreeFingerSwipe && NotificationPanelViewController.this.mStatusBarStateController.getState() == 1) {
                                     NotificationPanelViewController notificationPanelViewController22 = NotificationPanelViewController.this;
                                     notificationPanelViewController22.mMotionAborted = true;
-                                    NotificationPanelViewController.m2944$$Nest$mendMotionEvent(notificationPanelViewController22, motionEvent, x, y, true);
+                                    NotificationPanelViewController.m2942$$Nest$mendMotionEvent(notificationPanelViewController22, motionEvent, x, y, true);
                                     QuickPanelLogger quickPanelLogger5 = NotificationPanelViewController.this.mQuickPanelLogger;
                                     if (quickPanelLogger5 != null) {
                                         quickPanelLogger5.handleTouch(motionEvent, "!isTrackpadTwoOrThreeFingerSwipe && mStatusBarStateController.getState() == KEYGUARD)", false);
@@ -1791,7 +1791,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                                     NotificationPanelViewController.this.mTrackingPointer = motionEvent.getPointerId(i);
                                     NotificationPanelViewController notificationPanelViewController23 = NotificationPanelViewController.this;
                                     notificationPanelViewController23.mHandlingPointerUp = true;
-                                    NotificationPanelViewController.m2946$$Nest$mstartExpandMotion(notificationPanelViewController23, x2, y2, true, notificationPanelViewController23.mExpandedHeight);
+                                    NotificationPanelViewController.m2944$$Nest$mstartExpandMotion(notificationPanelViewController23, x2, y2, true, notificationPanelViewController23.mExpandedHeight);
                                     NotificationPanelViewController.this.mHandlingPointerUp = false;
                                 }
                                 notificationPanelViewController = NotificationPanelViewController.this;
@@ -1965,7 +1965,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                                     return false;
                                 }
                             }
-                            NotificationPanelViewController.m2945$$Nest$minitDownStates(NotificationPanelViewController.this, motionEvent);
+                            NotificationPanelViewController.m2943$$Nest$minitDownStates(NotificationPanelViewController.this, motionEvent);
                             NotificationPanelViewController notificationPanelViewController8 = NotificationPanelViewController.this;
                             if (notificationPanelViewController8.mCentralSurfaces.mBouncerShowing) {
                                 notificationPanelViewController8.mShadeLog.v("NotificationPanelViewController MotionEvent intercepted: bouncer is showing");
@@ -2302,7 +2302,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                                                                                         notificationPanelViewController29.mUpdateFlingOnLayout = false;
                                                                                         notificationPanelViewController29.mTouchAboveFalsingThreshold = false;
                                                                                         notificationPanelViewController29.mHeadsUpVisibleOnDown = ((HeadsUpManagerImpl) notificationPanelViewController29.mHeadsUpManager).mHasPinnedNotification;
-                                                                                        NotificationPanelViewController.m2943$$Nest$maddMovement(notificationPanelViewController29, motionEvent);
+                                                                                        NotificationPanelViewController.m2941$$Nest$maddMovement(notificationPanelViewController29, motionEvent);
                                                                                         quickPanelLogger = NotificationPanelViewController.this.mQuickPanelLogger;
                                                                                         if (quickPanelLogger != null) {
                                                                                         }
@@ -2318,7 +2318,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                                                                                     if (actionMasked2 == 2) {
                                                                                         NotificationPanelViewController notificationPanelViewController30 = NotificationPanelViewController.this;
                                                                                         float f3 = y4 - notificationPanelViewController30.mInitialExpandY;
-                                                                                        NotificationPanelViewController.m2943$$Nest$maddMovement(notificationPanelViewController30, motionEvent);
+                                                                                        NotificationPanelViewController.m2941$$Nest$maddMovement(notificationPanelViewController30, motionEvent);
                                                                                         NotificationPanelViewController notificationPanelViewController31 = NotificationPanelViewController.this;
                                                                                         boolean z11 = notificationPanelViewController31.mPanelClosedOnDown && !notificationPanelViewController31.mCollapsedAndHeadsUpOnDown;
                                                                                         if (zCanCollapsePanelOnTouch || notificationPanelViewController31.mTouchStartedInEmptyArea || notificationPanelViewController31.mAnimatingOnDown || z11) {
@@ -2328,7 +2328,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                                                                                             if ((f3 < f4 || ((z11 || NotificationPanelViewController.this.mAnimatingOnDown) && fAbs > touchSlop$1)) && fAbs > Math.abs(x4 - NotificationPanelViewController.this.mInitialExpandX)) {
                                                                                                 NotificationPanelViewController.this.cancelHeightAnimator();
                                                                                                 NotificationPanelViewController notificationPanelViewController32 = NotificationPanelViewController.this;
-                                                                                                NotificationPanelViewController.m2946$$Nest$mstartExpandMotion(notificationPanelViewController32, x4, y4, true, notificationPanelViewController32.mExpandedHeight);
+                                                                                                NotificationPanelViewController.m2944$$Nest$mstartExpandMotion(notificationPanelViewController32, x4, y4, true, notificationPanelViewController32.mExpandedHeight);
                                                                                                 NotificationPanelViewController.this.mShadeLog.v("NotificationPanelViewController MotionEvent intercepted: startExpandMotion");
                                                                                                 NotificationPanelViewController notificationPanelViewController33 = NotificationPanelViewController.this;
                                                                                                 if (notificationPanelViewController33.mQuickPanelLogger != null && (sb2 = notificationPanelViewController33.mQuickPanelLogBuilder) != null) {
@@ -2881,7 +2881,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
                                         if (NotificationPanelViewController.this.mLastEventSynthesizedDown && motionEvent.getAction() == 1) {
                                             NotificationPanelViewController.this.expand(true);
                                         }
-                                        NotificationPanelViewController.m2945$$Nest$minitDownStates(NotificationPanelViewController.this, motionEvent);
+                                        NotificationPanelViewController.m2943$$Nest$minitDownStates(NotificationPanelViewController.this, motionEvent);
                                         NotificationPanelViewController notificationPanelViewController7 = NotificationPanelViewController.this;
                                         if (!notificationPanelViewController7.mIsExpandingOrCollapsing) {
                                             if (notificationPanelViewController7.mQsController.shouldQuickSettingsIntercept(notificationPanelViewController7.mDownX, notificationPanelViewController7.mDownY, 0.0f)) {
@@ -3362,7 +3362,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     }
 
     /* renamed from: -$$Nest$maddMovement, reason: not valid java name */
-    public static void m2943$$Nest$maddMovement(NotificationPanelViewController notificationPanelViewController, MotionEvent motionEvent) {
+    public static void m2941$$Nest$maddMovement(NotificationPanelViewController notificationPanelViewController, MotionEvent motionEvent) {
         notificationPanelViewController.getClass();
         float rawX = motionEvent.getRawX() - motionEvent.getX();
         float rawY = motionEvent.getRawY() - motionEvent.getY();
@@ -3377,7 +3377,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static void m2944$$Nest$mendMotionEvent(NotificationPanelViewController notificationPanelViewController, MotionEvent motionEvent, float f, float f2, boolean z) throws Resources.NotFoundException {
+    public static void m2942$$Nest$mendMotionEvent(NotificationPanelViewController notificationPanelViewController, MotionEvent motionEvent, float f, float f2, boolean z) throws Resources.NotFoundException {
         boolean z2;
         float f3;
         boolean z3;
@@ -3509,7 +3509,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static void m2945$$Nest$minitDownStates(NotificationPanelViewController notificationPanelViewController, MotionEvent motionEvent) {
+    public static void m2943$$Nest$minitDownStates(NotificationPanelViewController notificationPanelViewController, MotionEvent motionEvent) {
         boolean z;
         int bottom;
         notificationPanelViewController.getClass();
@@ -3587,7 +3587,7 @@ public final class NotificationPanelViewController implements ShadeSurface, Dump
     }
 
     /* renamed from: -$$Nest$mstartExpandMotion, reason: not valid java name */
-    public static void m2946$$Nest$mstartExpandMotion(NotificationPanelViewController notificationPanelViewController, float f, float f2, boolean z, float f3) {
+    public static void m2944$$Nest$mstartExpandMotion(NotificationPanelViewController notificationPanelViewController, float f, float f2, boolean z, float f3) {
         if (!notificationPanelViewController.mHandlingPointerUp && !notificationPanelViewController.mStatusBarStateController.isDozing()) {
             notificationPanelViewController.mQsController.beginJankMonitoring(notificationPanelViewController.isFullyCollapsed());
         }

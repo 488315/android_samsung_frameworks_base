@@ -43,7 +43,7 @@ public abstract class BuildNumberKt {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static final void m2567BuildNumber3IgeMak(final BuildNumberViewModel.Factory factory, final long j, final Modifier modifier, Composer composer, final int i) {
+    public static final void m2565BuildNumber3IgeMak(final BuildNumberViewModel.Factory factory, final long j, final Modifier modifier, Composer composer, final int i) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(-1377105784);
         int i2 = i | (composerImpl.changed(factory) ? 4 : 2) | (composerImpl.changed(j) ? 32 : 16) | (composerImpl.changed(modifier) ? 256 : 128);
@@ -129,7 +129,7 @@ public abstract class BuildNumberKt {
                     int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
                     long j2 = this.f$1;
                     Modifier modifier2 = this.f$2;
-                    BuildNumberKt.m2567BuildNumber3IgeMak(this.f$0, j2, modifier2, (Composer) obj, iUpdateChangedFlags);
+                    BuildNumberKt.m2565BuildNumber3IgeMak(this.f$0, j2, modifier2, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

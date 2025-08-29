@@ -297,7 +297,7 @@ public class IMSParameter implements Parcelable {
     public void putParcelable(String str, Parcelable parcelable) {
         if (str.equals(GENERAL.APCS_INFO) && (parcelable instanceof IMSAPCSInfo)) {
             try {
-                this.mAPCSInfo = ((IMSAPCSInfo) parcelable).m3390clone();
+                this.mAPCSInfo = ((IMSAPCSInfo) parcelable).m3389clone();
                 return;
             } catch (CloneNotSupportedException e) {
                 e.printStackTrace();
@@ -309,7 +309,7 @@ public class IMSParameter implements Parcelable {
             return;
         }
         try {
-            this.mRegistrationInfo = ((IMSRegistrationInfo) parcelable).m3392clone();
+            this.mRegistrationInfo = ((IMSRegistrationInfo) parcelable).m3391clone();
         } catch (CloneNotSupportedException e2) {
             e2.printStackTrace();
         }
@@ -323,7 +323,7 @@ public class IMSParameter implements Parcelable {
         try {
             this.mProfileParams = new IMSProfileParams[parcelableArr.length];
             for (int i = 0; i < parcelableArr.length; i++) {
-                this.mProfileParams[i] = ((IMSProfileParams) parcelableArr[i]).m3391clone();
+                this.mProfileParams[i] = ((IMSProfileParams) parcelableArr[i]).m3390clone();
             }
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();

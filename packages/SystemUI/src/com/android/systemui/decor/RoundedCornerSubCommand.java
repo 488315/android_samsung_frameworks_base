@@ -55,18 +55,18 @@ public final class RoundedCornerSubCommand extends ParseableCommand {
         this.pathData$delegate = required(param("path-data", "d", "PathParser-compatible path string to be rendered as the corner drawable. This path should be a closed arc oriented as the top-left corner of the device", new ValueParser() { // from class: com.android.systemui.decor.RoundedCornerSubCommand$special$$inlined$map$1
             @Override // com.android.systemui.statusbar.commandline.ValueParser
             /* renamed from: parseValue-IoAF18A, reason: not valid java name */
-            public final Object mo2565parseValueIoAF18A(String str2) {
+            public final Object mo2563parseValueIoAF18A(String str2) {
                 Path pathCreatePathFromPathData;
-                Object objMo2565parseValueIoAF18A = valueParserKt$parseString$1.mo2565parseValueIoAF18A(str2);
+                Object objMo2563parseValueIoAF18A = valueParserKt$parseString$1.mo2563parseValueIoAF18A(str2);
                 int i = Result.$r8$clinit;
-                if (objMo2565parseValueIoAF18A instanceof Result.Failure) {
-                    Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(objMo2565parseValueIoAF18A);
-                    thM3442exceptionOrNullimpl.getClass();
-                    return new Result.Failure(thM3442exceptionOrNullimpl);
+                if (objMo2563parseValueIoAF18A instanceof Result.Failure) {
+                    Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(objMo2563parseValueIoAF18A);
+                    thM3441exceptionOrNullimpl.getClass();
+                    return new Result.Failure(thM3441exceptionOrNullimpl);
                 }
-                ResultKt.throwOnFailure(objMo2565parseValueIoAF18A);
+                ResultKt.throwOnFailure(objMo2563parseValueIoAF18A);
                 try {
-                    pathCreatePathFromPathData = PathParser.createPathFromPathData((String) objMo2565parseValueIoAF18A);
+                    pathCreatePathFromPathData = PathParser.createPathFromPathData((String) objMo2563parseValueIoAF18A);
                 } catch (Exception unused) {
                     pathCreatePathFromPathData = null;
                 }

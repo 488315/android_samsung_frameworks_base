@@ -74,11 +74,11 @@ public final class LowLightDreamManager {
                     boolean z = this.$shouldEnterLowLight;
                     this.label = 1;
                     lowLightTransitionCoordinator.getClass();
-                    Object objM3471withTimeoutKLykuaI = TimeoutKt.m3471withTimeoutKLykuaI(j, new LowLightTransitionCoordinator$waitForLowLightTransitionAnimationKLykuaI$$inlined$suspendCoroutineWithTimeoutKLykuaI$1(null, z, lowLightTransitionCoordinator), this);
-                    if (objM3471withTimeoutKLykuaI != obj2) {
-                        objM3471withTimeoutKLykuaI = Unit.INSTANCE;
+                    Object objM3470withTimeoutKLykuaI = TimeoutKt.m3470withTimeoutKLykuaI(j, new LowLightTransitionCoordinator$waitForLowLightTransitionAnimationKLykuaI$$inlined$suspendCoroutineWithTimeoutKLykuaI$1(null, z, lowLightTransitionCoordinator), this);
+                    if (objM3470withTimeoutKLykuaI != obj2) {
+                        objM3470withTimeoutKLykuaI = Unit.INSTANCE;
                     }
-                    if (objM3471withTimeoutKLykuaI == obj2) {
+                    if (objM3470withTimeoutKLykuaI == obj2) {
                         return obj2;
                     }
                 } else {

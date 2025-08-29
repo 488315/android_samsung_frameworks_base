@@ -55,12 +55,12 @@ final class WorkTileAutoAddable$autoAddSignal$signalsFromCallback$1 extends Susp
                                 i2 = workTileRestoreProcessor.lastRestorePosition.get(i, -1);
                                 workTileRestoreProcessor.lastRestorePosition.delete(i);
                             }
-                            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new AutoAddSignal.Add(tileSpec, i2));
+                            ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new AutoAddSignal.Add(tileSpec, i2));
                             return;
                         }
                     }
                 }
-                ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new AutoAddSignal.Remove(workTileAutoAddable.spec));
+                ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new AutoAddSignal.Remove(workTileAutoAddable.spec));
                 return;
             }
         }

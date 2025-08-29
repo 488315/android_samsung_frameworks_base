@@ -97,9 +97,9 @@ final class CastSettingScreenKt$CastSettingScreen$2$1 extends SuspendLambda impl
                     int i4 = Result.$r8$clinit;
                     failure2 = new Result.Failure(th);
                 }
-                Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure2);
-                if (thM3442exceptionOrNullimpl != null) {
-                    thM3442exceptionOrNullimpl.printStackTrace();
+                Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure2);
+                if (thM3441exceptionOrNullimpl != null) {
+                    thM3441exceptionOrNullimpl.printStackTrace();
                 }
                 PackageInfo packageInfo = failure2 instanceof Result.Failure ? null : failure2;
                 if (packageInfo != null && (activityInfoArr = packageInfo.receivers) != null) {

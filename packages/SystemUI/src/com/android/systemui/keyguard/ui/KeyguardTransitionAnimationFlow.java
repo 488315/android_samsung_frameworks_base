@@ -94,7 +94,7 @@ public final class KeyguardTransitionAnimationFlow {
         }
 
         /* renamed from: sharedFlow-74qcysc$default, reason: not valid java name */
-        public static KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 m2616sharedFlow74qcysc$default(FlowBuilder flowBuilder, long j, Function1 function1, long j2, Function0 function0, Function0 function02, Function0 function03, Interpolator interpolator, String str, int i) {
+        public static KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 m2614sharedFlow74qcysc$default(FlowBuilder flowBuilder, long j, Function1 function1, long j2, Function0 function0, Function0 function02, Function0 function03, Interpolator interpolator, String str, int i) {
             long duration;
             if ((i & 1) != 0) {
                 j = flowBuilder.transitionDuration;
@@ -106,11 +106,11 @@ public final class KeyguardTransitionAnimationFlow {
             } else {
                 duration = j2;
             }
-            return new KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1(flowBuilder.m2618sharedFlowWithState74qcysc(j3, function1, duration, (i & 8) != 0 ? null : function0, (i & 16) != 0 ? null : function02, (i & 32) != 0 ? null : function03, (i & 64) != 0 ? Interpolators.LINEAR : interpolator, (i & 128) != 0 ? null : str));
+            return new KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1(flowBuilder.m2616sharedFlowWithState74qcysc(j3, function1, duration, (i & 8) != 0 ? null : function0, (i & 16) != 0 ? null : function02, (i & 32) != 0 ? null : function03, (i & 64) != 0 ? Interpolators.LINEAR : interpolator, (i & 128) != 0 ? null : str));
         }
 
         /* renamed from: sharedFlowWithState-74qcysc$default, reason: not valid java name */
-        public static /* synthetic */ Flow m2617sharedFlowWithState74qcysc$default(FlowBuilder flowBuilder, long j, Function1 function1, long j2, Function0 function0, Function0 function02, Function0 function03, Interpolator interpolator, String str, int i) {
+        public static /* synthetic */ Flow m2615sharedFlowWithState74qcysc$default(FlowBuilder flowBuilder, long j, Function1 function1, long j2, Function0 function0, Function0 function02, Function0 function03, Interpolator interpolator, String str, int i) {
             long duration;
             if ((i & 4) != 0) {
                 Duration.Companion companion = Duration.Companion;
@@ -118,12 +118,12 @@ public final class KeyguardTransitionAnimationFlow {
             } else {
                 duration = j2;
             }
-            return flowBuilder.m2618sharedFlowWithState74qcysc(j, function1, duration, (i & 8) != 0 ? null : function0, (i & 16) != 0 ? null : function02, (i & 32) != 0 ? null : function03, (i & 64) != 0 ? Interpolators.LINEAR : interpolator, (i & 128) != 0 ? null : str);
+            return flowBuilder.m2616sharedFlowWithState74qcysc(j, function1, duration, (i & 8) != 0 ? null : function0, (i & 16) != 0 ? null : function02, (i & 32) != 0 ? null : function03, (i & 64) != 0 ? Interpolators.LINEAR : interpolator, (i & 128) != 0 ? null : str);
         }
 
         public final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 immediatelyTransitionTo(final float f) {
             Duration.Companion companion = Duration.Companion;
-            return m2616sharedFlow74qcysc$default(this, DurationKt.toDuration(1, DurationUnit.MILLISECONDS), new Function1() { // from class: com.android.systemui.keyguard.ui.KeyguardTransitionAnimationFlow$FlowBuilder$$ExternalSyntheticLambda0
+            return m2614sharedFlow74qcysc$default(this, DurationKt.toDuration(1, DurationUnit.MILLISECONDS), new Function1() { // from class: com.android.systemui.keyguard.ui.KeyguardTransitionAnimationFlow$FlowBuilder$$ExternalSyntheticLambda0
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
                 public final Object mo781invoke(Object obj) {
@@ -134,24 +134,24 @@ public final class KeyguardTransitionAnimationFlow {
         }
 
         public final FlowBuilder setupWithoutSceneContainer(Edge.StateToState stateToState) {
-            return KeyguardTransitionAnimationFlow.this.m2615setupVtjQ1oo(this.transitionDuration, stateToState);
+            return KeyguardTransitionAnimationFlow.this.m2613setupVtjQ1oo(this.transitionDuration, stateToState);
         }
 
         /* renamed from: sharedFlowWithState-74qcysc, reason: not valid java name */
-        public final Flow m2618sharedFlowWithState74qcysc(long j, final Function1 function1, long j2, final Function0 function0, final Function0 function02, final Function0 function03, final Interpolator interpolator, final String str) {
+        public final Flow m2616sharedFlowWithState74qcysc(long j, final Function1 function1, long j2, final Function0 function0, final Function0 function02, final Function0 function03, final Interpolator interpolator, final String str) {
             Duration.Companion companion = Duration.Companion;
             if (j <= 0) {
-                throw new IllegalArgumentException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("duration must be a positive number: ", Duration.m3466toStringimpl(j)));
+                throw new IllegalArgumentException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("duration must be a positive number: ", Duration.m3465toStringimpl(j)));
             }
-            long jM3461plusLRDsOJo = Duration.m3461plusLRDsOJo(j2, j);
+            long jM3460plusLRDsOJo = Duration.m3460plusLRDsOJo(j2, j);
             long j3 = this.transitionDuration;
-            if (Duration.m3455compareToLRDsOJo(jM3461plusLRDsOJo, j3) > 0) {
-                String strM3466toStringimpl = Duration.m3466toStringimpl(j2);
-                String strM3466toStringimpl2 = Duration.m3466toStringimpl(j);
-                throw new IllegalArgumentException(TransitionKt$$ExternalSyntheticOutline0.m(SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("startTime(", strM3466toStringimpl, ") + duration(", strM3466toStringimpl2, ") must be <= transitionDuration("), Duration.m3466toStringimpl(j3), ")"));
+            if (Duration.m3454compareToLRDsOJo(jM3460plusLRDsOJo, j3) > 0) {
+                String strM3465toStringimpl = Duration.m3465toStringimpl(j2);
+                String strM3465toStringimpl2 = Duration.m3465toStringimpl(j);
+                throw new IllegalArgumentException(TransitionKt$$ExternalSyntheticOutline0.m(SeslRoundedCorner$SeslRoundedChunkingDrawable$$ExternalSyntheticOutline0.m("startTime(", strM3465toStringimpl, ") + duration(", strM3465toStringimpl2, ") must be <= transitionDuration("), Duration.m3465toStringimpl(j3), ")"));
             }
-            final float fM3456divLRDsOJo = (float) Duration.m3456divLRDsOJo(j2, j3);
-            final float fM3456divLRDsOJo2 = (float) Duration.m3456divLRDsOJo(j3, j);
+            final float fM3455divLRDsOJo = (float) Duration.m3455divLRDsOJo(j2, j3);
+            final float fM3455divLRDsOJo2 = (float) Duration.m3455divLRDsOJo(j3, j);
             KeyguardTransitionAnimationFlow keyguardTransitionAnimationFlow = KeyguardTransitionAnimationFlow.this;
             KeyguardTransitionAnimationLogger keyguardTransitionAnimationLogger = keyguardTransitionAnimationFlow.logger;
             keyguardTransitionAnimationLogger.getClass();
@@ -162,7 +162,7 @@ public final class KeyguardTransitionAnimationFlow {
                 LogMessage logMessageObtain = logBuffer.obtain("KeyguardTransitionAnimationLog", logLevel, keyguardTransitionAnimationLogger$$ExternalSyntheticLambda0, null);
                 LogMessageImpl logMessageImpl = (LogMessageImpl) logMessageObtain;
                 logMessageImpl.str1 = str;
-                logMessageImpl.str2 = String.valueOf(fM3456divLRDsOJo);
+                logMessageImpl.str2 = String.valueOf(fM3455divLRDsOJo);
                 logBuffer.commit(logMessageObtain);
             }
             final Flow flowTransition = keyguardTransitionAnimationFlow.transitionInteractor.transition(this.edge);
@@ -288,7 +288,7 @@ public final class KeyguardTransitionAnimationFlow {
 
                 @Override // kotlinx.coroutines.flow.Flow
                 public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                    Object objCollect = flowTransition.collect(new AnonymousClass2(flowCollector, function02, function03, fM3456divLRDsOJo, fM3456divLRDsOJo2, function0, function1, interpolator, keyguardTransitionAnimationFlow2, str), continuation);
+                    Object objCollect = flowTransition.collect(new AnonymousClass2(flowCollector, function02, function03, fM3455divLRDsOJo, fM3455divLRDsOJo2, function0, function1, interpolator, keyguardTransitionAnimationFlow2, str), continuation);
                     return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                 }
             });
@@ -306,7 +306,7 @@ public final class KeyguardTransitionAnimationFlow {
     }
 
     /* renamed from: setup-VtjQ1oo, reason: not valid java name */
-    public final FlowBuilder m2615setupVtjQ1oo(long j, Edge edge) {
+    public final FlowBuilder m2613setupVtjQ1oo(long j, Edge edge) {
         return new FlowBuilder(this, j, edge, null);
     }
 }

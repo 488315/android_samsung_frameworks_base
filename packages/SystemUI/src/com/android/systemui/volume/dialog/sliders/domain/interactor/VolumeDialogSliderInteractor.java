@@ -45,7 +45,7 @@ public final class VolumeDialogSliderInteractor {
             if (zenModeInteractor.zenModeByStreamPredicates.containsKey(Integer.valueOf(i))) {
                 int i2 = ((VolumeDialogSliderType.Stream) volumeDialogSliderType).audioStream;
                 AudioStream.m991constructorimpl(i2);
-                final Flow flowM3108activeModesBlockingStreamtLTdkI8 = zenModeInteractor.m3108activeModesBlockingStreamtLTdkI8(i2);
+                final Flow flowM3107activeModesBlockingStreamtLTdkI8 = zenModeInteractor.m3107activeModesBlockingStreamtLTdkI8(i2);
                 flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new Flow() { // from class: com.android.systemui.volume.dialog.sliders.domain.interactor.VolumeDialogSliderInteractor$special$$inlined$map$1
 
                     /* renamed from: com.android.systemui.volume.dialog.sliders.domain.interactor.VolumeDialogSliderInteractor$special$$inlined$map$1$2, reason: invalid class name */
@@ -112,7 +112,7 @@ public final class VolumeDialogSliderInteractor {
 
                     @Override // kotlinx.coroutines.flow.Flow
                     public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                        Object objCollect = flowM3108activeModesBlockingStreamtLTdkI8.collect(new AnonymousClass2(flowCollector), continuation);
+                        Object objCollect = flowM3107activeModesBlockingStreamtLTdkI8.collect(new AnonymousClass2(flowCollector), continuation);
                         return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                     }
                 };

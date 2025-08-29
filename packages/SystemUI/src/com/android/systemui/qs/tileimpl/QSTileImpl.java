@@ -243,7 +243,7 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
                         if (message.arg1 == 0) {
                             z = false;
                         }
-                        QSTileImpl.m2916$$Nest$mhandleSetListeningInternal(qSTileImpl, obj, z);
+                        QSTileImpl.m2914$$Nest$mhandleSetListeningInternal(qSTileImpl, obj, z);
                         return;
                     }
                     if (i == 11) {
@@ -253,7 +253,7 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
                     if (i == 12) {
                         qSTileImpl.handleInitialize();
                     } else if (i == 102) {
-                        QSTileImpl.m2915$$Nest$mhandleSaveTileIcon(qSTileImpl);
+                        QSTileImpl.m2913$$Nest$mhandleSaveTileIcon(qSTileImpl);
                     } else {
                         throw new IllegalArgumentException("Unknown msg: " + message.what);
                     }
@@ -312,7 +312,7 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
     }
 
     /* renamed from: -$$Nest$mhandleSaveTileIcon, reason: not valid java name */
-    public static void m2915$$Nest$mhandleSaveTileIcon(QSTileImpl qSTileImpl) throws IOException {
+    public static void m2913$$Nest$mhandleSaveTileIcon(QSTileImpl qSTileImpl) throws IOException {
         Drawable tileIconDrawable = qSTileImpl.getTileIconDrawable();
         int tileIconSize = ((SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class)).getTileIconSize(qSTileImpl.mContext);
         if (qSTileImpl.mTileSpec == null || tileIconDrawable == null) {
@@ -345,7 +345,7 @@ public abstract class QSTileImpl implements QSTile, LifecycleOwner, Dumpable, Lo
     }
 
     /* renamed from: -$$Nest$mhandleSetListeningInternal, reason: not valid java name */
-    public static void m2916$$Nest$mhandleSetListeningInternal(QSTileImpl qSTileImpl, Object obj, boolean z) {
+    public static void m2914$$Nest$mhandleSetListeningInternal(QSTileImpl qSTileImpl, Object obj, boolean z) {
         Handler handler = qSTileImpl.mUiHandler;
         String str = qSTileImpl.TAG;
         boolean z2 = qSTileImpl.DEBUG;

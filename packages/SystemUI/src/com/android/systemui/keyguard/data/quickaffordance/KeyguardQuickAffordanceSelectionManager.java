@@ -9,7 +9,7 @@ public interface KeyguardQuickAffordanceSelectionManager {
     Map getSelections();
 
     /* renamed from: getSelections */
-    Flow mo2614getSelections();
+    Flow mo2612getSelections();
 
     void setSelections(String str, List list);
 }

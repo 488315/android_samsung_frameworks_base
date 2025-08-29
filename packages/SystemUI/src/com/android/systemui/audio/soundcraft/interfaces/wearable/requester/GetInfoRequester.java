@@ -73,7 +73,7 @@ public final class GetInfoRequester extends BudsPluginServiceRequester {
                         int i3 = Result.$r8$clinit;
                         failure = new Result.Failure(th);
                     }
-                    if (Result.m3442exceptionOrNullimpl(failure) != null) {
+                    if (Result.m3441exceptionOrNullimpl(failure) != null) {
                         failure = new BudsModel(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, 131071, null);
                     }
                     BudsModel budsModel = (BudsModel) failure;

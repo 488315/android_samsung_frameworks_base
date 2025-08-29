@@ -27,6 +27,6 @@ public final class StateImplKt$calm$$inlined$filterImpl$1 implements Function3 {
         stateDerived.validatedEpoch = j;
         stateDerived.invalidatedEpoch = j;
         Maybe.Companion.getClass();
-        return Maybe.Present.m2590boximpl(obj2);
+        return Maybe.Present.m2588boximpl(obj2);
     }
 }

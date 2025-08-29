@@ -48,16 +48,16 @@ final class RepeatWhenAttachedKt$isAttached$1 extends SuspendLambda implements F
                 @Override // android.view.View.OnAttachStateChangeListener
                 public final void onViewAttachedToWindow(View view) {
                     Assert.isMainThread();
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.TRUE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.TRUE);
                 }
 
                 @Override // android.view.View.OnAttachStateChangeListener
                 public final void onViewDetachedFromWindow(View view) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.FALSE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.FALSE);
                 }
             };
             this.$this_isAttached.addOnAttachStateChangeListener(onAttachStateChangeListener);
-            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(this.$this_isAttached.isAttachedToWindow()));
+            ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(this.$this_isAttached.isAttachedToWindow()));
             RepeatWhenAttachedKt$isAttached$1$$ExternalSyntheticLambda0 repeatWhenAttachedKt$isAttached$1$$ExternalSyntheticLambda0 = new RepeatWhenAttachedKt$isAttached$1$$ExternalSyntheticLambda0(0, this.$this_isAttached, onAttachStateChangeListener);
             this.label = 1;
             if (ProduceKt.awaitClose(producerScope, repeatWhenAttachedKt$isAttached$1$$ExternalSyntheticLambda0, this) == coroutineSingletons) {

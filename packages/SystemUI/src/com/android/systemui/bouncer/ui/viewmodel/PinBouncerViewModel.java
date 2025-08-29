@@ -1029,7 +1029,7 @@ public final class PinBouncerViewModel extends AuthMethodBouncerViewModel {
 
     public final void onAuthenticateButtonClicked() {
         if (Intrinsics.areEqual(this.authenticationMethod, AuthenticationMethodModel.Sim.INSTANCE)) {
-            ChannelResult.m3477boximpl(this.requests.mo3476trySendJP2dKIU(OnAuthenticateButtonClickedForSim.INSTANCE));
+            ChannelResult.m3476boximpl(this.requests.mo3475trySendJP2dKIU(OnAuthenticateButtonClickedForSim.INSTANCE));
         } else {
             AuthMethodBouncerViewModel.tryAuthenticate$default(this, null, false, 1);
         }

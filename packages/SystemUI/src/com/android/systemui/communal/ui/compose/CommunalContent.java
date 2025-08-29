@@ -242,7 +242,7 @@ public final class CommunalContent {
                                 communalContent.communalSettingsInteractor.isV2FlagEnabled();
                                 composerImpl3.startReplaceGroup(-1836012657);
                                 MaterialTheme.INSTANCE.getClass();
-                                communalContent.lockSection.m2620LockIconBAq54LU(contentScope2, Color.m456boximpl(MaterialTheme.getColorScheme(composerImpl3).onPrimaryContainer), contentScope2.element(companion, Communal$Elements.LockIcon), composerImpl3, 0, 0);
+                                communalContent.lockSection.m2618LockIconBAq54LU(contentScope2, Color.m456boximpl(MaterialTheme.getColorScheme(composerImpl3).onPrimaryContainer), contentScope2.element(companion, Communal$Elements.LockIcon), composerImpl3, 0, 0);
                                 composerImpl3.end(false);
                                 composerImpl3.startReplaceGroup(1880447978);
                                 communalContent.bottomAreaSection.IndicationArea(contentScope2, SizeKt.fillMaxWidth(contentScope2.element(companion, Communal$Elements.IndicationArea), 1.0f), composerImpl3, 0);

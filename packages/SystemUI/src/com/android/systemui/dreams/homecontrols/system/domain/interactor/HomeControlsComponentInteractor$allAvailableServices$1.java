@@ -50,7 +50,7 @@ final class HomeControlsComponentInteractor$allAvailableServices$1 extends Suspe
             final ?? r1 = new ControlsListingController.ControlsListingCallback() { // from class: com.android.systemui.dreams.homecontrols.system.domain.interactor.HomeControlsComponentInteractor$allAvailableServices$1$listener$1
                 @Override // com.android.systemui.controls.management.ControlsListingController.ControlsListingCallback
                 public final void onServicesUpdated(List list) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(list);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(list);
                 }
             };
             ControlsListingControllerImpl controlsListingControllerImpl = (ControlsListingControllerImpl) this.this$0.controlsListingController;

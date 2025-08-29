@@ -23,7 +23,7 @@ public final /* synthetic */ class ShellController$ShellInterfaceImpl$$ExternalS
         switch (this.$r8$classId) {
             case 0:
                 ShellController.ShellInterfaceImpl shellInterfaceImpl = this.f$0;
-                ShellController.m3282$$Nest$mhandleDump(ShellController.this, (PrintWriter) this.f$1);
+                ShellController.m3281$$Nest$mhandleDump(ShellController.this, (PrintWriter) this.f$1);
                 break;
             case 1:
                 ShellController.ShellInterfaceImpl shellInterfaceImpl2 = this.f$0;

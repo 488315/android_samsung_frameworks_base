@@ -6,5 +6,5 @@ import kotlin.reflect.KClass;
 /* loaded from: classes4.dex */
 public interface ParametrizedSerializerCache {
     /* renamed from: get-gIAlu-s */
-    Object mo3487getgIAlus(KClass kClass, List list);
+    Object mo3486getgIAlus(KClass kClass, List list);
 }

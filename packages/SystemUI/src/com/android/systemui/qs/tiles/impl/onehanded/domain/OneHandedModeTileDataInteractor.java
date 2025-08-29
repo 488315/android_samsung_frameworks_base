@@ -81,9 +81,9 @@ public final class OneHandedModeTileDataInteractor implements QSTileDataInteract
                     int i2 = anonymousClass1.label;
                     if (i2 == 0) {
                         ResultKt.throwOnFailure(obj2);
-                        OneHandedModeTileModel oneHandedModeTileModelM2933boximpl = OneHandedModeTileModel.m2933boximpl(((Boolean) obj).booleanValue());
+                        OneHandedModeTileModel oneHandedModeTileModelM2931boximpl = OneHandedModeTileModel.m2931boximpl(((Boolean) obj).booleanValue());
                         anonymousClass1.label = 1;
-                        if (this.$this_unsafeFlow.emit(oneHandedModeTileModelM2933boximpl, anonymousClass1) == coroutineSingletons) {
+                        if (this.$this_unsafeFlow.emit(oneHandedModeTileModelM2931boximpl, anonymousClass1) == coroutineSingletons) {
                             return coroutineSingletons;
                         }
                     } else {

@@ -71,7 +71,7 @@ final class TaskSwitcherNotificationViewModel$uiState$2 extends SuspendLambda im
             flowCollector2 = (FlowCollector) this.L$0;
             ResultKt.throwOnFailure(obj);
             TaskSwitcherNotificationViewModel.Companion.getClass();
-            MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("Auto hiding notification after ", Duration.m3466toStringimpl(TaskSwitcherNotificationViewModel.NOTIFICATION_MAX_SHOW_DURATION), "TaskSwitchNotifVM");
+            MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("Auto hiding notification after ", Duration.m3465toStringimpl(TaskSwitcherNotificationViewModel.NOTIFICATION_MAX_SHOW_DURATION), "TaskSwitchNotifVM");
             TaskSwitcherNotificationUiState.NotShowing notShowing = TaskSwitcherNotificationUiState.NotShowing.INSTANCE;
             this.L$0 = null;
             this.label = 3;
@@ -82,10 +82,10 @@ final class TaskSwitcherNotificationViewModel$uiState$2 extends SuspendLambda im
             this.L$0 = flowCollector;
             this.L$1 = null;
             this.label = 2;
-            if (DelayKt.m3469delayVtjQ1oo(j, this) != coroutineSingletons) {
+            if (DelayKt.m3468delayVtjQ1oo(j, this) != coroutineSingletons) {
                 flowCollector2 = flowCollector;
                 TaskSwitcherNotificationViewModel.Companion.getClass();
-                MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("Auto hiding notification after ", Duration.m3466toStringimpl(TaskSwitcherNotificationViewModel.NOTIFICATION_MAX_SHOW_DURATION), "TaskSwitchNotifVM");
+                MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m("Auto hiding notification after ", Duration.m3465toStringimpl(TaskSwitcherNotificationViewModel.NOTIFICATION_MAX_SHOW_DURATION), "TaskSwitchNotifVM");
                 TaskSwitcherNotificationUiState.NotShowing notShowing2 = TaskSwitcherNotificationUiState.NotShowing.INSTANCE;
                 this.L$0 = null;
                 this.label = 3;

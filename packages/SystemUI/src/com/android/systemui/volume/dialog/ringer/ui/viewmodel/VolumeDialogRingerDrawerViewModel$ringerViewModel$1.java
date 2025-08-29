@@ -76,19 +76,19 @@ final class VolumeDialogRingerDrawerViewModel$ringerViewModel$1 extends SuspendL
         if (iIndexOf == -1 || volumeDialogRingerModel.isSingleVolume) {
             return RingerViewModelState.Unavailable.INSTANCE;
         }
-        RingerButtonViewModel ringerButtonViewModelM3217toButtonViewModelL0tBgz0 = VolumeDialogRingerDrawerViewModel.m3217toButtonViewModelL0tBgz0(volumeDialogRingerModel, i2, z, true);
-        if (ringerButtonViewModelM3217toButtonViewModelL0tBgz0 == null) {
+        RingerButtonViewModel ringerButtonViewModelM3216toButtonViewModelL0tBgz0 = VolumeDialogRingerDrawerViewModel.m3216toButtonViewModelL0tBgz0(volumeDialogRingerModel, i2, z, true);
+        if (ringerButtonViewModelM3216toButtonViewModelL0tBgz0 == null) {
             return RingerViewModelState.Unavailable.INSTANCE;
         }
         List list2 = volumeDialogRingerModel.availableModes;
         ArrayList arrayList = new ArrayList();
         Iterator it = list2.iterator();
         while (it.hasNext()) {
-            RingerButtonViewModel ringerButtonViewModelM3217toButtonViewModelL0tBgz02 = VolumeDialogRingerDrawerViewModel.m3217toButtonViewModelL0tBgz0(volumeDialogRingerModel, ((RingerMode) it.next()).value, z, false);
-            if (ringerButtonViewModelM3217toButtonViewModelL0tBgz02 != null) {
-                arrayList.add(ringerButtonViewModelM3217toButtonViewModelL0tBgz02);
+            RingerButtonViewModel ringerButtonViewModelM3216toButtonViewModelL0tBgz02 = VolumeDialogRingerDrawerViewModel.m3216toButtonViewModelL0tBgz0(volumeDialogRingerModel, ((RingerMode) it.next()).value, z, false);
+            if (ringerButtonViewModelM3216toButtonViewModelL0tBgz02 != null) {
+                arrayList.add(ringerButtonViewModelM3216toButtonViewModelL0tBgz02);
             }
         }
-        return new RingerViewModelState.Available(new RingerViewModel(arrayList, iIndexOf, ringerButtonViewModelM3217toButtonViewModelL0tBgz0, ringerDrawerState), i);
+        return new RingerViewModelState.Available(new RingerViewModel(arrayList, iIndexOf, ringerButtonViewModelM3216toButtonViewModelL0tBgz0, ringerDrawerState), i);
     }
 }

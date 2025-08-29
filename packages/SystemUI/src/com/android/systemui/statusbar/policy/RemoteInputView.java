@@ -390,7 +390,7 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
                         RemoteInputView remoteInputView3 = RemoteInputView.this;
                         remoteInputView3.mEditText.setSelection(remoteInputView3.mPrevString.length());
                     }
-                    RemoteInputView.m3105$$Nest$mshowExceedTextLimitToast(RemoteInputView.this);
+                    RemoteInputView.m3103$$Nest$mshowExceedTextLimitToast(RemoteInputView.this);
                     return;
                 }
             } else {
@@ -399,7 +399,7 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
                     remoteInputView.mEditText.setText(remoteInputView.mPrevString);
                     RemoteInputView remoteInputView4 = RemoteInputView.this;
                     remoteInputView4.mEditText.setSelection(remoteInputView4.mPrevString.length());
-                    RemoteInputView.m3105$$Nest$mshowExceedTextLimitToast(RemoteInputView.this);
+                    RemoteInputView.m3103$$Nest$mshowExceedTextLimitToast(RemoteInputView.this);
                     return;
                 }
             }
@@ -416,7 +416,7 @@ public class RemoteInputView extends LinearLayout implements View.OnClickListene
     }
 
     /* renamed from: -$$Nest$mshowExceedTextLimitToast, reason: not valid java name */
-    public static void m3105$$Nest$mshowExceedTextLimitToast(RemoteInputView remoteInputView) throws Resources.NotFoundException {
+    public static void m3103$$Nest$mshowExceedTextLimitToast(RemoteInputView remoteInputView) throws Resources.NotFoundException {
         String string = remoteInputView.getContext().getResources().getString(R.string.noti_direct_reply_exceed_text_limit_toast);
         if (remoteInputView.mTextLimitToast == null) {
             remoteInputView.mTextLimitToast = Toast.makeText(remoteInputView.getContext(), string, 1);

@@ -83,7 +83,7 @@ final class DeviceStateRepositoryImpl$state$1 extends SuspendLambda implements F
                         if (deviceState2 == null) {
                         }
                     }
-                    ((ChannelCoroutine) sendChannel).mo3476trySendJP2dKIU(deviceState2);
+                    ((ChannelCoroutine) sendChannel).mo3475trySendJP2dKIU(deviceState2);
                 }
             };
             this.this$0.deviceStateManager.registerCallback(this.$executor, (DeviceStateManager.DeviceStateCallback) r1);

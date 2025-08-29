@@ -86,7 +86,7 @@ final class WifiRepositoryImpl$wifiPickerTrackerInfo$2$1 extends SuspendLambda i
                     wifiRepositoryImpl$wifiPickerTrackerInfo$2$1$callback$1.getClass();
                     ?? wifiPickerTrackerInfo = new WifiRepositoryImpl.WifiPickerTrackerInfo(i2, z, wifiNetworkModel, list);
                     ref$ObjectRef.element = wifiPickerTrackerInfo;
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(wifiPickerTrackerInfo);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(wifiPickerTrackerInfo);
                 }
 
                 /* JADX WARN: Removed duplicated region for block: B:58:0x0122  */

@@ -123,7 +123,7 @@ public class DesktopModeVisualIndicator {
                     int i2 = displayLayout2.mHeight;
                     final SurfaceControl surfaceControl2 = null;
                     visualIndicatorViewContainer.indicatorView = LayoutInflater.from(context).inflate(R.layout.desktop_drop_view, (ViewGroup) null);
-                    final SurfaceControl surfaceControlBuild = visualIndicatorViewContainer.indicatorBuilder.setName("Desktop Mode Visual Indicator").setContainerLayer().setCallsite("DesktopModeVisualIndicator.createView").build();
+                    final SurfaceControl surfaceControlBuild = visualIndicatorViewContainer.indicatorBuilder.setName("Desktop Mode Visual Indicator(Task=" + runningTaskInfo.taskId + ")").setContainerLayer().setCallsite("DesktopModeVisualIndicator.createView").build();
                     WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(i, i2, 2, 8, -2);
                     layoutParams.setTitle("Desktop Mode Visual Indicator");
                     layoutParams.setTrustedOverlay();
@@ -172,7 +172,7 @@ public class DesktopModeVisualIndicator {
                     visualIndicatorViewContainer.taskSnapshotView = LayoutInflater.from(context).inflate(R.layout.desktop_drop_view, (ViewGroup) null);
                     VisualIndicatorViewContainer visualIndicatorViewContainer5 = visualIndicatorViewContainer;
                     visualIndicatorViewContainer5.recentsTasksController = recentTasksController;
-                    final SurfaceControl surfaceControlBuild2 = visualIndicatorViewContainer5.indicatorBuilder.setName("Desktop Mode Tasks Snapshot").setContainerLayer().setCallsite("DesktopModeVisualIndicator.createView").build();
+                    final SurfaceControl surfaceControlBuild2 = visualIndicatorViewContainer5.indicatorBuilder.setName("Desktop Mode Tasks Snapshot(Task=" + runningTaskInfo.taskId + ")").setContainerLayer().setCallsite("DesktopModeVisualIndicator.createView").build();
                     VisualIndicatorViewContainer visualIndicatorViewContainer6 = visualIndicatorViewContainer;
                     WindowDecoration.SurfaceControlViewHostFactory surfaceControlViewHostFactory2 = visualIndicatorViewContainer6.surfaceControlViewHostFactory;
                     Context context3 = context;
@@ -290,6 +290,20 @@ public class DesktopModeVisualIndicator {
 
     public Rect getIndicatorBounds() {
         return this.mVisualIndicatorViewContainer.getIndicatorBounds();
+    }
+
+    public final String toString() {
+        StringBuilder sb = new StringBuilder("DesktopModeVisualIndicator{");
+        sb.append(Integer.toHexString(System.identityHashCode(this)));
+        sb.append(" tid=");
+        ActivityManager.RunningTaskInfo runningTaskInfo = this.mTaskInfo;
+        sb.append(runningTaskInfo != null ? Integer.valueOf(runningTaskInfo.taskId) : "-1");
+        sb.append(" t=");
+        sb.append(this.mCurrentType);
+        sb.append(" d=");
+        sb.append(this.mDragStartState);
+        sb.append("}");
+        return sb.toString();
     }
 
     /* JADX WARN: Removed duplicated region for block: B:52:0x00d7  */

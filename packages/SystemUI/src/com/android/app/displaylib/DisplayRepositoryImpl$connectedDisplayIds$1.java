@@ -89,7 +89,7 @@ final class DisplayRepositoryImpl$connectedDisplayIds$1 extends SuspendLambda im
                         mutableSet.add(Integer.valueOf(i2));
                         StateFlowImpl stateFlowImpl = displayRepositoryImpl2._ignoredDisplayIds;
                         stateFlowImpl.updateState(null, SetsKt___SetsKt.minus((Set) stateFlowImpl.getValue(), Integer.valueOf(i2)));
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(CollectionsKt___CollectionsKt.toSet(mutableSet));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(CollectionsKt___CollectionsKt.toSet(mutableSet));
                     }
 
                     public final void onDisplayDisconnected(int i2) {
@@ -100,7 +100,7 @@ final class DisplayRepositoryImpl$connectedDisplayIds$1 extends SuspendLambda im
                         }
                         StateFlowImpl stateFlowImpl = displayRepositoryImpl2._ignoredDisplayIds;
                         stateFlowImpl.updateState(null, SetsKt___SetsKt.minus((Set) stateFlowImpl.getValue(), Integer.valueOf(i2)));
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(CollectionsKt___CollectionsKt.toSet(mutableSet));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(CollectionsKt___CollectionsKt.toSet(mutableSet));
                     }
 
                     @Override // android.hardware.display.DisplayManager.DisplayListener
@@ -115,7 +115,7 @@ final class DisplayRepositoryImpl$connectedDisplayIds$1 extends SuspendLambda im
                     public final void onDisplayRemoved(int i2) {
                     }
                 };
-                ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(CollectionsKt___CollectionsKt.toSet(mutableSet));
+                ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(CollectionsKt___CollectionsKt.toSet(mutableSet));
                 this.this$0.displayManager.registerDisplayListener(r4, this.$backgroundHandler, 0L, 4L);
                 DisplayRepositoryImpl$allDisplayEvents$1$$ExternalSyntheticLambda0 displayRepositoryImpl$allDisplayEvents$1$$ExternalSyntheticLambda0 = new DisplayRepositoryImpl$allDisplayEvents$1$$ExternalSyntheticLambda0(this.this$0, (DisplayRepositoryImpl$connectedDisplayIds$1$callback$1) r4);
                 this.label = 1;

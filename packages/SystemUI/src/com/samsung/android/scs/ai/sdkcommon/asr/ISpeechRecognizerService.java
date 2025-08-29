@@ -27,7 +27,7 @@ public interface ISpeechRecognizerService extends IInterface {
 
     public class _Parcel {
         /* renamed from: -$$Nest$smreadTypedObject, reason: not valid java name */
-        public static /* bridge */ /* synthetic */ Object m3314$$Nest$smreadTypedObject(Parcel parcel) {
+        public static /* bridge */ /* synthetic */ Object m3313$$Nest$smreadTypedObject(Parcel parcel) {
             return readTypedObject(parcel, Bundle.CREATOR);
         }
 
@@ -112,7 +112,7 @@ public interface ISpeechRecognizerService extends IInterface {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
             Parcelable.Creator creator = Bundle.CREATOR;
-            ISpeechRecognizer iSpeechRecognizerCreate = create((Bundle) _Parcel.m3314$$Nest$smreadTypedObject(parcel));
+            ISpeechRecognizer iSpeechRecognizerCreate = create((Bundle) _Parcel.m3313$$Nest$smreadTypedObject(parcel));
             parcel2.writeNoException();
             parcel2.writeStrongInterface(iSpeechRecognizerCreate);
             return true;

@@ -164,7 +164,7 @@ public abstract class AnimateAsStateKt {
 
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    channel.mo3476trySendJP2dKIU(obj);
+                    channel.mo3475trySendJP2dKIU(obj);
                     return Unit.INSTANCE;
                 }
             };

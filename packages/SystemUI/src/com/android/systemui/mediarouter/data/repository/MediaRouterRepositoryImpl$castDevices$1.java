@@ -50,7 +50,7 @@ final class MediaRouterRepositoryImpl$castDevices$1 extends SuspendLambda implem
             final ?? r1 = new CastController.Callback() { // from class: com.android.systemui.mediarouter.data.repository.MediaRouterRepositoryImpl$castDevices$1$callback$1
                 @Override // com.android.systemui.statusbar.policy.CastController.Callback
                 public final void onCastDevicesChanged() {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(((CastControllerImpl) mediaRouterRepositoryImpl.castController).getCastDevices());
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(((CastControllerImpl) mediaRouterRepositoryImpl.castController).getCastDevices());
                 }
             };
             ((CastControllerImpl) this.this$0.castController).addCallback(r1);

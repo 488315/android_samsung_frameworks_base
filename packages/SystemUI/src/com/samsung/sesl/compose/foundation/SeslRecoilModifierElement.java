@@ -55,7 +55,7 @@ final class SeslRecoilModifierElement extends ModifierNodeElement<SeslRecoilNode
             return false;
         }
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.feedbackColor, seslRecoilModifierElement.feedbackColor) && Intrinsics.areEqual(this.feedbackShape, seslRecoilModifierElement.feedbackShape) && Intrinsics.areEqual(this.feedbackMargin, seslRecoilModifierElement.feedbackMargin) && Intrinsics.areEqual(this.feedbackAlpha, seslRecoilModifierElement.feedbackAlpha) && Intrinsics.areEqual(this.drawStrategy, seslRecoilModifierElement.drawStrategy);
+        return ULong.m3446equalsimpl0(this.feedbackColor, seslRecoilModifierElement.feedbackColor) && Intrinsics.areEqual(this.feedbackShape, seslRecoilModifierElement.feedbackShape) && Intrinsics.areEqual(this.feedbackMargin, seslRecoilModifierElement.feedbackMargin) && Intrinsics.areEqual(this.feedbackAlpha, seslRecoilModifierElement.feedbackAlpha) && Intrinsics.areEqual(this.drawStrategy, seslRecoilModifierElement.drawStrategy);
     }
 
     public final int hashCode() {

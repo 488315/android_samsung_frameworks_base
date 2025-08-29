@@ -11,7 +11,7 @@ public final class OneHandedModeTileModel {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ OneHandedModeTileModel m2933boximpl(boolean z) {
+    public static final /* synthetic */ OneHandedModeTileModel m2931boximpl(boolean z) {
         return new OneHandedModeTileModel(z);
     }
 

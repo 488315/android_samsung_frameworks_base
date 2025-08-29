@@ -22,9 +22,9 @@ public final /* synthetic */ class KeyguardSecBottomAreaViewController$$External
                 keyguardSecBottomAreaViewController.showShortcutsIfPossible();
                 return Unit.INSTANCE;
             case 1:
-                return KeyguardSecBottomAreaViewController.m3087$r8$lambda$D4kp5cmGQ_rGLdyL6oXY1kQhJo(keyguardSecBottomAreaViewController);
+                return KeyguardSecBottomAreaViewController.m3085$r8$lambda$D4kp5cmGQ_rGLdyL6oXY1kQhJo(keyguardSecBottomAreaViewController);
             case 2:
-                return KeyguardSecBottomAreaViewController.m3089$r8$lambda$YOkFmRiWxOyhXrDzbAm3sPmT8(keyguardSecBottomAreaViewController);
+                return KeyguardSecBottomAreaViewController.m3087$r8$lambda$YOkFmRiWxOyhXrDzbAm3sPmT8(keyguardSecBottomAreaViewController);
             case 3:
                 return KeyguardSecBottomAreaViewController.$r8$lambda$ZdrlybJBwxxHo4Ff_gUFuEpgBw8(keyguardSecBottomAreaViewController);
             case 4:
@@ -44,7 +44,7 @@ public final /* synthetic */ class KeyguardSecBottomAreaViewController$$External
             case 8:
                 return ((KeyguardSecBottomAreaView) keyguardSecBottomAreaViewController.mView).getRightView();
             case 9:
-                return KeyguardSecBottomAreaViewController.m3088$r8$lambda$Jgv21cVoSLZlA51xet8mwVwiBs(keyguardSecBottomAreaViewController);
+                return KeyguardSecBottomAreaViewController.m3086$r8$lambda$Jgv21cVoSLZlA51xet8mwVwiBs(keyguardSecBottomAreaViewController);
             case 10:
                 return KeyguardSecBottomAreaViewController.$r8$lambda$M7LuDowF8AhrK_kb4xF8Rm3VIPs(keyguardSecBottomAreaViewController);
             case 11:

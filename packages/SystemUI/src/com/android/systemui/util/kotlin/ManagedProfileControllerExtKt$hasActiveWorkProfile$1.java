@@ -51,7 +51,7 @@ final class ManagedProfileControllerExtKt$hasActiveWorkProfile$1 extends Suspend
             final ?? r1 = new ManagedProfileController.Callback() { // from class: com.android.systemui.util.kotlin.ManagedProfileControllerExtKt$hasActiveWorkProfile$1$callback$1
                 @Override // com.android.systemui.statusbar.phone.ManagedProfileController.Callback
                 public void onManagedProfileChanged() {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(((ManagedProfileControllerImpl) managedProfileController).hasActiveProfile()));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(((ManagedProfileControllerImpl) managedProfileController).hasActiveProfile()));
                 }
 
                 @Override // com.android.systemui.statusbar.phone.ManagedProfileController.Callback

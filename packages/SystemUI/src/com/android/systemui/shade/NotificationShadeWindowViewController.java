@@ -142,7 +142,7 @@ public class NotificationShadeWindowViewController implements Dumpable {
     }
 
     /* renamed from: -$$Nest$mdidNotificationPanelInterceptEvent, reason: not valid java name */
-    public static boolean m2947$$Nest$mdidNotificationPanelInterceptEvent(NotificationShadeWindowViewController notificationShadeWindowViewController, MotionEvent motionEvent) {
+    public static boolean m2945$$Nest$mdidNotificationPanelInterceptEvent(NotificationShadeWindowViewController notificationShadeWindowViewController, MotionEvent motionEvent) {
         if (!notificationShadeWindowViewController.mShadeViewController.handleExternalInterceptTouch(motionEvent)) {
             return false;
         }
@@ -151,7 +151,7 @@ public class NotificationShadeWindowViewController implements Dumpable {
     }
 
     /* renamed from: -$$Nest$mlogDownDispatch, reason: not valid java name */
-    public static void m2948$$Nest$mlogDownDispatch(NotificationShadeWindowViewController notificationShadeWindowViewController, MotionEvent motionEvent, String str, final Boolean bool) {
+    public static void m2946$$Nest$mlogDownDispatch(NotificationShadeWindowViewController notificationShadeWindowViewController, MotionEvent motionEvent, String str, final Boolean bool) {
         notificationShadeWindowViewController.getClass();
         if (motionEvent.getAction() == 0) {
             ShadeLogger shadeLogger = notificationShadeWindowViewController.mShadeLogger;

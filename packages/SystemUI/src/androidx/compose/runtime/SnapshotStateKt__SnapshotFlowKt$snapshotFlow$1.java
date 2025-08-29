@@ -172,7 +172,7 @@ final class SnapshotStateKt__SnapshotFlowKt$snapshotFlow$1 extends SuspendLambda
                                         if (((StateObjectImpl) obj7).m351isReadInh_f27i8$runtime_release(4)) {
                                         }
                                     }
-                                    channelChannel$default.mo3476trySendJP2dKIU(set2);
+                                    channelChannel$default.mo3475trySendJP2dKIU(set2);
                                 }
                             }
                         }
@@ -267,7 +267,7 @@ final class SnapshotStateKt__SnapshotFlowKt$snapshotFlow$1 extends SuspendLambda
                                 i3 = i6;
                             }
                             i = 0;
-                            set = (Set) ChannelResult.m3479getOrNullimpl(channel.mo3475tryReceivePtdJZtk());
+                            set = (Set) ChannelResult.m3478getOrNullimpl(channel.mo3474tryReceivePtdJZtk());
                             if (set == null) {
                                 break;
                             }
@@ -280,7 +280,7 @@ final class SnapshotStateKt__SnapshotFlowKt$snapshotFlow$1 extends SuspendLambda
                             i3 = i6;
                         }
                         i = i3;
-                        set = (Set) ChannelResult.m3479getOrNullimpl(channel.mo3475tryReceivePtdJZtk());
+                        set = (Set) ChannelResult.m3478getOrNullimpl(channel.mo3474tryReceivePtdJZtk());
                         if (set == null) {
                         }
                     }
@@ -375,7 +375,7 @@ final class SnapshotStateKt__SnapshotFlowKt$snapshotFlow$1 extends SuspendLambda
                     if (i != 0) {
                     }
                     i = i3;
-                    set = (Set) ChannelResult.m3479getOrNullimpl(channel.mo3475tryReceivePtdJZtk());
+                    set = (Set) ChannelResult.m3478getOrNullimpl(channel.mo3474tryReceivePtdJZtk());
                     if (set == null) {
                     }
                     i6 = i3;

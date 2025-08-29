@@ -10,9 +10,9 @@ public abstract class ContextExtKt {
     }
 
     public static final long seslColorResource(int i, Context context) {
-        Color colorM3360getColor6MYuD4A = ColorResourceHelper.INSTANCE.m3360getColor6MYuD4A(context, i);
-        if (colorM3360getColor6MYuD4A != null) {
-            return colorM3360getColor6MYuD4A.value;
+        Color colorM3359getColor6MYuD4A = ColorResourceHelper.INSTANCE.m3359getColor6MYuD4A(context, i);
+        if (colorM3359getColor6MYuD4A != null) {
+            return colorM3359getColor6MYuD4A.value;
         }
         Color.Companion.getClass();
         return Color.Unspecified;

@@ -47,7 +47,7 @@ final class ScrimStartable$scrimState$1 extends SuspendLambda implements Functio
             DozeServiceHost.HasPendingScreenOffCallbackChangeListener hasPendingScreenOffCallbackChangeListener = new DozeServiceHost.HasPendingScreenOffCallbackChangeListener() { // from class: com.android.systemui.scene.domain.startable.ScrimStartable$scrimState$1$listener$1
                 @Override // com.android.systemui.statusbar.phone.DozeServiceHost.HasPendingScreenOffCallbackChangeListener
                 public final void onHasPendingScreenOffCallbackChanged(boolean z) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(z));
                 }
             };
             this.this$0.dozeServiceHost.mHasPendingScreenOffCallbackChangeListener = hasPendingScreenOffCallbackChangeListener;

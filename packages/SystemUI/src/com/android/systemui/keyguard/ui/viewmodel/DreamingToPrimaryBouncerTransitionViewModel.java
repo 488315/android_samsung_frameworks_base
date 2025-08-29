@@ -24,7 +24,7 @@ public final class DreamingToPrimaryBouncerTransitionViewModel implements Primar
         KeyguardState keyguardState = KeyguardState.DREAMING;
         OverlayKey overlayKey = Overlays.Bouncer;
         companion.getClass();
-        this.windowBlurRadius = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(keyguardState, KeyguardState.PRIMARY_BOUNCER, keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, new Edge.StateToContent(keyguardState, overlayKey))).immediatelyTransitionTo(blurConfig.maxBlurRadiusPx);
+        this.windowBlurRadius = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(keyguardState, KeyguardState.PRIMARY_BOUNCER, keyguardTransitionAnimationFlow.m2613setupVtjQ1oo(j, new Edge.StateToContent(keyguardState, overlayKey))).immediatelyTransitionTo(blurConfig.maxBlurRadiusPx);
         this.notificationBlurRadius = EmptyFlow.INSTANCE;
     }
 

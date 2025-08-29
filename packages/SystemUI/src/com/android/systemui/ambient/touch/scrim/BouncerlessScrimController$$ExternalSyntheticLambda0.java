@@ -36,7 +36,7 @@ public final /* synthetic */ class BouncerlessScrimController$$ExternalSynthetic
                         ShadeExpansionChangeEvent shadeExpansionChangeEvent2 = shadeExpansionChangeEvent;
                         DreamOverlayContainerViewController.AnonymousClass1 anonymousClass1 = (DreamOverlayContainerViewController.AnonymousClass1) obj;
                         anonymousClass1.getClass();
-                        DreamOverlayContainerViewController.m2569$$Nest$mupdateTransitionState(DreamOverlayContainerViewController.this, shadeExpansionChangeEvent2.fraction);
+                        DreamOverlayContainerViewController.m2567$$Nest$mupdateTransitionState(DreamOverlayContainerViewController.this, shadeExpansionChangeEvent2.fraction);
                     }
                 });
                 break;

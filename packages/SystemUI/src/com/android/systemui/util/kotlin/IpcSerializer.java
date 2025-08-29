@@ -110,7 +110,7 @@ public final class IpcSerializer {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public final Object process(Continuation continuation) throws Throwable {
+    public final Object process(Continuation continuation) {
         AnonymousClass1 anonymousClass1;
         BufferedChannel.BufferedChannelIterator it;
         if (continuation instanceof AnonymousClass1) {

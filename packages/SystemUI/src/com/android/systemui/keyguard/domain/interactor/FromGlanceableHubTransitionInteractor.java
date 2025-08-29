@@ -98,7 +98,7 @@ public final class FromGlanceableHubTransitionInteractor extends TransitionInter
         } else {
             j = TO_OCCLUDED_DURATION;
         }
-        valueAnimator.setDuration(Duration.m3457getInWholeMillisecondsimpl(j));
+        valueAnimator.setDuration(Duration.m3456getInWholeMillisecondsimpl(j));
         return valueAnimator;
     }
 

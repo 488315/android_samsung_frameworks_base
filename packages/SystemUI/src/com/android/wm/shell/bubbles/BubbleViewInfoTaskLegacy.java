@@ -74,7 +74,7 @@ public class BubbleViewInfoTaskLegacy extends AsyncTask {
                 bubbleViewInfo.expandedView = bubbleExpandedView;
                 bubbleExpandedView.initialize(bubbleExpandedViewManager, bubbleStackView, bubblePositioner, false, orCreateBubbleTaskView);
             }
-            if (!BubbleViewInfoTaskLegacy.m3235$$Nest$smpopulateCommonInfo(bubbleViewInfo, context, bubble, bubbleIconFactory, bubbleBadgeIconFactory)) {
+            if (!BubbleViewInfoTaskLegacy.m3234$$Nest$smpopulateCommonInfo(bubbleViewInfo, context, bubble, bubbleIconFactory, bubbleBadgeIconFactory)) {
                 return null;
             }
             Bubble.FlyoutMessage flyoutMessage = bubble.mFlyoutMessage;
@@ -90,7 +90,7 @@ public class BubbleViewInfoTaskLegacy extends AsyncTask {
     }
 
     /* renamed from: -$$Nest$smpopulateCommonInfo, reason: not valid java name */
-    public static boolean m3235$$Nest$smpopulateCommonInfo(BubbleViewInfo bubbleViewInfo, Context context, Bubble bubble, BubbleIconFactory bubbleIconFactory, BubbleBadgeIconFactory bubbleBadgeIconFactory) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
+    public static boolean m3234$$Nest$smpopulateCommonInfo(BubbleViewInfo bubbleViewInfo, Context context, Bubble bubble, BubbleIconFactory bubbleIconFactory, BubbleBadgeIconFactory bubbleBadgeIconFactory) throws Resources.NotFoundException, PackageManager.NameNotFoundException {
         Drawable bubbleDrawable;
         Bitmap bitmapCreateIconBitmap;
         ShortcutInfo shortcutInfo = bubble.mShortcutInfo;
@@ -216,7 +216,7 @@ public class BubbleViewInfoTaskLegacy extends AsyncTask {
                 }
             });
         }
-        if (!m3235$$Nest$smpopulateCommonInfo(bubbleViewInfo, context, bubble, bubbleIconFactory, bubbleBadgeIconFactory)) {
+        if (!m3234$$Nest$smpopulateCommonInfo(bubbleViewInfo, context, bubble, bubbleIconFactory, bubbleBadgeIconFactory)) {
             return null;
         }
         bubbleViewInfo.flyoutMessage = bubble.mFlyoutMessage;

@@ -58,7 +58,7 @@ public final class LocationControllerExtKt {
                 final ?? r1 = new LocationController.LocationChangeCallback() { // from class: com.android.systemui.util.kotlin.LocationControllerExtKt$isLocationEnabledFlow$1$locationCallback$1
                     @Override // com.android.systemui.statusbar.policy.LocationController.LocationChangeCallback
                     public void onLocationSettingsChanged(boolean z) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(z));
                     }
 
                     @Override // com.android.systemui.statusbar.policy.LocationController.LocationChangeCallback

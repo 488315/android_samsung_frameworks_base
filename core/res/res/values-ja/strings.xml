@@ -2985,7 +2985,7 @@
     <string name="sdcard_readonly_mount_notification_title">外部SDカードへの書き込み不可</string>
     <string name="sdcard_unmount_policy_noti_content">外部SDカードの暗号化を実施してください。</string>
     <string name="sdcard_unmount_policy_noti_title">ITポリシーにより外部SDカードをマウント解除</string>
-    <string name="sdhms_nr_control_low_battery">端末のバッテリー残量が15%未満になると、バッテリーを節約するために5GをOFFにします。</string>
+    <string name="sdhms_nr_control_low_battery">端末のバッテリー残量が15%以下になると、バッテリーを節約するために5GをOFFにします。</string>
     <string name="search_hint">検索…</string>
     <string name="search_language_hint">言語名を入力</string>
     <string name="searchview_description_clear">検索キーワードを削除</string>

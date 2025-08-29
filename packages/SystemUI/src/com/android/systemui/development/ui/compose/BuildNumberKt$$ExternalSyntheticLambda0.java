@@ -20,7 +20,7 @@ public final /* synthetic */ class BuildNumberKt$$ExternalSyntheticLambda0 imple
             case 0:
                 return ((BuildNumberViewModel.Factory) this.f$0).create();
             default:
-                ((BuildNumberViewModel) this.f$0).copyRequests.mo3476trySendJP2dKIU(Unit.INSTANCE);
+                ((BuildNumberViewModel) this.f$0).copyRequests.mo3475trySendJP2dKIU(Unit.INSTANCE);
                 return Boolean.TRUE;
         }
     }

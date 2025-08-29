@@ -28,12 +28,12 @@ public final class LockscreenToOccludedTransitionViewModel implements DeviceEntr
 
     public LockscreenToOccludedTransitionViewModel(ShadeDependentFlows shadeDependentFlows, ConfigurationInteractor configurationInteractor, KeyguardTransitionAnimationFlow keyguardTransitionAnimationFlow) {
         FromLockscreenTransitionInteractor.Companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM2615setupVtjQ1oo = keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(FromLockscreenTransitionInteractor.TO_OCCLUDED_DURATION, KeyguardInteractor$$ExternalSyntheticOutline0.m(Edge.Companion, KeyguardState.LOCKSCREEN, KeyguardState.OCCLUDED));
-        this.transitionAnimation = flowBuilderM2615setupVtjQ1oo;
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM2613setupVtjQ1oo = keyguardTransitionAnimationFlow.m2613setupVtjQ1oo(FromLockscreenTransitionInteractor.TO_OCCLUDED_DURATION, KeyguardInteractor$$ExternalSyntheticOutline0.m(Edge.Companion, KeyguardState.LOCKSCREEN, KeyguardState.OCCLUDED));
+        this.transitionAnimation = flowBuilderM2613setupVtjQ1oo;
         Duration.Companion companion = Duration.Companion;
         DurationUnit durationUnit = DurationUnit.MILLISECONDS;
         final int i = 0;
-        this.lockscreenAlpha = shadeDependentFlows.transitionFlow(flowBuilderM2615setupVtjQ1oo.immediatelyTransitionTo(0.0f), KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilderM2615setupVtjQ1oo, DurationKt.toDuration(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend, durationUnit), new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToOccludedTransitionViewModel$$ExternalSyntheticLambda0
+        this.lockscreenAlpha = shadeDependentFlows.transitionFlow(flowBuilderM2613setupVtjQ1oo.immediatelyTransitionTo(0.0f), KeyguardTransitionAnimationFlow.FlowBuilder.m2614sharedFlow74qcysc$default(flowBuilderM2613setupVtjQ1oo, DurationKt.toDuration(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend, durationUnit), new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToOccludedTransitionViewModel$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
             public final Object mo781invoke(Object obj) {
@@ -44,7 +44,7 @@ public final class LockscreenToOccludedTransitionViewModel implements DeviceEntr
             }
         }, 0L, null, null, null, null, "LOCKSCREEN->OCCLUDED: lockscreenAlpha", 124));
         final int i2 = 1;
-        this.shortcutsAlpha = shadeDependentFlows.transitionFlow(flowBuilderM2615setupVtjQ1oo.immediatelyTransitionTo(0.0f), KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilderM2615setupVtjQ1oo, DurationKt.toDuration(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend, durationUnit), new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToOccludedTransitionViewModel$$ExternalSyntheticLambda0
+        this.shortcutsAlpha = shadeDependentFlows.transitionFlow(flowBuilderM2613setupVtjQ1oo.immediatelyTransitionTo(0.0f), KeyguardTransitionAnimationFlow.FlowBuilder.m2614sharedFlow74qcysc$default(flowBuilderM2613setupVtjQ1oo, DurationKt.toDuration(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend, durationUnit), new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToOccludedTransitionViewModel$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
             public final Object mo781invoke(Object obj) {
@@ -57,7 +57,7 @@ public final class LockscreenToOccludedTransitionViewModel implements DeviceEntr
         FlowKt.transformLatest(((ConfigurationInteractorImpl) configurationInteractor).dimensionPixelSize(R.dimen.lockscreen_to_occluded_transition_lockscreen_translation_y), new LockscreenToOccludedTransitionViewModel$special$$inlined$flatMapLatest$1(null, this));
         long duration = DurationKt.toDuration(IKnoxCustomManager.Stub.TRANSACTION_addDexURLShortcutExtend, durationUnit);
         final int i3 = 2;
-        this.deviceEntryParentViewAlpha = shadeDependentFlows.transitionFlow(flowBuilderM2615setupVtjQ1oo.immediatelyTransitionTo(0.0f), KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilderM2615setupVtjQ1oo, duration, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToOccludedTransitionViewModel$$ExternalSyntheticLambda0
+        this.deviceEntryParentViewAlpha = shadeDependentFlows.transitionFlow(flowBuilderM2613setupVtjQ1oo.immediatelyTransitionTo(0.0f), KeyguardTransitionAnimationFlow.FlowBuilder.m2614sharedFlow74qcysc$default(flowBuilderM2613setupVtjQ1oo, duration, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.LockscreenToOccludedTransitionViewModel$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
             public final Object mo781invoke(Object obj) {

@@ -101,6 +101,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -418,12 +419,9 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
                     }
                     privacyDialogController.backgroundExecutor.execute(new Runnable() { // from class: com.android.systemui.privacy.PrivacyDialogController$showDialog$1
                         /* JADX WARN: Multi-variable type inference failed */
-                        /* JADX WARN: Removed duplicated region for block: B:101:0x0208  */
-                        /* JADX WARN: Removed duplicated region for block: B:103:0x021d  */
                         /* JADX WARN: Removed duplicated region for block: B:23:0x0098  */
                         /* JADX WARN: Removed duplicated region for block: B:37:0x00b8  */
                         /* JADX WARN: Removed duplicated region for block: B:79:0x01a5  */
-                        /* JADX WARN: Removed duplicated region for block: B:98:0x01fc  */
                         /* JADX WARN: Type inference failed for: r12v4, types: [java.lang.CharSequence, java.lang.Object] */
                         @Override // java.lang.Runnable
                         /*
@@ -440,10 +438,9 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
                             String packageName;
                             PermissionGroupUsage permissionGroupUsage;
                             boolean z2;
-                            boolean z3;
                             Intent intent;
                             ActivityInfo activityInfo;
-                            boolean z4;
+                            boolean z3;
                             PrivacyDialogController privacyDialogController2 = privacyDialogController;
                             List indicatorAppOpUsageData = privacyDialogController2.permissionManager.getIndicatorAppOpUsageData(((AppOpsControllerImpl) privacyDialogController2.appOpsController).mMicMuted);
                             List userProfiles = ((UserTrackerImpl) privacyDialogController.userTracker).getUserProfiles();
@@ -492,142 +489,135 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
                                     }
                                 }
                                 UserInfo userInfo = (UserInfo) next;
-                                if (userInfo == null && !permissionGroupUsage2.isPhoneCall()) {
-                                    it = it2;
-                                    list = userProfiles;
-                                    context2 = context3;
-                                    privacyElement = privacyType3;
-                                } else if (privacyType2 != null) {
-                                    if (permissionGroupUsage2.isPhoneCall()) {
-                                        packageName = "";
-                                    } else {
-                                        packageName = permissionGroupUsage2.getPackageName();
-                                        try {
-                                            ?? LoadLabel = privacyDialogController3.packageManager.getApplicationInfoAsUser(packageName, 0, UserHandle.getUserId(permissionGroupUsage2.getUid())).loadLabel(privacyDialogController3.packageManager);
-                                            LoadLabel.getClass();
-                                            packageName = LoadLabel;
-                                        } catch (PackageManager.NameNotFoundException unused) {
-                                            MotionLayout$$ExternalSyntheticOutline0.m("Label not found for: ", packageName, "PrivacyDialogController");
-                                        }
-                                    }
-                                    String str = packageName;
-                                    int userId = UserHandle.getUserId(permissionGroupUsage2.getUid());
-                                    if (ScRune.QUICK_SUPPORT_LOCATION_PRIVACY_CHIP) {
-                                        List userProfiles2 = ((UserTrackerImpl) privacyDialogController3.userTracker).getUserProfiles();
-                                        if (privacyType2 == PrivacyType.TYPE_LOCATION) {
-                                            int[] iArr = privacyDialogController3.LOCATION_OPS;
-                                            int length = iArr.length;
-                                            int i2 = 0;
-                                            z4 = false;
-                                            while (true) {
-                                                if (i2 >= length) {
-                                                    it = it2;
-                                                    list = userProfiles;
-                                                    permissionGroupUsage = permissionGroupUsage2;
-                                                    break;
-                                                }
-                                                String strOpToPermission = AppOpsManager.opToPermission(iArr[i2]);
-                                                it = it2;
-                                                UserHandle userHandleForUid = UserHandle.getUserHandleForUid(permissionGroupUsage2.getUid());
-                                                list = userProfiles;
-                                                int size = userProfiles2.size();
-                                                permissionGroupUsage = permissionGroupUsage2;
-                                                int i3 = 0;
-                                                boolean z5 = false;
-                                                while (i3 < size) {
-                                                    int i4 = size;
-                                                    if (((UserInfo) userProfiles2.get(i3)).getUserHandle().equals(userHandleForUid)) {
-                                                        z5 = true;
-                                                    }
-                                                    i3++;
-                                                    size = i4;
-                                                }
-                                                if (!z5) {
-                                                    z4 = true;
-                                                    break;
-                                                }
-                                                int permissionFlags = privacyDialogController3.packageManager.getPermissionFlags(strOpToPermission, permissionGroupUsage.getPackageName(), userHandleForUid);
-                                                int i5 = i2;
-                                                if (PermissionChecker.checkPermissionForPreflight(context3, strOpToPermission, -1, permissionGroupUsage.getUid(), permissionGroupUsage.getPackageName()) == 0) {
-                                                    if ((permissionFlags & 256) == 0) {
-                                                        z4 = true;
-                                                    }
-                                                } else if ((permissionFlags & 512) == 0) {
-                                                }
-                                                i2 = i5 + 1;
-                                                permissionGroupUsage2 = permissionGroupUsage;
-                                                it2 = it;
-                                                userProfiles = list;
+                                if (userInfo != null || permissionGroupUsage2.isPhoneCall()) {
+                                    if (privacyType2 != null) {
+                                        if (permissionGroupUsage2.isPhoneCall()) {
+                                            packageName = "";
+                                        } else {
+                                            packageName = permissionGroupUsage2.getPackageName();
+                                            try {
+                                                ?? LoadLabel = privacyDialogController3.packageManager.getApplicationInfoAsUser(packageName, 0, UserHandle.getUserId(permissionGroupUsage2.getUid())).loadLabel(privacyDialogController3.packageManager);
+                                                LoadLabel.getClass();
+                                                packageName = LoadLabel;
+                                            } catch (PackageManager.NameNotFoundException unused) {
+                                                MotionLayout$$ExternalSyntheticOutline0.m("Label not found for: ", packageName, "PrivacyDialogController");
                                             }
+                                        }
+                                        String str = packageName;
+                                        int userId = UserHandle.getUserId(permissionGroupUsage2.getUid());
+                                        if (ScRune.QUICK_SUPPORT_LOCATION_PRIVACY_CHIP) {
+                                            List userProfiles2 = ((UserTrackerImpl) privacyDialogController3.userTracker).getUserProfiles();
+                                            if (privacyType2 == PrivacyType.TYPE_LOCATION) {
+                                                int[] iArr = privacyDialogController3.LOCATION_OPS;
+                                                int length = iArr.length;
+                                                int i2 = 0;
+                                                z3 = false;
+                                                while (true) {
+                                                    if (i2 >= length) {
+                                                        it = it2;
+                                                        list = userProfiles;
+                                                        permissionGroupUsage = permissionGroupUsage2;
+                                                        break;
+                                                    }
+                                                    String strOpToPermission = AppOpsManager.opToPermission(iArr[i2]);
+                                                    it = it2;
+                                                    UserHandle userHandleForUid = UserHandle.getUserHandleForUid(permissionGroupUsage2.getUid());
+                                                    list = userProfiles;
+                                                    int size = userProfiles2.size();
+                                                    permissionGroupUsage = permissionGroupUsage2;
+                                                    int i3 = 0;
+                                                    boolean z4 = false;
+                                                    while (i3 < size) {
+                                                        int i4 = size;
+                                                        if (((UserInfo) userProfiles2.get(i3)).getUserHandle().equals(userHandleForUid)) {
+                                                            z4 = true;
+                                                        }
+                                                        i3++;
+                                                        size = i4;
+                                                    }
+                                                    if (!z4) {
+                                                        z3 = true;
+                                                        break;
+                                                    }
+                                                    int permissionFlags = privacyDialogController3.packageManager.getPermissionFlags(strOpToPermission, permissionGroupUsage.getPackageName(), userHandleForUid);
+                                                    int i5 = i2;
+                                                    if (PermissionChecker.checkPermissionForPreflight(context3, strOpToPermission, -1, permissionGroupUsage.getUid(), permissionGroupUsage.getPackageName()) == 0) {
+                                                        if ((permissionFlags & 256) == 0) {
+                                                            z3 = true;
+                                                        }
+                                                    } else if ((permissionFlags & 512) == 0) {
+                                                    }
+                                                    i2 = i5 + 1;
+                                                    permissionGroupUsage2 = permissionGroupUsage;
+                                                    it2 = it;
+                                                    userProfiles = list;
+                                                }
+                                            } else {
+                                                it = it2;
+                                                list = userProfiles;
+                                                permissionGroupUsage = permissionGroupUsage2;
+                                                z3 = false;
+                                            }
+                                            z2 = z3;
                                         } else {
                                             it = it2;
                                             list = userProfiles;
                                             permissionGroupUsage = permissionGroupUsage2;
-                                            z4 = false;
+                                            z2 = false;
                                         }
-                                        z2 = z4;
+                                        if (!ScRune.QUICK_SUPPORT_LOCATION_PRIVACY_CHIP || !z2 || privacyDialogController3.settingsHelper.isShowLocationSystemApps()) {
+                                            String packageName2 = permissionGroupUsage.getPackageName();
+                                            CharSequence attributionTag = permissionGroupUsage.getAttributionTag();
+                                            CharSequence attributionLabel = permissionGroupUsage.getAttributionLabel();
+                                            CharSequence proxyLabel = permissionGroupUsage.getProxyLabel();
+                                            long lastAccessTimeMillis = permissionGroupUsage.getLastAccessTimeMillis();
+                                            PermissionGroupUsage permissionGroupUsage3 = permissionGroupUsage;
+                                            boolean zIsActive = permissionGroupUsage3.isActive();
+                                            boolean zIsManagedProfile = userInfo != null ? userInfo.isManagedProfile() : false;
+                                            boolean zIsPhoneCall = permissionGroupUsage3.isPhoneCall();
+                                            String permissionGroupName2 = permissionGroupUsage3.getPermissionGroupName();
+                                            if (z2) {
+                                                intent = new Intent("com.samsung.android.intent.action.LOCATION_RECENT_ACCESS");
+                                                intent.putExtra("isOnlyShowSystem", true);
+                                                context2 = context3;
+                                            } else {
+                                                String packageName3 = permissionGroupUsage3.getPackageName();
+                                                String permissionGroupName3 = permissionGroupUsage3.getPermissionGroupName();
+                                                CharSequence attributionTag2 = permissionGroupUsage3.getAttributionTag();
+                                                boolean z5 = permissionGroupUsage3.getAttributionLabel() != null;
+                                                if (attributionTag2 == null || !z5) {
+                                                    context2 = context3;
+                                                } else {
+                                                    context2 = context3;
+                                                    if (privacyDialogController3.locationManager.isProviderPackage(null, packageName3, attributionTag2.toString())) {
+                                                        intent = new Intent("android.intent.action.MANAGE_PERMISSION_USAGE");
+                                                        intent.setPackage(packageName3);
+                                                        intent.putExtra("android.intent.extra.PERMISSION_GROUP_NAME", permissionGroupName3.toString());
+                                                        intent.putExtra("android.intent.extra.ATTRIBUTION_TAGS", new String[]{attributionTag2.toString()});
+                                                        intent.putExtra("android.intent.extra.SHOWING_ATTRIBUTION", true);
+                                                        ResolveInfo resolveInfoResolveActivity = privacyDialogController3.packageManager.resolveActivity(intent, PackageManager.ResolveInfoFlags.of(0L));
+                                                        if (resolveInfoResolveActivity != null && (activityInfo = resolveInfoResolveActivity.activityInfo) != null && Intrinsics.areEqual(activityInfo.permission, "android.permission.START_VIEW_PERMISSION_USAGE")) {
+                                                            intent.setComponent(new ComponentName(packageName3, resolveInfoResolveActivity.activityInfo.name));
+                                                        }
+                                                    }
+                                                }
+                                                intent = new Intent("android.intent.action.MANAGE_APP_PERMISSIONS");
+                                                intent.putExtra("android.intent.extra.PACKAGE_NAME", packageName3);
+                                                intent.putExtra("android.intent.extra.USER", UserHandle.of(userId));
+                                            }
+                                            privacyElement = new PrivacyDialog.PrivacyElement(privacyType2, packageName2, userId, str, attributionTag, attributionLabel, proxyLabel, lastAccessTimeMillis, zIsActive, zIsManagedProfile, zIsPhoneCall, permissionGroupName2, intent, z2);
+                                        }
                                     } else {
                                         it = it2;
                                         list = userProfiles;
-                                        permissionGroupUsage = permissionGroupUsage2;
-                                        z2 = false;
                                     }
-                                    String packageName2 = permissionGroupUsage.getPackageName();
-                                    CharSequence attributionTag = permissionGroupUsage.getAttributionTag();
-                                    CharSequence attributionLabel = permissionGroupUsage.getAttributionLabel();
-                                    CharSequence proxyLabel = permissionGroupUsage.getProxyLabel();
-                                    long lastAccessTimeMillis = permissionGroupUsage.getLastAccessTimeMillis();
-                                    PermissionGroupUsage permissionGroupUsage3 = permissionGroupUsage;
-                                    boolean zIsActive = permissionGroupUsage3.isActive();
-                                    if (userInfo != null ? userInfo.isManagedProfile() : false) {
-                                        z3 = true;
-                                        boolean zIsPhoneCall = permissionGroupUsage3.isPhoneCall();
-                                        String permissionGroupName2 = permissionGroupUsage3.getPermissionGroupName();
-                                        if (z2) {
-                                            String packageName3 = permissionGroupUsage3.getPackageName();
-                                            String permissionGroupName3 = permissionGroupUsage3.getPermissionGroupName();
-                                            CharSequence attributionTag2 = permissionGroupUsage3.getAttributionTag();
-                                            boolean z6 = permissionGroupUsage3.getAttributionLabel() != null;
-                                            if (attributionTag2 == null || !z6) {
-                                                context2 = context3;
-                                            } else {
-                                                context2 = context3;
-                                                if (privacyDialogController3.locationManager.isProviderPackage(null, packageName3, attributionTag2.toString())) {
-                                                    intent = new Intent("android.intent.action.MANAGE_PERMISSION_USAGE");
-                                                    intent.setPackage(packageName3);
-                                                    intent.putExtra("android.intent.extra.PERMISSION_GROUP_NAME", permissionGroupName3.toString());
-                                                    intent.putExtra("android.intent.extra.ATTRIBUTION_TAGS", new String[]{attributionTag2.toString()});
-                                                    intent.putExtra("android.intent.extra.SHOWING_ATTRIBUTION", true);
-                                                    ResolveInfo resolveInfoResolveActivity = privacyDialogController3.packageManager.resolveActivity(intent, PackageManager.ResolveInfoFlags.of(0L));
-                                                    if (resolveInfoResolveActivity != null && (activityInfo = resolveInfoResolveActivity.activityInfo) != null && Intrinsics.areEqual(activityInfo.permission, "android.permission.START_VIEW_PERMISSION_USAGE")) {
-                                                        intent.setComponent(new ComponentName(packageName3, resolveInfoResolveActivity.activityInfo.name));
-                                                    }
-                                                }
-                                            }
-                                            intent = new Intent("android.intent.action.MANAGE_APP_PERMISSIONS");
-                                            intent.putExtra("android.intent.extra.PACKAGE_NAME", packageName3);
-                                            intent.putExtra("android.intent.extra.USER", UserHandle.of(userId));
-                                        } else {
-                                            intent = new Intent("com.samsung.android.intent.action.LOCATION_RECENT_ACCESS");
-                                            intent.putExtra("isOnlyShowSystem", true);
-                                            context2 = context3;
-                                        }
-                                        privacyElement = new PrivacyDialog.PrivacyElement(privacyType2, packageName2, userId, str, attributionTag, attributionLabel, proxyLabel, lastAccessTimeMillis, zIsActive, z3, zIsPhoneCall, permissionGroupName2, intent, z2);
-                                    } else {
-                                        if (!(userInfo != null ? userInfo.isPrivateProfile() : false)) {
-                                            z3 = false;
-                                        }
-                                        boolean zIsPhoneCall2 = permissionGroupUsage3.isPhoneCall();
-                                        String permissionGroupName22 = permissionGroupUsage3.getPermissionGroupName();
-                                        if (z2) {
-                                        }
-                                        privacyElement = new PrivacyDialog.PrivacyElement(privacyType2, packageName2, userId, str, attributionTag, attributionLabel, proxyLabel, lastAccessTimeMillis, zIsActive, z3, zIsPhoneCall2, permissionGroupName22, intent, z2);
-                                    }
+                                    context2 = context3;
+                                    privacyElement = null;
                                 } else {
                                     it = it2;
                                     list = userProfiles;
                                     context2 = context3;
-                                    privacyElement = null;
+                                    privacyElement = privacyType3;
                                 }
                                 if (privacyElement != null) {
                                     arrayList.add(privacyElement);
@@ -641,8 +631,13 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
                             Executor executor = privacyDialogController4.uiExecutor;
                             final Context context4 = context;
                             executor.execute(new Runnable() { // from class: com.android.systemui.privacy.PrivacyDialogController$showDialog$1.1
+                                /* JADX WARN: Multi-variable type inference failed */
+                                /* JADX WARN: Type inference failed for: r2v32, types: [java.lang.Object, java.util.List] */
+                                /* JADX WARN: Type inference failed for: r2v36, types: [java.util.ArrayList] */
+                                /* JADX WARN: Type inference failed for: r2v37 */
                                 @Override // java.lang.Runnable
                                 public final void run() {
+                                    Iterable iterableSingletonList;
                                     PrivacyDialogController privacyDialogController5 = privacyDialogController4;
                                     List list2 = arrayList;
                                     int i6 = PrivacyDialogController.$r8$clinit;
@@ -667,44 +662,79 @@ public final class ShadeHeaderController extends ViewController implements Dumpa
                                         }
                                         Map.Entry entry = (Map.Entry) it4.next();
                                         PrivacyType privacyType6 = (PrivacyType) entry.getKey();
-                                        Iterable iterableSingletonList = (List) entry.getValue();
-                                        iterableSingletonList.getClass();
-                                        Iterable iterable = iterableSingletonList;
-                                        ArrayList arrayList4 = new ArrayList();
+                                        ?? arrayList4 = (List) entry.getValue();
+                                        arrayList4.getClass();
+                                        Iterable iterable = (Iterable) arrayList4;
+                                        ArrayList arrayList5 = new ArrayList();
                                         for (Object obj2 : iterable) {
                                             if (((PrivacyDialog.PrivacyElement) obj2).active) {
-                                                arrayList4.add(obj2);
+                                                arrayList5.add(obj2);
                                             }
                                         }
-                                        if (!arrayList4.isEmpty()) {
-                                            iterableSingletonList = CollectionsKt___CollectionsKt.sortedWith(arrayList4, new Comparator() { // from class: com.android.systemui.privacy.PrivacyDialogController$filterAndSelect$lambda$7$$inlined$sortedByDescending$1
+                                        if (!arrayList5.isEmpty()) {
+                                            iterableSingletonList = CollectionsKt___CollectionsKt.sortedWith(arrayList5, new Comparator() { // from class: com.android.systemui.privacy.PrivacyDialogController$filterAndSelect$lambda$12$$inlined$sortedByDescending$1
                                                 @Override // java.util.Comparator
                                                 public final int compare(Object obj3, Object obj4) {
                                                     return ComparisonsKt__ComparisonsKt.compareValues(Long.valueOf(((PrivacyDialog.PrivacyElement) obj4).lastActiveTimestamp), Long.valueOf(((PrivacyDialog.PrivacyElement) obj3).lastActiveTimestamp));
                                                 }
                                             });
-                                        } else if (!ScRune.QUICK_SUPPORT_LOCATION_PRIVACY_CHIP || privacyType6 != PrivacyType.TYPE_LOCATION) {
-                                            Iterator it5 = iterable.iterator();
-                                            if (it5.hasNext()) {
-                                                next2 = it5.next();
-                                                if (it5.hasNext()) {
+                                        } else if (ScRune.QUICK_SUPPORT_LOCATION_PRIVACY_CHIP && privacyType6 == PrivacyType.TYPE_LOCATION) {
+                                            if (!(iterable instanceof Collection) || !((Collection) iterable).isEmpty()) {
+                                                Iterator it5 = iterable.iterator();
+                                                while (true) {
+                                                    if (!it5.hasNext()) {
+                                                        break;
+                                                    }
+                                                    if (!((PrivacyDialog.PrivacyElement) it5.next()).isSystem) {
+                                                        arrayList4 = new ArrayList();
+                                                        for (Object obj3 : iterable) {
+                                                            if (!((PrivacyDialog.PrivacyElement) obj3).isSystem) {
+                                                                arrayList4.add(obj3);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            Iterator it6 = ((Iterable) arrayList4).iterator();
+                                            if (it6.hasNext()) {
+                                                next2 = it6.next();
+                                                if (it6.hasNext()) {
                                                     long j = ((PrivacyDialog.PrivacyElement) next2).lastActiveTimestamp;
                                                     do {
-                                                        Object next3 = it5.next();
+                                                        Object next3 = it6.next();
                                                         long j2 = ((PrivacyDialog.PrivacyElement) next3).lastActiveTimestamp;
                                                         if (j < j2) {
                                                             next2 = next3;
                                                             j = j2;
                                                         }
-                                                    } while (it5.hasNext());
+                                                    } while (it6.hasNext());
                                                 }
                                             }
                                             PrivacyDialog.PrivacyElement privacyElement2 = (PrivacyDialog.PrivacyElement) next2;
                                             if (privacyElement2 == null || (iterableSingletonList = Collections.singletonList(privacyElement2)) == null) {
                                                 iterableSingletonList = EmptyList.INSTANCE;
                                             }
+                                        } else {
+                                            Iterator it7 = iterable.iterator();
+                                            if (it7.hasNext()) {
+                                                next2 = it7.next();
+                                                if (it7.hasNext()) {
+                                                    long j3 = ((PrivacyDialog.PrivacyElement) next2).lastActiveTimestamp;
+                                                    do {
+                                                        Object next4 = it7.next();
+                                                        long j4 = ((PrivacyDialog.PrivacyElement) next4).lastActiveTimestamp;
+                                                        if (j3 < j4) {
+                                                            next2 = next4;
+                                                            j3 = j4;
+                                                        }
+                                                    } while (it7.hasNext());
+                                                }
+                                            }
+                                            PrivacyDialog.PrivacyElement privacyElement3 = (PrivacyDialog.PrivacyElement) next2;
+                                            if (privacyElement3 == null || (iterableSingletonList = Collections.singletonList(privacyElement3)) == null) {
+                                                iterableSingletonList = EmptyList.INSTANCE;
+                                            }
                                         }
-                                        iterableSingletonList.getClass();
                                         CollectionsKt__MutableCollectionsKt.addAll(iterableSingletonList, arrayList3);
                                     }
                                     Log.i("PrivacyDialogController", "showDialog  elements " + arrayList3);

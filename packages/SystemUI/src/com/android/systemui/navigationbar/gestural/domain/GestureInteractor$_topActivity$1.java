@@ -48,7 +48,7 @@ final class GestureInteractor$_topActivity$1 extends SuspendLambda implements Fu
             final ?? r1 = new TaskStackChangeListener() { // from class: com.android.systemui.navigationbar.gestural.domain.GestureInteractor$_topActivity$1$taskListener$1
                 @Override // com.android.systemui.shared.system.TaskStackChangeListener
                 public final void onTaskStackChanged() {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
             this.this$0.taskStackChangeListeners.registerTaskStackListener(r1);

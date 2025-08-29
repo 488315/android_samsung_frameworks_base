@@ -28,7 +28,7 @@ public abstract class FilterKt {
                 ((Number) obj3).intValue();
                 if (((Boolean) function2.invoke((EvalScope) obj, obj2)).booleanValue()) {
                     Maybe.Companion.getClass();
-                    return Maybe.Present.m2590boximpl(obj2);
+                    return Maybe.Present.m2588boximpl(obj2);
                 }
                 Maybe.Companion.getClass();
                 return Maybe.Companion.absent;

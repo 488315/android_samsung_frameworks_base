@@ -75,18 +75,18 @@ public final class ScreenDecorCommand extends ParseableCommand {
         this.color$delegate = param("color", "c", "Set a specific color for the debug assets. See Color#parseString() for accepted inputs.", new ValueParser() { // from class: com.android.systemui.decor.ScreenDecorCommand$special$$inlined$map$1
             @Override // com.android.systemui.statusbar.commandline.ValueParser
             /* renamed from: parseValue-IoAF18A */
-            public final Object mo2565parseValueIoAF18A(String str) {
+            public final Object mo2563parseValueIoAF18A(String str) {
                 Integer numValueOf;
-                Object objMo2565parseValueIoAF18A = valueParserKt$parseString$1.mo2565parseValueIoAF18A(str);
+                Object objMo2563parseValueIoAF18A = valueParserKt$parseString$1.mo2563parseValueIoAF18A(str);
                 int i = Result.$r8$clinit;
-                if (objMo2565parseValueIoAF18A instanceof Result.Failure) {
-                    Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(objMo2565parseValueIoAF18A);
-                    thM3442exceptionOrNullimpl.getClass();
-                    return new Result.Failure(thM3442exceptionOrNullimpl);
+                if (objMo2563parseValueIoAF18A instanceof Result.Failure) {
+                    Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(objMo2563parseValueIoAF18A);
+                    thM3441exceptionOrNullimpl.getClass();
+                    return new Result.Failure(thM3441exceptionOrNullimpl);
                 }
-                ResultKt.throwOnFailure(objMo2565parseValueIoAF18A);
+                ResultKt.throwOnFailure(objMo2563parseValueIoAF18A);
                 try {
-                    numValueOf = Integer.valueOf(Color.parseColor((String) objMo2565parseValueIoAF18A));
+                    numValueOf = Integer.valueOf(Color.parseColor((String) objMo2563parseValueIoAF18A));
                 } catch (Exception unused) {
                     numValueOf = null;
                 }

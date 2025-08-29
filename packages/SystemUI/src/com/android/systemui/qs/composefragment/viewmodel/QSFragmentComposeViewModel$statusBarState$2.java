@@ -48,13 +48,13 @@ final class QSFragmentComposeViewModel$statusBarState$2 extends SuspendLambda im
             final ?? r1 = new StatusBarStateController.StateListener() { // from class: com.android.systemui.qs.composefragment.viewmodel.QSFragmentComposeViewModel$statusBarState$2$callback$1
                 @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
                 public final void onStateChanged(int i2) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Integer.valueOf(i2));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Integer.valueOf(i2));
                 }
 
                 @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
                 public final void onUpcomingStateChanged(int i2) {
                     if (i2 == 1) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Integer.valueOf(i2));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Integer.valueOf(i2));
                     }
                 }
             };

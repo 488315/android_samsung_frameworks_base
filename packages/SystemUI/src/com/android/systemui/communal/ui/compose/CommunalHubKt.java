@@ -1905,7 +1905,7 @@ public abstract class CommunalHubKt {
                                                     fIntBitsToFloat = 0.0f;
                                                 }
                                                 if (fIntBitsToFloat != 0.0f) {
-                                                    gridDragDropStateV1.scrollChannel.mo3476trySendJP2dKIU(Float.valueOf(fIntBitsToFloat));
+                                                    gridDragDropStateV1.scrollChannel.mo3475trySendJP2dKIU(Float.valueOf(fIntBitsToFloat));
                                                 }
                                                 gridDragDropStateV1.setDraggingToRemove(Float.intBitsToFloat((int) (gridDragDropStateV1.m1085getDraggingItemDraggedDeltaF1C5BW0() & j3)) < 0.0f ? ((Boolean) gridDragDropStateV1.updateDragPositionForRemove.mo781invoke(intRectM860IntRectVbeCjmY)).booleanValue() : false);
                                                 gridDragDropStateV1.previousTargetItemKey = null;

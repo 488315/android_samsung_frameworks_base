@@ -50,7 +50,7 @@ final class EngineeringModeManagerWrapper$callbackFlow$1 extends SuspendLambda i
             final ?? r1 = new KeyguardStateController.Callback() { // from class: com.android.keyguard.emm.EngineeringModeManagerWrapper$callbackFlow$1$callback$1
                 @Override // com.android.systemui.statusbar.policy.KeyguardStateController.Callback
                 public final void onKeyguardShowingChanged() {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(((KeyguardStateControllerImpl) engineeringModeManagerWrapper.keyguardStateController).mShowing));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(((KeyguardStateControllerImpl) engineeringModeManagerWrapper.keyguardStateController).mShowing));
                 }
             };
             ((KeyguardStateControllerImpl) this.this$0.keyguardStateController).addCallback(r1);

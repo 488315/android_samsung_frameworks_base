@@ -485,7 +485,7 @@ public class SemDualAppManager {
                     ImageView imageView = new ImageView(context);
                     Drawable drawableForDensity = Resources.getSystem().getDrawableForDensity(R.drawable.ic_dualapp_widget_badge, context.getResources().getDisplayMetrics().densityDpi);
                     if (drawableForDensity != null) {
-                        imageView.lambda$setImageURIAsync$2(drawableForDensity);
+                        imageView.setImageDrawable(drawableForDensity);
                         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(drawableForDensity.getIntrinsicWidth(), drawableForDensity.getIntrinsicHeight());
                         layoutParams.gravity = 85;
                         appWidgetHostView.addView(imageView, layoutParams);

@@ -59,7 +59,7 @@ public class VideoEngine extends WallpaperEngine {
             VideoEngine videoEngine = VideoEngine.this;
             Log.i(videoEngine.TAG, "onSurfaceAndPlayerReady: " + videoEngine.mVideoSize + ", validSurface=" + videoEngine.mSurfaceHolder.getSurface().isValid());
             if ((videoEngine.mVideoSource.mType & 2) == 2) {
-                ImageWallpaper.IntegratedEngine.m3231$$Nest$mrecreateSurfaceControl(ImageWallpaper.IntegratedEngine.this);
+                ImageWallpaper.IntegratedEngine.m3230$$Nest$mrecreateSurfaceControl(ImageWallpaper.IntegratedEngine.this);
             }
             videoEngine.setVisibleRectOfSurface(videoEngine.getVisibleRectOfSurface());
         }

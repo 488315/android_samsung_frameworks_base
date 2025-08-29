@@ -90,7 +90,7 @@ class FreeformContainerView extends FrameLayout implements FreeformContainerCall
     public FreeformContainerViewController mViewController;
 
     /* renamed from: -$$Nest$msettleDownPointerEffect, reason: not valid java name */
-    public static void m3269$$Nest$msettleDownPointerEffect(FreeformContainerView freeformContainerView) {
+    public static void m3268$$Nest$msettleDownPointerEffect(FreeformContainerView freeformContainerView) {
         if (freeformContainerView.mPointerSettleDownEffectRequested) {
             freeformContainerView.mPointerSettleDownEffectRequested = false;
             int iconViewListCount = freeformContainerView.getIconViewListCount();
@@ -584,7 +584,7 @@ class FreeformContainerView extends FrameLayout implements FreeformContainerCall
                 @Override // android.view.animation.Animation.AnimationListener
                 public final void onAnimationEnd(Animation animation) {
                     FreeformContainerView.this.mPointerGroupView.removeView(imageView);
-                    FreeformContainerView.m3269$$Nest$msettleDownPointerEffect(FreeformContainerView.this);
+                    FreeformContainerView.m3268$$Nest$msettleDownPointerEffect(FreeformContainerView.this);
                 }
 
                 @Override // android.view.animation.Animation.AnimationListener

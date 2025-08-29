@@ -94,7 +94,7 @@ public final class CanvasDrawScope implements DrawScope {
         AndroidPaint androidPaint = (AndroidPaint) paintSelectPaint;
         long jColor = ColorKt.Color(androidPaint.internalPaint.getColor());
         Color.Companion companion = Color.Companion;
-        if (!ULong.m3447equalsimpl0(jColor, j)) {
+        if (!ULong.m3446equalsimpl0(jColor, j)) {
             androidPaint.m440setColor8_81llA(j);
         }
         if (androidPaint.internalShader != null) {
@@ -136,7 +136,7 @@ public final class CanvasDrawScope implements DrawScope {
             long jColor = ColorKt.Color(androidPaint.internalPaint.getColor());
             Color.Companion.getClass();
             long j = Color.Black;
-            if (!ULong.m3447equalsimpl0(jColor, j)) {
+            if (!ULong.m3446equalsimpl0(jColor, j)) {
                 androidPaint.m440setColor8_81llA(j);
             }
             if (androidPaint.internalPaint.getAlpha() / 255.0f != f) {
@@ -201,7 +201,7 @@ public final class CanvasDrawScope implements DrawScope {
         AndroidPaint androidPaint = (AndroidPaint) paintObtainStrokePaint;
         long jColor = ColorKt.Color(androidPaint.internalPaint.getColor());
         Color.Companion companion = Color.Companion;
-        if (!ULong.m3447equalsimpl0(jColor, j)) {
+        if (!ULong.m3446equalsimpl0(jColor, j)) {
             androidPaint.m440setColor8_81llA(j);
         }
         if (androidPaint.internalShader != null) {

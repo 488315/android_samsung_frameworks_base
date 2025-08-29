@@ -74,6 +74,7 @@ public class CoreRune {
     public static final boolean DW_KEYBOARD_SHORTCUT = true;
     public static final boolean DW_KEYGUARD_OCCLUDED = true;
     public static final boolean DW_LAUNCH_AT_DROP_POSITION = true;
+    public static final boolean DW_LEAK_BUG_FIX = true;
     public static final boolean DW_MAX_ACTIVE_TASKS = true;
     public static final boolean DW_MULTIPLE_DESKS;
     public static final boolean DW_MULTI_FOLD_POLICY;

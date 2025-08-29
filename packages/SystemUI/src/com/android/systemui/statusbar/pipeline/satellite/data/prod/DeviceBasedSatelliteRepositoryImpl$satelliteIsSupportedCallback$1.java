@@ -61,7 +61,7 @@ final class DeviceBasedSatelliteRepositoryImpl$satelliteIsSupportedCallback$1 ex
                     });
                     SendChannel sendChannel = producerScope;
                     bool.getClass();
-                    ((ChannelCoroutine) sendChannel).mo3476trySendJP2dKIU(bool);
+                    ((ChannelCoroutine) sendChannel).mo3475trySendJP2dKIU(bool);
                 }
             };
             Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();

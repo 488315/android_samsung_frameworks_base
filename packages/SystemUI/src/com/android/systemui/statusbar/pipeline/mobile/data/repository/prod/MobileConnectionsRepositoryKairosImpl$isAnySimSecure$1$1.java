@@ -53,7 +53,7 @@ final class MobileConnectionsRepositoryKairosImpl$isAnySimSecure$1$1 extends Sus
                     MobileInputLogger mobileInputLogger = mobileConnectionsRepositoryKairosImpl2.logger;
                     mobileInputLogger.getClass();
                     LogBuffer.log$default(mobileInputLogger.buffer, "MobileInputLog", LogLevel.INFO, "onSimStateChanged");
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(mobileConnectionsRepositoryKairosImpl2.keyguardUpdateMonitor.isSimPinSecure()));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(mobileConnectionsRepositoryKairosImpl2.keyguardUpdateMonitor.isSimPinSecure()));
                 }
             };
             this.this$0.keyguardUpdateMonitor.registerCallback(keyguardUpdateMonitorCallback);

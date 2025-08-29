@@ -103,7 +103,7 @@ public final class IconButtonDefaults {
         long j = ((Color) composerImpl.consume(ContentColorKt.LocalContentColor)).value;
         MaterialTheme.INSTANCE.getClass();
         IconButtonColors iconButtonColorsM266defaultIconButtonColors4WTKRHQ$material3_release = m266defaultIconButtonColors4WTKRHQ$material3_release(MaterialTheme.getColorScheme(composerImpl), j);
-        if (!ULong.m3447equalsimpl0(iconButtonColorsM266defaultIconButtonColors4WTKRHQ$material3_release.contentColor, j)) {
+        if (!ULong.m3446equalsimpl0(iconButtonColorsM266defaultIconButtonColors4WTKRHQ$material3_release.contentColor, j)) {
             StandardIconButtonTokens.INSTANCE.getClass();
             iconButtonColorsM266defaultIconButtonColors4WTKRHQ$material3_release = iconButtonColorsM266defaultIconButtonColors4WTKRHQ$material3_release.m265copyjRlVdoo(iconButtonColorsM266defaultIconButtonColors4WTKRHQ$material3_release.containerColor, j, iconButtonColorsM266defaultIconButtonColors4WTKRHQ$material3_release.disabledContainerColor, ColorKt.Color(Color.m463getRedimpl(j), Color.m462getGreenimpl(j), Color.m460getBlueimpl(j), StandardIconButtonTokens.DisabledOpacity, Color.m461getColorSpaceimpl(j)));
         }

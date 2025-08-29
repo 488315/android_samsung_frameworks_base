@@ -722,7 +722,7 @@ public abstract class FooterActionsKt {
             RoundedCornerShape roundedCornerShape = RoundedCornerShapeKt.CircleShape;
             MaterialTheme.INSTANCE.getClass();
             composerImpl = composerImpl2;
-            ExpandableKt.m912ExpandableS04cQl8(jColorAttr, roundedCornerShape, BorderOnFocusKt.m2937borderOnFocusPOIbLQ4$default(modifier2, MaterialTheme.getColorScheme(composerImpl2).secondary, CornerSizeKt.CornerSize(50)), 0L, null, function1, mutableInteractionSource, z3, false, null, ComposableLambdaKt.rememberComposableLambda(-609751411, new Function3() { // from class: com.android.systemui.qs.footer.ui.compose.FooterActionsKt.NumberButton.1
+            ExpandableKt.m912ExpandableS04cQl8(jColorAttr, roundedCornerShape, BorderOnFocusKt.m2935borderOnFocusPOIbLQ4$default(modifier2, MaterialTheme.getColorScheme(composerImpl2).secondary, CornerSizeKt.CornerSize(50)), 0L, null, function1, mutableInteractionSource, z3, false, null, ComposableLambdaKt.rememberComposableLambda(-609751411, new Function3() { // from class: com.android.systemui.qs.footer.ui.compose.FooterActionsKt.NumberButton.1
                 /* JADX WARN: Removed duplicated region for block: B:29:0x0101  */
                 @Override // kotlin.jvm.functions.Function3
                 /*
@@ -1004,7 +1004,7 @@ public abstract class FooterActionsKt {
             long j = MaterialTheme.getColorScheme(composerImpl2).onSurfaceVariant;
             Dp.Companion companion = Dp.Companion;
             composerImpl = composerImpl2;
-            ExpandableKt.m912ExpandableS04cQl8(jColorAttr, roundedCornerShape, BorderOnFocusKt.m2937borderOnFocusPOIbLQ4$default(PaddingKt.m127paddingVpY3zN4$default(modifier, 4, 0.0f, 2), MaterialTheme.getColorScheme(composerImpl2).secondary, CornerSizeKt.CornerSize(50)), j, BorderStrokeKt.m31BorderStrokecXLIe8U(1, ColorKt.colorAttr(R.attr.shadeInactive, composerImpl2)), function1, null, z2, false, null, ComposableLambdaKt.rememberComposableLambda(-667881743, new Function3() { // from class: com.android.systemui.qs.footer.ui.compose.FooterActionsKt.TextButton.1
+            ExpandableKt.m912ExpandableS04cQl8(jColorAttr, roundedCornerShape, BorderOnFocusKt.m2935borderOnFocusPOIbLQ4$default(PaddingKt.m127paddingVpY3zN4$default(modifier, 4, 0.0f, 2), MaterialTheme.getColorScheme(composerImpl2).secondary, CornerSizeKt.CornerSize(50)), j, BorderStrokeKt.m31BorderStrokecXLIe8U(1, ColorKt.colorAttr(R.attr.shadeInactive, composerImpl2)), function1, null, z2, false, null, ComposableLambdaKt.rememberComposableLambda(-667881743, new Function3() { // from class: com.android.systemui.qs.footer.ui.compose.FooterActionsKt.TextButton.1
                 @Override // kotlin.jvm.functions.Function3
                 public final Object invoke(Object obj, Object obj2, Object obj3) {
                     Modifier.Companion companion2;
@@ -1120,7 +1120,7 @@ public abstract class FooterActionsKt {
             RoundedCornerShape roundedCornerShape = RoundedCornerShapeKt.CircleShape;
             MaterialTheme.INSTANCE.getClass();
             composerImpl = composerImpl2;
-            ExpandableKt.m912ExpandableS04cQl8(jColorAttr, roundedCornerShape, BorderOnFocusKt.m2937borderOnFocusPOIbLQ4$default(modifier, MaterialTheme.getColorScheme(composerImpl2).secondary, CornerSizeKt.CornerSize(50)), 0L, null, footerActionsButtonViewModel.onClick, null, z, false, null, ComposableLambdaKt.rememberComposableLambda(-1968802346, new Function3() { // from class: com.android.systemui.qs.footer.ui.compose.FooterActionsKt.IconButton.2
+            ExpandableKt.m912ExpandableS04cQl8(jColorAttr, roundedCornerShape, BorderOnFocusKt.m2935borderOnFocusPOIbLQ4$default(modifier, MaterialTheme.getColorScheme(composerImpl2).secondary, CornerSizeKt.CornerSize(50)), 0L, null, footerActionsButtonViewModel.onClick, null, z, false, null, ComposableLambdaKt.rememberComposableLambda(-1968802346, new Function3() { // from class: com.android.systemui.qs.footer.ui.compose.FooterActionsKt.IconButton.2
                 @Override // kotlin.jvm.functions.Function3
                 public final Object invoke(Object obj, Object obj2, Object obj3) {
                     long jColor;

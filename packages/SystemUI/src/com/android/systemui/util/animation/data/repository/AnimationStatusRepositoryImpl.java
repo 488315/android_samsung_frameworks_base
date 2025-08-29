@@ -63,7 +63,7 @@ public final class AnimationStatusRepositoryImpl implements AnimationStatusRepos
                 ScaleAwareTransitionProgressProvider.Companion companion = ScaleAwareTransitionProgressProvider.Companion;
                 ContentResolver contentResolver = AnimationStatusRepositoryImpl.this.resolver;
                 companion.getClass();
-                ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(ScaleAwareTransitionProgressProvider.Companion.areAnimationsEnabled(contentResolver)));
+                ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(ScaleAwareTransitionProgressProvider.Companion.areAnimationsEnabled(contentResolver)));
                 final Handler handler = AnimationStatusRepositoryImpl.this.backgroundHandler;
                 final AnimationStatusRepositoryImpl animationStatusRepositoryImpl = AnimationStatusRepositoryImpl.this;
                 final ?? r3 = new ContentObserver(handler) { // from class: com.android.systemui.util.animation.data.repository.AnimationStatusRepositoryImpl$areAnimationsEnabled$1$observer$1
@@ -73,7 +73,7 @@ public final class AnimationStatusRepositoryImpl implements AnimationStatusRepos
                         ContentResolver contentResolver2 = animationStatusRepositoryImpl.resolver;
                         companion2.getClass();
                         boolean zAreAnimationsEnabled = ScaleAwareTransitionProgressProvider.Companion.areAnimationsEnabled(contentResolver2);
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(zAreAnimationsEnabled));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(zAreAnimationsEnabled));
                     }
                 };
                 AnimationStatusRepositoryImpl.this.resolver.registerContentObserver(Settings.Global.getUriFor(SettingsHelper.INDEX_GLOBAL_ANIMATOR_DURATION_SCALE), false, r3);

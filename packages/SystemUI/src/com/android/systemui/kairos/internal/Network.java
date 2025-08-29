@@ -499,7 +499,7 @@ public final class Network implements NetworkScope {
                 if (pair2 == null) {
                     throw new IllegalStateException("Unexpected empty scheduler");
                 }
-                new SchedulerImpl$drain$1(((Number) pair2.getFirst()).intValue(), schedulerImpl, ref$IntRef2).invoke(LogIndent.m2587boximpl(), new Function2() { // from class: com.android.systemui.kairos.internal.SchedulerImpl$drainEval$1$1
+                new SchedulerImpl$drain$1(((Number) pair2.getFirst()).intValue(), schedulerImpl, ref$IntRef2).invoke(LogIndent.m2585boximpl(), new Function2() { // from class: com.android.systemui.kairos.internal.SchedulerImpl$drainEval$1$1
                     @Override // kotlin.jvm.functions.Function2
                     public final Object invoke(Object obj5, Object obj6) {
                         int i11 = ((LogIndent) obj5).currentLogIndent;
@@ -828,7 +828,7 @@ public final class Network implements NetworkScope {
                                 }
                             }
                             MonotonicTimeSource.INSTANCE.getClass();
-                            Duration.m3466toStringimpl(((j2 - 1) | 1) == Long.MAX_VALUE ? Duration.m3467unaryMinusUwyO8pc(LongSaturatedMathKt.infinityOfSign(j2)) : LongSaturatedMathKt.saturatingFiniteDiff(MonotonicTimeSource.read(), j2, DurationUnit.NANOSECONDS));
+                            Duration.m3465toStringimpl(((j2 - 1) | 1) == Long.MAX_VALUE ? Duration.m3466unaryMinusUwyO8pc(LongSaturatedMathKt.infinityOfSign(j2)) : LongSaturatedMathKt.saturatingFiniteDiff(MonotonicTimeSource.read(), j2, DurationUnit.NANOSECONDS));
                             Unit unit = Unit.INSTANCE;
                             mutex.unlock(null);
                             i3 = 1;
@@ -851,7 +851,7 @@ public final class Network implements NetworkScope {
                                 c08841.L$2 = bufferedChannelIterator3;
                                 c08841.label = 2;
                                 if (YieldKt.yield(c08841) != coroutineSingletons) {
-                                    scheduledAction = (ScheduledAction) ChannelResult.m3479getOrNullimpl(network.inputScheduleChan.mo3475tryReceivePtdJZtk());
+                                    scheduledAction = (ScheduledAction) ChannelResult.m3478getOrNullimpl(network.inputScheduleChan.mo3474tryReceivePtdJZtk());
                                     if (scheduledAction != null) {
                                         mutex = network.transactionMutex;
                                         c08841.L$0 = network;
@@ -941,7 +941,7 @@ public final class Network implements NetworkScope {
                 list2 = (List) c08841.L$1;
                 network = (Network) c08841.L$0;
                 ResultKt.throwOnFailure(objHasNext);
-                scheduledAction = (ScheduledAction) ChannelResult.m3479getOrNullimpl(network.inputScheduleChan.mo3475tryReceivePtdJZtk());
+                scheduledAction = (ScheduledAction) ChannelResult.m3478getOrNullimpl(network.inputScheduleChan.mo3474tryReceivePtdJZtk());
                 if (scheduledAction != null) {
                 }
             }

@@ -44,7 +44,7 @@ public class GroupCoalescer implements Dumpable, PipelineDumpable {
     public final long mMinGroupLingerDuration;
 
     /* renamed from: -$$Nest$mapplyRanking, reason: not valid java name */
-    public static void m2967$$Nest$mapplyRanking(GroupCoalescer groupCoalescer, NotificationListenerService.RankingMap rankingMap) {
+    public static void m2965$$Nest$mapplyRanking(GroupCoalescer groupCoalescer, NotificationListenerService.RankingMap rankingMap) {
         for (CoalescedEvent coalescedEvent : ((ArrayMap) groupCoalescer.mCoalescedEvents).values()) {
             NotificationListenerService.Ranking ranking = new NotificationListenerService.Ranking();
             if (rankingMap.getRanking(coalescedEvent.key, ranking)) {
@@ -63,7 +63,7 @@ public class GroupCoalescer implements Dumpable, PipelineDumpable {
     }
 
     /* renamed from: -$$Nest$mmaybeEmitBatch, reason: not valid java name */
-    public static void m2968$$Nest$mmaybeEmitBatch(GroupCoalescer groupCoalescer, StatusBarNotification statusBarNotification) {
+    public static void m2966$$Nest$mmaybeEmitBatch(GroupCoalescer groupCoalescer, StatusBarNotification statusBarNotification) {
         CoalescedEvent coalescedEvent = (CoalescedEvent) ((ArrayMap) groupCoalescer.mCoalescedEvents).get(statusBarNotification.getKey());
         EventBatch eventBatch = (EventBatch) ((ArrayMap) groupCoalescer.mBatches).get(statusBarNotification.getGroupKey());
         int i = UseElapsedRealtimeForCreationTime.$r8$clinit;
@@ -224,8 +224,8 @@ public class GroupCoalescer implements Dumpable, PipelineDumpable {
             @Override // com.android.systemui.statusbar.NotificationListener.NotificationHandler
             public final void onNotificationPosted(StatusBarNotification statusBarNotification, NotificationListenerService.RankingMap rankingMap) {
                 final GroupCoalescer groupCoalescer = GroupCoalescer.this;
-                GroupCoalescer.m2968$$Nest$mmaybeEmitBatch(groupCoalescer, statusBarNotification);
-                GroupCoalescer.m2967$$Nest$mapplyRanking(groupCoalescer, rankingMap);
+                GroupCoalescer.m2966$$Nest$mmaybeEmitBatch(groupCoalescer, statusBarNotification);
+                GroupCoalescer.m2965$$Nest$mapplyRanking(groupCoalescer, rankingMap);
                 if (((ArrayMap) groupCoalescer.mCoalescedEvents).containsKey(statusBarNotification.getKey())) {
                     throw new IllegalStateException("Notification has already been coalesced: " + statusBarNotification.getKey());
                 }
@@ -280,15 +280,15 @@ public class GroupCoalescer implements Dumpable, PipelineDumpable {
             @Override // com.android.systemui.statusbar.NotificationListener.NotificationHandler
             public final void onNotificationRankingUpdate(NotificationListenerService.RankingMap rankingMap) {
                 GroupCoalescer groupCoalescer = GroupCoalescer.this;
-                GroupCoalescer.m2967$$Nest$mapplyRanking(groupCoalescer, rankingMap);
+                GroupCoalescer.m2965$$Nest$mapplyRanking(groupCoalescer, rankingMap);
                 groupCoalescer.mHandler.onNotificationRankingUpdate(rankingMap);
             }
 
             @Override // com.android.systemui.statusbar.NotificationListener.NotificationHandler
             public final void onNotificationRemoved(StatusBarNotification statusBarNotification, NotificationListenerService.RankingMap rankingMap, int i) {
                 GroupCoalescer groupCoalescer = GroupCoalescer.this;
-                GroupCoalescer.m2968$$Nest$mmaybeEmitBatch(groupCoalescer, statusBarNotification);
-                GroupCoalescer.m2967$$Nest$mapplyRanking(groupCoalescer, rankingMap);
+                GroupCoalescer.m2966$$Nest$mmaybeEmitBatch(groupCoalescer, statusBarNotification);
+                GroupCoalescer.m2965$$Nest$mapplyRanking(groupCoalescer, rankingMap);
                 groupCoalescer.mHandler.onNotificationRemoved(statusBarNotification, rankingMap, i);
             }
 

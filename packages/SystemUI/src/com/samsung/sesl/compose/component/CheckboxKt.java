@@ -58,7 +58,7 @@ public abstract class CheckboxKt {
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslCheckbox (Checkbox.kt:61)");
             }
-            SeslRecoilNodeFactory seslRecoilNodeFactoryM3352seslRecoilIndicationbw27NRU$default = RecoilKt.m3352seslRecoilIndicationbw27NRU$default(SeslRecoilPreset.Button, RoundedCornerShapeKt.SeslCircleShape, 2);
+            SeslRecoilNodeFactory seslRecoilNodeFactoryM3351seslRecoilIndicationbw27NRU$default = RecoilKt.m3351seslRecoilIndicationbw27NRU$default(SeslRecoilPreset.Button, RoundedCornerShapeKt.SeslCircleShape, 2);
             composerImpl.startReplaceGroup(1338403464);
             boolean z4 = false;
             if (((Boolean) composerImpl.consume(ThemeKt.LocalOneUiOpenTheme)).booleanValue()) {
@@ -89,7 +89,7 @@ public abstract class CheckboxKt {
                     composerImpl.startReplaceGroup(-1458151936);
                     int i5 = (i3 & 14) | ((i3 << 3) & 896);
                     int i6 = i3 << 6;
-                    SeslOpenThemeCheckbox(z, seslOpenCheckboxResourceSet, function1, seslRecoilNodeFactoryM3352seslRecoilIndicationbw27NRU$default, modifier, z2, mutableInteractionSource, composerImpl, (458752 & i6) | i5 | (57344 & i6) | (i6 & 3670016));
+                    SeslOpenThemeCheckbox(z, seslOpenCheckboxResourceSet, function1, seslRecoilNodeFactoryM3351seslRecoilIndicationbw27NRU$default, modifier, z2, mutableInteractionSource, composerImpl, (458752 & i6) | i5 | (57344 & i6) | (i6 & 3670016));
                     composerImpl.end(false);
                 } else {
                     composerImpl.startReplaceGroup(-1457817043);
@@ -98,7 +98,7 @@ public abstract class CheckboxKt {
                     SeslCheckboxDefaults.INSTANCE.getClass();
                     int i7 = i3 << 3;
                     int i8 = i3 << 9;
-                    BasicCheckboxKt.m3346SeslBasicCheckboxaA_HZ9I(seslBasicCheckboxColors, z, function1, SeslCheckboxDefaults.checkboxSize, seslRecoilNodeFactoryM3352seslRecoilIndicationbw27NRU$default, modifier, z2, mutableInteractionSource, composerImpl, (458752 & i8) | (i7 & 896) | (i7 & 112) | 3072 | (3670016 & i8) | (i8 & 29360128));
+                    BasicCheckboxKt.m3345SeslBasicCheckboxaA_HZ9I(seslBasicCheckboxColors, z, function1, SeslCheckboxDefaults.checkboxSize, seslRecoilNodeFactoryM3351seslRecoilIndicationbw27NRU$default, modifier, z2, mutableInteractionSource, composerImpl, (458752 & i8) | (i7 & 896) | (i7 & 112) | 3072 | (3670016 & i8) | (i8 & 29360128));
                     composerImpl = composerImpl;
                     composerImpl.end(false);
                 }

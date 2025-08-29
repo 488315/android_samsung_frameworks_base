@@ -372,7 +372,7 @@ public abstract class ShortcutHelperKt {
             IconSource iconSource = new IconSource(AddKt.getAdd(), null, 2, null);
             MaterialTheme.INSTANCE.getClass();
             float f = 0;
-            SurfacesKt.m2596ShortcutHelperButton01TuoB8(function0, MaterialTheme.getColorScheme(composerImpl).primary, j, modifierM140size3ABfNKs, RoundedCornerShapeKt.CircleShape, iconSource, null, f, f, false, BorderStrokeKt.m31BorderStrokecXLIe8U(1, MaterialTheme.getColorScheme(composerImpl).outline), StringResources_androidKt.stringResource(R.string.shortcut_helper_add_shortcut_button_label, composerImpl), composerImpl, (i2 & 14) | 113249664, 576);
+            SurfacesKt.m2594ShortcutHelperButton01TuoB8(function0, MaterialTheme.getColorScheme(composerImpl).primary, j, modifierM140size3ABfNKs, RoundedCornerShapeKt.CircleShape, iconSource, null, f, f, false, BorderStrokeKt.m31BorderStrokecXLIe8U(1, MaterialTheme.getColorScheme(composerImpl).outline), StringResources_androidKt.stringResource(R.string.shortcut_helper_add_shortcut_button_label, composerImpl), composerImpl, (i2 & 14) | 113249664, 576);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
@@ -696,7 +696,7 @@ public abstract class ShortcutHelperKt {
                             RowScopeInstance rowScopeInstance = RowScopeInstance.INSTANCE;
                             Modifier modifierM140size3ABfNKs = SizeKt.m140size3ABfNKs(companion, 24);
                             final ShortcutCategoryUi shortcutCategoryUi2 = shortcutCategoryUi;
-                            ShortcutHelperKt.m2593ShortcutCategoryIconww6aTOc(shortcutCategoryUi2.iconSource, modifierM140size3ABfNKs, 0L, composer2, 48, 12);
+                            ShortcutHelperKt.m2591ShortcutCategoryIconww6aTOc(shortcutCategoryUi2.iconSource, modifierM140size3ABfNKs, 0L, composer2, 48, 12);
                             SpacerKt.Spacer(composer2, SizeKt.m144width3ABfNKs(companion, f));
                             TextKt.m317Text4IGK_g(shortcutCategoryUi2.label, null, 0L, 0L, null, null, null, 0L, null, null, 0L, 0, false, 0, 0, null, null, composer2, 0, 0, 131070);
                             SpacerKt.Spacer(composer2, rowScopeInstance.weight(companion, 1.0f, true));
@@ -837,7 +837,7 @@ public abstract class ShortcutHelperKt {
                             Modifier modifierM140size3ABfNKs = SizeKt.m140size3ABfNKs(companion3, f2);
                             NavigationDrawerItemColors navigationDrawerItemColors3 = navigationDrawerItemColorsM275colorsoq7We08;
                             boolean z2 = z;
-                            ShortcutHelperKt.m2593ShortcutCategoryIconww6aTOc(iconSource, modifierM140size3ABfNKs, ((Color) navigationDrawerItemColors3.iconColor(z2, composer2).getValue()).value, composer2, 432, 0);
+                            ShortcutHelperKt.m2591ShortcutCategoryIconww6aTOc(iconSource, modifierM140size3ABfNKs, ((Color) navigationDrawerItemColors3.iconColor(z2, composer2).getValue()).value, composer2, 432, 0);
                             SpacerKt.Spacer(composer2, SizeKt.m144width3ABfNKs(companion3, 12));
                             Modifier modifierWeight = rowScopeInstance.weight(companion3, 1.0f, true);
                             MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.TopStart, false);
@@ -912,9 +912,9 @@ public abstract class ShortcutHelperKt {
                             MutableState mutableStateCollectIsFocusedAsState = FocusInteractionKt.collectIsFocusedAsState(mutableInteractionSource, composer2, 0);
                             StaticProvidableCompositionLocal staticProvidableCompositionLocal = InteractiveComponentSizeKt.LocalMinimumInteractiveComponentSize;
                             Modifier modifierThen = modifierFillMaxWidth.then(MinimumInteractiveModifier.INSTANCE);
-                            long jM2599access$surfaceColorAtElevationCLU3JFs = SurfacesKt.m2599access$surfaceColorAtElevationCLU3JFs(j2, f3, composer2);
+                            long jM2597access$surfaceColorAtElevationCLU3JFs = SurfacesKt.m2597access$surfaceColorAtElevationCLU3JFs(j2, f3, composer2);
                             ComposerImpl composerImpl3 = (ComposerImpl) composer2;
-                            Modifier modifierM182selectableO2vRcR0 = SelectableKt.m182selectableO2vRcR0(SurfacesKt.m2598access$surfaceXOJAsU(modifierThen, roundedCornerShapeM187RoundedCornerShape0680j_4, jM2599access$surfaceColorAtElevationCLU3JFs, borderStroke, ((Density) composerImpl3.consume(CompositionLocalsKt.LocalDensity)).mo58toPx0680j_4(f2)), z, mutableInteractionSource, new ShortcutHelperIndication(interactionsConfig), z2, null, function0);
+                            Modifier modifierM182selectableO2vRcR0 = SelectableKt.m182selectableO2vRcR0(SurfacesKt.m2596access$surfaceXOJAsU(modifierThen, roundedCornerShapeM187RoundedCornerShape0680j_4, jM2597access$surfaceColorAtElevationCLU3JFs, borderStroke, ((Density) composerImpl3.consume(CompositionLocalsKt.LocalDensity)).mo58toPx0680j_4(f2)), z, mutableInteractionSource, new ShortcutHelperIndication(interactionsConfig), z2, null, function0);
                             if (((Boolean) mutableStateCollectIsFocusedAsState.getValue()).booleanValue()) {
                                 modifierM182selectableO2vRcR0 = modifierM182selectableO2vRcR0.then(ZIndexModifierKt.zIndex(Modifier.Companion, 1.0f));
                             }
@@ -1158,7 +1158,7 @@ public abstract class ShortcutHelperKt {
                 i3 = 2;
                 r8 = 0;
             }
-            SurfacesKt.m2596ShortcutHelperButton01TuoB8(function0, MaterialTheme.getColorScheme(composerImpl).onSecondaryContainer, j, modifierM133heightInVpY3zN4$default, null, new IconSource(imageVectorBuild, r8, i3, r8), StringResources_androidKt.stringResource(R.string.shortcut_helper_customize_button_text, composerImpl), 0.0f, 0.0f, false, null, null, composerImpl, (i2 & 14) | 3072, 3984);
+            SurfacesKt.m2594ShortcutHelperButton01TuoB8(function0, MaterialTheme.getColorScheme(composerImpl).onSecondaryContainer, j, modifierM133heightInVpY3zN4$default, null, new IconSource(imageVectorBuild, r8, i3, r8), StringResources_androidKt.stringResource(R.string.shortcut_helper_customize_button_text, composerImpl), 0.0f, 0.0f, false, null, null, composerImpl, (i2 & 14) | 3072, 3984);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
@@ -1226,7 +1226,7 @@ public abstract class ShortcutHelperKt {
             MaterialTheme.INSTANCE.getClass();
             float f = 0;
             function02 = function0;
-            SurfacesKt.m2596ShortcutHelperButton01TuoB8(function02, MaterialTheme.getColorScheme(composerImpl).primary, j, modifierM140size3ABfNKs, RoundedCornerShapeKt.CircleShape, iconSource, null, f, f, false, BorderStrokeKt.m31BorderStrokecXLIe8U(1, MaterialTheme.getColorScheme(composerImpl).outline), StringResources_androidKt.stringResource(R.string.shortcut_helper_delete_shortcut_button_label, composerImpl), composerImpl, (i3 & 14) | 113249664, 576);
+            SurfacesKt.m2594ShortcutHelperButton01TuoB8(function02, MaterialTheme.getColorScheme(composerImpl).primary, j, modifierM140size3ABfNKs, RoundedCornerShapeKt.CircleShape, iconSource, null, f, f, false, BorderStrokeKt.m31BorderStrokecXLIe8U(1, MaterialTheme.getColorScheme(composerImpl).outline), StringResources_androidKt.stringResource(R.string.shortcut_helper_delete_shortcut_button_label, composerImpl), composerImpl, (i3 & 14) | 113249664, 576);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
@@ -1255,7 +1255,7 @@ public abstract class ShortcutHelperKt {
             Dp.Companion companion = Dp.Companion;
             Modifier modifierM133heightInVpY3zN4$default = SizeKt.m133heightInVpY3zN4$default(Modifier.Companion, 40, 0.0f, 2);
             MaterialTheme.INSTANCE.getClass();
-            SurfacesKt.m2596ShortcutHelperButton01TuoB8(function0, MaterialTheme.getColorScheme(composerImpl).onPrimary, MaterialTheme.getColorScheme(composerImpl).primary, modifierM133heightInVpY3zN4$default, null, null, StringResources_androidKt.stringResource(R.string.shortcut_helper_done_button_text, composerImpl), 0.0f, 0.0f, false, null, null, composerImpl, (i2 & 14) | 3072, 4016);
+            SurfacesKt.m2594ShortcutHelperButton01TuoB8(function0, MaterialTheme.getColorScheme(composerImpl).onPrimary, MaterialTheme.getColorScheme(composerImpl).primary, modifierM133heightInVpY3zN4$default, null, null, StringResources_androidKt.stringResource(R.string.shortcut_helper_done_button_text, composerImpl), 0.0f, 0.0f, false, null, null, composerImpl, (i2 & 14) | 3072, 4016);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
@@ -1318,7 +1318,7 @@ public abstract class ShortcutHelperKt {
                 composerImpl.startReplaceGroup(-1556849968);
                 if (shortcutCategoryUi == null) {
                     Dp.Companion companion2 = Dp.Companion;
-                    m2592NoSearchResultsTextkHDZbjc(24, false, composerImpl, 54);
+                    m2590NoSearchResultsTextkHDZbjc(24, false, composerImpl, 54);
                     composerImpl.end(false);
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventEnd();
@@ -1517,7 +1517,7 @@ public abstract class ShortcutHelperKt {
     }
 
     /* renamed from: KeyboardSettings-ixp7dh8, reason: not valid java name */
-    public static final void m2591KeyboardSettingsixp7dh8(final float f, final float f2, Function0 function0, Composer composer, final int i) {
+    public static final void m2589KeyboardSettingsixp7dh8(final float f, final float f2, Function0 function0, Composer composer, final int i) {
         int i2;
         final Function0 function02 = function0;
         ComposerImpl composerImpl = (ComposerImpl) composer;
@@ -1553,7 +1553,7 @@ public abstract class ShortcutHelperKt {
             InteractionsConfig interactionsConfig = new InteractionsConfig(MaterialTheme.getColorScheme(composerImpl).onSurface, 0.11f, MaterialTheme.getColorScheme(composerImpl).onSurface, 0.15f, MaterialTheme.getColorScheme(composerImpl).secondary, 3, f4, f3, 28, f4, 0.0f, 1024, null);
             ComposableSingletons$ShortcutHelperKt.INSTANCE.getClass();
             function02 = function0;
-            SurfacesKt.m2595ClickableShortcutSurface9FW6N_Y(function02, modifierM127paddingVpY3zN4$default, false, roundedCornerShapeM187RoundedCornerShape0680j_4, j, null, interactionsConfig, ComposableSingletons$ShortcutHelperKt.f47lambda4, composerImpl, ((i2 >> 6) & 14) | 24576, 996);
+            SurfacesKt.m2593ClickableShortcutSurface9FW6N_Y(function02, modifierM127paddingVpY3zN4$default, false, roundedCornerShapeM187RoundedCornerShape0680j_4, j, null, interactionsConfig, ComposableSingletons$ShortcutHelperKt.f47lambda4, composerImpl, ((i2 >> 6) & 14) | 24576, 996);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
@@ -1565,7 +1565,7 @@ public abstract class ShortcutHelperKt {
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).intValue();
                     int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
-                    ShortcutHelperKt.m2591KeyboardSettingsixp7dh8(f, f2, function02, (Composer) obj, iUpdateChangedFlags);
+                    ShortcutHelperKt.m2589KeyboardSettingsixp7dh8(f, f2, function02, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };
@@ -1573,7 +1573,7 @@ public abstract class ShortcutHelperKt {
     }
 
     /* renamed from: NoSearchResultsText-kHDZbjc, reason: not valid java name */
-    public static final void m2592NoSearchResultsTextkHDZbjc(final float f, final boolean z, Composer composer, final int i) {
+    public static final void m2590NoSearchResultsTextkHDZbjc(final float f, final boolean z, Composer composer, final int i) {
         ComposerImpl composerImpl;
         ComposerImpl composerImpl2 = (ComposerImpl) composer;
         composerImpl2.startRestartGroup(-1804910765);
@@ -1609,7 +1609,7 @@ public abstract class ShortcutHelperKt {
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).getClass();
                     int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(55);
-                    ShortcutHelperKt.m2592NoSearchResultsTextkHDZbjc(this.f$0, this.f$1, (Composer) obj, iUpdateChangedFlags);
+                    ShortcutHelperKt.m2590NoSearchResultsTextkHDZbjc(this.f$0, this.f$1, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };
@@ -1666,7 +1666,7 @@ public abstract class ShortcutHelperKt {
             IconSource iconSource = new IconSource(imageVectorBuild, null, 2, null);
             String strStringResource = StringResources_androidKt.stringResource(R.string.shortcut_helper_reset_button_text, composerImpl);
             MaterialTheme.INSTANCE.getClass();
-            SurfacesKt.m2596ShortcutHelperButton01TuoB8(function0, MaterialTheme.getColorScheme(composerImpl).primary, j, modifierM133heightInVpY3zN4$default, null, iconSource, strStringResource, 0.0f, 0.0f, false, BorderStrokeKt.m31BorderStrokecXLIe8U(1, MaterialTheme.getColorScheme(composerImpl).outlineVariant), null, composerImpl, (i2 & 14) | 3456, 2960);
+            SurfacesKt.m2594ShortcutHelperButton01TuoB8(function0, MaterialTheme.getColorScheme(composerImpl).primary, j, modifierM133heightInVpY3zN4$default, null, iconSource, strStringResource, 0.0f, 0.0f, false, BorderStrokeKt.m31BorderStrokecXLIe8U(1, MaterialTheme.getColorScheme(composerImpl).outlineVariant), null, composerImpl, (i2 & 14) | 3456, 2960);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
@@ -2147,7 +2147,7 @@ public abstract class ShortcutHelperKt {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static final void m2593ShortcutCategoryIconww6aTOc(final IconSource iconSource, final Modifier modifier, long j, Composer composer, final int i, final int i2) {
+    public static final void m2591ShortcutCategoryIconww6aTOc(final IconSource iconSource, final Modifier modifier, long j, Composer composer, final int i, final int i2) {
         long j2;
         int i3;
         long j3;
@@ -2225,7 +2225,7 @@ public abstract class ShortcutHelperKt {
                         ((Integer) obj2).getClass();
                         int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
                         long j6 = j4;
-                        ShortcutHelperKt.m2593ShortcutCategoryIconww6aTOc(iconSource, modifier, j6, (Composer) obj, iUpdateChangedFlags, i2);
+                        ShortcutHelperKt.m2591ShortcutCategoryIconww6aTOc(iconSource, modifier, j6, (Composer) obj, iUpdateChangedFlags, i2);
                         return Unit.INSTANCE;
                     }
                 };
@@ -2681,7 +2681,7 @@ public abstract class ShortcutHelperKt {
                 Updater.m337setimpl(composerImpl, modifierMaterializeModifier2, function24);
                 BoxScopeInstance boxScopeInstance = BoxScopeInstance.INSTANCE;
                 z = true;
-                m2592NoSearchResultsTextkHDZbjc(f, true, composerImpl, 54);
+                m2590NoSearchResultsTextkHDZbjc(f, true, composerImpl, 54);
                 composerImpl.end(true);
                 composerImpl.end(false);
             } else {
@@ -2691,7 +2691,7 @@ public abstract class ShortcutHelperKt {
                 SpacerKt.Spacer(composerImpl, columnScopeInstance.weight(companion2, 1.0f, true));
                 composerImpl.end(false);
             }
-            m2591KeyboardSettingsixp7dh8(f, 32, function0, composerImpl, ((i3 >> 9) & 896) | 54);
+            m2589KeyboardSettingsixp7dh8(f, 32, function0, composerImpl, ((i3 >> 9) & 896) | 54);
             composerImpl.end(z);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
@@ -3217,7 +3217,7 @@ public abstract class ShortcutHelperKt {
                                 composerImpl3.startReplaceGroup(1146877384);
                                 if (i3 > 0) {
                                     Dp.Companion companion2 = Dp.Companion;
-                                    ShortcutHelperKt.m2594ShortcutOrSeparatorziNgDLE(flowRowScope, 16, composerImpl3, (iIntValue & 14) | 48);
+                                    ShortcutHelperKt.m2592ShortcutOrSeparatorziNgDLE(flowRowScope, 16, composerImpl3, (iIntValue & 14) | 48);
                                 }
                                 composerImpl3.end(false);
                                 ShortcutHelperKt.ShortcutCommandContainer(shortcutCommand.isCustom, ComposableLambdaKt.rememberComposableLambda(-1240949659, new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.ShortcutHelperKt$ShortcutKeyCombinations$3$1$1
@@ -3349,7 +3349,7 @@ public abstract class ShortcutHelperKt {
     }
 
     /* renamed from: ShortcutOrSeparator-ziNgDLE, reason: not valid java name */
-    public static final void m2594ShortcutOrSeparatorziNgDLE(final FlowRowScope flowRowScope, final float f, Composer composer, final int i) {
+    public static final void m2592ShortcutOrSeparatorziNgDLE(final FlowRowScope flowRowScope, final float f, Composer composer, final int i) {
         int i2;
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startRestartGroup(562023815);
@@ -3396,7 +3396,7 @@ public abstract class ShortcutHelperKt {
                 public final Object invoke(Object obj, Object obj2) {
                     ((Integer) obj2).intValue();
                     int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
-                    ShortcutHelperKt.m2594ShortcutOrSeparatorziNgDLE(flowRowScope, f, (Composer) obj, iUpdateChangedFlags);
+                    ShortcutHelperKt.m2592ShortcutOrSeparatorziNgDLE(flowRowScope, f, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };
@@ -3678,7 +3678,7 @@ public abstract class ShortcutHelperKt {
                             ShortcutHelperKt.CategoriesPanelTwoPane(list2, shortcutCategoryType, function12, composer2, 0);
                             SpacerKt.Spacer(composer2, columnScopeInstance.weight(companion, 1.0f, true));
                             float f = 24;
-                            ShortcutHelperKt.m2591KeyboardSettingsixp7dh8(f, f, function0, composer2, 54);
+                            ShortcutHelperKt.m2589KeyboardSettingsixp7dh8(f, f, function0, composer2, 54);
                             composerImpl3.end(true);
                             if (ComposerKt.isTraceInProgress()) {
                                 ComposerKt.traceEventEnd();

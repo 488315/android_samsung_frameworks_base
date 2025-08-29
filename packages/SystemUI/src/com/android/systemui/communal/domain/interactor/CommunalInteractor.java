@@ -241,7 +241,7 @@ public final class CommunalInteractor {
                 CommunalInteractor.Companion.getClass();
                 long j = CommunalInteractor.DISCLAIMER_RESET_MILLIS;
                 this.label = 1;
-                if (DelayKt.m3469delayVtjQ1oo(j, this) == coroutineSingletons) {
+                if (DelayKt.m3468delayVtjQ1oo(j, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {

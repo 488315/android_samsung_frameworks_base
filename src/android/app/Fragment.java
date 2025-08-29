@@ -1446,7 +1446,7 @@ public class Fragment implements ComponentCallbacks2, View.OnCreateContextMenuLi
         }
     }
 
-    private static Transition loadTransition(Context context, TypedArray typedArray, Transition transition, Transition transition2, int i) throws Resources.NotFoundException {
+    private static Transition loadTransition(Context context, TypedArray typedArray, Transition transition, Transition transition2, int i) {
         if (transition != transition2) {
             return transition;
         }

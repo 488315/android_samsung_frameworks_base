@@ -63,7 +63,7 @@ public final /* synthetic */ class IncrementalKt$$ExternalSyntheticLambda2 imple
                 final Function3 function3 = new Function3() { // from class: com.android.systemui.kairos.internal.IncrementalImplKt$$ExternalSyntheticLambda1
                     @Override // kotlin.jvm.functions.Function3
                     public final Object invoke(Object obj2, Object obj3, Object obj4) {
-                        Object objM2590boximpl;
+                        Object objM2588boximpl;
                         EvalScope evalScope = (EvalScope) obj2;
                         Map map = (Map) obj3;
                         ((Integer) obj4).getClass();
@@ -76,14 +76,14 @@ public final /* synthetic */ class IncrementalKt$$ExternalSyntheticLambda2 imple
                                 Maybe.Companion companion = Maybe.Companion;
                                 Object objInvoke = incrementalKt$$ExternalSyntheticLambda6.invoke(evalScope, new StoreEntry(key2, ((Maybe.Present) maybe).value));
                                 companion.getClass();
-                                objM2590boximpl = Maybe.Present.m2590boximpl(objInvoke);
+                                objM2588boximpl = Maybe.Present.m2588boximpl(objInvoke);
                             } else {
                                 if (!(maybe instanceof Maybe.Absent)) {
                                     throw new NoWhenBranchMatchedException();
                                 }
-                                objM2590boximpl = Maybe.Absent.INSTANCE;
+                                objM2588boximpl = Maybe.Absent.INSTANCE;
                             }
-                            linkedHashMap.put(key, objM2590boximpl);
+                            linkedHashMap.put(key, objM2588boximpl);
                         }
                         return linkedHashMap;
                     }
@@ -120,7 +120,7 @@ public final /* synthetic */ class IncrementalKt$$ExternalSyntheticLambda2 imple
                             return Maybe.Absent.INSTANCE;
                         }
                         Maybe.Companion.getClass();
-                        return Maybe.Present.m2590boximpl(pairAccess$applyPatchCalm);
+                        return Maybe.Present.m2588boximpl(pairAccess$applyPatchCalm);
                     }
                 };
                 final PullNodesKt$cached$$inlined$EventsImplCheap$1 pullNodesKt$cached$$inlined$EventsImplCheap$1Cached2 = PullNodesKt.cached(new EventsImpl() { // from class: com.android.systemui.kairos.internal.IncrementalImplKt$calmUpdates$$inlined$mapImpl$1

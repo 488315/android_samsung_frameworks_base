@@ -98,7 +98,7 @@ public class NotificationData {
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public NotificationCardData m2680clone() throws CloneNotSupportedException {
+        public NotificationCardData m2678clone() throws CloneNotSupportedException {
             return (NotificationCardData) super.clone();
         }
     }
@@ -202,7 +202,7 @@ public class NotificationData {
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public NotificationIconOnlyData m2681clone() throws CloneNotSupportedException {
+        public NotificationIconOnlyData m2679clone() throws CloneNotSupportedException {
             return (NotificationIconOnlyData) super.clone();
         }
     }
@@ -255,7 +255,7 @@ public class NotificationData {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public NotificationData m2679clone() throws CloneNotSupportedException {
+    public NotificationData m2677clone() throws CloneNotSupportedException {
         return (NotificationData) super.clone();
     }
 }

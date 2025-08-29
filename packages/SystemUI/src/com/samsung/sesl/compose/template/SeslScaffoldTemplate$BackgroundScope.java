@@ -55,7 +55,7 @@ public final class SeslScaffoldTemplate$BackgroundScope {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public final void m3356BackgroundFNF3uiM(final PaddingValues paddingValues, Modifier modifier, long j, Composer composer, final int i, final int i2) {
+    public final void m3355BackgroundFNF3uiM(final PaddingValues paddingValues, Modifier modifier, long j, Composer composer, final int i, final int i2) {
         int i3;
         final long j2;
         boolean z;
@@ -187,7 +187,7 @@ public final class SeslScaffoldTemplate$BackgroundScope {
                     ((Integer) obj2).getClass();
                     SeslScaffoldTemplate$BackgroundScope.Companion companion = SeslScaffoldTemplate$BackgroundScope.Companion;
                     int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
-                    this.f$0.m3356BackgroundFNF3uiM(paddingValues, modifier2, j3, composer2, iUpdateChangedFlags, i2);
+                    this.f$0.m3355BackgroundFNF3uiM(paddingValues, modifier2, j3, composer2, iUpdateChangedFlags, i2);
                     return Unit.INSTANCE;
                 }
             };

@@ -17,7 +17,7 @@ final /* synthetic */ class AccessibilityRepositoryImpl$isTouchExplorationEnable
     public final Object mo781invoke(Object obj) {
         Boolean bool = (Boolean) obj;
         bool.booleanValue();
-        ((ChannelCoroutine) ((ProducerScope) this.receiver)).mo3476trySendJP2dKIU(bool);
+        ((ChannelCoroutine) ((ProducerScope) this.receiver)).mo3475trySendJP2dKIU(bool);
         return Unit.INSTANCE;
     }
 }

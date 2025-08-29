@@ -26,7 +26,7 @@ public abstract class StackTraceRecoveryKt {
             int i3 = Result.$r8$clinit;
             failure2 = new Result.Failure(th2);
         }
-        if (Result.m3442exceptionOrNullimpl(failure2) != null) {
+        if (Result.m3441exceptionOrNullimpl(failure2) != null) {
             failure2 = "kotlinx.coroutines.internal.StackTraceRecoveryKt";
         }
     }

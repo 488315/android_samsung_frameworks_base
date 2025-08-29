@@ -781,7 +781,7 @@ public class AlertController {
         }
     }
 
-    private void setBackground(TypedArray typedArray, View view, View view2, View view3, View view4, boolean z, boolean z2, boolean z3) {
+    private void setBackground(TypedArray typedArray, View view, View view2, View view3, View view4, boolean z, boolean z2, boolean z3) throws Resources.NotFoundException {
         int i;
         int i2;
         int i3;

@@ -1283,16 +1283,16 @@ public final class FlowKt {
     }
 
     /* renamed from: slidingWindow-8Mi8wO0, reason: not valid java name */
-    public static final <T> Flow m3166slidingWindow8Mi8wO0(Flow flow, long j, SystemClock systemClock) {
+    public static final <T> Flow m3165slidingWindow8Mi8wO0(Flow flow, long j, SystemClock systemClock) {
         return new ChannelFlowBuilder(new FlowKt$slidingWindow$1(j, flow, systemClock, null), null, 0, null, 14, null);
     }
 
     /* renamed from: slidingWindow-8Mi8wO0$default, reason: not valid java name */
-    public static /* synthetic */ Flow m3167slidingWindow8Mi8wO0$default(Flow flow, long j, SystemClock systemClock, int i, Object obj) {
+    public static /* synthetic */ Flow m3166slidingWindow8Mi8wO0$default(Flow flow, long j, SystemClock systemClock, int i, Object obj) {
         if ((i & 2) != 0) {
             systemClock = new SystemClockImpl();
         }
-        return m3166slidingWindow8Mi8wO0(flow, j, systemClock);
+        return m3165slidingWindow8Mi8wO0(flow, j, systemClock);
     }
 
     public static final <T> Flow throttle(Flow flow, long j, SystemClock systemClock) {

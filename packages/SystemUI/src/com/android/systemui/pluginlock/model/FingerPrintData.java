@@ -68,7 +68,7 @@ public class FingerPrintData {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public FingerPrintData m2674clone() throws CloneNotSupportedException {
+    public FingerPrintData m2672clone() throws CloneNotSupportedException {
         return (FingerPrintData) super.clone();
     }
 }

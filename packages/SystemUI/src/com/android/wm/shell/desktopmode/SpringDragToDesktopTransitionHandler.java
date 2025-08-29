@@ -192,7 +192,7 @@ public final class SpringDragToDesktopTransitionHandler extends DragToDesktopTra
                 }
                 desktopModeOnTaskResizeAnimationListener2.onAnimationEnd(transitionStateRequireTransitionState.getDraggedTaskId());
                 transitionFinishCallback.onTransitionFinished(null);
-                springDragToDesktopTransitionHandler.transitionState = null;
+                springDragToDesktopTransitionHandler.clearState();
                 springDragToDesktopTransitionHandler.interactionJankMonitor.end(116);
                 return Unit.INSTANCE;
             }

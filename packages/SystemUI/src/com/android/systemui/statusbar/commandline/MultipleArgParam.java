@@ -52,12 +52,12 @@ public final class MultipleArgParam implements ReadOnlyProperty, Param {
             throw new ArgParseError("no argument provided for " + this.shortName);
         }
         for (int i = 0; i < this.numArgs; i++) {
-            Object objMo2565parseValueIoAF18A = this.valueParser.mo2565parseValueIoAF18A((String) it.next());
-            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(objMo2565parseValueIoAF18A);
-            if (thM3442exceptionOrNullimpl != null) {
-                throw thM3442exceptionOrNullimpl;
+            Object objMo2563parseValueIoAF18A = this.valueParser.mo2563parseValueIoAF18A((String) it.next());
+            Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(objMo2563parseValueIoAF18A);
+            if (thM3441exceptionOrNullimpl != null) {
+                throw thM3441exceptionOrNullimpl;
             }
-            ((ArrayList) this.inner).add(objMo2565parseValueIoAF18A);
+            ((ArrayList) this.inner).add(objMo2563parseValueIoAF18A);
         }
     }
 

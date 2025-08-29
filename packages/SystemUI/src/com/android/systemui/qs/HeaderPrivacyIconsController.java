@@ -48,15 +48,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import kotlin.Unit;
-import kotlin.collections.CollectionsKt___CollectionsKt;
-import kotlin.collections.EmptyList;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 
 /* loaded from: classes2.dex */
 public final class HeaderPrivacyIconsController {
     public static final /* synthetic */ int $r8$clinit = 0;
-    public final long UPDATE_CHIP_VISIBILITY = 10000;
     public final ActivityStarter activityStarter;
     public final HeaderPrivacyIconsController$attachStateChangeListener$1 attachStateChangeListener;
     public final Executor backgroundExecutor;
@@ -64,7 +61,13 @@ public final class HeaderPrivacyIconsController {
     public final String cameraSlot;
     public ShadeHeaderController$chipVisibilityListener$1 chipVisibilityListener;
     public final DelayableExecutor delayableUiExecutor;
-    public final HeaderPrivacyIconsController$desktopCallback$1 desktopCallback;
+    public final HeaderPrivacyIconsController$desktopCallback$1 desktopCallback = new StatusBarSignalPolicy.DesktopCallback() { // from class: com.android.systemui.qs.HeaderPrivacyIconsController$desktopCallback$1
+        @Override // com.android.systemui.statusbar.phone.StatusBarSignalPolicy.DesktopCallback
+        public final void updateDesktopStatusBarIcons() {
+            HeaderPrivacyIconsController headerPrivacyIconsController = this.this$0;
+            headerPrivacyIconsController.notifyPrivacyItemsChanged(headerPrivacyIconsController.privacyChip.privacyList);
+        }
+    };
     public final DeviceProvisionedController deviceProvisionedController;
     public final StatusIconContainer iconContainer;
     public boolean listening;
@@ -78,9 +81,7 @@ public final class HeaderPrivacyIconsController {
     public boolean privacyChipLogged;
     public final PrivacyDialogController privacyDialogController;
     public final PrivacyItemController privacyItemController;
-    public List privacyList;
     public final PrivacyLogger privacyLogger;
-    public List recentLocationPrivacyList;
     public final SafetyCenterManager safetyCenterManager;
     public final HeaderPrivacyIconsController$safetyCenterReceiver$1 safetyCenterReceiver;
     public final ShadeDialogContextInteractor shadeDialogContextInteractor;
@@ -104,9 +105,10 @@ public final class HeaderPrivacyIconsController {
 
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r1v0, types: [android.content.BroadcastReceiver, com.android.systemui.qs.HeaderPrivacyIconsController$safetyCenterReceiver$1] */
-    /* JADX WARN: Type inference failed for: r9v17, types: [com.android.systemui.qs.HeaderPrivacyIconsController$desktopCallback$1] */
-    /* JADX WARN: Type inference failed for: r9v18, types: [com.android.systemui.qs.HeaderPrivacyIconsController$panelEventReceiver$1] */
-    /* JADX WARN: Type inference failed for: r9v19, types: [android.view.View$OnAttachStateChangeListener, com.android.systemui.qs.HeaderPrivacyIconsController$attachStateChangeListener$1] */
+    /* JADX WARN: Type inference failed for: r9v15, types: [com.android.systemui.qs.HeaderPrivacyIconsController$desktopCallback$1] */
+    /* JADX WARN: Type inference failed for: r9v16, types: [com.android.systemui.qs.HeaderPrivacyIconsController$panelEventReceiver$1] */
+    /* JADX WARN: Type inference failed for: r9v17, types: [android.view.View$OnAttachStateChangeListener, com.android.systemui.qs.HeaderPrivacyIconsController$attachStateChangeListener$1] */
+    /* JADX WARN: Type inference failed for: r9v18, types: [com.android.systemui.qs.HeaderPrivacyIconsController$picCallback$1] */
     public HeaderPrivacyIconsController(PrivacyItemController privacyItemController, UiEventLogger uiEventLogger, OngoingPrivacyChip ongoingPrivacyChip, PrivacyDialogController privacyDialogController, PrivacyDialogControllerV2 privacyDialogControllerV2, PrivacyLogger privacyLogger, StatusIconContainer statusIconContainer, PermissionManager permissionManager, Executor executor, Executor executor2, ActivityStarter activityStarter, AppOpsController appOpsController, BroadcastDispatcher broadcastDispatcher, SafetyCenterManager safetyCenterManager, DeviceProvisionedController deviceProvisionedController, FeatureFlags featureFlags, ShadeDialogContextInteractor shadeDialogContextInteractor, DelayableExecutor delayableExecutor, SystemClock systemClock, TaskbarIndicatorController taskbarIndicatorController) {
         this.privacyItemController = privacyItemController;
         this.uiEventLogger = uiEventLogger;
@@ -127,16 +129,6 @@ public final class HeaderPrivacyIconsController {
         this.cameraSlot = ongoingPrivacyChip.getResources().getString(17043268);
         this.micSlot = ongoingPrivacyChip.getResources().getString(17043286);
         this.locationSlot = ongoingPrivacyChip.getResources().getString(17043284);
-        EmptyList emptyList = EmptyList.INSTANCE;
-        this.privacyList = emptyList;
-        this.recentLocationPrivacyList = emptyList;
-        this.desktopCallback = new StatusBarSignalPolicy.DesktopCallback() { // from class: com.android.systemui.qs.HeaderPrivacyIconsController$desktopCallback$1
-            @Override // com.android.systemui.statusbar.phone.StatusBarSignalPolicy.DesktopCallback
-            public final void updateDesktopStatusBarIcons() {
-                HeaderPrivacyIconsController headerPrivacyIconsController = this.this$0;
-                headerPrivacyIconsController.notifyPrivacyItemsChanged(headerPrivacyIconsController.privacyChip.privacyList);
-            }
-        };
         ?? r1 = new BroadcastReceiver() { // from class: com.android.systemui.qs.HeaderPrivacyIconsController$safetyCenterReceiver$1
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context, Intent intent) {
@@ -187,15 +179,41 @@ public final class HeaderPrivacyIconsController {
         }
         ongoingPrivacyChip.setVisibility(8);
         ongoingPrivacyChip.addOnAttachStateChangeListener(r9);
-        this.picCallback = new HeaderPrivacyIconsController$picCallback$1(this);
-    }
+        this.picCallback = new PrivacyItemController.Callback() { // from class: com.android.systemui.qs.HeaderPrivacyIconsController$picCallback$1
+            @Override // com.android.systemui.privacy.PrivacyConfig.Callback
+            public final void onFlagLocationChanged(boolean z) {
+                HeaderPrivacyIconsController headerPrivacyIconsController = this.this$0;
+                if (headerPrivacyIconsController.locationIndicatorsEnabled != z) {
+                    headerPrivacyIconsController.locationIndicatorsEnabled = z;
+                    update$2$1();
+                }
+            }
 
-    public final synchronized List getPrivacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core() {
-        return CollectionsKt___CollectionsKt.toList(this.privacyList);
-    }
+            @Override // com.android.systemui.privacy.PrivacyConfig.Callback
+            public final void onFlagMicCameraChanged(boolean z) {
+                HeaderPrivacyIconsController headerPrivacyIconsController = this.this$0;
+                if (headerPrivacyIconsController.micCameraIndicatorsEnabled != z) {
+                    headerPrivacyIconsController.micCameraIndicatorsEnabled = z;
+                    update$2$1();
+                }
+            }
 
-    public final synchronized List getRecentLocationPrivacyList$frameworks__base__packages__SystemUI__android_common__SystemUI_core() {
-        return CollectionsKt___CollectionsKt.toList(this.recentLocationPrivacyList);
+            @Override // com.android.systemui.privacy.PrivacyItemController.Callback
+            public final void onPrivacyItemsChanged(List list) {
+                HeaderPrivacyIconsController headerPrivacyIconsController = this.this$0;
+                headerPrivacyIconsController.privacyChip.setPrivacyList(list);
+                headerPrivacyIconsController.setChipVisibility(!list.isEmpty());
+                headerPrivacyIconsController.notifyPrivacyItemsChanged(list);
+            }
+
+            public final void update$2$1() {
+                int i = HeaderPrivacyIconsController.$r8$clinit;
+                HeaderPrivacyIconsController headerPrivacyIconsController = this.this$0;
+                headerPrivacyIconsController.updatePrivacyIconSlots();
+                headerPrivacyIconsController.setChipVisibility(!headerPrivacyIconsController.privacyChip.privacyList.isEmpty());
+                headerPrivacyIconsController.notifyPrivacyItemsChanged(headerPrivacyIconsController.privacyChip.privacyList);
+            }
+        };
     }
 
     public final void notifyPrivacyItemsChanged(List list) {

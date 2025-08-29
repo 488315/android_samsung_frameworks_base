@@ -676,7 +676,7 @@ public class MediaOutputBroadcastDialog extends MediaOutputBaseDialog {
                             }
                         }
                     }
-                    Pair pair = channelIndex == 0 ? new Pair(UInt.m3445boximpl(-1), UInt.m3445boximpl(i2)) : new Pair(UInt.m3445boximpl(channelIndex), UInt.m3445boximpl(i2));
+                    Pair pair = channelIndex == 0 ? new Pair(UInt.m3444boximpl(-1), UInt.m3444boximpl(i2)) : new Pair(UInt.m3444boximpl(channelIndex), UInt.m3444boximpl(i2));
                     int i4 = ((UInt) pair.component1()).data;
                     int i5 = ((UInt) pair.component2()).data;
                     int i6 = StringCompanionObject.$r8$clinit;

@@ -346,7 +346,7 @@ public abstract class PinInputDisplayKt {
                             alertDialogCreate.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.bouncer.ui.composable.PinInputDisplayKt$SimArea$2$1$1$1
                                 @Override // android.content.DialogInterface.OnDismissListener
                                 public final void onDismiss(DialogInterface dialogInterface) {
-                                    pinBouncerViewModel2.requests.mo3476trySendJP2dKIU(PinBouncerViewModel.OnErrorDialogDismissed.INSTANCE);
+                                    pinBouncerViewModel2.requests.mo3475trySendJP2dKIU(PinBouncerViewModel.OnErrorDialogDismissed.INSTANCE);
                                 }
                             });
                             alertDialogCreate.show();

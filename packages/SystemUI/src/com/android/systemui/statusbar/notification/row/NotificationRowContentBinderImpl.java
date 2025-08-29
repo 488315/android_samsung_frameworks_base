@@ -279,11 +279,11 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
 
         @Override // android.os.AsyncTask
         public final /* bridge */ /* synthetic */ Object doInBackground(Object[] objArr) {
-            return Result.m3441boximpl(m3083doInBackgroundIoAF18A());
+            return Result.m3440boximpl(m3081doInBackgroundIoAF18A());
         }
 
         /* renamed from: doInBackground-IoAF18A, reason: not valid java name */
-        public final Object m3083doInBackgroundIoAF18A() {
+        public final Object m3081doInBackgroundIoAF18A() {
             Object failure;
             boolean zIsEnabled = Trace.isEnabled();
             if (zIsEnabled) {
@@ -499,20 +499,7 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
                 View view8 = notificationContentView2.mHeadsUpChild;
                 notificationContentView2.applySnoozeAction(view8);
                 notificationContentView2.applyBubbleAction(view8, notificationEntry);
-                if (notificationContentView2.mContainingNotification != null) {
-                    View view9 = notificationContentView2.mContractedChild;
-                    if (view9 != null) {
-                        notificationContentView2.updateContentViewMarginBottom(view9, false);
-                    }
-                    View view10 = notificationContentView2.mExpandedChild;
-                    if (view10 != null) {
-                        notificationContentView2.updateContentViewMarginBottom(view10, true);
-                    }
-                    View view11 = notificationContentView2.mHeadsUpChild;
-                    if (view11 != null) {
-                        notificationContentView2.updateContentViewMarginBottom(view11, false);
-                    }
-                }
+                notificationContentView2.updateSystemActionsMargin();
             }
             expandableNotificationRow.mShowingPublicInitialized = false;
             NotificationMenuRowPlugin notificationMenuRowPlugin = expandableNotificationRow.mMenuRow;
@@ -539,18 +526,18 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
                 expandableNotificationRow3.mChildrenContainer.updateChildrenAppearance();
             }
             expandableNotificationRow.onAttachedChildrenCountChanged();
-            expandableNotificationRow.mPublicLayout.updateExpandButtonsDuringLayout(expandableNotificationRow.mShowPublicExpander, false);
+            expandableNotificationRow.mPublicLayout.updateExpandButtons(expandableNotificationRow.mShowPublicExpander);
             expandableNotificationRow.updateLimits();
             expandableNotificationRow.updateShelfIconColor();
             expandableNotificationRow.updateBackgroundColors();
             ((NotificationColorPicker) Dependency.sDependency.getDependencyInner(NotificationColorPicker.class)).updateAllTextViewColors(expandableNotificationRow, expandableNotificationRow.mDimmed);
             for (NotificationContentView notificationContentView3 : expandableNotificationRow.mLayouts) {
-                View view12 = notificationContentView3.mContractedChild;
-                if (view12 != null && (textView2 = (TextView) view12.findViewById(android.R.id.inter_word)) != null && textView2.getText().toString().contains("@")) {
+                View view9 = notificationContentView3.mContractedChild;
+                if (view9 != null && (textView2 = (TextView) view9.findViewById(android.R.id.inter_word)) != null && textView2.getText().toString().contains("@")) {
                     notificationContentView3.mIsContractedHeaderContainAtMark = true;
                 }
-                View view13 = notificationContentView3.mExpandedChild;
-                if (view13 != null && (textView = (TextView) view13.findViewById(android.R.id.inter_word)) != null && textView.getText().toString().contains("@")) {
+                View view10 = notificationContentView3.mExpandedChild;
+                if (view10 != null && (textView = (TextView) view10.findViewById(android.R.id.inter_word)) != null && textView.getText().toString().contains("@")) {
                     notificationContentView3.mIsExpandedHeaderContainAtMark = true;
                 }
             }
@@ -582,16 +569,16 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
         public final void onPostExecute(Object obj) {
             AsyncInflationTask asyncInflationTask;
             Trace.endAsyncSection("NotificationRowContentBinderImpl.AsyncInflationTask", System.identityHashCode(this));
-            Object objM3443unboximpl = ((Result) obj).m3443unboximpl();
-            if (objM3443unboximpl instanceof Result.Failure) {
+            Object objM3442unboximpl = ((Result) obj).m3442unboximpl();
+            if (objM3442unboximpl instanceof Result.Failure) {
                 asyncInflationTask = this;
             } else {
                 asyncInflationTask = this;
-                asyncInflationTask.cancellationSignal = Companion.access$apply(NotificationRowContentBinderImpl.Companion, this.inflationExecutor, this.inflateSynchronously, this.bindParams.isMinimized, (InflationProgress) objM3443unboximpl, this.reInflateFlags, this.remoteViewCache, this.entry, this.row, this.remoteViewClickHandler, asyncInflationTask, this.logger, this.faceWidgetNotificationControllerWrapper);
+                asyncInflationTask.cancellationSignal = Companion.access$apply(NotificationRowContentBinderImpl.Companion, this.inflationExecutor, this.inflateSynchronously, this.bindParams.isMinimized, (InflationProgress) objM3442unboximpl, this.reInflateFlags, this.remoteViewCache, this.entry, this.row, this.remoteViewClickHandler, asyncInflationTask, this.logger, this.faceWidgetNotificationControllerWrapper);
             }
-            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(objM3443unboximpl);
-            if (thM3442exceptionOrNullimpl != null) {
-                asyncInflationTask.handleError$1((Exception) thM3442exceptionOrNullimpl);
+            Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(objM3442unboximpl);
+            if (thM3441exceptionOrNullimpl != null) {
+                asyncInflationTask.handleError$1((Exception) thM3441exceptionOrNullimpl);
             }
         }
 
@@ -1304,7 +1291,7 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
             }
             if ((i & 2) != 0) {
                 expandableNotificationRow.mExpandable = newRemoteViews.expanded != null;
-                expandableNotificationRow.mPrivateLayout.updateExpandButtonsDuringLayout(expandableNotificationRow.isExpandable(), false);
+                expandableNotificationRow.mPrivateLayout.updateExpandButtons(expandableNotificationRow.isExpandable());
             }
             expandableNotificationRow.mIsCustomBigNotification = NotificationContentInflater.isCustomNotification(notificationEntry.mSbn.getNotification(), notificationContentView.mExpandedChild, notificationEntry.mSbn.getNotification().bigContentView);
             if ((i & 256) != 0 && (view = inflationProgress.inflatedPromotedOngoingView) != null) {
@@ -1760,7 +1747,7 @@ public final class NotificationRowContentBinderImpl implements NotificationRowCo
             asyncInflationTask.executeOnExecutor(this.inflationExecutor, new Void[0]);
         } else {
             Void[] voidArr = new Void[0];
-            asyncInflationTask.onPostExecute(Result.m3441boximpl(asyncInflationTask.m3083doInBackgroundIoAF18A()));
+            asyncInflationTask.onPostExecute(Result.m3440boximpl(asyncInflationTask.m3081doInBackgroundIoAF18A()));
         }
     }
 

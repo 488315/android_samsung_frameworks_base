@@ -1,6 +1,7 @@
 package android.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -373,7 +374,7 @@ public class ExpandableListView extends ListView {
         super.setOnItemClickListener(onItemClickListener);
     }
 
-    public void setAdapter(ExpandableListAdapter expandableListAdapter) {
+    public void setAdapter(ExpandableListAdapter expandableListAdapter) throws Resources.NotFoundException {
         this.mAdapter = expandableListAdapter;
         if (expandableListAdapter != null) {
             this.mConnector = new ExpandableListConnector(expandableListAdapter);

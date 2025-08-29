@@ -86,7 +86,7 @@ public final class Desktop extends GeneratedMessageLite implements MessageLiteOr
     }
 
     /* renamed from: -$$Nest$maddAllZOrderedTasks, reason: not valid java name */
-    public static void m3250$$Nest$maddAllZOrderedTasks(Desktop desktop, Iterable iterable) {
+    public static void m3249$$Nest$maddAllZOrderedTasks(Desktop desktop, Iterable iterable) {
         Internal.ProtobufList protobufList = desktop.zOrderedTasks_;
         if (!((AbstractProtobufList) protobufList).isMutable) {
             int size = protobufList.size();
@@ -96,13 +96,13 @@ public final class Desktop extends GeneratedMessageLite implements MessageLiteOr
     }
 
     /* renamed from: -$$Nest$mclearZOrderedTasks, reason: not valid java name */
-    public static void m3251$$Nest$mclearZOrderedTasks(Desktop desktop) {
+    public static void m3250$$Nest$mclearZOrderedTasks(Desktop desktop) {
         desktop.getClass();
         desktop.zOrderedTasks_ = IntArrayList.EMPTY_LIST;
     }
 
     /* renamed from: -$$Nest$mgetMutableTasksByTaskIdMap, reason: not valid java name */
-    public static MapFieldLite m3252$$Nest$mgetMutableTasksByTaskIdMap(Desktop desktop) {
+    public static MapFieldLite m3251$$Nest$mgetMutableTasksByTaskIdMap(Desktop desktop) {
         if (!desktop.tasksByTaskId_.isMutable()) {
             desktop.tasksByTaskId_ = desktop.tasksByTaskId_.mutableCopy();
         }
@@ -110,19 +110,19 @@ public final class Desktop extends GeneratedMessageLite implements MessageLiteOr
     }
 
     /* renamed from: -$$Nest$msetDesktopId, reason: not valid java name */
-    public static void m3253$$Nest$msetDesktopId(int i, Desktop desktop) {
+    public static void m3252$$Nest$msetDesktopId(int i, Desktop desktop) {
         desktop.bitField0_ |= 2;
         desktop.desktopId_ = i;
     }
 
     /* renamed from: -$$Nest$msetDisplayId, reason: not valid java name */
-    public static void m3254$$Nest$msetDisplayId(int i, Desktop desktop) {
+    public static void m3253$$Nest$msetDisplayId(int i, Desktop desktop) {
         desktop.bitField0_ |= 1;
         desktop.displayId_ = i;
     }
 
     /* renamed from: -$$Nest$msetUsed, reason: not valid java name */
-    public static void m3255$$Nest$msetUsed(int i, Desktop desktop) {
+    public static void m3254$$Nest$msetUsed(int i, Desktop desktop) {
         desktop.bitField0_ |= 4;
         desktop.used_ = i;
     }

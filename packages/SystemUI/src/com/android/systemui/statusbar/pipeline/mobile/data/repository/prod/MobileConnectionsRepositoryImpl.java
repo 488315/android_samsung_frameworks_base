@@ -168,11 +168,11 @@ public final class MobileConnectionsRepositoryImpl implements MobileConnectionsR
                         MobileInputLogger mobileInputLogger = mobileConnectionsRepositoryImpl2.logger;
                         mobileInputLogger.getClass();
                         LogBuffer.log$default(mobileInputLogger.buffer, "MobileInputLog", LogLevel.INFO, "onSimStateChanged");
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(mobileConnectionsRepositoryImpl2.keyguardUpdateMonitor.isSimPinSecure()));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(mobileConnectionsRepositoryImpl2.keyguardUpdateMonitor.isSimPinSecure()));
                     }
                 };
                 MobileConnectionsRepositoryImpl.this.keyguardUpdateMonitor.registerCallback(keyguardUpdateMonitorCallback);
-                ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.FALSE);
+                ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.FALSE);
                 MobileConnectionsRepositoryImpl$isAnySimSecure$1$$ExternalSyntheticLambda0 mobileConnectionsRepositoryImpl$isAnySimSecure$1$$ExternalSyntheticLambda0 = new MobileConnectionsRepositoryImpl$isAnySimSecure$1$$ExternalSyntheticLambda0(MobileConnectionsRepositoryImpl.this, keyguardUpdateMonitorCallback, 0);
                 this.label = 1;
                 if (ProduceKt.awaitClose(producerScope, mobileConnectionsRepositoryImpl$isAnySimSecure$1$$ExternalSyntheticLambda0, this) == coroutineSingletons) {

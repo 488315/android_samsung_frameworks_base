@@ -17,29 +17,29 @@ public class AcceptLanguageList extends SIPHeaderList<AcceptLanguage> {
 
     @Override // gov.nist.javax.sip.header.SIPHeaderList
     /* renamed from: getFirst */
-    public final SIPHeader mo3439getFirst() {
-        AcceptLanguage acceptLanguage = (AcceptLanguage) super.mo3439getFirst();
+    public final SIPHeader mo3438getFirst() {
+        AcceptLanguage acceptLanguage = (AcceptLanguage) super.mo3438getFirst();
         return acceptLanguage != null ? acceptLanguage : new AcceptLanguage();
     }
 
     @Override // gov.nist.javax.sip.header.SIPHeaderList
     /* renamed from: getLast */
-    public final SIPHeader mo3440getLast() {
-        AcceptLanguage acceptLanguage = (AcceptLanguage) super.mo3440getLast();
+    public final SIPHeader mo3439getLast() {
+        AcceptLanguage acceptLanguage = (AcceptLanguage) super.mo3439getLast();
         return acceptLanguage != null ? acceptLanguage : new AcceptLanguage();
     }
 
     @Override // gov.nist.javax.sip.header.SIPHeaderList
     /* renamed from: getFirst, reason: collision with other method in class */
-    public final Object mo3439getFirst() {
-        AcceptLanguage acceptLanguage = (AcceptLanguage) super.mo3439getFirst();
+    public final Object mo3438getFirst() {
+        AcceptLanguage acceptLanguage = (AcceptLanguage) super.mo3438getFirst();
         return acceptLanguage != null ? acceptLanguage : new AcceptLanguage();
     }
 
     @Override // gov.nist.javax.sip.header.SIPHeaderList
     /* renamed from: getLast, reason: collision with other method in class */
-    public final Object mo3440getLast() {
-        AcceptLanguage acceptLanguage = (AcceptLanguage) super.mo3440getLast();
+    public final Object mo3439getLast() {
+        AcceptLanguage acceptLanguage = (AcceptLanguage) super.mo3439getLast();
         return acceptLanguage != null ? acceptLanguage : new AcceptLanguage();
     }
 }

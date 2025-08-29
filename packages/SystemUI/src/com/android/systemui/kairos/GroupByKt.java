@@ -24,7 +24,7 @@ public abstract class GroupByKt {
             @Override // kotlin.jvm.functions.Function3
             public final Object invoke(Object obj, Object obj2, Object obj3) {
                 ((Number) obj3).intValue();
-                return MapHolder.m2586boximpl((Map) obj2);
+                return MapHolder.m2584boximpl((Map) obj2);
             }
         };
         return new GroupedEvents(DemuxKt.DemuxImpl(num, new EventsImpl() { // from class: com.android.systemui.kairos.internal.PullNodesKt$mapImpl$$inlined$EventsImplCheap$1

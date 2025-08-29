@@ -23,7 +23,7 @@ final class ColorStyle implements TextForegroundStyle {
         }
         long j = ((ColorStyle) obj).value;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.value, j);
+        return ULong.m3446equalsimpl0(this.value, j);
     }
 
     @Override // androidx.compose.ui.text.style.TextForegroundStyle

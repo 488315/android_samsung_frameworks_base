@@ -47,12 +47,12 @@ public final class Result<T> implements Serializable {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ Result m3441boximpl(Object obj) {
+    public static final /* synthetic */ Result m3440boximpl(Object obj) {
         return new Result(obj);
     }
 
     /* renamed from: exceptionOrNull-impl, reason: not valid java name */
-    public static final Throwable m3442exceptionOrNullimpl(Object obj) {
+    public static final Throwable m3441exceptionOrNullimpl(Object obj) {
         if (obj instanceof Failure) {
             return ((Failure) obj).exception;
         }
@@ -80,7 +80,7 @@ public final class Result<T> implements Serializable {
     }
 
     /* renamed from: unbox-impl, reason: not valid java name */
-    public final /* synthetic */ Object m3443unboximpl() {
+    public final /* synthetic */ Object m3442unboximpl() {
         return this.value;
     }
 }

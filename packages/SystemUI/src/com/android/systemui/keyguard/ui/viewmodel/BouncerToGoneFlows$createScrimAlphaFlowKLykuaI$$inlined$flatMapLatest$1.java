@@ -77,7 +77,7 @@ public final class BouncerToGoneFlows$createScrimAlphaFlowKLykuaI$$inlined$flatM
             final Ref$BooleanRef ref$BooleanRef2 = this.$willRunDismissFromKeyguard$inlined;
             final Function0 function0 = this.$willRunAnimationOnKeyguard$inlined;
             final Ref$BooleanRef ref$BooleanRef3 = this.$isShadeExpanded$inlined;
-            final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2616sharedFlow74qcysc$default = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilder, j, bouncerToGoneFlows$createScrimAlphaFlow$2$1, 0L, new Function0() { // from class: com.android.systemui.keyguard.ui.viewmodel.BouncerToGoneFlows$createScrimAlphaFlow$2$2
+            final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2614sharedFlow74qcysc$default = KeyguardTransitionAnimationFlow.FlowBuilder.m2614sharedFlow74qcysc$default(flowBuilder, j, bouncerToGoneFlows$createScrimAlphaFlow$2$1, 0L, new Function0() { // from class: com.android.systemui.keyguard.ui.viewmodel.BouncerToGoneFlows$createScrimAlphaFlow$2$2
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
                     ref$BooleanRef.element = ((StatusBarStateControllerImpl) bouncerToGoneFlows.statusBarStateController).mLeaveOpenOnKeyguardHide;
@@ -186,7 +186,7 @@ public final class BouncerToGoneFlows$createScrimAlphaFlowKLykuaI$$inlined$flatM
 
                 @Override // kotlinx.coroutines.flow.Flow
                 public final Object collect(FlowCollector flowCollector2, Continuation continuation) {
-                    Object objCollect = keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2616sharedFlow74qcysc$default.collect(new AnonymousClass2(flowCollector2, ref$BooleanRef4, ref$BooleanRef5, ref$BooleanRef6), continuation);
+                    Object objCollect = keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2614sharedFlow74qcysc$default.collect(new AnonymousClass2(flowCollector2, ref$BooleanRef4, ref$BooleanRef5, ref$BooleanRef6), continuation);
                     return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                 }
             };

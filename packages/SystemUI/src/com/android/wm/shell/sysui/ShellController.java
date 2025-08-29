@@ -76,7 +76,7 @@ public class ShellController {
     public final AnonymousClass2 mDumpCommandHandler = new ShellCommandHandler.ShellCommandActionHandler() { // from class: com.android.wm.shell.sysui.ShellController.2
         @Override // com.android.wm.shell.sysui.ShellCommandHandler.ShellCommandActionHandler
         public final boolean onShellCommand(PrintWriter printWriter, String[] strArr) {
-            ShellController.m3282$$Nest$mhandleDump(ShellController.this, printWriter);
+            ShellController.m3281$$Nest$mhandleDump(ShellController.this, printWriter);
             return true;
         }
 
@@ -212,7 +212,7 @@ public class ShellController {
     }
 
     /* renamed from: -$$Nest$mhandleDump, reason: not valid java name */
-    public static void m3282$$Nest$mhandleDump(ShellController shellController, PrintWriter printWriter) {
+    public static void m3281$$Nest$mhandleDump(ShellController shellController, PrintWriter printWriter) {
         ShellCommandHandler shellCommandHandler = shellController.mShellCommandHandler;
         Iterator it = shellCommandHandler.mDumpables.keySet().iterator();
         while (it.hasNext()) {

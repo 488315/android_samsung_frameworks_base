@@ -54,7 +54,7 @@ public final class TileGridCell implements GridCell, SizedTile, CategoryAndName 
 
     @Override // com.android.systemui.qs.panels.ui.model.GridCell
     /* renamed from: getSpan-hRN5aJ8 */
-    public final long mo2908getSpanhRN5aJ8() {
+    public final long mo2906getSpanhRN5aJ8() {
         return this.span;
     }
 

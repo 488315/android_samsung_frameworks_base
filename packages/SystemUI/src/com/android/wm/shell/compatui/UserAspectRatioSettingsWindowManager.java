@@ -47,7 +47,7 @@ public class UserAspectRatioSettingsWindowManager extends CompatUIWindowManagerA
     }
 
     /* renamed from: $r8$lambda$qcC5U0asMBEasgAnScT0e3j-tE0, reason: not valid java name */
-    public static void m3244$r8$lambda$qcC5U0asMBEasgAnScT0e3jtE0(UserAspectRatioSettingsWindowManager userAspectRatioSettingsWindowManager) {
+    public static void m3243$r8$lambda$qcC5U0asMBEasgAnScT0e3jtE0(UserAspectRatioSettingsWindowManager userAspectRatioSettingsWindowManager) {
         UserAspectRatioSettingsLayout userAspectRatioSettingsLayout = userAspectRatioSettingsWindowManager.mLayout;
         if (userAspectRatioSettingsLayout == null) {
             return;

@@ -38,7 +38,7 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E> implements
         }
 
         /* renamed from: add, reason: collision with other method in class */
-        public final void m3285add(Object obj) {
+        public final void m3284add(Object obj) {
             super.add(obj);
         }
     }
@@ -161,7 +161,7 @@ public abstract class ImmutableList<E> extends ImmutableCollection<E> implements
             return of(next);
         }
         Builder builder = new Builder();
-        builder.m3285add(next);
+        builder.m3284add(next);
         while (it.hasNext()) {
             builder.add(it.next());
         }

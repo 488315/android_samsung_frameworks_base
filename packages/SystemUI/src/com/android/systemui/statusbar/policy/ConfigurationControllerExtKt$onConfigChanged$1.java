@@ -47,7 +47,7 @@ final class ConfigurationControllerExtKt$onConfigChanged$1 extends SuspendLambda
             ConfigurationController.ConfigurationListener configurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.statusbar.policy.ConfigurationControllerExtKt$onConfigChanged$1$listener$1
                 @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
                 public final void onConfigChanged(Configuration configuration) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(configuration);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(configuration);
                 }
             };
             ((ConfigurationControllerImpl) this.$this_onConfigChanged).addCallback(configurationListener);

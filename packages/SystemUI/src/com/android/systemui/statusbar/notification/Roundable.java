@@ -17,15 +17,15 @@ public interface Roundable {
 
     default boolean requestBottomRoundness(float f, SourceType sourceType, boolean z) {
         LinkedHashMap linkedHashMap = (LinkedHashMap) getRoundableState().bottomRoundnessMap;
-        Float fM3450maxOrNull = CollectionsKt___CollectionsKt.m3450maxOrNull((Iterable) linkedHashMap.values());
-        float fFloatValue = fM3450maxOrNull != null ? fM3450maxOrNull.floatValue() : 0.0f;
+        Float fM3449maxOrNull = CollectionsKt___CollectionsKt.m3449maxOrNull((Iterable) linkedHashMap.values());
+        float fFloatValue = fM3449maxOrNull != null ? fM3449maxOrNull.floatValue() : 0.0f;
         if (f == 0.0f) {
             linkedHashMap.remove(sourceType);
         } else {
             linkedHashMap.put(sourceType, Float.valueOf(f));
         }
-        Float fM3450maxOrNull2 = CollectionsKt___CollectionsKt.m3450maxOrNull((Iterable) linkedHashMap.values());
-        float fFloatValue2 = fM3450maxOrNull2 != null ? fM3450maxOrNull2.floatValue() : 0.0f;
+        Float fM3449maxOrNull2 = CollectionsKt___CollectionsKt.m3449maxOrNull((Iterable) linkedHashMap.values());
+        float fFloatValue2 = fM3449maxOrNull2 != null ? fM3449maxOrNull2.floatValue() : 0.0f;
         if (fFloatValue == fFloatValue2) {
             return false;
         }
@@ -46,15 +46,15 @@ public interface Roundable {
 
     default boolean requestTopRoundness(float f, SourceType sourceType, boolean z) {
         LinkedHashMap linkedHashMap = (LinkedHashMap) getRoundableState().topRoundnessMap;
-        Float fM3450maxOrNull = CollectionsKt___CollectionsKt.m3450maxOrNull((Iterable) linkedHashMap.values());
-        float fFloatValue = fM3450maxOrNull != null ? fM3450maxOrNull.floatValue() : 0.0f;
+        Float fM3449maxOrNull = CollectionsKt___CollectionsKt.m3449maxOrNull((Iterable) linkedHashMap.values());
+        float fFloatValue = fM3449maxOrNull != null ? fM3449maxOrNull.floatValue() : 0.0f;
         if (f == 0.0f) {
             linkedHashMap.remove(sourceType);
         } else {
             linkedHashMap.put(sourceType, Float.valueOf(f));
         }
-        Float fM3450maxOrNull2 = CollectionsKt___CollectionsKt.m3450maxOrNull((Iterable) linkedHashMap.values());
-        float fFloatValue2 = fM3450maxOrNull2 != null ? fM3450maxOrNull2.floatValue() : 0.0f;
+        Float fM3449maxOrNull2 = CollectionsKt___CollectionsKt.m3449maxOrNull((Iterable) linkedHashMap.values());
+        float fFloatValue2 = fM3449maxOrNull2 != null ? fM3449maxOrNull2.floatValue() : 0.0f;
         if (fFloatValue == fFloatValue2) {
             return false;
         }

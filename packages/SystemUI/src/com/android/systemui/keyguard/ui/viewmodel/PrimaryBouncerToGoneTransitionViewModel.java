@@ -47,17 +47,17 @@ public final class PrimaryBouncerToGoneTransitionViewModel implements PrimaryBou
         FromPrimaryBouncerTransitionInteractor.Companion.getClass();
         long j = FromPrimaryBouncerTransitionInteractor.TO_GONE_DURATION;
         Edge.Companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM2615setupVtjQ1oo = keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, Edge.INVALID);
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM2613setupVtjQ1oo = keyguardTransitionAnimationFlow.m2613setupVtjQ1oo(j, Edge.INVALID);
         KeyguardState keyguardState = KeyguardState.PRIMARY_BOUNCER;
-        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(keyguardState, KeyguardState.GONE, flowBuilderM2615setupVtjQ1oo);
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(keyguardState, KeyguardState.GONE, flowBuilderM2613setupVtjQ1oo);
         this.transitionAnimation = flowBuilderM;
-        this.showAllNotifications = bouncerToGoneFlows.m2622showAllNotificationsVtjQ1oo(j, keyguardState);
+        this.showAllNotifications = bouncerToGoneFlows.m2620showAllNotificationsVtjQ1oo(j, keyguardState);
         ComposeBouncerFlags composeBouncerFlags = ComposeBouncerFlags.INSTANCE;
         composeBouncerFlags.getClass();
         final PrimaryBouncerToGoneTransitionViewModel$bouncerAlpha$2 primaryBouncerToGoneTransitionViewModel$bouncerAlpha$2 = new PrimaryBouncerToGoneTransitionViewModel$bouncerAlpha$2(primaryBouncerInteractor);
         FromPrimaryBouncerTransitionInteractor.Companion.getClass();
         final int i3 = 2;
-        this.bouncerAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(this.transitionAnimation, FromPrimaryBouncerTransitionInteractor.TO_GONE_SHORT_DURATION, new Function1(this) { // from class: com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToGoneTransitionViewModel$$ExternalSyntheticLambda0
+        this.bouncerAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2614sharedFlow74qcysc$default(this.transitionAnimation, FromPrimaryBouncerTransitionInteractor.TO_GONE_SHORT_DURATION, new Function1(this) { // from class: com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToGoneTransitionViewModel$$ExternalSyntheticLambda0
             public final /* synthetic */ PrimaryBouncerToGoneTransitionViewModel f$0;
 
             {
@@ -107,7 +107,7 @@ public final class PrimaryBouncerToGoneTransitionViewModel implements PrimaryBou
         }, null, null, null, null, IKnoxCustomManager.Stub.TRANSACTION_getHardKeyIntentMode);
         final PrimaryBouncerToGoneTransitionViewModel$lockscreenAlpha$2 primaryBouncerToGoneTransitionViewModel$lockscreenAlpha$2 = new PrimaryBouncerToGoneTransitionViewModel$lockscreenAlpha$2(primaryBouncerInteractor);
         Duration.Companion companion = Duration.Companion;
-        this.lockscreenAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(this.transitionAnimation, DurationKt.toDuration(50, DurationUnit.MILLISECONDS), new Function1(this) { // from class: com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToGoneTransitionViewModel$$ExternalSyntheticLambda0
+        this.lockscreenAlpha = KeyguardTransitionAnimationFlow.FlowBuilder.m2614sharedFlow74qcysc$default(this.transitionAnimation, DurationKt.toDuration(50, DurationUnit.MILLISECONDS), new Function1(this) { // from class: com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToGoneTransitionViewModel$$ExternalSyntheticLambda0
             public final /* synthetic */ PrimaryBouncerToGoneTransitionViewModel f$0;
 
             {
@@ -155,7 +155,7 @@ public final class PrimaryBouncerToGoneTransitionViewModel implements PrimaryBou
                 return Unit.INSTANCE;
             }
         }, null, new AlternateBouncerToAodTransitionViewModel$$ExternalSyntheticLambda1(), null, null, IKnoxCustomManager.Stub.TRANSACTION_getWifiState);
-        this.windowBlurRadius = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilderM, FromPrimaryBouncerTransitionInteractor.TO_GONE_SHORT_DURATION, new Function1(this) { // from class: com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToGoneTransitionViewModel$$ExternalSyntheticLambda0
+        this.windowBlurRadius = KeyguardTransitionAnimationFlow.FlowBuilder.m2614sharedFlow74qcysc$default(flowBuilderM, FromPrimaryBouncerTransitionInteractor.TO_GONE_SHORT_DURATION, new Function1(this) { // from class: com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToGoneTransitionViewModel$$ExternalSyntheticLambda0
             public final /* synthetic */ PrimaryBouncerToGoneTransitionViewModel f$0;
 
             {
@@ -191,7 +191,7 @@ public final class PrimaryBouncerToGoneTransitionViewModel implements PrimaryBou
         }, null, null, null, null, IKnoxCustomManager.Stub.TRANSACTION_getHardKeyIntentMode);
         this.notificationBlurRadius = flowBuilderM.immediatelyTransitionTo(0.0f);
         composeBouncerFlags.getClass();
-        this.scrimAlpha = bouncerToGoneFlows.m2621createScrimAlphaFlowKLykuaI(j, keyguardState, new BouncerToGoneFlows$scrimAlpha$2(bouncerToGoneFlows.primaryBouncerInteractor));
+        this.scrimAlpha = bouncerToGoneFlows.m2619createScrimAlphaFlowKLykuaI(j, keyguardState, new BouncerToGoneFlows$scrimAlpha$2(bouncerToGoneFlows.primaryBouncerInteractor));
     }
 
     @Override // com.android.systemui.keyguard.ui.transitions.PrimaryBouncerTransition

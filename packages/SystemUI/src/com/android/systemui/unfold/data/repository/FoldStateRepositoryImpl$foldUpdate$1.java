@@ -63,7 +63,7 @@ final class FoldStateRepositoryImpl$foldUpdate$1 extends SuspendLambda implement
                         }
                         foldUpdate = FoldStateRepository.FoldUpdate.FINISH_CLOSED;
                     }
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(foldUpdate);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(foldUpdate);
                 }
             };
             ((DeviceFoldStateProvider) this.this$0.foldStateProvider).addCallback(foldUpdatesListener);

@@ -158,7 +158,7 @@ public class SubscreenSubRoomNotification implements SubRoom {
     }
 
     /* renamed from: -$$Nest$mreturnRemoteInput, reason: not valid java name */
-    public static void m2966$$Nest$mreturnRemoteInput(SubscreenSubRoomNotification subscreenSubRoomNotification, String str, String str2, String str3) {
+    public static void m2964$$Nest$mreturnRemoteInput(SubscreenSubRoomNotification subscreenSubRoomNotification, String str, String str2, String str3) {
         subscreenSubRoomNotification.getClass();
         if (ServiceTuple.BASIC_STATUS_OPEN.equals(str3)) {
             subscreenSubRoomNotification.mNotificationDetailAdapter.getClass();
@@ -206,7 +206,7 @@ public class SubscreenSubRoomNotification implements SubRoom {
             public final void onReceive(Context context, Intent intent) {
                 Objects.toString(intent);
                 if ("com.samsung.android.action.RETURN_REMOTE_INPUT".equals(intent.getAction())) {
-                    SubscreenSubRoomNotification.m2966$$Nest$mreturnRemoteInput(SubscreenSubRoomNotification.this, intent.getStringExtra("key"), intent.getStringExtra("return"), intent.getStringExtra("state"));
+                    SubscreenSubRoomNotification.m2964$$Nest$mreturnRemoteInput(SubscreenSubRoomNotification.this, intent.getStringExtra("key"), intent.getStringExtra("return"), intent.getStringExtra("state"));
                 }
             }
         };
@@ -216,7 +216,7 @@ public class SubscreenSubRoomNotification implements SubRoom {
             public final void onReceive(Context context, Intent intent) {
                 Objects.toString(intent);
                 if ("com.samsung.android.action.RETURN_REMOTE_INPUT_VOICE".equals(intent.getAction())) {
-                    SubscreenSubRoomNotification.m2966$$Nest$mreturnRemoteInput(SubscreenSubRoomNotification.this, intent.getStringExtra("key"), intent.getStringExtra("return"), intent.getStringExtra("state"));
+                    SubscreenSubRoomNotification.m2964$$Nest$mreturnRemoteInput(SubscreenSubRoomNotification.this, intent.getStringExtra("key"), intent.getStringExtra("return"), intent.getStringExtra("state"));
                 }
             }
         };

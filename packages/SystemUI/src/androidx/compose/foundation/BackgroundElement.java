@@ -34,7 +34,7 @@ public final class BackgroundElement extends ModifierNodeElement<BackgroundNode>
             return false;
         }
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.color, backgroundElement.color) && Intrinsics.areEqual(this.brush, backgroundElement.brush) && this.alpha == backgroundElement.alpha && Intrinsics.areEqual(this.shape, backgroundElement.shape);
+        return ULong.m3446equalsimpl0(this.color, backgroundElement.color) && Intrinsics.areEqual(this.brush, backgroundElement.brush) && this.alpha == backgroundElement.alpha && Intrinsics.areEqual(this.shape, backgroundElement.shape);
     }
 
     public final int hashCode() {

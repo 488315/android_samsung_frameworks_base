@@ -2,6 +2,7 @@ package com.android.internal.app;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -40,7 +41,7 @@ public class MediaRouteChooserDialog extends AlertDialog implements MediaRouteCh
     }
 
     @Override // android.app.AlertDialog, android.app.Dialog
-    protected void onCreate(Bundle bundle) {
+    protected void onCreate(Bundle bundle) throws Resources.NotFoundException {
         View viewInflate = LayoutInflater.from(getContext()).inflate(R.layout.media_route_chooser_dialog, (ViewGroup) null);
         setView(viewInflate);
         setTitle(this.mContentManager.getRouteTypes() == 4 ? R.string.media_route_chooser_title_for_remote_display : R.string.media_route_chooser_title);

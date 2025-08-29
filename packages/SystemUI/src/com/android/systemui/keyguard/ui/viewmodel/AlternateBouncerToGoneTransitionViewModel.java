@@ -29,11 +29,11 @@ public final class AlternateBouncerToGoneTransitionViewModel implements DeviceEn
         KeyguardState keyguardState = KeyguardState.ALTERNATE_BOUNCER;
         SceneKey sceneKey = Scenes.Gone;
         companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(keyguardState, KeyguardState.GONE, keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, new Edge.StateToContent(keyguardState, sceneKey)));
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(keyguardState, KeyguardState.GONE, keyguardTransitionAnimationFlow.m2613setupVtjQ1oo(j, new Edge.StateToContent(keyguardState, sceneKey)));
         this.transitionAnimation = flowBuilderM;
-        this.showAllNotifications = bouncerToGoneFlows.m2622showAllNotificationsVtjQ1oo(j, keyguardState);
+        this.showAllNotifications = bouncerToGoneFlows.m2620showAllNotificationsVtjQ1oo(j, keyguardState);
         ComposeBouncerFlags.INSTANCE.getClass();
-        this.scrimAlpha = bouncerToGoneFlows.m2621createScrimAlphaFlowKLykuaI(j, keyguardState, new BouncerToGoneFlows$scrimAlpha$2(bouncerToGoneFlows.primaryBouncerInteractor));
+        this.scrimAlpha = bouncerToGoneFlows.m2619createScrimAlphaFlowKLykuaI(j, keyguardState, new BouncerToGoneFlows$scrimAlpha$2(bouncerToGoneFlows.primaryBouncerInteractor));
         this.deviceEntryParentViewAlpha = flowBuilderM.immediatelyTransitionTo(0.0f);
     }
 

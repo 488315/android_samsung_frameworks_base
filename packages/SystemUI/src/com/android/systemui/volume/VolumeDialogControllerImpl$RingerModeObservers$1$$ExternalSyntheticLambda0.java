@@ -66,9 +66,9 @@ public final /* synthetic */ class VolumeDialogControllerImpl$RingerModeObserver
                 }
                 String str2 = VolumeDialogControllerImpl.TAG;
                 if (volumeDialogControllerImpl2.updateRingerModeInternalW(iIntValue2)) {
-                    VolumeDialogControllerImpl.m3214$$Nest$mupdateStreamVolume(volumeDialogControllerImpl2, 2);
-                    VolumeDialogControllerImpl.m3214$$Nest$mupdateStreamVolume(volumeDialogControllerImpl2, 5);
-                    VolumeDialogControllerImpl.m3214$$Nest$mupdateStreamVolume(volumeDialogControllerImpl2, 1);
+                    VolumeDialogControllerImpl.m3213$$Nest$mupdateStreamVolume(volumeDialogControllerImpl2, 2);
+                    VolumeDialogControllerImpl.m3213$$Nest$mupdateStreamVolume(volumeDialogControllerImpl2, 5);
+                    VolumeDialogControllerImpl.m3213$$Nest$mupdateStreamVolume(volumeDialogControllerImpl2, 1);
                     volumeDialogControllerImpl2.mCallbacks.onStateChanged(volumeDialogControllerImpl2.mState);
                     break;
                 }

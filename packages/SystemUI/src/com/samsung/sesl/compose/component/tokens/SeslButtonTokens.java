@@ -65,7 +65,7 @@ public final class SeslButtonTokens {
         SeslButtonTokens seslButtonTokens = (SeslButtonTokens) obj;
         long j = seslButtonTokens.containerColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.containerColor, j) && ULong.m3447equalsimpl0(this.contentColor, seslButtonTokens.contentColor);
+        return ULong.m3446equalsimpl0(this.containerColor, j) && ULong.m3446equalsimpl0(this.contentColor, seslButtonTokens.contentColor);
     }
 
     public final int hashCode() {

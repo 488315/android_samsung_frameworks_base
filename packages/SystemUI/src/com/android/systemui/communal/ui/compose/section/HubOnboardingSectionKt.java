@@ -101,7 +101,7 @@ public abstract class HubOnboardingSectionKt {
                     public final Object mo781invoke(Object obj) {
                         final MutableState mutableState3 = mutableState;
                         Dp.Companion companion = Dp.Companion;
-                        ComponentSystemUIDialog componentSystemUIDialogM3095createBottomSheet6ZxE2Lo$default = SystemUIDialogFactoryExtKt.m3095createBottomSheet6ZxE2Lo$default(systemUIDialogFactory, new ComposableLambdaImpl(19620036, true, new Function3() { // from class: com.android.systemui.communal.ui.compose.section.HubOnboardingSectionKt$HubOnboardingBottomSheet$1$1$1
+                        ComponentSystemUIDialog componentSystemUIDialogM3093createBottomSheet6ZxE2Lo$default = SystemUIDialogFactoryExtKt.m3093createBottomSheet6ZxE2Lo$default(systemUIDialogFactory, new ComposableLambdaImpl(19620036, true, new Function3() { // from class: com.android.systemui.communal.ui.compose.section.HubOnboardingSectionKt$HubOnboardingBottomSheet$1$1$1
                             @Override // kotlin.jvm.functions.Function3
                             public final Object invoke(Object obj2, Object obj3, Object obj4) {
                                 Composer composer2 = (Composer) obj3;
@@ -137,7 +137,7 @@ public abstract class HubOnboardingSectionKt {
                         }), true, 627, 7);
                         final Function0 function02 = function0;
                         final MutableState mutableState4 = mutableState2;
-                        componentSystemUIDialogM3095createBottomSheet6ZxE2Lo$default.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.communal.ui.compose.section.HubOnboardingSectionKt$HubOnboardingBottomSheet$1$1$2$1
+                        componentSystemUIDialogM3093createBottomSheet6ZxE2Lo$default.setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.android.systemui.communal.ui.compose.section.HubOnboardingSectionKt$HubOnboardingBottomSheet$1$1$2$1
                             @Override // android.content.DialogInterface.OnDismissListener
                             public final void onDismiss(DialogInterface dialogInterface) {
                                 if (((Boolean) mutableState4.getValue()).booleanValue()) {
@@ -146,14 +146,14 @@ public abstract class HubOnboardingSectionKt {
                                 function02.invoke();
                             }
                         });
-                        componentSystemUIDialogM3095createBottomSheet6ZxE2Lo$default.setOnCancelListener(new DialogInterface.OnCancelListener() { // from class: com.android.systemui.communal.ui.compose.section.HubOnboardingSectionKt$HubOnboardingBottomSheet$1$1$2$2
+                        componentSystemUIDialogM3093createBottomSheet6ZxE2Lo$default.setOnCancelListener(new DialogInterface.OnCancelListener() { // from class: com.android.systemui.communal.ui.compose.section.HubOnboardingSectionKt$HubOnboardingBottomSheet$1$1$2$2
                             @Override // android.content.DialogInterface.OnCancelListener
                             public final void onCancel(DialogInterface dialogInterface) {
                                 mutableState4.setValue(Boolean.TRUE);
                             }
                         });
-                        componentSystemUIDialogM3095createBottomSheet6ZxE2Lo$default.show();
-                        mutableState3.setValue(componentSystemUIDialogM3095createBottomSheet6ZxE2Lo$default);
+                        componentSystemUIDialogM3093createBottomSheet6ZxE2Lo$default.show();
+                        mutableState3.setValue(componentSystemUIDialogM3093createBottomSheet6ZxE2Lo$default);
                         return new DisposableEffectResult() { // from class: com.android.systemui.communal.ui.compose.section.HubOnboardingSectionKt$HubOnboardingBottomSheet$lambda$9$lambda$8$$inlined$onDispose$1
                             @Override // androidx.compose.runtime.DisposableEffectResult
                             public final void dispose() {

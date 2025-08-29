@@ -83,7 +83,7 @@ public final class SeslAlertDialogTokens {
         SeslAlertDialogTokens seslAlertDialogTokens = (SeslAlertDialogTokens) obj;
         long j = seslAlertDialogTokens.titleTextColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.titleTextColor, j) && ULong.m3447equalsimpl0(this.messageTextColor, seslAlertDialogTokens.messageTextColor) && ULong.m3447equalsimpl0(this.buttonTextColor, seslAlertDialogTokens.buttonTextColor) && ULong.m3447equalsimpl0(this.listTextColor, seslAlertDialogTokens.listTextColor);
+        return ULong.m3446equalsimpl0(this.titleTextColor, j) && ULong.m3446equalsimpl0(this.messageTextColor, seslAlertDialogTokens.messageTextColor) && ULong.m3446equalsimpl0(this.buttonTextColor, seslAlertDialogTokens.buttonTextColor) && ULong.m3446equalsimpl0(this.listTextColor, seslAlertDialogTokens.listTextColor);
     }
 
     public final int hashCode() {

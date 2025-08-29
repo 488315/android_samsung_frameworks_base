@@ -649,9 +649,9 @@ public final class SoundCraftViewModel extends BaseViewModel {
                                     strFindProjectName2 = BudsPluginInfo.Companion.findProjectName(str);
                                 } catch (Throwable th9) {
                                     int i4 = Result.$r8$clinit;
-                                    Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(new Result.Failure(th9));
-                                    if (thM3442exceptionOrNullimpl != null) {
-                                        thM3442exceptionOrNullimpl.printStackTrace();
+                                    Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(new Result.Failure(th9));
+                                    if (thM3441exceptionOrNullimpl != null) {
+                                        thM3441exceptionOrNullimpl.printStackTrace();
                                     }
                                 }
                                 if (strFindProjectName2 != null) {
@@ -674,9 +674,9 @@ public final class SoundCraftViewModel extends BaseViewModel {
                                         strFindProjectName = BudsPluginInfo.Companion.findProjectName(str);
                                     } catch (Throwable th10) {
                                         int i5 = Result.$r8$clinit;
-                                        Throwable thM3442exceptionOrNullimpl2 = Result.m3442exceptionOrNullimpl(new Result.Failure(th10));
-                                        if (thM3442exceptionOrNullimpl2 != null) {
-                                            thM3442exceptionOrNullimpl2.printStackTrace();
+                                        Throwable thM3441exceptionOrNullimpl2 = Result.m3441exceptionOrNullimpl(new Result.Failure(th10));
+                                        if (thM3441exceptionOrNullimpl2 != null) {
+                                            thM3441exceptionOrNullimpl2.printStackTrace();
                                         }
                                     }
                                     if (strFindProjectName != null) {
@@ -704,9 +704,9 @@ public final class SoundCraftViewModel extends BaseViewModel {
                                     }
                                 } catch (Throwable th11) {
                                     int i6 = Result.$r8$clinit;
-                                    Throwable thM3442exceptionOrNullimpl3 = Result.m3442exceptionOrNullimpl(new Result.Failure(th11));
-                                    if (thM3442exceptionOrNullimpl3 != null) {
-                                        thM3442exceptionOrNullimpl3.printStackTrace();
+                                    Throwable thM3441exceptionOrNullimpl3 = Result.m3441exceptionOrNullimpl(new Result.Failure(th11));
+                                    if (thM3441exceptionOrNullimpl3 != null) {
+                                        thM3441exceptionOrNullimpl3.printStackTrace();
                                     }
                                 }
                                 boolean z10 = numValueOf3.intValue() == 2 ? z2 : false;
@@ -734,9 +734,9 @@ public final class SoundCraftViewModel extends BaseViewModel {
                                     }
                                 } catch (Throwable th12) {
                                     int i8 = Result.$r8$clinit;
-                                    Throwable thM3442exceptionOrNullimpl4 = Result.m3442exceptionOrNullimpl(new Result.Failure(th12));
-                                    if (thM3442exceptionOrNullimpl4 != null) {
-                                        thM3442exceptionOrNullimpl4.printStackTrace();
+                                    Throwable thM3441exceptionOrNullimpl4 = Result.m3441exceptionOrNullimpl(new Result.Failure(th12));
+                                    if (thM3441exceptionOrNullimpl4 != null) {
+                                        thM3441exceptionOrNullimpl4.printStackTrace();
                                     }
                                 }
                                 Boolean bool2 = boolValueOf3;
@@ -755,9 +755,9 @@ public final class SoundCraftViewModel extends BaseViewModel {
                                     }
                                 } catch (Throwable th13) {
                                     int i9 = Result.$r8$clinit;
-                                    Throwable thM3442exceptionOrNullimpl5 = Result.m3442exceptionOrNullimpl(new Result.Failure(th13));
-                                    if (thM3442exceptionOrNullimpl5 != null) {
-                                        thM3442exceptionOrNullimpl5.printStackTrace();
+                                    Throwable thM3441exceptionOrNullimpl5 = Result.m3441exceptionOrNullimpl(new Result.Failure(th13));
+                                    if (thM3441exceptionOrNullimpl5 != null) {
+                                        thM3441exceptionOrNullimpl5.printStackTrace();
                                     }
                                 }
                                 effectModel2 = new EffectModel(null, null, arrayList5, boolValueOf, Boolean.valueOf(z10), bool2, boolValueOf4, 3, null);

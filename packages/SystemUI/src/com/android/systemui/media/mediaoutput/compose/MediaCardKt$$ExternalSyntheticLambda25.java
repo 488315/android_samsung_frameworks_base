@@ -154,7 +154,7 @@ public final /* synthetic */ class MediaCardKt$$ExternalSyntheticLambda25 implem
                                                     composerImpl3.startReplaceGroup(506712694);
                                                     long jMediaPrimaryColor = mediaAction2.enabled ? ColorKt.mediaPrimaryColor(composerImpl3) : androidx.compose.ui.graphics.ColorKt.Color(4288256414L);
                                                     composerImpl3.end(false);
-                                                    IconExtKt.m2635IconExtww6aTOc(painter, strText, modifierM125padding3ABfNKs, jMediaPrimaryColor, composerImpl3, 384, 0);
+                                                    IconExtKt.m2633IconExtww6aTOc(painter, strText, modifierM125padding3ABfNKs, jMediaPrimaryColor, composerImpl3, 384, 0);
                                                     if (ComposerKt.isTraceInProgress()) {
                                                         ComposerKt.traceEventEnd();
                                                     }

@@ -30,7 +30,7 @@ public final class VolumePanelRadioButtonBarColors {
         VolumePanelRadioButtonBarColors volumePanelRadioButtonBarColors = (VolumePanelRadioButtonBarColors) obj;
         long j = volumePanelRadioButtonBarColors.indicatorColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.indicatorColor, j) && ULong.m3447equalsimpl0(this.indicatorBackgroundColor, volumePanelRadioButtonBarColors.indicatorBackgroundColor) && ULong.m3447equalsimpl0(this.iconColor, volumePanelRadioButtonBarColors.iconColor) && ULong.m3447equalsimpl0(this.selectedIconColor, volumePanelRadioButtonBarColors.selectedIconColor) && ULong.m3447equalsimpl0(this.labelColor, volumePanelRadioButtonBarColors.labelColor) && ULong.m3447equalsimpl0(this.selectedLabelColor, volumePanelRadioButtonBarColors.selectedLabelColor);
+        return ULong.m3446equalsimpl0(this.indicatorColor, j) && ULong.m3446equalsimpl0(this.indicatorBackgroundColor, volumePanelRadioButtonBarColors.indicatorBackgroundColor) && ULong.m3446equalsimpl0(this.iconColor, volumePanelRadioButtonBarColors.iconColor) && ULong.m3446equalsimpl0(this.selectedIconColor, volumePanelRadioButtonBarColors.selectedIconColor) && ULong.m3446equalsimpl0(this.labelColor, volumePanelRadioButtonBarColors.labelColor) && ULong.m3446equalsimpl0(this.selectedLabelColor, volumePanelRadioButtonBarColors.selectedLabelColor);
     }
 
     public final int hashCode() {

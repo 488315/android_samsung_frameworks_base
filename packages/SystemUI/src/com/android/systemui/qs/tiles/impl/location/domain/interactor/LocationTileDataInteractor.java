@@ -80,9 +80,9 @@ public final class LocationTileDataInteractor implements QSTileDataInteractor {
                     int i2 = anonymousClass1.label;
                     if (i2 == 0) {
                         ResultKt.throwOnFailure(obj2);
-                        LocationTileModel locationTileModelM2932boximpl = LocationTileModel.m2932boximpl(((Boolean) obj).booleanValue());
+                        LocationTileModel locationTileModelM2930boximpl = LocationTileModel.m2930boximpl(((Boolean) obj).booleanValue());
                         anonymousClass1.label = 1;
-                        if (this.$this_unsafeFlow.emit(locationTileModelM2932boximpl, anonymousClass1) == coroutineSingletons) {
+                        if (this.$this_unsafeFlow.emit(locationTileModelM2930boximpl, anonymousClass1) == coroutineSingletons) {
                             return coroutineSingletons;
                         }
                     } else {

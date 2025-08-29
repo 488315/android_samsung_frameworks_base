@@ -13,9 +13,9 @@ public final class R$dimen {
     public static final int large_clock_text_size = 2131166919;
     public static final int lock_icon_margin_bottom = 2131167260;
     public static final int presentation_clock_text_size = 2131168819;
-    public static final int small_clock_height = 2131170708;
-    public static final int small_clock_padding_top = 2131170709;
-    public static final int small_clock_text_size = 2131170710;
-    public static final int status_view_margin_horizontal = 2131170888;
-    public static final int weather_date_icon_padding = 2131171976;
+    public static final int small_clock_height = 2131170709;
+    public static final int small_clock_padding_top = 2131170710;
+    public static final int small_clock_text_size = 2131170711;
+    public static final int status_view_margin_horizontal = 2131170889;
+    public static final int weather_date_icon_padding = 2131171977;
 }

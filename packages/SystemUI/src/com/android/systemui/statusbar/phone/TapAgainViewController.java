@@ -14,7 +14,7 @@ public class TapAgainViewController extends ViewController {
     public Runnable mHideCanceler;
 
     /* renamed from: $r8$lambda$RI85HBul7dnFWQwIiM-PGhllBiQ, reason: not valid java name */
-    public static void m3096$r8$lambda$RI85HBul7dnFWQwIiMPGhllBiQ(TapAgainViewController tapAgainViewController) throws Resources.NotFoundException {
+    public static void m3094$r8$lambda$RI85HBul7dnFWQwIiMPGhllBiQ(TapAgainViewController tapAgainViewController) throws Resources.NotFoundException {
         tapAgainViewController.mHideCanceler = null;
         ((TapAgainView) tapAgainViewController.mView).animateOut();
     }
@@ -56,7 +56,7 @@ public class TapAgainViewController extends ViewController {
         this.mHideCanceler = this.mDelayableExecutor.executeDelayed(new Runnable() { // from class: com.android.systemui.statusbar.phone.TapAgainViewController$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() throws Resources.NotFoundException {
-                TapAgainViewController.m3096$r8$lambda$RI85HBul7dnFWQwIiMPGhllBiQ(this.f$0);
+                TapAgainViewController.m3094$r8$lambda$RI85HBul7dnFWQwIiMPGhllBiQ(this.f$0);
             }
         }, this.mDoubleTapTimeMs);
     }

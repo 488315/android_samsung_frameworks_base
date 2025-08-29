@@ -10,7 +10,7 @@ public final class ValueParserKt$parseBoolean$1 implements ValueParser {
 
     @Override // com.android.systemui.statusbar.commandline.ValueParser
     /* renamed from: parseValue-IoAF18A */
-    public final Object mo2565parseValueIoAF18A(String str) {
+    public final Object mo2563parseValueIoAF18A(String str) {
         Boolean booleanStrictOrNull = StringsKt__StringsKt.toBooleanStrictOrNull(str);
         if (booleanStrictOrNull != null) {
             int i = Result.$r8$clinit;

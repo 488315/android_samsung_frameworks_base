@@ -132,6 +132,7 @@ public class ProtectedCommand extends ICmdList {
         putAtCommands("AT+SCAMPARA=0,6,0", this.cmdType);
         putAtCommands("AT+SCAMPARA=0,6,0,*", this.cmdType);
         putAtCommands("AT+SCAMPARA=1,0,0,3", this.cmdType);
+        putAtCommands("AT+SCAMPARA=0,4,0,*", this.cmdType);
         putAtCommands("AT+WHO=*", this.cmdType);
         putAtCommands("ATQ0V1E0", this.cmdType);
         putAtCommands("ATE0Q0V1", this.cmdType);
@@ -258,6 +259,8 @@ public class ProtectedCommand extends ICmdList {
         putAtCommands("AT+TSSCHECK=1,0,0", this.cmdType);
         putAtCommands("AT+FACMTEST=0,3,2,0", this.cmdType);
         putAtCommands("AT+FACMTEST=0,2,2,0", this.cmdType);
+        putAtCommands("AT+FACMTEST=0,1,4,*", this.cmdType);
+        putAtCommands("AT+FACMTEST=0,3,1,0", this.cmdType);
         putAtCommands("AT+UWBDTEST=0,0,8,*", this.cmdType);
         putAtCommands("AT+UWBDTEST=0,0,0,0", this.cmdType);
         putAtCommands("AT+UWBDTEST=0,0,0,1", this.cmdType);
@@ -404,6 +407,8 @@ public class ProtectedCommand extends ICmdList {
         putAtCommands("AT+SPKSTEST=3,3,12", this.cmdType);
         putAtCommands("AT+FACMINFO=3,*", this.cmdType);
         putAtCommands("AT+FACMINFO=8,*", this.cmdType);
+        putAtCommands("AT+FACMINFO=1,*", this.cmdType);
+        putAtCommands("AT+FACMINFO=9,*", this.cmdType);
         putAtCommands("AT+CHIPIDTT=1,0,2,4", this.cmdType);
         putAtCommands("AT+DCICTEST=0,3", this.cmdType);
         putAtCommands("AT+USBMODEC=1,0", this.cmdType);

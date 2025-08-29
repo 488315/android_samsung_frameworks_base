@@ -19,7 +19,7 @@ public final /* synthetic */ class NetspeedViewController$$ExternalSyntheticLamb
                 ((NetspeedViewController) obj).setNetworkSpeed();
                 break;
             default:
-                NetspeedViewController.m3104$$Nest$monNetspeedSwitchChange(NetspeedViewController.this);
+                NetspeedViewController.m3102$$Nest$monNetspeedSwitchChange(NetspeedViewController.this);
                 break;
         }
     }

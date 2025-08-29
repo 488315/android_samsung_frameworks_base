@@ -91,7 +91,7 @@ public final class SeslAppBarTokens {
         SeslAppBarTokens$Companion$lightAppBarTokens$1 seslAppBarTokens$Companion$lightAppBarTokens$1 = new SeslDpProducer() { // from class: com.samsung.sesl.compose.component.tokens.SeslAppBarTokens$Companion$lightAppBarTokens$1
             @Override // com.samsung.sesl.compose.component.tokens.SeslDpProducer
             /* renamed from: produce-u2uoSUM */
-            public final float mo3335produceu2uoSUM(SeslDpProducer.Params params) {
+            public final float mo3334produceu2uoSUM(SeslDpProducer.Params params) {
                 Configuration configuration = params.configuration;
                 if (configuration.orientation == 1) {
                     float f = 8;
@@ -118,7 +118,7 @@ public final class SeslAppBarTokens {
         SeslAppBarTokens$Companion$darkAppBarTokens$1 seslAppBarTokens$Companion$darkAppBarTokens$1 = new SeslDpProducer() { // from class: com.samsung.sesl.compose.component.tokens.SeslAppBarTokens$Companion$darkAppBarTokens$1
             @Override // com.samsung.sesl.compose.component.tokens.SeslDpProducer
             /* renamed from: produce-u2uoSUM */
-            public final float mo3335produceu2uoSUM(SeslDpProducer.Params params) {
+            public final float mo3334produceu2uoSUM(SeslDpProducer.Params params) {
                 Configuration configuration = params.configuration;
                 if (configuration.orientation == 1) {
                     float f = 8;
@@ -148,7 +148,7 @@ public final class SeslAppBarTokens {
         SeslAppBarTokens seslAppBarTokens = (SeslAppBarTokens) obj;
         long j = seslAppBarTokens.topAppBarBackgroundColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.topAppBarBackgroundColor, j) && ULong.m3447equalsimpl0(this.topAppBarTitleTextColor, seslAppBarTokens.topAppBarTitleTextColor) && ULong.m3447equalsimpl0(this.topAppBarSubTitleTextColor, seslAppBarTokens.topAppBarSubTitleTextColor) && ULong.m3447equalsimpl0(this.topAppBarMenuTextColor, seslAppBarTokens.topAppBarMenuTextColor) && ULong.m3447equalsimpl0(this.topExtendedAppBarSubTitleColor, seslAppBarTokens.topExtendedAppBarSubTitleColor) && Intrinsics.areEqual(this.topAppBarTopPaddingDp, seslAppBarTokens.topAppBarTopPaddingDp) && Intrinsics.areEqual(this.backIcon, seslAppBarTokens.backIcon);
+        return ULong.m3446equalsimpl0(this.topAppBarBackgroundColor, j) && ULong.m3446equalsimpl0(this.topAppBarTitleTextColor, seslAppBarTokens.topAppBarTitleTextColor) && ULong.m3446equalsimpl0(this.topAppBarSubTitleTextColor, seslAppBarTokens.topAppBarSubTitleTextColor) && ULong.m3446equalsimpl0(this.topAppBarMenuTextColor, seslAppBarTokens.topAppBarMenuTextColor) && ULong.m3446equalsimpl0(this.topExtendedAppBarSubTitleColor, seslAppBarTokens.topExtendedAppBarSubTitleColor) && Intrinsics.areEqual(this.topAppBarTopPaddingDp, seslAppBarTokens.topAppBarTopPaddingDp) && Intrinsics.areEqual(this.backIcon, seslAppBarTokens.backIcon);
     }
 
     public final int hashCode() {

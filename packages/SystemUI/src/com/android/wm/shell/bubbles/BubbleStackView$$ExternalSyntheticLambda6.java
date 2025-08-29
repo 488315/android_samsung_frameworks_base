@@ -41,7 +41,7 @@ public final /* synthetic */ class BubbleStackView$$ExternalSyntheticLambda6 imp
                 bubbleStackView.mBubbleData.setExpanded(true);
                 break;
             default:
-                BubbleStackView.m3232$r8$lambda$H8d4Ep0eUhn88VAHYBVbgvu58M(bubbleStackView);
+                BubbleStackView.m3231$r8$lambda$H8d4Ep0eUhn88VAHYBVbgvu58M(bubbleStackView);
                 break;
         }
     }

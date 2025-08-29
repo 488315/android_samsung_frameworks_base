@@ -32,7 +32,7 @@ public final class ULongArray implements Collection, KMappedMarker {
                 throw new NoSuchElementException(String.valueOf(this.index));
             }
             this.index = i + 1;
-            return ULong.m3446boximpl(jArr[i]);
+            return ULong.m3445boximpl(jArr[i]);
         }
 
         @Override // java.util.Iterator

@@ -47,7 +47,7 @@ public final class KeyguardQuickAffordanceRepository$special$$inlined$flatMapLat
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
             FlowCollector flowCollector = (FlowCollector) this.L$0;
-            final Flow flowMo2614getSelections = ((KeyguardQuickAffordanceSelectionManager) this.L$1).mo2614getSelections();
+            final Flow flowMo2612getSelections = ((KeyguardQuickAffordanceSelectionManager) this.L$1).mo2612getSelections();
             final Set set = this.$configs$inlined;
             Flow flow = new Flow() { // from class: com.android.systemui.keyguard.data.repository.KeyguardQuickAffordanceRepository$selections$lambda$5$$inlined$map$1
 
@@ -130,7 +130,7 @@ public final class KeyguardQuickAffordanceRepository$special$$inlined$flatMapLat
 
                 @Override // kotlinx.coroutines.flow.Flow
                 public final Object collect(FlowCollector flowCollector2, Continuation continuation) {
-                    Object objCollect = flowMo2614getSelections.collect(new AnonymousClass2(flowCollector2, set), continuation);
+                    Object objCollect = flowMo2612getSelections.collect(new AnonymousClass2(flowCollector2, set), continuation);
                     return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                 }
             };

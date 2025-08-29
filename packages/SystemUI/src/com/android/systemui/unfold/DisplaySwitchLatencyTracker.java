@@ -91,11 +91,11 @@ public final class DisplaySwitchLatencyTracker implements CoreStartable {
         }
 
         /* renamed from: getCOOL_DOWN_DURATION-UwyO8pc$annotations, reason: not valid java name */
-        public static /* synthetic */ void m3128getCOOL_DOWN_DURATIONUwyO8pc$annotations() {
+        public static /* synthetic */ void m3127getCOOL_DOWN_DURATIONUwyO8pc$annotations() {
         }
 
         /* renamed from: getSCREEN_EVENT_TIMEOUT-UwyO8pc$annotations, reason: not valid java name */
-        public static /* synthetic */ void m3129getSCREEN_EVENT_TIMEOUTUwyO8pc$annotations() {
+        public static /* synthetic */ void m3128getSCREEN_EVENT_TIMEOUTUwyO8pc$annotations() {
         }
     }
 
@@ -504,7 +504,7 @@ public final class DisplaySwitchLatencyTracker implements CoreStartable {
                         this.L$0 = deviceState3;
                         this.L$1 = displaySwitchLatencyEventCopy$default;
                         this.label = 1;
-                        if (TimeoutKt.m3471withTimeoutKLykuaI(j, anonymousClass2, this) == coroutineSingletons) {
+                        if (TimeoutKt.m3470withTimeoutKLykuaI(j, anonymousClass2, this) == coroutineSingletons) {
                             return coroutineSingletons;
                         }
                     } catch (TimeoutCancellationException unused) {
@@ -516,7 +516,7 @@ public final class DisplaySwitchLatencyTracker implements CoreStartable {
                         this.this$0.latencyTracker.onActionCancel(13);
                         DisplaySwitchLatencyTracker displaySwitchLatencyTracker4 = this.this$0;
                         DisplaySwitchLatencyTracker.Companion.getClass();
-                        displaySwitchLatencyTracker4.logDisplaySwitchEvent(displaySwitchLatencyEvent, deviceState, Duration.m3457getInWholeMillisecondsimpl(DisplaySwitchLatencyTracker.SCREEN_EVENT_TIMEOUT), TrackingResult.TIMED_OUT);
+                        displaySwitchLatencyTracker4.logDisplaySwitchEvent(displaySwitchLatencyEvent, deviceState, Duration.m3456getInWholeMillisecondsimpl(DisplaySwitchLatencyTracker.SCREEN_EVENT_TIMEOUT), TrackingResult.TIMED_OUT);
                         return Unit.INSTANCE;
                     } catch (CancellationException unused2) {
                         displaySwitchLatencyEvent = displaySwitchLatencyEventCopy$default;
@@ -545,7 +545,7 @@ public final class DisplaySwitchLatencyTracker implements CoreStartable {
                         this.this$0.latencyTracker.onActionCancel(13);
                         DisplaySwitchLatencyTracker displaySwitchLatencyTracker42 = this.this$0;
                         DisplaySwitchLatencyTracker.Companion.getClass();
-                        displaySwitchLatencyTracker42.logDisplaySwitchEvent(displaySwitchLatencyEvent, deviceState, Duration.m3457getInWholeMillisecondsimpl(DisplaySwitchLatencyTracker.SCREEN_EVENT_TIMEOUT), TrackingResult.TIMED_OUT);
+                        displaySwitchLatencyTracker42.logDisplaySwitchEvent(displaySwitchLatencyEvent, deviceState, Duration.m3456getInWholeMillisecondsimpl(DisplaySwitchLatencyTracker.SCREEN_EVENT_TIMEOUT), TrackingResult.TIMED_OUT);
                         return Unit.INSTANCE;
                     } catch (CancellationException unused4) {
                         if (Trace.isEnabled()) {

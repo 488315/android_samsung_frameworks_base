@@ -745,7 +745,7 @@ public final class VolumeDialogRingerViewBinder implements ViewBinder {
         imageButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.volume.dialog.ringer.ui.binder.VolumeDialogRingerViewBinder.bindDrawerButton.1
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
-                volumeDialogRingerDrawerViewModel.m3218onRingerButtonClicked28s9KyU(ringerButtonViewModel.ringerMode, z2);
+                volumeDialogRingerDrawerViewModel.m3217onRingerButtonClicked28s9KyU(ringerButtonViewModel.ringerMode, z2);
             }
         });
     }

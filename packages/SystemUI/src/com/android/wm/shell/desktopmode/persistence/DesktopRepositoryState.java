@@ -73,7 +73,7 @@ public final class DesktopRepositoryState extends GeneratedMessageLite implement
     }
 
     /* renamed from: -$$Nest$mgetMutableDesktopMap, reason: not valid java name */
-    public static MapFieldLite m3259$$Nest$mgetMutableDesktopMap(DesktopRepositoryState desktopRepositoryState) {
+    public static MapFieldLite m3258$$Nest$mgetMutableDesktopMap(DesktopRepositoryState desktopRepositoryState) {
         if (!desktopRepositoryState.desktop_.isMutable()) {
             desktopRepositoryState.desktop_ = desktopRepositoryState.desktop_.mutableCopy();
         }

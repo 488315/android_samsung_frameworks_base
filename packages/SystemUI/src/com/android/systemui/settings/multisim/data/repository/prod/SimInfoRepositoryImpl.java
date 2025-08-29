@@ -280,7 +280,7 @@ public final class SimInfoRepositoryImpl implements SimInfoRepository {
                 final ?? r3 = new ContentObserver(handler) { // from class: com.android.systemui.settings.multisim.data.repository.prod.SimInfoRepositoryImpl$toStateFlow$1$observer$1
                     @Override // android.database.ContentObserver
                     public final void onChange(boolean z) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                     }
                 };
                 SimInfoRepositoryImpl.this.mContext.getContentResolver().registerContentObserver(Settings.Global.getUriFor(this.$this_toStateFlow), false, r3);

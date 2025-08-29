@@ -33,7 +33,7 @@ public class ChooseAccountActivity extends Activity {
     private HashMap<String, AuthenticatorDescription> mTypeToAuthDescription = new HashMap<>();
 
     @Override // android.app.Activity
-    public void onCreate(Bundle bundle) {
+    public void onCreate(Bundle bundle) throws Resources.NotFoundException {
         super.onCreate(bundle);
         getWindow().addSystemFlags(524288);
         this.mAccounts = getIntent().getParcelableArrayExtra(AccountManager.KEY_ACCOUNTS);

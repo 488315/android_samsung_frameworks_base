@@ -49,7 +49,7 @@ final class HeadsUpManagerExtKt$headsUpEvents$1 extends SuspendLambda implements
             final ?? r1 = new OnHeadsUpChangedListener() { // from class: com.android.systemui.statusbar.notification.headsup.HeadsUpManagerExtKt$headsUpEvents$1$listener$1
                 @Override // com.android.systemui.statusbar.notification.headsup.OnHeadsUpChangedListener
                 public final void onHeadsUpStateChanged(NotificationEntry notificationEntry, boolean z) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new Pair(notificationEntry, Boolean.valueOf(z)));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new Pair(notificationEntry, Boolean.valueOf(z)));
                 }
             };
             ((HeadsUpManagerImpl) this.$this_headsUpEvents).addListener(r1);

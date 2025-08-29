@@ -21,6 +21,7 @@ import com.android.wm.shell.windowdecor.HandleHideAnimator;
 import com.android.wm.shell.windowdecor.HandleImageButton;
 import com.android.wm.shell.windowdecor.WindowManagerWrapper;
 import com.android.wm.shell.windowdecor.additionalviewcontainer.AdditionalSystemViewContainer;
+import com.android.wm.shell.windowdecor.extension.TaskInfoKt;
 import com.android.wm.shell.windowdecor.viewholder.WindowDecorationViewHolder;
 import com.samsung.android.multiwindow.MultiWindowManager;
 import com.samsung.android.rune.CoreRune;
@@ -148,6 +149,14 @@ public final class MultiTaskingHandleViewHolder extends WindowDecorationViewHold
         });
     }
 
+    public static boolean shouldUseLightCaptionColors$1(ActivityManager.RunningTaskInfo runningTaskInfo) {
+        ActivityManager.TaskDescription taskDescription = runningTaskInfo.taskDescription;
+        if (taskDescription != null) {
+            return (Color.alpha(taskDescription.getStatusBarColor()) == 0 || runningTaskInfo.getWindowingMode() != 5) ? (taskDescription.getSystemBarsAppearance() & 8) == 0 : ((double) Color.valueOf(taskDescription.getStatusBarColor()).luminance()) < 0.5d;
+        }
+        return false;
+    }
+
     @Override // java.lang.AutoCloseable
     public final void close() {
         this.animator.cancel();
@@ -181,30 +190,40 @@ public final class MultiTaskingHandleViewHolder extends WindowDecorationViewHold
     }
 
     public final int getCaptionHandleColor(ActivityManager.RunningTaskInfo runningTaskInfo, boolean z) {
+        boolean zShouldUseLightCaptionColors$1;
         if (!CoreRune.MW_CAPTION_HANDLE) {
-            ActivityManager.TaskDescription taskDescription = runningTaskInfo.taskDescription;
-            return (taskDescription == null || (Color.alpha(taskDescription.getStatusBarColor()) == 0 || runningTaskInfo.getWindowingMode() != 5 ? (taskDescription.getSystemBarsAppearance() & 8) != 0 : ((double) Color.valueOf(taskDescription.getStatusBarColor()).luminance()) >= 0.5d)) ? this.context.getColor(R.color.desktop_mode_caption_handle_bar_dark) : this.context.getColor(R.color.desktop_mode_caption_handle_bar_light);
+            return shouldUseLightCaptionColors$1(runningTaskInfo) ? this.context.getColor(R.color.desktop_mode_caption_handle_bar_light) : this.context.getColor(R.color.desktop_mode_caption_handle_bar_dark);
         }
         boolean z2 = false;
-        boolean z3 = runningTaskInfo.configuration.isNightModeActive() || (runningTaskInfo.getWindowingMode() == 1 && runningTaskInfo.isDisplayCutoutHide);
-        ComponentName componentName = runningTaskInfo.realActivity;
-        UiModeManager uiModeManager = this.uiModeManager;
-        if (uiModeManager != null && componentName != null) {
-            z3 = z3 || (uiModeManager.getPackageNightMode(componentName.getPackageName()) == 32);
+        if (TaskInfoKt.isFullscreen(runningTaskInfo) && z) {
+            zShouldUseLightCaptionColors$1 = shouldUseLightCaptionColors$1(runningTaskInfo);
+        } else {
+            zShouldUseLightCaptionColors$1 = runningTaskInfo.configuration.isNightModeActive() || (runningTaskInfo.getWindowingMode() == 1 && runningTaskInfo.isDisplayCutoutHide);
+            ComponentName componentName = runningTaskInfo.realActivity;
+            UiModeManager uiModeManager = this.uiModeManager;
+            if (uiModeManager != null && componentName != null) {
+                zShouldUseLightCaptionColors$1 = zShouldUseLightCaptionColors$1 || (uiModeManager.getPackageNightMode(componentName.getPackageName()) == 32);
+            }
         }
-        this.handleHideAnimator.mIsNightMode = z3;
+        this.handleHideAnimator.mIsNightMode = zShouldUseLightCaptionColors$1;
         if (runningTaskInfo.isFocused && (runningTaskInfo.getWindowingMode() != 1 || this.multiWindowManager.getMultiWindowModeStates(0) == 1)) {
             z2 = true;
         }
         this.handleHideAnimator.mIsFocusedTask = z2;
-        return z2 ? CaptionGlobalState.COLOR_THEME_ENABLED ? z3 ? this.context.getColor(17171428) : this.context.getColor(17171426) : this.context.getColor(R.color.mw_handle_color_focused) : (CoreRune.MW_CAPTION_DESKTOP && runningTaskInfo.getWindowingMode() == 1 && z) ? z3 ? this.context.getColor(R.color.mw_caption_desktop_full_screen_handle_color_dark) : this.context.getColor(R.color.mw_caption_desktop_full_screen_handle_color_light) : this.context.getColor(R.color.mw_handle_color_unfocused);
+        return z2 ? CaptionGlobalState.COLOR_THEME_ENABLED ? zShouldUseLightCaptionColors$1 ? this.context.getColor(17171428) : this.context.getColor(17171426) : this.context.getColor(R.color.mw_handle_color_focused) : (CoreRune.MW_CAPTION_DESKTOP && runningTaskInfo.getWindowingMode() == 1 && z) ? zShouldUseLightCaptionColors$1 ? this.context.getColor(R.color.mw_caption_desktop_full_screen_handle_color_dark) : this.context.getColor(R.color.mw_caption_desktop_full_screen_handle_color_light) : this.context.getColor(R.color.mw_handle_color_unfocused);
     }
 
     @Override // com.android.wm.shell.windowdecor.viewholder.WindowDecorationViewHolder
     public final void onHandleMenuClosed() {
         if (!CoreRune.MW_CAPTION_HANDLE) {
             this.animator.animateCaptionHandleAlpha(0.0f, 1.0f);
-        } else if (this.statusBarVisible) {
+            return;
+        }
+        ActivityManager.RunningTaskInfo runningTaskInfo = this.taskInfo;
+        if (runningTaskInfo == null) {
+            runningTaskInfo = null;
+        }
+        if (!TaskInfoKt.isFullscreen(runningTaskInfo) || this.statusBarVisible) {
             HandleHideAnimator handleHideAnimator = this.handleHideAnimator;
             handleHideAnimator.cancelAllHandleAnim();
             handleHideAnimator.show(handleHideAnimator.isHandleHideEnabled() ? handleHideAnimator.mDelayedHideWithoutTouchRunnable : null, true, false, false);

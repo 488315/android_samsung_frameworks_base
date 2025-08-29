@@ -27,7 +27,7 @@ public final class ContextMenuColors {
         }
         ContextMenuColors contextMenuColors = (ContextMenuColors) obj;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.backgroundColor, contextMenuColors.backgroundColor) && ULong.m3447equalsimpl0(this.textColor, contextMenuColors.textColor) && ULong.m3447equalsimpl0(this.iconColor, contextMenuColors.iconColor) && ULong.m3447equalsimpl0(this.disabledTextColor, contextMenuColors.disabledTextColor) && ULong.m3447equalsimpl0(this.disabledIconColor, contextMenuColors.disabledIconColor);
+        return ULong.m3446equalsimpl0(this.backgroundColor, contextMenuColors.backgroundColor) && ULong.m3446equalsimpl0(this.textColor, contextMenuColors.textColor) && ULong.m3446equalsimpl0(this.iconColor, contextMenuColors.iconColor) && ULong.m3446equalsimpl0(this.disabledTextColor, contextMenuColors.disabledTextColor) && ULong.m3446equalsimpl0(this.disabledIconColor, contextMenuColors.disabledIconColor);
     }
 
     public final int hashCode() {

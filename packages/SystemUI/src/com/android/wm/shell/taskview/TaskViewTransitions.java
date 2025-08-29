@@ -330,7 +330,7 @@ public class TaskViewTransitions implements Transitions.TransitionHandler, TaskV
         }
     }
 
-    public final void recordLogHistory(String str) {
+    public final void recordLogHistory$1(String str) {
         if (this.mLogHistory.size() == 20) {
             this.mLogHistory.removeFirst();
         }
@@ -354,7 +354,7 @@ public class TaskViewTransitions implements Transitions.TransitionHandler, TaskV
         Slog.d("TaskViewTransitions", "registerTaskView: " + taskViewTaskController + ", Callers=" + Debug.getCallers(5));
         StringBuilder sb = new StringBuilder("[Add] ");
         sb.append(taskViewTaskController);
-        recordLogHistory(sb.toString());
+        recordLogHistory$1(sb.toString());
     }
 
     @Override // com.android.wm.shell.taskview.TaskViewController
@@ -734,7 +734,7 @@ public class TaskViewTransitions implements Transitions.TransitionHandler, TaskV
         Slog.d("TaskViewTransitions", "unregisterTaskView: " + taskViewTaskController + ", pendingTransit=" + pendingTransitionFindPending + ", Callers=" + Debug.getCallers(5));
         StringBuilder sb = new StringBuilder("[Remove] ");
         sb.append(taskViewTaskController);
-        recordLogHistory(sb.toString());
+        recordLogHistory$1(sb.toString());
     }
 
     public final void updateBounds(TaskViewTaskController taskViewTaskController, Rect rect, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2, ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl surfaceControl, WindowContainerTransaction windowContainerTransaction) {

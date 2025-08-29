@@ -406,7 +406,7 @@ public final class SessionAudioPathViewModel extends ViewModel implements AudioP
                     }
                 };
                 MediaOutputConst.INSTANCE.getClass();
-                final Flow flowM3482debounceHG0u8IE = FlowKt.m3482debounceHG0u8IE(flow, MediaOutputConst.AUDIO_PATH_DEBOUNCE_TIMEOUT);
+                final Flow flowM3481debounceHG0u8IE = FlowKt.m3481debounceHG0u8IE(flow, MediaOutputConst.AUDIO_PATH_DEBOUNCE_TIMEOUT);
                 final Flow flow2 = new Flow() { // from class: com.android.systemui.media.mediaoutput.viewmodel.SessionAudioPathViewModel$4$invokeSuspend$$inlined$map$1
 
                     /* renamed from: com.android.systemui.media.mediaoutput.viewmodel.SessionAudioPathViewModel$4$invokeSuspend$$inlined$map$1$2, reason: invalid class name */
@@ -483,7 +483,7 @@ public final class SessionAudioPathViewModel extends ViewModel implements AudioP
 
                     @Override // kotlinx.coroutines.flow.Flow
                     public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                        Object objCollect = flowM3482debounceHG0u8IE.collect(new AnonymousClass2(flowCollector), continuation);
+                        Object objCollect = flowM3481debounceHG0u8IE.collect(new AnonymousClass2(flowCollector), continuation);
                         return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                     }
                 };

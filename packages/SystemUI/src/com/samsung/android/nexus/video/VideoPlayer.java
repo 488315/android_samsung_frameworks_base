@@ -221,7 +221,7 @@ public final class VideoPlayer {
     }
 
     /* renamed from: getCurrentPosition, reason: collision with other method in class */
-    public final long m3308getCurrentPosition() {
+    public final long m3307getCurrentPosition() {
         return this.mMediaPlayer.getCurrentPosition();
     }
 

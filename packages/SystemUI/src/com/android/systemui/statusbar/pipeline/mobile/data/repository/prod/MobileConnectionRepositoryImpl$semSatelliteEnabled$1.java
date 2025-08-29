@@ -78,10 +78,10 @@ final class MobileConnectionRepositoryImpl$semSatelliteEnabled$1 extends Suspend
                     int i3 = mobileConnectionRepositoryImpl2.slotId;
                     sbM.append(i3);
                     Log.d("MobileConnectionRepositoryImpl", sbM.toString());
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(mobileConnectionRepositoryImpl2.settingsHelper.isSatelliteEnabled() && i2 == i3));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(mobileConnectionRepositoryImpl2.settingsHelper.isSatelliteEnabled() && i2 == i3));
                 }
             };
-            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(this.this$0.settingsHelper.isSatelliteEnabled() && SystemProperties.getInt("ril.tiantong.phone.id", -1) == this.this$0.slotId));
+            ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(this.this$0.settingsHelper.isSatelliteEnabled() && SystemProperties.getInt("ril.tiantong.phone.id", -1) == this.this$0.slotId));
             MobileInputLogger mobileInputLogger2 = this.$logger;
             boolean zIsSatelliteEnabled = this.this$0.settingsHelper.isSatelliteEnabled();
             int i2 = SystemProperties.getInt("ril.tiantong.phone.id", -1);

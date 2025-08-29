@@ -469,6 +469,33 @@ public final class KeyguardSecLegacyUnlockAnimationControllerImpl extends Keygua
         ((KeyguardViewMediator) this.keyguardViewMediatorLazy.get()).mHelper.adjustStatusBarLocked$2();
         if (this.animStartDelay == 0) {
             if (this.isLauncherActivity) {
+                if (LsRune.SECURITY_CAPTURED_BLUR && this.isPrimaryBouncerShowing) {
+                    SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
+                    try {
+                        try {
+                            SurfaceControl surfaceControl3 = this.closingWallpaperLeash;
+                            if (surfaceControl3 != null && surfaceControl3.isValid()) {
+                                SurfaceControl surfaceControl4 = this.closingWallpaperLeash;
+                                surfaceControl4.getClass();
+                                transaction.setAlpha(surfaceControl4, 0.0f);
+                            }
+                            SurfaceControl surfaceControl5 = this.openingWallpaperLeash;
+                            if (surfaceControl5 != null && surfaceControl5.isValid()) {
+                                SurfaceControl surfaceControl6 = this.openingWallpaperLeash;
+                                surfaceControl6.getClass();
+                                transaction.setAlpha(surfaceControl6, 1.0f);
+                            }
+                            transaction.apply();
+                        } catch (Exception e) {
+                            Log.e("KeyguardUnlock", "wallpaper animation failed on SECURITY_CAPTURED_BLUR models");
+                            e.printStackTrace();
+                        }
+                        transaction.close();
+                    } catch (Throwable th) {
+                        transaction.close();
+                        throw th;
+                    }
+                }
                 KeyguardSurfaceControllerImpl.setKeyguardSurfaceAppearAmount$default((KeyguardSurfaceControllerImpl) this.keyguardSurfaceControllerLazy.get(), null, 6);
             }
             if (this.shadeExpansionCollectorJob != null) {
@@ -488,7 +515,7 @@ public final class KeyguardSecLegacyUnlockAnimationControllerImpl extends Keygua
                 });
             }
         }
-        this.unlockAnimationExecutor.execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl.playCannedUnlockAnimation.5
+        this.unlockAnimationExecutor.execute(new Runnable() { // from class: com.android.systemui.keyguard.KeyguardSecLegacyUnlockAnimationControllerImpl.playCannedUnlockAnimation.6
             @Override // java.lang.Runnable
             public final void run() {
                 StandaloneCoroutine standaloneCoroutine;
@@ -496,9 +523,9 @@ public final class KeyguardSecLegacyUnlockAnimationControllerImpl extends Keygua
                 RemoteAnimationTarget remoteAnimationTarget4 = remoteAnimationTarget3;
                 if (remoteAnimationTarget4 != null) {
                     KeyguardSecLegacyUnlockAnimationControllerImpl keyguardSecLegacyUnlockAnimationControllerImpl = this;
-                    SurfaceControl surfaceControl3 = remoteAnimationTarget4.leash;
-                    keyguardSecLegacyUnlockAnimationControllerImpl.curLeash = surfaceControl3;
-                    keyguardSecLegacyUnlockAnimationControllerImpl.traceTag = surfaceControl3.toString();
+                    SurfaceControl surfaceControl7 = remoteAnimationTarget4.leash;
+                    keyguardSecLegacyUnlockAnimationControllerImpl.curLeash = surfaceControl7;
+                    keyguardSecLegacyUnlockAnimationControllerImpl.traceTag = surfaceControl7.toString();
                     Rect rect = remoteAnimationTarget4.screenSpaceBounds;
                     keyguardSecLegacyUnlockAnimationControllerImpl.curLeashWidth = rect.width() / 2.0f;
                     keyguardSecLegacyUnlockAnimationControllerImpl.curLeashHeight = rect.height() / 2.0f;
@@ -518,8 +545,8 @@ public final class KeyguardSecLegacyUnlockAnimationControllerImpl extends Keygua
                             iLauncherUnlockAnimationController$Stub$Proxy.prepareForUnlock(new Rect());
                             Unit unit = Unit.INSTANCE;
                         }
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
+                    } catch (RemoteException e2) {
+                        e2.printStackTrace();
                         Unit unit2 = Unit.INSTANCE;
                     }
                 } else {
@@ -535,11 +562,11 @@ public final class KeyguardSecLegacyUnlockAnimationControllerImpl extends Keygua
                     animatorSet2.setStartDelay(keyguardSecLegacyUnlockAnimationControllerImpl2.animStartDelay);
                     animatorSet2.play(keyguardSecLegacyUnlockAnimationControllerImpl2.alphaAnimator);
                     keyguardSecLegacyUnlockAnimationControllerImpl2.cannedAnimatorSet = animatorSet2;
-                    SurfaceControl surfaceControl4 = keyguardSecLegacyUnlockAnimationControllerImpl2.openingWallpaperLeash;
-                    if (surfaceControl4 != null) {
-                        SurfaceControl.Transaction transaction = keyguardSecLegacyUnlockAnimationControllerImpl2.curTransaction;
-                        transaction.getClass();
-                        transaction.setAlpha(surfaceControl4, 1.0f);
+                    SurfaceControl surfaceControl8 = keyguardSecLegacyUnlockAnimationControllerImpl2.openingWallpaperLeash;
+                    if (surfaceControl8 != null) {
+                        SurfaceControl.Transaction transaction2 = keyguardSecLegacyUnlockAnimationControllerImpl2.curTransaction;
+                        transaction2.getClass();
+                        transaction2.setAlpha(surfaceControl8, 1.0f);
                     }
                     keyguardSecLegacyUnlockAnimationControllerImpl2.skipFrameCount = 0;
                     keyguardSecLegacyUnlockAnimationControllerImpl2.frameUpdatedCount = 0;

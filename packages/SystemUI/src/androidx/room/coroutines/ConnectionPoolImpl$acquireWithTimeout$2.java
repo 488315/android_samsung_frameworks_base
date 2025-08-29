@@ -50,24 +50,24 @@ public final class ConnectionPoolImpl$acquireWithTimeout$2 extends SuspendLambda
             this.L$0 = ref$ObjectRef2;
             this.label = 1;
             BufferedChannel bufferedChannel = pool.channel;
-            Object objMo3475tryReceivePtdJZtk = bufferedChannel.mo3475tryReceivePtdJZtk();
+            Object objMo3474tryReceivePtdJZtk = bufferedChannel.mo3474tryReceivePtdJZtk();
             ChannelResult.Companion companion = ChannelResult.Companion;
-            boolean z = objMo3475tryReceivePtdJZtk instanceof ChannelResult.Failed;
+            boolean z = objMo3474tryReceivePtdJZtk instanceof ChannelResult.Failed;
             if (z) {
                 pool.tryOpenNewConnection();
                 objReceive = bufferedChannel.receive(this);
             } else {
                 if (z) {
-                    if (!(objMo3475tryReceivePtdJZtk instanceof ChannelResult.Closed)) {
+                    if (!(objMo3474tryReceivePtdJZtk instanceof ChannelResult.Closed)) {
                         throw new IllegalStateException("Trying to call 'getOrThrow' on a failed result of a non-closed channel");
                     }
-                    Throwable th = ((ChannelResult.Closed) objMo3475tryReceivePtdJZtk).cause;
+                    Throwable th = ((ChannelResult.Closed) objMo3474tryReceivePtdJZtk).cause;
                     if (th != null) {
                         throw th;
                     }
                     throw new IllegalStateException("Trying to call 'getOrThrow' on a channel closed without a cause");
                 }
-                objReceive = (ConnectionWithLock) objMo3475tryReceivePtdJZtk;
+                objReceive = (ConnectionWithLock) objMo3474tryReceivePtdJZtk;
             }
             if (objReceive == coroutineSingletons) {
                 return coroutineSingletons;

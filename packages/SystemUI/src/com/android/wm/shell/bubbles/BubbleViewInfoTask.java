@@ -71,7 +71,7 @@ public class BubbleViewInfoTask {
                 bubbleViewInfo.taskView = bubble.getOrCreateBubbleTaskView(bubbleTaskViewFactory);
                 bubbleViewInfo.expandedView = (BubbleExpandedView) layoutInflaterFrom.inflate(R.layout.bubble_expanded_view, (ViewGroup) bubbleStackView, false);
             }
-            if (!BubbleViewInfoTask.m3234$$Nest$smpopulateCommonInfo(bubbleViewInfo, context, bubble, bubbleIconFactory, bubbleBadgeIconFactory)) {
+            if (!BubbleViewInfoTask.m3233$$Nest$smpopulateCommonInfo(bubbleViewInfo, context, bubble, bubbleIconFactory, bubbleBadgeIconFactory)) {
                 return null;
             }
             Bubble.FlyoutMessage flyoutMessage = bubble.mFlyoutMessage;
@@ -88,7 +88,7 @@ public class BubbleViewInfoTask {
     }
 
     /* renamed from: -$$Nest$smpopulateCommonInfo, reason: not valid java name */
-    public static boolean m3234$$Nest$smpopulateCommonInfo(BubbleViewInfo bubbleViewInfo, Context context, Bubble bubble, BubbleIconFactory bubbleIconFactory, BubbleBadgeIconFactory bubbleBadgeIconFactory) throws PackageManager.NameNotFoundException {
+    public static boolean m3233$$Nest$smpopulateCommonInfo(BubbleViewInfo bubbleViewInfo, Context context, Bubble bubble, BubbleIconFactory bubbleIconFactory, BubbleBadgeIconFactory bubbleBadgeIconFactory) throws PackageManager.NameNotFoundException {
         Drawable bubbleDrawable;
         ShortcutInfo shortcutInfo = bubble.mShortcutInfo;
         if (shortcutInfo != null) {
@@ -175,7 +175,7 @@ public class BubbleViewInfoTask {
             bubbleViewInfo.taskView = bubble.getOrCreateBubbleTaskView(bubbleTaskViewFactory);
             bubbleViewInfo.bubbleBarExpandedView = (BubbleBarExpandedView) LayoutInflater.from(context).inflate(R.layout.bubble_bar_expanded_view, (ViewGroup) bubbleBarLayerView, false);
         }
-        if (!m3234$$Nest$smpopulateCommonInfo(bubbleViewInfo, context, bubble, this.mIconFactory, this.mBadgeIconFactory)) {
+        if (!m3233$$Nest$smpopulateCommonInfo(bubbleViewInfo, context, bubble, this.mIconFactory, this.mBadgeIconFactory)) {
             return null;
         }
         bubbleViewInfo.flyoutMessage = bubble.mFlyoutMessage;

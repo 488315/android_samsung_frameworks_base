@@ -12,6 +12,7 @@ import android.view.animation.Interpolator;
 import android.view.animation.PathInterpolator;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import com.android.keyguard.StrongAuthPopup$$ExternalSyntheticOutline0;
 import com.android.systemui.FontSizeUtils;
 import com.android.systemui.QpRune;
 import com.android.systemui.R;
@@ -158,7 +159,10 @@ public final class NotificationShelfManager {
 
     public final int getPanelShelfHeight() {
         updateShelfHeightResource(2);
-        return this.mShelfTextAreaHeight + this.mShelfTextAreaPaddingTop + this.mShelfTextAreaPaddingBottom;
+        if (!QpRune.QUICK_DATA_USAGE_LABEL || DeviceState.getActiveSimCount(this.context) <= 0 || this.settingsHelper.isPanelSplit() || this.statusBarState == 1) {
+            return this.mShelfTextAreaHeight + this.mShelfTextAreaPaddingTop + this.mShelfTextAreaPaddingBottom;
+        }
+        return StrongAuthPopup$$ExternalSyntheticOutline0.m(this.context, R.dimen.sec_notification_shelf_text_area_bottom_padding_with_data_usage_view, this.mShelfTextAreaHeight + this.mShelfTextAreaPaddingTop + this.mShelfTextAreaPaddingBottom);
     }
 
     public final void startButtonAnimation(final View view, final boolean z, boolean z2) {
@@ -276,7 +280,7 @@ public final class NotificationShelfManager {
         int i = this.mShelfTextAreaHeight + this.mShelfTextAreaPaddingTop + this.mShelfTextAreaPaddingBottom;
         NotificationShelf notificationShelf = this.shelf;
         if (notificationShelf != null) {
-            if (!QpRune.QUICK_DATA_USAGE_LABEL || DeviceState.getActiveSimCount(notificationShelf.getContext()) <= 0 || this.settingsHelper.isPanelSplit()) {
+            if (!QpRune.QUICK_DATA_USAGE_LABEL || DeviceState.getActiveSimCount(notificationShelf.getContext()) <= 0 || this.settingsHelper.isPanelSplit() || this.statusBarState == 1) {
                 notificationShelf.getLayoutParams().height = i;
             } else {
                 notificationShelf.getLayoutParams().height = notificationShelf.getContext().getResources().getDimensionPixelSize(R.dimen.sec_notification_shelf_text_area_bottom_padding_with_data_usage_view) + i;

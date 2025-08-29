@@ -3485,7 +3485,7 @@ public class Editor {
         }
 
         @Override // android.widget.Editor.PinnedPopupWindow
-        protected void initContentView() {
+        protected void initContentView() throws Resources.NotFoundException {
             LayoutInflater layoutInflater = (LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             this.mContentView = (ViewGroup) layoutInflater.inflate(Editor.this.mTextView.mTextEditSuggestionContainerLayout, (ViewGroup) null);
             LinearLayout linearLayout = (LinearLayout) this.mContentView.findViewById(R.id.suggestionWindowContainer);

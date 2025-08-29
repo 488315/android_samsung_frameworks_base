@@ -80,11 +80,11 @@ public final class DesktopPersistentRepository {
         public static DesktopTask createDesktopTask(int i, DesktopTaskState desktopTaskState, DesktopTaskTilingState desktopTaskTilingState) {
             DesktopTask.Builder builderNewBuilder = DesktopTask.newBuilder();
             builderNewBuilder.copyOnWrite();
-            DesktopTask.m3263$$Nest$msetTaskId((DesktopTask) builderNewBuilder.instance, i);
+            DesktopTask.m3262$$Nest$msetTaskId((DesktopTask) builderNewBuilder.instance, i);
             builderNewBuilder.copyOnWrite();
-            DesktopTask.m3261$$Nest$msetDesktopTaskState((DesktopTask) builderNewBuilder.instance, desktopTaskState);
+            DesktopTask.m3260$$Nest$msetDesktopTaskState((DesktopTask) builderNewBuilder.instance, desktopTaskState);
             builderNewBuilder.copyOnWrite();
-            DesktopTask.m3262$$Nest$msetDesktopTaskTilingState((DesktopTask) builderNewBuilder.instance, desktopTaskTilingState);
+            DesktopTask.m3261$$Nest$msetDesktopTaskTilingState((DesktopTask) builderNewBuilder.instance, desktopTaskTilingState);
             return (DesktopTask) builderNewBuilder.build();
         }
 
@@ -167,10 +167,10 @@ public final class DesktopPersistentRepository {
             desktopPersistentRepository.getClass();
             Desktop.Builder builderNewBuilder = Desktop.newBuilder();
             builderNewBuilder.copyOnWrite();
-            Desktop.m3253$$Nest$msetDesktopId(i, (Desktop) builderNewBuilder.instance);
+            Desktop.m3252$$Nest$msetDesktopId(i, (Desktop) builderNewBuilder.instance);
             builderNewBuilder.copyOnWrite();
             int i2 = 0;
-            Desktop.m3254$$Nest$msetDisplayId(0, (Desktop) builderNewBuilder.instance);
+            Desktop.m3253$$Nest$msetDisplayId(0, (Desktop) builderNewBuilder.instance);
             Desktop.Builder builder = (Desktop.Builder) desktopRepoByUserOrDefault.getDesktopOrDefault(i, (Desktop) builderNewBuilder.build()).toBuilder();
             ArraySet<Integer> arraySet = this.$visibleTasks;
             ArraySet<Integer> arraySet2 = this.$minimizedTasks;
@@ -179,7 +179,7 @@ public final class DesktopPersistentRepository {
             Integer num2 = this.$rightTiledTask;
             companion.getClass();
             builder.copyOnWrite();
-            Desktop.m3252$$Nest$mgetMutableTasksByTaskIdMap((Desktop) builder.instance).clear();
+            Desktop.m3251$$Nest$mgetMutableTasksByTaskIdMap((Desktop) builder.instance).clear();
             if (arrayList.size() > arraySet2.size() + arraySet.size() && arraySet.isEmpty()) {
                 ArrayList arrayList2 = new ArrayList();
                 int size = arrayList.size();
@@ -210,7 +210,7 @@ public final class DesktopPersistentRepository {
                 linkedHashMap.put(next, Companion.createDesktopTask(iIntValue, desktopTaskState, (num != null && iIntValue2 == num.intValue()) ? DesktopTaskTilingState.LEFT : (num2 != null && iIntValue2 == num2.intValue()) ? DesktopTaskTilingState.RIGHT : DesktopTaskTilingState.NONE));
             }
             builder.copyOnWrite();
-            Desktop.m3252$$Nest$mgetMutableTasksByTaskIdMap((Desktop) builder.instance).putAll(linkedHashMap);
+            Desktop.m3251$$Nest$mgetMutableTasksByTaskIdMap((Desktop) builder.instance).putAll(linkedHashMap);
             int iMapCapacity2 = MapsKt__MapsJVMKt.mapCapacity(CollectionsKt__IterablesKt.collectionSizeOrDefault(arraySet2, 10));
             LinkedHashMap linkedHashMap2 = new LinkedHashMap(iMapCapacity2 >= 16 ? iMapCapacity2 : 16);
             Iterator<Integer> it2 = arraySet2.iterator();
@@ -226,28 +226,28 @@ public final class DesktopPersistentRepository {
                 linkedHashMap2.put(next2, Companion.createDesktopTask(iIntValue3, desktopTaskState2, desktopTaskTilingState));
             }
             builder.copyOnWrite();
-            Desktop.m3252$$Nest$mgetMutableTasksByTaskIdMap((Desktop) builder.instance).putAll(linkedHashMap2);
+            Desktop.m3251$$Nest$mgetMutableTasksByTaskIdMap((Desktop) builder.instance).putAll(linkedHashMap2);
             ArrayList<Integer> arrayList3 = this.$freeformTasksInZOrder;
             builder.copyOnWrite();
-            Desktop.m3251$$Nest$mclearZOrderedTasks((Desktop) builder.instance);
+            Desktop.m3250$$Nest$mclearZOrderedTasks((Desktop) builder.instance);
             builder.copyOnWrite();
-            Desktop.m3250$$Nest$maddAllZOrderedTasks((Desktop) builder.instance, arrayList3);
+            Desktop.m3249$$Nest$maddAllZOrderedTasks((Desktop) builder.instance, arrayList3);
             int i3 = this.$displayId;
             builder.copyOnWrite();
-            Desktop.m3254$$Nest$msetDisplayId(i3, (Desktop) builder.instance);
+            Desktop.m3253$$Nest$msetDisplayId(i3, (Desktop) builder.instance);
             int i4 = this.$usedDesk;
             builder.copyOnWrite();
-            Desktop.m3255$$Nest$msetUsed(i4, (Desktop) builder.instance);
+            Desktop.m3254$$Nest$msetUsed(i4, (Desktop) builder.instance);
             DesktopPersistentRepositories.Builder builder2 = (DesktopPersistentRepositories.Builder) desktopPersistentRepositories.toBuilder();
             int i5 = this.$userId;
             DesktopRepositoryState.Builder builder3 = (DesktopRepositoryState.Builder) desktopRepoByUserOrDefault.toBuilder();
             int i6 = this.$desktopId;
             Desktop desktop = (Desktop) builder.build();
             builder3.copyOnWrite();
-            DesktopRepositoryState.m3259$$Nest$mgetMutableDesktopMap((DesktopRepositoryState) builder3.instance).put(Integer.valueOf(i6), desktop);
+            DesktopRepositoryState.m3258$$Nest$mgetMutableDesktopMap((DesktopRepositoryState) builder3.instance).put(Integer.valueOf(i6), desktop);
             DesktopRepositoryState desktopRepositoryState = (DesktopRepositoryState) builder3.build();
             builder2.copyOnWrite();
-            DesktopPersistentRepositories.m3257$$Nest$mgetMutableDesktopRepoByUserMap((DesktopPersistentRepositories) builder2.instance).put(Integer.valueOf(i5), desktopRepositoryState);
+            DesktopPersistentRepositories.m3256$$Nest$mgetMutableDesktopRepoByUserMap((DesktopPersistentRepositories) builder2.instance).put(Integer.valueOf(i5), desktopRepositoryState);
             return builder2.build();
         }
     }
@@ -362,10 +362,10 @@ public final class DesktopPersistentRepository {
             DesktopRepositoryState.Builder builder2 = (DesktopRepositoryState.Builder) desktopRepoByUserOrDefault.toBuilder();
             int i2 = this.$desktopId;
             builder2.copyOnWrite();
-            DesktopRepositoryState.m3259$$Nest$mgetMutableDesktopMap((DesktopRepositoryState) builder2.instance).remove(Integer.valueOf(i2));
+            DesktopRepositoryState.m3258$$Nest$mgetMutableDesktopMap((DesktopRepositoryState) builder2.instance).remove(Integer.valueOf(i2));
             DesktopRepositoryState desktopRepositoryState = (DesktopRepositoryState) builder2.build();
             builder.copyOnWrite();
-            DesktopPersistentRepositories.m3257$$Nest$mgetMutableDesktopRepoByUserMap((DesktopPersistentRepositories) builder.instance).put(Integer.valueOf(i), desktopRepositoryState);
+            DesktopPersistentRepositories.m3256$$Nest$mgetMutableDesktopRepoByUserMap((DesktopPersistentRepositories) builder.instance).put(Integer.valueOf(i), desktopRepositoryState);
             return builder.build();
         }
     }
@@ -423,7 +423,7 @@ public final class DesktopPersistentRepository {
             while (it.hasNext()) {
                 int iIntValue = ((Number) it.next()).intValue();
                 builder.copyOnWrite();
-                DesktopPersistentRepositories.m3257$$Nest$mgetMutableDesktopRepoByUserMap((DesktopPersistentRepositories) builder.instance).remove(Integer.valueOf(iIntValue));
+                DesktopPersistentRepositories.m3256$$Nest$mgetMutableDesktopRepoByUserMap((DesktopPersistentRepositories) builder.instance).remove(Integer.valueOf(iIntValue));
             }
             return builder.build();
         }

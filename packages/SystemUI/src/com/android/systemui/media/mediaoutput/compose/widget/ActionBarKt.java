@@ -284,7 +284,7 @@ public abstract class ActionBarKt {
                                     Color.Companion.getClass();
                                     long j = Color.Transparent;
                                     seslTopAppBarDefaults.getClass();
-                                    com.samsung.sesl.compose.component.AppBarKt.m3337SeslTopAppBarau3_HiA(composableLambdaImplRememberComposableLambda2, null, composableLambdaImplRememberComposableLambda3, composableLambdaImpl4, WindowInsets, SeslTopAppBarDefaults.m3345topAppBarColors5tl4gsc(j, composerImpl4), 0.0f, composerImpl4, 6, 66);
+                                    com.samsung.sesl.compose.component.AppBarKt.m3336SeslTopAppBarau3_HiA(composableLambdaImplRememberComposableLambda2, null, composableLambdaImplRememberComposableLambda3, composableLambdaImpl4, WindowInsets, SeslTopAppBarDefaults.m3344topAppBarColors5tl4gsc(j, composerImpl4), 0.0f, composerImpl4, 6, 66);
                                     if (ComposerKt.isTraceInProgress()) {
                                         ComposerKt.traceEventEnd();
                                     }
@@ -294,7 +294,7 @@ public abstract class ActionBarKt {
                         }
                     }, composerImpl2);
                     ComposableSingletons$ActionBarKt.INSTANCE.getClass();
-                    ScaffoldKt.m3341SeslScaffold5k0As8s(modifierNestedScroll, composableLambdaImplRememberComposableLambda, null, null, null, ComposableSingletons$ActionBarKt.f86lambda3, 0, 0L, null, ComposableLambdaKt.rememberComposableLambda(-980437253, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ActionBarKt$SecTitle$1$2
+                    ScaffoldKt.m3340SeslScaffold5k0As8s(modifierNestedScroll, composableLambdaImplRememberComposableLambda, null, null, null, ComposableSingletons$ActionBarKt.f86lambda3, 0, 0L, null, ComposableLambdaKt.rememberComposableLambda(-980437253, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ActionBarKt$SecTitle$1$2
                         /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
                         @Override // kotlin.jvm.functions.Function3
                         /*
@@ -482,7 +482,7 @@ public abstract class ActionBarKt {
                                 Color.Companion.getClass();
                                 long j = Color.Transparent;
                                 seslTopAppBarDefaults.getClass();
-                                com.samsung.sesl.compose.component.AppBarKt.m3337SeslTopAppBarau3_HiA(composableLambdaImplRememberComposableLambda22, null, composableLambdaImplRememberComposableLambda3, composableLambdaImpl4, WindowInsets, SeslTopAppBarDefaults.m3345topAppBarColors5tl4gsc(j, composerImpl4), 0.0f, composerImpl4, 6, 66);
+                                com.samsung.sesl.compose.component.AppBarKt.m3336SeslTopAppBarau3_HiA(composableLambdaImplRememberComposableLambda22, null, composableLambdaImplRememberComposableLambda3, composableLambdaImpl4, WindowInsets, SeslTopAppBarDefaults.m3344topAppBarColors5tl4gsc(j, composerImpl4), 0.0f, composerImpl4, 6, 66);
                                 if (ComposerKt.isTraceInProgress()) {
                                     ComposerKt.traceEventEnd();
                                 }
@@ -492,7 +492,7 @@ public abstract class ActionBarKt {
                     }
                 }, composerImpl2);
                 ComposableSingletons$ActionBarKt.INSTANCE.getClass();
-                ScaffoldKt.m3341SeslScaffold5k0As8s(modifierNestedScroll2, composableLambdaImplRememberComposableLambda2, null, null, null, ComposableSingletons$ActionBarKt.f86lambda3, 0, 0L, null, ComposableLambdaKt.rememberComposableLambda(-980437253, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ActionBarKt$SecTitle$1$2
+                ScaffoldKt.m3340SeslScaffold5k0As8s(modifierNestedScroll2, composableLambdaImplRememberComposableLambda2, null, null, null, ComposableSingletons$ActionBarKt.f86lambda3, 0, 0L, null, ComposableLambdaKt.rememberComposableLambda(-980437253, new Function3() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ActionBarKt$SecTitle$1$2
                     /* JADX WARN: Removed duplicated region for block: B:15:0x002f  */
                     @Override // kotlin.jvm.functions.Function3
                     /*

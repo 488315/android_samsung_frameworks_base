@@ -138,7 +138,7 @@ public final class SensorPrivacyToggleTileDataInteractor implements QSTileDataIn
                     @Override // com.android.systemui.statusbar.policy.IndividualSensorPrivacyController.Callback
                     public final void onSensorBlockedChanged(int i2, boolean z) {
                         if (i2 == sensorPrivacyToggleTileDataInteractor.sensorId) {
-                            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(SensorPrivacyToggleTileModel.m2936boximpl(z));
+                            ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(SensorPrivacyToggleTileModel.m2934boximpl(z));
                         }
                     }
                 };
@@ -194,9 +194,9 @@ public final class SensorPrivacyToggleTileDataInteractor implements QSTileDataIn
                 ResultKt.throwOnFailure(obj);
                 FlowCollector flowCollector = (FlowCollector) this.L$0;
                 SensorPrivacyToggleTileDataInteractor sensorPrivacyToggleTileDataInteractor = SensorPrivacyToggleTileDataInteractor.this;
-                SensorPrivacyToggleTileModel sensorPrivacyToggleTileModelM2936boximpl = SensorPrivacyToggleTileModel.m2936boximpl(((IndividualSensorPrivacyControllerImpl) sensorPrivacyToggleTileDataInteractor.privacyController).isSensorBlocked(sensorPrivacyToggleTileDataInteractor.sensorId));
+                SensorPrivacyToggleTileModel sensorPrivacyToggleTileModelM2934boximpl = SensorPrivacyToggleTileModel.m2934boximpl(((IndividualSensorPrivacyControllerImpl) sensorPrivacyToggleTileDataInteractor.privacyController).isSensorBlocked(sensorPrivacyToggleTileDataInteractor.sensorId));
                 this.label = 1;
-                if (flowCollector.emit(sensorPrivacyToggleTileModelM2936boximpl, this) == coroutineSingletons) {
+                if (flowCollector.emit(sensorPrivacyToggleTileModelM2934boximpl, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {

@@ -6297,7 +6297,7 @@ public final class MessageSchema implements Schema {
                             GeneratedMessageLite.ExtendableMessage extendableMessage = (GeneratedMessageLite.ExtendableMessage) obj2;
                             FieldSet fieldSet = extendableMessage.extensions;
                             if (fieldSet.isImmutable) {
-                                extendableMessage.extensions = fieldSet.m3288clone();
+                                extendableMessage.extensions = fieldSet.m3287clone();
                             }
                             FieldSet fieldSet2 = extendableMessage.extensions;
                             GeneratedMessageLite.ExtensionDescriptor extensionDescriptor = generatedExtension.descriptor;

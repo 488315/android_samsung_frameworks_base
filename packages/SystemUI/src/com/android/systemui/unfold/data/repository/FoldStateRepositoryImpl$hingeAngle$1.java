@@ -46,7 +46,7 @@ final class FoldStateRepositoryImpl$hingeAngle$1 extends SuspendLambda implement
             FoldStateProvider.FoldUpdatesListener foldUpdatesListener = new FoldStateProvider.FoldUpdatesListener() { // from class: com.android.systemui.unfold.data.repository.FoldStateRepositoryImpl$hingeAngle$1$callback$1
                 @Override // com.android.systemui.unfold.updates.FoldStateProvider.FoldUpdatesListener
                 public final void onHingeAngleUpdate(float f) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Float.valueOf(f));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Float.valueOf(f));
                 }
             };
             ((DeviceFoldStateProvider) this.this$0.foldStateProvider).addCallback(foldUpdatesListener);

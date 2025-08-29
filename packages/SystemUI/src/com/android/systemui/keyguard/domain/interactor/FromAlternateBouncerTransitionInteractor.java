@@ -224,7 +224,7 @@ public final class FromAlternateBouncerTransitionInteractor extends TransitionIn
                 j = TRANSITION_DURATION_MS;
                 break;
         }
-        valueAnimator.setDuration(Duration.m3457getInWholeMillisecondsimpl(j));
+        valueAnimator.setDuration(Duration.m3456getInWholeMillisecondsimpl(j));
         return valueAnimator;
     }
 

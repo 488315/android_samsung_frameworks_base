@@ -393,7 +393,7 @@ public class RecentsTransitionHandler implements Transitions.TransitionHandler, 
                             z3 = false;
                             break;
                         } else {
-                            if (RecentsTransitionHandler.m3277$$Nest$misDeskRootTask(RecentsTransitionHandler.this, ((TaskState) this.mOpeningTasks.get(i3)).mTaskInfo)) {
+                            if (RecentsTransitionHandler.m3276$$Nest$misDeskRootTask(RecentsTransitionHandler.this, ((TaskState) this.mOpeningTasks.get(i3)).mTaskInfo)) {
                                 z3 = true;
                                 break;
                             }
@@ -774,7 +774,7 @@ public class RecentsTransitionHandler implements Transitions.TransitionHandler, 
                                     size = i12;
                                     arrayList = arrayList6;
                                     intArray = intArray3;
-                                    if (TransitionUtil.isOpeningType(change5.getMode()) && RecentsTransitionHandler.m3277$$Nest$misDeskRootTask(RecentsTransitionHandler.this, change5.getTaskInfo()) && remoteAnimationTargetArr2 == null) {
+                                    if (TransitionUtil.isOpeningType(change5.getMode()) && RecentsTransitionHandler.m3276$$Nest$misDeskRootTask(RecentsTransitionHandler.this, change5.getTaskInfo()) && remoteAnimationTargetArr2 == null) {
                                         remoteAnimationTargetArr2 = new RemoteAnimationTarget[0];
                                     }
                                     if (ProtoLogImpl_1771455215.Cache.WM_SHELL_RECENTS_TRANSITION_enabled[1]) {
@@ -951,7 +951,7 @@ public class RecentsTransitionHandler implements Transitions.TransitionHandler, 
                     WindowContainerToken windowContainerToken = this.mRecentsTask;
                     boolean z16 = windowContainerToken != null && windowContainerToken.equals(change8.getContainer());
                     z5 = z5 || z15;
-                    int i16 = (!leafTaskFilter.test(change8) || RecentsTransitionHandler.m3277$$Nest$misDeskRootTask(RecentsTransitionHandler.this, taskInfo3)) ? 0 : 1;
+                    int i16 = (!leafTaskFilter.test(change8) || RecentsTransitionHandler.m3276$$Nest$misDeskRootTask(RecentsTransitionHandler.this, taskInfo3)) ? 0 : 1;
                     if (TransitionUtil.isOpeningType(change8.getMode()) || TransitionUtil.isOrderOnly(change8)) {
                         arrayList2 = arrayList5;
                         c = ' ';
@@ -1167,7 +1167,7 @@ public class RecentsTransitionHandler implements Transitions.TransitionHandler, 
     }
 
     /* renamed from: -$$Nest$misDeskRootTask, reason: not valid java name */
-    public static boolean m3277$$Nest$misDeskRootTask(RecentsTransitionHandler recentsTransitionHandler, ActivityManager.RunningTaskInfo runningTaskInfo) {
+    public static boolean m3276$$Nest$misDeskRootTask(RecentsTransitionHandler recentsTransitionHandler, ActivityManager.RunningTaskInfo runningTaskInfo) {
         DesktopTasksController desktopTasksController = recentsTransitionHandler.mDesktopTasksController;
         if (desktopTasksController == null || runningTaskInfo == null) {
             return false;

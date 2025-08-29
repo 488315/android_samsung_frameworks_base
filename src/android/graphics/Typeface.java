@@ -86,6 +86,7 @@ public class Typeface {
     private boolean isBoldFont;
     public boolean isLikeDefault;
     private final Runnable mCleaner;
+    public boolean mCustomBuilder;
     private final Typeface mDerivedFrom;
     private boolean mIsVariationInstance;
     private int mStyle;
@@ -525,11 +526,16 @@ public class Typeface {
                     style.setSystemFallback(str3);
                 }
                 Typeface typefaceBuild = style.build();
-                if (strCreateAssetUid == null) {
-                    return typefaceBuild;
+                if (strCreateAssetUid != null) {
+                    synchronized (Typeface.sDynamicCacheLock) {
+                        Typeface.sDynamicTypefaceCache.put(strCreateAssetUid, typefaceBuild);
+                    }
                 }
-                synchronized (Typeface.sDynamicCacheLock) {
-                    Typeface.sDynamicTypefaceCache.put(strCreateAssetUid, typefaceBuild);
+                for (FontVariationAxis fontVariationAxis : fontBuild.getAxes()) {
+                    if ("SKIP".equals(fontVariationAxis.getTag())) {
+                        typefaceBuild.mCustomBuilder = true;
+                        return typefaceBuild;
+                    }
                 }
                 return typefaceBuild;
             } catch (IOException | IllegalArgumentException unused) {
@@ -816,6 +822,7 @@ public class Typeface {
     private Typeface(long j, String str, Typeface typeface) {
         this.isLikeDefault = false;
         this.isBoldFont = false;
+        this.mCustomBuilder = false;
         if (j == 0) {
             throw new RuntimeException("native typeface cannot be made");
         }

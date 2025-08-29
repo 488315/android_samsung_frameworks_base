@@ -851,14 +851,14 @@ public class FreeformContainerManager {
             }
             if (this.mColorThemeAppIconUri.equals(uri) || this.mWallpaperThemeStateUri.equals(uri) || this.mWallpaperThemeColorUri.equals(uri) || this.mCurrentSecAppIconThemePackageUri.equals(uri)) {
                 FreeformContainerManager.this.rebuildAll("colorPalette");
-            } else if (this.mLeboSettingUri.equals(uri) && FreeformContainerManager.m3268$$Nest$mshouldHideInformation(FreeformContainerManager.this)) {
+            } else if (this.mLeboSettingUri.equals(uri) && FreeformContainerManager.m3267$$Nest$mshouldHideInformation(FreeformContainerManager.this)) {
                 FreeformContainerManager.this.mH.sendMessage(25);
             }
         }
     }
 
     /* renamed from: -$$Nest$mshouldHideInformation, reason: not valid java name */
-    public static boolean m3268$$Nest$mshouldHideInformation(FreeformContainerManager freeformContainerManager) {
+    public static boolean m3267$$Nest$mshouldHideInformation(FreeformContainerManager freeformContainerManager) {
         String str;
         DisplayManager displayManager;
         int activeDisplayState;
@@ -909,7 +909,7 @@ public class FreeformContainerManager {
                         break;
                     case "com.samsung.intent.action.WIFI_DISPLAY_SOURCE_STATE":
                     case "com.samsung.intent.action.LELINK_CAST_CONNECTION_CHANGED":
-                        if (FreeformContainerManager.m3268$$Nest$mshouldHideInformation(FreeformContainerManager.this)) {
+                        if (FreeformContainerManager.m3267$$Nest$mshouldHideInformation(FreeformContainerManager.this)) {
                             FreeformContainerManager.this.mH.sendMessage(25);
                             break;
                         }

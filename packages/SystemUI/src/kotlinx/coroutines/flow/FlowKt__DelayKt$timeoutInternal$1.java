@@ -77,7 +77,7 @@ final class FlowKt__DelayKt$timeoutInternal$1 extends SuspendLambda implements F
             kotlin.time.Duration$Companion r9 = kotlin.time.Duration.Companion
             r9.getClass()
             r9 = 0
-            int r7 = kotlin.time.Duration.m3455compareToLRDsOJo(r7, r9)
+            int r7 = kotlin.time.Duration.m3454compareToLRDsOJo(r7, r9)
             if (r7 <= 0) goto Lc5
             kotlinx.coroutines.flow.Flow r7 = r0.$this_timeoutInternal
             r8 = 2
@@ -127,7 +127,7 @@ final class FlowKt__DelayKt$timeoutInternal$1 extends SuspendLambda implements F
             r10.register(r9, r3)
             kotlinx.coroutines.flow.FlowKt__DelayKt$timeoutInternal$1$1$2 r9 = new kotlinx.coroutines.flow.FlowKt__DelayKt$timeoutInternal$1$1$2
             r9.<init>(r6, r5)
-            long r11 = kotlinx.coroutines.DelayKt.m3470toDelayMillisLRDsOJo(r6)
+            long r11 = kotlinx.coroutines.DelayKt.m3469toDelayMillisLRDsOJo(r6)
             kotlinx.coroutines.selects.OnTimeoutKt.onTimeout(r10, r11, r9)
             r0.L$0 = r8
             r0.L$1 = r2

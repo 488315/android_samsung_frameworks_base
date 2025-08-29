@@ -40,7 +40,7 @@ public final class SecMediaPlayerData implements Dumpable {
     @Override // com.android.systemui.Dumpable
     public final void dump(PrintWriter printWriter, String[] strArr) {
         printWriter.println("mediaPlayers: " + getMediaPlayers());
-        printWriter.println("mediaData: " + m2629getMediaData());
+        printWriter.println("mediaData: " + m2627getMediaData());
         printWriter.println("sortedMediaPlayers: " + getSortedMediaPlayers());
     }
 
@@ -64,11 +64,11 @@ public final class SecMediaPlayerData implements Dumpable {
                         case 0:
                             int i2 = SecMediaPlayerData.$r8$clinit;
                             entry.getClass();
-                            return Boolean.valueOf(secMediaPlayerData.m2629getMediaData().containsKey((String) entry.getKey()) && secMediaPlayerData.getSortedMediaPlayers().get(secMediaPlayerData.currentPosition) == ((SecMediaControlPanel) entry.getValue()));
+                            return Boolean.valueOf(secMediaPlayerData.m2627getMediaData().containsKey((String) entry.getKey()) && secMediaPlayerData.getSortedMediaPlayers().get(secMediaPlayerData.currentPosition) == ((SecMediaControlPanel) entry.getValue()));
                         default:
                             int i3 = SecMediaPlayerData.$r8$clinit;
                             entry.getClass();
-                            return (MediaData) secMediaPlayerData.m2629getMediaData().get((String) entry.getKey());
+                            return (MediaData) secMediaPlayerData.m2627getMediaData().get((String) entry.getKey());
                     }
                 }
             };
@@ -95,11 +95,11 @@ public final class SecMediaPlayerData implements Dumpable {
                         case 0:
                             int i22 = SecMediaPlayerData.$r8$clinit;
                             entry.getClass();
-                            return Boolean.valueOf(secMediaPlayerData.m2629getMediaData().containsKey((String) entry.getKey()) && secMediaPlayerData.getSortedMediaPlayers().get(secMediaPlayerData.currentPosition) == ((SecMediaControlPanel) entry.getValue()));
+                            return Boolean.valueOf(secMediaPlayerData.m2627getMediaData().containsKey((String) entry.getKey()) && secMediaPlayerData.getSortedMediaPlayers().get(secMediaPlayerData.currentPosition) == ((SecMediaControlPanel) entry.getValue()));
                         default:
                             int i3 = SecMediaPlayerData.$r8$clinit;
                             entry.getClass();
-                            return (MediaData) secMediaPlayerData.m2629getMediaData().get((String) entry.getKey());
+                            return (MediaData) secMediaPlayerData.m2627getMediaData().get((String) entry.getKey());
                     }
                 }
             };
@@ -120,7 +120,7 @@ public final class SecMediaPlayerData implements Dumpable {
     }
 
     /* renamed from: getMediaData, reason: collision with other method in class */
-    public final ConcurrentHashMap m2629getMediaData() {
+    public final ConcurrentHashMap m2627getMediaData() {
         return (ConcurrentHashMap) this.mediaData$delegate.getValue();
     }
 
@@ -145,6 +145,6 @@ public final class SecMediaPlayerData implements Dumpable {
     }
 
     public final Iterable getMediaData() {
-        return m2629getMediaData().entrySet();
+        return m2627getMediaData().entrySet();
     }
 }

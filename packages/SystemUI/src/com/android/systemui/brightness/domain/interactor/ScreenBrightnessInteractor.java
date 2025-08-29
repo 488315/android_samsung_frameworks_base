@@ -86,7 +86,7 @@ public final class ScreenBrightnessInteractor {
             screenBrightnessRepository = (ScreenBrightnessRepository) screenBrightnessInteractor$setBrightness$1.L$0;
             ResultKt.throwOnFailure(obj);
         }
-        ((ScreenBrightnessDisplayManagerRepository) screenBrightnessRepository).apiQueue.mo3476trySendJP2dKIU(ScreenBrightnessDisplayManagerRepository.SetBrightnessMethod.Permanent.m1061boximpl(((LinearBrightness) obj).floatValue));
+        ((ScreenBrightnessDisplayManagerRepository) screenBrightnessRepository).apiQueue.mo3475trySendJP2dKIU(ScreenBrightnessDisplayManagerRepository.SetBrightnessMethod.Permanent.m1061boximpl(((LinearBrightness) obj).floatValue));
         return Unit.INSTANCE;
     }
 
@@ -129,7 +129,7 @@ public final class ScreenBrightnessInteractor {
             screenBrightnessRepository = (ScreenBrightnessRepository) screenBrightnessInteractor$setTemporaryBrightness$1.L$0;
             ResultKt.throwOnFailure(obj);
         }
-        ((ScreenBrightnessDisplayManagerRepository) screenBrightnessRepository).apiQueue.mo3476trySendJP2dKIU(ScreenBrightnessDisplayManagerRepository.SetBrightnessMethod.Temporary.m1062boximpl(((LinearBrightness) obj).floatValue));
+        ((ScreenBrightnessDisplayManagerRepository) screenBrightnessRepository).apiQueue.mo3475trySendJP2dKIU(ScreenBrightnessDisplayManagerRepository.SetBrightnessMethod.Temporary.m1062boximpl(((LinearBrightness) obj).floatValue));
         return Unit.INSTANCE;
     }
 

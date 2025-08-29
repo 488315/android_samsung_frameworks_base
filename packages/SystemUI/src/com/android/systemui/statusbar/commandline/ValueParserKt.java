@@ -15,7 +15,7 @@ public abstract class ValueParserKt {
         ValueParserKt$parseColor$1 valueParserKt$parseColor$1 = new ValueParser() { // from class: com.android.systemui.statusbar.commandline.ValueParserKt$parseColor$1
             @Override // com.android.systemui.statusbar.commandline.ValueParser
             /* renamed from: parseValue-IoAF18A */
-            public final Object mo2565parseValueIoAF18A(String str) {
+            public final Object mo2563parseValueIoAF18A(String str) {
                 try {
                     int i = Result.$r8$clinit;
                     return Integer.valueOf(Color.parseColor(str));

@@ -59,7 +59,7 @@ final class VolumeNavigator$2$1 extends SuspendLambda implements Function2 {
             final VolumeNavigator volumeNavigator = this.this$0;
             volumeNavigator.getClass();
             Dp.Companion companion = Dp.Companion;
-            final ComponentSystemUIDialog componentSystemUIDialogM3095createBottomSheet6ZxE2Lo$default = SystemUIDialogFactoryExtKt.m3095createBottomSheet6ZxE2Lo$default(volumeNavigator.dialogFactory, new ComposableLambdaImpl(746853774, true, new Function3() { // from class: com.android.systemui.volume.ui.navigation.VolumeNavigator$createNewVolumePanelDialog$1
+            final ComponentSystemUIDialog componentSystemUIDialogM3093createBottomSheet6ZxE2Lo$default = SystemUIDialogFactoryExtKt.m3093createBottomSheet6ZxE2Lo$default(volumeNavigator.dialogFactory, new ComposableLambdaImpl(746853774, true, new Function3() { // from class: com.android.systemui.volume.ui.navigation.VolumeNavigator$createNewVolumePanelDialog$1
                 /* JADX WARN: Removed duplicated region for block: B:9:0x0037  */
                 @Override // kotlin.jvm.functions.Function3
                 /*
@@ -113,11 +113,11 @@ final class VolumeNavigator$2$1 extends SuspendLambda implements Function2 {
                 }
             }), false, 800, 7);
             this.this$0.uiEventLogger.log(VolumePanelUiEvent.VOLUME_PANEL_SHOWN);
-            componentSystemUIDialogM3095createBottomSheet6ZxE2Lo$default.show();
+            componentSystemUIDialogM3093createBottomSheet6ZxE2Lo$default.show();
             Function0 function0 = new Function0() { // from class: com.android.systemui.volume.ui.navigation.VolumeNavigator$2$1.1
                 @Override // kotlin.jvm.functions.Function0
                 public final Object invoke() {
-                    componentSystemUIDialogM3095createBottomSheet6ZxE2Lo$default.dismiss();
+                    componentSystemUIDialogM3093createBottomSheet6ZxE2Lo$default.dismiss();
                     return Unit.INSTANCE;
                 }
             };

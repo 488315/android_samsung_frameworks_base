@@ -153,7 +153,7 @@ public final class FromDreamingTransitionInteractor extends TransitionInteractor
         ValueAnimator valueAnimator = new ValueAnimator();
         valueAnimator.setInterpolator(Interpolators.LINEAR);
         int i = WhenMappings.$EnumSwitchMapping$0[keyguardState.ordinal()];
-        valueAnimator.setDuration(Duration.m3457getInWholeMillisecondsimpl(i != 1 ? i != 2 ? DEFAULT_DURATION : TO_GLANCEABLE_HUB_DURATION : TO_LOCKSCREEN_DURATION));
+        valueAnimator.setDuration(Duration.m3456getInWholeMillisecondsimpl(i != 1 ? i != 2 ? DEFAULT_DURATION : TO_GLANCEABLE_HUB_DURATION : TO_LOCKSCREEN_DURATION));
         return valueAnimator;
     }
 

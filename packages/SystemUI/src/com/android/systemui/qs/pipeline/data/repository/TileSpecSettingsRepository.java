@@ -127,7 +127,7 @@ public final class TileSpecSettingsRepository implements TileSpecRepository {
         /*
             Code decompiled incorrectly, please refer to instructions dump.
         */
-        public final Object invokeSuspend(Object obj) throws Throwable {
+        public final Object invokeSuspend(Object obj) {
             BufferedChannel.BufferedChannelIterator bufferedChannelIterator;
             CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
             int i = this.label;

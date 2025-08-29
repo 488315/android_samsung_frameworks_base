@@ -100,7 +100,7 @@ public final class BuiltInDeviceController extends DeviceController {
                 companion.getClass();
                 Flow flowBuffer$default = FlowKt.buffer$default(FlowKt.callbackFlow(new BuiltInDeviceController$Companion$deviceStateChanges$1(pair, null)), -1, 2);
                 MediaOutputConst.INSTANCE.getClass();
-                Flow flowM3482debounceHG0u8IE = FlowKt.m3482debounceHG0u8IE(flowBuffer$default, MediaOutputConst.AUDIO_PATH_DEBOUNCE_TIMEOUT);
+                Flow flowM3481debounceHG0u8IE = FlowKt.m3481debounceHG0u8IE(flowBuffer$default, MediaOutputConst.AUDIO_PATH_DEBOUNCE_TIMEOUT);
                 final BuiltInDeviceController builtInDeviceController2 = BuiltInDeviceController.this;
                 FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.media.mediaoutput.controller.device.BuiltInDeviceController.1.1
                     @Override // kotlinx.coroutines.flow.FlowCollector
@@ -111,7 +111,7 @@ public final class BuiltInDeviceController extends DeviceController {
                     }
                 };
                 this.label = 1;
-                if (flowM3482debounceHG0u8IE.collect(flowCollector, this) == coroutineSingletons) {
+                if (flowM3481debounceHG0u8IE.collect(flowCollector, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
             } else {

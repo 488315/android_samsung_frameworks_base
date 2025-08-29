@@ -77,7 +77,7 @@ public final class SoundAliveManager {
             int i3 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        if (Result.m3442exceptionOrNullimpl(failure) != null) {
+        if (Result.m3441exceptionOrNullimpl(failure) != null) {
             Log.e(str2, "Exception occurs, can't execute requested insert");
         }
     }

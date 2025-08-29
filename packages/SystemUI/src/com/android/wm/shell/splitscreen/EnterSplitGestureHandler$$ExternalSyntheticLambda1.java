@@ -80,8 +80,8 @@ public final /* synthetic */ class EnterSplitGestureHandler$$ExternalSyntheticLa
                 final Handler handler = enterSplitGestureHandler.mHandler;
                 enterSplitGestureHandler.mObserver = 
                 /*  JADX ERROR: Method code generation error
-                    jadx.core.utils.exceptions.CodegenException: Error generate insn: 0x00ec: IPUT 
-                      (wrap:??:0x00e9: CONSTRUCTOR 
+                    jadx.core.utils.exceptions.CodegenException: Error generate insn: 0x00ed: IPUT 
+                      (wrap:??:0x00ea: CONSTRUCTOR 
                       (r3v0 'enterSplitGestureHandler' com.android.wm.shell.splitscreen.EnterSplitGestureHandler A[DONT_INLINE])
                       (r4v3 'handler' android.os.Handler A[DONT_INLINE])
                       (r0v21 'uriFor' android.net.Uri A[DONT_INLINE])
@@ -92,9 +92,9 @@ public final /* synthetic */ class EnterSplitGestureHandler$$ExternalSyntheticLa
                       (r10v1 'uriFor5' android.net.Uri A[DONT_INLINE])
                       (r11v0 'uriFor6' android.net.Uri A[DONT_INLINE])
                       (r12v0 'uriFor7' android.net.Uri A[DONT_INLINE])
-                     A[MD:(com.android.wm.shell.splitscreen.EnterSplitGestureHandler, android.os.Handler, android.net.Uri, android.content.ContentResolver, android.net.Uri, android.net.Uri, android.net.Uri, android.net.Uri, android.net.Uri, android.net.Uri):void (m), WRAPPED] (LINE:234) call: com.android.wm.shell.splitscreen.EnterSplitGestureHandler.5.<init>(com.android.wm.shell.splitscreen.EnterSplitGestureHandler, android.os.Handler, android.net.Uri, android.content.ContentResolver, android.net.Uri, android.net.Uri, android.net.Uri, android.net.Uri, android.net.Uri, android.net.Uri):void type: CONSTRUCTOR)
+                     A[MD:(com.android.wm.shell.splitscreen.EnterSplitGestureHandler, android.os.Handler, android.net.Uri, android.content.ContentResolver, android.net.Uri, android.net.Uri, android.net.Uri, android.net.Uri, android.net.Uri, android.net.Uri):void (m), WRAPPED] (LINE:235) call: com.android.wm.shell.splitscreen.EnterSplitGestureHandler.5.<init>(com.android.wm.shell.splitscreen.EnterSplitGestureHandler, android.os.Handler, android.net.Uri, android.content.ContentResolver, android.net.Uri, android.net.Uri, android.net.Uri, android.net.Uri, android.net.Uri, android.net.Uri):void type: CONSTRUCTOR)
                       (r3v0 'enterSplitGestureHandler' com.android.wm.shell.splitscreen.EnterSplitGestureHandler)
-                     (LINE:237) com.android.wm.shell.splitscreen.EnterSplitGestureHandler.mObserver com.android.wm.shell.splitscreen.EnterSplitGestureHandler$5 in method: com.android.wm.shell.splitscreen.EnterSplitGestureHandler$$ExternalSyntheticLambda1.run():void, file: classes3.dex
+                     (LINE:238) com.android.wm.shell.splitscreen.EnterSplitGestureHandler.mObserver com.android.wm.shell.splitscreen.EnterSplitGestureHandler$5 in method: com.android.wm.shell.splitscreen.EnterSplitGestureHandler$$ExternalSyntheticLambda1.run():void, file: classes3.dex
                     	at jadx.core.codegen.InsnGen.makeInsn(InsnGen.java:310)
                     	at jadx.core.codegen.InsnGen.makeInsn(InsnGen.java:273)
                     	at jadx.core.codegen.RegionGen.makeSimpleBlock(RegionGen.java:94)
@@ -130,7 +130,7 @@ public final /* synthetic */ class EnterSplitGestureHandler$$ExternalSyntheticLa
                     	... 21 more
                     */
                 /*
-                    Method dump skipped, instructions count: 388
+                    Method dump skipped, instructions count: 390
                     To view this dump add '--comments-level debug' option
                 */
                 throw new UnsupportedOperationException("Method not decompiled: com.android.wm.shell.splitscreen.EnterSplitGestureHandler$$ExternalSyntheticLambda1.run():void");

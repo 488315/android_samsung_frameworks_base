@@ -803,7 +803,7 @@ public abstract class AppBarKt {
                                                     DrawScope drawScope = (DrawScope) obj;
                                                     long j = ((Color) stateM7animateColorAsStateeuL9pac.getValue()).value;
                                                     Color.Companion.getClass();
-                                                    if (!ULong.m3447equalsimpl0(j, Color.Unspecified)) {
+                                                    if (!ULong.m3446equalsimpl0(j, Color.Unspecified)) {
                                                         DrawScope.m541drawRectnJ9OG0$default(drawScope, j, 0L, 0L, 0.0f, null, null, 0, 126);
                                                     }
                                                     return Unit.INSTANCE;

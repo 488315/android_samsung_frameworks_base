@@ -24,7 +24,7 @@ public final /* synthetic */ class EventsKt$$ExternalSyntheticLambda0 implements
                     return Maybe.Absent.INSTANCE;
                 }
                 Maybe.Companion.getClass();
-                return Maybe.Present.m2590boximpl(objInvoke);
+                return Maybe.Present.m2588boximpl(objInvoke);
             default:
                 ((MobileConnectionsRepositoryKairosImpl$$ExternalSyntheticLambda4) this.f$0).invoke(transactionScope, obj2);
                 return obj2;

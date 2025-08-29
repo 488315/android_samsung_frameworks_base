@@ -42,7 +42,7 @@ public final /* synthetic */ class StateScope$DefaultImpls$$ExternalSyntheticLam
                 Maybe.Companion companion = Maybe.Companion;
                 Object value = entry2.getValue();
                 companion.getClass();
-                return Maybe.Present.m2590boximpl(value);
+                return Maybe.Present.m2588boximpl(value);
             default:
                 return (State) ((StateScope$DefaultImpls$$ExternalSyntheticLambda0) this.f$0).invoke((KairosScope) obj, (Map.Entry) obj2);
         }

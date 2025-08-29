@@ -17,8 +17,7 @@ public interface IIntelligentDynamicFpsService extends IInterface {
         }
 
         @Override // com.sec.android.smartfpsadjuster.IIntelligentDynamicFpsService
-        public int cameraPolicyChange(int i) throws RemoteException {
-            return 0;
+        public void cameraPolicyChange(int i) throws RemoteException {
         }
 
         @Override // com.sec.android.smartfpsadjuster.IIntelligentDynamicFpsService
@@ -30,7 +29,7 @@ public interface IIntelligentDynamicFpsService extends IInterface {
         }
     }
 
-    int cameraPolicyChange(int i) throws RemoteException;
+    void cameraPolicyChange(int i) throws RemoteException;
 
     void cameraPolicyStart() throws RemoteException;
 
@@ -102,9 +101,7 @@ public interface IIntelligentDynamicFpsService extends IInterface {
             } else if (i == 3) {
                 int i3 = parcel.readInt();
                 parcel.enforceNoDataAvail();
-                int iCameraPolicyChange = cameraPolicyChange(i3);
-                parcel2.writeNoException();
-                parcel2.writeInt(iCameraPolicyChange);
+                cameraPolicyChange(i3);
             } else {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
@@ -156,17 +153,13 @@ public interface IIntelligentDynamicFpsService extends IInterface {
             }
 
             @Override // com.sec.android.smartfpsadjuster.IIntelligentDynamicFpsService
-            public int cameraPolicyChange(int i) throws RemoteException {
+            public void cameraPolicyChange(int i) throws RemoteException {
                 Parcel parcelObtain = Parcel.obtain(asBinder());
-                Parcel parcelObtain2 = Parcel.obtain();
                 try {
                     parcelObtain.writeInterfaceToken(IIntelligentDynamicFpsService.DESCRIPTOR);
                     parcelObtain.writeInt(i);
-                    this.mRemote.transact(3, parcelObtain, parcelObtain2, 0);
-                    parcelObtain2.readException();
-                    return parcelObtain2.readInt();
+                    this.mRemote.transact(3, parcelObtain, null, 1);
                 } finally {
-                    parcelObtain2.recycle();
                     parcelObtain.recycle();
                 }
             }

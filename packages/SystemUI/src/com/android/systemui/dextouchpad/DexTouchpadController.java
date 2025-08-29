@@ -177,7 +177,7 @@ public class DexTouchpadController implements CoreStartable {
                 ((HashSet) dexTouchpadController.mDexDisplayIds).remove(Integer.valueOf(i));
                 Log.d("DexTouchpadController", "onDisplayRemoveSystemDecorations displayId=" + i + " dexDisplayIds=" + dexTouchpadController.mDexDisplayIds);
                 if (((HashSet) dexTouchpadController.mDexDisplayIds).isEmpty()) {
-                    DexTouchpadController.m2568$$Nest$mremoveAll(dexTouchpadController);
+                    DexTouchpadController.m2566$$Nest$mremoveAll(dexTouchpadController);
                     Utils.mDesktopDisplayId = -1;
                 }
             }
@@ -191,7 +191,7 @@ public class DexTouchpadController implements CoreStartable {
                 ((HashSet) dexTouchpadController.mDexDisplayIds).remove(Integer.valueOf(i));
                 Log.d("DexTouchpadController", "onDisplayRemoved, displayId=" + i + " dexDisplayIds=" + dexTouchpadController.mDexDisplayIds);
                 if (((HashSet) dexTouchpadController.mDexDisplayIds).isEmpty()) {
-                    DexTouchpadController.m2568$$Nest$mremoveAll(dexTouchpadController);
+                    DexTouchpadController.m2566$$Nest$mremoveAll(dexTouchpadController);
                 }
             }
         }
@@ -235,7 +235,7 @@ public class DexTouchpadController implements CoreStartable {
     }
 
     /* renamed from: -$$Nest$mremoveAll, reason: not valid java name */
-    public static void m2568$$Nest$mremoveAll(DexTouchpadController dexTouchpadController) {
+    public static void m2566$$Nest$mremoveAll(DexTouchpadController dexTouchpadController) {
         dexTouchpadController.mIsConnectedDexMode = false;
         SettingsObserver settingsObserver = dexTouchpadController.mSettingsObserver;
         settingsObserver.mResolver.unregisterContentObserver(settingsObserver);

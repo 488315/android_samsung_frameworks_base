@@ -182,7 +182,7 @@ public class BinderCallMonitorImpl implements BinderCallMonitor {
     }
 
     /* renamed from: -$$Nest$smgetCallers, reason: not valid java name */
-    public static String m3127$$Nest$smgetCallers(Item item) {
+    public static String m3126$$Nest$smgetCallers(Item item) {
         String str;
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
         StringBuilder sb = new StringBuilder();

@@ -722,7 +722,7 @@ public class Capabilities implements Parcelable, Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public Capabilities m3429clone() throws CloneNotSupportedException {
+    public Capabilities m3428clone() throws CloneNotSupportedException {
         return (Capabilities) super.clone();
     }
 

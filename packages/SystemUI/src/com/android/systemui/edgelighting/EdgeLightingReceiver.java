@@ -138,9 +138,9 @@ public class EdgeLightingReceiver extends BroadcastReceiver {
                 IntentFilter intentFilter = new IntentFilter("android.intent.action.PACKAGE_ADDED");
                 Class<?> cls = getClass();
                 EdgeLightingReceiver edgeLightingReceiver = EdgeLightingReceiver.this;
-                EdgeLightingReceiver.m2570$$Nest$mregisterBroadcastReceiver(edgeLightingReceiver, context, "com.samsung.android.app.edgelighting.PACKAGE_ADDED", intentFilter, cls);
-                EdgeLightingReceiver.m2570$$Nest$mregisterBroadcastReceiver(edgeLightingReceiver, context, "com.samsung.android.app.edgelighting.PACKAGE_REMOVED", new IntentFilter("android.intent.action.PACKAGE_REMOVED"), getClass());
-                EdgeLightingReceiver.m2570$$Nest$mregisterBroadcastReceiver(edgeLightingReceiver, context, "com.samsung.android.app.edgelighting.PACKAGE_REPLACED", new IntentFilter("android.intent.action.PACKAGE_REPLACED"), getClass());
+                EdgeLightingReceiver.m2568$$Nest$mregisterBroadcastReceiver(edgeLightingReceiver, context, "com.samsung.android.app.edgelighting.PACKAGE_ADDED", intentFilter, cls);
+                EdgeLightingReceiver.m2568$$Nest$mregisterBroadcastReceiver(edgeLightingReceiver, context, "com.samsung.android.app.edgelighting.PACKAGE_REMOVED", new IntentFilter("android.intent.action.PACKAGE_REMOVED"), getClass());
+                EdgeLightingReceiver.m2568$$Nest$mregisterBroadcastReceiver(edgeLightingReceiver, context, "com.samsung.android.app.edgelighting.PACKAGE_REPLACED", new IntentFilter("android.intent.action.PACKAGE_REPLACED"), getClass());
                 EdgeLightingPolicyManager.getInstance(context, false).updateEdgeLightingPolicy(context, EdgeLightingSettingManager.getInstance(context).mAllApplication);
                 return;
             }
@@ -165,7 +165,7 @@ public class EdgeLightingReceiver extends BroadcastReceiver {
     };
 
     /* renamed from: -$$Nest$mregisterBroadcastReceiver, reason: not valid java name */
-    public static void m2570$$Nest$mregisterBroadcastReceiver(EdgeLightingReceiver edgeLightingReceiver, Context context, String str, IntentFilter intentFilter, Class cls) {
+    public static void m2568$$Nest$mregisterBroadcastReceiver(EdgeLightingReceiver edgeLightingReceiver, Context context, String str, IntentFilter intentFilter, Class cls) {
         edgeLightingReceiver.getClass();
         SemEventDelegationManager semEventDelegationManager = (SemEventDelegationManager) context.getSystemService("semeventdelegator");
         Intent intent = new Intent(str);

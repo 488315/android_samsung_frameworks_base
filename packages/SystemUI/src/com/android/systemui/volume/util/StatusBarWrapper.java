@@ -52,9 +52,9 @@ public final class StatusBarWrapper {
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-        if (thM3442exceptionOrNullimpl != null) {
-            this.logWrapper.e("StatusBarWrapper", "startDoNotDisturbActivity : Exception = " + thM3442exceptionOrNullimpl);
+        Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+        if (thM3441exceptionOrNullimpl != null) {
+            this.logWrapper.e("StatusBarWrapper", "startDoNotDisturbActivity : Exception = " + thM3441exceptionOrNullimpl);
         }
     }
 
@@ -75,9 +75,9 @@ public final class StatusBarWrapper {
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-        if (thM3442exceptionOrNullimpl != null) {
-            this.logWrapper.e("StatusBarWrapper", "startHearingEnhancementsActivity : Exception = " + thM3442exceptionOrNullimpl);
+        Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+        if (thM3441exceptionOrNullimpl != null) {
+            this.logWrapper.e("StatusBarWrapper", "startHearingEnhancementsActivity : Exception = " + thM3441exceptionOrNullimpl);
         }
     }
 
@@ -94,9 +94,9 @@ public final class StatusBarWrapper {
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-        if (thM3442exceptionOrNullimpl != null) {
-            this.logWrapper.e("StatusBarWrapper", "startLeBroadcastActivity : Exception = " + thM3442exceptionOrNullimpl);
+        Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+        if (thM3441exceptionOrNullimpl != null) {
+            this.logWrapper.e("StatusBarWrapper", "startLeBroadcastActivity : Exception = " + thM3441exceptionOrNullimpl);
         }
     }
 
@@ -113,9 +113,9 @@ public final class StatusBarWrapper {
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-        if (thM3442exceptionOrNullimpl != null) {
-            this.logWrapper.e("StatusBarWrapper", "startSettingsActivity : Exception = " + thM3442exceptionOrNullimpl);
+        Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+        if (thM3441exceptionOrNullimpl != null) {
+            this.logWrapper.e("StatusBarWrapper", "startSettingsActivity : Exception = " + thM3441exceptionOrNullimpl);
         }
     }
 
@@ -143,9 +143,9 @@ public final class StatusBarWrapper {
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-        if (thM3442exceptionOrNullimpl != null) {
-            this.logWrapper.e("StatusBarWrapper", "startVolumeSettingsActivity : Exception = " + thM3442exceptionOrNullimpl);
+        Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+        if (thM3441exceptionOrNullimpl != null) {
+            this.logWrapper.e("StatusBarWrapper", "startVolumeSettingsActivity : Exception = " + thM3441exceptionOrNullimpl);
         }
     }
 }

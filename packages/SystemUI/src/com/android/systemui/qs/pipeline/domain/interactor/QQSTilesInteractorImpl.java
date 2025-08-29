@@ -130,7 +130,7 @@ public final class QQSTilesInteractorImpl implements CurrentTilesInteractor {
             }
 
             /* renamed from: box-impl, reason: not valid java name */
-            public static final /* synthetic */ Tile m2911boximpl(QSTile qSTile) {
+            public static final /* synthetic */ Tile m2909boximpl(QSTile qSTile) {
                 return new Tile(qSTile);
             }
 

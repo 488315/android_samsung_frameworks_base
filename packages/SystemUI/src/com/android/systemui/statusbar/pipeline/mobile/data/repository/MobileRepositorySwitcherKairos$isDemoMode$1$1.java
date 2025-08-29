@@ -50,7 +50,7 @@ final class MobileRepositorySwitcherKairos$isDemoMode$1$1 extends SuspendLambda 
             final ?? r1 = new DemoMode() { // from class: com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileRepositorySwitcherKairos$isDemoMode$1$1$callback$1
                 @Override // com.android.systemui.demomode.DemoModeCommandReceiver
                 public final void onDemoModeFinished() {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.FALSE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.FALSE);
                 }
 
                 @Override // com.android.systemui.demomode.DemoModeCommandReceiver

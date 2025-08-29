@@ -39,7 +39,7 @@ public final class ColorPainter extends Painter {
         }
         long j = ((ColorPainter) obj).color;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.color, j);
+        return ULong.m3446equalsimpl0(this.color, j);
     }
 
     @Override // androidx.compose.ui.graphics.painter.Painter

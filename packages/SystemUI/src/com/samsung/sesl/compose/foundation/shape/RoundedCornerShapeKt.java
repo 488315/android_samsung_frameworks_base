@@ -13,7 +13,7 @@ public abstract class RoundedCornerShapeKt {
     }
 
     /* renamed from: SeslRoundedCornerShape-D5KLDUw$default, reason: not valid java name */
-    public static SeslRoundedCornerShape m3354SeslRoundedCornerShapeD5KLDUw$default(float f) {
+    public static SeslRoundedCornerShape m3353SeslRoundedCornerShapeD5KLDUw$default(float f) {
         CornerSize cornerSizeM186CornerSize0680j_4 = CornerSizeKt.m186CornerSize0680j_4(f);
         return new SeslRoundedCornerShape(cornerSizeM186CornerSize0680j_4, cornerSizeM186CornerSize0680j_4, cornerSizeM186CornerSize0680j_4, cornerSizeM186CornerSize0680j_4, false);
     }

@@ -8,14 +8,14 @@ public final class TimeSource$Monotonic {
         public final long reading;
 
         /* renamed from: minus-6eNON_k, reason: not valid java name */
-        public static final long m3468minus6eNON_k(long j, long j2) {
+        public static final long m3467minus6eNON_k(long j, long j2) {
             MonotonicTimeSource.INSTANCE.getClass();
             DurationUnit durationUnit = DurationUnit.NANOSECONDS;
             if (((j2 - 1) | 1) != Long.MAX_VALUE) {
                 return (1 | (j - 1)) == Long.MAX_VALUE ? LongSaturatedMathKt.infinityOfSign(j) : LongSaturatedMathKt.saturatingFiniteDiff(j, j2, durationUnit);
             }
             if (j != j2) {
-                return Duration.m3467unaryMinusUwyO8pc(LongSaturatedMathKt.infinityOfSign(j2));
+                return Duration.m3466unaryMinusUwyO8pc(LongSaturatedMathKt.infinityOfSign(j2));
             }
             Duration.Companion.getClass();
             return 0L;
@@ -26,9 +26,9 @@ public final class TimeSource$Monotonic {
             ValueTimeMark valueTimeMark = (ValueTimeMark) obj;
             long j = this.reading;
             if (valueTimeMark != null) {
-                long jM3468minus6eNON_k = m3468minus6eNON_k(j, valueTimeMark.reading);
+                long jM3467minus6eNON_k = m3467minus6eNON_k(j, valueTimeMark.reading);
                 Duration.Companion.getClass();
-                return Duration.m3455compareToLRDsOJo(jM3468minus6eNON_k, 0L);
+                return Duration.m3454compareToLRDsOJo(jM3467minus6eNON_k, 0L);
             }
             throw new IllegalArgumentException("Subtracting or comparing time marks from different time sources is not possible: " + ((Object) ("ValueTimeMark(reading=" + j + ')')) + " and " + valueTimeMark);
         }

@@ -63,7 +63,7 @@ final class DisplayMetricsRepository$displayMetrics$1 extends SuspendLambda impl
                     if (display != null) {
                         display.getMetrics(displayMetrics);
                     }
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(displayMetrics);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(displayMetrics);
                 }
             };
             ((ConfigurationControllerImpl) this.$configurationController).addCallback(r1);

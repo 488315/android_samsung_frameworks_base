@@ -685,7 +685,7 @@ public class SemExpandableListView extends ListView {
         super.setOnItemClickListener(onItemClickListener);
     }
 
-    public void setAdapter(ExpandableListAdapter expandableListAdapter) {
+    public void setAdapter(ExpandableListAdapter expandableListAdapter) throws Resources.NotFoundException {
         this.mAdapter = expandableListAdapter;
         if (expandableListAdapter != null) {
             SemExpandableListConnector semExpandableListConnector = new SemExpandableListConnector(expandableListAdapter);

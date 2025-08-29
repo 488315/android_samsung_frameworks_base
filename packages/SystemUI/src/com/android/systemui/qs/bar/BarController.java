@@ -79,7 +79,7 @@ public class BarController implements Dumpable, PanelScreenShotLogger.LogProvide
                 barController.mThemeSeq = i3;
                 Context context2 = barController.mContext;
                 if (context2 != null) {
-                    BarController.m2900$$Nest$mlogForOpenTheme(barController, context2);
+                    BarController.m2898$$Nest$mlogForOpenTheme(barController, context2);
                 }
             }
         }
@@ -131,7 +131,7 @@ public class BarController implements Dumpable, PanelScreenShotLogger.LogProvide
     }
 
     /* renamed from: -$$Nest$mlogForOpenTheme, reason: not valid java name */
-    public static void m2900$$Nest$mlogForOpenTheme(BarController barController, Context context) {
+    public static void m2898$$Nest$mlogForOpenTheme(BarController barController, Context context) {
         Log.d("BarController", "<QUICK_OPENTHEME is " + barController.mSettingsHelper.getActiveThemePackage());
         logForColors(context, new BarController$$ExternalSyntheticLambda3(1));
         Log.d("BarController", ">");

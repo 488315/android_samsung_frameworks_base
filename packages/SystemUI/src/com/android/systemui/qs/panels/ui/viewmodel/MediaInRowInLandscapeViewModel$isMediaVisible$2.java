@@ -50,7 +50,7 @@ final class MediaInRowInLandscapeViewModel$isMediaVisible$2 extends SuspendLambd
                 @Override // com.android.systemui.media.controls.ui.controller.MediaHostStatesManager.Callback
                 public final void onHostStateChanged(int i2, MediaHostState mediaHostState) {
                     if (i2 == mediaInRowInLandscapeViewModel.inLocation) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(mediaHostState.getVisible()));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(mediaHostState.getVisible()));
                     }
                 }
             };

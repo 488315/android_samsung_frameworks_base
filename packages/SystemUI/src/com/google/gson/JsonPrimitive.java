@@ -78,7 +78,7 @@ public final class JsonPrimitive extends JsonElement {
     }
 
     @Override // com.google.gson.JsonElement
-    public double getAsDouble() throws NumberFormatException {
+    public double getAsDouble() {
         return isNumber() ? getAsNumber().doubleValue() : Double.parseDouble(getAsString());
     }
 
@@ -88,12 +88,12 @@ public final class JsonPrimitive extends JsonElement {
     }
 
     @Override // com.google.gson.JsonElement
-    public int getAsInt() throws NumberFormatException {
+    public int getAsInt() {
         return isNumber() ? getAsNumber().intValue() : Integer.parseInt(getAsString());
     }
 
     @Override // com.google.gson.JsonElement
-    public long getAsLong() throws NumberFormatException {
+    public long getAsLong() {
         return isNumber() ? getAsNumber().longValue() : Long.parseLong(getAsString());
     }
 

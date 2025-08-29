@@ -77,7 +77,7 @@ public class IndicationData {
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public HelpTextData m2675clone() throws CloneNotSupportedException {
+        public HelpTextData m2673clone() throws CloneNotSupportedException {
             return (HelpTextData) super.clone();
         }
     }
@@ -112,7 +112,7 @@ public class IndicationData {
         }
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-        public LockIconData m2676clone() throws CloneNotSupportedException {
+        public LockIconData m2674clone() throws CloneNotSupportedException {
             return (LockIconData) super.clone();
         }
     }

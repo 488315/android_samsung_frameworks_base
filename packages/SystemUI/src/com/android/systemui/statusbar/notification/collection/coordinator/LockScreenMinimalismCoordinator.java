@@ -288,7 +288,7 @@ public final class LockScreenMinimalismCoordinator implements Coordinator, Dumpa
                 long j = LockScreenMinimalismCoordinator.SHADE_VISIBLE_SEEN_TIMEOUT;
                 this.Z$0 = z2;
                 this.label = 1;
-                if (DelayKt.m3469delayVtjQ1oo(j, this) == coroutineSingletons) {
+                if (DelayKt.m3468delayVtjQ1oo(j, this) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
                 z = z2;
@@ -365,7 +365,7 @@ public final class LockScreenMinimalismCoordinator implements Coordinator, Dumpa
                         long j = LockScreenMinimalismCoordinator.HEADS_UP_SEEN_TIMEOUT;
                         this.L$0 = str2;
                         this.label = 1;
-                        if (DelayKt.m3469delayVtjQ1oo(j, this) == coroutineSingletons) {
+                        if (DelayKt.m3468delayVtjQ1oo(j, this) == coroutineSingletons) {
                             return coroutineSingletons;
                         }
                         str = str2;

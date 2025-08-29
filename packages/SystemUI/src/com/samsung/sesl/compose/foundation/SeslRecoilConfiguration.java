@@ -24,7 +24,7 @@ public final class SeslRecoilConfiguration {
         SeslRecoilConfiguration seslRecoilConfiguration = (SeslRecoilConfiguration) obj;
         long j = seslRecoilConfiguration.color;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.color, j) && Intrinsics.areEqual(this.feedbackAlpha, seslRecoilConfiguration.feedbackAlpha);
+        return ULong.m3446equalsimpl0(this.color, j) && Intrinsics.areEqual(this.feedbackAlpha, seslRecoilConfiguration.feedbackAlpha);
     }
 
     public final int hashCode() {

@@ -819,7 +819,7 @@ public class MultiTaskingAppCompatUIWindowManager extends CompatUIWindowManagerA
                 }
                 MultiTaskingAppCompatUIUtil$TipPopupBuilder multiTaskingAppCompatUIUtil$TipPopupBuilder = new MultiTaskingAppCompatUIUtil$TipPopupBuilder(multiTaskingAppCompatUILayout);
                 multiTaskingAppCompatUIUtil$TipPopupBuilder.mMessage = this.mContext.getResources().getString(R.string.restart_button_guide_onboarding);
-                MultiTaskingAppCompatUIUtil$TipPopupAdapter.m3242$$Nest$mbuild(MultiTaskingAppCompatUIUtil$TipPopupAdapter.INSTANCE, multiTaskingAppCompatUIUtil$TipPopupBuilder).show();
+                MultiTaskingAppCompatUIUtil$TipPopupAdapter.m3241$$Nest$mbuild(MultiTaskingAppCompatUIUtil$TipPopupAdapter.INSTANCE, multiTaskingAppCompatUIUtil$TipPopupBuilder).show();
             }
         }
     }

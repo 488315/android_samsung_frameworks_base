@@ -185,45 +185,45 @@ public abstract class ColorSchemeKt {
     public static final long m258contentColorFor4WTKRHQ(ColorScheme colorScheme, long j) {
         long j2 = colorScheme.primary;
         Color.Companion companion = Color.Companion;
-        if (ULong.m3447equalsimpl0(j, j2)) {
+        if (ULong.m3446equalsimpl0(j, j2)) {
             return colorScheme.onPrimary;
         }
-        if (ULong.m3447equalsimpl0(j, colorScheme.secondary)) {
+        if (ULong.m3446equalsimpl0(j, colorScheme.secondary)) {
             return colorScheme.onSecondary;
         }
-        if (ULong.m3447equalsimpl0(j, colorScheme.tertiary)) {
+        if (ULong.m3446equalsimpl0(j, colorScheme.tertiary)) {
             return colorScheme.onTertiary;
         }
-        if (ULong.m3447equalsimpl0(j, colorScheme.background)) {
+        if (ULong.m3446equalsimpl0(j, colorScheme.background)) {
             return colorScheme.onBackground;
         }
-        if (ULong.m3447equalsimpl0(j, colorScheme.error)) {
+        if (ULong.m3446equalsimpl0(j, colorScheme.error)) {
             return colorScheme.onError;
         }
-        if (ULong.m3447equalsimpl0(j, colorScheme.primaryContainer)) {
+        if (ULong.m3446equalsimpl0(j, colorScheme.primaryContainer)) {
             return colorScheme.onPrimaryContainer;
         }
-        if (ULong.m3447equalsimpl0(j, colorScheme.secondaryContainer)) {
+        if (ULong.m3446equalsimpl0(j, colorScheme.secondaryContainer)) {
             return colorScheme.onSecondaryContainer;
         }
-        if (ULong.m3447equalsimpl0(j, colorScheme.tertiaryContainer)) {
+        if (ULong.m3446equalsimpl0(j, colorScheme.tertiaryContainer)) {
             return colorScheme.onTertiaryContainer;
         }
-        if (ULong.m3447equalsimpl0(j, colorScheme.errorContainer)) {
+        if (ULong.m3446equalsimpl0(j, colorScheme.errorContainer)) {
             return colorScheme.onErrorContainer;
         }
-        if (ULong.m3447equalsimpl0(j, colorScheme.inverseSurface)) {
+        if (ULong.m3446equalsimpl0(j, colorScheme.inverseSurface)) {
             return colorScheme.inverseOnSurface;
         }
-        boolean zM3447equalsimpl0 = ULong.m3447equalsimpl0(j, colorScheme.surface);
+        boolean zM3446equalsimpl0 = ULong.m3446equalsimpl0(j, colorScheme.surface);
         long j3 = colorScheme.onSurface;
-        if (zM3447equalsimpl0) {
+        if (zM3446equalsimpl0) {
             return j3;
         }
-        if (ULong.m3447equalsimpl0(j, colorScheme.surfaceVariant)) {
+        if (ULong.m3446equalsimpl0(j, colorScheme.surfaceVariant)) {
             return colorScheme.onSurfaceVariant;
         }
-        if (ULong.m3447equalsimpl0(j, colorScheme.surfaceBright) || ULong.m3447equalsimpl0(j, colorScheme.surfaceContainer) || ULong.m3447equalsimpl0(j, colorScheme.surfaceContainerHigh) || ULong.m3447equalsimpl0(j, colorScheme.surfaceContainerHighest) || ULong.m3447equalsimpl0(j, colorScheme.surfaceContainerLow) || ULong.m3447equalsimpl0(j, colorScheme.surfaceContainerLowest)) {
+        if (ULong.m3446equalsimpl0(j, colorScheme.surfaceBright) || ULong.m3446equalsimpl0(j, colorScheme.surfaceContainer) || ULong.m3446equalsimpl0(j, colorScheme.surfaceContainerHigh) || ULong.m3446equalsimpl0(j, colorScheme.surfaceContainerHighest) || ULong.m3446equalsimpl0(j, colorScheme.surfaceContainerLow) || ULong.m3446equalsimpl0(j, colorScheme.surfaceContainerLowest)) {
             return j3;
         }
         Color.Companion.getClass();

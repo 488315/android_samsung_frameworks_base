@@ -77,8 +77,8 @@ public final class DisconnectedDeviceController extends DeviceController {
                     Flow flowBuffer$default = FlowKt.buffer$default(FlowKt.callbackFlow(new DisconnectedDeviceController$Companion$connectedDeviceChanges$1(localBluetoothManager, null)), -1, 2);
                     if (flowBuffer$default != null) {
                         MediaOutputConst.INSTANCE.getClass();
-                        Flow flowM3482debounceHG0u8IE = FlowKt.m3482debounceHG0u8IE(flowBuffer$default, MediaOutputConst.AUDIO_PATH_DEBOUNCE_TIMEOUT);
-                        if (flowM3482debounceHG0u8IE != null) {
+                        Flow flowM3481debounceHG0u8IE = FlowKt.m3481debounceHG0u8IE(flowBuffer$default, MediaOutputConst.AUDIO_PATH_DEBOUNCE_TIMEOUT);
+                        if (flowM3481debounceHG0u8IE != null) {
                             final DisconnectedDeviceController disconnectedDeviceController = DisconnectedDeviceController.this;
                             FlowCollector flowCollector = new FlowCollector() { // from class: com.android.systemui.media.mediaoutput.controller.device.DisconnectedDeviceController.1.1
                                 @Override // kotlinx.coroutines.flow.FlowCollector
@@ -89,7 +89,7 @@ public final class DisconnectedDeviceController extends DeviceController {
                                 }
                             };
                             this.label = 1;
-                            if (flowM3482debounceHG0u8IE.collect(flowCollector, this) == coroutineSingletons) {
+                            if (flowM3481debounceHG0u8IE.collect(flowCollector, this) == coroutineSingletons) {
                                 return coroutineSingletons;
                             }
                         }

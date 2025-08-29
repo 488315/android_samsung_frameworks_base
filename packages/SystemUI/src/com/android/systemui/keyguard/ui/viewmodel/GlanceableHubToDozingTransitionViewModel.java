@@ -22,6 +22,6 @@ public final class GlanceableHubToDozingTransitionViewModel implements Glanceabl
         KeyguardState keyguardState = KeyguardState.DOZING;
         SceneKey sceneKey = Scenes.Communal;
         companion.getClass();
-        this.windowBlurRadius = ((DaggerReferenceGlobalRootComponent.GlanceableHubBlurComponentImpl) factory.create(keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, new Edge.StateToContent(keyguardState, sceneKey)).setupWithoutSceneContainer(new Edge.StateToState(KeyguardState.GLANCEABLE_HUB, keyguardState)))).getBlurProvider().exitBlurRadius;
+        this.windowBlurRadius = ((DaggerReferenceGlobalRootComponent.GlanceableHubBlurComponentImpl) factory.create(keyguardTransitionAnimationFlow.m2613setupVtjQ1oo(j, new Edge.StateToContent(keyguardState, sceneKey)).setupWithoutSceneContainer(new Edge.StateToState(KeyguardState.GLANCEABLE_HUB, keyguardState)))).getBlurProvider().exitBlurRadius;
     }
 }

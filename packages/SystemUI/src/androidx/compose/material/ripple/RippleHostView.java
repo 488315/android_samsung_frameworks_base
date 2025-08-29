@@ -120,7 +120,7 @@ public final class RippleHostView extends View {
         }
         long jColor = ColorKt.Color(Color.m463getRedimpl(j2), Color.m462getGreenimpl(j2), Color.m460getBlueimpl(j2), f, Color.m461getColorSpaceimpl(j2));
         Color color = unprojectedRipple.rippleColor;
-        if (!(color == null ? false : ULong.m3447equalsimpl0(color.value, jColor))) {
+        if (!(color == null ? false : ULong.m3446equalsimpl0(color.value, jColor))) {
             unprojectedRipple.rippleColor = Color.m456boximpl(jColor);
             unprojectedRipple.setColor(ColorStateList.valueOf(ColorKt.m469toArgb8_81llA(jColor)));
         }

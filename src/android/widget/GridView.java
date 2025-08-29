@@ -176,12 +176,12 @@ public class GridView extends AbsListView {
 
     @Override // android.widget.AbsListView
     @RemotableViewMethod(asyncImpl = "setRemoteViewsAdapterAsync")
-    public void setRemoteViewsAdapter(Intent intent) {
+    public void setRemoteViewsAdapter(Intent intent) throws Resources.NotFoundException {
         super.setRemoteViewsAdapter(intent);
     }
 
     @Override // android.widget.AbsListView, android.widget.AdapterView
-    public void setAdapter(ListAdapter listAdapter) {
+    public void setAdapter(ListAdapter listAdapter) throws Resources.NotFoundException {
         int iLookForSelectablePosition;
         if (this.mAdapter != null && this.mDataSetObserver != null) {
             this.mAdapter.unregisterDataSetObserver(this.mDataSetObserver);

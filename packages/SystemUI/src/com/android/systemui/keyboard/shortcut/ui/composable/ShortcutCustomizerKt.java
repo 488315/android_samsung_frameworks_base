@@ -562,7 +562,7 @@ public abstract class ShortcutCustomizerKt {
                 float f2 = 40;
                 Modifier modifierM133heightInVpY3zN4$default = SizeKt.m133heightInVpY3zN4$default(companion, f2, 0.0f, 2);
                 MaterialTheme.INSTANCE.getClass();
-                SurfacesKt.m2596ShortcutHelperButton01TuoB8(function0, MaterialTheme.getColorScheme(composerImpl2).primary, j, modifierM133heightInVpY3zN4$default, roundedCornerShapeM187RoundedCornerShape0680j_4, null, StringResources_androidKt.stringResource(R.string.shortcut_helper_customize_dialog_cancel_button_label, composerImpl2), 0.0f, 0.0f, false, BorderStrokeKt.m31BorderStrokecXLIe8U(1, MaterialTheme.getColorScheme(composerImpl2).outlineVariant), null, composerImpl2, (i3 & 14) | 3456, 2976);
+                SurfacesKt.m2594ShortcutHelperButton01TuoB8(function0, MaterialTheme.getColorScheme(composerImpl2).primary, j, modifierM133heightInVpY3zN4$default, roundedCornerShapeM187RoundedCornerShape0680j_4, null, StringResources_androidKt.stringResource(R.string.shortcut_helper_customize_dialog_cancel_button_label, composerImpl2), 0.0f, 0.0f, false, BorderStrokeKt.m31BorderStrokecXLIe8U(1, MaterialTheme.getColorScheme(composerImpl2).outlineVariant), null, composerImpl2, (i3 & 14) | 3456, 2976);
                 SpacerKt.Spacer(composerImpl2, SizeKt.m144width3ABfNKs(companion, 8));
                 Modifier modifierFocusRequester = FocusRequesterModifierKt.focusRequester(SizeKt.m133heightInVpY3zN4$default(companion, f2, 0.0f, 2), focusRequester);
                 composerImpl2.startReplaceGroup(-1909155448);
@@ -576,7 +576,7 @@ public abstract class ShortcutCustomizerKt {
                 }
                 composerImpl2.end(z3);
                 boolean z6 = z5;
-                SurfacesKt.m2596ShortcutHelperButton01TuoB8(function02, MaterialTheme.getColorScheme(composerImpl2).onPrimary, MaterialTheme.getColorScheme(composerImpl2).primary, FocusPropertiesKt.focusProperties(modifierFocusRequester, (Function1) objRememberedValue3), null, null, str, 0.0f, 0.0f, z6, null, null, composerImpl2, ((i3 >> 6) & 14) | ((i3 << 9) & 3670016) | (1879048192 & (i3 << 24)), 3504);
+                SurfacesKt.m2594ShortcutHelperButton01TuoB8(function02, MaterialTheme.getColorScheme(composerImpl2).onPrimary, MaterialTheme.getColorScheme(composerImpl2).primary, FocusPropertiesKt.focusProperties(modifierFocusRequester, (Function1) objRememberedValue3), null, null, str, 0.0f, 0.0f, z6, null, null, composerImpl2, ((i3 >> 6) & 14) | ((i3 << 9) & 3670016) | (1879048192 & (i3 << 24)), 3504);
                 composerImpl = composerImpl2;
                 composerImpl.end(true);
                 if (ComposerKt.isTraceInProgress()) {

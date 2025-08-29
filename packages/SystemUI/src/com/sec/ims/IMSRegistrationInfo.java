@@ -197,7 +197,7 @@ public class IMSRegistrationInfo implements Parcelable, Cloneable {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public IMSRegistrationInfo m3392clone() throws CloneNotSupportedException {
+    public IMSRegistrationInfo m3391clone() throws CloneNotSupportedException {
         IMSRegistrationInfo iMSRegistrationInfo = (IMSRegistrationInfo) super.clone();
         String str = this.mLocalProfileUri;
         if (str != null) {

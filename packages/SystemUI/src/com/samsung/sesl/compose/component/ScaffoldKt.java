@@ -66,7 +66,7 @@ public abstract class ScaffoldKt {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static final void m3341SeslScaffold5k0As8s(Modifier modifier, Function2 function2, ComposableLambdaImpl composableLambdaImpl, ComposableLambdaImpl composableLambdaImpl2, ComposableLambdaImpl composableLambdaImpl3, Function4 function4, int i, long j, WindowInsets windowInsets, ComposableLambdaImpl composableLambdaImpl4, Composer composer, int i2, int i3) {
+    public static final void m3340SeslScaffold5k0As8s(Modifier modifier, Function2 function2, ComposableLambdaImpl composableLambdaImpl, ComposableLambdaImpl composableLambdaImpl2, ComposableLambdaImpl composableLambdaImpl3, Function4 function4, int i, long j, WindowInsets windowInsets, ComposableLambdaImpl composableLambdaImpl4, Composer composer, int i2, int i3) {
         int i4;
         Function2 function22;
         ComposableLambdaImpl composableLambdaImpl5;
@@ -173,7 +173,7 @@ public abstract class ScaffoldKt {
                     ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslScaffold (Scaffold.kt:67)");
                 }
                 composerImpl = composerImpl2;
-                m3342SeslScaffoldImpl5k0As8s(modifier, function22, composableLambdaImpl7, composableLambdaImpl13, composableLambdaImpl6, function4, i7, j4, windowInsets2, composableLambdaImpl4, composerImpl, i6 & 2147483646, 6);
+                m3341SeslScaffoldImpl5k0As8s(modifier, function22, composableLambdaImpl7, composableLambdaImpl13, composableLambdaImpl6, function4, i7, j4, windowInsets2, composableLambdaImpl4, composerImpl, i6 & 2147483646, 6);
                 if (ComposerKt.isTraceInProgress()) {
                     ComposerKt.traceEventEnd();
                 }
@@ -245,7 +245,7 @@ public abstract class ScaffoldKt {
                 if (ComposerKt.isTraceInProgress()) {
                 }
                 composerImpl = composerImpl2;
-                m3342SeslScaffoldImpl5k0As8s(modifier, function22, composableLambdaImpl7, composableLambdaImpl132, composableLambdaImpl6, function4, i7, j42, windowInsets2, composableLambdaImpl4, composerImpl, i6 & 2147483646, 6);
+                m3341SeslScaffoldImpl5k0As8s(modifier, function22, composableLambdaImpl7, composableLambdaImpl132, composableLambdaImpl6, function4, i7, j42, windowInsets2, composableLambdaImpl4, composerImpl, i6 & 2147483646, 6);
                 if (ComposerKt.isTraceInProgress()) {
                 }
                 composableLambdaImpl8 = composableLambdaImpl7;
@@ -262,7 +262,7 @@ public abstract class ScaffoldKt {
     }
 
     /* renamed from: SeslScaffoldImpl-5k0As8s, reason: not valid java name */
-    public static final void m3342SeslScaffoldImpl5k0As8s(Modifier modifier, Function2 function2, ComposableLambdaImpl composableLambdaImpl, ComposableLambdaImpl composableLambdaImpl2, ComposableLambdaImpl composableLambdaImpl3, Function4 function4, int i, long j, WindowInsets windowInsets, ComposableLambdaImpl composableLambdaImpl4, Composer composer, int i2, int i3) {
+    public static final void m3341SeslScaffoldImpl5k0As8s(Modifier modifier, Function2 function2, ComposableLambdaImpl composableLambdaImpl, ComposableLambdaImpl composableLambdaImpl2, ComposableLambdaImpl composableLambdaImpl3, Function4 function4, int i, long j, WindowInsets windowInsets, ComposableLambdaImpl composableLambdaImpl4, Composer composer, int i2, int i3) {
         int i4;
         int i5;
         ComposerImpl composerImpl = (ComposerImpl) composer;
@@ -309,7 +309,7 @@ public abstract class ScaffoldKt {
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventStart("com.samsung.sesl.compose.component.SeslScaffoldImpl (Scaffold.kt:98)");
             }
-            m3343SeslScaffoldLayoutvZ1zQFI(i, function2, composableLambdaImpl4, composableLambdaImpl2, composableLambdaImpl3, windowInsets, composableLambdaImpl, function4, composerImpl, ((i5 << 6) & 896) | ((i4 >> 18) & 14) | (i4 & 112) | (i4 & 7168) | (57344 & i4) | ((i4 >> 9) & 458752) | ((i4 << 12) & 3670016) | ((i4 << 6) & 29360128) | ((i4 >> 3) & 234881024));
+            m3342SeslScaffoldLayoutvZ1zQFI(i, function2, composableLambdaImpl4, composableLambdaImpl2, composableLambdaImpl3, windowInsets, composableLambdaImpl, function4, composerImpl, ((i5 << 6) & 896) | ((i4 >> 18) & 14) | (i4 & 112) | (i4 & 7168) | (57344 & i4) | ((i4 >> 9) & 458752) | ((i4 << 12) & 3670016) | ((i4 << 6) & 29360128) | ((i4 >> 3) & 234881024));
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
@@ -325,7 +325,7 @@ public abstract class ScaffoldKt {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static final void m3343SeslScaffoldLayoutvZ1zQFI(final int i, final Function2 function2, final ComposableLambdaImpl composableLambdaImpl, final ComposableLambdaImpl composableLambdaImpl2, final ComposableLambdaImpl composableLambdaImpl3, final WindowInsets windowInsets, final ComposableLambdaImpl composableLambdaImpl4, final Function4 function4, Composer composer, final int i2) {
+    public static final void m3342SeslScaffoldLayoutvZ1zQFI(final int i, final Function2 function2, final ComposableLambdaImpl composableLambdaImpl, final ComposableLambdaImpl composableLambdaImpl2, final ComposableLambdaImpl composableLambdaImpl3, final WindowInsets windowInsets, final ComposableLambdaImpl composableLambdaImpl4, final Function4 function4, Composer composer, final int i2) {
         int i3;
         ComposableLambdaImpl composableLambdaImpl5;
         WindowInsets windowInsets2;
@@ -840,7 +840,7 @@ public abstract class ScaffoldKt {
                     WindowInsets windowInsets4 = windowInsets;
                     ComposableLambdaImpl composableLambdaImpl10 = composableLambdaImpl4;
                     Function4 function42 = function4;
-                    ScaffoldKt.m3343SeslScaffoldLayoutvZ1zQFI(i, function2, composableLambdaImpl9, composableLambdaImpl2, composableLambdaImpl3, windowInsets4, composableLambdaImpl10, function42, (Composer) obj, iUpdateChangedFlags);
+                    ScaffoldKt.m3342SeslScaffoldLayoutvZ1zQFI(i, function2, composableLambdaImpl9, composableLambdaImpl2, composableLambdaImpl3, windowInsets4, composableLambdaImpl10, function42, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

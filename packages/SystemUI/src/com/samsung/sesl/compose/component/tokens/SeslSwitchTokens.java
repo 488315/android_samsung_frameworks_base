@@ -83,7 +83,7 @@ public final class SeslSwitchTokens {
         SeslSwitchTokens seslSwitchTokens = (SeslSwitchTokens) obj;
         long j = seslSwitchTokens.trackOnColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.trackOnColor, j) && ULong.m3447equalsimpl0(this.trackOffColor, seslSwitchTokens.trackOffColor) && ULong.m3447equalsimpl0(this.thumbOnColor, seslSwitchTokens.thumbOnColor) && ULong.m3447equalsimpl0(this.thumbOffColor, seslSwitchTokens.thumbOffColor);
+        return ULong.m3446equalsimpl0(this.trackOnColor, j) && ULong.m3446equalsimpl0(this.trackOffColor, seslSwitchTokens.trackOffColor) && ULong.m3446equalsimpl0(this.thumbOnColor, seslSwitchTokens.thumbOnColor) && ULong.m3446equalsimpl0(this.thumbOffColor, seslSwitchTokens.thumbOffColor);
     }
 
     public final int hashCode() {

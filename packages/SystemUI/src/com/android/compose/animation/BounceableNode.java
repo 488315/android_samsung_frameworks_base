@@ -64,14 +64,14 @@ public final class BounceableNode extends Modifier.Node implements LayoutModifie
         final Ref$FloatRef ref$FloatRef = new Ref$FloatRef();
         Bounceable bounceable = this.previousBounceable;
         if (bounceable != null) {
-            ref$FloatRef.element = (measureScope.mo58toPx0680j_4(((BounceableTileViewModel) this.bounceable).m2909getBounceD9Ej5fM()) - measureScope.mo58toPx0680j_4(((BounceableTileViewModel) bounceable).m2909getBounceD9Ej5fM())) + ref$FloatRef.element;
+            ref$FloatRef.element = (measureScope.mo58toPx0680j_4(((BounceableTileViewModel) this.bounceable).m2907getBounceD9Ej5fM()) - measureScope.mo58toPx0680j_4(((BounceableTileViewModel) bounceable).m2907getBounceD9Ej5fM())) + ref$FloatRef.element;
         }
         Bounceable bounceable2 = this.nextBounceable;
         float fMo58toPx0680j_4 = 0.0f;
         if (bounceable2 != null) {
-            fMo58toPx0680j_4 = 0.0f + (measureScope.mo58toPx0680j_4(((BounceableTileViewModel) this.bounceable).m2909getBounceD9Ej5fM()) - measureScope.mo58toPx0680j_4(((BounceableTileViewModel) bounceable2).m2909getBounceD9Ej5fM()));
+            fMo58toPx0680j_4 = 0.0f + (measureScope.mo58toPx0680j_4(((BounceableTileViewModel) this.bounceable).m2907getBounceD9Ej5fM()) - measureScope.mo58toPx0680j_4(((BounceableTileViewModel) bounceable2).m2907getBounceD9Ej5fM()));
         } else if (this.bounceEnd) {
-            fMo58toPx0680j_4 = 0.0f + measureScope.mo58toPx0680j_4(((BounceableTileViewModel) this.bounceable).m2909getBounceD9Ej5fM());
+            fMo58toPx0680j_4 = 0.0f + measureScope.mo58toPx0680j_4(((BounceableTileViewModel) this.bounceable).m2907getBounceD9Ej5fM());
         }
         int i2 = WhenMappings.$EnumSwitchMapping$0[this.orientation.ordinal()];
         if (i2 == 1) {

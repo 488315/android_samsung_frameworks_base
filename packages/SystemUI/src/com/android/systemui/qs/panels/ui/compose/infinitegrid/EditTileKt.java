@@ -780,7 +780,7 @@ public abstract class EditTileKt {
                                     availableTileGridCell2 = availableTileGridCell;
                                 }
                                 composerImpl.end(false);
-                                CommonTileKt.m2906SmallTileContent8V94_ZQ((Function1) objRememberedValue5, tileColors.icon, modifierAlign, null, true, composerImpl, 24576, 8);
+                                CommonTileKt.m2904SmallTileContent8V94_ZQ((Function1) objRememberedValue5, tileColors.icon, modifierAlign, null, true, composerImpl, 24576, 8);
                                 composerImpl.end(true);
                                 Icons.INSTANCE.getClass();
                                 ImageVector add = AddKt.getAdd();
@@ -1098,7 +1098,7 @@ public abstract class EditTileKt {
                         int i9;
                         long jAccess$toOffset = DragAndDropStateKt.access$toOffset(dragAndDropEvent);
                         EditTileListState editTileListState2 = (EditTileListState) editTileListState;
-                        editTileListState2.m2905setDraggedPositionk4lQ0M(jAccess$toOffset);
+                        editTileListState2.m2903setDraggedPositionk4lQ0M(jAccess$toOffset);
                         long jM402minusMKHz9U = Offset.m402minusMKHz9U(jAccess$toOffset, ((Offset) function0.invoke()).packedValue);
                         Iterator it = ((LazyGridMeasureResult) lazyGridStateRememberLazyGridState.getLayoutInfo()).visibleItemsInfo.iterator();
                         while (true) {
@@ -1802,14 +1802,14 @@ public abstract class EditTileKt {
                                                                             }
                                                                         });
                                                                         Offset.Companion.getClass();
-                                                                        editTileListState4.m2905setDraggedPositionk4lQ0M(Offset.Unspecified);
+                                                                        editTileListState4.m2903setDraggedPositionk4lQ0M(Offset.Unspecified);
                                                                         editTileListState4.regenerateGrid();
                                                                     }
                                                                 }
 
                                                                 @Override // androidx.compose.ui.draganddrop.DragAndDropTarget
                                                                 public final void onMoved(DragAndDropEvent dragAndDropEvent) {
-                                                                    ((EditTileListState) editTileListState3).m2905setDraggedPositionk4lQ0M(DragAndDropStateKt.access$toOffset(dragAndDropEvent));
+                                                                    ((EditTileListState) editTileListState3).m2903setDraggedPositionk4lQ0M(DragAndDropStateKt.access$toOffset(dragAndDropEvent));
                                                                 }
                                                             };
                                                             composerImpl6.updateRememberedValue(objRememberedValue8);
@@ -2423,7 +2423,7 @@ public abstract class EditTileKt {
                                 composerImpl2.updateRememberedValue(objRememberedValue4);
                             }
                             composerImpl2.end(false);
-                            CommonTileKt.m2906SmallTileContent8V94_ZQ(function1, j, modifierAlign, (Function0) objRememberedValue4, true, composerImpl2, 24576, 0);
+                            CommonTileKt.m2904SmallTileContent8V94_ZQ(function1, j, modifierAlign, (Function0) objRememberedValue4, true, composerImpl2, 24576, 0);
                             composerImpl2.end(true);
                             String str = editTileViewModel.label.text;
                             AnnotatedString annotatedString = editTileViewModel.appName;

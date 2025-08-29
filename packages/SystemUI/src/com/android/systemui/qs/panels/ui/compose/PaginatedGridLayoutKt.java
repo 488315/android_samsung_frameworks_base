@@ -130,7 +130,7 @@ public abstract class PaginatedGridLayoutKt {
                 }
                 Updater.m337setimpl(composerImpl2, modifierMaterializeModifier2, function24);
                 MaterialTheme.INSTANCE.getClass();
-                BuildNumberKt.m2567BuildNumber3IgeMak(factory, MaterialTheme.getColorScheme(composerImpl2).onSurface, SizeKt.wrapContentSize$default(BorderOnFocusKt.m2937borderOnFocusPOIbLQ4$default(companion, MaterialTheme.getColorScheme(composerImpl2).secondary, CornerSizeKt.m186CornerSize0680j_4(1)), null, 3), composerImpl2, i2 & 14);
+                BuildNumberKt.m2565BuildNumber3IgeMak(factory, MaterialTheme.getColorScheme(composerImpl2).onSurface, SizeKt.wrapContentSize$default(BorderOnFocusKt.m2935borderOnFocusPOIbLQ4$default(companion, MaterialTheme.getColorScheme(composerImpl2).secondary, CornerSizeKt.m186CornerSize0680j_4(1)), null, 3), composerImpl2, i2 & 14);
                 SpacerKt.Spacer(composerImpl2, rowScopeInstance.weight(companion, 1.0f, true));
                 composerImpl2.end(true);
                 pagerState2 = pagerState;

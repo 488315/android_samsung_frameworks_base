@@ -18,9 +18,9 @@ final /* synthetic */ class BufferedChannel$bindCancellationFunResult$1 extends 
         Object obj4 = ((ChannelResult) obj2).holder;
         Function1 function1 = ((BufferedChannel) this.receiver).onUndeliveredElement;
         function1.getClass();
-        Object objM3479getOrNullimpl = ChannelResult.m3479getOrNullimpl(obj4);
-        objM3479getOrNullimpl.getClass();
-        OnUndeliveredElementKt.callUndeliveredElement(function1, objM3479getOrNullimpl, (CoroutineContext) obj3);
+        Object objM3478getOrNullimpl = ChannelResult.m3478getOrNullimpl(obj4);
+        objM3478getOrNullimpl.getClass();
+        OnUndeliveredElementKt.callUndeliveredElement(function1, objM3478getOrNullimpl, (CoroutineContext) obj3);
         return Unit.INSTANCE;
     }
 }

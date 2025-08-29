@@ -467,7 +467,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     return;
                 case 3:
                     str2 = "RESET";
-                    KeyguardViewMediator.m2606$$Nest$mhandleReset(KeyguardViewMediator.this, message.arg1 != 0);
+                    KeyguardViewMediator.m2604$$Nest$mhandleReset(KeyguardViewMediator.this, message.arg1 != 0);
                     str = str2;
                     android.util.Log.d("KeyguardViewMediator", "KeyguardViewMediator queue processing message: ".concat(str));
                     KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl222 = KeyguardViewMediator.this.mHelper;
@@ -490,7 +490,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     return;
                 case 5:
                     str = "NOTIFY_FINISHED_GOING_TO_SLEEP";
-                    KeyguardViewMediator.m2604$$Nest$mhandleNotifyFinishedGoingToSleep(KeyguardViewMediator.this);
+                    KeyguardViewMediator.m2602$$Nest$mhandleNotifyFinishedGoingToSleep(KeyguardViewMediator.this);
                     android.util.Log.d("KeyguardViewMediator", "KeyguardViewMediator queue processing message: ".concat(str));
                     KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl22222 = KeyguardViewMediator.this.mHelper;
                     Objects.requireNonNull(keyguardViewMediatorHelperImpl22222);
@@ -509,7 +509,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                 case 8:
                     str = "KEYGUARD_DONE_DRAWING";
                     Trace.beginSection("KeyguardViewMediator#handleMessage KEYGUARD_DONE_DRAWING");
-                    KeyguardViewMediator.m2603$$Nest$mhandleKeyguardDoneDrawing(KeyguardViewMediator.this);
+                    KeyguardViewMediator.m2601$$Nest$mhandleKeyguardDoneDrawing(KeyguardViewMediator.this);
                     Trace.endSection();
                     android.util.Log.d("KeyguardViewMediator", "KeyguardViewMediator queue processing message: ".concat(str));
                     KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2222222 = KeyguardViewMediator.this.mHelper;
@@ -523,7 +523,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                     boolean z2 = message.arg1 != 0;
                     boolean z3 = message.arg2 != 0;
                     Object obj = message.obj;
-                    KeyguardViewMediator.m2607$$Nest$mhandleSetOccluded(keyguardViewMediator3, z2, z3, obj != null ? ((Integer) obj).intValue() : -1);
+                    KeyguardViewMediator.m2605$$Nest$mhandleSetOccluded(keyguardViewMediator3, z2, z3, obj != null ? ((Integer) obj).intValue() : -1);
                     Trace.endSection();
                     str = str2;
                     android.util.Log.d("KeyguardViewMediator", "KeyguardViewMediator queue processing message: ".concat(str));
@@ -658,7 +658,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                 case 14:
                     str = "NOTIFY_STARTED_WAKING_UP";
                     Trace.beginSection("KeyguardViewMediator#handleMessage NOTIFY_STARTED_WAKING_UP");
-                    KeyguardViewMediator.m2605$$Nest$mhandleNotifyStartedWakingUp(KeyguardViewMediator.this);
+                    KeyguardViewMediator.m2603$$Nest$mhandleNotifyStartedWakingUp(KeyguardViewMediator.this);
                     Trace.endSection();
                     android.util.Log.d("KeyguardViewMediator", "KeyguardViewMediator queue processing message: ".concat(str));
                     KeyguardViewMediatorHelperImpl keyguardViewMediatorHelperImpl2222222222222 = KeyguardViewMediator.this.mHelper;
@@ -1098,7 +1098,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
                                 public final void onAnimationEnd(Animator animator) {
                                     try {
                                         if (!this.mIsCancelled) {
-                                            KeyguardViewMediator.m2607$$Nest$mhandleSetOccluded(KeyguardViewMediator.this, true, false, -1);
+                                            KeyguardViewMediator.m2605$$Nest$mhandleSetOccluded(KeyguardViewMediator.this, true, false, -1);
                                         }
                                         iRemoteAnimationFinishedCallback2.onAnimationFinished();
                                         AnonymousClass9.this.mOccludeByDreamAnimator = null;
@@ -1209,7 +1209,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
     }
 
     /* renamed from: -$$Nest$mhandleKeyguardDoneDrawing, reason: not valid java name */
-    public static void m2603$$Nest$mhandleKeyguardDoneDrawing(KeyguardViewMediator keyguardViewMediator) {
+    public static void m2601$$Nest$mhandleKeyguardDoneDrawing(KeyguardViewMediator keyguardViewMediator) {
         keyguardViewMediator.getClass();
         Trace.beginSection("KeyguardViewMediator#handleKeyguardDoneDrawing");
         synchronized (keyguardViewMediator) {
@@ -1229,7 +1229,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
     }
 
     /* renamed from: -$$Nest$mhandleNotifyFinishedGoingToSleep, reason: not valid java name */
-    public static void m2604$$Nest$mhandleNotifyFinishedGoingToSleep(KeyguardViewMediator keyguardViewMediator) {
+    public static void m2602$$Nest$mhandleNotifyFinishedGoingToSleep(KeyguardViewMediator keyguardViewMediator) {
         synchronized (keyguardViewMediator) {
             android.util.Log.d("KeyguardViewMediator", "handleNotifyFinishedGoingToSleep");
             ((KeyguardViewController) keyguardViewMediator.mKeyguardViewControllerLazy.get()).onFinishedGoingToSleep();
@@ -1237,7 +1237,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
     }
 
     /* renamed from: -$$Nest$mhandleNotifyStartedWakingUp, reason: not valid java name */
-    public static void m2605$$Nest$mhandleNotifyStartedWakingUp(KeyguardViewMediator keyguardViewMediator) {
+    public static void m2603$$Nest$mhandleNotifyStartedWakingUp(KeyguardViewMediator keyguardViewMediator) {
         keyguardViewMediator.getClass();
         Trace.beginSection("KeyguardViewMediator#handleMotifyStartedWakingUp");
         synchronized (keyguardViewMediator) {
@@ -1248,7 +1248,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
     }
 
     /* renamed from: -$$Nest$mhandleReset, reason: not valid java name */
-    public static void m2606$$Nest$mhandleReset(KeyguardViewMediator keyguardViewMediator, boolean z) {
+    public static void m2604$$Nest$mhandleReset(KeyguardViewMediator keyguardViewMediator, boolean z) {
         synchronized (keyguardViewMediator) {
             try {
                 if (keyguardViewMediator.mHideAnimationRun) {
@@ -1270,7 +1270,7 @@ public class KeyguardViewMediator implements CoreStartable, StatusBarStateContro
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static void m2607$$Nest$mhandleSetOccluded(KeyguardViewMediator keyguardViewMediator, boolean z, boolean z2, int i) {
+    public static void m2605$$Nest$mhandleSetOccluded(KeyguardViewMediator keyguardViewMediator, boolean z, boolean z2, int i) {
         boolean z3;
         keyguardViewMediator.getClass();
         Trace.beginSection("KeyguardViewMediator#handleSetOccluded");

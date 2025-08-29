@@ -48,7 +48,7 @@ public abstract class WindowRecomposer_androidKt {
                     SafeFlow safeFlow = new SafeFlow(new WindowRecomposer_androidKt$getAnimationScaleFlowFor$1$1$1(contentResolver, uriFor, new ContentObserver(handlerCreateAsync) { // from class: androidx.compose.ui.platform.WindowRecomposer_androidKt$getAnimationScaleFlowFor$1$1$contentObserver$1
                         @Override // android.database.ContentObserver
                         public final void onChange(boolean z, Uri uri) {
-                            bufferedChannelChannel$default.mo3476trySendJP2dKIU(Unit.INSTANCE);
+                            bufferedChannelChannel$default.mo3475trySendJP2dKIU(Unit.INSTANCE);
                         }
                     }, bufferedChannelChannel$default, context, null));
                     SupervisorJobImpl supervisorJobImplSupervisorJob$default = SupervisorKt.SupervisorJob$default();

@@ -114,7 +114,7 @@ public final class SecQSPanelResourceLargePicker extends SecQSPanelResourceNorma
     @Override // com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker
     public final int getNotificationBottomPadding(Context context) {
         SecQSPanelResourceCommon.Companion.getClass();
-        return (int) (SecQSPanelResourceCommon.Companion.m2903float(R.dimen.sec_notification_stack_scroller_bottom_padding_ratio, context) * DeviceState.getDisplayHeight(context));
+        return (int) (SecQSPanelResourceCommon.Companion.m2901float(R.dimen.sec_notification_stack_scroller_bottom_padding_ratio, context) * DeviceState.getDisplayHeight(context));
     }
 
     @Override // com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker
@@ -160,7 +160,7 @@ public final class SecQSPanelResourceLargePicker extends SecQSPanelResourceNorma
     @Override // com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker
     public final int getPopOverBlankSpace(Context context) {
         SecQSPanelResourceCommon.Companion.getClass();
-        return (int) (SecQSPanelResourceCommon.Companion.m2903float(R.dimen.qs_pop_over_blank_space, context) * DeviceState.getDisplayHeight(context));
+        return (int) (SecQSPanelResourceCommon.Companion.m2901float(R.dimen.qs_pop_over_blank_space, context) * DeviceState.getDisplayHeight(context));
     }
 
     @Override // com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker
@@ -210,10 +210,10 @@ public final class SecQSPanelResourceLargePicker extends SecQSPanelResourceNorma
     public final int getQsTileColumn(Context context) {
         if (this.common.isEmergencyMode) {
             SecQSPanelResourceCommon.Companion.getClass();
-            return Math.max(1, SecQSPanelResourceCommon.Companion.m2904int(R.integer.sec_quick_settings_num_columns_power_saving, context));
+            return Math.max(1, SecQSPanelResourceCommon.Companion.m2902int(R.integer.sec_quick_settings_num_columns_power_saving, context));
         }
         SecQSPanelResourceCommon.Companion.getClass();
-        return SecQSPanelResourceCommon.Companion.m2904int(R.integer.sec_quick_settings_num_columns_tablet, context);
+        return SecQSPanelResourceCommon.Companion.m2902int(R.integer.sec_quick_settings_num_columns_tablet, context);
     }
 
     @Override // com.android.systemui.qs.panelresource.SecQSPanelResourceNormalPicker

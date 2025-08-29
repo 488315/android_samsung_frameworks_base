@@ -41,6 +41,9 @@ import com.android.systemui.qs.buttons.QSMumButton;
 import com.android.systemui.shade.PanelTransitionStateChangeEvent;
 import com.android.systemui.shade.PanelTransitionStateListener;
 import com.android.systemui.shade.SecPanelSplitHelper;
+import com.android.systemui.shade.domain.interactor.SecPanelExpansionStateChangeEvent;
+import com.android.systemui.shade.domain.interactor.SecPanelExpansionStateInteractor;
+import com.android.systemui.shade.domain.interactor.SecPanelExpansionStateListener;
 import com.android.systemui.statusbar.AlphaOptimizedFrameLayout;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.phone.MultiUserSwitch;
@@ -58,11 +61,13 @@ import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.ViewUtil;
 import com.samsung.android.desktopmode.SemDesktopModeState;
 import com.samsung.android.knox.SemPersonaManager;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /* loaded from: classes2.dex */
 public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsContainer.CloseTooltipWindow {
     public static final InterestingConfigChanges configChanges = new InterestingConfigChanges(268435456);
     public boolean isExpandedOnLockScreen;
+    public boolean isPanelExpanding;
     public final CommandQueue mCommandQueue;
     public final Context mContext;
     public boolean mExpanded;
@@ -75,6 +80,7 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
     public final SecPanelSplitHelper mPanelSplitHelper;
     public final QSMumButton$$ExternalSyntheticLambda0 mPanelTransitionStateListener;
     public final SecQSPanelResourcePicker mResourcePicker;
+    public final QSMumButton$$ExternalSyntheticLambda1 mSecPanelExpansionStateListener;
     public final StatusBarStateController mStatusBarStateController;
     public QSTooltipWindow mTipWindow;
     public final int mToolTipString;
@@ -90,7 +96,7 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
             public final void onChanged(Uri uri) {
                 QSMumButton.MumAndDexHelper mumAndDexHelper = this.f$0;
                 Log.d("QSMumButton", "MumAndDexHelper receive SettingsHelper callback !");
-                QSMumButton.this.post(new QSMumButton$$ExternalSyntheticLambda1(mumAndDexHelper, 0));
+                QSMumButton.this.post(new QSMumButton$$ExternalSyntheticLambda2(mumAndDexHelper, 0));
             }
         };
         public boolean mIsDexEnablingOrEnabled = false;
@@ -117,7 +123,7 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
                 if (DeviceType.isEngOrUTBinary()) {
                     Log.d("QSMumButton", "MumAndDexHelper, BaseUserAdapter notifyDataSetChanged()");
                 }
-                QSMumButton.this.post(new QSMumButton$$ExternalSyntheticLambda1(this, 1));
+                QSMumButton.this.post(new QSMumButton$$ExternalSyntheticLambda2(this, 1));
             }
         }
 
@@ -200,7 +206,7 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
             }
             qSMumButton.mMultiUserAvatar.setImageDrawable(drawable);
             qSMumButton.mMultiUserSwitch.setContentDescription(qSMumButton.getResources().getString(com.android.systemui.R.string.accessibility_quick_settings_user, str));
-            qSMumButton.post(new QSMumButton$$ExternalSyntheticLambda1(this, 0));
+            qSMumButton.post(new QSMumButton$$ExternalSyntheticLambda2(this, 0));
         }
 
         public final void updateDesktopModeState(SemDesktopModeState semDesktopModeState) {
@@ -208,7 +214,7 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
             if (this.mIsDexEnablingOrEnabled != z) {
                 CarrierTextManager$$ExternalSyntheticOutline0.m(new StringBuilder("MumAndDexHelper updateDesktopModeState() mIsDexEnablingOrEnabled:"), this.mIsDexEnablingOrEnabled, ">>", z, "QSMumButton");
                 this.mIsDexEnablingOrEnabled = z;
-                QSMumButton.this.post(new QSMumButton$$ExternalSyntheticLambda1(this, 0));
+                QSMumButton.this.post(new QSMumButton$$ExternalSyntheticLambda2(this, 0));
             }
         }
 
@@ -272,11 +278,13 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
     }
 
     /* JADX WARN: Type inference failed for: r3v7, types: [com.android.systemui.qs.buttons.QSMumButton$$ExternalSyntheticLambda0] */
+    /* JADX WARN: Type inference failed for: r3v8, types: [com.android.systemui.qs.buttons.QSMumButton$$ExternalSyntheticLambda1] */
     public QSMumButton(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         this.mMainHandler = null;
         this.mPanelSplitEnabled = SecPanelSplitHelper.isEnabled();
         this.isExpandedOnLockScreen = false;
+        this.isPanelExpanding = false;
         this.secQsUiDisplayModeInteractor = (SecQsUiDisplayModeInteractor) Dependency.sDependency.getDependencyInner(SecQsUiDisplayModeInteractor.class);
         this.mPanelTransitionStateListener = new PanelTransitionStateListener() { // from class: com.android.systemui.qs.buttons.QSMumButton$$ExternalSyntheticLambda0
             @Override // com.android.systemui.shade.PanelTransitionStateListener
@@ -301,6 +309,19 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
                         qSMumButton.isExpandedOnLockScreen = true;
                         qSMumButton.mMumAndDexHelper.updateMumSwitchVisibility();
                     }
+                }
+            }
+        };
+        this.mSecPanelExpansionStateListener = new SecPanelExpansionStateListener() { // from class: com.android.systemui.qs.buttons.QSMumButton$$ExternalSyntheticLambda1
+            @Override // com.android.systemui.shade.domain.interactor.SecPanelExpansionStateListener
+            public final void onPanelExpansionStateChanged(SecPanelExpansionStateChangeEvent secPanelExpansionStateChangeEvent) {
+                InterestingConfigChanges interestingConfigChanges = QSMumButton.configChanges;
+                QSMumButton qSMumButton = this.f$0;
+                boolean z = secPanelExpansionStateChangeEvent.panelExpansionState == 1;
+                CarrierTextManager$$ExternalSyntheticOutline0.m(new StringBuilder("onPanelExpansionStateChanged isPanelExpanding = "), qSMumButton.isPanelExpanding, " > ", z, "QSMumButton");
+                if (qSMumButton.isPanelExpanding != z) {
+                    qSMumButton.isPanelExpanding = z;
+                    qSMumButton.mMumAndDexHelper.updateMumSwitchVisibility();
                 }
             }
         };
@@ -352,6 +373,8 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
             mumAndDexHelper.destroy();
         }
         this.mPanelSplitHelper.removeListener(this.mPanelTransitionStateListener);
+        SecPanelExpansionStateInteractor secPanelExpansionStateInteractor = (SecPanelExpansionStateInteractor) Dependency.sDependency.getDependencyInner(SecPanelExpansionStateInteractor.class);
+        ((CopyOnWriteArrayList) secPanelExpansionStateInteractor.expansionStateListeners$delegate.getValue()).remove(this.mSecPanelExpansionStateListener);
     }
 
     @Override // android.view.View
@@ -361,13 +384,13 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
         MultiUserSwitch multiUserSwitch = (MultiUserSwitch) findViewById(com.android.systemui.R.id.multi_user_switch);
         this.mMultiUserSwitch = multiUserSwitch;
         this.mMultiUserAvatar = (ImageView) multiUserSwitch.findViewById(com.android.systemui.R.id.multi_user_avatar);
-        findViewById(com.android.systemui.R.id.mum_button_container).setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.qs.buttons.QSMumButton$$ExternalSyntheticLambda2
+        findViewById(com.android.systemui.R.id.mum_button_container).setOnTouchListener(new View.OnTouchListener() { // from class: com.android.systemui.qs.buttons.QSMumButton$$ExternalSyntheticLambda3
             @Override // android.view.View.OnTouchListener
             public final boolean onTouch(View view, MotionEvent motionEvent) {
                 return this.f$0.mMultiUserSwitch.onTouchEvent(motionEvent);
             }
         });
-        this.mMultiUserSwitch.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.qs.buttons.QSMumButton$$ExternalSyntheticLambda3
+        this.mMultiUserSwitch.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.systemui.qs.buttons.QSMumButton$$ExternalSyntheticLambda4
             @Override // android.view.View.OnLongClickListener
             public final boolean onLongClick(View view) throws Resources.NotFoundException {
                 QSMumButton qSMumButton = this.f$0;
@@ -383,7 +406,7 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
                 return true;
             }
         });
-        this.mMultiUserSwitch.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.buttons.QSMumButton$$ExternalSyntheticLambda4
+        this.mMultiUserSwitch.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.buttons.QSMumButton$$ExternalSyntheticLambda5
             @Override // android.view.View.OnClickListener
             public final void onClick(View view) {
                 QSMumButton qSMumButton = this.f$0;
@@ -394,6 +417,7 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
             }
         });
         this.mPanelSplitHelper.addListener(this.mPanelTransitionStateListener);
+        ((SecPanelExpansionStateInteractor) Dependency.sDependency.getDependencyInner(SecPanelExpansionStateInteractor.class)).registerListener(this.mSecPanelExpansionStateListener);
     }
 
     public final void setListening(boolean z) {
@@ -406,7 +430,7 @@ public class QSMumButton extends AlphaOptimizedFrameLayout implements QSButtonsC
         if (mumAndDexHelper == null || !z) {
             return;
         }
-        post(new QSMumButton$$ExternalSyntheticLambda1(mumAndDexHelper, 0));
+        post(new QSMumButton$$ExternalSyntheticLambda2(mumAndDexHelper, 0));
     }
 
     public final void updateTouchTargetArea$1() {

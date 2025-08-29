@@ -19,7 +19,7 @@ public final class PrimaryBouncerToOccludedTransitionViewModel implements Primar
         FromPrimaryBouncerTransitionInteractor.Companion.getClass();
         long j = FromPrimaryBouncerTransitionInteractor.TO_OCCLUDED_DURATION;
         Edge.Companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.PRIMARY_BOUNCER, KeyguardState.OCCLUDED, keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, Edge.INVALID));
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.PRIMARY_BOUNCER, KeyguardState.OCCLUDED, keyguardTransitionAnimationFlow.m2613setupVtjQ1oo(j, Edge.INVALID));
         this.windowBlurRadius = shadeDependentFlows.transitionFlow(flowBuilderM.immediatelyTransitionTo(blurConfig.minBlurRadiusPx), flowBuilderM.immediatelyTransitionTo(blurConfig.minBlurRadiusPx));
         this.notificationBlurRadius = flowBuilderM.immediatelyTransitionTo(0.0f);
     }

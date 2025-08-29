@@ -30,12 +30,12 @@ public final class SecQSPanelResourceCommon {
         }
 
         /* renamed from: float, reason: not valid java name */
-        public static float m2903float(int i, Context context) {
+        public static float m2901float(int i, Context context) {
             return context.getResources().getFloat(i);
         }
 
         /* renamed from: int, reason: not valid java name */
-        public static int m2904int(int i, Context context) {
+        public static int m2902int(int i, Context context) {
             return context.getResources().getInteger(i);
         }
 

@@ -55,7 +55,7 @@ public abstract class BasicCheckboxKt {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static final void m3346SeslBasicCheckboxaA_HZ9I(final SeslBasicCheckboxColors seslBasicCheckboxColors, final boolean z, final Function1 function1, final float f, final SeslRecoilNodeFactory seslRecoilNodeFactory, final Modifier modifier, final boolean z2, final MutableInteractionSource mutableInteractionSource, Composer composer, final int i) {
+    public static final void m3345SeslBasicCheckboxaA_HZ9I(final SeslBasicCheckboxColors seslBasicCheckboxColors, final boolean z, final Function1 function1, final float f, final SeslRecoilNodeFactory seslRecoilNodeFactory, final Modifier modifier, final boolean z2, final MutableInteractionSource mutableInteractionSource, Composer composer, final int i) {
         int i2;
         Function0 function0;
         ComposerImpl composerImpl;
@@ -121,7 +121,7 @@ public abstract class BasicCheckboxKt {
             Function0 function02 = function0;
             composerImpl2.end(false);
             composerImpl = composerImpl2;
-            m3347SeslBasicCheckboxInnerGHTll3U(seslBasicCheckboxColors, toggleableState, function02, seslRecoilNodeFactory, f, modifier, z2, mutableInteractionSource, composerImpl, (i2 & 14) | ((i2 >> 3) & 7168) | (57344 & (i2 << 3)) | (458752 & i2) | (3670016 & i2) | (i2 & 29360128));
+            m3346SeslBasicCheckboxInnerGHTll3U(seslBasicCheckboxColors, toggleableState, function02, seslRecoilNodeFactory, f, modifier, z2, mutableInteractionSource, composerImpl, (i2 & 14) | ((i2 >> 3) & 7168) | (57344 & (i2 << 3)) | (458752 & i2) | (3670016 & i2) | (i2 & 29360128));
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
@@ -137,7 +137,7 @@ public abstract class BasicCheckboxKt {
                     SeslRecoilNodeFactory seslRecoilNodeFactory2 = seslRecoilNodeFactory;
                     boolean z4 = z2;
                     MutableInteractionSource mutableInteractionSource2 = mutableInteractionSource;
-                    BasicCheckboxKt.m3346SeslBasicCheckboxaA_HZ9I(seslBasicCheckboxColors2, z, function1, f, seslRecoilNodeFactory2, modifier, z4, mutableInteractionSource2, (Composer) obj, iUpdateChangedFlags);
+                    BasicCheckboxKt.m3345SeslBasicCheckboxaA_HZ9I(seslBasicCheckboxColors2, z, function1, f, seslRecoilNodeFactory2, modifier, z4, mutableInteractionSource2, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };
@@ -145,7 +145,7 @@ public abstract class BasicCheckboxKt {
     }
 
     /* renamed from: SeslBasicCheckboxInner-GHTll3U, reason: not valid java name */
-    public static final void m3347SeslBasicCheckboxInnerGHTll3U(final SeslBasicCheckboxColors seslBasicCheckboxColors, ToggleableState toggleableState, final Function0 function0, final SeslRecoilNodeFactory seslRecoilNodeFactory, final float f, final Modifier modifier, final boolean z, final MutableInteractionSource mutableInteractionSource, Composer composer, final int i) {
+    public static final void m3346SeslBasicCheckboxInnerGHTll3U(final SeslBasicCheckboxColors seslBasicCheckboxColors, ToggleableState toggleableState, final Function0 function0, final SeslRecoilNodeFactory seslRecoilNodeFactory, final float f, final Modifier modifier, final boolean z, final MutableInteractionSource mutableInteractionSource, Composer composer, final int i) {
         int i2;
         SeslRecoilNodeFactory seslRecoilNodeFactory2;
         MutableInteractionSource mutableInteractionSource2;
@@ -205,7 +205,7 @@ public abstract class BasicCheckboxKt {
             Modifier modifierM140size3ABfNKs = SizeKt.m140size3ABfNKs(modifier2, f);
             boolean z2 = toggleableState2 == ToggleableState.On;
             composerImpl = composerImpl2;
-            m3348SeslBasicCheckboxInnervc5YOHI(seslBasicCheckboxColors.checkColor, seslBasicCheckboxColors.circleStrokeColor, z2, modifierM140size3ABfNKs, z, composerImpl, (i3 >> 6) & 57344);
+            m3347SeslBasicCheckboxInnervc5YOHI(seslBasicCheckboxColors.checkColor, seslBasicCheckboxColors.circleStrokeColor, z2, modifierM140size3ABfNKs, z, composerImpl, (i3 >> 6) & 57344);
             if (ComposerKt.isTraceInProgress()) {
                 ComposerKt.traceEventEnd();
             }
@@ -221,7 +221,7 @@ public abstract class BasicCheckboxKt {
                     SeslRecoilNodeFactory seslRecoilNodeFactory3 = seslRecoilNodeFactory;
                     boolean z3 = z;
                     MutableInteractionSource mutableInteractionSource3 = mutableInteractionSource;
-                    BasicCheckboxKt.m3347SeslBasicCheckboxInnerGHTll3U(seslBasicCheckboxColors2, toggleableState2, function0, seslRecoilNodeFactory3, f, modifier, z3, mutableInteractionSource3, (Composer) obj, iUpdateChangedFlags);
+                    BasicCheckboxKt.m3346SeslBasicCheckboxInnerGHTll3U(seslBasicCheckboxColors2, toggleableState2, function0, seslRecoilNodeFactory3, f, modifier, z3, mutableInteractionSource3, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };
@@ -229,7 +229,7 @@ public abstract class BasicCheckboxKt {
     }
 
     /* renamed from: SeslBasicCheckboxInner-vc5YOHI, reason: not valid java name */
-    public static final void m3348SeslBasicCheckboxInnervc5YOHI(final long j, final long j2, final boolean z, final Modifier modifier, final boolean z2, Composer composer, final int i) {
+    public static final void m3347SeslBasicCheckboxInnervc5YOHI(final long j, final long j2, final boolean z, final Modifier modifier, final boolean z2, Composer composer, final int i) {
         int i2;
         Object obj;
         KeyframesSpec keyframesSpecKeyframes;
@@ -585,7 +585,7 @@ public abstract class BasicCheckboxKt {
                     int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
                     Modifier modifier2 = modifier;
                     boolean z3 = z2;
-                    BasicCheckboxKt.m3348SeslBasicCheckboxInnervc5YOHI(j, j2, z, modifier2, z3, (Composer) obj2, iUpdateChangedFlags);
+                    BasicCheckboxKt.m3347SeslBasicCheckboxInnervc5YOHI(j, j2, z, modifier2, z3, (Composer) obj2, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };

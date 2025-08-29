@@ -181,13 +181,13 @@ public final /* synthetic */ class CommunalContainerKt$$ExternalSyntheticLambda0
             case 20:
                 TransitionBuilderImpl transitionBuilderImpl7 = (TransitionBuilderImpl) obj;
                 FromPrimaryBouncerTransitionInteractor.Companion.getClass();
-                transitionBuilderImpl7.spec = AnimationSpecKt.tween$default(Duration.m3464toIntimpl(FromPrimaryBouncerTransitionInteractor.TO_GONE_DURATION, DurationUnit.MILLISECONDS), 0, null, 6);
+                transitionBuilderImpl7.spec = AnimationSpecKt.tween$default(Duration.m3463toIntimpl(FromPrimaryBouncerTransitionInteractor.TO_GONE_DURATION, DurationUnit.MILLISECONDS), 0, null, 6);
                 transitionBuilderImpl7.fade(AllElements.INSTANCE);
                 break;
             case 21:
                 TransitionBuilderImpl transitionBuilderImpl8 = (TransitionBuilderImpl) obj;
                 FromGlanceableHubTransitionInteractor.Companion.getClass();
-                transitionBuilderImpl8.spec = AnimationSpecKt.tween$default(Duration.m3464toIntimpl(FromGlanceableHubTransitionInteractor.TO_LOCKSCREEN_DURATION, DurationUnit.MILLISECONDS), 0, null, 6);
+                transitionBuilderImpl8.spec = AnimationSpecKt.tween$default(Duration.m3463toIntimpl(FromGlanceableHubTransitionInteractor.TO_LOCKSCREEN_DURATION, DurationUnit.MILLISECONDS), 0, null, 6);
                 Communal$Elements.INSTANCE.getClass();
                 BaseTransitionBuilder.translate$default(transitionBuilderImpl8, Communal$Elements.Grid, Edge.End);
                 TransitionBuilderImpl.timestampRange$default(transitionBuilderImpl8, null, 167, new CommunalContainerKt$$ExternalSyntheticLambda0(9), 5);
@@ -209,7 +209,7 @@ public final /* synthetic */ class CommunalContainerKt$$ExternalSyntheticLambda0
             case 24:
                 TransitionBuilderImpl transitionBuilderImpl11 = (TransitionBuilderImpl) obj;
                 FromPrimaryBouncerTransitionInteractor.Companion.getClass();
-                transitionBuilderImpl11.spec = AnimationSpecKt.tween$default(Duration.m3464toIntimpl(FromPrimaryBouncerTransitionInteractor.TO_GONE_DURATION, DurationUnit.MILLISECONDS), 0, null, 6);
+                transitionBuilderImpl11.spec = AnimationSpecKt.tween$default(Duration.m3463toIntimpl(FromPrimaryBouncerTransitionInteractor.TO_GONE_DURATION, DurationUnit.MILLISECONDS), 0, null, 6);
                 transitionBuilderImpl11.fade(AllElements.INSTANCE);
                 break;
             default:

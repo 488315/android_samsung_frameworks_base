@@ -224,9 +224,9 @@ public class SimpleDigitalClockTextView extends TextView {
         this.lastUnconstrainedTextSize = Float.MAX_VALUE;
         this.initThread = Thread.currentThread();
         VRectF.Companion companion = VRectF.Companion;
-        this.textBounds = companion.m2851getZERO3Hl7r_E();
-        this.prevTextBounds = companion.m2851getZERO3Hl7r_E();
-        this.targetTextBounds = companion.m2851getZERO3Hl7r_E();
+        this.textBounds = companion.m2849getZERO3Hl7r_E();
+        this.prevTextBounds = companion.m2849getZERO3Hl7r_E();
+        this.targetTextBounds = companion.m2849getZERO3Hl7r_E();
         String simpleName = Reflection.getOrCreateKotlinClass(getClass()).getSimpleName();
         simpleName.getClass();
         this.logger = new ClockLogger(this, clockContext.messageBuffer, simpleName);
@@ -245,7 +245,7 @@ public class SimpleDigitalClockTextView extends TextView {
         this.horizontalAlignment = HorizontalAlignment.CENTER;
         this.isAnimationEnabled = true;
         this.lockscreenColor = -1;
-        this.layoutBounds = companion.m2851getZERO3Hl7r_E();
+        this.layoutBounds = companion.m2849getZERO3Hl7r_E();
     }
 
     public static void applyTextSize$default(SimpleDigitalClockTextView simpleDigitalClockTextView, Float f) {
@@ -280,7 +280,7 @@ public class SimpleDigitalClockTextView extends TextView {
             simpleDigitalClockTextView.textBounds = SimpleDigitalClockTextViewKt.access$getTextBounds(simpleDigitalClockTextView.lockScreenPaint, simpleDigitalClockTextView.getText());
             simpleDigitalClockTextView.updateAnimationTextBounds();
         }
-        VRectF.m2836getHeightimpl(simpleDigitalClockTextView.textBounds);
+        VRectF.m2834getHeightimpl(simpleDigitalClockTextView.textBounds);
         simpleDigitalClockTextView.lockScreenPaint.getStrokeWidth();
         simpleDigitalClockTextView.lockScreenPaint.setStrokeWidth(0.0f);
         simpleDigitalClockTextView.recomputeMaxSingleDigitSizes();
@@ -394,25 +394,25 @@ public class SimpleDigitalClockTextView extends TextView {
     }
 
     /* renamed from: computeMeasuredSize-q_v0amA, reason: not valid java name */
-    public final long m2951computeMeasuredSizeq_v0amA(int i, int i2, long j) {
-        float fM2841getWidthimpl;
+    public final long m2949computeMeasuredSizeq_v0amA(int i, int i2, long j) {
+        float fM2839getWidthimpl;
         float strokeWidth;
-        long jM2703constructorimpl = VPoint.m2703constructorimpl(View.MeasureSpec.getMode(i), View.MeasureSpec.getMode(i2));
-        if (VPoint.m2711getXimpl(jM2703constructorimpl) == 1073741824) {
-            fM2841getWidthimpl = View.MeasureSpec.getSize(i);
+        long jM2701constructorimpl = VPoint.m2701constructorimpl(View.MeasureSpec.getMode(i), View.MeasureSpec.getMode(i2));
+        if (VPoint.m2709getXimpl(jM2701constructorimpl) == 1073741824) {
+            fM2839getWidthimpl = View.MeasureSpec.getSize(i);
         } else {
-            fM2841getWidthimpl = VRectF.m2841getWidthimpl(j) + (this.lockScreenPaint.getStrokeWidth() * 2);
+            fM2839getWidthimpl = VRectF.m2839getWidthimpl(j) + (this.lockScreenPaint.getStrokeWidth() * 2);
         }
-        if (VPoint.m2712getYimpl(jM2703constructorimpl) == 1073741824) {
+        if (VPoint.m2710getYimpl(jM2701constructorimpl) == 1073741824) {
             strokeWidth = View.MeasureSpec.getSize(i2);
         } else {
-            strokeWidth = (this.lockScreenPaint.getStrokeWidth() * 2) + VRectF.m2836getHeightimpl(j);
+            strokeWidth = (this.lockScreenPaint.getStrokeWidth() * 2) + VRectF.m2834getHeightimpl(j);
         }
-        return VPointF.m2749constructorimpl(fM2841getWidthimpl, strokeWidth);
+        return VPointF.m2747constructorimpl(fM2839getWidthimpl, strokeWidth);
     }
 
     /* renamed from: getInterpolatedTextBounds-WMibXUk, reason: not valid java name */
-    public final long m2952getInterpolatedTextBoundsWMibXUk(float f) {
+    public final long m2950getInterpolatedTextBoundsWMibXUk(float f) {
         if (f <= 0.0f) {
             return this.prevTextBounds;
         }
@@ -424,7 +424,7 @@ public class SimpleDigitalClockTextView extends TextView {
         if (!(valueAnimator != null ? valueAnimator.isRunning() : false) || f >= 1.0f) {
             return this.targetTextBounds;
         }
-        return VRectF.m2828constructorimpl(MathUtils.lerp(VRectF.m2837getLeftimpl(this.prevTextBounds), VRectF.m2837getLeftimpl(this.targetTextBounds), f), MathUtils.lerp(VRectF.m2840getTopimpl(this.prevTextBounds), VRectF.m2840getTopimpl(this.targetTextBounds), f), MathUtils.lerp(VRectF.m2838getRightimpl(this.prevTextBounds), VRectF.m2838getRightimpl(this.targetTextBounds), f), MathUtils.lerp(VRectF.m2834getBottomimpl(this.prevTextBounds), VRectF.m2834getBottomimpl(this.targetTextBounds), f));
+        return VRectF.m2826constructorimpl(MathUtils.lerp(VRectF.m2835getLeftimpl(this.prevTextBounds), VRectF.m2835getLeftimpl(this.targetTextBounds), f), MathUtils.lerp(VRectF.m2838getTopimpl(this.prevTextBounds), VRectF.m2838getTopimpl(this.targetTextBounds), f), MathUtils.lerp(VRectF.m2836getRightimpl(this.prevTextBounds), VRectF.m2836getRightimpl(this.targetTextBounds), f), MathUtils.lerp(VRectF.m2832getBottomimpl(this.prevTextBounds), VRectF.m2832getBottomimpl(this.targetTextBounds), f));
     }
 
     public final ClockLogger getLogger() {
@@ -445,13 +445,13 @@ public class SimpleDigitalClockTextView extends TextView {
 
     @Override // android.widget.TextView, android.view.View
     public final void onDraw(final Canvas canvas) {
-        float fM2837getLeftimpl;
-        float fM2840getTopimpl;
-        float fM2763getYimpl;
-        float fM2763getYimpl2;
-        float fM2763getYimpl3;
-        float fM2762getXimpl;
-        float fM2762getXimpl2;
+        float fM2835getLeftimpl;
+        float fM2838getTopimpl;
+        float fM2761getYimpl;
+        float fM2761getYimpl2;
+        float fM2761getYimpl3;
+        float fM2760getXimpl;
+        float fM2760getXimpl2;
         ClockLogger logger = getLogger();
         TextAnimator textAnimator = this.textAnimator;
         if (textAnimator == null) {
@@ -463,12 +463,12 @@ public class SimpleDigitalClockTextView extends TextView {
             textAnimator2 = null;
         }
         float f = textAnimator2.textInterpolator.progress;
-        final long jM2952getInterpolatedTextBoundsWMibXUk = m2952getInterpolatedTextBoundsWMibXUk(f);
+        final long jM2950getInterpolatedTextBoundsWMibXUk = m2950getInterpolatedTextBoundsWMibXUk(f);
         Float f2 = this.drawnProgress;
         if (f2 == null || f != f2.floatValue()) {
             this.drawnProgress = Float.valueOf(f);
-            long jM2951computeMeasuredSizeq_v0amA = m2951computeMeasuredSizeq_v0amA(getMeasuredWidthAndState(), getMeasuredHeightAndState(), jM2952getInterpolatedTextBoundsWMibXUk);
-            m2953setInterpolatedSizerQse7s4(getMeasuredWidthAndState(), getMeasuredHeightAndState(), jM2951computeMeasuredSizeq_v0amA);
+            long jM2949computeMeasuredSizeq_v0amA = m2949computeMeasuredSizeq_v0amA(getMeasuredWidthAndState(), getMeasuredHeightAndState(), jM2950getInterpolatedTextBoundsWMibXUk);
+            m2951setInterpolatedSizerQse7s4(getMeasuredWidthAndState(), getMeasuredHeightAndState(), jM2949computeMeasuredSizeq_v0amA);
             ViewParent parent = getParent();
             FlexClockView flexClockView = parent instanceof FlexClockView ? (FlexClockView) parent : null;
             if (flexClockView != null) {
@@ -480,51 +480,51 @@ public class SimpleDigitalClockTextView extends TextView {
                 int i = WhenMappings.$EnumSwitchMapping$0[this.horizontalAlignment.resolveXAlignment(this).ordinal()];
                 if (i != 1) {
                     if (i == 2) {
-                        fM2762getXimpl = VPointF.m2762getXimpl(VRectF.m2835getCenterJv7bpU8(this.layoutBounds));
-                        fM2762getXimpl2 = VPointF.m2762getXimpl(jM2951computeMeasuredSizeq_v0amA) / 2.0f;
+                        fM2760getXimpl = VPointF.m2760getXimpl(VRectF.m2833getCenterJv7bpU8(this.layoutBounds));
+                        fM2760getXimpl2 = VPointF.m2760getXimpl(jM2949computeMeasuredSizeq_v0amA) / 2.0f;
                     } else {
                         if (i != 3) {
                             throw new NoWhenBranchMatchedException();
                         }
-                        fM2762getXimpl = VRectF.m2838getRightimpl(this.layoutBounds);
-                        fM2762getXimpl2 = VPointF.m2762getXimpl(jM2951computeMeasuredSizeq_v0amA);
+                        fM2760getXimpl = VRectF.m2836getRightimpl(this.layoutBounds);
+                        fM2760getXimpl2 = VPointF.m2760getXimpl(jM2949computeMeasuredSizeq_v0amA);
                     }
-                    fM2837getLeftimpl = fM2762getXimpl - fM2762getXimpl2;
+                    fM2835getLeftimpl = fM2760getXimpl - fM2760getXimpl2;
                 } else {
-                    fM2837getLeftimpl = VRectF.m2837getLeftimpl(this.layoutBounds);
+                    fM2835getLeftimpl = VRectF.m2835getLeftimpl(this.layoutBounds);
                 }
                 int i2 = WhenMappings.$EnumSwitchMapping$1[this.verticalAlignment.ordinal()];
                 if (i2 != 1) {
                     if (i2 == 2) {
-                        fM2763getYimpl = VPointF.m2763getYimpl(VRectF.m2835getCenterJv7bpU8(this.layoutBounds));
-                        fM2763getYimpl2 = VPointF.m2763getYimpl(jM2951computeMeasuredSizeq_v0amA);
+                        fM2761getYimpl = VPointF.m2761getYimpl(VRectF.m2833getCenterJv7bpU8(this.layoutBounds));
+                        fM2761getYimpl2 = VPointF.m2761getYimpl(jM2949computeMeasuredSizeq_v0amA);
                     } else if (i2 == 3) {
-                        fM2763getYimpl = VRectF.m2834getBottomimpl(this.layoutBounds);
-                        fM2763getYimpl3 = VPointF.m2763getYimpl(jM2951computeMeasuredSizeq_v0amA);
-                        fM2840getTopimpl = fM2763getYimpl - fM2763getYimpl3;
+                        fM2761getYimpl = VRectF.m2832getBottomimpl(this.layoutBounds);
+                        fM2761getYimpl3 = VPointF.m2761getYimpl(jM2949computeMeasuredSizeq_v0amA);
+                        fM2838getTopimpl = fM2761getYimpl - fM2761getYimpl3;
                     } else {
                         if (i2 != 4) {
                             throw new NoWhenBranchMatchedException();
                         }
-                        fM2763getYimpl = VPointF.m2763getYimpl(VRectF.m2835getCenterJv7bpU8(this.layoutBounds));
-                        fM2763getYimpl2 = VPointF.m2763getYimpl(jM2951computeMeasuredSizeq_v0amA);
+                        fM2761getYimpl = VPointF.m2761getYimpl(VRectF.m2833getCenterJv7bpU8(this.layoutBounds));
+                        fM2761getYimpl2 = VPointF.m2761getYimpl(jM2949computeMeasuredSizeq_v0amA);
                     }
-                    fM2763getYimpl3 = fM2763getYimpl2 / 2.0f;
-                    fM2840getTopimpl = fM2763getYimpl - fM2763getYimpl3;
+                    fM2761getYimpl3 = fM2761getYimpl2 / 2.0f;
+                    fM2838getTopimpl = fM2761getYimpl - fM2761getYimpl3;
                 } else {
-                    fM2840getTopimpl = VRectF.m2840getTopimpl(this.layoutBounds);
+                    fM2838getTopimpl = VRectF.m2838getTopimpl(this.layoutBounds);
                 }
-                long jM2850fromTopLeftcwyIbD4 = VRectF.Companion.m2850fromTopLeftcwyIbD4(VPointF.m2749constructorimpl(fM2837getLeftimpl, fM2840getTopimpl), jM2951computeMeasuredSizeq_v0amA);
-                setFrame(MathKt__MathJVMKt.roundToInt(VRectF.m2837getLeftimpl(jM2850fromTopLeftcwyIbD4)), MathKt__MathJVMKt.roundToInt(VRectF.m2840getTopimpl(jM2850fromTopLeftcwyIbD4)), MathKt__MathJVMKt.roundToInt(VRectF.m2838getRightimpl(jM2850fromTopLeftcwyIbD4)), MathKt__MathJVMKt.roundToInt(VRectF.m2834getBottomimpl(jM2850fromTopLeftcwyIbD4)));
+                long jM2848fromTopLeftcwyIbD4 = VRectF.Companion.m2848fromTopLeftcwyIbD4(VPointF.m2747constructorimpl(fM2835getLeftimpl, fM2838getTopimpl), jM2949computeMeasuredSizeq_v0amA);
+                setFrame(MathKt__MathJVMKt.roundToInt(VRectF.m2835getLeftimpl(jM2848fromTopLeftcwyIbD4)), MathKt__MathJVMKt.roundToInt(VRectF.m2838getTopimpl(jM2848fromTopLeftcwyIbD4)), MathKt__MathJVMKt.roundToInt(VRectF.m2836getRightimpl(jM2848fromTopLeftcwyIbD4)), MathKt__MathJVMKt.roundToInt(VRectF.m2832getBottomimpl(jM2848fromTopLeftcwyIbD4)));
                 Function1 function1 = this.onViewBoundsChanged;
                 if (function1 != null) {
-                    function1.mo781invoke(VRectF.m2827boximpl(jM2850fromTopLeftcwyIbD4));
+                    function1.mo781invoke(VRectF.m2825boximpl(jM2848fromTopLeftcwyIbD4));
                 }
                 ClockLogger logger2 = getLogger();
                 LogMessage logMessageObtain = logger2.getBuffer().obtain(logger2.getTag(), LogLevel.DEBUG, new SimpleDigitalClockTextView$$ExternalSyntheticLambda1(1), null);
-                logMessageObtain.setLong1(VRectF.m2843toLongimpl(jM2850fromTopLeftcwyIbD4));
+                logMessageObtain.setLong1(VRectF.m2841toLongimpl(jM2848fromTopLeftcwyIbD4));
                 logger2.getBuffer().commit(logMessageObtain);
-                VRectF.m2827boximpl(jM2850fromTopLeftcwyIbD4);
+                VRectF.m2825boximpl(jM2848fromTopLeftcwyIbD4);
             }
         }
         CanvasUtil canvasUtil = CanvasUtil.INSTANCE;
@@ -540,13 +540,13 @@ public class SimpleDigitalClockTextView extends TextView {
                     CanvasUtil canvasUtil2 = CanvasUtil.INSTANCE;
                     long j = digitTranslateAnimator.currentTranslation;
                     canvasUtil2.getClass();
-                    canvas2.translate(VPointF.m2762getXimpl(j), VPointF.m2763getYimpl(j));
+                    canvas2.translate(VPointF.m2760getXimpl(j), VPointF.m2761getYimpl(j));
                 }
                 CanvasUtil canvasUtil3 = CanvasUtil.INSTANCE;
                 ViewUtils.INSTANCE.getClass();
-                long jM2752constructorimpl = VPointF.m2752constructorimpl(simpleDigitalClockTextView.getMeasuredWidth(), simpleDigitalClockTextView.getMeasuredHeight());
-                long j2 = jM2952getInterpolatedTextBoundsWMibXUk;
-                long jM2769minusb2IjXjg = VPointF.m2769minusb2IjXjg(jM2752constructorimpl, VRectF.m2839getSizeJv7bpU8(j2));
+                long jM2750constructorimpl = VPointF.m2750constructorimpl(simpleDigitalClockTextView.getMeasuredWidth(), simpleDigitalClockTextView.getMeasuredHeight());
+                long j2 = jM2950getInterpolatedTextBoundsWMibXUk;
+                long jM2767minusb2IjXjg = VPointF.m2767minusb2IjXjg(jM2750constructorimpl, VRectF.m2837getSizeJv7bpU8(j2));
                 int i3 = SimpleDigitalClockTextView.WhenMappings.$EnumSwitchMapping$0[simpleDigitalClockTextView.horizontalAlignment.resolveXAlignment(simpleDigitalClockTextView).ordinal()];
                 float f4 = 1.0f;
                 if (i3 == 1) {
@@ -570,11 +570,11 @@ public class SimpleDigitalClockTextView extends TextView {
                     }
                     f4 = 0.5f;
                 }
-                long jM2774plusb2IjXjg = VPointF.m2774plusb2IjXjg(VPointF.m2778timesb2IjXjg(jM2769minusb2IjXjg, VPointF.m2749constructorimpl(f3, f4)), VPointF.m2749constructorimpl(-VRectF.m2837getLeftimpl(j2), (-VRectF.m2840getTopimpl(j2)) - (simpleDigitalClockTextView.getBaseline() != -1 ? simpleDigitalClockTextView.getBaseline() : simpleDigitalClockTextView.measuredBaseline)));
+                long jM2772plusb2IjXjg = VPointF.m2772plusb2IjXjg(VPointF.m2776timesb2IjXjg(jM2767minusb2IjXjg, VPointF.m2747constructorimpl(f3, f4)), VPointF.m2747constructorimpl(-VRectF.m2835getLeftimpl(j2), (-VRectF.m2838getTopimpl(j2)) - (simpleDigitalClockTextView.getBaseline() != -1 ? simpleDigitalClockTextView.getBaseline() : simpleDigitalClockTextView.measuredBaseline)));
                 canvasUtil3.getClass();
-                canvas2.translate(VPointF.m2762getXimpl(jM2774plusb2IjXjg), VPointF.m2763getYimpl(jM2774plusb2IjXjg));
+                canvas2.translate(VPointF.m2760getXimpl(jM2772plusb2IjXjg), VPointF.m2761getYimpl(jM2772plusb2IjXjg));
                 if (simpleDigitalClockTextView.isLayoutRtl()) {
-                    canvas2.translate(VRectF.m2841getWidthimpl(j2) - VRectF.m2841getWidthimpl(simpleDigitalClockTextView.textBounds), 0.0f);
+                    canvas2.translate(VRectF.m2839getWidthimpl(j2) - VRectF.m2839getWidthimpl(simpleDigitalClockTextView.textBounds), 0.0f);
                 }
                 TextAnimator textAnimator3 = simpleDigitalClockTextView.textAnimator;
                 if (textAnimator3 == null) {
@@ -594,7 +594,7 @@ public class SimpleDigitalClockTextView extends TextView {
     public final void onLayout(boolean z, int i, int i2, int i3, int i4) {
         super.onLayout(z, i, i2, i3, i4);
         getLogger().onLayout(z, i, i2, i3, i4);
-        this.layoutBounds = VRectF.m2828constructorimpl(i, i2, i3, i4);
+        this.layoutBounds = VRectF.m2826constructorimpl(i, i2, i3, i4);
     }
 
     @Override // android.widget.TextView, android.view.View
@@ -636,7 +636,7 @@ public class SimpleDigitalClockTextView extends TextView {
         if (textAnimator2 == null) {
             textAnimator2 = null;
         }
-        m2953setInterpolatedSizerQse7s4(i, i2, m2951computeMeasuredSizeq_v0amA(i, i2, m2952getInterpolatedTextBoundsWMibXUk(textAnimator2.textInterpolator.progress)));
+        m2951setInterpolatedSizerQse7s4(i, i2, m2949computeMeasuredSizeq_v0amA(i, i2, m2950getInterpolatedTextBoundsWMibXUk(textAnimator2.textInterpolator.progress)));
     }
 
     public final void recomputeMaxSingleDigitSizes() {
@@ -644,8 +644,8 @@ public class SimpleDigitalClockTextView extends TextView {
         this.maxSingleDigitWidth = 0.0f;
         for (int i = 0; i < 10; i++) {
             long jAccess$getTextBounds = SimpleDigitalClockTextViewKt.access$getTextBounds(this.lockScreenPaint, String.valueOf(i));
-            this.maxSingleDigitHeight = Math.max(this.maxSingleDigitHeight, VRectF.m2836getHeightimpl(jAccess$getTextBounds));
-            this.maxSingleDigitWidth = Math.max(this.maxSingleDigitWidth, VRectF.m2841getWidthimpl(jAccess$getTextBounds));
+            this.maxSingleDigitHeight = Math.max(this.maxSingleDigitHeight, VRectF.m2834getHeightimpl(jAccess$getTextBounds));
+            this.maxSingleDigitWidth = Math.max(this.maxSingleDigitWidth, VRectF.m2839getWidthimpl(jAccess$getTextBounds));
         }
         float f = 2;
         this.maxSingleDigitWidth = (this.lockScreenPaint.getStrokeWidth() * f) + this.maxSingleDigitWidth;
@@ -659,14 +659,14 @@ public class SimpleDigitalClockTextView extends TextView {
     }
 
     /* renamed from: setInterpolatedSize-rQse7s4, reason: not valid java name */
-    public final void m2953setInterpolatedSizerQse7s4(int i, int i2, long j) {
-        long jM2703constructorimpl = VPoint.m2703constructorimpl(View.MeasureSpec.getMode(i), View.MeasureSpec.getMode(i2));
-        setMeasuredDimension(View.MeasureSpec.makeMeasureSpec(MathKt__MathJVMKt.roundToInt(VPointF.m2762getXimpl(j)), VPoint.m2711getXimpl(jM2703constructorimpl)), View.MeasureSpec.makeMeasureSpec(MathKt__MathJVMKt.roundToInt(VPointF.m2763getYimpl(j)), VPoint.m2712getYimpl(jM2703constructorimpl)));
+    public final void m2951setInterpolatedSizerQse7s4(int i, int i2, long j) {
+        long jM2701constructorimpl = VPoint.m2701constructorimpl(View.MeasureSpec.getMode(i), View.MeasureSpec.getMode(i2));
+        setMeasuredDimension(View.MeasureSpec.makeMeasureSpec(MathKt__MathJVMKt.roundToInt(VPointF.m2760getXimpl(j)), VPoint.m2709getXimpl(jM2701constructorimpl)), View.MeasureSpec.makeMeasureSpec(MathKt__MathJVMKt.roundToInt(VPointF.m2761getYimpl(j)), VPoint.m2710getYimpl(jM2701constructorimpl)));
         ClockLogger logger = getLogger();
         SimpleDigitalClockTextView$$ExternalSyntheticLambda1 simpleDigitalClockTextView$$ExternalSyntheticLambda1 = new SimpleDigitalClockTextView$$ExternalSyntheticLambda1(0);
         LogMessage logMessageObtain = logger.getBuffer().obtain(logger.getTag(), LogLevel.DEBUG, simpleDigitalClockTextView$$ExternalSyntheticLambda1, null);
-        logMessageObtain.setLong1(VPointF.m2780toLongimpl(j));
-        logMessageObtain.setLong2(VPoint.m2726toLongimpl(jM2703constructorimpl));
+        logMessageObtain.setLong1(VPointF.m2778toLongimpl(j));
+        logMessageObtain.setLong2(VPoint.m2724toLongimpl(jM2701constructorimpl));
         logger.getBuffer().commit(logMessageObtain);
     }
 

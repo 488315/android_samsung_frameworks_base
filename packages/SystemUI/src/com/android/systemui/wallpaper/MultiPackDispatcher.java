@@ -67,7 +67,7 @@ public class MultiPackDispatcher {
             MultiPackDispatcher multiPackDispatcher = MultiPackDispatcher.this;
             if (multiPackDispatcher.mSelectedUserId != 0) {
                 try {
-                    MultiPackDispatcher.m3226$$Nest$mrequestImageWallpaper(multiPackDispatcher, data.getString("wallpaper_path"));
+                    MultiPackDispatcher.m3225$$Nest$mrequestImageWallpaper(multiPackDispatcher, data.getString("wallpaper_path"));
                     return;
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -194,7 +194,7 @@ public class MultiPackDispatcher {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static void m3226$$Nest$mrequestImageWallpaper(MultiPackDispatcher multiPackDispatcher, String str) {
+    public static void m3225$$Nest$mrequestImageWallpaper(MultiPackDispatcher multiPackDispatcher, String str) {
         File file;
         File file2;
         ((WallpaperLoggerImpl) multiPackDispatcher.mLoggerWrapper).log("MultiPackDispatcher", "requestImageWallpaper for subuser.");

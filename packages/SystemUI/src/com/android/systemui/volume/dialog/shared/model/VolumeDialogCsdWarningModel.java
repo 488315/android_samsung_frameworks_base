@@ -56,7 +56,7 @@ public interface VolumeDialogCsdWarningModel {
         }
 
         public final String toString() {
-            return "Visible(warning=" + this.warning + ", duration=" + Duration.m3466toStringimpl(this.duration) + ")";
+            return "Visible(warning=" + this.warning + ", duration=" + Duration.m3465toStringimpl(this.duration) + ")";
         }
 
         private Visible(int i, long j) {

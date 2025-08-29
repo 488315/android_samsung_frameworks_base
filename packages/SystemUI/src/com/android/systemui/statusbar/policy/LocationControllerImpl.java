@@ -54,6 +54,7 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
     public final H mHandler;
     public ILocationManager mLocationManager;
     public final PackageManager mPackageManager;
+    public final SamsungLocationControllerExt mSamsungExt;
     public final SecureSettings mSecureSettings;
     public boolean mShouldDisplayAllAccesses;
     public boolean mShowSystemAccessesFlag;
@@ -132,8 +133,8 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r2v22, types: [android.database.ContentObserver, com.android.systemui.statusbar.policy.LocationControllerImpl$1] */
-    public LocationControllerImpl(Context context, AppOpsController appOpsController, DeviceConfigProxy deviceConfigProxy, Looper looper, Handler handler, BroadcastDispatcher broadcastDispatcher, BootCompleteCache bootCompleteCache, UserTracker userTracker, PackageManager packageManager, UiEventLogger uiEventLogger, SecureSettings secureSettings) throws NumberFormatException {
+    /* JADX WARN: Type inference failed for: r2v20, types: [android.database.ContentObserver, com.android.systemui.statusbar.policy.LocationControllerImpl$1] */
+    public LocationControllerImpl(Context context, AppOpsController appOpsController, DeviceConfigProxy deviceConfigProxy, Looper looper, Handler handler, BroadcastDispatcher broadcastDispatcher, BootCompleteCache bootCompleteCache, SamsungLocationControllerExt samsungLocationControllerExt, UserTracker userTracker, PackageManager packageManager, UiEventLogger uiEventLogger, SecureSettings secureSettings) throws NumberFormatException {
         int i;
         this.mContext = context;
         this.mAppOpsController = appOpsController;
@@ -154,7 +155,7 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
         string = (string == null || string.length() == 0) ? SystemProperties.get("ro.csc.sales_code") : string;
         this.mSupportChnNlpIcon = SystemProperties.getInt("ro.product.first_api_level", 0) >= 34 && ("CHN".equals(string) || "CHC".equals(string) || "CHU".equals(string) || "CTC".equals(string) || "CHM".equals(string));
         this.mShouldDisplayAllAccesses = this.mDeviceConfigProxy.getBoolean("privacy", "location_indicators_small_enabled", false) || this.mSupportChnNlpIcon || BasicRune.STATUS_LAYOUT_SYSTEM_ICONS_LOCATION;
-        this.mShowSystemAccessesFlag = this.mDeviceConfigProxy.getBoolean("privacy", "location_indicators_show_system", false) || BasicRune.STATUS_LAYOUT_SYSTEM_ICONS_LOCATION;
+        this.mShowSystemAccessesFlag = this.mDeviceConfigProxy.getBoolean("privacy", "location_indicators_show_system", false);
         this.mShowSystemAccessesSetting = this.mSecureSettings.getIntForUser("locationShowSystemOps", 0, -2) == 1;
         ?? r2 = new ContentObserver(this.mBackgroundHandler) { // from class: com.android.systemui.statusbar.policy.LocationControllerImpl.1
             @Override // android.database.ContentObserver
@@ -173,7 +174,7 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
                 LocationControllerImpl locationControllerImpl = this.f$0;
                 int i2 = LocationControllerImpl.$r8$clinit;
                 locationControllerImpl.mShouldDisplayAllAccesses = locationControllerImpl.mDeviceConfigProxy.getBoolean("privacy", "location_indicators_small_enabled", false) || locationControllerImpl.mSupportChnNlpIcon || BasicRune.STATUS_LAYOUT_SYSTEM_ICONS_LOCATION;
-                locationControllerImpl.mShowSystemAccessesFlag = locationControllerImpl.mDeviceConfigProxy.getBoolean("privacy", "location_indicators_show_system", false) || BasicRune.STATUS_LAYOUT_SYSTEM_ICONS_LOCATION;
+                locationControllerImpl.mShowSystemAccessesFlag = locationControllerImpl.mDeviceConfigProxy.getBoolean("privacy", "location_indicators_show_system", false);
                 locationControllerImpl.updateActiveLocationRequests();
             }
         });
@@ -182,6 +183,7 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
         intentFilter.addAction("android.location.HIGH_POWER_REQUEST_CHANGE");
         intentFilter.addAction("android.location.MODE_CHANGED");
         broadcastDispatcher.registerReceiverWithHandler(this, intentFilter, this.mHandler, UserHandle.ALL);
+        this.mSamsungExt = samsungLocationControllerExt;
         ((AppOpsControllerImpl) this.mAppOpsController).addCallback(new int[]{0, 1, 42}, this);
         handler.post(new LocationControllerImpl$$ExternalSyntheticLambda0(this, 1));
     }
@@ -208,92 +210,106 @@ public class LocationControllerImpl extends BroadcastReceiver implements Locatio
         return false;
     }
 
-    /* JADX WARN: Removed duplicated region for block: B:35:0x009e  */
-    /* JADX WARN: Removed duplicated region for block: B:46:0x00bf  */
-    /* JADX WARN: Removed duplicated region for block: B:47:0x00c1  */
-    /* JADX WARN: Removed duplicated region for block: B:53:0x00cb  */
+    /* JADX WARN: Removed duplicated region for block: B:20:0x002a  */
+    /* JADX WARN: Removed duplicated region for block: B:44:0x00b0  */
+    /* JADX WARN: Removed duplicated region for block: B:55:0x00d1  */
+    /* JADX WARN: Removed duplicated region for block: B:56:0x00d3  */
+    /* JADX WARN: Removed duplicated region for block: B:62:0x00dd  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
     public void areActiveLocationRequests() {
         boolean z;
         boolean z2;
+        boolean z3;
+        SamsungLocationControllerExt samsungLocationControllerExt;
         if (this.mShouldDisplayAllAccesses) {
-            boolean z3 = this.mAreActiveLocationRequests;
-            boolean z4 = true;
-            boolean z5 = this.mShowSystemAccessesFlag || this.mShowSystemAccessesSetting;
+            boolean z4 = this.mAreActiveLocationRequests;
+            boolean z5 = true;
+            int i = 0;
+            if (this.mShowSystemAccessesFlag || this.mShowSystemAccessesSetting) {
+                z = true;
+            } else {
+                boolean z6 = BasicRune.STATUS_LAYOUT_SYSTEM_ICONS_LOCATION;
+                if (z6 && (samsungLocationControllerExt = this.mSamsungExt) != null) {
+                    samsungLocationControllerExt.getClass();
+                    if (!z6 ? false : samsungLocationControllerExt.isShowOnSettingsValue) {
+                    }
+                }
+                z = false;
+            }
             List activeAppOps = ((AppOpsControllerImpl) this.mAppOpsController).getActiveAppOps(false);
             List userProfiles = ((UserTrackerImpl) this.mUserTracker).getUserProfiles();
             ArrayList arrayList = (ArrayList) activeAppOps;
             int size = arrayList.size();
-            int i = 0;
-            boolean z6 = false;
+            int i2 = 0;
             boolean z7 = false;
             boolean z8 = false;
-            while (i < size) {
-                if (((AppOpItem) arrayList.get(i)).mCode == z4 || ((AppOpItem) arrayList.get(i)).mCode == 0) {
-                    AppOpItem appOpItem = (AppOpItem) arrayList.get(i);
+            boolean z9 = false;
+            while (i2 < size) {
+                if (((AppOpItem) arrayList.get(i2)).mCode == z5 || ((AppOpItem) arrayList.get(i2)).mCode == 0) {
+                    AppOpItem appOpItem = (AppOpItem) arrayList.get(i2);
                     String strOpToPermission = AppOpsManager.opToPermission(appOpItem.mCode);
-                    int i2 = appOpItem.mUid;
-                    UserHandle userHandleForUid = UserHandle.getUserHandleForUid(i2);
+                    int i3 = appOpItem.mUid;
+                    UserHandle userHandleForUid = UserHandle.getUserHandleForUid(i3);
                     int size2 = userProfiles.size();
-                    int i3 = 0;
-                    boolean z9 = false;
-                    while (i3 < size2) {
-                        boolean z10 = z5;
-                        if (((UserInfo) userProfiles.get(i3)).getUserHandle().equals(userHandleForUid)) {
-                            z9 = true;
+                    int i4 = i;
+                    while (i < size2) {
+                        boolean z10 = z;
+                        if (((UserInfo) userProfiles.get(i)).getUserHandle().equals(userHandleForUid)) {
+                            i4 = 1;
                         }
-                        i3++;
-                        z5 = z10;
+                        i++;
+                        z = z10;
                     }
-                    z = z5;
-                    if (z9) {
+                    z2 = z;
+                    if (i4 == 0) {
+                        z3 = true;
+                        if (z3) {
+                            z9 = true;
+                        } else {
+                            z8 = true;
+                        }
+                        z7 = (z2 && !z7 && z3) ? false : true;
+                    } else {
                         PackageManager packageManager = this.mPackageManager;
                         String str = appOpItem.mPackageName;
                         int permissionFlags = packageManager.getPermissionFlags(strOpToPermission, str, userHandleForUid);
-                        if (PermissionChecker.checkPermissionForPreflight(this.mContext, strOpToPermission, -1, i2, str) != 0 ? (permissionFlags & 512) != 0 : (permissionFlags & 256) != 0) {
-                            z2 = false;
+                        if (PermissionChecker.checkPermissionForPreflight(this.mContext, strOpToPermission, -1, i3, str) != 0 ? (permissionFlags & 512) != 0 : (permissionFlags & 256) != 0) {
+                            z3 = false;
+                        }
+                        if (z3) {
                         }
                         if (z2) {
                         }
-                        if (z) {
-                        }
-                    } else {
-                        z2 = true;
-                        if (z2) {
-                            z8 = true;
-                        } else {
-                            z7 = true;
-                        }
-                        z6 = (z && !z6 && z2) ? false : true;
                     }
-                } else if ((this.mSupportChnNlpIcon || BasicRune.STATUS_LAYOUT_SYSTEM_ICONS_LOCATION) && ((AppOpItem) arrayList.get(i)).mCode == 42) {
-                    z = z5;
-                    z6 = z4;
+                } else if ((this.mSupportChnNlpIcon || BasicRune.STATUS_LAYOUT_SYSTEM_ICONS_LOCATION) && ((AppOpItem) arrayList.get(i2)).mCode == 42) {
+                    z2 = z;
+                    z7 = z5;
                 } else {
-                    z = z5;
+                    z2 = z;
                 }
-                i++;
-                z5 = z;
-                z4 = true;
+                i2++;
+                z = z2;
+                z5 = true;
+                i = 0;
             }
             boolean zAreActiveHighPowerLocationRequests = areActiveHighPowerLocationRequests();
-            this.mAreActiveLocationRequests = z6;
-            if (z6 != z3) {
+            this.mAreActiveLocationRequests = z7;
+            if (z7 != z4) {
                 this.mHandler.sendEmptyMessage(2);
             }
-            if (z3) {
+            if (z4) {
                 return;
             }
-            if (zAreActiveHighPowerLocationRequests || z7 || z8) {
+            if (zAreActiveHighPowerLocationRequests || z8 || z9) {
                 if (zAreActiveHighPowerLocationRequests) {
                     this.mUiEventLogger.log(LocationIndicatorEvent.LOCATION_INDICATOR_MONITOR_HIGH_POWER);
                 }
-                if (z7) {
+                if (z8) {
                     this.mUiEventLogger.log(LocationIndicatorEvent.LOCATION_INDICATOR_SYSTEM_APP);
                 }
-                if (z8) {
+                if (z9) {
                     this.mUiEventLogger.log(LocationIndicatorEvent.LOCATION_INDICATOR_NON_SYSTEM_APP);
                 }
             }

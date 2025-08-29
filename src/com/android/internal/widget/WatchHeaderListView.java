@@ -1,6 +1,7 @@
 package com.android.internal.widget;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class WatchHeaderListView extends ListView {
     }
 
     @Override // android.widget.ListView, android.widget.AbsListView, android.widget.AdapterView
-    public void setAdapter(ListAdapter listAdapter) {
+    public void setAdapter(ListAdapter listAdapter) throws Resources.NotFoundException {
         super.setAdapter(listAdapter);
         wrapAdapterIfNecessary();
     }

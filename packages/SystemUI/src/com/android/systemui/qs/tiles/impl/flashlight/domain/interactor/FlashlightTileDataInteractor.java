@@ -58,17 +58,17 @@ public final class FlashlightTileDataInteractor implements QSTileDataInteractor 
                 final ?? r1 = new FlashlightController.FlashlightListener() { // from class: com.android.systemui.qs.tiles.impl.flashlight.domain.interactor.FlashlightTileDataInteractor$tileData$1$callback$1
                     @Override // com.android.systemui.statusbar.policy.FlashlightController.FlashlightListener
                     public final void onFlashlightAvailabilityChanged(boolean z) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(z ? FlashlightTileModel.FlashlightAvailable.m2929boximpl(((FlashlightControllerImpl) flashlightTileDataInteractor.flashlightController).isEnabled()) : FlashlightTileModel.FlashlightTemporarilyUnavailable.INSTANCE);
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(z ? FlashlightTileModel.FlashlightAvailable.m2927boximpl(((FlashlightControllerImpl) flashlightTileDataInteractor.flashlightController).isEnabled()) : FlashlightTileModel.FlashlightTemporarilyUnavailable.INSTANCE);
                     }
 
                     @Override // com.android.systemui.statusbar.policy.FlashlightController.FlashlightListener
                     public final void onFlashlightChanged(boolean z) {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(FlashlightTileModel.FlashlightAvailable.m2929boximpl(z));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(FlashlightTileModel.FlashlightAvailable.m2927boximpl(z));
                     }
 
                     @Override // com.android.systemui.statusbar.policy.FlashlightController.FlashlightListener
                     public final void onFlashlightError() {
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(FlashlightTileModel.FlashlightAvailable.m2929boximpl(false));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(FlashlightTileModel.FlashlightAvailable.m2927boximpl(false));
                     }
                 };
                 ((FlashlightControllerImpl) FlashlightTileDataInteractor.this.flashlightController).addCallback(r1);

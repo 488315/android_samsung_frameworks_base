@@ -26,8 +26,8 @@ public final class SearchBarColors {
         SearchBarColors searchBarColors = (SearchBarColors) obj;
         long j = searchBarColors.containerColor;
         Color.Companion companion = Color.Companion;
-        if (ULong.m3447equalsimpl0(this.containerColor, j)) {
-            return ULong.m3447equalsimpl0(this.dividerColor, searchBarColors.dividerColor) && Intrinsics.areEqual(this.inputFieldColors, searchBarColors.inputFieldColors);
+        if (ULong.m3446equalsimpl0(this.containerColor, j)) {
+            return ULong.m3446equalsimpl0(this.dividerColor, searchBarColors.dividerColor) && Intrinsics.areEqual(this.inputFieldColors, searchBarColors.inputFieldColors);
         }
         return false;
     }

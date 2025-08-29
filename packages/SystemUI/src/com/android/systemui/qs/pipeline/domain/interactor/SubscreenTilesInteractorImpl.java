@@ -129,7 +129,7 @@ public final class SubscreenTilesInteractorImpl implements CurrentTilesInteracto
             }
 
             /* renamed from: box-impl, reason: not valid java name */
-            public static final /* synthetic */ Tile m2912boximpl(QSTile qSTile) {
+            public static final /* synthetic */ Tile m2910boximpl(QSTile qSTile) {
                 return new Tile(qSTile);
             }
 

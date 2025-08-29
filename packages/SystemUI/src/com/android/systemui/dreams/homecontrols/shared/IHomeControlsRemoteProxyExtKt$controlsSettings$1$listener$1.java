@@ -16,6 +16,6 @@ public final class IHomeControlsRemoteProxyExtKt$controlsSettings$1$listener$1 e
 
     @Override // com.android.systemui.dreams.homecontrols.shared.IOnControlsSettingsChangeListener
     public final void onControlsSettingsChanged(ComponentName componentName, boolean z) {
-        ((ChannelCoroutine) this.$$this$conflatedCallbackFlow).mo3476trySendJP2dKIU(new HomeControlsComponentInfo(componentName, z));
+        ((ChannelCoroutine) this.$$this$conflatedCallbackFlow).mo3475trySendJP2dKIU(new HomeControlsComponentInfo(componentName, z));
     }
 }

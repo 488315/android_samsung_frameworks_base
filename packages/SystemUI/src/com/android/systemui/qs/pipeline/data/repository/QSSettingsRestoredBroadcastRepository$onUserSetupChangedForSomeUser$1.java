@@ -49,7 +49,7 @@ final class QSSettingsRestoredBroadcastRepository$onUserSetupChangedForSomeUser$
             final ?? r1 = new DeviceProvisionedController.DeviceProvisionedListener() { // from class: com.android.systemui.qs.pipeline.data.repository.QSSettingsRestoredBroadcastRepository$onUserSetupChangedForSomeUser$1$callback$1
                 @Override // com.android.systemui.statusbar.policy.DeviceProvisionedController.DeviceProvisionedListener
                 public final void onUserSetupChanged() {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
             ((DeviceProvisionedControllerImpl) this.this$0.deviceProvisionedController).addCallback(r1);

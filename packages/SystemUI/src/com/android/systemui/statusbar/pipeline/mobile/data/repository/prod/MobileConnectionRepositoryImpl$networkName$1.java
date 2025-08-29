@@ -69,7 +69,7 @@ final class MobileConnectionRepositoryImpl$networkName$1 extends SuspendLambda i
                         if (networkNameModel2 == null) {
                             networkNameModel2 = networkNameModel;
                         }
-                        ((ChannelCoroutine) sendChannel).mo3476trySendJP2dKIU(networkNameModel2);
+                        ((ChannelCoroutine) sendChannel).mo3475trySendJP2dKIU(networkNameModel2);
                     }
                 }
             };

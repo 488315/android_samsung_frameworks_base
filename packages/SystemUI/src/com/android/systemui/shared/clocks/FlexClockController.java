@@ -245,10 +245,10 @@ public final class FlexClockController implements ClockController {
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
             public final Object mo781invoke(Object obj) {
-                long jM2847unboximpl = ((VRectF) obj).m2847unboximpl();
+                long jM2845unboximpl = ((VRectF) obj).m2845unboximpl();
                 ClockEventListener clockEventListener2 = clockEventListener;
                 if (clockEventListener2 != null) {
-                    clockEventListener2.mo947onBoundsChangedTTAm5xc(jM2847unboximpl);
+                    clockEventListener2.mo947onBoundsChangedTTAm5xc(jM2845unboximpl);
                 }
                 return Unit.INSTANCE;
             }
@@ -268,10 +268,10 @@ public final class FlexClockController implements ClockController {
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
             public final Object mo781invoke(Object obj) {
-                long jM2847unboximpl = ((VRectF) obj).m2847unboximpl();
+                long jM2845unboximpl = ((VRectF) obj).m2845unboximpl();
                 ClockEventListener clockEventListener2 = clockEventListener;
                 if (clockEventListener2 != null) {
-                    clockEventListener2.mo947onBoundsChangedTTAm5xc(jM2847unboximpl);
+                    clockEventListener2.mo947onBoundsChangedTTAm5xc(jM2845unboximpl);
                 }
                 return Unit.INSTANCE;
             }

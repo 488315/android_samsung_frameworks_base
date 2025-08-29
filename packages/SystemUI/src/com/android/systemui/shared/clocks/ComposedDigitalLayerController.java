@@ -167,14 +167,14 @@ public final class ComposedDigitalLayerController implements SimpleClockLayerCon
                                 long j2 = FlexClockView.CHARGING_TRANSITION_DURATION;
                                 int id = simpleDigitalClockTextView.getId();
                                 FlexClockView flexClockView3 = flexClockView2;
-                                DigitTranslateAnimator.m2949animatePositionWofAHi4$default(digitTranslateAnimator, z2, j2, interpolator2, FlexClockView.Companion.m2950updateDirectionalTargetTranslateNvxBqkk(id, flexClockView3.dozeFraction == 1.0f ? flexClockView3.aodTranslate : flexClockView3.lockscreenTranslate), null, 34);
+                                DigitTranslateAnimator.m2947animatePositionWofAHi4$default(digitTranslateAnimator, z2, j2, interpolator2, FlexClockView.Companion.m2948updateDirectionalTargetTranslateNvxBqkk(id, flexClockView3.dozeFraction == 1.0f ? flexClockView3.aodTranslate : flexClockView3.lockscreenTranslate), null, 34);
                             }
                         };
                         FlexClockView.Companion companion = FlexClockView.Companion;
                         int id = simpleDigitalClockTextView.getId();
                         long j2 = flexClockView2.dozeFraction == 1.0f ? flexClockView2.lockscreenTranslate : flexClockView2.aodTranslate;
                         companion.getClass();
-                        DigitTranslateAnimator.m2949animatePositionWofAHi4$default(digitTranslateAnimator, z, j, interpolator, FlexClockView.Companion.m2950updateDirectionalTargetTranslateNvxBqkk(id, j2), r9, 2);
+                        DigitTranslateAnimator.m2947animatePositionWofAHi4$default(digitTranslateAnimator, z, j, interpolator, FlexClockView.Companion.m2948updateDirectionalTargetTranslateNvxBqkk(id, j2), r9, 2);
                     }
                 }
             }
@@ -217,7 +217,7 @@ public final class ComposedDigitalLayerController implements SimpleClockLayerCon
             public final void onFidgetTap(float f, float f2) {
                 FlexClockView flexClockView2 = this.this$0.view;
                 flexClockView2.getClass();
-                final long jM2749constructorimpl = VPointF.m2749constructorimpl(f, f2);
+                final long jM2747constructorimpl = VPointF.m2747constructorimpl(f, f2);
                 int i = 0;
                 final int[] iArr = {0, 0};
                 for (Object obj : CollectionsKt___CollectionsKt.sortedWith(flexClockView2.getChildViews(), new Comparator() { // from class: com.android.systemui.shared.clocks.view.FlexClockView$animateFidget$$inlined$sortedBy$1
@@ -226,16 +226,16 @@ public final class ComposedDigitalLayerController implements SimpleClockLayerCon
                         SimpleDigitalClockTextView simpleDigitalClockTextView = (SimpleDigitalClockTextView) obj2;
                         simpleDigitalClockTextView.getLocationInWindow(iArr);
                         int[] iArr2 = iArr;
-                        long jM2703constructorimpl = VPoint.m2703constructorimpl(iArr2[0], iArr2[1]);
+                        long jM2701constructorimpl = VPoint.m2701constructorimpl(iArr2[0], iArr2[1]);
                         ViewUtils viewUtils = ViewUtils.INSTANCE;
                         viewUtils.getClass();
-                        Float fValueOf = Float.valueOf(VPointF.m2765lengthimpl(VPointF.m2769minusb2IjXjg(VPoint.m2721plusb2IjXjg(jM2703constructorimpl, VPointF.m2755divAsyRdg(VPointF.m2752constructorimpl(simpleDigitalClockTextView.getMeasuredWidth(), simpleDigitalClockTextView.getMeasuredHeight()), 2.0f)), jM2749constructorimpl)));
+                        Float fValueOf = Float.valueOf(VPointF.m2763lengthimpl(VPointF.m2767minusb2IjXjg(VPoint.m2719plusb2IjXjg(jM2701constructorimpl, VPointF.m2753divAsyRdg(VPointF.m2750constructorimpl(simpleDigitalClockTextView.getMeasuredWidth(), simpleDigitalClockTextView.getMeasuredHeight()), 2.0f)), jM2747constructorimpl)));
                         SimpleDigitalClockTextView simpleDigitalClockTextView2 = (SimpleDigitalClockTextView) obj3;
                         simpleDigitalClockTextView2.getLocationInWindow(iArr);
                         int[] iArr3 = iArr;
-                        long jM2703constructorimpl2 = VPoint.m2703constructorimpl(iArr3[0], iArr3[1]);
+                        long jM2701constructorimpl2 = VPoint.m2701constructorimpl(iArr3[0], iArr3[1]);
                         viewUtils.getClass();
-                        return ComparisonsKt__ComparisonsKt.compareValues(fValueOf, Float.valueOf(VPointF.m2765lengthimpl(VPointF.m2769minusb2IjXjg(VPoint.m2721plusb2IjXjg(jM2703constructorimpl2, VPointF.m2755divAsyRdg(VPointF.m2752constructorimpl(simpleDigitalClockTextView2.getMeasuredWidth(), simpleDigitalClockTextView2.getMeasuredHeight()), 2.0f)), jM2749constructorimpl))));
+                        return ComparisonsKt__ComparisonsKt.compareValues(fValueOf, Float.valueOf(VPointF.m2763lengthimpl(VPointF.m2767minusb2IjXjg(VPoint.m2719plusb2IjXjg(jM2701constructorimpl2, VPointF.m2753divAsyRdg(VPointF.m2750constructorimpl(simpleDigitalClockTextView2.getMeasuredWidth(), simpleDigitalClockTextView2.getMeasuredHeight()), 2.0f)), jM2747constructorimpl))));
                     }
                 })) {
                     int i2 = i + 1;

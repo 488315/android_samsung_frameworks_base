@@ -130,7 +130,7 @@ final class QQSUserTileSpecRepository$startFlowCollections$1 extends SuspendLamb
 
                         @Override // android.database.ContentObserver
                         public final void onChange(boolean z) {
-                            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                            ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                         }
                     };
                     QQSUserTileSpecRepository qQSUserTileSpecRepository = this.this$0;

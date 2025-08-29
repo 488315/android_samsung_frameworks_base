@@ -169,7 +169,7 @@ public final class ComposableSingletons$ScaffoldKt {
                         if (ComposerKt.isTraceInProgress()) {
                             ComposerKt.traceEventStart("com.samsung.sesl.compose.component.ComposableSingletons$ScaffoldKt.lambda-5.<anonymous> (Scaffold.kt:60)");
                         }
-                        seslScaffoldTemplate$BackgroundScope.m3356BackgroundFNF3uiM(paddingValues, null, 0L, composer, ((i >> 3) & 14) | ((i << 9) & 7168), 6);
+                        seslScaffoldTemplate$BackgroundScope.m3355BackgroundFNF3uiM(paddingValues, null, 0L, composer, ((i >> 3) & 14) | ((i << 9) & 7168), 6);
                         if (ComposerKt.isTraceInProgress()) {
                             ComposerKt.traceEventEnd();
                         }

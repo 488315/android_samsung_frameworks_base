@@ -436,7 +436,7 @@ public final class PosturingInteractor {
             }
         });
         long j = SLIDING_WINDOW_DURATION;
-        final Flow flowM3166slidingWindow8Mi8wO0 = com.android.systemui.util.kotlin.FlowKt.m3166slidingWindow8Mi8wO0(channelLimitedFlowMergeMerge, j, systemClock);
+        final Flow flowM3165slidingWindow8Mi8wO0 = com.android.systemui.util.kotlin.FlowKt.m3165slidingWindow8Mi8wO0(channelLimitedFlowMergeMerge, j, systemClock);
         final Flow flow3 = new Flow() { // from class: com.android.systemui.communal.posturing.domain.interactor.PosturingInteractor$special$$inlined$filterNot$2
 
             /* renamed from: com.android.systemui.communal.posturing.domain.interactor.PosturingInteractor$special$$inlined$filterNot$2$2, reason: invalid class name */
@@ -505,7 +505,7 @@ public final class PosturingInteractor {
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object objCollect = flowM3166slidingWindow8Mi8wO0.collect(new AnonymousClass2(flowCollector), continuation);
+                Object objCollect = flowM3165slidingWindow8Mi8wO0.collect(new AnonymousClass2(flowCollector), continuation);
                 return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
@@ -732,7 +732,7 @@ public final class PosturingInteractor {
                 return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
-        final Flow flowM3166slidingWindow8Mi8wO02 = com.android.systemui.util.kotlin.FlowKt.m3166slidingWindow8Mi8wO0(new Flow() { // from class: com.android.systemui.communal.posturing.domain.interactor.PosturingInteractor$special$$inlined$map$7
+        final Flow flowM3165slidingWindow8Mi8wO02 = com.android.systemui.util.kotlin.FlowKt.m3165slidingWindow8Mi8wO0(new Flow() { // from class: com.android.systemui.communal.posturing.domain.interactor.PosturingInteractor$special$$inlined$map$7
 
             /* renamed from: com.android.systemui.communal.posturing.domain.interactor.PosturingInteractor$special$$inlined$map$7$2, reason: invalid class name */
             public final class AnonymousClass2 implements FlowCollector {
@@ -871,7 +871,7 @@ public final class PosturingInteractor {
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object objCollect = flowM3166slidingWindow8Mi8wO02.collect(new AnonymousClass2(flowCollector), continuation);
+                Object objCollect = flowM3165slidingWindow8Mi8wO02.collect(new AnonymousClass2(flowCollector), continuation);
                 return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         };
@@ -1027,9 +1027,9 @@ public final class PosturingInteractor {
             }
         }, coroutineDispatcher);
         SharingStarted.Companion companion = SharingStarted.Companion;
-        long jM3457getInWholeMillisecondsimpl = Duration.m3457getInWholeMillisecondsimpl(STOP_TIMEOUT_AFTER_UNSUBSCRIBE);
+        long jM3456getInWholeMillisecondsimpl = Duration.m3456getInWholeMillisecondsimpl(STOP_TIMEOUT_AFTER_UNSUBSCRIBE);
         companion.getClass();
-        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(flowFlowOn, coroutineScope, new StartedWhileSubscribed(jM3457getInWholeMillisecondsimpl, 0L), unknown);
+        ReadonlyStateFlow readonlyStateFlowStateIn = FlowKt.stateIn(flowFlowOn, coroutineScope, new StartedWhileSubscribed(jM3456getInWholeMillisecondsimpl, 0L), unknown);
         this.posturedSmoothed = readonlyStateFlowStateIn;
         this.postured = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(readonlyStateFlowStateIn, stateFlowImplMutableStateFlow, new PosturingInteractor$postured$1(null));
     }

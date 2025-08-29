@@ -57,7 +57,7 @@ public final /* synthetic */ class ImageWallpaper$CanvasEngine$$ExternalSyntheti
             default:
                 ImageWallpaper.CanvasEngine canvasEngine3 = ImageWallpaper.CanvasEngine.this;
                 if (canvasEngine3.mIsEngineAlive) {
-                    ImageWallpaper.CanvasEngine.m3230$$Nest$mupdatePluginWallpaper(canvasEngine3);
+                    ImageWallpaper.CanvasEngine.m3229$$Nest$mupdatePluginWallpaper(canvasEngine3);
                     return;
                 } else {
                     Log.w(canvasEngine3.TAG, " mPluginWallpaperConsumer, skip, engine is destroyed");

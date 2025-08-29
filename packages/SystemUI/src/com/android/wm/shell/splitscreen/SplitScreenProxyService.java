@@ -153,7 +153,7 @@ public class SplitScreenProxyService extends Service {
                     if (!z5 || stageLaunchOptions.mCellStageIntent == null) {
                         i = 0;
                         final int i12 = 3;
-                        SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
+                        SplitScreenProxyService.m3277$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 int i13 = i12;
@@ -281,7 +281,7 @@ public class SplitScreenProxyService extends Service {
                         });
                     } else {
                         i = 0;
-                        SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
+                        SplitScreenProxyService.m3277$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 int i13 = i;
@@ -461,7 +461,7 @@ public class SplitScreenProxyService extends Service {
                     return;
                 case 2:
                     if (i10 != -1 && stageLaunchOptions.mSideStageIntent != null) {
-                        SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
+                        SplitScreenProxyService.m3277$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 int i13 = i2;
@@ -597,7 +597,7 @@ public class SplitScreenProxyService extends Service {
                         return;
                     }
                     if (CoreRune.MW_MULTI_SPLIT && stageLaunchOptions.mPendingIntent != null && stageLaunchOptions.mCellStageWindowConfigPosition != 0) {
-                        SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
+                        SplitScreenProxyService.m3277$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 int i13 = i3;
@@ -727,7 +727,7 @@ public class SplitScreenProxyService extends Service {
                     }
                     if (!CoreRune.MW_MULTI_SPLIT_FREE_POSITION || stageLaunchOptions.mSplitDivision == -1 || splitScreenProxyService.mSplitScreenController.mStageCoordinator.isSplitScreenVisible()) {
                         final int i13 = 7;
-                        SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
+                        SplitScreenProxyService.m3277$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 int i132 = i13;
@@ -856,7 +856,7 @@ public class SplitScreenProxyService extends Service {
                         return;
                     } else {
                         final int i14 = 6;
-                        SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
+                        SplitScreenProxyService.m3277$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 int i132 = i14;
@@ -990,7 +990,7 @@ public class SplitScreenProxyService extends Service {
                         return;
                     } else {
                         final int i15 = 8;
-                        SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
+                        SplitScreenProxyService.m3277$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 int i132 = i15;
@@ -1123,7 +1123,7 @@ public class SplitScreenProxyService extends Service {
                         Slog.w("SplitScreenProxyService", "OPEN_IN_SPLIT_WITH_TAP has no valid start info");
                         return;
                     } else {
-                        SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
+                        SplitScreenProxyService.m3277$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 int i132 = i5;
@@ -1257,7 +1257,7 @@ public class SplitScreenProxyService extends Service {
                         return;
                     } else {
                         final int i16 = 9;
-                        SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
+                        SplitScreenProxyService.m3277$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 int i132 = i16;
@@ -1394,7 +1394,7 @@ public class SplitScreenProxyService extends Service {
                         Slog.w("SplitScreenProxyService", "OPEN_IN_SPLIT_WITH_ALLAPPS has no valid start info");
                         return;
                     } else {
-                        SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
+                        SplitScreenProxyService.m3277$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new Consumer() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda0
                             @Override // java.util.function.Consumer
                             public final void accept(Object obj) {
                                 int i132 = i6;
@@ -1523,7 +1523,7 @@ public class SplitScreenProxyService extends Service {
                         return;
                     }
                 case 9:
-                    SplitScreenProxyService.m3278$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda1());
+                    SplitScreenProxyService.m3277$$Nest$mexecuteRemoteCall(splitScreenProxyService, splitScreenProxyService.mSplitScreenController, new SplitScreenProxyService$MessageHandler$$ExternalSyntheticLambda1());
                     return;
             }
         }
@@ -1533,7 +1533,7 @@ public class SplitScreenProxyService extends Service {
     }
 
     /* renamed from: -$$Nest$mexecuteRemoteCall, reason: not valid java name */
-    public static void m3278$$Nest$mexecuteRemoteCall(SplitScreenProxyService splitScreenProxyService, final RemoteCallable remoteCallable, final Consumer consumer) {
+    public static void m3277$$Nest$mexecuteRemoteCall(SplitScreenProxyService splitScreenProxyService, final RemoteCallable remoteCallable, final Consumer consumer) {
         splitScreenProxyService.getClass();
         remoteCallable.getRemoteCallExecutor().execute(new Runnable() { // from class: com.android.wm.shell.splitscreen.SplitScreenProxyService$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable

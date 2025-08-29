@@ -39,7 +39,7 @@ public final class Shadow {
         Shadow shadow = (Shadow) obj;
         long j = shadow.color;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.color, j) && Offset.m398equalsimpl0(this.offset, shadow.offset) && this.blurRadius == shadow.blurRadius;
+        return ULong.m3446equalsimpl0(this.color, j) && Offset.m398equalsimpl0(this.offset, shadow.offset) && this.blurRadius == shadow.blurRadius;
     }
 
     public final int hashCode() {

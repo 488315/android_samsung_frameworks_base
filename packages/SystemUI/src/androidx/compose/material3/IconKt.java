@@ -383,7 +383,7 @@ public abstract class IconKt {
                     companion.getClass();
                     if (objRememberedValue == Composer.Companion.Empty) {
                         Color.Companion.getClass();
-                        objRememberedValue = ULong.m3447equalsimpl0(j4, Color.Unspecified) ? null : ColorFilter.Companion.m465tintxETnrds$default(ColorFilter.Companion, j4);
+                        objRememberedValue = ULong.m3446equalsimpl0(j4, Color.Unspecified) ? null : ColorFilter.Companion.m465tintxETnrds$default(ColorFilter.Companion, j4);
                         composerImpl.updateRememberedValue(objRememberedValue);
                     }
                     ColorFilter colorFilter = (ColorFilter) objRememberedValue;

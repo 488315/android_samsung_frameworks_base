@@ -49,7 +49,7 @@ final class SimBouncerRepositoryImpl$simBouncerModel$1 extends SuspendLambda imp
             final ?? r1 = new KeyguardUpdateMonitorCallback() { // from class: com.android.systemui.bouncer.data.repository.SimBouncerRepositoryImpl$simBouncerModel$1$callback$1
                 @Override // com.android.keyguard.KeyguardUpdateMonitorCallback
                 public final void onSimStateChanged(int i2, int i3, int i4) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
             this.$keyguardUpdateMonitor.registerCallback(r1);

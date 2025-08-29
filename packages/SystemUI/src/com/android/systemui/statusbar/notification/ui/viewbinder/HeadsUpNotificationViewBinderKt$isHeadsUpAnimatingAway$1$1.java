@@ -18,6 +18,6 @@ public final class HeadsUpNotificationViewBinderKt$isHeadsUpAnimatingAway$1$1 im
         Boolean bool = (Boolean) obj;
         SendChannel sendChannel = this.$$this$conflatedCallbackFlow;
         bool.getClass();
-        ((ChannelCoroutine) sendChannel).mo3476trySendJP2dKIU(bool);
+        ((ChannelCoroutine) sendChannel).mo3475trySendJP2dKIU(bool);
     }
 }

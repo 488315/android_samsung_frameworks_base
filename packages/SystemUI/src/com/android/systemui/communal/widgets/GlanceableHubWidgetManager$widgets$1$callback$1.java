@@ -21,6 +21,6 @@ public final class GlanceableHubWidgetManager$widgets$1$callback$1 extends IGlan
         if (list == null) {
             list = EmptyList.INSTANCE;
         }
-        ((ChannelCoroutine) sendChannel).mo3476trySendJP2dKIU(list);
+        ((ChannelCoroutine) sendChannel).mo3475trySendJP2dKIU(list);
     }
 }

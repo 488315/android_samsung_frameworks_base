@@ -1,9 +1,16 @@
 package com.android.systemui.privacy;
 
+import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.PermissionChecker;
+import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
+import android.net.Uri;
 import android.os.UserHandle;
+import android.provider.Settings;
 import android.util.IndentingPrintWriter;
+import android.util.Log;
+import com.android.systemui.ScRune;
 import com.android.systemui.appops.AppOpItem;
 import com.android.systemui.appops.AppOpsController;
 import com.android.systemui.appops.AppOpsControllerImpl;
@@ -19,6 +26,7 @@ import com.android.systemui.privacy.logging.PrivacyLogger$$ExternalSyntheticLamb
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.util.DumpUtilsKt;
+import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.concurrency.DelayableExecutor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -45,7 +53,11 @@ public final class AppOpsPrivacyItemMonitor implements PrivacyItemMonitor {
     public boolean locationAvailable;
     public final PrivacyLogger logger;
     public boolean micCameraAvailable;
+    public final PackageManager packageManager;
     public final PrivacyConfig privacyConfig;
+    private final SettingsHelper settingsHelper;
+    public boolean showSystem;
+    private final SettingsHelper.OnChangedCallback showSystemAppSettingsListener;
     public final UserTracker userTracker;
     public static final Companion Companion = new Companion(null);
     public static final int[] USER_INDEPENDENT_OPS = {101, 100};
@@ -127,16 +139,19 @@ public final class AppOpsPrivacyItemMonitor implements PrivacyItemMonitor {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r1v4, types: [com.android.systemui.privacy.AppOpsPrivacyItemMonitor$appOpsCallback$1] */
-    /* JADX WARN: Type inference failed for: r1v6, types: [com.android.systemui.privacy.AppOpsPrivacyItemMonitor$configCallback$1, com.android.systemui.privacy.PrivacyConfig$Callback] */
-    public AppOpsPrivacyItemMonitor(AppOpsController appOpsController, UserTracker userTracker, PrivacyConfig privacyConfig, DelayableExecutor delayableExecutor, PrivacyLogger privacyLogger) {
+    /* JADX WARN: Type inference failed for: r1v5, types: [com.android.systemui.privacy.AppOpsPrivacyItemMonitor$appOpsCallback$1] */
+    /* JADX WARN: Type inference failed for: r1v7, types: [com.android.systemui.privacy.AppOpsPrivacyItemMonitor$configCallback$1, com.android.systemui.privacy.PrivacyConfig$Callback] */
+    public AppOpsPrivacyItemMonitor(AppOpsController appOpsController, UserTracker userTracker, PrivacyConfig privacyConfig, DelayableExecutor delayableExecutor, PrivacyLogger privacyLogger, SettingsHelper settingsHelper, PackageManager packageManager) {
         this.appOpsController = appOpsController;
         this.userTracker = userTracker;
         this.privacyConfig = privacyConfig;
         this.bgExecutor = delayableExecutor;
         this.logger = privacyLogger;
+        this.settingsHelper = settingsHelper;
+        this.packageManager = packageManager;
         this.micCameraAvailable = privacyConfig.micCameraAvailable;
         this.locationAvailable = privacyConfig.locationAvailable;
+        this.showSystem = true;
         ?? r1 = new PrivacyConfig.Callback() { // from class: com.android.systemui.privacy.AppOpsPrivacyItemMonitor$configCallback$1
             public final void onFlagChanged() {
                 AppOpsPrivacyItemMonitor appOpsPrivacyItemMonitor = this.this$0;
@@ -162,6 +177,17 @@ public final class AppOpsPrivacyItemMonitor implements PrivacyItemMonitor {
         };
         this.configCallback = r1;
         privacyConfig.addCallback(r1);
+        if (ScRune.QUICK_SUPPORT_LOCATION_PRIVACY_CHIP) {
+            this.showSystem = settingsHelper.isShowLocationSystemApps();
+        }
+        this.showSystemAppSettingsListener = new SettingsHelper.OnChangedCallback() { // from class: com.android.systemui.privacy.AppOpsPrivacyItemMonitor$showSystemAppSettingsListener$1
+            @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
+            public final void onChanged(Uri uri) {
+                AppOpsPrivacyItemMonitor appOpsPrivacyItemMonitor = this.this$0;
+                appOpsPrivacyItemMonitor.showSystem = appOpsPrivacyItemMonitor.settingsHelper.isShowLocationSystemApps();
+                appOpsPrivacyItemMonitor.dispatchOnPrivacyItemsChanged();
+            }
+        };
     }
 
     public final void dispatchOnPrivacyItemsChanged() {
@@ -210,6 +236,27 @@ public final class AppOpsPrivacyItemMonitor implements PrivacyItemMonitor {
         }
     }
 
+    public final boolean filterLocationSystemAppIfNeeded(AppOpItem appOpItem) {
+        if (!ArraysKt___ArraysKt.contains(appOpItem.mCode, OPS_LOCATION)) {
+            return true;
+        }
+        if (this.showSystem) {
+            Log.d("AppOpsPrivacyItemMonitor", "showLocationSystemApps  " + appOpItem);
+            return true;
+        }
+        String strOpToPermission = AppOpsManager.opToPermission(appOpItem.mCode);
+        int i = appOpItem.mUid;
+        UserHandle userHandleForUid = UserHandle.getUserHandleForUid(i);
+        PackageManager packageManager = this.packageManager;
+        String str = appOpItem.mPackageName;
+        int permissionFlags = packageManager.getPermissionFlags(strOpToPermission, str, userHandleForUid);
+        boolean z = PermissionChecker.checkPermissionForPreflight(((UserTrackerImpl) this.userTracker).getUserContext(), strOpToPermission, -1, i, str) != 0 ? (permissionFlags & 512) == 0 : (permissionFlags & 256) == 0;
+        if (z) {
+            Log.i("AppOpsPrivacyItemMonitor", "filterSystemApp " + z + " " + appOpItem);
+        }
+        return !z;
+    }
+
     public final void onCurrentProfilesChanged() {
         List userProfiles = ((UserTrackerImpl) this.userTracker).getUserProfiles();
         ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(userProfiles, 10));
@@ -242,6 +289,10 @@ public final class AppOpsPrivacyItemMonitor implements PrivacyItemMonitor {
             ((AppOpsControllerImpl) appOpsController).addCallback(iArr, appOpsPrivacyItemMonitor$appOpsCallback$1);
             ((UserTrackerImpl) userTracker).addCallback(this.userTrackerCallback, this.bgExecutor);
             onCurrentProfilesChanged();
+            if (ScRune.QUICK_SUPPORT_LOCATION_PRIVACY_CHIP) {
+                this.settingsHelper.registerCallback(this.showSystemAppSettingsListener, Settings.System.getUriFor(SettingsHelper.INDEX_SHOW_STATUS_BAR_LOCATION_ICON));
+                return;
+            }
             return;
         }
         AppOpsControllerImpl appOpsControllerImpl = (AppOpsControllerImpl) appOpsController;
@@ -257,6 +308,9 @@ public final class AppOpsPrivacyItemMonitor implements PrivacyItemMonitor {
             appOpsControllerImpl.setListening(false);
         }
         ((UserTrackerImpl) userTracker).removeCallback(this.userTrackerCallback);
+        if (ScRune.QUICK_SUPPORT_LOCATION_PRIVACY_CHIP) {
+            this.settingsHelper.unregisterCallback(this.showSystemAppSettingsListener);
+        }
     }
 
     public final PrivacyItem toPrivacyItemLocked(AppOpItem appOpItem) {

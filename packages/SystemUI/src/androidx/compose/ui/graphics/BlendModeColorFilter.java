@@ -25,7 +25,7 @@ public final class BlendModeColorFilter extends ColorFilter {
         BlendModeColorFilter blendModeColorFilter = (BlendModeColorFilter) obj;
         long j = blendModeColorFilter.color;
         Color.Companion companion = Color.Companion;
-        if (!ULong.m3447equalsimpl0(this.color, j)) {
+        if (!ULong.m3446equalsimpl0(this.color, j)) {
             return false;
         }
         int i = blendModeColorFilter.blendMode;

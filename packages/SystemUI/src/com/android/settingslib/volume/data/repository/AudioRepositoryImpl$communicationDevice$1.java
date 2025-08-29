@@ -47,7 +47,7 @@ final class AudioRepositoryImpl$communicationDevice$1 extends SuspendLambda impl
             AudioManager.OnCommunicationDeviceChangedListener onCommunicationDeviceChangedListener = new AudioManager.OnCommunicationDeviceChangedListener() { // from class: com.android.settingslib.volume.data.repository.AudioRepositoryImpl$communicationDevice$1$listener$1
                 @Override // android.media.AudioManager.OnCommunicationDeviceChangedListener
                 public final void onCommunicationDeviceChanged(AudioDeviceInfo audioDeviceInfo) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
             this.this$0.audioManager.addOnCommunicationDeviceChangedListener(ConcurrentUtils.DIRECT_EXECUTOR, onCommunicationDeviceChangedListener);

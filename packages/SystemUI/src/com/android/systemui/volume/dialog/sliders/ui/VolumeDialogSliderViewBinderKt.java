@@ -397,7 +397,7 @@ public abstract class VolumeDialogSliderViewBinderKt {
                                 ComposerKt.traceEventStart("com.android.systemui.volume.dialog.sliders.ui.VolumeDialogSlider.<anonymous> (VolumeDialogSliderViewBinder.kt:138)");
                             }
                             final VolumeDialogSliderStateModel volumeDialogSliderStateModel2 = volumeDialogSliderStateModel;
-                            VolumeDialogSliderTrackKt.m3219SliderTrackq58E_xs(sliderState, !volumeDialogSliderStateModel2.isDisabled, null, sliderColorsM291copyK518z4, 0.0f, 0.0f, 0.0f, 0.0f, true, ComposableLambdaKt.rememberComposableLambda(1218107908, new Function4() { // from class: com.android.systemui.volume.dialog.sliders.ui.VolumeDialogSliderViewBinderKt.VolumeDialogSlider.6.1
+                            VolumeDialogSliderTrackKt.m3218SliderTrackq58E_xs(sliderState, !volumeDialogSliderStateModel2.isDisabled, null, sliderColorsM291copyK518z4, 0.0f, 0.0f, 0.0f, 0.0f, true, ComposableLambdaKt.rememberComposableLambda(1218107908, new Function4() { // from class: com.android.systemui.volume.dialog.sliders.ui.VolumeDialogSliderViewBinderKt.VolumeDialogSlider.6.1
                                 /* JADX WARN: Removed duplicated region for block: B:18:0x003f  */
                                 @Override // kotlin.jvm.functions.Function4
                                 /*

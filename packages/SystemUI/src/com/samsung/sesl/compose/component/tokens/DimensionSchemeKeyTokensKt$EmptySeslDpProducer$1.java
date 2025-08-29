@@ -9,7 +9,7 @@ public final class DimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 implements S
 
     @Override // com.samsung.sesl.compose.component.tokens.SeslDpProducer
     /* renamed from: produce-u2uoSUM */
-    public final float mo3335produceu2uoSUM(SeslDpProducer.Params params) {
+    public final float mo3334produceu2uoSUM(SeslDpProducer.Params params) {
         Dp.Companion.getClass();
         return Dp.Unspecified;
     }

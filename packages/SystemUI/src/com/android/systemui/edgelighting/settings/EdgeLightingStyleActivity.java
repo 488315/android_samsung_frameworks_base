@@ -396,7 +396,7 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
                     }
                     EdgeLightingStyleActivity edgeLightingStyleActivity3 = EdgeLightingStyleActivity.this;
                     if (edgeLightingStyleActivity3.mLightingController != null) {
-                        EdgeLightingStyleActivity.m2579$$Nest$mupdatePreviewEdgeLighting(edgeLightingStyleActivity3);
+                        EdgeLightingStyleActivity.m2577$$Nest$mupdatePreviewEdgeLighting(edgeLightingStyleActivity3);
                     } else {
                         edgeLightingStyleActivity3.showPreviewEdgeLighting(new int[]{edgeLightingStyleActivity3.getEdgeLightingColor()});
                     }
@@ -498,7 +498,7 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
         @Override // android.widget.BaseAdapter
         public final void notifyDataSetChanged() {
             EdgeLightingStyleActivity edgeLightingStyleActivity = EdgeLightingStyleActivity.this;
-            EdgeLightingStyleActivity.m2578$$Nest$msetDynamicWidth(edgeLightingStyleActivity, edgeLightingStyleActivity.mColorGridView, 6);
+            EdgeLightingStyleActivity.m2576$$Nest$msetDynamicWidth(edgeLightingStyleActivity, edgeLightingStyleActivity.mColorGridView, 6);
             super.notifyDataSetChanged();
         }
     }
@@ -636,7 +636,7 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
             gridView.setNumColumns(edgeLightingStyleActivity.calculateColumnCount(gridView, this.mEdgeLightingStyleList.size()));
             EdgeLightingStyleActivity edgeLightingStyleActivity2 = EdgeLightingStyleActivity.this;
             GridView gridView2 = edgeLightingStyleActivity2.mEffectGridView;
-            EdgeLightingStyleActivity.m2578$$Nest$msetDynamicWidth(edgeLightingStyleActivity2, gridView2, edgeLightingStyleActivity2.calculateColumnCount(gridView2, this.mEdgeLightingStyleList.size()));
+            EdgeLightingStyleActivity.m2576$$Nest$msetDynamicWidth(edgeLightingStyleActivity2, gridView2, edgeLightingStyleActivity2.calculateColumnCount(gridView2, this.mEdgeLightingStyleList.size()));
             super.notifyDataSetChanged();
         }
     }
@@ -649,7 +649,7 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
     }
 
     /* renamed from: -$$Nest$msetDynamicWidth, reason: not valid java name */
-    public static void m2578$$Nest$msetDynamicWidth(EdgeLightingStyleActivity edgeLightingStyleActivity, GridView gridView, int i) {
+    public static void m2576$$Nest$msetDynamicWidth(EdgeLightingStyleActivity edgeLightingStyleActivity, GridView gridView, int i) {
         ListAdapter adapter;
         View view;
         edgeLightingStyleActivity.getClass();
@@ -666,7 +666,7 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
     }
 
     /* renamed from: -$$Nest$mupdatePreviewEdgeLighting, reason: not valid java name */
-    public static void m2579$$Nest$mupdatePreviewEdgeLighting(EdgeLightingStyleActivity edgeLightingStyleActivity) {
+    public static void m2577$$Nest$mupdatePreviewEdgeLighting(EdgeLightingStyleActivity edgeLightingStyleActivity) {
         if (edgeLightingStyleActivity.mLightingController != null) {
             int[] iArr = {edgeLightingStyleActivity.getEdgeLightingColor()};
             EdgeEffectInfo edgeEffectInfo = edgeLightingStyleActivity.mPreviewEffectInfo;
@@ -789,7 +789,7 @@ public class EdgeLightingStyleActivity extends AppCompatActivity implements View
                     if (edgeLightingStyleActivity.mLightingController == null) {
                         edgeLightingStyleActivity.showPreviewEdgeLighting(new int[]{edgeLightingStyleActivity.getEdgeLightingColor()});
                     } else {
-                        EdgeLightingStyleActivity.m2579$$Nest$mupdatePreviewEdgeLighting(edgeLightingStyleActivity);
+                        EdgeLightingStyleActivity.m2577$$Nest$mupdatePreviewEdgeLighting(edgeLightingStyleActivity);
                     }
                 }
             }

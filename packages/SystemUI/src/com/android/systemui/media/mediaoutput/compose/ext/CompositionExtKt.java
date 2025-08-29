@@ -15,11 +15,11 @@ public abstract class CompositionExtKt {
                 throw new IllegalStateException("No Color provided");
             } catch (Throwable th) {
                 int i2 = Result.$r8$clinit;
-                Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(new Result.Failure(th));
-                if (thM3442exceptionOrNullimpl == null) {
+                Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(new Result.Failure(th));
+                if (thM3441exceptionOrNullimpl == null) {
                     return null;
                 }
-                thM3442exceptionOrNullimpl.printStackTrace();
+                thM3441exceptionOrNullimpl.printStackTrace();
                 return null;
             }
         }
@@ -52,9 +52,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No SecPlatformHapticFeedback provided");
                         } catch (Throwable th) {
                             int i3 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(new Result.Failure(th));
-                            if (thM3442exceptionOrNullimpl != null) {
-                                thM3442exceptionOrNullimpl.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(new Result.Failure(th));
+                            if (thM3441exceptionOrNullimpl != null) {
+                                thM3441exceptionOrNullimpl.printStackTrace();
                             }
                             return null;
                         }
@@ -64,9 +64,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No DensityScale provided");
                         } catch (Throwable th2) {
                             int i5 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl2 = Result.m3442exceptionOrNullimpl(new Result.Failure(th2));
-                            if (thM3442exceptionOrNullimpl2 != null) {
-                                thM3442exceptionOrNullimpl2.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl2 = Result.m3441exceptionOrNullimpl(new Result.Failure(th2));
+                            if (thM3441exceptionOrNullimpl2 != null) {
+                                thM3441exceptionOrNullimpl2.printStackTrace();
                             }
                             return Float.valueOf(1.0f);
                         }
@@ -76,9 +76,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No HeaderHeight provided");
                         } catch (Throwable th3) {
                             int i7 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl3 = Result.m3442exceptionOrNullimpl(new Result.Failure(th3));
-                            if (thM3442exceptionOrNullimpl3 != null) {
-                                thM3442exceptionOrNullimpl3.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl3 = Result.m3441exceptionOrNullimpl(new Result.Failure(th3));
+                            if (thM3441exceptionOrNullimpl3 != null) {
+                                thM3441exceptionOrNullimpl3.printStackTrace();
                             }
                             return null;
                         }
@@ -114,9 +114,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No SecPlatformHapticFeedback provided");
                         } catch (Throwable th) {
                             int i3 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(new Result.Failure(th));
-                            if (thM3442exceptionOrNullimpl != null) {
-                                thM3442exceptionOrNullimpl.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(new Result.Failure(th));
+                            if (thM3441exceptionOrNullimpl != null) {
+                                thM3441exceptionOrNullimpl.printStackTrace();
                             }
                             return null;
                         }
@@ -126,9 +126,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No DensityScale provided");
                         } catch (Throwable th2) {
                             int i5 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl2 = Result.m3442exceptionOrNullimpl(new Result.Failure(th2));
-                            if (thM3442exceptionOrNullimpl2 != null) {
-                                thM3442exceptionOrNullimpl2.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl2 = Result.m3441exceptionOrNullimpl(new Result.Failure(th2));
+                            if (thM3441exceptionOrNullimpl2 != null) {
+                                thM3441exceptionOrNullimpl2.printStackTrace();
                             }
                             return Float.valueOf(1.0f);
                         }
@@ -138,9 +138,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No HeaderHeight provided");
                         } catch (Throwable th3) {
                             int i7 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl3 = Result.m3442exceptionOrNullimpl(new Result.Failure(th3));
-                            if (thM3442exceptionOrNullimpl3 != null) {
-                                thM3442exceptionOrNullimpl3.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl3 = Result.m3441exceptionOrNullimpl(new Result.Failure(th3));
+                            if (thM3441exceptionOrNullimpl3 != null) {
+                                thM3441exceptionOrNullimpl3.printStackTrace();
                             }
                             return null;
                         }
@@ -176,9 +176,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No SecPlatformHapticFeedback provided");
                         } catch (Throwable th) {
                             int i32 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(new Result.Failure(th));
-                            if (thM3442exceptionOrNullimpl != null) {
-                                thM3442exceptionOrNullimpl.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(new Result.Failure(th));
+                            if (thM3441exceptionOrNullimpl != null) {
+                                thM3441exceptionOrNullimpl.printStackTrace();
                             }
                             return null;
                         }
@@ -188,9 +188,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No DensityScale provided");
                         } catch (Throwable th2) {
                             int i5 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl2 = Result.m3442exceptionOrNullimpl(new Result.Failure(th2));
-                            if (thM3442exceptionOrNullimpl2 != null) {
-                                thM3442exceptionOrNullimpl2.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl2 = Result.m3441exceptionOrNullimpl(new Result.Failure(th2));
+                            if (thM3441exceptionOrNullimpl2 != null) {
+                                thM3441exceptionOrNullimpl2.printStackTrace();
                             }
                             return Float.valueOf(1.0f);
                         }
@@ -200,9 +200,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No HeaderHeight provided");
                         } catch (Throwable th3) {
                             int i7 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl3 = Result.m3442exceptionOrNullimpl(new Result.Failure(th3));
-                            if (thM3442exceptionOrNullimpl3 != null) {
-                                thM3442exceptionOrNullimpl3.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl3 = Result.m3441exceptionOrNullimpl(new Result.Failure(th3));
+                            if (thM3441exceptionOrNullimpl3 != null) {
+                                thM3441exceptionOrNullimpl3.printStackTrace();
                             }
                             return null;
                         }
@@ -238,9 +238,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No SecPlatformHapticFeedback provided");
                         } catch (Throwable th) {
                             int i32 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(new Result.Failure(th));
-                            if (thM3442exceptionOrNullimpl != null) {
-                                thM3442exceptionOrNullimpl.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(new Result.Failure(th));
+                            if (thM3441exceptionOrNullimpl != null) {
+                                thM3441exceptionOrNullimpl.printStackTrace();
                             }
                             return null;
                         }
@@ -250,9 +250,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No DensityScale provided");
                         } catch (Throwable th2) {
                             int i5 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl2 = Result.m3442exceptionOrNullimpl(new Result.Failure(th2));
-                            if (thM3442exceptionOrNullimpl2 != null) {
-                                thM3442exceptionOrNullimpl2.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl2 = Result.m3441exceptionOrNullimpl(new Result.Failure(th2));
+                            if (thM3441exceptionOrNullimpl2 != null) {
+                                thM3441exceptionOrNullimpl2.printStackTrace();
                             }
                             return Float.valueOf(1.0f);
                         }
@@ -262,9 +262,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No HeaderHeight provided");
                         } catch (Throwable th3) {
                             int i7 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl3 = Result.m3442exceptionOrNullimpl(new Result.Failure(th3));
-                            if (thM3442exceptionOrNullimpl3 != null) {
-                                thM3442exceptionOrNullimpl3.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl3 = Result.m3441exceptionOrNullimpl(new Result.Failure(th3));
+                            if (thM3441exceptionOrNullimpl3 != null) {
+                                thM3441exceptionOrNullimpl3.printStackTrace();
                             }
                             return null;
                         }
@@ -300,9 +300,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No SecPlatformHapticFeedback provided");
                         } catch (Throwable th) {
                             int i32 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(new Result.Failure(th));
-                            if (thM3442exceptionOrNullimpl != null) {
-                                thM3442exceptionOrNullimpl.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(new Result.Failure(th));
+                            if (thM3441exceptionOrNullimpl != null) {
+                                thM3441exceptionOrNullimpl.printStackTrace();
                             }
                             return null;
                         }
@@ -312,9 +312,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No DensityScale provided");
                         } catch (Throwable th2) {
                             int i52 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl2 = Result.m3442exceptionOrNullimpl(new Result.Failure(th2));
-                            if (thM3442exceptionOrNullimpl2 != null) {
-                                thM3442exceptionOrNullimpl2.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl2 = Result.m3441exceptionOrNullimpl(new Result.Failure(th2));
+                            if (thM3441exceptionOrNullimpl2 != null) {
+                                thM3441exceptionOrNullimpl2.printStackTrace();
                             }
                             return Float.valueOf(1.0f);
                         }
@@ -324,9 +324,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No HeaderHeight provided");
                         } catch (Throwable th3) {
                             int i7 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl3 = Result.m3442exceptionOrNullimpl(new Result.Failure(th3));
-                            if (thM3442exceptionOrNullimpl3 != null) {
-                                thM3442exceptionOrNullimpl3.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl3 = Result.m3441exceptionOrNullimpl(new Result.Failure(th3));
+                            if (thM3441exceptionOrNullimpl3 != null) {
+                                thM3441exceptionOrNullimpl3.printStackTrace();
                             }
                             return null;
                         }
@@ -362,9 +362,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No SecPlatformHapticFeedback provided");
                         } catch (Throwable th) {
                             int i32 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(new Result.Failure(th));
-                            if (thM3442exceptionOrNullimpl != null) {
-                                thM3442exceptionOrNullimpl.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(new Result.Failure(th));
+                            if (thM3441exceptionOrNullimpl != null) {
+                                thM3441exceptionOrNullimpl.printStackTrace();
                             }
                             return null;
                         }
@@ -374,9 +374,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No DensityScale provided");
                         } catch (Throwable th2) {
                             int i52 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl2 = Result.m3442exceptionOrNullimpl(new Result.Failure(th2));
-                            if (thM3442exceptionOrNullimpl2 != null) {
-                                thM3442exceptionOrNullimpl2.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl2 = Result.m3441exceptionOrNullimpl(new Result.Failure(th2));
+                            if (thM3441exceptionOrNullimpl2 != null) {
+                                thM3441exceptionOrNullimpl2.printStackTrace();
                             }
                             return Float.valueOf(1.0f);
                         }
@@ -386,9 +386,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No HeaderHeight provided");
                         } catch (Throwable th3) {
                             int i7 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl3 = Result.m3442exceptionOrNullimpl(new Result.Failure(th3));
-                            if (thM3442exceptionOrNullimpl3 != null) {
-                                thM3442exceptionOrNullimpl3.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl3 = Result.m3441exceptionOrNullimpl(new Result.Failure(th3));
+                            if (thM3441exceptionOrNullimpl3 != null) {
+                                thM3441exceptionOrNullimpl3.printStackTrace();
                             }
                             return null;
                         }
@@ -424,9 +424,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No SecPlatformHapticFeedback provided");
                         } catch (Throwable th) {
                             int i32 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(new Result.Failure(th));
-                            if (thM3442exceptionOrNullimpl != null) {
-                                thM3442exceptionOrNullimpl.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(new Result.Failure(th));
+                            if (thM3441exceptionOrNullimpl != null) {
+                                thM3441exceptionOrNullimpl.printStackTrace();
                             }
                             return null;
                         }
@@ -436,9 +436,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No DensityScale provided");
                         } catch (Throwable th2) {
                             int i52 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl2 = Result.m3442exceptionOrNullimpl(new Result.Failure(th2));
-                            if (thM3442exceptionOrNullimpl2 != null) {
-                                thM3442exceptionOrNullimpl2.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl2 = Result.m3441exceptionOrNullimpl(new Result.Failure(th2));
+                            if (thM3441exceptionOrNullimpl2 != null) {
+                                thM3441exceptionOrNullimpl2.printStackTrace();
                             }
                             return Float.valueOf(1.0f);
                         }
@@ -448,9 +448,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No HeaderHeight provided");
                         } catch (Throwable th3) {
                             int i72 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl3 = Result.m3442exceptionOrNullimpl(new Result.Failure(th3));
-                            if (thM3442exceptionOrNullimpl3 != null) {
-                                thM3442exceptionOrNullimpl3.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl3 = Result.m3441exceptionOrNullimpl(new Result.Failure(th3));
+                            if (thM3441exceptionOrNullimpl3 != null) {
+                                thM3441exceptionOrNullimpl3.printStackTrace();
                             }
                             return null;
                         }
@@ -486,9 +486,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No SecPlatformHapticFeedback provided");
                         } catch (Throwable th) {
                             int i32 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(new Result.Failure(th));
-                            if (thM3442exceptionOrNullimpl != null) {
-                                thM3442exceptionOrNullimpl.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(new Result.Failure(th));
+                            if (thM3441exceptionOrNullimpl != null) {
+                                thM3441exceptionOrNullimpl.printStackTrace();
                             }
                             return null;
                         }
@@ -498,9 +498,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No DensityScale provided");
                         } catch (Throwable th2) {
                             int i52 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl2 = Result.m3442exceptionOrNullimpl(new Result.Failure(th2));
-                            if (thM3442exceptionOrNullimpl2 != null) {
-                                thM3442exceptionOrNullimpl2.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl2 = Result.m3441exceptionOrNullimpl(new Result.Failure(th2));
+                            if (thM3441exceptionOrNullimpl2 != null) {
+                                thM3441exceptionOrNullimpl2.printStackTrace();
                             }
                             return Float.valueOf(1.0f);
                         }
@@ -510,9 +510,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No HeaderHeight provided");
                         } catch (Throwable th3) {
                             int i72 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl3 = Result.m3442exceptionOrNullimpl(new Result.Failure(th3));
-                            if (thM3442exceptionOrNullimpl3 != null) {
-                                thM3442exceptionOrNullimpl3.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl3 = Result.m3441exceptionOrNullimpl(new Result.Failure(th3));
+                            if (thM3441exceptionOrNullimpl3 != null) {
+                                thM3441exceptionOrNullimpl3.printStackTrace();
                             }
                             return null;
                         }
@@ -548,9 +548,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No SecPlatformHapticFeedback provided");
                         } catch (Throwable th) {
                             int i32 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(new Result.Failure(th));
-                            if (thM3442exceptionOrNullimpl != null) {
-                                thM3442exceptionOrNullimpl.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(new Result.Failure(th));
+                            if (thM3441exceptionOrNullimpl != null) {
+                                thM3441exceptionOrNullimpl.printStackTrace();
                             }
                             return null;
                         }
@@ -560,9 +560,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No DensityScale provided");
                         } catch (Throwable th2) {
                             int i52 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl2 = Result.m3442exceptionOrNullimpl(new Result.Failure(th2));
-                            if (thM3442exceptionOrNullimpl2 != null) {
-                                thM3442exceptionOrNullimpl2.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl2 = Result.m3441exceptionOrNullimpl(new Result.Failure(th2));
+                            if (thM3441exceptionOrNullimpl2 != null) {
+                                thM3441exceptionOrNullimpl2.printStackTrace();
                             }
                             return Float.valueOf(1.0f);
                         }
@@ -572,9 +572,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No HeaderHeight provided");
                         } catch (Throwable th3) {
                             int i72 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl3 = Result.m3442exceptionOrNullimpl(new Result.Failure(th3));
-                            if (thM3442exceptionOrNullimpl3 != null) {
-                                thM3442exceptionOrNullimpl3.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl3 = Result.m3441exceptionOrNullimpl(new Result.Failure(th3));
+                            if (thM3441exceptionOrNullimpl3 != null) {
+                                thM3441exceptionOrNullimpl3.printStackTrace();
                             }
                             return null;
                         }
@@ -610,9 +610,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No SecPlatformHapticFeedback provided");
                         } catch (Throwable th) {
                             int i32 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(new Result.Failure(th));
-                            if (thM3442exceptionOrNullimpl != null) {
-                                thM3442exceptionOrNullimpl.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(new Result.Failure(th));
+                            if (thM3441exceptionOrNullimpl != null) {
+                                thM3441exceptionOrNullimpl.printStackTrace();
                             }
                             return null;
                         }
@@ -622,9 +622,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No DensityScale provided");
                         } catch (Throwable th2) {
                             int i52 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl2 = Result.m3442exceptionOrNullimpl(new Result.Failure(th2));
-                            if (thM3442exceptionOrNullimpl2 != null) {
-                                thM3442exceptionOrNullimpl2.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl2 = Result.m3441exceptionOrNullimpl(new Result.Failure(th2));
+                            if (thM3441exceptionOrNullimpl2 != null) {
+                                thM3441exceptionOrNullimpl2.printStackTrace();
                             }
                             return Float.valueOf(1.0f);
                         }
@@ -634,9 +634,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No HeaderHeight provided");
                         } catch (Throwable th3) {
                             int i72 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl3 = Result.m3442exceptionOrNullimpl(new Result.Failure(th3));
-                            if (thM3442exceptionOrNullimpl3 != null) {
-                                thM3442exceptionOrNullimpl3.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl3 = Result.m3441exceptionOrNullimpl(new Result.Failure(th3));
+                            if (thM3441exceptionOrNullimpl3 != null) {
+                                thM3441exceptionOrNullimpl3.printStackTrace();
                             }
                             return null;
                         }
@@ -672,9 +672,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No SecPlatformHapticFeedback provided");
                         } catch (Throwable th) {
                             int i32 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(new Result.Failure(th));
-                            if (thM3442exceptionOrNullimpl != null) {
-                                thM3442exceptionOrNullimpl.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(new Result.Failure(th));
+                            if (thM3441exceptionOrNullimpl != null) {
+                                thM3441exceptionOrNullimpl.printStackTrace();
                             }
                             return null;
                         }
@@ -684,9 +684,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No DensityScale provided");
                         } catch (Throwable th2) {
                             int i52 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl2 = Result.m3442exceptionOrNullimpl(new Result.Failure(th2));
-                            if (thM3442exceptionOrNullimpl2 != null) {
-                                thM3442exceptionOrNullimpl2.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl2 = Result.m3441exceptionOrNullimpl(new Result.Failure(th2));
+                            if (thM3441exceptionOrNullimpl2 != null) {
+                                thM3441exceptionOrNullimpl2.printStackTrace();
                             }
                             return Float.valueOf(1.0f);
                         }
@@ -696,9 +696,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No HeaderHeight provided");
                         } catch (Throwable th3) {
                             int i72 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl3 = Result.m3442exceptionOrNullimpl(new Result.Failure(th3));
-                            if (thM3442exceptionOrNullimpl3 != null) {
-                                thM3442exceptionOrNullimpl3.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl3 = Result.m3441exceptionOrNullimpl(new Result.Failure(th3));
+                            if (thM3441exceptionOrNullimpl3 != null) {
+                                thM3441exceptionOrNullimpl3.printStackTrace();
                             }
                             return null;
                         }
@@ -734,9 +734,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No SecPlatformHapticFeedback provided");
                         } catch (Throwable th) {
                             int i32 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(new Result.Failure(th));
-                            if (thM3442exceptionOrNullimpl != null) {
-                                thM3442exceptionOrNullimpl.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(new Result.Failure(th));
+                            if (thM3441exceptionOrNullimpl != null) {
+                                thM3441exceptionOrNullimpl.printStackTrace();
                             }
                             return null;
                         }
@@ -746,9 +746,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No DensityScale provided");
                         } catch (Throwable th2) {
                             int i52 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl2 = Result.m3442exceptionOrNullimpl(new Result.Failure(th2));
-                            if (thM3442exceptionOrNullimpl2 != null) {
-                                thM3442exceptionOrNullimpl2.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl2 = Result.m3441exceptionOrNullimpl(new Result.Failure(th2));
+                            if (thM3441exceptionOrNullimpl2 != null) {
+                                thM3441exceptionOrNullimpl2.printStackTrace();
                             }
                             return Float.valueOf(1.0f);
                         }
@@ -758,9 +758,9 @@ public abstract class CompositionExtKt {
                             throw new IllegalStateException("No HeaderHeight provided");
                         } catch (Throwable th3) {
                             int i72 = Result.$r8$clinit;
-                            Throwable thM3442exceptionOrNullimpl3 = Result.m3442exceptionOrNullimpl(new Result.Failure(th3));
-                            if (thM3442exceptionOrNullimpl3 != null) {
-                                thM3442exceptionOrNullimpl3.printStackTrace();
+                            Throwable thM3441exceptionOrNullimpl3 = Result.m3441exceptionOrNullimpl(new Result.Failure(th3));
+                            if (thM3441exceptionOrNullimpl3 != null) {
+                                thM3441exceptionOrNullimpl3.printStackTrace();
                             }
                             return null;
                         }

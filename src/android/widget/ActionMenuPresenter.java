@@ -1157,8 +1157,9 @@ public class ActionMenuPresenter extends BaseMenuPresenter implements ActionProv
             return ActionMenuPresenter.this.mNavigationBarHeight;
         }
 
+        /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.widget.TextView, android.view.View
-        protected boolean setFrame(int i, int i2, int i3, int i4) {
+        public boolean setFrame(int i, int i2, int i3, int i4) {
             boolean frame = super.setFrame(i, i2, i3, i4);
             Drawable drawable = getDrawable();
             Drawable background = getBackground();

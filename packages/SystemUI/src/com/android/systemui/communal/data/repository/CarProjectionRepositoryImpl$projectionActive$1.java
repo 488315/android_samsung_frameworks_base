@@ -49,7 +49,7 @@ final class CarProjectionRepositoryImpl$projectionActive$1 extends SuspendLambda
             final ProducerScope producerScope = (ProducerScope) this.L$0;
             final ?? r1 = new UiModeManager.OnProjectionStateChangedListener() { // from class: com.android.systemui.communal.data.repository.CarProjectionRepositoryImpl$projectionActive$1$listener$1
                 public final void onProjectionStateChanged(int i2, Set set) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
             CarProjectionRepositoryImpl carProjectionRepositoryImpl = this.this$0;

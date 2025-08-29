@@ -204,7 +204,7 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
             BiometricSourceType biometricSourceType2 = BiometricSourceType.FACE;
             KeyguardSecIndicationController keyguardSecIndicationController = KeyguardSecIndicationController.this;
             if (biometricSourceType == biometricSourceType2 && ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isEnabledFaceStayOnLock() && keyguardSecIndicationController.mVisible && !keyguardSecIndicationController.mDozing && keyguardSecIndicationController.mIsScreenOn) {
-                KeyguardSecIndicationController.m2961$$Nest$mupdateDefaultIndications(keyguardSecIndicationController);
+                KeyguardSecIndicationController.m2959$$Nest$mupdateDefaultIndications(keyguardSecIndicationController);
                 keyguardSecIndicationController.showBounceAnimation(keyguardSecIndicationController.mUpperTextView);
             } else {
                 KeyguardSecIndicationPolicy keyguardSecIndicationPolicy = keyguardSecIndicationController.mIndicationPolicy;
@@ -313,7 +313,7 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
             KeyguardSecIndicationController keyguardSecIndicationController = KeyguardSecIndicationController.this;
             if (keyguardSecIndicationController.mVisible && !keyguardSecIndicationController.mDozing && keyguardSecIndicationController.mIsScreenOn) {
                 if (z) {
-                    KeyguardSecIndicationController.m2961$$Nest$mupdateDefaultIndications(keyguardSecIndicationController);
+                    KeyguardSecIndicationController.m2959$$Nest$mupdateDefaultIndications(keyguardSecIndicationController);
                     keyguardSecIndicationController.addIndicationTimeout(IndicationEventType.BIOMETRICS_STOP, "", keyguardSecIndicationController.mInitialTextColorState, false);
                     return;
                 }
@@ -536,7 +536,7 @@ public class KeyguardSecIndicationController extends KeyguardIndicationControlle
     }
 
     /* renamed from: -$$Nest$mupdateDefaultIndications, reason: not valid java name */
-    public static void m2961$$Nest$mupdateDefaultIndications(KeyguardSecIndicationController keyguardSecIndicationController) throws Resources.NotFoundException {
+    public static void m2959$$Nest$mupdateDefaultIndications(KeyguardSecIndicationController keyguardSecIndicationController) throws Resources.NotFoundException {
         keyguardSecIndicationController.addInitialIndication();
         keyguardSecIndicationController.addIndication(keyguardSecIndicationController.isAuthenticatedWithBiometric() ? IndicationEventType.BIOMETRICS_HELP : IndicationEventType.UNLOCK_GUIDE, keyguardSecIndicationController.getUnlockGuideText());
         if (keyguardSecIndicationController.mIsFpGuidePos) {

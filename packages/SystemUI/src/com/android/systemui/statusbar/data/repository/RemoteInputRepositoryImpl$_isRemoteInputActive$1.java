@@ -50,10 +50,10 @@ final class RemoteInputRepositoryImpl$_isRemoteInputActive$1 extends SuspendLamb
             final ?? r1 = new RemoteInputController.Callback() { // from class: com.android.systemui.statusbar.data.repository.RemoteInputRepositoryImpl$_isRemoteInputActive$1$callback$1
                 @Override // com.android.systemui.statusbar.RemoteInputController.Callback
                 public final void onRemoteInputActive(boolean z) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(z));
                 }
             };
-            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(this.this$0.notificationRemoteInputManager.isRemoteInputActive()));
+            ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(this.this$0.notificationRemoteInputManager.isRemoteInputActive()));
             NotificationRemoteInputManager notificationRemoteInputManager = this.this$0.notificationRemoteInputManager;
             RemoteInputController remoteInputController = notificationRemoteInputManager.mRemoteInputController;
             if (remoteInputController != null) {

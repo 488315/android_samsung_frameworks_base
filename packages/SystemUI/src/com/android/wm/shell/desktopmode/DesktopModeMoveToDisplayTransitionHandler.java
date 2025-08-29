@@ -93,7 +93,7 @@ public final class DesktopModeMoveToDisplayTransitionHandler implements Transiti
             i++;
             final TransitionInfo.Change change3 = (TransitionInfo.Change) obj3;
             ValueAnimator valueAnimatorOfFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
-            valueAnimatorOfFloat.setDuration(Duration.m3457getInWholeMillisecondsimpl(ANIM_DURATION));
+            valueAnimatorOfFloat.setDuration(Duration.m3456getInWholeMillisecondsimpl(ANIM_DURATION));
             valueAnimatorOfFloat.setInterpolator(Interpolators.LINEAR);
             valueAnimatorOfFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.wm.shell.desktopmode.DesktopModeMoveToDisplayTransitionHandler$startAnimation$1$1$1
                 @Override // android.animation.ValueAnimator.AnimatorUpdateListener

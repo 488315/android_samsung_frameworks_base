@@ -30,7 +30,7 @@ public final class SeslTopAppBarColors {
         SeslTopAppBarColors seslTopAppBarColors = (SeslTopAppBarColors) obj;
         long j = seslTopAppBarColors.containerColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.containerColor, j) && ULong.m3447equalsimpl0(this.scrolledContainerColor, seslTopAppBarColors.scrolledContainerColor) && ULong.m3447equalsimpl0(this.navigationIconContentColor, seslTopAppBarColors.navigationIconContentColor) && ULong.m3447equalsimpl0(this.titleContentColor, seslTopAppBarColors.titleContentColor) && ULong.m3447equalsimpl0(this.actionIconContentColor, seslTopAppBarColors.actionIconContentColor) && ULong.m3447equalsimpl0(this.subtitleContentColor, seslTopAppBarColors.subtitleContentColor);
+        return ULong.m3446equalsimpl0(this.containerColor, j) && ULong.m3446equalsimpl0(this.scrolledContainerColor, seslTopAppBarColors.scrolledContainerColor) && ULong.m3446equalsimpl0(this.navigationIconContentColor, seslTopAppBarColors.navigationIconContentColor) && ULong.m3446equalsimpl0(this.titleContentColor, seslTopAppBarColors.titleContentColor) && ULong.m3446equalsimpl0(this.actionIconContentColor, seslTopAppBarColors.actionIconContentColor) && ULong.m3446equalsimpl0(this.subtitleContentColor, seslTopAppBarColors.subtitleContentColor);
     }
 
     public final int hashCode() {

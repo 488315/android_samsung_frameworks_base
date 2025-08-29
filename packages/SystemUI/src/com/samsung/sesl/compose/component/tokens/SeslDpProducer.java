@@ -30,5 +30,5 @@ public interface SeslDpProducer {
     }
 
     /* renamed from: produce-u2uoSUM */
-    float mo3335produceu2uoSUM(Params params);
+    float mo3334produceu2uoSUM(Params params);
 }

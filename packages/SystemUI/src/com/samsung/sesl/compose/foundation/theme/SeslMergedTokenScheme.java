@@ -56,23 +56,23 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j = Color.Unspecified;
                         long j2 = appBarTokens.topAppBarBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j2, j)) {
+                        if (ULong.m3446equalsimpl0(j2, j)) {
                             j2 = appBarTokens2.topAppBarBackgroundColor;
                         }
                         long j3 = appBarTokens.topAppBarTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j3, j)) {
+                        if (ULong.m3446equalsimpl0(j3, j)) {
                             j3 = appBarTokens2.topAppBarTitleTextColor;
                         }
                         long j4 = appBarTokens.topAppBarSubTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j4, j)) {
+                        if (ULong.m3446equalsimpl0(j4, j)) {
                             j4 = appBarTokens2.topAppBarSubTitleTextColor;
                         }
                         long j5 = appBarTokens.topAppBarMenuTextColor;
-                        if (ULong.m3447equalsimpl0(j5, j)) {
+                        if (ULong.m3446equalsimpl0(j5, j)) {
                             j5 = appBarTokens2.topAppBarMenuTextColor;
                         }
                         long j6 = appBarTokens.topExtendedAppBarSubTitleColor;
-                        if (ULong.m3447equalsimpl0(j6, j)) {
+                        if (ULong.m3446equalsimpl0(j6, j)) {
                             j6 = appBarTokens2.topExtendedAppBarSubTitleColor;
                         }
                         DimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 dimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 = DimensionSchemeKeyTokensKt.EmptySeslDpProducer;
@@ -90,11 +90,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j7 = Color.Unspecified;
                         long j8 = dividerTokens.horizontalDividerColor;
-                        if (ULong.m3447equalsimpl0(j8, j7)) {
+                        if (ULong.m3446equalsimpl0(j8, j7)) {
                             j8 = dividerTokens2.horizontalDividerColor;
                         }
                         long j9 = dividerTokens.verticalDividerColor;
-                        if (ULong.m3447equalsimpl0(j9, j7)) {
+                        if (ULong.m3446equalsimpl0(j9, j7)) {
                             j9 = dividerTokens2.verticalDividerColor;
                         }
                         return new SeslDividerTokens(j8, j9, null);
@@ -105,11 +105,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j10 = Color.Unspecified;
                         long j11 = listTokens.scrollbarThumbActivateColor;
-                        if (ULong.m3447equalsimpl0(j11, j10)) {
+                        if (ULong.m3446equalsimpl0(j11, j10)) {
                             j11 = listTokens2.scrollbarThumbActivateColor;
                         }
                         long j12 = listTokens.scrollbarThumbInactiveColor;
-                        if (ULong.m3447equalsimpl0(j12, j10)) {
+                        if (ULong.m3446equalsimpl0(j12, j10)) {
                             j12 = listTokens2.scrollbarThumbInactiveColor;
                         }
                         return new SeslListTokens(j11, j12, null);
@@ -120,11 +120,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j13 = Color.Unspecified;
                         long j14 = popupTokens.backgroundColor;
-                        if (ULong.m3447equalsimpl0(j14, j13)) {
+                        if (ULong.m3446equalsimpl0(j14, j13)) {
                             j14 = popupTokens2.backgroundColor;
                         }
                         long j15 = popupTokens.borderColor;
-                        if (ULong.m3447equalsimpl0(j15, j13)) {
+                        if (ULong.m3446equalsimpl0(j15, j13)) {
                             j15 = popupTokens2.borderColor;
                         }
                         Drawable drawable2 = popupTokens.menuBackground;
@@ -144,47 +144,47 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j16 = Color.Unspecified;
                         long j17 = sliderTokens.thumbFillColor;
-                        if (ULong.m3447equalsimpl0(j17, j16)) {
+                        if (ULong.m3446equalsimpl0(j17, j16)) {
                             j17 = sliderTokens2.thumbFillColor;
                         }
                         long j18 = sliderTokens.activateThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j18, j16)) {
+                        if (ULong.m3446equalsimpl0(j18, j16)) {
                             j18 = sliderTokens2.activateThumbStrokeColor;
                         }
                         long j19 = sliderTokens.inactiveThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j19, j16)) {
+                        if (ULong.m3446equalsimpl0(j19, j16)) {
                             j19 = sliderTokens2.inactiveThumbStrokeColor;
                         }
                         long j20 = sliderTokens.activateTrackColor;
-                        if (ULong.m3447equalsimpl0(j20, j16)) {
+                        if (ULong.m3446equalsimpl0(j20, j16)) {
                             j20 = sliderTokens2.activateTrackColor;
                         }
                         long j21 = sliderTokens.inactivateTrackColor;
-                        if (ULong.m3447equalsimpl0(j21, j16)) {
+                        if (ULong.m3446equalsimpl0(j21, j16)) {
                             j21 = sliderTokens2.inactivateTrackColor;
                         }
                         long j22 = j17;
                         long j23 = sliderTokens.overlapActivateColor;
-                        if (ULong.m3447equalsimpl0(j23, j16)) {
+                        if (ULong.m3446equalsimpl0(j23, j16)) {
                             j23 = sliderTokens2.overlapActivateColor;
                         }
                         long j24 = j23;
                         long j25 = sliderTokens.overlapInactiveColor;
-                        if (ULong.m3447equalsimpl0(j25, j16)) {
+                        if (ULong.m3446equalsimpl0(j25, j16)) {
                             j25 = sliderTokens2.overlapInactiveColor;
                         }
                         long j26 = j25;
                         long j27 = sliderTokens.levelTrackColor;
-                        if (ULong.m3447equalsimpl0(j27, j16)) {
+                        if (ULong.m3446equalsimpl0(j27, j16)) {
                             j27 = sliderTokens2.levelTrackColor;
                         }
                         long j28 = j27;
                         long j29 = sliderTokens.activateTickColor;
-                        if (ULong.m3447equalsimpl0(j29, j16)) {
+                        if (ULong.m3446equalsimpl0(j29, j16)) {
                             j29 = sliderTokens2.activateTickColor;
                         }
                         long j30 = sliderTokens.inactiveTickColor;
-                        if (ULong.m3447equalsimpl0(j30, j16)) {
+                        if (ULong.m3446equalsimpl0(j30, j16)) {
                             j30 = sliderTokens2.inactiveTickColor;
                         }
                         return new SeslSliderTokens(j22, j18, j19, j20, j21, j24, j26, j28, j29, j30, null);
@@ -195,11 +195,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j31 = Color.Unspecified;
                         long j32 = spinnerTokens.itemTextColorNormal;
-                        if (ULong.m3447equalsimpl0(j32, j31)) {
+                        if (ULong.m3446equalsimpl0(j32, j31)) {
                             j32 = spinnerTokens2.itemTextColorNormal;
                         }
                         long j33 = spinnerTokens.iconColorDefault;
-                        if (ULong.m3447equalsimpl0(j33, j31)) {
+                        if (ULong.m3446equalsimpl0(j33, j31)) {
                             j33 = spinnerTokens2.iconColorDefault;
                         }
                         return new SeslSpinnerTokens(j32, j33, null);
@@ -210,19 +210,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j34 = Color.Unspecified;
                         long j35 = switchTokens.trackOnColor;
-                        if (ULong.m3447equalsimpl0(j35, j34)) {
+                        if (ULong.m3446equalsimpl0(j35, j34)) {
                             j35 = switchTokens2.trackOnColor;
                         }
                         long j36 = switchTokens.trackOffColor;
-                        if (ULong.m3447equalsimpl0(j36, j34)) {
+                        if (ULong.m3446equalsimpl0(j36, j34)) {
                             j36 = switchTokens2.trackOffColor;
                         }
                         long j37 = switchTokens.thumbOnColor;
-                        if (ULong.m3447equalsimpl0(j37, j34)) {
+                        if (ULong.m3446equalsimpl0(j37, j34)) {
                             j37 = switchTokens2.thumbOnColor;
                         }
                         long j38 = switchTokens.thumbOffColor;
-                        if (ULong.m3447equalsimpl0(j38, j34)) {
+                        if (ULong.m3446equalsimpl0(j38, j34)) {
                             j38 = switchTokens2.thumbOffColor;
                         }
                         return new SeslSwitchTokens(j35, j36, j37, j38, null);
@@ -233,42 +233,42 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j39 = Color.Unspecified;
                         long j40 = tabTokens.textColor;
-                        if (ULong.m3447equalsimpl0(j40, j39)) {
+                        if (ULong.m3446equalsimpl0(j40, j39)) {
                             j40 = tabTokens2.textColor;
                         }
                         long j41 = tabTokens.selectedTextColor;
-                        if (ULong.m3447equalsimpl0(j41, j39)) {
+                        if (ULong.m3446equalsimpl0(j41, j39)) {
                             j41 = tabTokens2.selectedTextColor;
                         }
                         long j42 = tabTokens.subTabTextColor;
-                        if (ULong.m3447equalsimpl0(j42, j39)) {
+                        if (ULong.m3446equalsimpl0(j42, j39)) {
                             j42 = tabTokens2.subTabTextColor;
                         }
                         long j43 = tabTokens.subTabSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j43, j39)) {
+                        if (ULong.m3446equalsimpl0(j43, j39)) {
                             j43 = tabTokens2.subTabSelectedTextColor;
                         }
                         long j44 = tabTokens.subTabTwoLineTextColor;
-                        if (ULong.m3447equalsimpl0(j44, j39)) {
+                        if (ULong.m3446equalsimpl0(j44, j39)) {
                             j44 = tabTokens2.subTabTwoLineTextColor;
                         }
                         long j45 = j40;
                         long j46 = tabTokens.subTabTwoLineSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j46, j39)) {
+                        if (ULong.m3446equalsimpl0(j46, j39)) {
                             j46 = tabTokens2.subTabTwoLineSelectedTextColor;
                         }
                         long j47 = j46;
                         long j48 = tabTokens.subTabTwoLineSubTextColor;
-                        if (ULong.m3447equalsimpl0(j48, j39)) {
+                        if (ULong.m3446equalsimpl0(j48, j39)) {
                             j48 = tabTokens2.subTabTwoLineSubTextColor;
                         }
                         long j49 = j48;
                         long j50 = tabTokens.subTabTwoLineSubSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j50, j39)) {
+                        if (ULong.m3446equalsimpl0(j50, j39)) {
                             j50 = tabTokens2.subTabTwoLineSubSelectedTextColor;
                         }
                         long j51 = tabTokens.subTabIndicatorBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j51, j39)) {
+                        if (ULong.m3446equalsimpl0(j51, j39)) {
                             j51 = tabTokens2.subTabIndicatorBackgroundColor;
                         }
                         return new SeslTabTokens(j45, j41, j42, j43, j44, j47, j49, j50, j51, null);
@@ -279,19 +279,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j52 = Color.Unspecified;
                         long j53 = alertDialogTokens.titleTextColor;
-                        if (ULong.m3447equalsimpl0(j53, j52)) {
+                        if (ULong.m3446equalsimpl0(j53, j52)) {
                             j53 = alertDialogTokens2.titleTextColor;
                         }
                         long j54 = alertDialogTokens.messageTextColor;
-                        if (ULong.m3447equalsimpl0(j54, j52)) {
+                        if (ULong.m3446equalsimpl0(j54, j52)) {
                             j54 = alertDialogTokens2.messageTextColor;
                         }
                         long j55 = alertDialogTokens.buttonTextColor;
-                        if (ULong.m3447equalsimpl0(j55, j52)) {
+                        if (ULong.m3446equalsimpl0(j55, j52)) {
                             j55 = alertDialogTokens2.buttonTextColor;
                         }
                         long j56 = alertDialogTokens.listTextColor;
-                        if (ULong.m3447equalsimpl0(j56, j52)) {
+                        if (ULong.m3446equalsimpl0(j56, j52)) {
                             j56 = alertDialogTokens2.listTextColor;
                         }
                         return new SeslAlertDialogTokens(j53, j54, j55, j56, null);
@@ -302,11 +302,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j57 = Color.Unspecified;
                         long j58 = buttonTokens.containerColor;
-                        if (ULong.m3447equalsimpl0(j58, j57)) {
+                        if (ULong.m3446equalsimpl0(j58, j57)) {
                             j58 = buttonTokens2.containerColor;
                         }
                         long j59 = buttonTokens.contentColor;
-                        if (ULong.m3447equalsimpl0(j59, j57)) {
+                        if (ULong.m3446equalsimpl0(j59, j57)) {
                             j59 = buttonTokens2.contentColor;
                         }
                         return new SeslButtonTokens(j58, j59, null);
@@ -324,32 +324,32 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j60 = Color.Unspecified;
                         long j61 = commonTokens.primaryColor;
-                        if (ULong.m3447equalsimpl0(j61, j60)) {
+                        if (ULong.m3446equalsimpl0(j61, j60)) {
                             j61 = commonTokens2.primaryColor;
                         }
                         long j62 = commonTokens.windowBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j62, j60)) {
+                        if (ULong.m3446equalsimpl0(j62, j60)) {
                             j62 = commonTokens2.windowBackgroundColor;
                         }
                         long j63 = commonTokens.rippleColor;
-                        if (ULong.m3447equalsimpl0(j63, j60)) {
+                        if (ULong.m3446equalsimpl0(j63, j60)) {
                             j63 = commonTokens2.rippleColor;
                         }
                         long j64 = commonTokens.roundedCornerColor;
-                        if (ULong.m3447equalsimpl0(j64, j60)) {
+                        if (ULong.m3446equalsimpl0(j64, j60)) {
                             j64 = commonTokens2.roundedCornerColor;
                         }
                         long j65 = commonTokens.mainTextColor;
-                        if (ULong.m3447equalsimpl0(j65, j60)) {
+                        if (ULong.m3446equalsimpl0(j65, j60)) {
                             j65 = commonTokens2.mainTextColor;
                         }
                         long j66 = j61;
                         long j67 = commonTokens.subTextColor;
-                        if (ULong.m3447equalsimpl0(j67, j60)) {
+                        if (ULong.m3446equalsimpl0(j67, j60)) {
                             j67 = commonTokens2.subTextColor;
                         }
                         long j68 = commonTokens.pointTextColor;
-                        if (ULong.m3447equalsimpl0(j68, j60)) {
+                        if (ULong.m3446equalsimpl0(j68, j60)) {
                             j68 = commonTokens2.pointTextColor;
                         }
                         return new SeslCommonTokens(j66, j62, j63, j64, j65, j67, j68, null);
@@ -374,23 +374,23 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j = Color.Unspecified;
                         long j2 = appBarTokens.topAppBarBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j2, j)) {
+                        if (ULong.m3446equalsimpl0(j2, j)) {
                             j2 = appBarTokens2.topAppBarBackgroundColor;
                         }
                         long j3 = appBarTokens.topAppBarTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j3, j)) {
+                        if (ULong.m3446equalsimpl0(j3, j)) {
                             j3 = appBarTokens2.topAppBarTitleTextColor;
                         }
                         long j4 = appBarTokens.topAppBarSubTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j4, j)) {
+                        if (ULong.m3446equalsimpl0(j4, j)) {
                             j4 = appBarTokens2.topAppBarSubTitleTextColor;
                         }
                         long j5 = appBarTokens.topAppBarMenuTextColor;
-                        if (ULong.m3447equalsimpl0(j5, j)) {
+                        if (ULong.m3446equalsimpl0(j5, j)) {
                             j5 = appBarTokens2.topAppBarMenuTextColor;
                         }
                         long j6 = appBarTokens.topExtendedAppBarSubTitleColor;
-                        if (ULong.m3447equalsimpl0(j6, j)) {
+                        if (ULong.m3446equalsimpl0(j6, j)) {
                             j6 = appBarTokens2.topExtendedAppBarSubTitleColor;
                         }
                         DimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 dimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 = DimensionSchemeKeyTokensKt.EmptySeslDpProducer;
@@ -408,11 +408,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j7 = Color.Unspecified;
                         long j8 = dividerTokens.horizontalDividerColor;
-                        if (ULong.m3447equalsimpl0(j8, j7)) {
+                        if (ULong.m3446equalsimpl0(j8, j7)) {
                             j8 = dividerTokens2.horizontalDividerColor;
                         }
                         long j9 = dividerTokens.verticalDividerColor;
-                        if (ULong.m3447equalsimpl0(j9, j7)) {
+                        if (ULong.m3446equalsimpl0(j9, j7)) {
                             j9 = dividerTokens2.verticalDividerColor;
                         }
                         return new SeslDividerTokens(j8, j9, null);
@@ -423,11 +423,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j10 = Color.Unspecified;
                         long j11 = listTokens.scrollbarThumbActivateColor;
-                        if (ULong.m3447equalsimpl0(j11, j10)) {
+                        if (ULong.m3446equalsimpl0(j11, j10)) {
                             j11 = listTokens2.scrollbarThumbActivateColor;
                         }
                         long j12 = listTokens.scrollbarThumbInactiveColor;
-                        if (ULong.m3447equalsimpl0(j12, j10)) {
+                        if (ULong.m3446equalsimpl0(j12, j10)) {
                             j12 = listTokens2.scrollbarThumbInactiveColor;
                         }
                         return new SeslListTokens(j11, j12, null);
@@ -438,11 +438,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j13 = Color.Unspecified;
                         long j14 = popupTokens.backgroundColor;
-                        if (ULong.m3447equalsimpl0(j14, j13)) {
+                        if (ULong.m3446equalsimpl0(j14, j13)) {
                             j14 = popupTokens2.backgroundColor;
                         }
                         long j15 = popupTokens.borderColor;
-                        if (ULong.m3447equalsimpl0(j15, j13)) {
+                        if (ULong.m3446equalsimpl0(j15, j13)) {
                             j15 = popupTokens2.borderColor;
                         }
                         Drawable drawable2 = popupTokens.menuBackground;
@@ -462,47 +462,47 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j16 = Color.Unspecified;
                         long j17 = sliderTokens.thumbFillColor;
-                        if (ULong.m3447equalsimpl0(j17, j16)) {
+                        if (ULong.m3446equalsimpl0(j17, j16)) {
                             j17 = sliderTokens2.thumbFillColor;
                         }
                         long j18 = sliderTokens.activateThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j18, j16)) {
+                        if (ULong.m3446equalsimpl0(j18, j16)) {
                             j18 = sliderTokens2.activateThumbStrokeColor;
                         }
                         long j19 = sliderTokens.inactiveThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j19, j16)) {
+                        if (ULong.m3446equalsimpl0(j19, j16)) {
                             j19 = sliderTokens2.inactiveThumbStrokeColor;
                         }
                         long j20 = sliderTokens.activateTrackColor;
-                        if (ULong.m3447equalsimpl0(j20, j16)) {
+                        if (ULong.m3446equalsimpl0(j20, j16)) {
                             j20 = sliderTokens2.activateTrackColor;
                         }
                         long j21 = sliderTokens.inactivateTrackColor;
-                        if (ULong.m3447equalsimpl0(j21, j16)) {
+                        if (ULong.m3446equalsimpl0(j21, j16)) {
                             j21 = sliderTokens2.inactivateTrackColor;
                         }
                         long j22 = j17;
                         long j23 = sliderTokens.overlapActivateColor;
-                        if (ULong.m3447equalsimpl0(j23, j16)) {
+                        if (ULong.m3446equalsimpl0(j23, j16)) {
                             j23 = sliderTokens2.overlapActivateColor;
                         }
                         long j24 = j23;
                         long j25 = sliderTokens.overlapInactiveColor;
-                        if (ULong.m3447equalsimpl0(j25, j16)) {
+                        if (ULong.m3446equalsimpl0(j25, j16)) {
                             j25 = sliderTokens2.overlapInactiveColor;
                         }
                         long j26 = j25;
                         long j27 = sliderTokens.levelTrackColor;
-                        if (ULong.m3447equalsimpl0(j27, j16)) {
+                        if (ULong.m3446equalsimpl0(j27, j16)) {
                             j27 = sliderTokens2.levelTrackColor;
                         }
                         long j28 = j27;
                         long j29 = sliderTokens.activateTickColor;
-                        if (ULong.m3447equalsimpl0(j29, j16)) {
+                        if (ULong.m3446equalsimpl0(j29, j16)) {
                             j29 = sliderTokens2.activateTickColor;
                         }
                         long j30 = sliderTokens.inactiveTickColor;
-                        if (ULong.m3447equalsimpl0(j30, j16)) {
+                        if (ULong.m3446equalsimpl0(j30, j16)) {
                             j30 = sliderTokens2.inactiveTickColor;
                         }
                         return new SeslSliderTokens(j22, j18, j19, j20, j21, j24, j26, j28, j29, j30, null);
@@ -513,11 +513,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j31 = Color.Unspecified;
                         long j32 = spinnerTokens.itemTextColorNormal;
-                        if (ULong.m3447equalsimpl0(j32, j31)) {
+                        if (ULong.m3446equalsimpl0(j32, j31)) {
                             j32 = spinnerTokens2.itemTextColorNormal;
                         }
                         long j33 = spinnerTokens.iconColorDefault;
-                        if (ULong.m3447equalsimpl0(j33, j31)) {
+                        if (ULong.m3446equalsimpl0(j33, j31)) {
                             j33 = spinnerTokens2.iconColorDefault;
                         }
                         return new SeslSpinnerTokens(j32, j33, null);
@@ -528,19 +528,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j34 = Color.Unspecified;
                         long j35 = switchTokens.trackOnColor;
-                        if (ULong.m3447equalsimpl0(j35, j34)) {
+                        if (ULong.m3446equalsimpl0(j35, j34)) {
                             j35 = switchTokens2.trackOnColor;
                         }
                         long j36 = switchTokens.trackOffColor;
-                        if (ULong.m3447equalsimpl0(j36, j34)) {
+                        if (ULong.m3446equalsimpl0(j36, j34)) {
                             j36 = switchTokens2.trackOffColor;
                         }
                         long j37 = switchTokens.thumbOnColor;
-                        if (ULong.m3447equalsimpl0(j37, j34)) {
+                        if (ULong.m3446equalsimpl0(j37, j34)) {
                             j37 = switchTokens2.thumbOnColor;
                         }
                         long j38 = switchTokens.thumbOffColor;
-                        if (ULong.m3447equalsimpl0(j38, j34)) {
+                        if (ULong.m3446equalsimpl0(j38, j34)) {
                             j38 = switchTokens2.thumbOffColor;
                         }
                         return new SeslSwitchTokens(j35, j36, j37, j38, null);
@@ -551,42 +551,42 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j39 = Color.Unspecified;
                         long j40 = tabTokens.textColor;
-                        if (ULong.m3447equalsimpl0(j40, j39)) {
+                        if (ULong.m3446equalsimpl0(j40, j39)) {
                             j40 = tabTokens2.textColor;
                         }
                         long j41 = tabTokens.selectedTextColor;
-                        if (ULong.m3447equalsimpl0(j41, j39)) {
+                        if (ULong.m3446equalsimpl0(j41, j39)) {
                             j41 = tabTokens2.selectedTextColor;
                         }
                         long j42 = tabTokens.subTabTextColor;
-                        if (ULong.m3447equalsimpl0(j42, j39)) {
+                        if (ULong.m3446equalsimpl0(j42, j39)) {
                             j42 = tabTokens2.subTabTextColor;
                         }
                         long j43 = tabTokens.subTabSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j43, j39)) {
+                        if (ULong.m3446equalsimpl0(j43, j39)) {
                             j43 = tabTokens2.subTabSelectedTextColor;
                         }
                         long j44 = tabTokens.subTabTwoLineTextColor;
-                        if (ULong.m3447equalsimpl0(j44, j39)) {
+                        if (ULong.m3446equalsimpl0(j44, j39)) {
                             j44 = tabTokens2.subTabTwoLineTextColor;
                         }
                         long j45 = j40;
                         long j46 = tabTokens.subTabTwoLineSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j46, j39)) {
+                        if (ULong.m3446equalsimpl0(j46, j39)) {
                             j46 = tabTokens2.subTabTwoLineSelectedTextColor;
                         }
                         long j47 = j46;
                         long j48 = tabTokens.subTabTwoLineSubTextColor;
-                        if (ULong.m3447equalsimpl0(j48, j39)) {
+                        if (ULong.m3446equalsimpl0(j48, j39)) {
                             j48 = tabTokens2.subTabTwoLineSubTextColor;
                         }
                         long j49 = j48;
                         long j50 = tabTokens.subTabTwoLineSubSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j50, j39)) {
+                        if (ULong.m3446equalsimpl0(j50, j39)) {
                             j50 = tabTokens2.subTabTwoLineSubSelectedTextColor;
                         }
                         long j51 = tabTokens.subTabIndicatorBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j51, j39)) {
+                        if (ULong.m3446equalsimpl0(j51, j39)) {
                             j51 = tabTokens2.subTabIndicatorBackgroundColor;
                         }
                         return new SeslTabTokens(j45, j41, j42, j43, j44, j47, j49, j50, j51, null);
@@ -597,19 +597,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j52 = Color.Unspecified;
                         long j53 = alertDialogTokens.titleTextColor;
-                        if (ULong.m3447equalsimpl0(j53, j52)) {
+                        if (ULong.m3446equalsimpl0(j53, j52)) {
                             j53 = alertDialogTokens2.titleTextColor;
                         }
                         long j54 = alertDialogTokens.messageTextColor;
-                        if (ULong.m3447equalsimpl0(j54, j52)) {
+                        if (ULong.m3446equalsimpl0(j54, j52)) {
                             j54 = alertDialogTokens2.messageTextColor;
                         }
                         long j55 = alertDialogTokens.buttonTextColor;
-                        if (ULong.m3447equalsimpl0(j55, j52)) {
+                        if (ULong.m3446equalsimpl0(j55, j52)) {
                             j55 = alertDialogTokens2.buttonTextColor;
                         }
                         long j56 = alertDialogTokens.listTextColor;
-                        if (ULong.m3447equalsimpl0(j56, j52)) {
+                        if (ULong.m3446equalsimpl0(j56, j52)) {
                             j56 = alertDialogTokens2.listTextColor;
                         }
                         return new SeslAlertDialogTokens(j53, j54, j55, j56, null);
@@ -620,11 +620,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j57 = Color.Unspecified;
                         long j58 = buttonTokens.containerColor;
-                        if (ULong.m3447equalsimpl0(j58, j57)) {
+                        if (ULong.m3446equalsimpl0(j58, j57)) {
                             j58 = buttonTokens2.containerColor;
                         }
                         long j59 = buttonTokens.contentColor;
-                        if (ULong.m3447equalsimpl0(j59, j57)) {
+                        if (ULong.m3446equalsimpl0(j59, j57)) {
                             j59 = buttonTokens2.contentColor;
                         }
                         return new SeslButtonTokens(j58, j59, null);
@@ -642,32 +642,32 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j60 = Color.Unspecified;
                         long j61 = commonTokens.primaryColor;
-                        if (ULong.m3447equalsimpl0(j61, j60)) {
+                        if (ULong.m3446equalsimpl0(j61, j60)) {
                             j61 = commonTokens2.primaryColor;
                         }
                         long j62 = commonTokens.windowBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j62, j60)) {
+                        if (ULong.m3446equalsimpl0(j62, j60)) {
                             j62 = commonTokens2.windowBackgroundColor;
                         }
                         long j63 = commonTokens.rippleColor;
-                        if (ULong.m3447equalsimpl0(j63, j60)) {
+                        if (ULong.m3446equalsimpl0(j63, j60)) {
                             j63 = commonTokens2.rippleColor;
                         }
                         long j64 = commonTokens.roundedCornerColor;
-                        if (ULong.m3447equalsimpl0(j64, j60)) {
+                        if (ULong.m3446equalsimpl0(j64, j60)) {
                             j64 = commonTokens2.roundedCornerColor;
                         }
                         long j65 = commonTokens.mainTextColor;
-                        if (ULong.m3447equalsimpl0(j65, j60)) {
+                        if (ULong.m3446equalsimpl0(j65, j60)) {
                             j65 = commonTokens2.mainTextColor;
                         }
                         long j66 = j61;
                         long j67 = commonTokens.subTextColor;
-                        if (ULong.m3447equalsimpl0(j67, j60)) {
+                        if (ULong.m3446equalsimpl0(j67, j60)) {
                             j67 = commonTokens2.subTextColor;
                         }
                         long j68 = commonTokens.pointTextColor;
-                        if (ULong.m3447equalsimpl0(j68, j60)) {
+                        if (ULong.m3446equalsimpl0(j68, j60)) {
                             j68 = commonTokens2.pointTextColor;
                         }
                         return new SeslCommonTokens(j66, j62, j63, j64, j65, j67, j68, null);
@@ -692,23 +692,23 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j = Color.Unspecified;
                         long j2 = appBarTokens.topAppBarBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j2, j)) {
+                        if (ULong.m3446equalsimpl0(j2, j)) {
                             j2 = appBarTokens2.topAppBarBackgroundColor;
                         }
                         long j3 = appBarTokens.topAppBarTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j3, j)) {
+                        if (ULong.m3446equalsimpl0(j3, j)) {
                             j3 = appBarTokens2.topAppBarTitleTextColor;
                         }
                         long j4 = appBarTokens.topAppBarSubTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j4, j)) {
+                        if (ULong.m3446equalsimpl0(j4, j)) {
                             j4 = appBarTokens2.topAppBarSubTitleTextColor;
                         }
                         long j5 = appBarTokens.topAppBarMenuTextColor;
-                        if (ULong.m3447equalsimpl0(j5, j)) {
+                        if (ULong.m3446equalsimpl0(j5, j)) {
                             j5 = appBarTokens2.topAppBarMenuTextColor;
                         }
                         long j6 = appBarTokens.topExtendedAppBarSubTitleColor;
-                        if (ULong.m3447equalsimpl0(j6, j)) {
+                        if (ULong.m3446equalsimpl0(j6, j)) {
                             j6 = appBarTokens2.topExtendedAppBarSubTitleColor;
                         }
                         DimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 dimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 = DimensionSchemeKeyTokensKt.EmptySeslDpProducer;
@@ -726,11 +726,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j7 = Color.Unspecified;
                         long j8 = dividerTokens.horizontalDividerColor;
-                        if (ULong.m3447equalsimpl0(j8, j7)) {
+                        if (ULong.m3446equalsimpl0(j8, j7)) {
                             j8 = dividerTokens2.horizontalDividerColor;
                         }
                         long j9 = dividerTokens.verticalDividerColor;
-                        if (ULong.m3447equalsimpl0(j9, j7)) {
+                        if (ULong.m3446equalsimpl0(j9, j7)) {
                             j9 = dividerTokens2.verticalDividerColor;
                         }
                         return new SeslDividerTokens(j8, j9, null);
@@ -741,11 +741,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j10 = Color.Unspecified;
                         long j11 = listTokens.scrollbarThumbActivateColor;
-                        if (ULong.m3447equalsimpl0(j11, j10)) {
+                        if (ULong.m3446equalsimpl0(j11, j10)) {
                             j11 = listTokens2.scrollbarThumbActivateColor;
                         }
                         long j12 = listTokens.scrollbarThumbInactiveColor;
-                        if (ULong.m3447equalsimpl0(j12, j10)) {
+                        if (ULong.m3446equalsimpl0(j12, j10)) {
                             j12 = listTokens2.scrollbarThumbInactiveColor;
                         }
                         return new SeslListTokens(j11, j12, null);
@@ -756,11 +756,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j13 = Color.Unspecified;
                         long j14 = popupTokens.backgroundColor;
-                        if (ULong.m3447equalsimpl0(j14, j13)) {
+                        if (ULong.m3446equalsimpl0(j14, j13)) {
                             j14 = popupTokens2.backgroundColor;
                         }
                         long j15 = popupTokens.borderColor;
-                        if (ULong.m3447equalsimpl0(j15, j13)) {
+                        if (ULong.m3446equalsimpl0(j15, j13)) {
                             j15 = popupTokens2.borderColor;
                         }
                         Drawable drawable2 = popupTokens.menuBackground;
@@ -780,47 +780,47 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j16 = Color.Unspecified;
                         long j17 = sliderTokens.thumbFillColor;
-                        if (ULong.m3447equalsimpl0(j17, j16)) {
+                        if (ULong.m3446equalsimpl0(j17, j16)) {
                             j17 = sliderTokens2.thumbFillColor;
                         }
                         long j18 = sliderTokens.activateThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j18, j16)) {
+                        if (ULong.m3446equalsimpl0(j18, j16)) {
                             j18 = sliderTokens2.activateThumbStrokeColor;
                         }
                         long j19 = sliderTokens.inactiveThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j19, j16)) {
+                        if (ULong.m3446equalsimpl0(j19, j16)) {
                             j19 = sliderTokens2.inactiveThumbStrokeColor;
                         }
                         long j20 = sliderTokens.activateTrackColor;
-                        if (ULong.m3447equalsimpl0(j20, j16)) {
+                        if (ULong.m3446equalsimpl0(j20, j16)) {
                             j20 = sliderTokens2.activateTrackColor;
                         }
                         long j21 = sliderTokens.inactivateTrackColor;
-                        if (ULong.m3447equalsimpl0(j21, j16)) {
+                        if (ULong.m3446equalsimpl0(j21, j16)) {
                             j21 = sliderTokens2.inactivateTrackColor;
                         }
                         long j22 = j17;
                         long j23 = sliderTokens.overlapActivateColor;
-                        if (ULong.m3447equalsimpl0(j23, j16)) {
+                        if (ULong.m3446equalsimpl0(j23, j16)) {
                             j23 = sliderTokens2.overlapActivateColor;
                         }
                         long j24 = j23;
                         long j25 = sliderTokens.overlapInactiveColor;
-                        if (ULong.m3447equalsimpl0(j25, j16)) {
+                        if (ULong.m3446equalsimpl0(j25, j16)) {
                             j25 = sliderTokens2.overlapInactiveColor;
                         }
                         long j26 = j25;
                         long j27 = sliderTokens.levelTrackColor;
-                        if (ULong.m3447equalsimpl0(j27, j16)) {
+                        if (ULong.m3446equalsimpl0(j27, j16)) {
                             j27 = sliderTokens2.levelTrackColor;
                         }
                         long j28 = j27;
                         long j29 = sliderTokens.activateTickColor;
-                        if (ULong.m3447equalsimpl0(j29, j16)) {
+                        if (ULong.m3446equalsimpl0(j29, j16)) {
                             j29 = sliderTokens2.activateTickColor;
                         }
                         long j30 = sliderTokens.inactiveTickColor;
-                        if (ULong.m3447equalsimpl0(j30, j16)) {
+                        if (ULong.m3446equalsimpl0(j30, j16)) {
                             j30 = sliderTokens2.inactiveTickColor;
                         }
                         return new SeslSliderTokens(j22, j18, j19, j20, j21, j24, j26, j28, j29, j30, null);
@@ -831,11 +831,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j31 = Color.Unspecified;
                         long j32 = spinnerTokens.itemTextColorNormal;
-                        if (ULong.m3447equalsimpl0(j32, j31)) {
+                        if (ULong.m3446equalsimpl0(j32, j31)) {
                             j32 = spinnerTokens2.itemTextColorNormal;
                         }
                         long j33 = spinnerTokens.iconColorDefault;
-                        if (ULong.m3447equalsimpl0(j33, j31)) {
+                        if (ULong.m3446equalsimpl0(j33, j31)) {
                             j33 = spinnerTokens2.iconColorDefault;
                         }
                         return new SeslSpinnerTokens(j32, j33, null);
@@ -846,19 +846,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j34 = Color.Unspecified;
                         long j35 = switchTokens.trackOnColor;
-                        if (ULong.m3447equalsimpl0(j35, j34)) {
+                        if (ULong.m3446equalsimpl0(j35, j34)) {
                             j35 = switchTokens2.trackOnColor;
                         }
                         long j36 = switchTokens.trackOffColor;
-                        if (ULong.m3447equalsimpl0(j36, j34)) {
+                        if (ULong.m3446equalsimpl0(j36, j34)) {
                             j36 = switchTokens2.trackOffColor;
                         }
                         long j37 = switchTokens.thumbOnColor;
-                        if (ULong.m3447equalsimpl0(j37, j34)) {
+                        if (ULong.m3446equalsimpl0(j37, j34)) {
                             j37 = switchTokens2.thumbOnColor;
                         }
                         long j38 = switchTokens.thumbOffColor;
-                        if (ULong.m3447equalsimpl0(j38, j34)) {
+                        if (ULong.m3446equalsimpl0(j38, j34)) {
                             j38 = switchTokens2.thumbOffColor;
                         }
                         return new SeslSwitchTokens(j35, j36, j37, j38, null);
@@ -869,42 +869,42 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j39 = Color.Unspecified;
                         long j40 = tabTokens.textColor;
-                        if (ULong.m3447equalsimpl0(j40, j39)) {
+                        if (ULong.m3446equalsimpl0(j40, j39)) {
                             j40 = tabTokens2.textColor;
                         }
                         long j41 = tabTokens.selectedTextColor;
-                        if (ULong.m3447equalsimpl0(j41, j39)) {
+                        if (ULong.m3446equalsimpl0(j41, j39)) {
                             j41 = tabTokens2.selectedTextColor;
                         }
                         long j42 = tabTokens.subTabTextColor;
-                        if (ULong.m3447equalsimpl0(j42, j39)) {
+                        if (ULong.m3446equalsimpl0(j42, j39)) {
                             j42 = tabTokens2.subTabTextColor;
                         }
                         long j43 = tabTokens.subTabSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j43, j39)) {
+                        if (ULong.m3446equalsimpl0(j43, j39)) {
                             j43 = tabTokens2.subTabSelectedTextColor;
                         }
                         long j44 = tabTokens.subTabTwoLineTextColor;
-                        if (ULong.m3447equalsimpl0(j44, j39)) {
+                        if (ULong.m3446equalsimpl0(j44, j39)) {
                             j44 = tabTokens2.subTabTwoLineTextColor;
                         }
                         long j45 = j40;
                         long j46 = tabTokens.subTabTwoLineSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j46, j39)) {
+                        if (ULong.m3446equalsimpl0(j46, j39)) {
                             j46 = tabTokens2.subTabTwoLineSelectedTextColor;
                         }
                         long j47 = j46;
                         long j48 = tabTokens.subTabTwoLineSubTextColor;
-                        if (ULong.m3447equalsimpl0(j48, j39)) {
+                        if (ULong.m3446equalsimpl0(j48, j39)) {
                             j48 = tabTokens2.subTabTwoLineSubTextColor;
                         }
                         long j49 = j48;
                         long j50 = tabTokens.subTabTwoLineSubSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j50, j39)) {
+                        if (ULong.m3446equalsimpl0(j50, j39)) {
                             j50 = tabTokens2.subTabTwoLineSubSelectedTextColor;
                         }
                         long j51 = tabTokens.subTabIndicatorBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j51, j39)) {
+                        if (ULong.m3446equalsimpl0(j51, j39)) {
                             j51 = tabTokens2.subTabIndicatorBackgroundColor;
                         }
                         return new SeslTabTokens(j45, j41, j42, j43, j44, j47, j49, j50, j51, null);
@@ -915,19 +915,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j52 = Color.Unspecified;
                         long j53 = alertDialogTokens.titleTextColor;
-                        if (ULong.m3447equalsimpl0(j53, j52)) {
+                        if (ULong.m3446equalsimpl0(j53, j52)) {
                             j53 = alertDialogTokens2.titleTextColor;
                         }
                         long j54 = alertDialogTokens.messageTextColor;
-                        if (ULong.m3447equalsimpl0(j54, j52)) {
+                        if (ULong.m3446equalsimpl0(j54, j52)) {
                             j54 = alertDialogTokens2.messageTextColor;
                         }
                         long j55 = alertDialogTokens.buttonTextColor;
-                        if (ULong.m3447equalsimpl0(j55, j52)) {
+                        if (ULong.m3446equalsimpl0(j55, j52)) {
                             j55 = alertDialogTokens2.buttonTextColor;
                         }
                         long j56 = alertDialogTokens.listTextColor;
-                        if (ULong.m3447equalsimpl0(j56, j52)) {
+                        if (ULong.m3446equalsimpl0(j56, j52)) {
                             j56 = alertDialogTokens2.listTextColor;
                         }
                         return new SeslAlertDialogTokens(j53, j54, j55, j56, null);
@@ -938,11 +938,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j57 = Color.Unspecified;
                         long j58 = buttonTokens.containerColor;
-                        if (ULong.m3447equalsimpl0(j58, j57)) {
+                        if (ULong.m3446equalsimpl0(j58, j57)) {
                             j58 = buttonTokens2.containerColor;
                         }
                         long j59 = buttonTokens.contentColor;
-                        if (ULong.m3447equalsimpl0(j59, j57)) {
+                        if (ULong.m3446equalsimpl0(j59, j57)) {
                             j59 = buttonTokens2.contentColor;
                         }
                         return new SeslButtonTokens(j58, j59, null);
@@ -960,32 +960,32 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j60 = Color.Unspecified;
                         long j61 = commonTokens.primaryColor;
-                        if (ULong.m3447equalsimpl0(j61, j60)) {
+                        if (ULong.m3446equalsimpl0(j61, j60)) {
                             j61 = commonTokens2.primaryColor;
                         }
                         long j62 = commonTokens.windowBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j62, j60)) {
+                        if (ULong.m3446equalsimpl0(j62, j60)) {
                             j62 = commonTokens2.windowBackgroundColor;
                         }
                         long j63 = commonTokens.rippleColor;
-                        if (ULong.m3447equalsimpl0(j63, j60)) {
+                        if (ULong.m3446equalsimpl0(j63, j60)) {
                             j63 = commonTokens2.rippleColor;
                         }
                         long j64 = commonTokens.roundedCornerColor;
-                        if (ULong.m3447equalsimpl0(j64, j60)) {
+                        if (ULong.m3446equalsimpl0(j64, j60)) {
                             j64 = commonTokens2.roundedCornerColor;
                         }
                         long j65 = commonTokens.mainTextColor;
-                        if (ULong.m3447equalsimpl0(j65, j60)) {
+                        if (ULong.m3446equalsimpl0(j65, j60)) {
                             j65 = commonTokens2.mainTextColor;
                         }
                         long j66 = j61;
                         long j67 = commonTokens.subTextColor;
-                        if (ULong.m3447equalsimpl0(j67, j60)) {
+                        if (ULong.m3446equalsimpl0(j67, j60)) {
                             j67 = commonTokens2.subTextColor;
                         }
                         long j68 = commonTokens.pointTextColor;
-                        if (ULong.m3447equalsimpl0(j68, j60)) {
+                        if (ULong.m3446equalsimpl0(j68, j60)) {
                             j68 = commonTokens2.pointTextColor;
                         }
                         return new SeslCommonTokens(j66, j62, j63, j64, j65, j67, j68, null);
@@ -1010,23 +1010,23 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j = Color.Unspecified;
                         long j2 = appBarTokens.topAppBarBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j2, j)) {
+                        if (ULong.m3446equalsimpl0(j2, j)) {
                             j2 = appBarTokens2.topAppBarBackgroundColor;
                         }
                         long j3 = appBarTokens.topAppBarTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j3, j)) {
+                        if (ULong.m3446equalsimpl0(j3, j)) {
                             j3 = appBarTokens2.topAppBarTitleTextColor;
                         }
                         long j4 = appBarTokens.topAppBarSubTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j4, j)) {
+                        if (ULong.m3446equalsimpl0(j4, j)) {
                             j4 = appBarTokens2.topAppBarSubTitleTextColor;
                         }
                         long j5 = appBarTokens.topAppBarMenuTextColor;
-                        if (ULong.m3447equalsimpl0(j5, j)) {
+                        if (ULong.m3446equalsimpl0(j5, j)) {
                             j5 = appBarTokens2.topAppBarMenuTextColor;
                         }
                         long j6 = appBarTokens.topExtendedAppBarSubTitleColor;
-                        if (ULong.m3447equalsimpl0(j6, j)) {
+                        if (ULong.m3446equalsimpl0(j6, j)) {
                             j6 = appBarTokens2.topExtendedAppBarSubTitleColor;
                         }
                         DimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 dimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 = DimensionSchemeKeyTokensKt.EmptySeslDpProducer;
@@ -1044,11 +1044,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j7 = Color.Unspecified;
                         long j8 = dividerTokens.horizontalDividerColor;
-                        if (ULong.m3447equalsimpl0(j8, j7)) {
+                        if (ULong.m3446equalsimpl0(j8, j7)) {
                             j8 = dividerTokens2.horizontalDividerColor;
                         }
                         long j9 = dividerTokens.verticalDividerColor;
-                        if (ULong.m3447equalsimpl0(j9, j7)) {
+                        if (ULong.m3446equalsimpl0(j9, j7)) {
                             j9 = dividerTokens2.verticalDividerColor;
                         }
                         return new SeslDividerTokens(j8, j9, null);
@@ -1059,11 +1059,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j10 = Color.Unspecified;
                         long j11 = listTokens.scrollbarThumbActivateColor;
-                        if (ULong.m3447equalsimpl0(j11, j10)) {
+                        if (ULong.m3446equalsimpl0(j11, j10)) {
                             j11 = listTokens2.scrollbarThumbActivateColor;
                         }
                         long j12 = listTokens.scrollbarThumbInactiveColor;
-                        if (ULong.m3447equalsimpl0(j12, j10)) {
+                        if (ULong.m3446equalsimpl0(j12, j10)) {
                             j12 = listTokens2.scrollbarThumbInactiveColor;
                         }
                         return new SeslListTokens(j11, j12, null);
@@ -1074,11 +1074,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j13 = Color.Unspecified;
                         long j14 = popupTokens.backgroundColor;
-                        if (ULong.m3447equalsimpl0(j14, j13)) {
+                        if (ULong.m3446equalsimpl0(j14, j13)) {
                             j14 = popupTokens2.backgroundColor;
                         }
                         long j15 = popupTokens.borderColor;
-                        if (ULong.m3447equalsimpl0(j15, j13)) {
+                        if (ULong.m3446equalsimpl0(j15, j13)) {
                             j15 = popupTokens2.borderColor;
                         }
                         Drawable drawable2 = popupTokens.menuBackground;
@@ -1098,47 +1098,47 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j16 = Color.Unspecified;
                         long j17 = sliderTokens.thumbFillColor;
-                        if (ULong.m3447equalsimpl0(j17, j16)) {
+                        if (ULong.m3446equalsimpl0(j17, j16)) {
                             j17 = sliderTokens2.thumbFillColor;
                         }
                         long j18 = sliderTokens.activateThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j18, j16)) {
+                        if (ULong.m3446equalsimpl0(j18, j16)) {
                             j18 = sliderTokens2.activateThumbStrokeColor;
                         }
                         long j19 = sliderTokens.inactiveThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j19, j16)) {
+                        if (ULong.m3446equalsimpl0(j19, j16)) {
                             j19 = sliderTokens2.inactiveThumbStrokeColor;
                         }
                         long j20 = sliderTokens.activateTrackColor;
-                        if (ULong.m3447equalsimpl0(j20, j16)) {
+                        if (ULong.m3446equalsimpl0(j20, j16)) {
                             j20 = sliderTokens2.activateTrackColor;
                         }
                         long j21 = sliderTokens.inactivateTrackColor;
-                        if (ULong.m3447equalsimpl0(j21, j16)) {
+                        if (ULong.m3446equalsimpl0(j21, j16)) {
                             j21 = sliderTokens2.inactivateTrackColor;
                         }
                         long j22 = j17;
                         long j23 = sliderTokens.overlapActivateColor;
-                        if (ULong.m3447equalsimpl0(j23, j16)) {
+                        if (ULong.m3446equalsimpl0(j23, j16)) {
                             j23 = sliderTokens2.overlapActivateColor;
                         }
                         long j24 = j23;
                         long j25 = sliderTokens.overlapInactiveColor;
-                        if (ULong.m3447equalsimpl0(j25, j16)) {
+                        if (ULong.m3446equalsimpl0(j25, j16)) {
                             j25 = sliderTokens2.overlapInactiveColor;
                         }
                         long j26 = j25;
                         long j27 = sliderTokens.levelTrackColor;
-                        if (ULong.m3447equalsimpl0(j27, j16)) {
+                        if (ULong.m3446equalsimpl0(j27, j16)) {
                             j27 = sliderTokens2.levelTrackColor;
                         }
                         long j28 = j27;
                         long j29 = sliderTokens.activateTickColor;
-                        if (ULong.m3447equalsimpl0(j29, j16)) {
+                        if (ULong.m3446equalsimpl0(j29, j16)) {
                             j29 = sliderTokens2.activateTickColor;
                         }
                         long j30 = sliderTokens.inactiveTickColor;
-                        if (ULong.m3447equalsimpl0(j30, j16)) {
+                        if (ULong.m3446equalsimpl0(j30, j16)) {
                             j30 = sliderTokens2.inactiveTickColor;
                         }
                         return new SeslSliderTokens(j22, j18, j19, j20, j21, j24, j26, j28, j29, j30, null);
@@ -1149,11 +1149,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j31 = Color.Unspecified;
                         long j32 = spinnerTokens.itemTextColorNormal;
-                        if (ULong.m3447equalsimpl0(j32, j31)) {
+                        if (ULong.m3446equalsimpl0(j32, j31)) {
                             j32 = spinnerTokens2.itemTextColorNormal;
                         }
                         long j33 = spinnerTokens.iconColorDefault;
-                        if (ULong.m3447equalsimpl0(j33, j31)) {
+                        if (ULong.m3446equalsimpl0(j33, j31)) {
                             j33 = spinnerTokens2.iconColorDefault;
                         }
                         return new SeslSpinnerTokens(j32, j33, null);
@@ -1164,19 +1164,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j34 = Color.Unspecified;
                         long j35 = switchTokens.trackOnColor;
-                        if (ULong.m3447equalsimpl0(j35, j34)) {
+                        if (ULong.m3446equalsimpl0(j35, j34)) {
                             j35 = switchTokens2.trackOnColor;
                         }
                         long j36 = switchTokens.trackOffColor;
-                        if (ULong.m3447equalsimpl0(j36, j34)) {
+                        if (ULong.m3446equalsimpl0(j36, j34)) {
                             j36 = switchTokens2.trackOffColor;
                         }
                         long j37 = switchTokens.thumbOnColor;
-                        if (ULong.m3447equalsimpl0(j37, j34)) {
+                        if (ULong.m3446equalsimpl0(j37, j34)) {
                             j37 = switchTokens2.thumbOnColor;
                         }
                         long j38 = switchTokens.thumbOffColor;
-                        if (ULong.m3447equalsimpl0(j38, j34)) {
+                        if (ULong.m3446equalsimpl0(j38, j34)) {
                             j38 = switchTokens2.thumbOffColor;
                         }
                         return new SeslSwitchTokens(j35, j36, j37, j38, null);
@@ -1187,42 +1187,42 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j39 = Color.Unspecified;
                         long j40 = tabTokens.textColor;
-                        if (ULong.m3447equalsimpl0(j40, j39)) {
+                        if (ULong.m3446equalsimpl0(j40, j39)) {
                             j40 = tabTokens2.textColor;
                         }
                         long j41 = tabTokens.selectedTextColor;
-                        if (ULong.m3447equalsimpl0(j41, j39)) {
+                        if (ULong.m3446equalsimpl0(j41, j39)) {
                             j41 = tabTokens2.selectedTextColor;
                         }
                         long j42 = tabTokens.subTabTextColor;
-                        if (ULong.m3447equalsimpl0(j42, j39)) {
+                        if (ULong.m3446equalsimpl0(j42, j39)) {
                             j42 = tabTokens2.subTabTextColor;
                         }
                         long j43 = tabTokens.subTabSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j43, j39)) {
+                        if (ULong.m3446equalsimpl0(j43, j39)) {
                             j43 = tabTokens2.subTabSelectedTextColor;
                         }
                         long j44 = tabTokens.subTabTwoLineTextColor;
-                        if (ULong.m3447equalsimpl0(j44, j39)) {
+                        if (ULong.m3446equalsimpl0(j44, j39)) {
                             j44 = tabTokens2.subTabTwoLineTextColor;
                         }
                         long j45 = j40;
                         long j46 = tabTokens.subTabTwoLineSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j46, j39)) {
+                        if (ULong.m3446equalsimpl0(j46, j39)) {
                             j46 = tabTokens2.subTabTwoLineSelectedTextColor;
                         }
                         long j47 = j46;
                         long j48 = tabTokens.subTabTwoLineSubTextColor;
-                        if (ULong.m3447equalsimpl0(j48, j39)) {
+                        if (ULong.m3446equalsimpl0(j48, j39)) {
                             j48 = tabTokens2.subTabTwoLineSubTextColor;
                         }
                         long j49 = j48;
                         long j50 = tabTokens.subTabTwoLineSubSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j50, j39)) {
+                        if (ULong.m3446equalsimpl0(j50, j39)) {
                             j50 = tabTokens2.subTabTwoLineSubSelectedTextColor;
                         }
                         long j51 = tabTokens.subTabIndicatorBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j51, j39)) {
+                        if (ULong.m3446equalsimpl0(j51, j39)) {
                             j51 = tabTokens2.subTabIndicatorBackgroundColor;
                         }
                         return new SeslTabTokens(j45, j41, j42, j43, j44, j47, j49, j50, j51, null);
@@ -1233,19 +1233,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j52 = Color.Unspecified;
                         long j53 = alertDialogTokens.titleTextColor;
-                        if (ULong.m3447equalsimpl0(j53, j52)) {
+                        if (ULong.m3446equalsimpl0(j53, j52)) {
                             j53 = alertDialogTokens2.titleTextColor;
                         }
                         long j54 = alertDialogTokens.messageTextColor;
-                        if (ULong.m3447equalsimpl0(j54, j52)) {
+                        if (ULong.m3446equalsimpl0(j54, j52)) {
                             j54 = alertDialogTokens2.messageTextColor;
                         }
                         long j55 = alertDialogTokens.buttonTextColor;
-                        if (ULong.m3447equalsimpl0(j55, j52)) {
+                        if (ULong.m3446equalsimpl0(j55, j52)) {
                             j55 = alertDialogTokens2.buttonTextColor;
                         }
                         long j56 = alertDialogTokens.listTextColor;
-                        if (ULong.m3447equalsimpl0(j56, j52)) {
+                        if (ULong.m3446equalsimpl0(j56, j52)) {
                             j56 = alertDialogTokens2.listTextColor;
                         }
                         return new SeslAlertDialogTokens(j53, j54, j55, j56, null);
@@ -1256,11 +1256,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j57 = Color.Unspecified;
                         long j58 = buttonTokens.containerColor;
-                        if (ULong.m3447equalsimpl0(j58, j57)) {
+                        if (ULong.m3446equalsimpl0(j58, j57)) {
                             j58 = buttonTokens2.containerColor;
                         }
                         long j59 = buttonTokens.contentColor;
-                        if (ULong.m3447equalsimpl0(j59, j57)) {
+                        if (ULong.m3446equalsimpl0(j59, j57)) {
                             j59 = buttonTokens2.contentColor;
                         }
                         return new SeslButtonTokens(j58, j59, null);
@@ -1278,32 +1278,32 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j60 = Color.Unspecified;
                         long j61 = commonTokens.primaryColor;
-                        if (ULong.m3447equalsimpl0(j61, j60)) {
+                        if (ULong.m3446equalsimpl0(j61, j60)) {
                             j61 = commonTokens2.primaryColor;
                         }
                         long j62 = commonTokens.windowBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j62, j60)) {
+                        if (ULong.m3446equalsimpl0(j62, j60)) {
                             j62 = commonTokens2.windowBackgroundColor;
                         }
                         long j63 = commonTokens.rippleColor;
-                        if (ULong.m3447equalsimpl0(j63, j60)) {
+                        if (ULong.m3446equalsimpl0(j63, j60)) {
                             j63 = commonTokens2.rippleColor;
                         }
                         long j64 = commonTokens.roundedCornerColor;
-                        if (ULong.m3447equalsimpl0(j64, j60)) {
+                        if (ULong.m3446equalsimpl0(j64, j60)) {
                             j64 = commonTokens2.roundedCornerColor;
                         }
                         long j65 = commonTokens.mainTextColor;
-                        if (ULong.m3447equalsimpl0(j65, j60)) {
+                        if (ULong.m3446equalsimpl0(j65, j60)) {
                             j65 = commonTokens2.mainTextColor;
                         }
                         long j66 = j61;
                         long j67 = commonTokens.subTextColor;
-                        if (ULong.m3447equalsimpl0(j67, j60)) {
+                        if (ULong.m3446equalsimpl0(j67, j60)) {
                             j67 = commonTokens2.subTextColor;
                         }
                         long j68 = commonTokens.pointTextColor;
-                        if (ULong.m3447equalsimpl0(j68, j60)) {
+                        if (ULong.m3446equalsimpl0(j68, j60)) {
                             j68 = commonTokens2.pointTextColor;
                         }
                         return new SeslCommonTokens(j66, j62, j63, j64, j65, j67, j68, null);
@@ -1328,23 +1328,23 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j = Color.Unspecified;
                         long j2 = appBarTokens.topAppBarBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j2, j)) {
+                        if (ULong.m3446equalsimpl0(j2, j)) {
                             j2 = appBarTokens2.topAppBarBackgroundColor;
                         }
                         long j3 = appBarTokens.topAppBarTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j3, j)) {
+                        if (ULong.m3446equalsimpl0(j3, j)) {
                             j3 = appBarTokens2.topAppBarTitleTextColor;
                         }
                         long j4 = appBarTokens.topAppBarSubTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j4, j)) {
+                        if (ULong.m3446equalsimpl0(j4, j)) {
                             j4 = appBarTokens2.topAppBarSubTitleTextColor;
                         }
                         long j5 = appBarTokens.topAppBarMenuTextColor;
-                        if (ULong.m3447equalsimpl0(j5, j)) {
+                        if (ULong.m3446equalsimpl0(j5, j)) {
                             j5 = appBarTokens2.topAppBarMenuTextColor;
                         }
                         long j6 = appBarTokens.topExtendedAppBarSubTitleColor;
-                        if (ULong.m3447equalsimpl0(j6, j)) {
+                        if (ULong.m3446equalsimpl0(j6, j)) {
                             j6 = appBarTokens2.topExtendedAppBarSubTitleColor;
                         }
                         DimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 dimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 = DimensionSchemeKeyTokensKt.EmptySeslDpProducer;
@@ -1362,11 +1362,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j7 = Color.Unspecified;
                         long j8 = dividerTokens.horizontalDividerColor;
-                        if (ULong.m3447equalsimpl0(j8, j7)) {
+                        if (ULong.m3446equalsimpl0(j8, j7)) {
                             j8 = dividerTokens2.horizontalDividerColor;
                         }
                         long j9 = dividerTokens.verticalDividerColor;
-                        if (ULong.m3447equalsimpl0(j9, j7)) {
+                        if (ULong.m3446equalsimpl0(j9, j7)) {
                             j9 = dividerTokens2.verticalDividerColor;
                         }
                         return new SeslDividerTokens(j8, j9, null);
@@ -1377,11 +1377,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j10 = Color.Unspecified;
                         long j11 = listTokens.scrollbarThumbActivateColor;
-                        if (ULong.m3447equalsimpl0(j11, j10)) {
+                        if (ULong.m3446equalsimpl0(j11, j10)) {
                             j11 = listTokens2.scrollbarThumbActivateColor;
                         }
                         long j12 = listTokens.scrollbarThumbInactiveColor;
-                        if (ULong.m3447equalsimpl0(j12, j10)) {
+                        if (ULong.m3446equalsimpl0(j12, j10)) {
                             j12 = listTokens2.scrollbarThumbInactiveColor;
                         }
                         return new SeslListTokens(j11, j12, null);
@@ -1392,11 +1392,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j13 = Color.Unspecified;
                         long j14 = popupTokens.backgroundColor;
-                        if (ULong.m3447equalsimpl0(j14, j13)) {
+                        if (ULong.m3446equalsimpl0(j14, j13)) {
                             j14 = popupTokens2.backgroundColor;
                         }
                         long j15 = popupTokens.borderColor;
-                        if (ULong.m3447equalsimpl0(j15, j13)) {
+                        if (ULong.m3446equalsimpl0(j15, j13)) {
                             j15 = popupTokens2.borderColor;
                         }
                         Drawable drawable2 = popupTokens.menuBackground;
@@ -1416,47 +1416,47 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j16 = Color.Unspecified;
                         long j17 = sliderTokens.thumbFillColor;
-                        if (ULong.m3447equalsimpl0(j17, j16)) {
+                        if (ULong.m3446equalsimpl0(j17, j16)) {
                             j17 = sliderTokens2.thumbFillColor;
                         }
                         long j18 = sliderTokens.activateThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j18, j16)) {
+                        if (ULong.m3446equalsimpl0(j18, j16)) {
                             j18 = sliderTokens2.activateThumbStrokeColor;
                         }
                         long j19 = sliderTokens.inactiveThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j19, j16)) {
+                        if (ULong.m3446equalsimpl0(j19, j16)) {
                             j19 = sliderTokens2.inactiveThumbStrokeColor;
                         }
                         long j20 = sliderTokens.activateTrackColor;
-                        if (ULong.m3447equalsimpl0(j20, j16)) {
+                        if (ULong.m3446equalsimpl0(j20, j16)) {
                             j20 = sliderTokens2.activateTrackColor;
                         }
                         long j21 = sliderTokens.inactivateTrackColor;
-                        if (ULong.m3447equalsimpl0(j21, j16)) {
+                        if (ULong.m3446equalsimpl0(j21, j16)) {
                             j21 = sliderTokens2.inactivateTrackColor;
                         }
                         long j22 = j17;
                         long j23 = sliderTokens.overlapActivateColor;
-                        if (ULong.m3447equalsimpl0(j23, j16)) {
+                        if (ULong.m3446equalsimpl0(j23, j16)) {
                             j23 = sliderTokens2.overlapActivateColor;
                         }
                         long j24 = j23;
                         long j25 = sliderTokens.overlapInactiveColor;
-                        if (ULong.m3447equalsimpl0(j25, j16)) {
+                        if (ULong.m3446equalsimpl0(j25, j16)) {
                             j25 = sliderTokens2.overlapInactiveColor;
                         }
                         long j26 = j25;
                         long j27 = sliderTokens.levelTrackColor;
-                        if (ULong.m3447equalsimpl0(j27, j16)) {
+                        if (ULong.m3446equalsimpl0(j27, j16)) {
                             j27 = sliderTokens2.levelTrackColor;
                         }
                         long j28 = j27;
                         long j29 = sliderTokens.activateTickColor;
-                        if (ULong.m3447equalsimpl0(j29, j16)) {
+                        if (ULong.m3446equalsimpl0(j29, j16)) {
                             j29 = sliderTokens2.activateTickColor;
                         }
                         long j30 = sliderTokens.inactiveTickColor;
-                        if (ULong.m3447equalsimpl0(j30, j16)) {
+                        if (ULong.m3446equalsimpl0(j30, j16)) {
                             j30 = sliderTokens2.inactiveTickColor;
                         }
                         return new SeslSliderTokens(j22, j18, j19, j20, j21, j24, j26, j28, j29, j30, null);
@@ -1467,11 +1467,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j31 = Color.Unspecified;
                         long j32 = spinnerTokens.itemTextColorNormal;
-                        if (ULong.m3447equalsimpl0(j32, j31)) {
+                        if (ULong.m3446equalsimpl0(j32, j31)) {
                             j32 = spinnerTokens2.itemTextColorNormal;
                         }
                         long j33 = spinnerTokens.iconColorDefault;
-                        if (ULong.m3447equalsimpl0(j33, j31)) {
+                        if (ULong.m3446equalsimpl0(j33, j31)) {
                             j33 = spinnerTokens2.iconColorDefault;
                         }
                         return new SeslSpinnerTokens(j32, j33, null);
@@ -1482,19 +1482,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j34 = Color.Unspecified;
                         long j35 = switchTokens.trackOnColor;
-                        if (ULong.m3447equalsimpl0(j35, j34)) {
+                        if (ULong.m3446equalsimpl0(j35, j34)) {
                             j35 = switchTokens2.trackOnColor;
                         }
                         long j36 = switchTokens.trackOffColor;
-                        if (ULong.m3447equalsimpl0(j36, j34)) {
+                        if (ULong.m3446equalsimpl0(j36, j34)) {
                             j36 = switchTokens2.trackOffColor;
                         }
                         long j37 = switchTokens.thumbOnColor;
-                        if (ULong.m3447equalsimpl0(j37, j34)) {
+                        if (ULong.m3446equalsimpl0(j37, j34)) {
                             j37 = switchTokens2.thumbOnColor;
                         }
                         long j38 = switchTokens.thumbOffColor;
-                        if (ULong.m3447equalsimpl0(j38, j34)) {
+                        if (ULong.m3446equalsimpl0(j38, j34)) {
                             j38 = switchTokens2.thumbOffColor;
                         }
                         return new SeslSwitchTokens(j35, j36, j37, j38, null);
@@ -1505,42 +1505,42 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j39 = Color.Unspecified;
                         long j40 = tabTokens.textColor;
-                        if (ULong.m3447equalsimpl0(j40, j39)) {
+                        if (ULong.m3446equalsimpl0(j40, j39)) {
                             j40 = tabTokens2.textColor;
                         }
                         long j41 = tabTokens.selectedTextColor;
-                        if (ULong.m3447equalsimpl0(j41, j39)) {
+                        if (ULong.m3446equalsimpl0(j41, j39)) {
                             j41 = tabTokens2.selectedTextColor;
                         }
                         long j42 = tabTokens.subTabTextColor;
-                        if (ULong.m3447equalsimpl0(j42, j39)) {
+                        if (ULong.m3446equalsimpl0(j42, j39)) {
                             j42 = tabTokens2.subTabTextColor;
                         }
                         long j43 = tabTokens.subTabSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j43, j39)) {
+                        if (ULong.m3446equalsimpl0(j43, j39)) {
                             j43 = tabTokens2.subTabSelectedTextColor;
                         }
                         long j44 = tabTokens.subTabTwoLineTextColor;
-                        if (ULong.m3447equalsimpl0(j44, j39)) {
+                        if (ULong.m3446equalsimpl0(j44, j39)) {
                             j44 = tabTokens2.subTabTwoLineTextColor;
                         }
                         long j45 = j40;
                         long j46 = tabTokens.subTabTwoLineSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j46, j39)) {
+                        if (ULong.m3446equalsimpl0(j46, j39)) {
                             j46 = tabTokens2.subTabTwoLineSelectedTextColor;
                         }
                         long j47 = j46;
                         long j48 = tabTokens.subTabTwoLineSubTextColor;
-                        if (ULong.m3447equalsimpl0(j48, j39)) {
+                        if (ULong.m3446equalsimpl0(j48, j39)) {
                             j48 = tabTokens2.subTabTwoLineSubTextColor;
                         }
                         long j49 = j48;
                         long j50 = tabTokens.subTabTwoLineSubSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j50, j39)) {
+                        if (ULong.m3446equalsimpl0(j50, j39)) {
                             j50 = tabTokens2.subTabTwoLineSubSelectedTextColor;
                         }
                         long j51 = tabTokens.subTabIndicatorBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j51, j39)) {
+                        if (ULong.m3446equalsimpl0(j51, j39)) {
                             j51 = tabTokens2.subTabIndicatorBackgroundColor;
                         }
                         return new SeslTabTokens(j45, j41, j42, j43, j44, j47, j49, j50, j51, null);
@@ -1551,19 +1551,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j52 = Color.Unspecified;
                         long j53 = alertDialogTokens.titleTextColor;
-                        if (ULong.m3447equalsimpl0(j53, j52)) {
+                        if (ULong.m3446equalsimpl0(j53, j52)) {
                             j53 = alertDialogTokens2.titleTextColor;
                         }
                         long j54 = alertDialogTokens.messageTextColor;
-                        if (ULong.m3447equalsimpl0(j54, j52)) {
+                        if (ULong.m3446equalsimpl0(j54, j52)) {
                             j54 = alertDialogTokens2.messageTextColor;
                         }
                         long j55 = alertDialogTokens.buttonTextColor;
-                        if (ULong.m3447equalsimpl0(j55, j52)) {
+                        if (ULong.m3446equalsimpl0(j55, j52)) {
                             j55 = alertDialogTokens2.buttonTextColor;
                         }
                         long j56 = alertDialogTokens.listTextColor;
-                        if (ULong.m3447equalsimpl0(j56, j52)) {
+                        if (ULong.m3446equalsimpl0(j56, j52)) {
                             j56 = alertDialogTokens2.listTextColor;
                         }
                         return new SeslAlertDialogTokens(j53, j54, j55, j56, null);
@@ -1574,11 +1574,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j57 = Color.Unspecified;
                         long j58 = buttonTokens.containerColor;
-                        if (ULong.m3447equalsimpl0(j58, j57)) {
+                        if (ULong.m3446equalsimpl0(j58, j57)) {
                             j58 = buttonTokens2.containerColor;
                         }
                         long j59 = buttonTokens.contentColor;
-                        if (ULong.m3447equalsimpl0(j59, j57)) {
+                        if (ULong.m3446equalsimpl0(j59, j57)) {
                             j59 = buttonTokens2.contentColor;
                         }
                         return new SeslButtonTokens(j58, j59, null);
@@ -1596,32 +1596,32 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j60 = Color.Unspecified;
                         long j61 = commonTokens.primaryColor;
-                        if (ULong.m3447equalsimpl0(j61, j60)) {
+                        if (ULong.m3446equalsimpl0(j61, j60)) {
                             j61 = commonTokens2.primaryColor;
                         }
                         long j62 = commonTokens.windowBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j62, j60)) {
+                        if (ULong.m3446equalsimpl0(j62, j60)) {
                             j62 = commonTokens2.windowBackgroundColor;
                         }
                         long j63 = commonTokens.rippleColor;
-                        if (ULong.m3447equalsimpl0(j63, j60)) {
+                        if (ULong.m3446equalsimpl0(j63, j60)) {
                             j63 = commonTokens2.rippleColor;
                         }
                         long j64 = commonTokens.roundedCornerColor;
-                        if (ULong.m3447equalsimpl0(j64, j60)) {
+                        if (ULong.m3446equalsimpl0(j64, j60)) {
                             j64 = commonTokens2.roundedCornerColor;
                         }
                         long j65 = commonTokens.mainTextColor;
-                        if (ULong.m3447equalsimpl0(j65, j60)) {
+                        if (ULong.m3446equalsimpl0(j65, j60)) {
                             j65 = commonTokens2.mainTextColor;
                         }
                         long j66 = j61;
                         long j67 = commonTokens.subTextColor;
-                        if (ULong.m3447equalsimpl0(j67, j60)) {
+                        if (ULong.m3446equalsimpl0(j67, j60)) {
                             j67 = commonTokens2.subTextColor;
                         }
                         long j68 = commonTokens.pointTextColor;
-                        if (ULong.m3447equalsimpl0(j68, j60)) {
+                        if (ULong.m3446equalsimpl0(j68, j60)) {
                             j68 = commonTokens2.pointTextColor;
                         }
                         return new SeslCommonTokens(j66, j62, j63, j64, j65, j67, j68, null);
@@ -1646,23 +1646,23 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j = Color.Unspecified;
                         long j2 = appBarTokens.topAppBarBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j2, j)) {
+                        if (ULong.m3446equalsimpl0(j2, j)) {
                             j2 = appBarTokens2.topAppBarBackgroundColor;
                         }
                         long j3 = appBarTokens.topAppBarTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j3, j)) {
+                        if (ULong.m3446equalsimpl0(j3, j)) {
                             j3 = appBarTokens2.topAppBarTitleTextColor;
                         }
                         long j4 = appBarTokens.topAppBarSubTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j4, j)) {
+                        if (ULong.m3446equalsimpl0(j4, j)) {
                             j4 = appBarTokens2.topAppBarSubTitleTextColor;
                         }
                         long j5 = appBarTokens.topAppBarMenuTextColor;
-                        if (ULong.m3447equalsimpl0(j5, j)) {
+                        if (ULong.m3446equalsimpl0(j5, j)) {
                             j5 = appBarTokens2.topAppBarMenuTextColor;
                         }
                         long j6 = appBarTokens.topExtendedAppBarSubTitleColor;
-                        if (ULong.m3447equalsimpl0(j6, j)) {
+                        if (ULong.m3446equalsimpl0(j6, j)) {
                             j6 = appBarTokens2.topExtendedAppBarSubTitleColor;
                         }
                         DimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 dimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 = DimensionSchemeKeyTokensKt.EmptySeslDpProducer;
@@ -1680,11 +1680,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j7 = Color.Unspecified;
                         long j8 = dividerTokens.horizontalDividerColor;
-                        if (ULong.m3447equalsimpl0(j8, j7)) {
+                        if (ULong.m3446equalsimpl0(j8, j7)) {
                             j8 = dividerTokens2.horizontalDividerColor;
                         }
                         long j9 = dividerTokens.verticalDividerColor;
-                        if (ULong.m3447equalsimpl0(j9, j7)) {
+                        if (ULong.m3446equalsimpl0(j9, j7)) {
                             j9 = dividerTokens2.verticalDividerColor;
                         }
                         return new SeslDividerTokens(j8, j9, null);
@@ -1695,11 +1695,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j10 = Color.Unspecified;
                         long j11 = listTokens.scrollbarThumbActivateColor;
-                        if (ULong.m3447equalsimpl0(j11, j10)) {
+                        if (ULong.m3446equalsimpl0(j11, j10)) {
                             j11 = listTokens2.scrollbarThumbActivateColor;
                         }
                         long j12 = listTokens.scrollbarThumbInactiveColor;
-                        if (ULong.m3447equalsimpl0(j12, j10)) {
+                        if (ULong.m3446equalsimpl0(j12, j10)) {
                             j12 = listTokens2.scrollbarThumbInactiveColor;
                         }
                         return new SeslListTokens(j11, j12, null);
@@ -1710,11 +1710,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j13 = Color.Unspecified;
                         long j14 = popupTokens.backgroundColor;
-                        if (ULong.m3447equalsimpl0(j14, j13)) {
+                        if (ULong.m3446equalsimpl0(j14, j13)) {
                             j14 = popupTokens2.backgroundColor;
                         }
                         long j15 = popupTokens.borderColor;
-                        if (ULong.m3447equalsimpl0(j15, j13)) {
+                        if (ULong.m3446equalsimpl0(j15, j13)) {
                             j15 = popupTokens2.borderColor;
                         }
                         Drawable drawable2 = popupTokens.menuBackground;
@@ -1734,47 +1734,47 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j16 = Color.Unspecified;
                         long j17 = sliderTokens.thumbFillColor;
-                        if (ULong.m3447equalsimpl0(j17, j16)) {
+                        if (ULong.m3446equalsimpl0(j17, j16)) {
                             j17 = sliderTokens2.thumbFillColor;
                         }
                         long j18 = sliderTokens.activateThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j18, j16)) {
+                        if (ULong.m3446equalsimpl0(j18, j16)) {
                             j18 = sliderTokens2.activateThumbStrokeColor;
                         }
                         long j19 = sliderTokens.inactiveThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j19, j16)) {
+                        if (ULong.m3446equalsimpl0(j19, j16)) {
                             j19 = sliderTokens2.inactiveThumbStrokeColor;
                         }
                         long j20 = sliderTokens.activateTrackColor;
-                        if (ULong.m3447equalsimpl0(j20, j16)) {
+                        if (ULong.m3446equalsimpl0(j20, j16)) {
                             j20 = sliderTokens2.activateTrackColor;
                         }
                         long j21 = sliderTokens.inactivateTrackColor;
-                        if (ULong.m3447equalsimpl0(j21, j16)) {
+                        if (ULong.m3446equalsimpl0(j21, j16)) {
                             j21 = sliderTokens2.inactivateTrackColor;
                         }
                         long j22 = j17;
                         long j23 = sliderTokens.overlapActivateColor;
-                        if (ULong.m3447equalsimpl0(j23, j16)) {
+                        if (ULong.m3446equalsimpl0(j23, j16)) {
                             j23 = sliderTokens2.overlapActivateColor;
                         }
                         long j24 = j23;
                         long j25 = sliderTokens.overlapInactiveColor;
-                        if (ULong.m3447equalsimpl0(j25, j16)) {
+                        if (ULong.m3446equalsimpl0(j25, j16)) {
                             j25 = sliderTokens2.overlapInactiveColor;
                         }
                         long j26 = j25;
                         long j27 = sliderTokens.levelTrackColor;
-                        if (ULong.m3447equalsimpl0(j27, j16)) {
+                        if (ULong.m3446equalsimpl0(j27, j16)) {
                             j27 = sliderTokens2.levelTrackColor;
                         }
                         long j28 = j27;
                         long j29 = sliderTokens.activateTickColor;
-                        if (ULong.m3447equalsimpl0(j29, j16)) {
+                        if (ULong.m3446equalsimpl0(j29, j16)) {
                             j29 = sliderTokens2.activateTickColor;
                         }
                         long j30 = sliderTokens.inactiveTickColor;
-                        if (ULong.m3447equalsimpl0(j30, j16)) {
+                        if (ULong.m3446equalsimpl0(j30, j16)) {
                             j30 = sliderTokens2.inactiveTickColor;
                         }
                         return new SeslSliderTokens(j22, j18, j19, j20, j21, j24, j26, j28, j29, j30, null);
@@ -1785,11 +1785,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j31 = Color.Unspecified;
                         long j32 = spinnerTokens.itemTextColorNormal;
-                        if (ULong.m3447equalsimpl0(j32, j31)) {
+                        if (ULong.m3446equalsimpl0(j32, j31)) {
                             j32 = spinnerTokens2.itemTextColorNormal;
                         }
                         long j33 = spinnerTokens.iconColorDefault;
-                        if (ULong.m3447equalsimpl0(j33, j31)) {
+                        if (ULong.m3446equalsimpl0(j33, j31)) {
                             j33 = spinnerTokens2.iconColorDefault;
                         }
                         return new SeslSpinnerTokens(j32, j33, null);
@@ -1800,19 +1800,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j34 = Color.Unspecified;
                         long j35 = switchTokens.trackOnColor;
-                        if (ULong.m3447equalsimpl0(j35, j34)) {
+                        if (ULong.m3446equalsimpl0(j35, j34)) {
                             j35 = switchTokens2.trackOnColor;
                         }
                         long j36 = switchTokens.trackOffColor;
-                        if (ULong.m3447equalsimpl0(j36, j34)) {
+                        if (ULong.m3446equalsimpl0(j36, j34)) {
                             j36 = switchTokens2.trackOffColor;
                         }
                         long j37 = switchTokens.thumbOnColor;
-                        if (ULong.m3447equalsimpl0(j37, j34)) {
+                        if (ULong.m3446equalsimpl0(j37, j34)) {
                             j37 = switchTokens2.thumbOnColor;
                         }
                         long j38 = switchTokens.thumbOffColor;
-                        if (ULong.m3447equalsimpl0(j38, j34)) {
+                        if (ULong.m3446equalsimpl0(j38, j34)) {
                             j38 = switchTokens2.thumbOffColor;
                         }
                         return new SeslSwitchTokens(j35, j36, j37, j38, null);
@@ -1823,42 +1823,42 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j39 = Color.Unspecified;
                         long j40 = tabTokens.textColor;
-                        if (ULong.m3447equalsimpl0(j40, j39)) {
+                        if (ULong.m3446equalsimpl0(j40, j39)) {
                             j40 = tabTokens2.textColor;
                         }
                         long j41 = tabTokens.selectedTextColor;
-                        if (ULong.m3447equalsimpl0(j41, j39)) {
+                        if (ULong.m3446equalsimpl0(j41, j39)) {
                             j41 = tabTokens2.selectedTextColor;
                         }
                         long j42 = tabTokens.subTabTextColor;
-                        if (ULong.m3447equalsimpl0(j42, j39)) {
+                        if (ULong.m3446equalsimpl0(j42, j39)) {
                             j42 = tabTokens2.subTabTextColor;
                         }
                         long j43 = tabTokens.subTabSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j43, j39)) {
+                        if (ULong.m3446equalsimpl0(j43, j39)) {
                             j43 = tabTokens2.subTabSelectedTextColor;
                         }
                         long j44 = tabTokens.subTabTwoLineTextColor;
-                        if (ULong.m3447equalsimpl0(j44, j39)) {
+                        if (ULong.m3446equalsimpl0(j44, j39)) {
                             j44 = tabTokens2.subTabTwoLineTextColor;
                         }
                         long j45 = j40;
                         long j46 = tabTokens.subTabTwoLineSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j46, j39)) {
+                        if (ULong.m3446equalsimpl0(j46, j39)) {
                             j46 = tabTokens2.subTabTwoLineSelectedTextColor;
                         }
                         long j47 = j46;
                         long j48 = tabTokens.subTabTwoLineSubTextColor;
-                        if (ULong.m3447equalsimpl0(j48, j39)) {
+                        if (ULong.m3446equalsimpl0(j48, j39)) {
                             j48 = tabTokens2.subTabTwoLineSubTextColor;
                         }
                         long j49 = j48;
                         long j50 = tabTokens.subTabTwoLineSubSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j50, j39)) {
+                        if (ULong.m3446equalsimpl0(j50, j39)) {
                             j50 = tabTokens2.subTabTwoLineSubSelectedTextColor;
                         }
                         long j51 = tabTokens.subTabIndicatorBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j51, j39)) {
+                        if (ULong.m3446equalsimpl0(j51, j39)) {
                             j51 = tabTokens2.subTabIndicatorBackgroundColor;
                         }
                         return new SeslTabTokens(j45, j41, j42, j43, j44, j47, j49, j50, j51, null);
@@ -1869,19 +1869,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j52 = Color.Unspecified;
                         long j53 = alertDialogTokens.titleTextColor;
-                        if (ULong.m3447equalsimpl0(j53, j52)) {
+                        if (ULong.m3446equalsimpl0(j53, j52)) {
                             j53 = alertDialogTokens2.titleTextColor;
                         }
                         long j54 = alertDialogTokens.messageTextColor;
-                        if (ULong.m3447equalsimpl0(j54, j52)) {
+                        if (ULong.m3446equalsimpl0(j54, j52)) {
                             j54 = alertDialogTokens2.messageTextColor;
                         }
                         long j55 = alertDialogTokens.buttonTextColor;
-                        if (ULong.m3447equalsimpl0(j55, j52)) {
+                        if (ULong.m3446equalsimpl0(j55, j52)) {
                             j55 = alertDialogTokens2.buttonTextColor;
                         }
                         long j56 = alertDialogTokens.listTextColor;
-                        if (ULong.m3447equalsimpl0(j56, j52)) {
+                        if (ULong.m3446equalsimpl0(j56, j52)) {
                             j56 = alertDialogTokens2.listTextColor;
                         }
                         return new SeslAlertDialogTokens(j53, j54, j55, j56, null);
@@ -1892,11 +1892,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j57 = Color.Unspecified;
                         long j58 = buttonTokens.containerColor;
-                        if (ULong.m3447equalsimpl0(j58, j57)) {
+                        if (ULong.m3446equalsimpl0(j58, j57)) {
                             j58 = buttonTokens2.containerColor;
                         }
                         long j59 = buttonTokens.contentColor;
-                        if (ULong.m3447equalsimpl0(j59, j57)) {
+                        if (ULong.m3446equalsimpl0(j59, j57)) {
                             j59 = buttonTokens2.contentColor;
                         }
                         return new SeslButtonTokens(j58, j59, null);
@@ -1914,32 +1914,32 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j60 = Color.Unspecified;
                         long j61 = commonTokens.primaryColor;
-                        if (ULong.m3447equalsimpl0(j61, j60)) {
+                        if (ULong.m3446equalsimpl0(j61, j60)) {
                             j61 = commonTokens2.primaryColor;
                         }
                         long j62 = commonTokens.windowBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j62, j60)) {
+                        if (ULong.m3446equalsimpl0(j62, j60)) {
                             j62 = commonTokens2.windowBackgroundColor;
                         }
                         long j63 = commonTokens.rippleColor;
-                        if (ULong.m3447equalsimpl0(j63, j60)) {
+                        if (ULong.m3446equalsimpl0(j63, j60)) {
                             j63 = commonTokens2.rippleColor;
                         }
                         long j64 = commonTokens.roundedCornerColor;
-                        if (ULong.m3447equalsimpl0(j64, j60)) {
+                        if (ULong.m3446equalsimpl0(j64, j60)) {
                             j64 = commonTokens2.roundedCornerColor;
                         }
                         long j65 = commonTokens.mainTextColor;
-                        if (ULong.m3447equalsimpl0(j65, j60)) {
+                        if (ULong.m3446equalsimpl0(j65, j60)) {
                             j65 = commonTokens2.mainTextColor;
                         }
                         long j66 = j61;
                         long j67 = commonTokens.subTextColor;
-                        if (ULong.m3447equalsimpl0(j67, j60)) {
+                        if (ULong.m3446equalsimpl0(j67, j60)) {
                             j67 = commonTokens2.subTextColor;
                         }
                         long j68 = commonTokens.pointTextColor;
-                        if (ULong.m3447equalsimpl0(j68, j60)) {
+                        if (ULong.m3446equalsimpl0(j68, j60)) {
                             j68 = commonTokens2.pointTextColor;
                         }
                         return new SeslCommonTokens(j66, j62, j63, j64, j65, j67, j68, null);
@@ -1964,23 +1964,23 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j = Color.Unspecified;
                         long j2 = appBarTokens.topAppBarBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j2, j)) {
+                        if (ULong.m3446equalsimpl0(j2, j)) {
                             j2 = appBarTokens2.topAppBarBackgroundColor;
                         }
                         long j3 = appBarTokens.topAppBarTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j3, j)) {
+                        if (ULong.m3446equalsimpl0(j3, j)) {
                             j3 = appBarTokens2.topAppBarTitleTextColor;
                         }
                         long j4 = appBarTokens.topAppBarSubTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j4, j)) {
+                        if (ULong.m3446equalsimpl0(j4, j)) {
                             j4 = appBarTokens2.topAppBarSubTitleTextColor;
                         }
                         long j5 = appBarTokens.topAppBarMenuTextColor;
-                        if (ULong.m3447equalsimpl0(j5, j)) {
+                        if (ULong.m3446equalsimpl0(j5, j)) {
                             j5 = appBarTokens2.topAppBarMenuTextColor;
                         }
                         long j6 = appBarTokens.topExtendedAppBarSubTitleColor;
-                        if (ULong.m3447equalsimpl0(j6, j)) {
+                        if (ULong.m3446equalsimpl0(j6, j)) {
                             j6 = appBarTokens2.topExtendedAppBarSubTitleColor;
                         }
                         DimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 dimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 = DimensionSchemeKeyTokensKt.EmptySeslDpProducer;
@@ -1998,11 +1998,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j7 = Color.Unspecified;
                         long j8 = dividerTokens.horizontalDividerColor;
-                        if (ULong.m3447equalsimpl0(j8, j7)) {
+                        if (ULong.m3446equalsimpl0(j8, j7)) {
                             j8 = dividerTokens2.horizontalDividerColor;
                         }
                         long j9 = dividerTokens.verticalDividerColor;
-                        if (ULong.m3447equalsimpl0(j9, j7)) {
+                        if (ULong.m3446equalsimpl0(j9, j7)) {
                             j9 = dividerTokens2.verticalDividerColor;
                         }
                         return new SeslDividerTokens(j8, j9, null);
@@ -2013,11 +2013,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j10 = Color.Unspecified;
                         long j11 = listTokens.scrollbarThumbActivateColor;
-                        if (ULong.m3447equalsimpl0(j11, j10)) {
+                        if (ULong.m3446equalsimpl0(j11, j10)) {
                             j11 = listTokens2.scrollbarThumbActivateColor;
                         }
                         long j12 = listTokens.scrollbarThumbInactiveColor;
-                        if (ULong.m3447equalsimpl0(j12, j10)) {
+                        if (ULong.m3446equalsimpl0(j12, j10)) {
                             j12 = listTokens2.scrollbarThumbInactiveColor;
                         }
                         return new SeslListTokens(j11, j12, null);
@@ -2028,11 +2028,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j13 = Color.Unspecified;
                         long j14 = popupTokens.backgroundColor;
-                        if (ULong.m3447equalsimpl0(j14, j13)) {
+                        if (ULong.m3446equalsimpl0(j14, j13)) {
                             j14 = popupTokens2.backgroundColor;
                         }
                         long j15 = popupTokens.borderColor;
-                        if (ULong.m3447equalsimpl0(j15, j13)) {
+                        if (ULong.m3446equalsimpl0(j15, j13)) {
                             j15 = popupTokens2.borderColor;
                         }
                         Drawable drawable2 = popupTokens.menuBackground;
@@ -2052,47 +2052,47 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j16 = Color.Unspecified;
                         long j17 = sliderTokens.thumbFillColor;
-                        if (ULong.m3447equalsimpl0(j17, j16)) {
+                        if (ULong.m3446equalsimpl0(j17, j16)) {
                             j17 = sliderTokens2.thumbFillColor;
                         }
                         long j18 = sliderTokens.activateThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j18, j16)) {
+                        if (ULong.m3446equalsimpl0(j18, j16)) {
                             j18 = sliderTokens2.activateThumbStrokeColor;
                         }
                         long j19 = sliderTokens.inactiveThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j19, j16)) {
+                        if (ULong.m3446equalsimpl0(j19, j16)) {
                             j19 = sliderTokens2.inactiveThumbStrokeColor;
                         }
                         long j20 = sliderTokens.activateTrackColor;
-                        if (ULong.m3447equalsimpl0(j20, j16)) {
+                        if (ULong.m3446equalsimpl0(j20, j16)) {
                             j20 = sliderTokens2.activateTrackColor;
                         }
                         long j21 = sliderTokens.inactivateTrackColor;
-                        if (ULong.m3447equalsimpl0(j21, j16)) {
+                        if (ULong.m3446equalsimpl0(j21, j16)) {
                             j21 = sliderTokens2.inactivateTrackColor;
                         }
                         long j22 = j17;
                         long j23 = sliderTokens.overlapActivateColor;
-                        if (ULong.m3447equalsimpl0(j23, j16)) {
+                        if (ULong.m3446equalsimpl0(j23, j16)) {
                             j23 = sliderTokens2.overlapActivateColor;
                         }
                         long j24 = j23;
                         long j25 = sliderTokens.overlapInactiveColor;
-                        if (ULong.m3447equalsimpl0(j25, j16)) {
+                        if (ULong.m3446equalsimpl0(j25, j16)) {
                             j25 = sliderTokens2.overlapInactiveColor;
                         }
                         long j26 = j25;
                         long j27 = sliderTokens.levelTrackColor;
-                        if (ULong.m3447equalsimpl0(j27, j16)) {
+                        if (ULong.m3446equalsimpl0(j27, j16)) {
                             j27 = sliderTokens2.levelTrackColor;
                         }
                         long j28 = j27;
                         long j29 = sliderTokens.activateTickColor;
-                        if (ULong.m3447equalsimpl0(j29, j16)) {
+                        if (ULong.m3446equalsimpl0(j29, j16)) {
                             j29 = sliderTokens2.activateTickColor;
                         }
                         long j30 = sliderTokens.inactiveTickColor;
-                        if (ULong.m3447equalsimpl0(j30, j16)) {
+                        if (ULong.m3446equalsimpl0(j30, j16)) {
                             j30 = sliderTokens2.inactiveTickColor;
                         }
                         return new SeslSliderTokens(j22, j18, j19, j20, j21, j24, j26, j28, j29, j30, null);
@@ -2103,11 +2103,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j31 = Color.Unspecified;
                         long j32 = spinnerTokens.itemTextColorNormal;
-                        if (ULong.m3447equalsimpl0(j32, j31)) {
+                        if (ULong.m3446equalsimpl0(j32, j31)) {
                             j32 = spinnerTokens2.itemTextColorNormal;
                         }
                         long j33 = spinnerTokens.iconColorDefault;
-                        if (ULong.m3447equalsimpl0(j33, j31)) {
+                        if (ULong.m3446equalsimpl0(j33, j31)) {
                             j33 = spinnerTokens2.iconColorDefault;
                         }
                         return new SeslSpinnerTokens(j32, j33, null);
@@ -2118,19 +2118,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j34 = Color.Unspecified;
                         long j35 = switchTokens.trackOnColor;
-                        if (ULong.m3447equalsimpl0(j35, j34)) {
+                        if (ULong.m3446equalsimpl0(j35, j34)) {
                             j35 = switchTokens2.trackOnColor;
                         }
                         long j36 = switchTokens.trackOffColor;
-                        if (ULong.m3447equalsimpl0(j36, j34)) {
+                        if (ULong.m3446equalsimpl0(j36, j34)) {
                             j36 = switchTokens2.trackOffColor;
                         }
                         long j37 = switchTokens.thumbOnColor;
-                        if (ULong.m3447equalsimpl0(j37, j34)) {
+                        if (ULong.m3446equalsimpl0(j37, j34)) {
                             j37 = switchTokens2.thumbOnColor;
                         }
                         long j38 = switchTokens.thumbOffColor;
-                        if (ULong.m3447equalsimpl0(j38, j34)) {
+                        if (ULong.m3446equalsimpl0(j38, j34)) {
                             j38 = switchTokens2.thumbOffColor;
                         }
                         return new SeslSwitchTokens(j35, j36, j37, j38, null);
@@ -2141,42 +2141,42 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j39 = Color.Unspecified;
                         long j40 = tabTokens.textColor;
-                        if (ULong.m3447equalsimpl0(j40, j39)) {
+                        if (ULong.m3446equalsimpl0(j40, j39)) {
                             j40 = tabTokens2.textColor;
                         }
                         long j41 = tabTokens.selectedTextColor;
-                        if (ULong.m3447equalsimpl0(j41, j39)) {
+                        if (ULong.m3446equalsimpl0(j41, j39)) {
                             j41 = tabTokens2.selectedTextColor;
                         }
                         long j42 = tabTokens.subTabTextColor;
-                        if (ULong.m3447equalsimpl0(j42, j39)) {
+                        if (ULong.m3446equalsimpl0(j42, j39)) {
                             j42 = tabTokens2.subTabTextColor;
                         }
                         long j43 = tabTokens.subTabSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j43, j39)) {
+                        if (ULong.m3446equalsimpl0(j43, j39)) {
                             j43 = tabTokens2.subTabSelectedTextColor;
                         }
                         long j44 = tabTokens.subTabTwoLineTextColor;
-                        if (ULong.m3447equalsimpl0(j44, j39)) {
+                        if (ULong.m3446equalsimpl0(j44, j39)) {
                             j44 = tabTokens2.subTabTwoLineTextColor;
                         }
                         long j45 = j40;
                         long j46 = tabTokens.subTabTwoLineSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j46, j39)) {
+                        if (ULong.m3446equalsimpl0(j46, j39)) {
                             j46 = tabTokens2.subTabTwoLineSelectedTextColor;
                         }
                         long j47 = j46;
                         long j48 = tabTokens.subTabTwoLineSubTextColor;
-                        if (ULong.m3447equalsimpl0(j48, j39)) {
+                        if (ULong.m3446equalsimpl0(j48, j39)) {
                             j48 = tabTokens2.subTabTwoLineSubTextColor;
                         }
                         long j49 = j48;
                         long j50 = tabTokens.subTabTwoLineSubSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j50, j39)) {
+                        if (ULong.m3446equalsimpl0(j50, j39)) {
                             j50 = tabTokens2.subTabTwoLineSubSelectedTextColor;
                         }
                         long j51 = tabTokens.subTabIndicatorBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j51, j39)) {
+                        if (ULong.m3446equalsimpl0(j51, j39)) {
                             j51 = tabTokens2.subTabIndicatorBackgroundColor;
                         }
                         return new SeslTabTokens(j45, j41, j42, j43, j44, j47, j49, j50, j51, null);
@@ -2187,19 +2187,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j52 = Color.Unspecified;
                         long j53 = alertDialogTokens.titleTextColor;
-                        if (ULong.m3447equalsimpl0(j53, j52)) {
+                        if (ULong.m3446equalsimpl0(j53, j52)) {
                             j53 = alertDialogTokens2.titleTextColor;
                         }
                         long j54 = alertDialogTokens.messageTextColor;
-                        if (ULong.m3447equalsimpl0(j54, j52)) {
+                        if (ULong.m3446equalsimpl0(j54, j52)) {
                             j54 = alertDialogTokens2.messageTextColor;
                         }
                         long j55 = alertDialogTokens.buttonTextColor;
-                        if (ULong.m3447equalsimpl0(j55, j52)) {
+                        if (ULong.m3446equalsimpl0(j55, j52)) {
                             j55 = alertDialogTokens2.buttonTextColor;
                         }
                         long j56 = alertDialogTokens.listTextColor;
-                        if (ULong.m3447equalsimpl0(j56, j52)) {
+                        if (ULong.m3446equalsimpl0(j56, j52)) {
                             j56 = alertDialogTokens2.listTextColor;
                         }
                         return new SeslAlertDialogTokens(j53, j54, j55, j56, null);
@@ -2210,11 +2210,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j57 = Color.Unspecified;
                         long j58 = buttonTokens.containerColor;
-                        if (ULong.m3447equalsimpl0(j58, j57)) {
+                        if (ULong.m3446equalsimpl0(j58, j57)) {
                             j58 = buttonTokens2.containerColor;
                         }
                         long j59 = buttonTokens.contentColor;
-                        if (ULong.m3447equalsimpl0(j59, j57)) {
+                        if (ULong.m3446equalsimpl0(j59, j57)) {
                             j59 = buttonTokens2.contentColor;
                         }
                         return new SeslButtonTokens(j58, j59, null);
@@ -2232,32 +2232,32 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j60 = Color.Unspecified;
                         long j61 = commonTokens.primaryColor;
-                        if (ULong.m3447equalsimpl0(j61, j60)) {
+                        if (ULong.m3446equalsimpl0(j61, j60)) {
                             j61 = commonTokens2.primaryColor;
                         }
                         long j62 = commonTokens.windowBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j62, j60)) {
+                        if (ULong.m3446equalsimpl0(j62, j60)) {
                             j62 = commonTokens2.windowBackgroundColor;
                         }
                         long j63 = commonTokens.rippleColor;
-                        if (ULong.m3447equalsimpl0(j63, j60)) {
+                        if (ULong.m3446equalsimpl0(j63, j60)) {
                             j63 = commonTokens2.rippleColor;
                         }
                         long j64 = commonTokens.roundedCornerColor;
-                        if (ULong.m3447equalsimpl0(j64, j60)) {
+                        if (ULong.m3446equalsimpl0(j64, j60)) {
                             j64 = commonTokens2.roundedCornerColor;
                         }
                         long j65 = commonTokens.mainTextColor;
-                        if (ULong.m3447equalsimpl0(j65, j60)) {
+                        if (ULong.m3446equalsimpl0(j65, j60)) {
                             j65 = commonTokens2.mainTextColor;
                         }
                         long j66 = j61;
                         long j67 = commonTokens.subTextColor;
-                        if (ULong.m3447equalsimpl0(j67, j60)) {
+                        if (ULong.m3446equalsimpl0(j67, j60)) {
                             j67 = commonTokens2.subTextColor;
                         }
                         long j68 = commonTokens.pointTextColor;
-                        if (ULong.m3447equalsimpl0(j68, j60)) {
+                        if (ULong.m3446equalsimpl0(j68, j60)) {
                             j68 = commonTokens2.pointTextColor;
                         }
                         return new SeslCommonTokens(j66, j62, j63, j64, j65, j67, j68, null);
@@ -2282,23 +2282,23 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j = Color.Unspecified;
                         long j2 = appBarTokens.topAppBarBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j2, j)) {
+                        if (ULong.m3446equalsimpl0(j2, j)) {
                             j2 = appBarTokens2.topAppBarBackgroundColor;
                         }
                         long j3 = appBarTokens.topAppBarTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j3, j)) {
+                        if (ULong.m3446equalsimpl0(j3, j)) {
                             j3 = appBarTokens2.topAppBarTitleTextColor;
                         }
                         long j4 = appBarTokens.topAppBarSubTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j4, j)) {
+                        if (ULong.m3446equalsimpl0(j4, j)) {
                             j4 = appBarTokens2.topAppBarSubTitleTextColor;
                         }
                         long j5 = appBarTokens.topAppBarMenuTextColor;
-                        if (ULong.m3447equalsimpl0(j5, j)) {
+                        if (ULong.m3446equalsimpl0(j5, j)) {
                             j5 = appBarTokens2.topAppBarMenuTextColor;
                         }
                         long j6 = appBarTokens.topExtendedAppBarSubTitleColor;
-                        if (ULong.m3447equalsimpl0(j6, j)) {
+                        if (ULong.m3446equalsimpl0(j6, j)) {
                             j6 = appBarTokens2.topExtendedAppBarSubTitleColor;
                         }
                         DimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 dimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 = DimensionSchemeKeyTokensKt.EmptySeslDpProducer;
@@ -2316,11 +2316,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j7 = Color.Unspecified;
                         long j8 = dividerTokens.horizontalDividerColor;
-                        if (ULong.m3447equalsimpl0(j8, j7)) {
+                        if (ULong.m3446equalsimpl0(j8, j7)) {
                             j8 = dividerTokens2.horizontalDividerColor;
                         }
                         long j9 = dividerTokens.verticalDividerColor;
-                        if (ULong.m3447equalsimpl0(j9, j7)) {
+                        if (ULong.m3446equalsimpl0(j9, j7)) {
                             j9 = dividerTokens2.verticalDividerColor;
                         }
                         return new SeslDividerTokens(j8, j9, null);
@@ -2331,11 +2331,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j10 = Color.Unspecified;
                         long j11 = listTokens.scrollbarThumbActivateColor;
-                        if (ULong.m3447equalsimpl0(j11, j10)) {
+                        if (ULong.m3446equalsimpl0(j11, j10)) {
                             j11 = listTokens2.scrollbarThumbActivateColor;
                         }
                         long j12 = listTokens.scrollbarThumbInactiveColor;
-                        if (ULong.m3447equalsimpl0(j12, j10)) {
+                        if (ULong.m3446equalsimpl0(j12, j10)) {
                             j12 = listTokens2.scrollbarThumbInactiveColor;
                         }
                         return new SeslListTokens(j11, j12, null);
@@ -2346,11 +2346,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j13 = Color.Unspecified;
                         long j14 = popupTokens.backgroundColor;
-                        if (ULong.m3447equalsimpl0(j14, j13)) {
+                        if (ULong.m3446equalsimpl0(j14, j13)) {
                             j14 = popupTokens2.backgroundColor;
                         }
                         long j15 = popupTokens.borderColor;
-                        if (ULong.m3447equalsimpl0(j15, j13)) {
+                        if (ULong.m3446equalsimpl0(j15, j13)) {
                             j15 = popupTokens2.borderColor;
                         }
                         Drawable drawable2 = popupTokens.menuBackground;
@@ -2370,47 +2370,47 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j16 = Color.Unspecified;
                         long j17 = sliderTokens.thumbFillColor;
-                        if (ULong.m3447equalsimpl0(j17, j16)) {
+                        if (ULong.m3446equalsimpl0(j17, j16)) {
                             j17 = sliderTokens2.thumbFillColor;
                         }
                         long j18 = sliderTokens.activateThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j18, j16)) {
+                        if (ULong.m3446equalsimpl0(j18, j16)) {
                             j18 = sliderTokens2.activateThumbStrokeColor;
                         }
                         long j19 = sliderTokens.inactiveThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j19, j16)) {
+                        if (ULong.m3446equalsimpl0(j19, j16)) {
                             j19 = sliderTokens2.inactiveThumbStrokeColor;
                         }
                         long j20 = sliderTokens.activateTrackColor;
-                        if (ULong.m3447equalsimpl0(j20, j16)) {
+                        if (ULong.m3446equalsimpl0(j20, j16)) {
                             j20 = sliderTokens2.activateTrackColor;
                         }
                         long j21 = sliderTokens.inactivateTrackColor;
-                        if (ULong.m3447equalsimpl0(j21, j16)) {
+                        if (ULong.m3446equalsimpl0(j21, j16)) {
                             j21 = sliderTokens2.inactivateTrackColor;
                         }
                         long j22 = j17;
                         long j23 = sliderTokens.overlapActivateColor;
-                        if (ULong.m3447equalsimpl0(j23, j16)) {
+                        if (ULong.m3446equalsimpl0(j23, j16)) {
                             j23 = sliderTokens2.overlapActivateColor;
                         }
                         long j24 = j23;
                         long j25 = sliderTokens.overlapInactiveColor;
-                        if (ULong.m3447equalsimpl0(j25, j16)) {
+                        if (ULong.m3446equalsimpl0(j25, j16)) {
                             j25 = sliderTokens2.overlapInactiveColor;
                         }
                         long j26 = j25;
                         long j27 = sliderTokens.levelTrackColor;
-                        if (ULong.m3447equalsimpl0(j27, j16)) {
+                        if (ULong.m3446equalsimpl0(j27, j16)) {
                             j27 = sliderTokens2.levelTrackColor;
                         }
                         long j28 = j27;
                         long j29 = sliderTokens.activateTickColor;
-                        if (ULong.m3447equalsimpl0(j29, j16)) {
+                        if (ULong.m3446equalsimpl0(j29, j16)) {
                             j29 = sliderTokens2.activateTickColor;
                         }
                         long j30 = sliderTokens.inactiveTickColor;
-                        if (ULong.m3447equalsimpl0(j30, j16)) {
+                        if (ULong.m3446equalsimpl0(j30, j16)) {
                             j30 = sliderTokens2.inactiveTickColor;
                         }
                         return new SeslSliderTokens(j22, j18, j19, j20, j21, j24, j26, j28, j29, j30, null);
@@ -2421,11 +2421,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j31 = Color.Unspecified;
                         long j32 = spinnerTokens.itemTextColorNormal;
-                        if (ULong.m3447equalsimpl0(j32, j31)) {
+                        if (ULong.m3446equalsimpl0(j32, j31)) {
                             j32 = spinnerTokens2.itemTextColorNormal;
                         }
                         long j33 = spinnerTokens.iconColorDefault;
-                        if (ULong.m3447equalsimpl0(j33, j31)) {
+                        if (ULong.m3446equalsimpl0(j33, j31)) {
                             j33 = spinnerTokens2.iconColorDefault;
                         }
                         return new SeslSpinnerTokens(j32, j33, null);
@@ -2436,19 +2436,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j34 = Color.Unspecified;
                         long j35 = switchTokens.trackOnColor;
-                        if (ULong.m3447equalsimpl0(j35, j34)) {
+                        if (ULong.m3446equalsimpl0(j35, j34)) {
                             j35 = switchTokens2.trackOnColor;
                         }
                         long j36 = switchTokens.trackOffColor;
-                        if (ULong.m3447equalsimpl0(j36, j34)) {
+                        if (ULong.m3446equalsimpl0(j36, j34)) {
                             j36 = switchTokens2.trackOffColor;
                         }
                         long j37 = switchTokens.thumbOnColor;
-                        if (ULong.m3447equalsimpl0(j37, j34)) {
+                        if (ULong.m3446equalsimpl0(j37, j34)) {
                             j37 = switchTokens2.thumbOnColor;
                         }
                         long j38 = switchTokens.thumbOffColor;
-                        if (ULong.m3447equalsimpl0(j38, j34)) {
+                        if (ULong.m3446equalsimpl0(j38, j34)) {
                             j38 = switchTokens2.thumbOffColor;
                         }
                         return new SeslSwitchTokens(j35, j36, j37, j38, null);
@@ -2459,42 +2459,42 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j39 = Color.Unspecified;
                         long j40 = tabTokens.textColor;
-                        if (ULong.m3447equalsimpl0(j40, j39)) {
+                        if (ULong.m3446equalsimpl0(j40, j39)) {
                             j40 = tabTokens2.textColor;
                         }
                         long j41 = tabTokens.selectedTextColor;
-                        if (ULong.m3447equalsimpl0(j41, j39)) {
+                        if (ULong.m3446equalsimpl0(j41, j39)) {
                             j41 = tabTokens2.selectedTextColor;
                         }
                         long j42 = tabTokens.subTabTextColor;
-                        if (ULong.m3447equalsimpl0(j42, j39)) {
+                        if (ULong.m3446equalsimpl0(j42, j39)) {
                             j42 = tabTokens2.subTabTextColor;
                         }
                         long j43 = tabTokens.subTabSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j43, j39)) {
+                        if (ULong.m3446equalsimpl0(j43, j39)) {
                             j43 = tabTokens2.subTabSelectedTextColor;
                         }
                         long j44 = tabTokens.subTabTwoLineTextColor;
-                        if (ULong.m3447equalsimpl0(j44, j39)) {
+                        if (ULong.m3446equalsimpl0(j44, j39)) {
                             j44 = tabTokens2.subTabTwoLineTextColor;
                         }
                         long j45 = j40;
                         long j46 = tabTokens.subTabTwoLineSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j46, j39)) {
+                        if (ULong.m3446equalsimpl0(j46, j39)) {
                             j46 = tabTokens2.subTabTwoLineSelectedTextColor;
                         }
                         long j47 = j46;
                         long j48 = tabTokens.subTabTwoLineSubTextColor;
-                        if (ULong.m3447equalsimpl0(j48, j39)) {
+                        if (ULong.m3446equalsimpl0(j48, j39)) {
                             j48 = tabTokens2.subTabTwoLineSubTextColor;
                         }
                         long j49 = j48;
                         long j50 = tabTokens.subTabTwoLineSubSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j50, j39)) {
+                        if (ULong.m3446equalsimpl0(j50, j39)) {
                             j50 = tabTokens2.subTabTwoLineSubSelectedTextColor;
                         }
                         long j51 = tabTokens.subTabIndicatorBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j51, j39)) {
+                        if (ULong.m3446equalsimpl0(j51, j39)) {
                             j51 = tabTokens2.subTabIndicatorBackgroundColor;
                         }
                         return new SeslTabTokens(j45, j41, j42, j43, j44, j47, j49, j50, j51, null);
@@ -2505,19 +2505,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j52 = Color.Unspecified;
                         long j53 = alertDialogTokens.titleTextColor;
-                        if (ULong.m3447equalsimpl0(j53, j52)) {
+                        if (ULong.m3446equalsimpl0(j53, j52)) {
                             j53 = alertDialogTokens2.titleTextColor;
                         }
                         long j54 = alertDialogTokens.messageTextColor;
-                        if (ULong.m3447equalsimpl0(j54, j52)) {
+                        if (ULong.m3446equalsimpl0(j54, j52)) {
                             j54 = alertDialogTokens2.messageTextColor;
                         }
                         long j55 = alertDialogTokens.buttonTextColor;
-                        if (ULong.m3447equalsimpl0(j55, j52)) {
+                        if (ULong.m3446equalsimpl0(j55, j52)) {
                             j55 = alertDialogTokens2.buttonTextColor;
                         }
                         long j56 = alertDialogTokens.listTextColor;
-                        if (ULong.m3447equalsimpl0(j56, j52)) {
+                        if (ULong.m3446equalsimpl0(j56, j52)) {
                             j56 = alertDialogTokens2.listTextColor;
                         }
                         return new SeslAlertDialogTokens(j53, j54, j55, j56, null);
@@ -2528,11 +2528,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j57 = Color.Unspecified;
                         long j58 = buttonTokens.containerColor;
-                        if (ULong.m3447equalsimpl0(j58, j57)) {
+                        if (ULong.m3446equalsimpl0(j58, j57)) {
                             j58 = buttonTokens2.containerColor;
                         }
                         long j59 = buttonTokens.contentColor;
-                        if (ULong.m3447equalsimpl0(j59, j57)) {
+                        if (ULong.m3446equalsimpl0(j59, j57)) {
                             j59 = buttonTokens2.contentColor;
                         }
                         return new SeslButtonTokens(j58, j59, null);
@@ -2550,32 +2550,32 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j60 = Color.Unspecified;
                         long j61 = commonTokens.primaryColor;
-                        if (ULong.m3447equalsimpl0(j61, j60)) {
+                        if (ULong.m3446equalsimpl0(j61, j60)) {
                             j61 = commonTokens2.primaryColor;
                         }
                         long j62 = commonTokens.windowBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j62, j60)) {
+                        if (ULong.m3446equalsimpl0(j62, j60)) {
                             j62 = commonTokens2.windowBackgroundColor;
                         }
                         long j63 = commonTokens.rippleColor;
-                        if (ULong.m3447equalsimpl0(j63, j60)) {
+                        if (ULong.m3446equalsimpl0(j63, j60)) {
                             j63 = commonTokens2.rippleColor;
                         }
                         long j64 = commonTokens.roundedCornerColor;
-                        if (ULong.m3447equalsimpl0(j64, j60)) {
+                        if (ULong.m3446equalsimpl0(j64, j60)) {
                             j64 = commonTokens2.roundedCornerColor;
                         }
                         long j65 = commonTokens.mainTextColor;
-                        if (ULong.m3447equalsimpl0(j65, j60)) {
+                        if (ULong.m3446equalsimpl0(j65, j60)) {
                             j65 = commonTokens2.mainTextColor;
                         }
                         long j66 = j61;
                         long j67 = commonTokens.subTextColor;
-                        if (ULong.m3447equalsimpl0(j67, j60)) {
+                        if (ULong.m3446equalsimpl0(j67, j60)) {
                             j67 = commonTokens2.subTextColor;
                         }
                         long j68 = commonTokens.pointTextColor;
-                        if (ULong.m3447equalsimpl0(j68, j60)) {
+                        if (ULong.m3446equalsimpl0(j68, j60)) {
                             j68 = commonTokens2.pointTextColor;
                         }
                         return new SeslCommonTokens(j66, j62, j63, j64, j65, j67, j68, null);
@@ -2600,23 +2600,23 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j = Color.Unspecified;
                         long j2 = appBarTokens.topAppBarBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j2, j)) {
+                        if (ULong.m3446equalsimpl0(j2, j)) {
                             j2 = appBarTokens2.topAppBarBackgroundColor;
                         }
                         long j3 = appBarTokens.topAppBarTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j3, j)) {
+                        if (ULong.m3446equalsimpl0(j3, j)) {
                             j3 = appBarTokens2.topAppBarTitleTextColor;
                         }
                         long j4 = appBarTokens.topAppBarSubTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j4, j)) {
+                        if (ULong.m3446equalsimpl0(j4, j)) {
                             j4 = appBarTokens2.topAppBarSubTitleTextColor;
                         }
                         long j5 = appBarTokens.topAppBarMenuTextColor;
-                        if (ULong.m3447equalsimpl0(j5, j)) {
+                        if (ULong.m3446equalsimpl0(j5, j)) {
                             j5 = appBarTokens2.topAppBarMenuTextColor;
                         }
                         long j6 = appBarTokens.topExtendedAppBarSubTitleColor;
-                        if (ULong.m3447equalsimpl0(j6, j)) {
+                        if (ULong.m3446equalsimpl0(j6, j)) {
                             j6 = appBarTokens2.topExtendedAppBarSubTitleColor;
                         }
                         DimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 dimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 = DimensionSchemeKeyTokensKt.EmptySeslDpProducer;
@@ -2634,11 +2634,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j7 = Color.Unspecified;
                         long j8 = dividerTokens.horizontalDividerColor;
-                        if (ULong.m3447equalsimpl0(j8, j7)) {
+                        if (ULong.m3446equalsimpl0(j8, j7)) {
                             j8 = dividerTokens2.horizontalDividerColor;
                         }
                         long j9 = dividerTokens.verticalDividerColor;
-                        if (ULong.m3447equalsimpl0(j9, j7)) {
+                        if (ULong.m3446equalsimpl0(j9, j7)) {
                             j9 = dividerTokens2.verticalDividerColor;
                         }
                         return new SeslDividerTokens(j8, j9, null);
@@ -2649,11 +2649,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j10 = Color.Unspecified;
                         long j11 = listTokens.scrollbarThumbActivateColor;
-                        if (ULong.m3447equalsimpl0(j11, j10)) {
+                        if (ULong.m3446equalsimpl0(j11, j10)) {
                             j11 = listTokens2.scrollbarThumbActivateColor;
                         }
                         long j12 = listTokens.scrollbarThumbInactiveColor;
-                        if (ULong.m3447equalsimpl0(j12, j10)) {
+                        if (ULong.m3446equalsimpl0(j12, j10)) {
                             j12 = listTokens2.scrollbarThumbInactiveColor;
                         }
                         return new SeslListTokens(j11, j12, null);
@@ -2664,11 +2664,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j13 = Color.Unspecified;
                         long j14 = popupTokens.backgroundColor;
-                        if (ULong.m3447equalsimpl0(j14, j13)) {
+                        if (ULong.m3446equalsimpl0(j14, j13)) {
                             j14 = popupTokens2.backgroundColor;
                         }
                         long j15 = popupTokens.borderColor;
-                        if (ULong.m3447equalsimpl0(j15, j13)) {
+                        if (ULong.m3446equalsimpl0(j15, j13)) {
                             j15 = popupTokens2.borderColor;
                         }
                         Drawable drawable2 = popupTokens.menuBackground;
@@ -2688,47 +2688,47 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j16 = Color.Unspecified;
                         long j17 = sliderTokens.thumbFillColor;
-                        if (ULong.m3447equalsimpl0(j17, j16)) {
+                        if (ULong.m3446equalsimpl0(j17, j16)) {
                             j17 = sliderTokens2.thumbFillColor;
                         }
                         long j18 = sliderTokens.activateThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j18, j16)) {
+                        if (ULong.m3446equalsimpl0(j18, j16)) {
                             j18 = sliderTokens2.activateThumbStrokeColor;
                         }
                         long j19 = sliderTokens.inactiveThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j19, j16)) {
+                        if (ULong.m3446equalsimpl0(j19, j16)) {
                             j19 = sliderTokens2.inactiveThumbStrokeColor;
                         }
                         long j20 = sliderTokens.activateTrackColor;
-                        if (ULong.m3447equalsimpl0(j20, j16)) {
+                        if (ULong.m3446equalsimpl0(j20, j16)) {
                             j20 = sliderTokens2.activateTrackColor;
                         }
                         long j21 = sliderTokens.inactivateTrackColor;
-                        if (ULong.m3447equalsimpl0(j21, j16)) {
+                        if (ULong.m3446equalsimpl0(j21, j16)) {
                             j21 = sliderTokens2.inactivateTrackColor;
                         }
                         long j22 = j17;
                         long j23 = sliderTokens.overlapActivateColor;
-                        if (ULong.m3447equalsimpl0(j23, j16)) {
+                        if (ULong.m3446equalsimpl0(j23, j16)) {
                             j23 = sliderTokens2.overlapActivateColor;
                         }
                         long j24 = j23;
                         long j25 = sliderTokens.overlapInactiveColor;
-                        if (ULong.m3447equalsimpl0(j25, j16)) {
+                        if (ULong.m3446equalsimpl0(j25, j16)) {
                             j25 = sliderTokens2.overlapInactiveColor;
                         }
                         long j26 = j25;
                         long j27 = sliderTokens.levelTrackColor;
-                        if (ULong.m3447equalsimpl0(j27, j16)) {
+                        if (ULong.m3446equalsimpl0(j27, j16)) {
                             j27 = sliderTokens2.levelTrackColor;
                         }
                         long j28 = j27;
                         long j29 = sliderTokens.activateTickColor;
-                        if (ULong.m3447equalsimpl0(j29, j16)) {
+                        if (ULong.m3446equalsimpl0(j29, j16)) {
                             j29 = sliderTokens2.activateTickColor;
                         }
                         long j30 = sliderTokens.inactiveTickColor;
-                        if (ULong.m3447equalsimpl0(j30, j16)) {
+                        if (ULong.m3446equalsimpl0(j30, j16)) {
                             j30 = sliderTokens2.inactiveTickColor;
                         }
                         return new SeslSliderTokens(j22, j18, j19, j20, j21, j24, j26, j28, j29, j30, null);
@@ -2739,11 +2739,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j31 = Color.Unspecified;
                         long j32 = spinnerTokens.itemTextColorNormal;
-                        if (ULong.m3447equalsimpl0(j32, j31)) {
+                        if (ULong.m3446equalsimpl0(j32, j31)) {
                             j32 = spinnerTokens2.itemTextColorNormal;
                         }
                         long j33 = spinnerTokens.iconColorDefault;
-                        if (ULong.m3447equalsimpl0(j33, j31)) {
+                        if (ULong.m3446equalsimpl0(j33, j31)) {
                             j33 = spinnerTokens2.iconColorDefault;
                         }
                         return new SeslSpinnerTokens(j32, j33, null);
@@ -2754,19 +2754,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j34 = Color.Unspecified;
                         long j35 = switchTokens.trackOnColor;
-                        if (ULong.m3447equalsimpl0(j35, j34)) {
+                        if (ULong.m3446equalsimpl0(j35, j34)) {
                             j35 = switchTokens2.trackOnColor;
                         }
                         long j36 = switchTokens.trackOffColor;
-                        if (ULong.m3447equalsimpl0(j36, j34)) {
+                        if (ULong.m3446equalsimpl0(j36, j34)) {
                             j36 = switchTokens2.trackOffColor;
                         }
                         long j37 = switchTokens.thumbOnColor;
-                        if (ULong.m3447equalsimpl0(j37, j34)) {
+                        if (ULong.m3446equalsimpl0(j37, j34)) {
                             j37 = switchTokens2.thumbOnColor;
                         }
                         long j38 = switchTokens.thumbOffColor;
-                        if (ULong.m3447equalsimpl0(j38, j34)) {
+                        if (ULong.m3446equalsimpl0(j38, j34)) {
                             j38 = switchTokens2.thumbOffColor;
                         }
                         return new SeslSwitchTokens(j35, j36, j37, j38, null);
@@ -2777,42 +2777,42 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j39 = Color.Unspecified;
                         long j40 = tabTokens.textColor;
-                        if (ULong.m3447equalsimpl0(j40, j39)) {
+                        if (ULong.m3446equalsimpl0(j40, j39)) {
                             j40 = tabTokens2.textColor;
                         }
                         long j41 = tabTokens.selectedTextColor;
-                        if (ULong.m3447equalsimpl0(j41, j39)) {
+                        if (ULong.m3446equalsimpl0(j41, j39)) {
                             j41 = tabTokens2.selectedTextColor;
                         }
                         long j42 = tabTokens.subTabTextColor;
-                        if (ULong.m3447equalsimpl0(j42, j39)) {
+                        if (ULong.m3446equalsimpl0(j42, j39)) {
                             j42 = tabTokens2.subTabTextColor;
                         }
                         long j43 = tabTokens.subTabSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j43, j39)) {
+                        if (ULong.m3446equalsimpl0(j43, j39)) {
                             j43 = tabTokens2.subTabSelectedTextColor;
                         }
                         long j44 = tabTokens.subTabTwoLineTextColor;
-                        if (ULong.m3447equalsimpl0(j44, j39)) {
+                        if (ULong.m3446equalsimpl0(j44, j39)) {
                             j44 = tabTokens2.subTabTwoLineTextColor;
                         }
                         long j45 = j40;
                         long j46 = tabTokens.subTabTwoLineSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j46, j39)) {
+                        if (ULong.m3446equalsimpl0(j46, j39)) {
                             j46 = tabTokens2.subTabTwoLineSelectedTextColor;
                         }
                         long j47 = j46;
                         long j48 = tabTokens.subTabTwoLineSubTextColor;
-                        if (ULong.m3447equalsimpl0(j48, j39)) {
+                        if (ULong.m3446equalsimpl0(j48, j39)) {
                             j48 = tabTokens2.subTabTwoLineSubTextColor;
                         }
                         long j49 = j48;
                         long j50 = tabTokens.subTabTwoLineSubSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j50, j39)) {
+                        if (ULong.m3446equalsimpl0(j50, j39)) {
                             j50 = tabTokens2.subTabTwoLineSubSelectedTextColor;
                         }
                         long j51 = tabTokens.subTabIndicatorBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j51, j39)) {
+                        if (ULong.m3446equalsimpl0(j51, j39)) {
                             j51 = tabTokens2.subTabIndicatorBackgroundColor;
                         }
                         return new SeslTabTokens(j45, j41, j42, j43, j44, j47, j49, j50, j51, null);
@@ -2823,19 +2823,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j52 = Color.Unspecified;
                         long j53 = alertDialogTokens.titleTextColor;
-                        if (ULong.m3447equalsimpl0(j53, j52)) {
+                        if (ULong.m3446equalsimpl0(j53, j52)) {
                             j53 = alertDialogTokens2.titleTextColor;
                         }
                         long j54 = alertDialogTokens.messageTextColor;
-                        if (ULong.m3447equalsimpl0(j54, j52)) {
+                        if (ULong.m3446equalsimpl0(j54, j52)) {
                             j54 = alertDialogTokens2.messageTextColor;
                         }
                         long j55 = alertDialogTokens.buttonTextColor;
-                        if (ULong.m3447equalsimpl0(j55, j52)) {
+                        if (ULong.m3446equalsimpl0(j55, j52)) {
                             j55 = alertDialogTokens2.buttonTextColor;
                         }
                         long j56 = alertDialogTokens.listTextColor;
-                        if (ULong.m3447equalsimpl0(j56, j52)) {
+                        if (ULong.m3446equalsimpl0(j56, j52)) {
                             j56 = alertDialogTokens2.listTextColor;
                         }
                         return new SeslAlertDialogTokens(j53, j54, j55, j56, null);
@@ -2846,11 +2846,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j57 = Color.Unspecified;
                         long j58 = buttonTokens.containerColor;
-                        if (ULong.m3447equalsimpl0(j58, j57)) {
+                        if (ULong.m3446equalsimpl0(j58, j57)) {
                             j58 = buttonTokens2.containerColor;
                         }
                         long j59 = buttonTokens.contentColor;
-                        if (ULong.m3447equalsimpl0(j59, j57)) {
+                        if (ULong.m3446equalsimpl0(j59, j57)) {
                             j59 = buttonTokens2.contentColor;
                         }
                         return new SeslButtonTokens(j58, j59, null);
@@ -2868,32 +2868,32 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j60 = Color.Unspecified;
                         long j61 = commonTokens.primaryColor;
-                        if (ULong.m3447equalsimpl0(j61, j60)) {
+                        if (ULong.m3446equalsimpl0(j61, j60)) {
                             j61 = commonTokens2.primaryColor;
                         }
                         long j62 = commonTokens.windowBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j62, j60)) {
+                        if (ULong.m3446equalsimpl0(j62, j60)) {
                             j62 = commonTokens2.windowBackgroundColor;
                         }
                         long j63 = commonTokens.rippleColor;
-                        if (ULong.m3447equalsimpl0(j63, j60)) {
+                        if (ULong.m3446equalsimpl0(j63, j60)) {
                             j63 = commonTokens2.rippleColor;
                         }
                         long j64 = commonTokens.roundedCornerColor;
-                        if (ULong.m3447equalsimpl0(j64, j60)) {
+                        if (ULong.m3446equalsimpl0(j64, j60)) {
                             j64 = commonTokens2.roundedCornerColor;
                         }
                         long j65 = commonTokens.mainTextColor;
-                        if (ULong.m3447equalsimpl0(j65, j60)) {
+                        if (ULong.m3446equalsimpl0(j65, j60)) {
                             j65 = commonTokens2.mainTextColor;
                         }
                         long j66 = j61;
                         long j67 = commonTokens.subTextColor;
-                        if (ULong.m3447equalsimpl0(j67, j60)) {
+                        if (ULong.m3446equalsimpl0(j67, j60)) {
                             j67 = commonTokens2.subTextColor;
                         }
                         long j68 = commonTokens.pointTextColor;
-                        if (ULong.m3447equalsimpl0(j68, j60)) {
+                        if (ULong.m3446equalsimpl0(j68, j60)) {
                             j68 = commonTokens2.pointTextColor;
                         }
                         return new SeslCommonTokens(j66, j62, j63, j64, j65, j67, j68, null);
@@ -2918,23 +2918,23 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j = Color.Unspecified;
                         long j2 = appBarTokens.topAppBarBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j2, j)) {
+                        if (ULong.m3446equalsimpl0(j2, j)) {
                             j2 = appBarTokens2.topAppBarBackgroundColor;
                         }
                         long j3 = appBarTokens.topAppBarTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j3, j)) {
+                        if (ULong.m3446equalsimpl0(j3, j)) {
                             j3 = appBarTokens2.topAppBarTitleTextColor;
                         }
                         long j4 = appBarTokens.topAppBarSubTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j4, j)) {
+                        if (ULong.m3446equalsimpl0(j4, j)) {
                             j4 = appBarTokens2.topAppBarSubTitleTextColor;
                         }
                         long j5 = appBarTokens.topAppBarMenuTextColor;
-                        if (ULong.m3447equalsimpl0(j5, j)) {
+                        if (ULong.m3446equalsimpl0(j5, j)) {
                             j5 = appBarTokens2.topAppBarMenuTextColor;
                         }
                         long j6 = appBarTokens.topExtendedAppBarSubTitleColor;
-                        if (ULong.m3447equalsimpl0(j6, j)) {
+                        if (ULong.m3446equalsimpl0(j6, j)) {
                             j6 = appBarTokens2.topExtendedAppBarSubTitleColor;
                         }
                         DimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 dimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 = DimensionSchemeKeyTokensKt.EmptySeslDpProducer;
@@ -2952,11 +2952,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j7 = Color.Unspecified;
                         long j8 = dividerTokens.horizontalDividerColor;
-                        if (ULong.m3447equalsimpl0(j8, j7)) {
+                        if (ULong.m3446equalsimpl0(j8, j7)) {
                             j8 = dividerTokens2.horizontalDividerColor;
                         }
                         long j9 = dividerTokens.verticalDividerColor;
-                        if (ULong.m3447equalsimpl0(j9, j7)) {
+                        if (ULong.m3446equalsimpl0(j9, j7)) {
                             j9 = dividerTokens2.verticalDividerColor;
                         }
                         return new SeslDividerTokens(j8, j9, null);
@@ -2967,11 +2967,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j10 = Color.Unspecified;
                         long j11 = listTokens.scrollbarThumbActivateColor;
-                        if (ULong.m3447equalsimpl0(j11, j10)) {
+                        if (ULong.m3446equalsimpl0(j11, j10)) {
                             j11 = listTokens2.scrollbarThumbActivateColor;
                         }
                         long j12 = listTokens.scrollbarThumbInactiveColor;
-                        if (ULong.m3447equalsimpl0(j12, j10)) {
+                        if (ULong.m3446equalsimpl0(j12, j10)) {
                             j12 = listTokens2.scrollbarThumbInactiveColor;
                         }
                         return new SeslListTokens(j11, j12, null);
@@ -2982,11 +2982,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j13 = Color.Unspecified;
                         long j14 = popupTokens.backgroundColor;
-                        if (ULong.m3447equalsimpl0(j14, j13)) {
+                        if (ULong.m3446equalsimpl0(j14, j13)) {
                             j14 = popupTokens2.backgroundColor;
                         }
                         long j15 = popupTokens.borderColor;
-                        if (ULong.m3447equalsimpl0(j15, j13)) {
+                        if (ULong.m3446equalsimpl0(j15, j13)) {
                             j15 = popupTokens2.borderColor;
                         }
                         Drawable drawable2 = popupTokens.menuBackground;
@@ -3006,47 +3006,47 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j16 = Color.Unspecified;
                         long j17 = sliderTokens.thumbFillColor;
-                        if (ULong.m3447equalsimpl0(j17, j16)) {
+                        if (ULong.m3446equalsimpl0(j17, j16)) {
                             j17 = sliderTokens2.thumbFillColor;
                         }
                         long j18 = sliderTokens.activateThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j18, j16)) {
+                        if (ULong.m3446equalsimpl0(j18, j16)) {
                             j18 = sliderTokens2.activateThumbStrokeColor;
                         }
                         long j19 = sliderTokens.inactiveThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j19, j16)) {
+                        if (ULong.m3446equalsimpl0(j19, j16)) {
                             j19 = sliderTokens2.inactiveThumbStrokeColor;
                         }
                         long j20 = sliderTokens.activateTrackColor;
-                        if (ULong.m3447equalsimpl0(j20, j16)) {
+                        if (ULong.m3446equalsimpl0(j20, j16)) {
                             j20 = sliderTokens2.activateTrackColor;
                         }
                         long j21 = sliderTokens.inactivateTrackColor;
-                        if (ULong.m3447equalsimpl0(j21, j16)) {
+                        if (ULong.m3446equalsimpl0(j21, j16)) {
                             j21 = sliderTokens2.inactivateTrackColor;
                         }
                         long j22 = j17;
                         long j23 = sliderTokens.overlapActivateColor;
-                        if (ULong.m3447equalsimpl0(j23, j16)) {
+                        if (ULong.m3446equalsimpl0(j23, j16)) {
                             j23 = sliderTokens2.overlapActivateColor;
                         }
                         long j24 = j23;
                         long j25 = sliderTokens.overlapInactiveColor;
-                        if (ULong.m3447equalsimpl0(j25, j16)) {
+                        if (ULong.m3446equalsimpl0(j25, j16)) {
                             j25 = sliderTokens2.overlapInactiveColor;
                         }
                         long j26 = j25;
                         long j27 = sliderTokens.levelTrackColor;
-                        if (ULong.m3447equalsimpl0(j27, j16)) {
+                        if (ULong.m3446equalsimpl0(j27, j16)) {
                             j27 = sliderTokens2.levelTrackColor;
                         }
                         long j28 = j27;
                         long j29 = sliderTokens.activateTickColor;
-                        if (ULong.m3447equalsimpl0(j29, j16)) {
+                        if (ULong.m3446equalsimpl0(j29, j16)) {
                             j29 = sliderTokens2.activateTickColor;
                         }
                         long j30 = sliderTokens.inactiveTickColor;
-                        if (ULong.m3447equalsimpl0(j30, j16)) {
+                        if (ULong.m3446equalsimpl0(j30, j16)) {
                             j30 = sliderTokens2.inactiveTickColor;
                         }
                         return new SeslSliderTokens(j22, j18, j19, j20, j21, j24, j26, j28, j29, j30, null);
@@ -3057,11 +3057,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j31 = Color.Unspecified;
                         long j32 = spinnerTokens.itemTextColorNormal;
-                        if (ULong.m3447equalsimpl0(j32, j31)) {
+                        if (ULong.m3446equalsimpl0(j32, j31)) {
                             j32 = spinnerTokens2.itemTextColorNormal;
                         }
                         long j33 = spinnerTokens.iconColorDefault;
-                        if (ULong.m3447equalsimpl0(j33, j31)) {
+                        if (ULong.m3446equalsimpl0(j33, j31)) {
                             j33 = spinnerTokens2.iconColorDefault;
                         }
                         return new SeslSpinnerTokens(j32, j33, null);
@@ -3072,19 +3072,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j34 = Color.Unspecified;
                         long j35 = switchTokens.trackOnColor;
-                        if (ULong.m3447equalsimpl0(j35, j34)) {
+                        if (ULong.m3446equalsimpl0(j35, j34)) {
                             j35 = switchTokens2.trackOnColor;
                         }
                         long j36 = switchTokens.trackOffColor;
-                        if (ULong.m3447equalsimpl0(j36, j34)) {
+                        if (ULong.m3446equalsimpl0(j36, j34)) {
                             j36 = switchTokens2.trackOffColor;
                         }
                         long j37 = switchTokens.thumbOnColor;
-                        if (ULong.m3447equalsimpl0(j37, j34)) {
+                        if (ULong.m3446equalsimpl0(j37, j34)) {
                             j37 = switchTokens2.thumbOnColor;
                         }
                         long j38 = switchTokens.thumbOffColor;
-                        if (ULong.m3447equalsimpl0(j38, j34)) {
+                        if (ULong.m3446equalsimpl0(j38, j34)) {
                             j38 = switchTokens2.thumbOffColor;
                         }
                         return new SeslSwitchTokens(j35, j36, j37, j38, null);
@@ -3095,42 +3095,42 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j39 = Color.Unspecified;
                         long j40 = tabTokens.textColor;
-                        if (ULong.m3447equalsimpl0(j40, j39)) {
+                        if (ULong.m3446equalsimpl0(j40, j39)) {
                             j40 = tabTokens2.textColor;
                         }
                         long j41 = tabTokens.selectedTextColor;
-                        if (ULong.m3447equalsimpl0(j41, j39)) {
+                        if (ULong.m3446equalsimpl0(j41, j39)) {
                             j41 = tabTokens2.selectedTextColor;
                         }
                         long j42 = tabTokens.subTabTextColor;
-                        if (ULong.m3447equalsimpl0(j42, j39)) {
+                        if (ULong.m3446equalsimpl0(j42, j39)) {
                             j42 = tabTokens2.subTabTextColor;
                         }
                         long j43 = tabTokens.subTabSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j43, j39)) {
+                        if (ULong.m3446equalsimpl0(j43, j39)) {
                             j43 = tabTokens2.subTabSelectedTextColor;
                         }
                         long j44 = tabTokens.subTabTwoLineTextColor;
-                        if (ULong.m3447equalsimpl0(j44, j39)) {
+                        if (ULong.m3446equalsimpl0(j44, j39)) {
                             j44 = tabTokens2.subTabTwoLineTextColor;
                         }
                         long j45 = j40;
                         long j46 = tabTokens.subTabTwoLineSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j46, j39)) {
+                        if (ULong.m3446equalsimpl0(j46, j39)) {
                             j46 = tabTokens2.subTabTwoLineSelectedTextColor;
                         }
                         long j47 = j46;
                         long j48 = tabTokens.subTabTwoLineSubTextColor;
-                        if (ULong.m3447equalsimpl0(j48, j39)) {
+                        if (ULong.m3446equalsimpl0(j48, j39)) {
                             j48 = tabTokens2.subTabTwoLineSubTextColor;
                         }
                         long j49 = j48;
                         long j50 = tabTokens.subTabTwoLineSubSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j50, j39)) {
+                        if (ULong.m3446equalsimpl0(j50, j39)) {
                             j50 = tabTokens2.subTabTwoLineSubSelectedTextColor;
                         }
                         long j51 = tabTokens.subTabIndicatorBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j51, j39)) {
+                        if (ULong.m3446equalsimpl0(j51, j39)) {
                             j51 = tabTokens2.subTabIndicatorBackgroundColor;
                         }
                         return new SeslTabTokens(j45, j41, j42, j43, j44, j47, j49, j50, j51, null);
@@ -3141,19 +3141,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j52 = Color.Unspecified;
                         long j53 = alertDialogTokens.titleTextColor;
-                        if (ULong.m3447equalsimpl0(j53, j52)) {
+                        if (ULong.m3446equalsimpl0(j53, j52)) {
                             j53 = alertDialogTokens2.titleTextColor;
                         }
                         long j54 = alertDialogTokens.messageTextColor;
-                        if (ULong.m3447equalsimpl0(j54, j52)) {
+                        if (ULong.m3446equalsimpl0(j54, j52)) {
                             j54 = alertDialogTokens2.messageTextColor;
                         }
                         long j55 = alertDialogTokens.buttonTextColor;
-                        if (ULong.m3447equalsimpl0(j55, j52)) {
+                        if (ULong.m3446equalsimpl0(j55, j52)) {
                             j55 = alertDialogTokens2.buttonTextColor;
                         }
                         long j56 = alertDialogTokens.listTextColor;
-                        if (ULong.m3447equalsimpl0(j56, j52)) {
+                        if (ULong.m3446equalsimpl0(j56, j52)) {
                             j56 = alertDialogTokens2.listTextColor;
                         }
                         return new SeslAlertDialogTokens(j53, j54, j55, j56, null);
@@ -3164,11 +3164,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j57 = Color.Unspecified;
                         long j58 = buttonTokens.containerColor;
-                        if (ULong.m3447equalsimpl0(j58, j57)) {
+                        if (ULong.m3446equalsimpl0(j58, j57)) {
                             j58 = buttonTokens2.containerColor;
                         }
                         long j59 = buttonTokens.contentColor;
-                        if (ULong.m3447equalsimpl0(j59, j57)) {
+                        if (ULong.m3446equalsimpl0(j59, j57)) {
                             j59 = buttonTokens2.contentColor;
                         }
                         return new SeslButtonTokens(j58, j59, null);
@@ -3186,32 +3186,32 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j60 = Color.Unspecified;
                         long j61 = commonTokens.primaryColor;
-                        if (ULong.m3447equalsimpl0(j61, j60)) {
+                        if (ULong.m3446equalsimpl0(j61, j60)) {
                             j61 = commonTokens2.primaryColor;
                         }
                         long j62 = commonTokens.windowBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j62, j60)) {
+                        if (ULong.m3446equalsimpl0(j62, j60)) {
                             j62 = commonTokens2.windowBackgroundColor;
                         }
                         long j63 = commonTokens.rippleColor;
-                        if (ULong.m3447equalsimpl0(j63, j60)) {
+                        if (ULong.m3446equalsimpl0(j63, j60)) {
                             j63 = commonTokens2.rippleColor;
                         }
                         long j64 = commonTokens.roundedCornerColor;
-                        if (ULong.m3447equalsimpl0(j64, j60)) {
+                        if (ULong.m3446equalsimpl0(j64, j60)) {
                             j64 = commonTokens2.roundedCornerColor;
                         }
                         long j65 = commonTokens.mainTextColor;
-                        if (ULong.m3447equalsimpl0(j65, j60)) {
+                        if (ULong.m3446equalsimpl0(j65, j60)) {
                             j65 = commonTokens2.mainTextColor;
                         }
                         long j66 = j61;
                         long j67 = commonTokens.subTextColor;
-                        if (ULong.m3447equalsimpl0(j67, j60)) {
+                        if (ULong.m3446equalsimpl0(j67, j60)) {
                             j67 = commonTokens2.subTextColor;
                         }
                         long j68 = commonTokens.pointTextColor;
-                        if (ULong.m3447equalsimpl0(j68, j60)) {
+                        if (ULong.m3446equalsimpl0(j68, j60)) {
                             j68 = commonTokens2.pointTextColor;
                         }
                         return new SeslCommonTokens(j66, j62, j63, j64, j65, j67, j68, null);
@@ -3236,23 +3236,23 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j = Color.Unspecified;
                         long j2 = appBarTokens.topAppBarBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j2, j)) {
+                        if (ULong.m3446equalsimpl0(j2, j)) {
                             j2 = appBarTokens2.topAppBarBackgroundColor;
                         }
                         long j3 = appBarTokens.topAppBarTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j3, j)) {
+                        if (ULong.m3446equalsimpl0(j3, j)) {
                             j3 = appBarTokens2.topAppBarTitleTextColor;
                         }
                         long j4 = appBarTokens.topAppBarSubTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j4, j)) {
+                        if (ULong.m3446equalsimpl0(j4, j)) {
                             j4 = appBarTokens2.topAppBarSubTitleTextColor;
                         }
                         long j5 = appBarTokens.topAppBarMenuTextColor;
-                        if (ULong.m3447equalsimpl0(j5, j)) {
+                        if (ULong.m3446equalsimpl0(j5, j)) {
                             j5 = appBarTokens2.topAppBarMenuTextColor;
                         }
                         long j6 = appBarTokens.topExtendedAppBarSubTitleColor;
-                        if (ULong.m3447equalsimpl0(j6, j)) {
+                        if (ULong.m3446equalsimpl0(j6, j)) {
                             j6 = appBarTokens2.topExtendedAppBarSubTitleColor;
                         }
                         DimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 dimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 = DimensionSchemeKeyTokensKt.EmptySeslDpProducer;
@@ -3270,11 +3270,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j7 = Color.Unspecified;
                         long j8 = dividerTokens.horizontalDividerColor;
-                        if (ULong.m3447equalsimpl0(j8, j7)) {
+                        if (ULong.m3446equalsimpl0(j8, j7)) {
                             j8 = dividerTokens2.horizontalDividerColor;
                         }
                         long j9 = dividerTokens.verticalDividerColor;
-                        if (ULong.m3447equalsimpl0(j9, j7)) {
+                        if (ULong.m3446equalsimpl0(j9, j7)) {
                             j9 = dividerTokens2.verticalDividerColor;
                         }
                         return new SeslDividerTokens(j8, j9, null);
@@ -3285,11 +3285,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j10 = Color.Unspecified;
                         long j11 = listTokens.scrollbarThumbActivateColor;
-                        if (ULong.m3447equalsimpl0(j11, j10)) {
+                        if (ULong.m3446equalsimpl0(j11, j10)) {
                             j11 = listTokens2.scrollbarThumbActivateColor;
                         }
                         long j12 = listTokens.scrollbarThumbInactiveColor;
-                        if (ULong.m3447equalsimpl0(j12, j10)) {
+                        if (ULong.m3446equalsimpl0(j12, j10)) {
                             j12 = listTokens2.scrollbarThumbInactiveColor;
                         }
                         return new SeslListTokens(j11, j12, null);
@@ -3300,11 +3300,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j13 = Color.Unspecified;
                         long j14 = popupTokens.backgroundColor;
-                        if (ULong.m3447equalsimpl0(j14, j13)) {
+                        if (ULong.m3446equalsimpl0(j14, j13)) {
                             j14 = popupTokens2.backgroundColor;
                         }
                         long j15 = popupTokens.borderColor;
-                        if (ULong.m3447equalsimpl0(j15, j13)) {
+                        if (ULong.m3446equalsimpl0(j15, j13)) {
                             j15 = popupTokens2.borderColor;
                         }
                         Drawable drawable2 = popupTokens.menuBackground;
@@ -3324,47 +3324,47 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j16 = Color.Unspecified;
                         long j17 = sliderTokens.thumbFillColor;
-                        if (ULong.m3447equalsimpl0(j17, j16)) {
+                        if (ULong.m3446equalsimpl0(j17, j16)) {
                             j17 = sliderTokens2.thumbFillColor;
                         }
                         long j18 = sliderTokens.activateThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j18, j16)) {
+                        if (ULong.m3446equalsimpl0(j18, j16)) {
                             j18 = sliderTokens2.activateThumbStrokeColor;
                         }
                         long j19 = sliderTokens.inactiveThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j19, j16)) {
+                        if (ULong.m3446equalsimpl0(j19, j16)) {
                             j19 = sliderTokens2.inactiveThumbStrokeColor;
                         }
                         long j20 = sliderTokens.activateTrackColor;
-                        if (ULong.m3447equalsimpl0(j20, j16)) {
+                        if (ULong.m3446equalsimpl0(j20, j16)) {
                             j20 = sliderTokens2.activateTrackColor;
                         }
                         long j21 = sliderTokens.inactivateTrackColor;
-                        if (ULong.m3447equalsimpl0(j21, j16)) {
+                        if (ULong.m3446equalsimpl0(j21, j16)) {
                             j21 = sliderTokens2.inactivateTrackColor;
                         }
                         long j22 = j17;
                         long j23 = sliderTokens.overlapActivateColor;
-                        if (ULong.m3447equalsimpl0(j23, j16)) {
+                        if (ULong.m3446equalsimpl0(j23, j16)) {
                             j23 = sliderTokens2.overlapActivateColor;
                         }
                         long j24 = j23;
                         long j25 = sliderTokens.overlapInactiveColor;
-                        if (ULong.m3447equalsimpl0(j25, j16)) {
+                        if (ULong.m3446equalsimpl0(j25, j16)) {
                             j25 = sliderTokens2.overlapInactiveColor;
                         }
                         long j26 = j25;
                         long j27 = sliderTokens.levelTrackColor;
-                        if (ULong.m3447equalsimpl0(j27, j16)) {
+                        if (ULong.m3446equalsimpl0(j27, j16)) {
                             j27 = sliderTokens2.levelTrackColor;
                         }
                         long j28 = j27;
                         long j29 = sliderTokens.activateTickColor;
-                        if (ULong.m3447equalsimpl0(j29, j16)) {
+                        if (ULong.m3446equalsimpl0(j29, j16)) {
                             j29 = sliderTokens2.activateTickColor;
                         }
                         long j30 = sliderTokens.inactiveTickColor;
-                        if (ULong.m3447equalsimpl0(j30, j16)) {
+                        if (ULong.m3446equalsimpl0(j30, j16)) {
                             j30 = sliderTokens2.inactiveTickColor;
                         }
                         return new SeslSliderTokens(j22, j18, j19, j20, j21, j24, j26, j28, j29, j30, null);
@@ -3375,11 +3375,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j31 = Color.Unspecified;
                         long j32 = spinnerTokens.itemTextColorNormal;
-                        if (ULong.m3447equalsimpl0(j32, j31)) {
+                        if (ULong.m3446equalsimpl0(j32, j31)) {
                             j32 = spinnerTokens2.itemTextColorNormal;
                         }
                         long j33 = spinnerTokens.iconColorDefault;
-                        if (ULong.m3447equalsimpl0(j33, j31)) {
+                        if (ULong.m3446equalsimpl0(j33, j31)) {
                             j33 = spinnerTokens2.iconColorDefault;
                         }
                         return new SeslSpinnerTokens(j32, j33, null);
@@ -3390,19 +3390,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j34 = Color.Unspecified;
                         long j35 = switchTokens.trackOnColor;
-                        if (ULong.m3447equalsimpl0(j35, j34)) {
+                        if (ULong.m3446equalsimpl0(j35, j34)) {
                             j35 = switchTokens2.trackOnColor;
                         }
                         long j36 = switchTokens.trackOffColor;
-                        if (ULong.m3447equalsimpl0(j36, j34)) {
+                        if (ULong.m3446equalsimpl0(j36, j34)) {
                             j36 = switchTokens2.trackOffColor;
                         }
                         long j37 = switchTokens.thumbOnColor;
-                        if (ULong.m3447equalsimpl0(j37, j34)) {
+                        if (ULong.m3446equalsimpl0(j37, j34)) {
                             j37 = switchTokens2.thumbOnColor;
                         }
                         long j38 = switchTokens.thumbOffColor;
-                        if (ULong.m3447equalsimpl0(j38, j34)) {
+                        if (ULong.m3446equalsimpl0(j38, j34)) {
                             j38 = switchTokens2.thumbOffColor;
                         }
                         return new SeslSwitchTokens(j35, j36, j37, j38, null);
@@ -3413,42 +3413,42 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j39 = Color.Unspecified;
                         long j40 = tabTokens.textColor;
-                        if (ULong.m3447equalsimpl0(j40, j39)) {
+                        if (ULong.m3446equalsimpl0(j40, j39)) {
                             j40 = tabTokens2.textColor;
                         }
                         long j41 = tabTokens.selectedTextColor;
-                        if (ULong.m3447equalsimpl0(j41, j39)) {
+                        if (ULong.m3446equalsimpl0(j41, j39)) {
                             j41 = tabTokens2.selectedTextColor;
                         }
                         long j42 = tabTokens.subTabTextColor;
-                        if (ULong.m3447equalsimpl0(j42, j39)) {
+                        if (ULong.m3446equalsimpl0(j42, j39)) {
                             j42 = tabTokens2.subTabTextColor;
                         }
                         long j43 = tabTokens.subTabSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j43, j39)) {
+                        if (ULong.m3446equalsimpl0(j43, j39)) {
                             j43 = tabTokens2.subTabSelectedTextColor;
                         }
                         long j44 = tabTokens.subTabTwoLineTextColor;
-                        if (ULong.m3447equalsimpl0(j44, j39)) {
+                        if (ULong.m3446equalsimpl0(j44, j39)) {
                             j44 = tabTokens2.subTabTwoLineTextColor;
                         }
                         long j45 = j40;
                         long j46 = tabTokens.subTabTwoLineSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j46, j39)) {
+                        if (ULong.m3446equalsimpl0(j46, j39)) {
                             j46 = tabTokens2.subTabTwoLineSelectedTextColor;
                         }
                         long j47 = j46;
                         long j48 = tabTokens.subTabTwoLineSubTextColor;
-                        if (ULong.m3447equalsimpl0(j48, j39)) {
+                        if (ULong.m3446equalsimpl0(j48, j39)) {
                             j48 = tabTokens2.subTabTwoLineSubTextColor;
                         }
                         long j49 = j48;
                         long j50 = tabTokens.subTabTwoLineSubSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j50, j39)) {
+                        if (ULong.m3446equalsimpl0(j50, j39)) {
                             j50 = tabTokens2.subTabTwoLineSubSelectedTextColor;
                         }
                         long j51 = tabTokens.subTabIndicatorBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j51, j39)) {
+                        if (ULong.m3446equalsimpl0(j51, j39)) {
                             j51 = tabTokens2.subTabIndicatorBackgroundColor;
                         }
                         return new SeslTabTokens(j45, j41, j42, j43, j44, j47, j49, j50, j51, null);
@@ -3459,19 +3459,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j52 = Color.Unspecified;
                         long j53 = alertDialogTokens.titleTextColor;
-                        if (ULong.m3447equalsimpl0(j53, j52)) {
+                        if (ULong.m3446equalsimpl0(j53, j52)) {
                             j53 = alertDialogTokens2.titleTextColor;
                         }
                         long j54 = alertDialogTokens.messageTextColor;
-                        if (ULong.m3447equalsimpl0(j54, j52)) {
+                        if (ULong.m3446equalsimpl0(j54, j52)) {
                             j54 = alertDialogTokens2.messageTextColor;
                         }
                         long j55 = alertDialogTokens.buttonTextColor;
-                        if (ULong.m3447equalsimpl0(j55, j52)) {
+                        if (ULong.m3446equalsimpl0(j55, j52)) {
                             j55 = alertDialogTokens2.buttonTextColor;
                         }
                         long j56 = alertDialogTokens.listTextColor;
-                        if (ULong.m3447equalsimpl0(j56, j52)) {
+                        if (ULong.m3446equalsimpl0(j56, j52)) {
                             j56 = alertDialogTokens2.listTextColor;
                         }
                         return new SeslAlertDialogTokens(j53, j54, j55, j56, null);
@@ -3482,11 +3482,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j57 = Color.Unspecified;
                         long j58 = buttonTokens.containerColor;
-                        if (ULong.m3447equalsimpl0(j58, j57)) {
+                        if (ULong.m3446equalsimpl0(j58, j57)) {
                             j58 = buttonTokens2.containerColor;
                         }
                         long j59 = buttonTokens.contentColor;
-                        if (ULong.m3447equalsimpl0(j59, j57)) {
+                        if (ULong.m3446equalsimpl0(j59, j57)) {
                             j59 = buttonTokens2.contentColor;
                         }
                         return new SeslButtonTokens(j58, j59, null);
@@ -3504,32 +3504,32 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j60 = Color.Unspecified;
                         long j61 = commonTokens.primaryColor;
-                        if (ULong.m3447equalsimpl0(j61, j60)) {
+                        if (ULong.m3446equalsimpl0(j61, j60)) {
                             j61 = commonTokens2.primaryColor;
                         }
                         long j62 = commonTokens.windowBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j62, j60)) {
+                        if (ULong.m3446equalsimpl0(j62, j60)) {
                             j62 = commonTokens2.windowBackgroundColor;
                         }
                         long j63 = commonTokens.rippleColor;
-                        if (ULong.m3447equalsimpl0(j63, j60)) {
+                        if (ULong.m3446equalsimpl0(j63, j60)) {
                             j63 = commonTokens2.rippleColor;
                         }
                         long j64 = commonTokens.roundedCornerColor;
-                        if (ULong.m3447equalsimpl0(j64, j60)) {
+                        if (ULong.m3446equalsimpl0(j64, j60)) {
                             j64 = commonTokens2.roundedCornerColor;
                         }
                         long j65 = commonTokens.mainTextColor;
-                        if (ULong.m3447equalsimpl0(j65, j60)) {
+                        if (ULong.m3446equalsimpl0(j65, j60)) {
                             j65 = commonTokens2.mainTextColor;
                         }
                         long j66 = j61;
                         long j67 = commonTokens.subTextColor;
-                        if (ULong.m3447equalsimpl0(j67, j60)) {
+                        if (ULong.m3446equalsimpl0(j67, j60)) {
                             j67 = commonTokens2.subTextColor;
                         }
                         long j68 = commonTokens.pointTextColor;
-                        if (ULong.m3447equalsimpl0(j68, j60)) {
+                        if (ULong.m3446equalsimpl0(j68, j60)) {
                             j68 = commonTokens2.pointTextColor;
                         }
                         return new SeslCommonTokens(j66, j62, j63, j64, j65, j67, j68, null);
@@ -3554,23 +3554,23 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j = Color.Unspecified;
                         long j2 = appBarTokens.topAppBarBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j2, j)) {
+                        if (ULong.m3446equalsimpl0(j2, j)) {
                             j2 = appBarTokens2.topAppBarBackgroundColor;
                         }
                         long j3 = appBarTokens.topAppBarTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j3, j)) {
+                        if (ULong.m3446equalsimpl0(j3, j)) {
                             j3 = appBarTokens2.topAppBarTitleTextColor;
                         }
                         long j4 = appBarTokens.topAppBarSubTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j4, j)) {
+                        if (ULong.m3446equalsimpl0(j4, j)) {
                             j4 = appBarTokens2.topAppBarSubTitleTextColor;
                         }
                         long j5 = appBarTokens.topAppBarMenuTextColor;
-                        if (ULong.m3447equalsimpl0(j5, j)) {
+                        if (ULong.m3446equalsimpl0(j5, j)) {
                             j5 = appBarTokens2.topAppBarMenuTextColor;
                         }
                         long j6 = appBarTokens.topExtendedAppBarSubTitleColor;
-                        if (ULong.m3447equalsimpl0(j6, j)) {
+                        if (ULong.m3446equalsimpl0(j6, j)) {
                             j6 = appBarTokens2.topExtendedAppBarSubTitleColor;
                         }
                         DimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 dimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 = DimensionSchemeKeyTokensKt.EmptySeslDpProducer;
@@ -3588,11 +3588,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j7 = Color.Unspecified;
                         long j8 = dividerTokens.horizontalDividerColor;
-                        if (ULong.m3447equalsimpl0(j8, j7)) {
+                        if (ULong.m3446equalsimpl0(j8, j7)) {
                             j8 = dividerTokens2.horizontalDividerColor;
                         }
                         long j9 = dividerTokens.verticalDividerColor;
-                        if (ULong.m3447equalsimpl0(j9, j7)) {
+                        if (ULong.m3446equalsimpl0(j9, j7)) {
                             j9 = dividerTokens2.verticalDividerColor;
                         }
                         return new SeslDividerTokens(j8, j9, null);
@@ -3603,11 +3603,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j10 = Color.Unspecified;
                         long j11 = listTokens.scrollbarThumbActivateColor;
-                        if (ULong.m3447equalsimpl0(j11, j10)) {
+                        if (ULong.m3446equalsimpl0(j11, j10)) {
                             j11 = listTokens2.scrollbarThumbActivateColor;
                         }
                         long j12 = listTokens.scrollbarThumbInactiveColor;
-                        if (ULong.m3447equalsimpl0(j12, j10)) {
+                        if (ULong.m3446equalsimpl0(j12, j10)) {
                             j12 = listTokens2.scrollbarThumbInactiveColor;
                         }
                         return new SeslListTokens(j11, j12, null);
@@ -3618,11 +3618,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j13 = Color.Unspecified;
                         long j14 = popupTokens.backgroundColor;
-                        if (ULong.m3447equalsimpl0(j14, j13)) {
+                        if (ULong.m3446equalsimpl0(j14, j13)) {
                             j14 = popupTokens2.backgroundColor;
                         }
                         long j15 = popupTokens.borderColor;
-                        if (ULong.m3447equalsimpl0(j15, j13)) {
+                        if (ULong.m3446equalsimpl0(j15, j13)) {
                             j15 = popupTokens2.borderColor;
                         }
                         Drawable drawable2 = popupTokens.menuBackground;
@@ -3642,47 +3642,47 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j16 = Color.Unspecified;
                         long j17 = sliderTokens.thumbFillColor;
-                        if (ULong.m3447equalsimpl0(j17, j16)) {
+                        if (ULong.m3446equalsimpl0(j17, j16)) {
                             j17 = sliderTokens2.thumbFillColor;
                         }
                         long j18 = sliderTokens.activateThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j18, j16)) {
+                        if (ULong.m3446equalsimpl0(j18, j16)) {
                             j18 = sliderTokens2.activateThumbStrokeColor;
                         }
                         long j19 = sliderTokens.inactiveThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j19, j16)) {
+                        if (ULong.m3446equalsimpl0(j19, j16)) {
                             j19 = sliderTokens2.inactiveThumbStrokeColor;
                         }
                         long j20 = sliderTokens.activateTrackColor;
-                        if (ULong.m3447equalsimpl0(j20, j16)) {
+                        if (ULong.m3446equalsimpl0(j20, j16)) {
                             j20 = sliderTokens2.activateTrackColor;
                         }
                         long j21 = sliderTokens.inactivateTrackColor;
-                        if (ULong.m3447equalsimpl0(j21, j16)) {
+                        if (ULong.m3446equalsimpl0(j21, j16)) {
                             j21 = sliderTokens2.inactivateTrackColor;
                         }
                         long j22 = j17;
                         long j23 = sliderTokens.overlapActivateColor;
-                        if (ULong.m3447equalsimpl0(j23, j16)) {
+                        if (ULong.m3446equalsimpl0(j23, j16)) {
                             j23 = sliderTokens2.overlapActivateColor;
                         }
                         long j24 = j23;
                         long j25 = sliderTokens.overlapInactiveColor;
-                        if (ULong.m3447equalsimpl0(j25, j16)) {
+                        if (ULong.m3446equalsimpl0(j25, j16)) {
                             j25 = sliderTokens2.overlapInactiveColor;
                         }
                         long j26 = j25;
                         long j27 = sliderTokens.levelTrackColor;
-                        if (ULong.m3447equalsimpl0(j27, j16)) {
+                        if (ULong.m3446equalsimpl0(j27, j16)) {
                             j27 = sliderTokens2.levelTrackColor;
                         }
                         long j28 = j27;
                         long j29 = sliderTokens.activateTickColor;
-                        if (ULong.m3447equalsimpl0(j29, j16)) {
+                        if (ULong.m3446equalsimpl0(j29, j16)) {
                             j29 = sliderTokens2.activateTickColor;
                         }
                         long j30 = sliderTokens.inactiveTickColor;
-                        if (ULong.m3447equalsimpl0(j30, j16)) {
+                        if (ULong.m3446equalsimpl0(j30, j16)) {
                             j30 = sliderTokens2.inactiveTickColor;
                         }
                         return new SeslSliderTokens(j22, j18, j19, j20, j21, j24, j26, j28, j29, j30, null);
@@ -3693,11 +3693,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j31 = Color.Unspecified;
                         long j32 = spinnerTokens.itemTextColorNormal;
-                        if (ULong.m3447equalsimpl0(j32, j31)) {
+                        if (ULong.m3446equalsimpl0(j32, j31)) {
                             j32 = spinnerTokens2.itemTextColorNormal;
                         }
                         long j33 = spinnerTokens.iconColorDefault;
-                        if (ULong.m3447equalsimpl0(j33, j31)) {
+                        if (ULong.m3446equalsimpl0(j33, j31)) {
                             j33 = spinnerTokens2.iconColorDefault;
                         }
                         return new SeslSpinnerTokens(j32, j33, null);
@@ -3708,19 +3708,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j34 = Color.Unspecified;
                         long j35 = switchTokens.trackOnColor;
-                        if (ULong.m3447equalsimpl0(j35, j34)) {
+                        if (ULong.m3446equalsimpl0(j35, j34)) {
                             j35 = switchTokens2.trackOnColor;
                         }
                         long j36 = switchTokens.trackOffColor;
-                        if (ULong.m3447equalsimpl0(j36, j34)) {
+                        if (ULong.m3446equalsimpl0(j36, j34)) {
                             j36 = switchTokens2.trackOffColor;
                         }
                         long j37 = switchTokens.thumbOnColor;
-                        if (ULong.m3447equalsimpl0(j37, j34)) {
+                        if (ULong.m3446equalsimpl0(j37, j34)) {
                             j37 = switchTokens2.thumbOnColor;
                         }
                         long j38 = switchTokens.thumbOffColor;
-                        if (ULong.m3447equalsimpl0(j38, j34)) {
+                        if (ULong.m3446equalsimpl0(j38, j34)) {
                             j38 = switchTokens2.thumbOffColor;
                         }
                         return new SeslSwitchTokens(j35, j36, j37, j38, null);
@@ -3731,42 +3731,42 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j39 = Color.Unspecified;
                         long j40 = tabTokens.textColor;
-                        if (ULong.m3447equalsimpl0(j40, j39)) {
+                        if (ULong.m3446equalsimpl0(j40, j39)) {
                             j40 = tabTokens2.textColor;
                         }
                         long j41 = tabTokens.selectedTextColor;
-                        if (ULong.m3447equalsimpl0(j41, j39)) {
+                        if (ULong.m3446equalsimpl0(j41, j39)) {
                             j41 = tabTokens2.selectedTextColor;
                         }
                         long j42 = tabTokens.subTabTextColor;
-                        if (ULong.m3447equalsimpl0(j42, j39)) {
+                        if (ULong.m3446equalsimpl0(j42, j39)) {
                             j42 = tabTokens2.subTabTextColor;
                         }
                         long j43 = tabTokens.subTabSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j43, j39)) {
+                        if (ULong.m3446equalsimpl0(j43, j39)) {
                             j43 = tabTokens2.subTabSelectedTextColor;
                         }
                         long j44 = tabTokens.subTabTwoLineTextColor;
-                        if (ULong.m3447equalsimpl0(j44, j39)) {
+                        if (ULong.m3446equalsimpl0(j44, j39)) {
                             j44 = tabTokens2.subTabTwoLineTextColor;
                         }
                         long j45 = j40;
                         long j46 = tabTokens.subTabTwoLineSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j46, j39)) {
+                        if (ULong.m3446equalsimpl0(j46, j39)) {
                             j46 = tabTokens2.subTabTwoLineSelectedTextColor;
                         }
                         long j47 = j46;
                         long j48 = tabTokens.subTabTwoLineSubTextColor;
-                        if (ULong.m3447equalsimpl0(j48, j39)) {
+                        if (ULong.m3446equalsimpl0(j48, j39)) {
                             j48 = tabTokens2.subTabTwoLineSubTextColor;
                         }
                         long j49 = j48;
                         long j50 = tabTokens.subTabTwoLineSubSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j50, j39)) {
+                        if (ULong.m3446equalsimpl0(j50, j39)) {
                             j50 = tabTokens2.subTabTwoLineSubSelectedTextColor;
                         }
                         long j51 = tabTokens.subTabIndicatorBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j51, j39)) {
+                        if (ULong.m3446equalsimpl0(j51, j39)) {
                             j51 = tabTokens2.subTabIndicatorBackgroundColor;
                         }
                         return new SeslTabTokens(j45, j41, j42, j43, j44, j47, j49, j50, j51, null);
@@ -3777,19 +3777,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j52 = Color.Unspecified;
                         long j53 = alertDialogTokens.titleTextColor;
-                        if (ULong.m3447equalsimpl0(j53, j52)) {
+                        if (ULong.m3446equalsimpl0(j53, j52)) {
                             j53 = alertDialogTokens2.titleTextColor;
                         }
                         long j54 = alertDialogTokens.messageTextColor;
-                        if (ULong.m3447equalsimpl0(j54, j52)) {
+                        if (ULong.m3446equalsimpl0(j54, j52)) {
                             j54 = alertDialogTokens2.messageTextColor;
                         }
                         long j55 = alertDialogTokens.buttonTextColor;
-                        if (ULong.m3447equalsimpl0(j55, j52)) {
+                        if (ULong.m3446equalsimpl0(j55, j52)) {
                             j55 = alertDialogTokens2.buttonTextColor;
                         }
                         long j56 = alertDialogTokens.listTextColor;
-                        if (ULong.m3447equalsimpl0(j56, j52)) {
+                        if (ULong.m3446equalsimpl0(j56, j52)) {
                             j56 = alertDialogTokens2.listTextColor;
                         }
                         return new SeslAlertDialogTokens(j53, j54, j55, j56, null);
@@ -3800,11 +3800,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j57 = Color.Unspecified;
                         long j58 = buttonTokens.containerColor;
-                        if (ULong.m3447equalsimpl0(j58, j57)) {
+                        if (ULong.m3446equalsimpl0(j58, j57)) {
                             j58 = buttonTokens2.containerColor;
                         }
                         long j59 = buttonTokens.contentColor;
-                        if (ULong.m3447equalsimpl0(j59, j57)) {
+                        if (ULong.m3446equalsimpl0(j59, j57)) {
                             j59 = buttonTokens2.contentColor;
                         }
                         return new SeslButtonTokens(j58, j59, null);
@@ -3822,32 +3822,32 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j60 = Color.Unspecified;
                         long j61 = commonTokens.primaryColor;
-                        if (ULong.m3447equalsimpl0(j61, j60)) {
+                        if (ULong.m3446equalsimpl0(j61, j60)) {
                             j61 = commonTokens2.primaryColor;
                         }
                         long j62 = commonTokens.windowBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j62, j60)) {
+                        if (ULong.m3446equalsimpl0(j62, j60)) {
                             j62 = commonTokens2.windowBackgroundColor;
                         }
                         long j63 = commonTokens.rippleColor;
-                        if (ULong.m3447equalsimpl0(j63, j60)) {
+                        if (ULong.m3446equalsimpl0(j63, j60)) {
                             j63 = commonTokens2.rippleColor;
                         }
                         long j64 = commonTokens.roundedCornerColor;
-                        if (ULong.m3447equalsimpl0(j64, j60)) {
+                        if (ULong.m3446equalsimpl0(j64, j60)) {
                             j64 = commonTokens2.roundedCornerColor;
                         }
                         long j65 = commonTokens.mainTextColor;
-                        if (ULong.m3447equalsimpl0(j65, j60)) {
+                        if (ULong.m3446equalsimpl0(j65, j60)) {
                             j65 = commonTokens2.mainTextColor;
                         }
                         long j66 = j61;
                         long j67 = commonTokens.subTextColor;
-                        if (ULong.m3447equalsimpl0(j67, j60)) {
+                        if (ULong.m3446equalsimpl0(j67, j60)) {
                             j67 = commonTokens2.subTextColor;
                         }
                         long j68 = commonTokens.pointTextColor;
-                        if (ULong.m3447equalsimpl0(j68, j60)) {
+                        if (ULong.m3446equalsimpl0(j68, j60)) {
                             j68 = commonTokens2.pointTextColor;
                         }
                         return new SeslCommonTokens(j66, j62, j63, j64, j65, j67, j68, null);
@@ -3872,23 +3872,23 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j = Color.Unspecified;
                         long j2 = appBarTokens.topAppBarBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j2, j)) {
+                        if (ULong.m3446equalsimpl0(j2, j)) {
                             j2 = appBarTokens2.topAppBarBackgroundColor;
                         }
                         long j3 = appBarTokens.topAppBarTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j3, j)) {
+                        if (ULong.m3446equalsimpl0(j3, j)) {
                             j3 = appBarTokens2.topAppBarTitleTextColor;
                         }
                         long j4 = appBarTokens.topAppBarSubTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j4, j)) {
+                        if (ULong.m3446equalsimpl0(j4, j)) {
                             j4 = appBarTokens2.topAppBarSubTitleTextColor;
                         }
                         long j5 = appBarTokens.topAppBarMenuTextColor;
-                        if (ULong.m3447equalsimpl0(j5, j)) {
+                        if (ULong.m3446equalsimpl0(j5, j)) {
                             j5 = appBarTokens2.topAppBarMenuTextColor;
                         }
                         long j6 = appBarTokens.topExtendedAppBarSubTitleColor;
-                        if (ULong.m3447equalsimpl0(j6, j)) {
+                        if (ULong.m3446equalsimpl0(j6, j)) {
                             j6 = appBarTokens2.topExtendedAppBarSubTitleColor;
                         }
                         DimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 dimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 = DimensionSchemeKeyTokensKt.EmptySeslDpProducer;
@@ -3906,11 +3906,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j7 = Color.Unspecified;
                         long j8 = dividerTokens.horizontalDividerColor;
-                        if (ULong.m3447equalsimpl0(j8, j7)) {
+                        if (ULong.m3446equalsimpl0(j8, j7)) {
                             j8 = dividerTokens2.horizontalDividerColor;
                         }
                         long j9 = dividerTokens.verticalDividerColor;
-                        if (ULong.m3447equalsimpl0(j9, j7)) {
+                        if (ULong.m3446equalsimpl0(j9, j7)) {
                             j9 = dividerTokens2.verticalDividerColor;
                         }
                         return new SeslDividerTokens(j8, j9, null);
@@ -3921,11 +3921,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j10 = Color.Unspecified;
                         long j11 = listTokens.scrollbarThumbActivateColor;
-                        if (ULong.m3447equalsimpl0(j11, j10)) {
+                        if (ULong.m3446equalsimpl0(j11, j10)) {
                             j11 = listTokens2.scrollbarThumbActivateColor;
                         }
                         long j12 = listTokens.scrollbarThumbInactiveColor;
-                        if (ULong.m3447equalsimpl0(j12, j10)) {
+                        if (ULong.m3446equalsimpl0(j12, j10)) {
                             j12 = listTokens2.scrollbarThumbInactiveColor;
                         }
                         return new SeslListTokens(j11, j12, null);
@@ -3936,11 +3936,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j13 = Color.Unspecified;
                         long j14 = popupTokens.backgroundColor;
-                        if (ULong.m3447equalsimpl0(j14, j13)) {
+                        if (ULong.m3446equalsimpl0(j14, j13)) {
                             j14 = popupTokens2.backgroundColor;
                         }
                         long j15 = popupTokens.borderColor;
-                        if (ULong.m3447equalsimpl0(j15, j13)) {
+                        if (ULong.m3446equalsimpl0(j15, j13)) {
                             j15 = popupTokens2.borderColor;
                         }
                         Drawable drawable2 = popupTokens.menuBackground;
@@ -3960,47 +3960,47 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j16 = Color.Unspecified;
                         long j17 = sliderTokens.thumbFillColor;
-                        if (ULong.m3447equalsimpl0(j17, j16)) {
+                        if (ULong.m3446equalsimpl0(j17, j16)) {
                             j17 = sliderTokens2.thumbFillColor;
                         }
                         long j18 = sliderTokens.activateThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j18, j16)) {
+                        if (ULong.m3446equalsimpl0(j18, j16)) {
                             j18 = sliderTokens2.activateThumbStrokeColor;
                         }
                         long j19 = sliderTokens.inactiveThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j19, j16)) {
+                        if (ULong.m3446equalsimpl0(j19, j16)) {
                             j19 = sliderTokens2.inactiveThumbStrokeColor;
                         }
                         long j20 = sliderTokens.activateTrackColor;
-                        if (ULong.m3447equalsimpl0(j20, j16)) {
+                        if (ULong.m3446equalsimpl0(j20, j16)) {
                             j20 = sliderTokens2.activateTrackColor;
                         }
                         long j21 = sliderTokens.inactivateTrackColor;
-                        if (ULong.m3447equalsimpl0(j21, j16)) {
+                        if (ULong.m3446equalsimpl0(j21, j16)) {
                             j21 = sliderTokens2.inactivateTrackColor;
                         }
                         long j22 = j17;
                         long j23 = sliderTokens.overlapActivateColor;
-                        if (ULong.m3447equalsimpl0(j23, j16)) {
+                        if (ULong.m3446equalsimpl0(j23, j16)) {
                             j23 = sliderTokens2.overlapActivateColor;
                         }
                         long j24 = j23;
                         long j25 = sliderTokens.overlapInactiveColor;
-                        if (ULong.m3447equalsimpl0(j25, j16)) {
+                        if (ULong.m3446equalsimpl0(j25, j16)) {
                             j25 = sliderTokens2.overlapInactiveColor;
                         }
                         long j26 = j25;
                         long j27 = sliderTokens.levelTrackColor;
-                        if (ULong.m3447equalsimpl0(j27, j16)) {
+                        if (ULong.m3446equalsimpl0(j27, j16)) {
                             j27 = sliderTokens2.levelTrackColor;
                         }
                         long j28 = j27;
                         long j29 = sliderTokens.activateTickColor;
-                        if (ULong.m3447equalsimpl0(j29, j16)) {
+                        if (ULong.m3446equalsimpl0(j29, j16)) {
                             j29 = sliderTokens2.activateTickColor;
                         }
                         long j30 = sliderTokens.inactiveTickColor;
-                        if (ULong.m3447equalsimpl0(j30, j16)) {
+                        if (ULong.m3446equalsimpl0(j30, j16)) {
                             j30 = sliderTokens2.inactiveTickColor;
                         }
                         return new SeslSliderTokens(j22, j18, j19, j20, j21, j24, j26, j28, j29, j30, null);
@@ -4011,11 +4011,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j31 = Color.Unspecified;
                         long j32 = spinnerTokens.itemTextColorNormal;
-                        if (ULong.m3447equalsimpl0(j32, j31)) {
+                        if (ULong.m3446equalsimpl0(j32, j31)) {
                             j32 = spinnerTokens2.itemTextColorNormal;
                         }
                         long j33 = spinnerTokens.iconColorDefault;
-                        if (ULong.m3447equalsimpl0(j33, j31)) {
+                        if (ULong.m3446equalsimpl0(j33, j31)) {
                             j33 = spinnerTokens2.iconColorDefault;
                         }
                         return new SeslSpinnerTokens(j32, j33, null);
@@ -4026,19 +4026,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j34 = Color.Unspecified;
                         long j35 = switchTokens.trackOnColor;
-                        if (ULong.m3447equalsimpl0(j35, j34)) {
+                        if (ULong.m3446equalsimpl0(j35, j34)) {
                             j35 = switchTokens2.trackOnColor;
                         }
                         long j36 = switchTokens.trackOffColor;
-                        if (ULong.m3447equalsimpl0(j36, j34)) {
+                        if (ULong.m3446equalsimpl0(j36, j34)) {
                             j36 = switchTokens2.trackOffColor;
                         }
                         long j37 = switchTokens.thumbOnColor;
-                        if (ULong.m3447equalsimpl0(j37, j34)) {
+                        if (ULong.m3446equalsimpl0(j37, j34)) {
                             j37 = switchTokens2.thumbOnColor;
                         }
                         long j38 = switchTokens.thumbOffColor;
-                        if (ULong.m3447equalsimpl0(j38, j34)) {
+                        if (ULong.m3446equalsimpl0(j38, j34)) {
                             j38 = switchTokens2.thumbOffColor;
                         }
                         return new SeslSwitchTokens(j35, j36, j37, j38, null);
@@ -4049,42 +4049,42 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j39 = Color.Unspecified;
                         long j40 = tabTokens.textColor;
-                        if (ULong.m3447equalsimpl0(j40, j39)) {
+                        if (ULong.m3446equalsimpl0(j40, j39)) {
                             j40 = tabTokens2.textColor;
                         }
                         long j41 = tabTokens.selectedTextColor;
-                        if (ULong.m3447equalsimpl0(j41, j39)) {
+                        if (ULong.m3446equalsimpl0(j41, j39)) {
                             j41 = tabTokens2.selectedTextColor;
                         }
                         long j42 = tabTokens.subTabTextColor;
-                        if (ULong.m3447equalsimpl0(j42, j39)) {
+                        if (ULong.m3446equalsimpl0(j42, j39)) {
                             j42 = tabTokens2.subTabTextColor;
                         }
                         long j43 = tabTokens.subTabSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j43, j39)) {
+                        if (ULong.m3446equalsimpl0(j43, j39)) {
                             j43 = tabTokens2.subTabSelectedTextColor;
                         }
                         long j44 = tabTokens.subTabTwoLineTextColor;
-                        if (ULong.m3447equalsimpl0(j44, j39)) {
+                        if (ULong.m3446equalsimpl0(j44, j39)) {
                             j44 = tabTokens2.subTabTwoLineTextColor;
                         }
                         long j45 = j40;
                         long j46 = tabTokens.subTabTwoLineSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j46, j39)) {
+                        if (ULong.m3446equalsimpl0(j46, j39)) {
                             j46 = tabTokens2.subTabTwoLineSelectedTextColor;
                         }
                         long j47 = j46;
                         long j48 = tabTokens.subTabTwoLineSubTextColor;
-                        if (ULong.m3447equalsimpl0(j48, j39)) {
+                        if (ULong.m3446equalsimpl0(j48, j39)) {
                             j48 = tabTokens2.subTabTwoLineSubTextColor;
                         }
                         long j49 = j48;
                         long j50 = tabTokens.subTabTwoLineSubSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j50, j39)) {
+                        if (ULong.m3446equalsimpl0(j50, j39)) {
                             j50 = tabTokens2.subTabTwoLineSubSelectedTextColor;
                         }
                         long j51 = tabTokens.subTabIndicatorBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j51, j39)) {
+                        if (ULong.m3446equalsimpl0(j51, j39)) {
                             j51 = tabTokens2.subTabIndicatorBackgroundColor;
                         }
                         return new SeslTabTokens(j45, j41, j42, j43, j44, j47, j49, j50, j51, null);
@@ -4095,19 +4095,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j52 = Color.Unspecified;
                         long j53 = alertDialogTokens.titleTextColor;
-                        if (ULong.m3447equalsimpl0(j53, j52)) {
+                        if (ULong.m3446equalsimpl0(j53, j52)) {
                             j53 = alertDialogTokens2.titleTextColor;
                         }
                         long j54 = alertDialogTokens.messageTextColor;
-                        if (ULong.m3447equalsimpl0(j54, j52)) {
+                        if (ULong.m3446equalsimpl0(j54, j52)) {
                             j54 = alertDialogTokens2.messageTextColor;
                         }
                         long j55 = alertDialogTokens.buttonTextColor;
-                        if (ULong.m3447equalsimpl0(j55, j52)) {
+                        if (ULong.m3446equalsimpl0(j55, j52)) {
                             j55 = alertDialogTokens2.buttonTextColor;
                         }
                         long j56 = alertDialogTokens.listTextColor;
-                        if (ULong.m3447equalsimpl0(j56, j52)) {
+                        if (ULong.m3446equalsimpl0(j56, j52)) {
                             j56 = alertDialogTokens2.listTextColor;
                         }
                         return new SeslAlertDialogTokens(j53, j54, j55, j56, null);
@@ -4118,11 +4118,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j57 = Color.Unspecified;
                         long j58 = buttonTokens.containerColor;
-                        if (ULong.m3447equalsimpl0(j58, j57)) {
+                        if (ULong.m3446equalsimpl0(j58, j57)) {
                             j58 = buttonTokens2.containerColor;
                         }
                         long j59 = buttonTokens.contentColor;
-                        if (ULong.m3447equalsimpl0(j59, j57)) {
+                        if (ULong.m3446equalsimpl0(j59, j57)) {
                             j59 = buttonTokens2.contentColor;
                         }
                         return new SeslButtonTokens(j58, j59, null);
@@ -4140,32 +4140,32 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j60 = Color.Unspecified;
                         long j61 = commonTokens.primaryColor;
-                        if (ULong.m3447equalsimpl0(j61, j60)) {
+                        if (ULong.m3446equalsimpl0(j61, j60)) {
                             j61 = commonTokens2.primaryColor;
                         }
                         long j62 = commonTokens.windowBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j62, j60)) {
+                        if (ULong.m3446equalsimpl0(j62, j60)) {
                             j62 = commonTokens2.windowBackgroundColor;
                         }
                         long j63 = commonTokens.rippleColor;
-                        if (ULong.m3447equalsimpl0(j63, j60)) {
+                        if (ULong.m3446equalsimpl0(j63, j60)) {
                             j63 = commonTokens2.rippleColor;
                         }
                         long j64 = commonTokens.roundedCornerColor;
-                        if (ULong.m3447equalsimpl0(j64, j60)) {
+                        if (ULong.m3446equalsimpl0(j64, j60)) {
                             j64 = commonTokens2.roundedCornerColor;
                         }
                         long j65 = commonTokens.mainTextColor;
-                        if (ULong.m3447equalsimpl0(j65, j60)) {
+                        if (ULong.m3446equalsimpl0(j65, j60)) {
                             j65 = commonTokens2.mainTextColor;
                         }
                         long j66 = j61;
                         long j67 = commonTokens.subTextColor;
-                        if (ULong.m3447equalsimpl0(j67, j60)) {
+                        if (ULong.m3446equalsimpl0(j67, j60)) {
                             j67 = commonTokens2.subTextColor;
                         }
                         long j68 = commonTokens.pointTextColor;
-                        if (ULong.m3447equalsimpl0(j68, j60)) {
+                        if (ULong.m3446equalsimpl0(j68, j60)) {
                             j68 = commonTokens2.pointTextColor;
                         }
                         return new SeslCommonTokens(j66, j62, j63, j64, j65, j67, j68, null);
@@ -4190,23 +4190,23 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j = Color.Unspecified;
                         long j2 = appBarTokens.topAppBarBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j2, j)) {
+                        if (ULong.m3446equalsimpl0(j2, j)) {
                             j2 = appBarTokens2.topAppBarBackgroundColor;
                         }
                         long j3 = appBarTokens.topAppBarTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j3, j)) {
+                        if (ULong.m3446equalsimpl0(j3, j)) {
                             j3 = appBarTokens2.topAppBarTitleTextColor;
                         }
                         long j4 = appBarTokens.topAppBarSubTitleTextColor;
-                        if (ULong.m3447equalsimpl0(j4, j)) {
+                        if (ULong.m3446equalsimpl0(j4, j)) {
                             j4 = appBarTokens2.topAppBarSubTitleTextColor;
                         }
                         long j5 = appBarTokens.topAppBarMenuTextColor;
-                        if (ULong.m3447equalsimpl0(j5, j)) {
+                        if (ULong.m3446equalsimpl0(j5, j)) {
                             j5 = appBarTokens2.topAppBarMenuTextColor;
                         }
                         long j6 = appBarTokens.topExtendedAppBarSubTitleColor;
-                        if (ULong.m3447equalsimpl0(j6, j)) {
+                        if (ULong.m3446equalsimpl0(j6, j)) {
                             j6 = appBarTokens2.topExtendedAppBarSubTitleColor;
                         }
                         DimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 dimensionSchemeKeyTokensKt$EmptySeslDpProducer$1 = DimensionSchemeKeyTokensKt.EmptySeslDpProducer;
@@ -4224,11 +4224,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j7 = Color.Unspecified;
                         long j8 = dividerTokens.horizontalDividerColor;
-                        if (ULong.m3447equalsimpl0(j8, j7)) {
+                        if (ULong.m3446equalsimpl0(j8, j7)) {
                             j8 = dividerTokens2.horizontalDividerColor;
                         }
                         long j9 = dividerTokens.verticalDividerColor;
-                        if (ULong.m3447equalsimpl0(j9, j7)) {
+                        if (ULong.m3446equalsimpl0(j9, j7)) {
                             j9 = dividerTokens2.verticalDividerColor;
                         }
                         return new SeslDividerTokens(j8, j9, null);
@@ -4239,11 +4239,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j10 = Color.Unspecified;
                         long j11 = listTokens.scrollbarThumbActivateColor;
-                        if (ULong.m3447equalsimpl0(j11, j10)) {
+                        if (ULong.m3446equalsimpl0(j11, j10)) {
                             j11 = listTokens2.scrollbarThumbActivateColor;
                         }
                         long j12 = listTokens.scrollbarThumbInactiveColor;
-                        if (ULong.m3447equalsimpl0(j12, j10)) {
+                        if (ULong.m3446equalsimpl0(j12, j10)) {
                             j12 = listTokens2.scrollbarThumbInactiveColor;
                         }
                         return new SeslListTokens(j11, j12, null);
@@ -4254,11 +4254,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j13 = Color.Unspecified;
                         long j14 = popupTokens.backgroundColor;
-                        if (ULong.m3447equalsimpl0(j14, j13)) {
+                        if (ULong.m3446equalsimpl0(j14, j13)) {
                             j14 = popupTokens2.backgroundColor;
                         }
                         long j15 = popupTokens.borderColor;
-                        if (ULong.m3447equalsimpl0(j15, j13)) {
+                        if (ULong.m3446equalsimpl0(j15, j13)) {
                             j15 = popupTokens2.borderColor;
                         }
                         Drawable drawable2 = popupTokens.menuBackground;
@@ -4278,47 +4278,47 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j16 = Color.Unspecified;
                         long j17 = sliderTokens.thumbFillColor;
-                        if (ULong.m3447equalsimpl0(j17, j16)) {
+                        if (ULong.m3446equalsimpl0(j17, j16)) {
                             j17 = sliderTokens2.thumbFillColor;
                         }
                         long j18 = sliderTokens.activateThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j18, j16)) {
+                        if (ULong.m3446equalsimpl0(j18, j16)) {
                             j18 = sliderTokens2.activateThumbStrokeColor;
                         }
                         long j19 = sliderTokens.inactiveThumbStrokeColor;
-                        if (ULong.m3447equalsimpl0(j19, j16)) {
+                        if (ULong.m3446equalsimpl0(j19, j16)) {
                             j19 = sliderTokens2.inactiveThumbStrokeColor;
                         }
                         long j20 = sliderTokens.activateTrackColor;
-                        if (ULong.m3447equalsimpl0(j20, j16)) {
+                        if (ULong.m3446equalsimpl0(j20, j16)) {
                             j20 = sliderTokens2.activateTrackColor;
                         }
                         long j21 = sliderTokens.inactivateTrackColor;
-                        if (ULong.m3447equalsimpl0(j21, j16)) {
+                        if (ULong.m3446equalsimpl0(j21, j16)) {
                             j21 = sliderTokens2.inactivateTrackColor;
                         }
                         long j22 = j17;
                         long j23 = sliderTokens.overlapActivateColor;
-                        if (ULong.m3447equalsimpl0(j23, j16)) {
+                        if (ULong.m3446equalsimpl0(j23, j16)) {
                             j23 = sliderTokens2.overlapActivateColor;
                         }
                         long j24 = j23;
                         long j25 = sliderTokens.overlapInactiveColor;
-                        if (ULong.m3447equalsimpl0(j25, j16)) {
+                        if (ULong.m3446equalsimpl0(j25, j16)) {
                             j25 = sliderTokens2.overlapInactiveColor;
                         }
                         long j26 = j25;
                         long j27 = sliderTokens.levelTrackColor;
-                        if (ULong.m3447equalsimpl0(j27, j16)) {
+                        if (ULong.m3446equalsimpl0(j27, j16)) {
                             j27 = sliderTokens2.levelTrackColor;
                         }
                         long j28 = j27;
                         long j29 = sliderTokens.activateTickColor;
-                        if (ULong.m3447equalsimpl0(j29, j16)) {
+                        if (ULong.m3446equalsimpl0(j29, j16)) {
                             j29 = sliderTokens2.activateTickColor;
                         }
                         long j30 = sliderTokens.inactiveTickColor;
-                        if (ULong.m3447equalsimpl0(j30, j16)) {
+                        if (ULong.m3446equalsimpl0(j30, j16)) {
                             j30 = sliderTokens2.inactiveTickColor;
                         }
                         return new SeslSliderTokens(j22, j18, j19, j20, j21, j24, j26, j28, j29, j30, null);
@@ -4329,11 +4329,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j31 = Color.Unspecified;
                         long j32 = spinnerTokens.itemTextColorNormal;
-                        if (ULong.m3447equalsimpl0(j32, j31)) {
+                        if (ULong.m3446equalsimpl0(j32, j31)) {
                             j32 = spinnerTokens2.itemTextColorNormal;
                         }
                         long j33 = spinnerTokens.iconColorDefault;
-                        if (ULong.m3447equalsimpl0(j33, j31)) {
+                        if (ULong.m3446equalsimpl0(j33, j31)) {
                             j33 = spinnerTokens2.iconColorDefault;
                         }
                         return new SeslSpinnerTokens(j32, j33, null);
@@ -4344,19 +4344,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j34 = Color.Unspecified;
                         long j35 = switchTokens.trackOnColor;
-                        if (ULong.m3447equalsimpl0(j35, j34)) {
+                        if (ULong.m3446equalsimpl0(j35, j34)) {
                             j35 = switchTokens2.trackOnColor;
                         }
                         long j36 = switchTokens.trackOffColor;
-                        if (ULong.m3447equalsimpl0(j36, j34)) {
+                        if (ULong.m3446equalsimpl0(j36, j34)) {
                             j36 = switchTokens2.trackOffColor;
                         }
                         long j37 = switchTokens.thumbOnColor;
-                        if (ULong.m3447equalsimpl0(j37, j34)) {
+                        if (ULong.m3446equalsimpl0(j37, j34)) {
                             j37 = switchTokens2.thumbOnColor;
                         }
                         long j38 = switchTokens.thumbOffColor;
-                        if (ULong.m3447equalsimpl0(j38, j34)) {
+                        if (ULong.m3446equalsimpl0(j38, j34)) {
                             j38 = switchTokens2.thumbOffColor;
                         }
                         return new SeslSwitchTokens(j35, j36, j37, j38, null);
@@ -4367,42 +4367,42 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j39 = Color.Unspecified;
                         long j40 = tabTokens.textColor;
-                        if (ULong.m3447equalsimpl0(j40, j39)) {
+                        if (ULong.m3446equalsimpl0(j40, j39)) {
                             j40 = tabTokens2.textColor;
                         }
                         long j41 = tabTokens.selectedTextColor;
-                        if (ULong.m3447equalsimpl0(j41, j39)) {
+                        if (ULong.m3446equalsimpl0(j41, j39)) {
                             j41 = tabTokens2.selectedTextColor;
                         }
                         long j42 = tabTokens.subTabTextColor;
-                        if (ULong.m3447equalsimpl0(j42, j39)) {
+                        if (ULong.m3446equalsimpl0(j42, j39)) {
                             j42 = tabTokens2.subTabTextColor;
                         }
                         long j43 = tabTokens.subTabSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j43, j39)) {
+                        if (ULong.m3446equalsimpl0(j43, j39)) {
                             j43 = tabTokens2.subTabSelectedTextColor;
                         }
                         long j44 = tabTokens.subTabTwoLineTextColor;
-                        if (ULong.m3447equalsimpl0(j44, j39)) {
+                        if (ULong.m3446equalsimpl0(j44, j39)) {
                             j44 = tabTokens2.subTabTwoLineTextColor;
                         }
                         long j45 = j40;
                         long j46 = tabTokens.subTabTwoLineSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j46, j39)) {
+                        if (ULong.m3446equalsimpl0(j46, j39)) {
                             j46 = tabTokens2.subTabTwoLineSelectedTextColor;
                         }
                         long j47 = j46;
                         long j48 = tabTokens.subTabTwoLineSubTextColor;
-                        if (ULong.m3447equalsimpl0(j48, j39)) {
+                        if (ULong.m3446equalsimpl0(j48, j39)) {
                             j48 = tabTokens2.subTabTwoLineSubTextColor;
                         }
                         long j49 = j48;
                         long j50 = tabTokens.subTabTwoLineSubSelectedTextColor;
-                        if (ULong.m3447equalsimpl0(j50, j39)) {
+                        if (ULong.m3446equalsimpl0(j50, j39)) {
                             j50 = tabTokens2.subTabTwoLineSubSelectedTextColor;
                         }
                         long j51 = tabTokens.subTabIndicatorBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j51, j39)) {
+                        if (ULong.m3446equalsimpl0(j51, j39)) {
                             j51 = tabTokens2.subTabIndicatorBackgroundColor;
                         }
                         return new SeslTabTokens(j45, j41, j42, j43, j44, j47, j49, j50, j51, null);
@@ -4413,19 +4413,19 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j52 = Color.Unspecified;
                         long j53 = alertDialogTokens.titleTextColor;
-                        if (ULong.m3447equalsimpl0(j53, j52)) {
+                        if (ULong.m3446equalsimpl0(j53, j52)) {
                             j53 = alertDialogTokens2.titleTextColor;
                         }
                         long j54 = alertDialogTokens.messageTextColor;
-                        if (ULong.m3447equalsimpl0(j54, j52)) {
+                        if (ULong.m3446equalsimpl0(j54, j52)) {
                             j54 = alertDialogTokens2.messageTextColor;
                         }
                         long j55 = alertDialogTokens.buttonTextColor;
-                        if (ULong.m3447equalsimpl0(j55, j52)) {
+                        if (ULong.m3446equalsimpl0(j55, j52)) {
                             j55 = alertDialogTokens2.buttonTextColor;
                         }
                         long j56 = alertDialogTokens.listTextColor;
-                        if (ULong.m3447equalsimpl0(j56, j52)) {
+                        if (ULong.m3446equalsimpl0(j56, j52)) {
                             j56 = alertDialogTokens2.listTextColor;
                         }
                         return new SeslAlertDialogTokens(j53, j54, j55, j56, null);
@@ -4436,11 +4436,11 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j57 = Color.Unspecified;
                         long j58 = buttonTokens.containerColor;
-                        if (ULong.m3447equalsimpl0(j58, j57)) {
+                        if (ULong.m3446equalsimpl0(j58, j57)) {
                             j58 = buttonTokens2.containerColor;
                         }
                         long j59 = buttonTokens.contentColor;
-                        if (ULong.m3447equalsimpl0(j59, j57)) {
+                        if (ULong.m3446equalsimpl0(j59, j57)) {
                             j59 = buttonTokens2.contentColor;
                         }
                         return new SeslButtonTokens(j58, j59, null);
@@ -4458,32 +4458,32 @@ public final class SeslMergedTokenScheme implements SeslTokenScheme {
                         Color.Companion.getClass();
                         long j60 = Color.Unspecified;
                         long j61 = commonTokens.primaryColor;
-                        if (ULong.m3447equalsimpl0(j61, j60)) {
+                        if (ULong.m3446equalsimpl0(j61, j60)) {
                             j61 = commonTokens2.primaryColor;
                         }
                         long j62 = commonTokens.windowBackgroundColor;
-                        if (ULong.m3447equalsimpl0(j62, j60)) {
+                        if (ULong.m3446equalsimpl0(j62, j60)) {
                             j62 = commonTokens2.windowBackgroundColor;
                         }
                         long j63 = commonTokens.rippleColor;
-                        if (ULong.m3447equalsimpl0(j63, j60)) {
+                        if (ULong.m3446equalsimpl0(j63, j60)) {
                             j63 = commonTokens2.rippleColor;
                         }
                         long j64 = commonTokens.roundedCornerColor;
-                        if (ULong.m3447equalsimpl0(j64, j60)) {
+                        if (ULong.m3446equalsimpl0(j64, j60)) {
                             j64 = commonTokens2.roundedCornerColor;
                         }
                         long j65 = commonTokens.mainTextColor;
-                        if (ULong.m3447equalsimpl0(j65, j60)) {
+                        if (ULong.m3446equalsimpl0(j65, j60)) {
                             j65 = commonTokens2.mainTextColor;
                         }
                         long j66 = j61;
                         long j67 = commonTokens.subTextColor;
-                        if (ULong.m3447equalsimpl0(j67, j60)) {
+                        if (ULong.m3446equalsimpl0(j67, j60)) {
                             j67 = commonTokens2.subTextColor;
                         }
                         long j68 = commonTokens.pointTextColor;
-                        if (ULong.m3447equalsimpl0(j68, j60)) {
+                        if (ULong.m3446equalsimpl0(j68, j60)) {
                             j68 = commonTokens2.pointTextColor;
                         }
                         return new SeslCommonTokens(j66, j62, j63, j64, j65, j67, j68, null);

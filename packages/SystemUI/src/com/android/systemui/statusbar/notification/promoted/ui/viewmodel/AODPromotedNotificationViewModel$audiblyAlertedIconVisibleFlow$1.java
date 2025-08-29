@@ -56,7 +56,7 @@ final class AODPromotedNotificationViewModel$audiblyAlertedIconVisibleFlow$1 ext
             duration = (Duration) this.L$1;
             Duration.Companion companion = Duration.Companion;
             long duration2 = DurationKt.toDuration(this.$systemClock.currentTimeMillis(), DurationUnit.MILLISECONDS);
-            if (duration == null || Duration.m3455compareToLRDsOJo(duration.rawValue, duration2) <= 0) {
+            if (duration == null || Duration.m3454compareToLRDsOJo(duration.rawValue, duration2) <= 0) {
                 Boolean bool = Boolean.FALSE;
                 this.L$0 = null;
                 this.label = 3;
@@ -93,11 +93,11 @@ final class AODPromotedNotificationViewModel$audiblyAlertedIconVisibleFlow$1 ext
             this.L$0 = null;
             this.label = 3;
         }
-        long jM3461plusLRDsOJo = Duration.m3461plusLRDsOJo(duration.rawValue, Duration.m3467unaryMinusUwyO8pc(j));
+        long jM3460plusLRDsOJo = Duration.m3460plusLRDsOJo(duration.rawValue, Duration.m3466unaryMinusUwyO8pc(j));
         this.L$0 = flowCollector;
         this.L$1 = null;
         this.label = 2;
-        if (DelayKt.m3469delayVtjQ1oo(jM3461plusLRDsOJo, this) != coroutineSingletons) {
+        if (DelayKt.m3468delayVtjQ1oo(jM3460plusLRDsOJo, this) != coroutineSingletons) {
             flowCollector2 = flowCollector;
             flowCollector = flowCollector2;
             Boolean bool32 = Boolean.FALSE;

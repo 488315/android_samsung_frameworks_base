@@ -54,7 +54,7 @@ public class EdgeLightingDialog extends Dialog implements IEdgeLightingControlle
             if (applicationEffect == null || !applicationEffect.isShown()) {
                 NotificationEffect notificationEffect = edgeLightingDialog.mNotificationEffect;
                 if (notificationEffect == null || !notificationEffect.isShown()) {
-                    EdgeLightingDialog.m2572$$Nest$mselfDismissWindow(edgeLightingDialog);
+                    EdgeLightingDialog.m2570$$Nest$mselfDismissWindow(edgeLightingDialog);
                 }
             }
         }
@@ -93,7 +93,7 @@ public class EdgeLightingDialog extends Dialog implements IEdgeLightingControlle
     }
 
     /* renamed from: -$$Nest$mdismissInternal, reason: not valid java name */
-    public static void m2571$$Nest$mdismissInternal(EdgeLightingDialog edgeLightingDialog) {
+    public static void m2569$$Nest$mdismissInternal(EdgeLightingDialog edgeLightingDialog) {
         if (edgeLightingDialog.mAODShowState != null) {
             edgeLightingDialog.getContext().getContentResolver().unregisterContentObserver(edgeLightingDialog.mAODShowState);
             edgeLightingDialog.mAODShowState = null;
@@ -121,7 +121,7 @@ public class EdgeLightingDialog extends Dialog implements IEdgeLightingControlle
     }
 
     /* renamed from: -$$Nest$mselfDismissWindow, reason: not valid java name */
-    public static void m2572$$Nest$mselfDismissWindow(EdgeLightingDialog edgeLightingDialog) {
+    public static void m2570$$Nest$mselfDismissWindow(EdgeLightingDialog edgeLightingDialog) {
         IEdgeLightingWindowCallback iEdgeLightingWindowCallback = edgeLightingDialog.mWindowCallback;
         if (iEdgeLightingWindowCallback != null) {
             iEdgeLightingWindowCallback.onDismissEdgeWindow();
@@ -151,7 +151,7 @@ public class EdgeLightingDialog extends Dialog implements IEdgeLightingControlle
                 if (message.what != 1) {
                     return;
                 }
-                EdgeLightingDialog.m2571$$Nest$mdismissInternal(EdgeLightingDialog.this);
+                EdgeLightingDialog.m2569$$Nest$mdismissInternal(EdgeLightingDialog.this);
             }
         };
         this.mEdgeAnimationListener = new AnonymousClass4();
@@ -316,7 +316,7 @@ public class EdgeLightingDialog extends Dialog implements IEdgeLightingControlle
         new Handler().postDelayed(new Runnable() { // from class: com.android.systemui.edgelighting.effect.container.EdgeLightingDialog.3
             @Override // java.lang.Runnable
             public final void run() {
-                EdgeLightingDialog.m2572$$Nest$mselfDismissWindow(EdgeLightingDialog.this);
+                EdgeLightingDialog.m2570$$Nest$mselfDismissWindow(EdgeLightingDialog.this);
             }
         }, 500L);
     }
@@ -374,7 +374,7 @@ public class EdgeLightingDialog extends Dialog implements IEdgeLightingControlle
                 if (message.what != 1) {
                     return;
                 }
-                EdgeLightingDialog.m2571$$Nest$mdismissInternal(EdgeLightingDialog.this);
+                EdgeLightingDialog.m2569$$Nest$mdismissInternal(EdgeLightingDialog.this);
             }
         };
         this.mEdgeAnimationListener = new AnonymousClass4();

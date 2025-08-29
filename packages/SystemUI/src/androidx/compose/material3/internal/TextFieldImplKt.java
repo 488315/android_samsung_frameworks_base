@@ -371,9 +371,9 @@ public abstract class TextFieldImplKt {
             long jM758getColor0d7_KjU = textStyle3.m758getColor0d7_KjU();
             Color.Companion.getClass();
             long j4 = Color.Unspecified;
-            boolean zM3447equalsimpl0 = ULong.m3447equalsimpl0(jM758getColor0d7_KjU, j4);
+            boolean zM3446equalsimpl0 = ULong.m3446equalsimpl0(jM758getColor0d7_KjU, j4);
             final TextStyle textStyle4 = typography.bodySmall;
-            boolean z4 = (zM3447equalsimpl0 && !ULong.m3447equalsimpl0(textStyle4.m758getColor0d7_KjU(), j4)) || (!ULong.m3447equalsimpl0(textStyle3.m758getColor0d7_KjU(), j4) && ULong.m3447equalsimpl0(textStyle4.m758getColor0d7_KjU(), j4));
+            boolean z4 = (zM3446equalsimpl0 && !ULong.m3446equalsimpl0(textStyle4.m758getColor0d7_KjU(), j4)) || (!ULong.m3446equalsimpl0(textStyle3.m758getColor0d7_KjU(), j4) && ULong.m3446equalsimpl0(textStyle4.m758getColor0d7_KjU(), j4));
             long jM758getColor0d7_KjU2 = textStyle4.m758getColor0d7_KjU();
             if (z4 && jM758getColor0d7_KjU2 == 16) {
                 jM758getColor0d7_KjU2 = j3;

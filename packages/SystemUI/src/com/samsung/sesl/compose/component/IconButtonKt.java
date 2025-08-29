@@ -394,7 +394,7 @@ public abstract class IconButtonKt {
                     Modifier modifierM34clickableO2vRcR0$default = ClickableKt.m34clickableO2vRcR0$default(modifierM140size3ABfNKs, mutableInteractionSource3, null, z3, null, Role.m715boximpl(0), function0, 8);
                     SeslRecoilPreset seslRecoilPreset = SeslRecoilPreset.IconButton;
                     RoundedCornerShape roundedCornerShape = RoundedCornerShapeKt.CircleShape;
-                    Modifier modifierM26backgroundbw27NRU = BackgroundKt.m26backgroundbw27NRU(RecoilKt.m3350seslRecoil3f6hBDE(modifierM34clickableO2vRcR0$default, mutableInteractionSource3, seslRecoilPreset, roundedCornerShape, 0L, z3, PaddingKt.m120PaddingValues0680j_4(Dp.m838equalsimpl0(((Dp) composerImpl.consume(InteractiveComponentSizeKt.LocalMinimumInteractiveComponentSize)).value, (float) 48) ? 0 : 6), composerImpl, ((i8 >> 9) & 112) | 384 | (458752 & (i8 << 9)), 8), j3, roundedCornerShape);
+                    Modifier modifierM26backgroundbw27NRU = BackgroundKt.m26backgroundbw27NRU(RecoilKt.m3349seslRecoil3f6hBDE(modifierM34clickableO2vRcR0$default, mutableInteractionSource3, seslRecoilPreset, roundedCornerShape, 0L, z3, PaddingKt.m120PaddingValues0680j_4(Dp.m838equalsimpl0(((Dp) composerImpl.consume(InteractiveComponentSizeKt.LocalMinimumInteractiveComponentSize)).value, (float) 48) ? 0 : 6), composerImpl, ((i8 >> 9) & 112) | 384 | (458752 & (i8 << 9)), 8), j3, roundedCornerShape);
                     Alignment.Companion.getClass();
                     MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.Center, false);
                     int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
@@ -451,7 +451,7 @@ public abstract class IconButtonKt {
                 Modifier modifierM34clickableO2vRcR0$default2 = ClickableKt.m34clickableO2vRcR0$default(modifierM140size3ABfNKs2, mutableInteractionSource3, null, z3, null, Role.m715boximpl(0), function0, 8);
                 SeslRecoilPreset seslRecoilPreset2 = SeslRecoilPreset.IconButton;
                 RoundedCornerShape roundedCornerShape2 = RoundedCornerShapeKt.CircleShape;
-                Modifier modifierM26backgroundbw27NRU2 = BackgroundKt.m26backgroundbw27NRU(RecoilKt.m3350seslRecoil3f6hBDE(modifierM34clickableO2vRcR0$default2, mutableInteractionSource3, seslRecoilPreset2, roundedCornerShape2, 0L, z3, PaddingKt.m120PaddingValues0680j_4(Dp.m838equalsimpl0(((Dp) composerImpl.consume(InteractiveComponentSizeKt.LocalMinimumInteractiveComponentSize)).value, (float) 48) ? 0 : 6), composerImpl, ((i8 >> 9) & 112) | 384 | (458752 & (i8 << 9)), 8), j32, roundedCornerShape2);
+                Modifier modifierM26backgroundbw27NRU2 = BackgroundKt.m26backgroundbw27NRU(RecoilKt.m3349seslRecoil3f6hBDE(modifierM34clickableO2vRcR0$default2, mutableInteractionSource3, seslRecoilPreset2, roundedCornerShape2, 0L, z3, PaddingKt.m120PaddingValues0680j_4(Dp.m838equalsimpl0(((Dp) composerImpl.consume(InteractiveComponentSizeKt.LocalMinimumInteractiveComponentSize)).value, (float) 48) ? 0 : 6), composerImpl, ((i8 >> 9) & 112) | 384 | (458752 & (i8 << 9)), 8), j32, roundedCornerShape2);
                 Alignment.Companion.getClass();
                 MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy2 = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.Center, false);
                 int currentCompositeKeyHash2 = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);
@@ -516,7 +516,7 @@ public abstract class IconButtonKt {
                 Modifier modifierM34clickableO2vRcR0$default22 = ClickableKt.m34clickableO2vRcR0$default(modifierM140size3ABfNKs22, mutableInteractionSource3, null, z3, null, Role.m715boximpl(0), function0, 8);
                 SeslRecoilPreset seslRecoilPreset22 = SeslRecoilPreset.IconButton;
                 RoundedCornerShape roundedCornerShape22 = RoundedCornerShapeKt.CircleShape;
-                Modifier modifierM26backgroundbw27NRU22 = BackgroundKt.m26backgroundbw27NRU(RecoilKt.m3350seslRecoil3f6hBDE(modifierM34clickableO2vRcR0$default22, mutableInteractionSource3, seslRecoilPreset22, roundedCornerShape22, 0L, z3, PaddingKt.m120PaddingValues0680j_4(Dp.m838equalsimpl0(((Dp) composerImpl.consume(InteractiveComponentSizeKt.LocalMinimumInteractiveComponentSize)).value, (float) 48) ? 0 : 6), composerImpl, ((i8 >> 9) & 112) | 384 | (458752 & (i8 << 9)), 8), j322, roundedCornerShape22);
+                Modifier modifierM26backgroundbw27NRU22 = BackgroundKt.m26backgroundbw27NRU(RecoilKt.m3349seslRecoil3f6hBDE(modifierM34clickableO2vRcR0$default22, mutableInteractionSource3, seslRecoilPreset22, roundedCornerShape22, 0L, z3, PaddingKt.m120PaddingValues0680j_4(Dp.m838equalsimpl0(((Dp) composerImpl.consume(InteractiveComponentSizeKt.LocalMinimumInteractiveComponentSize)).value, (float) 48) ? 0 : 6), composerImpl, ((i8 >> 9) & 112) | 384 | (458752 & (i8 << 9)), 8), j322, roundedCornerShape22);
                 Alignment.Companion.getClass();
                 MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy22 = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.Center, false);
                 int currentCompositeKeyHash22 = ComposablesKt.getCurrentCompositeKeyHash(composerImpl);

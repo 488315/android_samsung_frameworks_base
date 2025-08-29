@@ -87,7 +87,7 @@ public final class KeyguardQuickAffordanceLocalUserSelectionManager implements K
 
     @Override // com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceSelectionManager
     /* renamed from: getSelections, reason: collision with other method in class */
-    public final Flow mo2614getSelections() {
+    public final Flow mo2612getSelections() {
         return this.selections;
     }
 

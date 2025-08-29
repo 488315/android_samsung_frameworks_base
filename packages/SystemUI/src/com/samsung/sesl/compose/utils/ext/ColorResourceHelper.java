@@ -13,7 +13,7 @@ public final class ColorResourceHelper {
     }
 
     /* renamed from: getColor-6MYuD4A, reason: not valid java name */
-    public final Color m3360getColor6MYuD4A(Context context, int i) {
+    public final Color m3359getColor6MYuD4A(Context context, int i) {
         try {
             return Color.m456boximpl(ColorKt.Color(context.getResources().getColor(i, context.getTheme())));
         } catch (Resources.NotFoundException e) {

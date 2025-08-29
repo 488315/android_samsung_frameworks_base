@@ -224,7 +224,7 @@ public final class ShadeDisplayChangeLatencyTracker {
 
     /* JADX WARN: Code restructure failed: missing block: B:38:0x00be, code lost:
     
-        if (kotlinx.coroutines.TimeoutKt.m3471withTimeoutKLykuaI(r9, r14, r0) == r1) goto L39;
+        if (kotlinx.coroutines.TimeoutKt.m3470withTimeoutKLykuaI(r9, r14, r0) == r1) goto L39;
      */
     /* JADX WARN: Removed duplicated region for block: B:29:0x008e A[Catch: all -> 0x0047, TryCatch #0 {all -> 0x0047, blocks: (B:16:0x0043, B:27:0x0088, B:29:0x008e, B:30:0x00a1), top: B:45:0x0043 }] */
     /* JADX WARN: Removed duplicated region for block: B:7:0x0013  */
@@ -267,7 +267,7 @@ public final class ShadeDisplayChangeLatencyTracker {
                     c10401.J$0 = j2;
                     c10401.I$1 = iNextInt;
                     c10401.label = 1;
-                    if (TimeoutKt.m3471withTimeoutKLykuaI(j3, shadeDisplayChangeLatencyTracker$waitForOnMovedToDisplayDispatchedToView$3$1, c10401) != coroutineSingletons) {
+                    if (TimeoutKt.m3470withTimeoutKLykuaI(j3, shadeDisplayChangeLatencyTracker$waitForOnMovedToDisplayDispatchedToView$3$1, c10401) != coroutineSingletons) {
                         i2 = iNextInt;
                         j = j2;
                         str = str2;
@@ -357,7 +357,7 @@ public final class ShadeDisplayChangeLatencyTracker {
                 c10411.J$0 = j2;
                 c10411.I$0 = iNextInt;
                 c10411.label = 1;
-                if (TimeoutKt.m3471withTimeoutKLykuaI(j3, shadeDisplayChangeLatencyTracker$waitUntilNextDoFrameDone$2$1, c10411) == coroutineSingletons) {
+                if (TimeoutKt.m3470withTimeoutKLykuaI(j3, shadeDisplayChangeLatencyTracker$waitUntilNextDoFrameDone$2$1, c10411) == coroutineSingletons) {
                     return coroutineSingletons;
                 }
                 str = str2;

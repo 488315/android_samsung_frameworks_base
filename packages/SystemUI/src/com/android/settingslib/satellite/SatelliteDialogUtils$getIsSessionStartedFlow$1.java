@@ -56,7 +56,7 @@ final class SatelliteDialogUtils$getIsSessionStartedFlow$1 extends SuspendLambda
                     SatelliteDialogUtils.INSTANCE.getClass();
                     boolean z = (i2 == -1 || i2 == 4 || i2 == 5) ? false : true;
                     Log.i("SatelliteDialogUtils", "Satellite modem state changed: state=" + i2 + ", isSessionStarted=" + z);
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(z));
                 }
             };
             try {
@@ -67,7 +67,7 @@ final class SatelliteDialogUtils$getIsSessionStartedFlow$1 extends SuspendLambda
             }
             if (iRegisterForModemStateChanged != 0) {
                 RecordingInputConnection$$ExternalSyntheticOutline0.m(iRegisterForModemStateChanged, "Failed to register for satellite modem state change: ", "SatelliteDialogUtils");
-                ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.FALSE);
+                ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.FALSE);
             }
             final SatelliteManager satelliteManager = this.$satelliteManager;
             Function0 function0 = new Function0() { // from class: com.android.settingslib.satellite.SatelliteDialogUtils$getIsSessionStartedFlow$1$$ExternalSyntheticLambda0

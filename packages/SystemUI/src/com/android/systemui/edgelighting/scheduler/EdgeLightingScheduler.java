@@ -481,7 +481,7 @@ public class EdgeLightingScheduler {
                 stringBuffer.append(str5);
                 int i12 = lightingScheduleInfo5.mReason;
                 EdgeLightingScheduler edgeLightingScheduler4 = EdgeLightingScheduler.this;
-                if (EdgeLightingScheduler.m2576$$Nest$misNeedToBlockedByPolicy(edgeLightingScheduler4, str5, i12)) {
+                if (EdgeLightingScheduler.m2574$$Nest$misNeedToBlockedByPolicy(edgeLightingScheduler4, str5, i12)) {
                     stringBuffer.append(" +isBlockedByPolicy");
                     Slog.d("EdgeLightingScheduler", stringBuffer.toString());
                     edgeLightingScheduler4.mNotificationLightingScheduler.flushNotiNow();
@@ -493,7 +493,7 @@ public class EdgeLightingScheduler {
                     if (mode != 1) {
                         if (mode != 2) {
                             turnOverEdgeLighting.mCurrentTurnMode = stateIdle;
-                            EdgeLightingScheduler.m2577$$Nest$mstartNotiEffect(edgeLightingScheduler4, false);
+                            EdgeLightingScheduler.m2575$$Nest$mstartNotiEffect(edgeLightingScheduler4, false);
                         }
                         Slog.d("EdgeLightingScheduler", stringBuffer.toString());
                     } else {
@@ -559,10 +559,10 @@ public class EdgeLightingScheduler {
             EdgeLightingScheduler edgeLightingScheduler5 = EdgeLightingScheduler.this;
             if (edgeLightingScheduler5.mTurnOverEdgeLighting.mIsUpsideDown == 1) {
                 Slog.d("EdgeLightingScheduler", "updateText: restart edge lighting for turn over");
-                EdgeLightingScheduler.m2577$$Nest$mstartNotiEffect(edgeLightingScheduler5, true);
+                EdgeLightingScheduler.m2575$$Nest$mstartNotiEffect(edgeLightingScheduler5, true);
                 return;
             }
-            if (EdgeLightingScheduler.m2576$$Nest$misNeedToBlockedByPolicy(edgeLightingScheduler5, str5, lightingScheduleInfo5.mReason)) {
+            if (EdgeLightingScheduler.m2574$$Nest$misNeedToBlockedByPolicy(edgeLightingScheduler5, str5, lightingScheduleInfo5.mReason)) {
                 Slog.d("EdgeLightingScheduler", "updateText: skip by Blocking Policy");
             } else {
                 StringBuffer stringBuffer3 = new StringBuffer("updateNotiText: isDirty = ");
@@ -737,7 +737,7 @@ public class EdgeLightingScheduler {
     }
 
     /* renamed from: -$$Nest$misNeedToBlockedByPolicy, reason: not valid java name */
-    public static boolean m2576$$Nest$misNeedToBlockedByPolicy(EdgeLightingScheduler edgeLightingScheduler, String str, int i) {
+    public static boolean m2574$$Nest$misNeedToBlockedByPolicy(EdgeLightingScheduler edgeLightingScheduler, String str, int i) {
         SemStatusBarManager semStatusBarManager = (SemStatusBarManager) EdgeLightingService.this.getSystemService(SemStatusBarManager.class);
         if (semStatusBarManager != null ? semStatusBarManager.isPanelExpanded() : false) {
             Slog.d("EdgeLightingScheduler", "isNeedToBlockedByPolicy: not work on statusbar");
@@ -756,7 +756,7 @@ public class EdgeLightingScheduler {
 
     /* JADX WARN: Type inference failed for: r8v7, types: [com.android.systemui.edgelighting.scheduler.EdgeLightingScheduler$7] */
     /* renamed from: -$$Nest$mstartNotiEffect, reason: not valid java name */
-    public static void m2577$$Nest$mstartNotiEffect(EdgeLightingScheduler edgeLightingScheduler, boolean z) {
+    public static void m2575$$Nest$mstartNotiEffect(EdgeLightingScheduler edgeLightingScheduler, boolean z) {
         ArrayList parcelableArrayList;
         boolean z2;
         boolean z3;

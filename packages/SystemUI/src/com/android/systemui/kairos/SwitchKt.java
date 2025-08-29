@@ -42,7 +42,7 @@ public abstract class SwitchKt {
             public final Object invoke(Object obj, Object obj2, Object obj3) {
                 ((Number) obj3).intValue();
                 Maybe.Companion.getClass();
-                return new Single(Maybe.Present.m2590boximpl((EventsImpl) obj2)).getEntries();
+                return new Single(Maybe.Present.m2588boximpl((EventsImpl) obj2)).getEntries();
             }
         };
         final EventsImpl eventsImpl2 = new EventsImpl() { // from class: com.android.systemui.kairos.SwitchKt$switchEvents$$inlined$switchDeferredImplSingle$default$1

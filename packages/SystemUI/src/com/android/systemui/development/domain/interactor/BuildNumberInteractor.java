@@ -133,14 +133,14 @@ public final class BuildNumberInteractor {
                     if (i2 == 0) {
                         ResultKt.throwOnFailure(obj2);
                         boolean zBooleanValue = ((Boolean) obj).booleanValue();
-                        BuildNumber buildNumberM2566boximpl = BuildNumber.m2566boximpl(this.this$0.buildText);
+                        BuildNumber buildNumberM2564boximpl = BuildNumber.m2564boximpl(this.this$0.buildText);
                         if (!zBooleanValue) {
-                            buildNumberM2566boximpl = null;
+                            buildNumberM2564boximpl = null;
                         }
-                        String str = buildNumberM2566boximpl != null ? buildNumberM2566boximpl.value : null;
-                        BuildNumber buildNumberM2566boximpl2 = str != null ? BuildNumber.m2566boximpl(str) : null;
+                        String str = buildNumberM2564boximpl != null ? buildNumberM2564boximpl.value : null;
+                        BuildNumber buildNumberM2564boximpl2 = str != null ? BuildNumber.m2564boximpl(str) : null;
                         anonymousClass1.label = 1;
-                        if (this.$this_unsafeFlow.emit(buildNumberM2566boximpl2, anonymousClass1) == coroutineSingletons) {
+                        if (this.$this_unsafeFlow.emit(buildNumberM2564boximpl2, anonymousClass1) == coroutineSingletons) {
                             return coroutineSingletons;
                         }
                     } else {

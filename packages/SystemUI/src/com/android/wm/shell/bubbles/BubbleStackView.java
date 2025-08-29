@@ -449,7 +449,7 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
     }
 
     /* renamed from: $r8$lambda$H8d4Ep0eU-hn88VAHYBVbgvu58M, reason: not valid java name */
-    public static void m3232$r8$lambda$H8d4Ep0eUhn88VAHYBVbgvu58M(BubbleStackView bubbleStackView) {
+    public static void m3231$r8$lambda$H8d4Ep0eUhn88VAHYBVbgvu58M(BubbleStackView bubbleStackView) {
         BubbleData bubbleData = bubbleStackView.mBubbleData;
         BubbleViewProvider bubbleViewProvider = bubbleData.mSelectedBubble;
         if (bubbleViewProvider == null || !bubbleData.hasBubbleInStackWithKey(bubbleViewProvider.getKey())) {
@@ -501,7 +501,7 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
     }
 
     /* renamed from: -$$Nest$mshowExpandedViewIfNeeded, reason: not valid java name */
-    public static void m3233$$Nest$mshowExpandedViewIfNeeded(BubbleStackView bubbleStackView) {
+    public static void m3232$$Nest$mshowExpandedViewIfNeeded(BubbleStackView bubbleStackView) {
         if (bubbleStackView.mExpandedViewTemporarilyHidden) {
             bubbleStackView.mExpandedViewTemporarilyHidden = false;
             AnimatableScaleMatrix animatableScaleMatrix = bubbleStackView.mExpandedViewContainerMatrix;
@@ -861,12 +861,12 @@ public class BubbleStackView extends FrameLayout implements ViewTreeObserver.OnC
                         return;
                     }
                 }
-                BubbleStackView.m3233$$Nest$mshowExpandedViewIfNeeded(BubbleStackView.this);
+                BubbleStackView.m3232$$Nest$mshowExpandedViewIfNeeded(BubbleStackView.this);
                 BubbleStackView.this.getClass();
                 BubbleStackView bubbleStackView2 = BubbleStackView.this;
                 if (bubbleStackView2.mBubbleData.mExpanded) {
                     bubbleStackView2.mExpandedAnimationController.snapBubbleBack(view, f3, f4);
-                    BubbleStackView.m3233$$Nest$mshowExpandedViewIfNeeded(BubbleStackView.this);
+                    BubbleStackView.m3232$$Nest$mshowExpandedViewIfNeeded(BubbleStackView.this);
                 } else {
                     boolean z = bubbleStackView2.mStackOnLeftOrWillBe;
                     bubbleStackView2.mStackOnLeftOrWillBe = bubbleStackView2.mStackAnimationController.flingStackThenSpringToEdge(f + f2, f3, f4) <= ((float) (BubbleStackView.this.getWidth() / 2));

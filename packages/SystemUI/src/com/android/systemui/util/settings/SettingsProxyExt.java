@@ -88,7 +88,7 @@ public final class SettingsProxyExt {
 
                     @Override // android.database.ContentObserver
                     public void onChange(boolean z) {
-                        ((ChannelCoroutine) producerScope2).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                        ((ChannelCoroutine) producerScope2).mo3475trySendJP2dKIU(Unit.INSTANCE);
                     }
                 };
                 String[] strArr2 = this.$names;
@@ -222,7 +222,7 @@ public final class SettingsProxyExt {
 
                     @Override // android.database.ContentObserver
                     public void onChange(boolean z) {
-                        ((ChannelCoroutine) producerScope2).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                        ((ChannelCoroutine) producerScope2).mo3475trySendJP2dKIU(Unit.INSTANCE);
                     }
                 };
                 String[] strArr2 = this.$names;

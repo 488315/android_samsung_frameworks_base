@@ -52,7 +52,7 @@ final class SecBlurSettingsRepositoryImpl$blurReduced$1 extends SuspendLambda im
                     if (uri != null && uri.equals(Settings.System.getUriFor(SettingsHelper.INDEX_ACCESSIBILITY_REDUCE_TRANSPARENCY))) {
                         SecBlurSettingsRepositoryImpl.Companion.getClass();
                         EmergencyButtonController$$ExternalSyntheticOutline0.m("isReduceTransparencyEnabled changed ", SecBlurSettingsRepositoryImpl.TAG, settingsHelper.isReduceTransparencyEnabled());
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(settingsHelper.isReduceTransparencyEnabled()));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(settingsHelper.isReduceTransparencyEnabled()));
                     }
                 }
             };

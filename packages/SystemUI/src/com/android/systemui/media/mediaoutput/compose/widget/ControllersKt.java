@@ -74,7 +74,7 @@ public abstract class ControllersKt {
                 ComposerKt.traceEventStart("com.android.systemui.media.mediaoutput.compose.widget.MoCheckbox (Controllers.kt:81)");
             }
             SeslTheme.INSTANCE.getClass();
-            ThemeKt.SeslTheme(false, SeslColorScheme.m3358copyFD3wquc$default(SeslTheme.getColorScheme(composerImpl), ColorKt.Color(4294769919L), ColorKt.Color(4294769919L)), ComposableLambdaKt.rememberComposableLambda(1403220974, new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ControllersKt.MoCheckbox.2
+            ThemeKt.SeslTheme(false, SeslColorScheme.m3357copyFD3wquc$default(SeslTheme.getColorScheme(composerImpl), ColorKt.Color(4294769919L), ColorKt.Color(4294769919L)), ComposableLambdaKt.rememberComposableLambda(1403220974, new Function2() { // from class: com.android.systemui.media.mediaoutput.compose.widget.ControllersKt.MoCheckbox.2
                 /* JADX WARN: Removed duplicated region for block: B:8:0x001c  */
                 @Override // kotlin.jvm.functions.Function2
                 /*
@@ -373,7 +373,7 @@ public abstract class ControllersKt {
                                                     Modifier modifierM127paddingVpY3zN4$default = PaddingKt.m127paddingVpY3zN4$default(companion2, 0.0f, (22 - f4) / 2, 1);
                                                     long j2 = ((Color) state.getValue()).value;
                                                     SliderColors sliderColors8 = sliderColors7;
-                                                    seekbarDefaults2.m2636ThumbFJfuzF0(mutableState7, modifierM127paddingVpY3zN4$default, sliderColors8.m291copyK518z4(sliderColors8.thumbColor, (1021 & 2) != 0 ? sliderColors8.activeTrackColor : j2, (1021 & 4) != 0 ? sliderColors8.activeTickColor : 0L, (1021 & 8) != 0 ? sliderColors8.inactiveTrackColor : 0L, (1021 & 16) != 0 ? sliderColors8.inactiveTickColor : 0L, sliderColors8.disabledThumbColor, sliderColors8.disabledActiveTrackColor, sliderColors8.disabledActiveTickColor, sliderColors8.disabledInactiveTrackColor, sliderColors8.disabledInactiveTickColor), false, f4, composer3, 221238);
+                                                    seekbarDefaults2.m2634ThumbFJfuzF0(mutableState7, modifierM127paddingVpY3zN4$default, sliderColors8.m291copyK518z4(sliderColors8.thumbColor, (1021 & 2) != 0 ? sliderColors8.activeTrackColor : j2, (1021 & 4) != 0 ? sliderColors8.activeTickColor : 0L, (1021 & 8) != 0 ? sliderColors8.inactiveTrackColor : 0L, (1021 & 16) != 0 ? sliderColors8.inactiveTickColor : 0L, sliderColors8.disabledThumbColor, sliderColors8.disabledActiveTrackColor, sliderColors8.disabledActiveTickColor, sliderColors8.disabledInactiveTrackColor, sliderColors8.disabledInactiveTickColor), false, f4, composer3, 221238);
                                                     if (ComposerKt.isTraceInProgress()) {
                                                         ComposerKt.traceEventEnd();
                                                     }
@@ -543,7 +543,7 @@ public abstract class ControllersKt {
                                                     Modifier modifierM127paddingVpY3zN4$default = PaddingKt.m127paddingVpY3zN4$default(companion2, 0.0f, (22 - f4) / 2, 1);
                                                     long j2 = ((Color) state.getValue()).value;
                                                     SliderColors sliderColors8 = sliderColors7;
-                                                    seekbarDefaults2.m2636ThumbFJfuzF0(mutableState7, modifierM127paddingVpY3zN4$default, sliderColors8.m291copyK518z4(sliderColors8.thumbColor, (1021 & 2) != 0 ? sliderColors8.activeTrackColor : j2, (1021 & 4) != 0 ? sliderColors8.activeTickColor : 0L, (1021 & 8) != 0 ? sliderColors8.inactiveTrackColor : 0L, (1021 & 16) != 0 ? sliderColors8.inactiveTickColor : 0L, sliderColors8.disabledThumbColor, sliderColors8.disabledActiveTrackColor, sliderColors8.disabledActiveTickColor, sliderColors8.disabledInactiveTrackColor, sliderColors8.disabledInactiveTickColor), false, f4, composer3, 221238);
+                                                    seekbarDefaults2.m2634ThumbFJfuzF0(mutableState7, modifierM127paddingVpY3zN4$default, sliderColors8.m291copyK518z4(sliderColors8.thumbColor, (1021 & 2) != 0 ? sliderColors8.activeTrackColor : j2, (1021 & 4) != 0 ? sliderColors8.activeTickColor : 0L, (1021 & 8) != 0 ? sliderColors8.inactiveTrackColor : 0L, (1021 & 16) != 0 ? sliderColors8.inactiveTickColor : 0L, sliderColors8.disabledThumbColor, sliderColors8.disabledActiveTrackColor, sliderColors8.disabledActiveTickColor, sliderColors8.disabledInactiveTrackColor, sliderColors8.disabledInactiveTickColor), false, f4, composer3, 221238);
                                                     if (ComposerKt.isTraceInProgress()) {
                                                         ComposerKt.traceEventEnd();
                                                     }

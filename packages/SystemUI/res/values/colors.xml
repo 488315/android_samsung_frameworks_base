@@ -1425,6 +1425,7 @@
     <color name="sec_privacy_dialog_bg">#ccffffff</color>
     <color name="sec_privacy_dialog_bg_reduce_transparency">#ffffffff</color>
     <color name="sec_privacy_dialog_divider">#14000000</color>
+    <color name="sec_privacy_dialog_system_setting_divider">#ffc9c9cc</color>
     <color name="sec_qs_button_badge_background_color">#fff56a0d</color>
     <color name="sec_qs_button_badge_text_color">#fffafafa</color>
     <color name="sec_qs_detail_action_button">#fffafaff</color>
@@ -2153,7 +2154,7 @@
     <color name="subroom_flashlight_help_text">#ffffffff</color>
     <color name="subroom_flashlight_turn_off">#fffafafa</color>
     <color name="subroom_qp_seekbar_icon_color">#ff171717</color>
-    <color name="subroom_seekbar_icon_color">#ff959595</color>
+    <color name="subroom_seekbar_icon_color">#ff252525</color>
     <color name="subroom_seekbar_progress_background">#fffdfdfd</color>
     <color name="subroom_seekbar_progress_background_disabled">#26ffffff</color>
     <color name="subroom_seekbar_track_background">#40ffffff</color>

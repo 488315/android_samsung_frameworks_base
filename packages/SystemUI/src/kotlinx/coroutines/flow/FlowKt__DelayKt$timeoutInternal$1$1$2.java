@@ -40,6 +40,6 @@ final class FlowKt__DelayKt$timeoutInternal$1$1$2 extends SuspendLambda implemen
             throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
         }
         ResultKt.throwOnFailure(obj);
-        throw new TimeoutCancellationException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Timed out waiting for ", Duration.m3466toStringimpl(this.$timeout)));
+        throw new TimeoutCancellationException(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("Timed out waiting for ", Duration.m3465toStringimpl(this.$timeout)));
     }
 }

@@ -66,7 +66,7 @@ final class BatteryRepository$estimate$1 extends SuspendLambda implements Functi
                     duration = DurationKt.toDuration(2, DurationUnit.MINUTES);
                     this.L$0 = flowCollector;
                     this.label = 3;
-                    if (DelayKt.m3469delayVtjQ1oo(duration, this) != coroutineSingletons) {
+                    if (DelayKt.m3468delayVtjQ1oo(duration, this) != coroutineSingletons) {
                     }
                 }
                 return coroutineSingletons;
@@ -78,7 +78,7 @@ final class BatteryRepository$estimate$1 extends SuspendLambda implements Functi
                 duration = DurationKt.toDuration(2, DurationUnit.MINUTES);
                 this.L$0 = flowCollector;
                 this.label = 3;
-                if (DelayKt.m3469delayVtjQ1oo(duration, this) != coroutineSingletons) {
+                if (DelayKt.m3468delayVtjQ1oo(duration, this) != coroutineSingletons) {
                 }
                 return coroutineSingletons;
             }

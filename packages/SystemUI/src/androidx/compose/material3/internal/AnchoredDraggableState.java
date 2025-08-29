@@ -527,8 +527,8 @@ public final class AnchoredDraggableState<T> {
         MutableFloatState mutableFloatState = this.offset$delegate;
         float floatValue = (Float.isNaN(((SnapshotMutableFloatStateImpl) mutableFloatState).getFloatValue()) ? 0.0f : ((SnapshotMutableFloatStateImpl) mutableFloatState).getFloatValue()) + f;
         float fMinAnchor = ((MapDraggableAnchors) getAnchors()).minAnchor();
-        Float fM3450maxOrNull = CollectionsKt___CollectionsKt.m3450maxOrNull((Iterable) ((MapDraggableAnchors) getAnchors()).anchors.values());
-        return RangesKt___RangesKt.coerceIn(floatValue, fMinAnchor, fM3450maxOrNull != null ? fM3450maxOrNull.floatValue() : Float.NaN);
+        Float fM3449maxOrNull = CollectionsKt___CollectionsKt.m3449maxOrNull((Iterable) ((MapDraggableAnchors) getAnchors()).anchors.values());
+        return RangesKt___RangesKt.coerceIn(floatValue, fMinAnchor, fM3449maxOrNull != null ? fM3449maxOrNull.floatValue() : Float.NaN);
     }
 
     public final float requireOffset() {

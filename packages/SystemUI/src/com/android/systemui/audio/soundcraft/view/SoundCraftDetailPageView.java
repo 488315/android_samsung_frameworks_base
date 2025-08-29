@@ -88,7 +88,7 @@ public final class SoundCraftDetailPageView extends LinearLayout implements Soun
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        if (Result.m3442exceptionOrNullimpl(failure) != null) {
+        if (Result.m3441exceptionOrNullimpl(failure) != null) {
             Log.d("SoundCraft.SoundCraftDetailPageView", "updatePadding fail");
         }
     }
@@ -208,7 +208,7 @@ public final class SoundCraftDetailPageView extends LinearLayout implements Soun
                     int i3 = Result.$r8$clinit;
                     failure = new Result.Failure(th);
                 }
-                if (Result.m3442exceptionOrNullimpl(failure) != null) {
+                if (Result.m3441exceptionOrNullimpl(failure) != null) {
                     Log.d("SoundCraft.SoundCraftDetailPageView", "updatePadding fail");
                 }
                 return windowInsetsCompat;

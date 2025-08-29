@@ -533,7 +533,7 @@ final class CurrentTilesInteractorImpl$startTileCollection$1 extends SuspendLamb
                     i6 = 1;
                     qSTile = (QSTile) objAccess$createTile2;
                     if (qSTile != null) {
-                        map.put(tileSpec, CurrentTilesInteractorImpl.TileOrNotInstalled.Tile.m2910boximpl(qSTile));
+                        map.put(tileSpec, CurrentTilesInteractorImpl.TileOrNotInstalled.Tile.m2908boximpl(qSTile));
                     }
                     Unit unit2 = Unit.INSTANCE;
                     i = i6;

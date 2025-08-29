@@ -1609,7 +1609,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
             int i2 = NotificationsLiveDataStoreRefactor.$r8$clinit;
             NotificationStatsLoggerBinderKt$onNotificationLocationsUpdated$1$callback$1 notificationStatsLoggerBinderKt$onNotificationLocationsUpdated$1$callback$1 = this.mLocationsChangedListener;
             if (notificationStatsLoggerBinderKt$onNotificationLocationsUpdated$1$callback$1 != null) {
-                ((ChannelCoroutine) notificationStatsLoggerBinderKt$onNotificationLocationsUpdated$1$callback$1.$$this$conflatedCallbackFlow).mo3476trySendJP2dKIU(this.collectVisibleLocationsCallable);
+                ((ChannelCoroutine) notificationStatsLoggerBinderKt$onNotificationLocationsUpdated$1$callback$1.$$this$conflatedCallbackFlow).mo3475trySendJP2dKIU(this.collectVisibleLocationsCallable);
             }
         }
         runAnimationFinishedRunnables();
@@ -3878,7 +3878,7 @@ public class NotificationStackScrollLayout extends ViewGroup implements Dumpable
                                         }
                                         notificationStackScrollLayoutController.mView.mCheckForLeavebehind = true;
                                     }
-                                    NotificationStackScrollLayoutController.m3084$$Nest$mupdateEventAvailability(notificationStackScrollLayoutController, motionEvent);
+                                    NotificationStackScrollLayoutController.m3082$$Nest$mupdateEventAvailability(notificationStackScrollLayoutController, motionEvent);
                                     int actionMasked2 = motionEvent.getActionMasked();
                                     InteractionJankMonitor interactionJankMonitor = notificationStackScrollLayoutController.mJankMonitor;
                                     if (interactionJankMonitor == null) {

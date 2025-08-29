@@ -31,7 +31,7 @@ public class PipResizeAnimator extends ValueAnimator {
     public PipSurfaceTransactionHelper.SurfaceControlTransactionFactory mSurfaceControlTransactionFactory;
 
     /* renamed from: -$$Nest$smsetBoundsAndRotation, reason: not valid java name */
-    public static void m3276$$Nest$smsetBoundsAndRotation(SurfaceControl.Transaction transaction, SurfaceControl surfaceControl, Rect rect, Rect rect2, float f, int i, int i2) {
+    public static void m3275$$Nest$smsetBoundsAndRotation(SurfaceControl.Transaction transaction, SurfaceControl surfaceControl, Rect rect, Rect rect2, float f, int i, int i2) {
         Matrix matrix = new Matrix();
         float fWidth = rect2.width() / rect.width();
         matrix.setScale(fWidth, rect2.height() / rect.height());
@@ -59,7 +59,7 @@ public class PipResizeAnimator extends ValueAnimator {
                 PipResizeAnimator pipResizeAnimator = PipResizeAnimator.this;
                 SurfaceControl.Transaction transaction3 = pipResizeAnimator.mFinishTx;
                 if (transaction3 != null) {
-                    PipResizeAnimator.m3276$$Nest$smsetBoundsAndRotation(transaction3, pipResizeAnimator.mLeash, pipResizeAnimator.mBaseBounds, pipResizeAnimator.mEndBounds, 0.0f, pipResizeAnimator.mCornerRadius, pipResizeAnimator.mShadowRadius);
+                    PipResizeAnimator.m3275$$Nest$smsetBoundsAndRotation(transaction3, pipResizeAnimator.mLeash, pipResizeAnimator.mBaseBounds, pipResizeAnimator.mEndBounds, 0.0f, pipResizeAnimator.mCornerRadius, pipResizeAnimator.mShadowRadius);
                 }
                 Runnable runnable = PipResizeAnimator.this.mAnimationEndCallback;
                 if (runnable != null) {
@@ -76,7 +76,7 @@ public class PipResizeAnimator extends ValueAnimator {
                 PipResizeAnimator pipResizeAnimator2 = PipResizeAnimator.this;
                 SurfaceControl.Transaction transaction3 = pipResizeAnimator2.mStartTx;
                 if (transaction3 != null) {
-                    PipResizeAnimator.m3276$$Nest$smsetBoundsAndRotation(transaction3, pipResizeAnimator2.mLeash, pipResizeAnimator2.mBaseBounds, pipResizeAnimator2.mStartBounds, pipResizeAnimator2.mDelta, pipResizeAnimator2.mCornerRadius, pipResizeAnimator2.mShadowRadius);
+                    PipResizeAnimator.m3275$$Nest$smsetBoundsAndRotation(transaction3, pipResizeAnimator2.mLeash, pipResizeAnimator2.mBaseBounds, pipResizeAnimator2.mStartBounds, pipResizeAnimator2.mDelta, pipResizeAnimator2.mCornerRadius, pipResizeAnimator2.mShadowRadius);
                     PipResizeAnimator.this.mStartTx.apply();
                 }
             }
@@ -88,7 +88,7 @@ public class PipResizeAnimator extends ValueAnimator {
                 SurfaceControl.Transaction transaction3 = ((PipSurfaceTransactionHelper.VsyncSurfaceControlTransactionFactory) PipResizeAnimator.this.mSurfaceControlTransactionFactory).getTransaction();
                 float animatedFraction = 1.0f - PipResizeAnimator.this.getAnimatedFraction();
                 PipResizeAnimator pipResizeAnimator = PipResizeAnimator.this;
-                PipResizeAnimator.m3276$$Nest$smsetBoundsAndRotation(transaction3, pipResizeAnimator.mLeash, pipResizeAnimator.mBaseBounds, pipResizeAnimator.mAnimatedRect, animatedFraction * pipResizeAnimator.mDelta, pipResizeAnimator.mCornerRadius, pipResizeAnimator.mShadowRadius);
+                PipResizeAnimator.m3275$$Nest$smsetBoundsAndRotation(transaction3, pipResizeAnimator.mLeash, pipResizeAnimator.mBaseBounds, pipResizeAnimator.mAnimatedRect, animatedFraction * pipResizeAnimator.mDelta, pipResizeAnimator.mCornerRadius, pipResizeAnimator.mShadowRadius);
                 transaction3.apply();
             }
         };

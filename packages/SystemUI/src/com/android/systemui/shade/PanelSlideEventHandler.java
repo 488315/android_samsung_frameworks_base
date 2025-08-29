@@ -600,7 +600,7 @@ public final class PanelSlideEventHandler implements ShadeExpansionListener, Con
                                         }
                                     } else {
                                         SecMediaPlayerData secMediaPlayerData = (SecMediaPlayerData) secMediaHost.mMediaPlayerData.get(MediaType.QS);
-                                        if ((secMediaPlayerData != null ? secMediaPlayerData.m2629getMediaData().size() : 0) > 1) {
+                                        if ((secMediaPlayerData != null ? secMediaPlayerData.m2627getMediaData().size() : 0) > 1) {
                                             if (rawX > iArr3[0] && rawX < viewFindViewById3.getWidth() + r8) {
                                                 if (rawY > iArr3[1] && rawY < viewFindViewById3.getHeight() + r8) {
                                                     z5 = true;

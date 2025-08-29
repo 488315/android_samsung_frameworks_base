@@ -4,11 +4,13 @@ import android.R;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.ResourcesManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -64,6 +66,8 @@ public class StorageNotification implements CoreStartable {
     public final Map mMountedVolumes = new ConcurrentHashMap();
     public volatile int mCurrentUserId = 0;
     public final ArrayMap mPrevStatus = new ArrayMap();
+    public final ArrayMap mPkgPath = new ArrayMap();
+    public final ArrayMap mSplitPkgPaths = new ArrayMap();
     public final SparseArray mMoves = new SparseArray();
     public final AnonymousClass1 mListener = new StorageEventListener() { // from class: com.android.systemui.usb.StorageNotification.1
         public final void onDiskDestroyed(DiskInfo diskInfo) {
@@ -139,7 +143,7 @@ public class StorageNotification implements CoreStartable {
                 final StorageNotification storageNotification = StorageNotification.this;
                 int i3 = StorageNotification.$r8$clinit;
                 storageNotification.getClass();
-                new Thread(new Runnable() { // from class: com.android.systemui.usb.StorageNotification.13
+                new Thread(new Runnable() { // from class: com.android.systemui.usb.StorageNotification.14
                     @Override // java.lang.Runnable
                     public final void run() throws InterruptedException, Resources.NotFoundException {
                         String string = StorageNotification.this.mContext.getString(R.string.accessibility_gesture_3finger_prompt_text);
@@ -307,7 +311,67 @@ public class StorageNotification implements CoreStartable {
             }
         }
     };
-    public final AnonymousClass10 mUEventObserver = new UEventObserver() { // from class: com.android.systemui.usb.StorageNotification.10
+    public final AnonymousClass10 mPackageIntentReceiver = new BroadcastReceiver() { // from class: com.android.systemui.usb.StorageNotification.10
+        @Override // android.content.BroadcastReceiver
+        public final void onReceive(Context context, Intent intent) throws PackageManager.NameNotFoundException {
+            String action = intent.getAction();
+            Log.d("StorageNotification", "mPackageIntentReceiver (" + intent + ")");
+            if (action == null) {
+                return;
+            }
+            if (action.equals("android.intent.action.EXTERNAL_APPLICATIONS_UNAVAILABLE")) {
+                KeyguardKnoxDualDarInnerPasswordViewController$$ExternalSyntheticOutline0.m("action=", action, " invalidating Packages", "StorageNotification");
+                String[] stringArrayExtra = intent.getStringArrayExtra("android.intent.extra.changed_package_list");
+                if (stringArrayExtra == null || stringArrayExtra.length <= 0) {
+                    return;
+                }
+                for (String str : stringArrayExtra) {
+                    Log.d("StorageNotification", " invalidating package=" + str);
+                    ResourcesManager.getInstance().invalidatePath((String) StorageNotification.this.mPkgPath.get(str));
+                    String[] strArr = (String[]) StorageNotification.this.mSplitPkgPaths.get(str);
+                    if (strArr != null && strArr.length > 0) {
+                        for (String str2 : strArr) {
+                            ResourcesManager.getInstance().invalidatePath(str2);
+                            Log.d("StorageNotification", " invalidating split package path =" + str2);
+                        }
+                    }
+                    StorageNotification.this.mPkgPath.remove(str);
+                    StorageNotification.this.mSplitPkgPaths.remove(str);
+                }
+                return;
+            }
+            if (action.equals("android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE")) {
+                KeyguardKnoxDualDarInnerPasswordViewController$$ExternalSyntheticOutline0.m("action=", action, " saving Packages Path info", "StorageNotification");
+                String[] stringArrayExtra2 = intent.getStringArrayExtra("android.intent.extra.changed_package_list");
+                if (stringArrayExtra2 == null || stringArrayExtra2.length <= 0) {
+                    return;
+                }
+                for (String str3 : stringArrayExtra2) {
+                    try {
+                        ApplicationInfo applicationInfo = StorageNotification.this.mContext.getPackageManager().getApplicationInfo(str3, 0);
+                        String str4 = applicationInfo.sourceDir;
+                        String[] strArr2 = applicationInfo.splitSourceDirs;
+                        if (str4 != null) {
+                            StorageNotification.this.mPkgPath.put(str3, str4);
+                            Log.d("StorageNotification", "saving base apk path " + str4);
+                        } else {
+                            Log.d("StorageNotification", "sourcedir path null");
+                        }
+                        if (strArr2 != null) {
+                            StorageNotification.this.mSplitPkgPaths.put(str3, strArr2);
+                            Log.d("StorageNotification", "saving path split apk paths");
+                        } else {
+                            Log.d("StorageNotification", "splitSourceDirs path null");
+                        }
+                    } catch (PackageManager.NameNotFoundException e) {
+                        Log.d("StorageNotification", "Can not get applictionInfo, " + e);
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    };
+    public final AnonymousClass11 mUEventObserver = new UEventObserver() { // from class: com.android.systemui.usb.StorageNotification.11
         public final void onUEvent(UEventObserver.UEvent uEvent) {
             uEvent.toString();
             if ("YES".equals(uEvent.get("IOERROR"))) {
@@ -318,7 +382,7 @@ public class StorageNotification implements CoreStartable {
             }
         }
     };
-    public final AnonymousClass11 mROMountUEventObserver = new UEventObserver() { // from class: com.android.systemui.usb.StorageNotification.11
+    public final AnonymousClass12 mROMountUEventObserver = new UEventObserver() { // from class: com.android.systemui.usb.StorageNotification.12
         public final void onUEvent(UEventObserver.UEvent uEvent) {
             uEvent.toString();
             String str = uEvent.get("MAJOR");
@@ -339,7 +403,7 @@ public class StorageNotification implements CoreStartable {
             storageNotification2.showExtStorageReadOnlyMountNoti("usb", true);
         }
     };
-    public final AnonymousClass12 mMoveCallback = new PackageManager.MoveCallback() { // from class: com.android.systemui.usb.StorageNotification.12
+    public final AnonymousClass13 mMoveCallback = new PackageManager.MoveCallback() { // from class: com.android.systemui.usb.StorageNotification.13
         public final void onCreated(int i, Bundle bundle) {
             Log.d("StorageNotification", "mMoveCallback (" + i + ")");
             MoveInfo moveInfo = new MoveInfo(0);
@@ -475,18 +539,19 @@ public class StorageNotification implements CoreStartable {
         }
     }
 
-    /* JADX WARN: Type inference failed for: r0v10, types: [com.android.systemui.usb.StorageNotification$6] */
-    /* JADX WARN: Type inference failed for: r0v11, types: [com.android.systemui.usb.StorageNotification$7] */
-    /* JADX WARN: Type inference failed for: r0v12, types: [com.android.systemui.usb.StorageNotification$8] */
-    /* JADX WARN: Type inference failed for: r0v13, types: [com.android.systemui.usb.StorageNotification$9] */
-    /* JADX WARN: Type inference failed for: r0v14, types: [com.android.systemui.usb.StorageNotification$10] */
-    /* JADX WARN: Type inference failed for: r0v15, types: [com.android.systemui.usb.StorageNotification$11] */
-    /* JADX WARN: Type inference failed for: r0v16, types: [com.android.systemui.usb.StorageNotification$12] */
-    /* JADX WARN: Type inference failed for: r0v5, types: [com.android.systemui.usb.StorageNotification$1] */
-    /* JADX WARN: Type inference failed for: r0v6, types: [com.android.systemui.usb.StorageNotification$2] */
-    /* JADX WARN: Type inference failed for: r0v7, types: [com.android.systemui.usb.StorageNotification$3] */
-    /* JADX WARN: Type inference failed for: r0v8, types: [com.android.systemui.usb.StorageNotification$4] */
-    /* JADX WARN: Type inference failed for: r0v9, types: [com.android.systemui.usb.StorageNotification$5] */
+    /* JADX WARN: Type inference failed for: r0v10, types: [com.android.systemui.usb.StorageNotification$4] */
+    /* JADX WARN: Type inference failed for: r0v11, types: [com.android.systemui.usb.StorageNotification$5] */
+    /* JADX WARN: Type inference failed for: r0v12, types: [com.android.systemui.usb.StorageNotification$6] */
+    /* JADX WARN: Type inference failed for: r0v13, types: [com.android.systemui.usb.StorageNotification$7] */
+    /* JADX WARN: Type inference failed for: r0v14, types: [com.android.systemui.usb.StorageNotification$8] */
+    /* JADX WARN: Type inference failed for: r0v15, types: [com.android.systemui.usb.StorageNotification$9] */
+    /* JADX WARN: Type inference failed for: r0v16, types: [com.android.systemui.usb.StorageNotification$10] */
+    /* JADX WARN: Type inference failed for: r0v17, types: [com.android.systemui.usb.StorageNotification$11] */
+    /* JADX WARN: Type inference failed for: r0v18, types: [com.android.systemui.usb.StorageNotification$12] */
+    /* JADX WARN: Type inference failed for: r0v19, types: [com.android.systemui.usb.StorageNotification$13] */
+    /* JADX WARN: Type inference failed for: r0v7, types: [com.android.systemui.usb.StorageNotification$1] */
+    /* JADX WARN: Type inference failed for: r0v8, types: [com.android.systemui.usb.StorageNotification$2] */
+    /* JADX WARN: Type inference failed for: r0v9, types: [com.android.systemui.usb.StorageNotification$3] */
     public StorageNotification(Context context, BroadcastDispatcher broadcastDispatcher, NotificationManager notificationManager, StorageManager storageManager) {
         this.mContext = context;
         this.mBroadcastDispatcher = broadcastDispatcher;
@@ -890,6 +955,10 @@ public class StorageNotification implements CoreStartable {
         intentFilter.addAction("android.intent.action.USER_SWITCHED");
         intentFilter.addAction("android.intent.action.USER_REMOVED");
         ((BroadcastDispatcher) Dependency.sDependency.getDependencyInner(BroadcastDispatcher.class)).registerReceiver(intentFilter, this.mUserReceiver);
+        IntentFilter intentFilter2 = new IntentFilter();
+        intentFilter2.addAction("android.intent.action.EXTERNAL_APPLICATIONS_UNAVAILABLE");
+        intentFilter2.addAction("android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE");
+        ((BroadcastDispatcher) Dependency.sDependency.getDependencyInner(BroadcastDispatcher.class)).registerReceiver(intentFilter2, this.mPackageIntentReceiver);
         startObserving("DEVPATH=/devices/virtual/sec/sdcard");
         startObserving("DEVPATH=/fs/sdfat/uevent");
         startObserving("DEVPATH=/fs/fat/uevent");

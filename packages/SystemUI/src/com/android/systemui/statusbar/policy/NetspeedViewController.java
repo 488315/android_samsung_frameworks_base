@@ -197,7 +197,7 @@ public class NetspeedViewController extends ViewController implements Configurat
 
         @Override // com.android.systemui.util.SettingsHelper.OnChangedCallback
         public final void onChanged(Uri uri) {
-            NetspeedViewController.m3104$$Nest$monNetspeedSwitchChange(NetspeedViewController.this);
+            NetspeedViewController.m3102$$Nest$monNetspeedSwitchChange(NetspeedViewController.this);
         }
 
         private SettingObserver() {
@@ -206,7 +206,7 @@ public class NetspeedViewController extends ViewController implements Configurat
     }
 
     /* renamed from: -$$Nest$monNetspeedSwitchChange, reason: not valid java name */
-    public static void m3104$$Nest$monNetspeedSwitchChange(NetspeedViewController netspeedViewController) {
+    public static void m3102$$Nest$monNetspeedSwitchChange(NetspeedViewController netspeedViewController) {
         netspeedViewController.getClass();
         sNetspeedSwitch = ((SettingsHelper) Dependency.sDependency.getDependencyInner(SettingsHelper.class)).isShowNetworkSpeedInStatusBar();
         StringBuilder sb = new StringBuilder("onNetspeedSwitchChange - sNetspeedSwitch = ");

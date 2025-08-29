@@ -94,7 +94,7 @@ final class DeviceBasedSatelliteRepositoryImpl$satelliteProvisioned$1 extends Su
         producerScope = (ProducerScope) this.L$0;
         ResultKt.throwOnFailure(obj);
         obj2 = producerScope3;
-        ((ChannelCoroutine) obj2).mo3476trySendJP2dKIU(obj);
+        ((ChannelCoroutine) obj2).mo3475trySendJP2dKIU(obj);
         final DeviceBasedSatelliteRepositoryImpl deviceBasedSatelliteRepositoryImpl2 = this.this$0;
         SatelliteProvisionStateCallback satelliteProvisionStateCallback = new SatelliteProvisionStateCallback() { // from class: com.android.systemui.statusbar.pipeline.satellite.data.prod.DeviceBasedSatelliteRepositoryImpl$satelliteProvisioned$1$callback$1
             public final void onSatelliteProvisionStateChanged(final boolean z) {
@@ -105,7 +105,7 @@ final class DeviceBasedSatelliteRepositoryImpl$satelliteProvisioned$1 extends Su
                         return "onSatelliteProvisionStateChanged: ".concat(z ? "provisioned" : "not provisioned");
                     }
                 });
-                ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
+                ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(z));
             }
         };
         Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();

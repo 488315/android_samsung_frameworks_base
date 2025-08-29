@@ -41,7 +41,7 @@ public final class SeslSwitchDefaults {
     }
 
     /* renamed from: colors-oq7We08, reason: not valid java name */
-    public static SeslSwitchColors m3344colorsoq7We08(long j, Composer composer) {
+    public static SeslSwitchColors m3343colorsoq7We08(long j, Composer composer) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startReplaceGroup(-613805783);
         long color = BasicColorSchemeKt.toColor(SeslSwitchColorSchemeKeyTokens.ThumbOnColor, composerImpl);

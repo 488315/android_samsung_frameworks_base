@@ -292,7 +292,7 @@ public abstract class UcmAgentService extends Service {
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
         public Bundle decrypt(String str, byte[] bArr, String str2, Bundle bundle) throws RemoteException {
-            return UcmAgentService.m3292$$Nest$mdecrypt(bundle, UcmAgentService.this, str, str2, bArr);
+            return UcmAgentService.m3291$$Nest$mdecrypt(bundle, UcmAgentService.this, str, str2, bArr);
         }
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
@@ -302,7 +302,7 @@ public abstract class UcmAgentService extends Service {
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
         public Bundle encrypt(String str, byte[] bArr, String str2, Bundle bundle) {
-            return UcmAgentService.m3294$$Nest$mencrypt(bundle, UcmAgentService.this, str, str2, bArr);
+            return UcmAgentService.m3293$$Nest$mencrypt(bundle, UcmAgentService.this, str, str2, bArr);
         }
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
@@ -422,12 +422,12 @@ public abstract class UcmAgentService extends Service {
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
         public Bundle installCertificateIfSupported(String str, byte[] bArr, String str2, Bundle bundle) throws RemoteException {
-            return UcmAgentService.m3303$$Nest$minstallCertificateIfSupported(bundle, UcmAgentService.this, str, str2, bArr);
+            return UcmAgentService.m3302$$Nest$minstallCertificateIfSupported(bundle, UcmAgentService.this, str, str2, bArr);
         }
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
         public Bundle keyAgreement(String str, String str2, byte[] bArr, Bundle bundle) throws RemoteException {
-            return UcmAgentService.m3304$$Nest$mkeyAgreement(bundle, UcmAgentService.this, str, str2, bArr);
+            return UcmAgentService.m3303$$Nest$mkeyAgreement(bundle, UcmAgentService.this, str, str2, bArr);
         }
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
@@ -437,7 +437,7 @@ public abstract class UcmAgentService extends Service {
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
         public Bundle mac(String str, byte[] bArr, String str2, Bundle bundle) throws RemoteException {
-            return UcmAgentService.m3305$$Nest$mmac(bundle, UcmAgentService.this, str, str2, bArr);
+            return UcmAgentService.m3304$$Nest$mmac(bundle, UcmAgentService.this, str, str2, bArr);
         }
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
@@ -501,7 +501,7 @@ public abstract class UcmAgentService extends Service {
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
         public Bundle sign(String str, byte[] bArr, String str2, boolean z, Bundle bundle) throws RemoteException {
-            return z ? UcmAgentService.this.encrypt(str, bArr, bundle) : UcmAgentService.m3307$$Nest$msign(bundle, UcmAgentService.this, str, str2, bArr);
+            return z ? UcmAgentService.this.encrypt(str, bArr, bundle) : UcmAgentService.m3306$$Nest$msign(bundle, UcmAgentService.this, str, str2, bArr);
         }
 
         @Override // com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService
@@ -529,32 +529,32 @@ public abstract class UcmAgentService extends Service {
     }
 
     /* renamed from: -$$Nest$mdecrypt, reason: not valid java name */
-    public static /* bridge */ /* synthetic */ Bundle m3292$$Nest$mdecrypt(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
+    public static /* bridge */ /* synthetic */ Bundle m3291$$Nest$mdecrypt(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
         return ucmAgentService.decrypt(str, bArr, str2, bundle);
     }
 
     /* renamed from: -$$Nest$mencrypt, reason: not valid java name */
-    public static /* bridge */ /* synthetic */ Bundle m3294$$Nest$mencrypt(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
+    public static /* bridge */ /* synthetic */ Bundle m3293$$Nest$mencrypt(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
         return ucmAgentService.encrypt(str, bArr, str2, bundle);
     }
 
     /* renamed from: -$$Nest$minstallCertificateIfSupported, reason: not valid java name */
-    public static /* bridge */ /* synthetic */ Bundle m3303$$Nest$minstallCertificateIfSupported(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
+    public static /* bridge */ /* synthetic */ Bundle m3302$$Nest$minstallCertificateIfSupported(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
         return ucmAgentService.installCertificateIfSupported(str, bArr, str2, bundle);
     }
 
     /* renamed from: -$$Nest$mkeyAgreement, reason: not valid java name */
-    public static /* bridge */ /* synthetic */ Bundle m3304$$Nest$mkeyAgreement(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
+    public static /* bridge */ /* synthetic */ Bundle m3303$$Nest$mkeyAgreement(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
         return ucmAgentService.keyAgreement(str, str2, bArr, bundle);
     }
 
     /* renamed from: -$$Nest$mmac, reason: not valid java name */
-    public static /* bridge */ /* synthetic */ Bundle m3305$$Nest$mmac(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
+    public static /* bridge */ /* synthetic */ Bundle m3304$$Nest$mmac(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
         return ucmAgentService.mac(str, bArr, str2, bundle);
     }
 
     /* renamed from: -$$Nest$msign, reason: not valid java name */
-    public static /* bridge */ /* synthetic */ Bundle m3307$$Nest$msign(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
+    public static /* bridge */ /* synthetic */ Bundle m3306$$Nest$msign(Bundle bundle, UcmAgentService ucmAgentService, String str, String str2, byte[] bArr) {
         return ucmAgentService.sign(str, bArr, str2, bundle);
     }
 

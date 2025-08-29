@@ -100,8 +100,8 @@ public final class QSPanelItem {
         float f4;
         float f5;
         float f6;
-        int iMo2938getDefaultSpanSizeYbymL2g = (i4 & 2) != 0 ? (int) (gridTileItem.mo2938getDefaultSpanSizeYbymL2g() >> 32) : i;
-        int iMo2938getDefaultSpanSizeYbymL2g2 = (i4 & 4) != 0 ? (int) (gridTileItem.mo2938getDefaultSpanSizeYbymL2g() & 4294967295L) : i2;
+        int iMo2936getDefaultSpanSizeYbymL2g = (i4 & 2) != 0 ? (int) (gridTileItem.mo2936getDefaultSpanSizeYbymL2g() >> 32) : i;
+        int iMo2936getDefaultSpanSizeYbymL2g2 = (i4 & 4) != 0 ? (int) (gridTileItem.mo2936getDefaultSpanSizeYbymL2g() & 4294967295L) : i2;
         if ((i4 & 8) != 0) {
             long j3 = -1;
             IntOffset.Companion companion = IntOffset.Companion;
@@ -137,6 +137,6 @@ public final class QSPanelItem {
         } else {
             f4 = f2;
         }
-        this(gridTileItem, iMo2938getDefaultSpanSizeYbymL2g, iMo2938getDefaultSpanSizeYbymL2g2, j2, f3, f4, (i4 & 64) != 0 ? 0 : i3, (i4 & 128) != 0 ? null : intOffset, (i4 & 256) != 0 ? null : intOffset2, (i4 & 512) != 0 ? null : intRect, (i4 & 1024) != 0 ? false : z, null);
+        this(gridTileItem, iMo2936getDefaultSpanSizeYbymL2g, iMo2936getDefaultSpanSizeYbymL2g2, j2, f3, f4, (i4 & 64) != 0 ? 0 : i3, (i4 & 128) != 0 ? null : intOffset, (i4 & 256) != 0 ? null : intOffset2, (i4 & 512) != 0 ? null : intRect, (i4 & 1024) != 0 ? false : z, null);
     }
 }

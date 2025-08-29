@@ -25,7 +25,7 @@ public final class CardColors {
         }
         CardColors cardColors = (CardColors) obj;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.containerColor, cardColors.containerColor) && ULong.m3447equalsimpl0(this.contentColor, cardColors.contentColor) && ULong.m3447equalsimpl0(this.disabledContainerColor, cardColors.disabledContainerColor) && ULong.m3447equalsimpl0(this.disabledContentColor, cardColors.disabledContentColor);
+        return ULong.m3446equalsimpl0(this.containerColor, cardColors.containerColor) && ULong.m3446equalsimpl0(this.contentColor, cardColors.contentColor) && ULong.m3446equalsimpl0(this.disabledContainerColor, cardColors.disabledContainerColor) && ULong.m3446equalsimpl0(this.disabledContentColor, cardColors.disabledContentColor);
     }
 
     public final int hashCode() {

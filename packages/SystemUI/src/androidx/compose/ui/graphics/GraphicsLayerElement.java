@@ -61,7 +61,7 @@ public final class GraphicsLayerElement extends ModifierNodeElement<SimpleGraphi
             return false;
         }
         Color.Companion companion = Color.Companion;
-        if (!ULong.m3447equalsimpl0(this.ambientShadowColor, graphicsLayerElement.ambientShadowColor) || !ULong.m3447equalsimpl0(this.spotShadowColor, graphicsLayerElement.spotShadowColor)) {
+        if (!ULong.m3446equalsimpl0(this.ambientShadowColor, graphicsLayerElement.ambientShadowColor) || !ULong.m3446equalsimpl0(this.spotShadowColor, graphicsLayerElement.spotShadowColor)) {
             return false;
         }
         CompositingStrategy.Companion companion2 = CompositingStrategy.Companion;

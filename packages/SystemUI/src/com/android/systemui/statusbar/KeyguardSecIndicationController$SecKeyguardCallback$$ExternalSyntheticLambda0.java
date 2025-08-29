@@ -19,7 +19,7 @@ public final /* synthetic */ class KeyguardSecIndicationController$SecKeyguardCa
     public final void run() throws Resources.NotFoundException {
         switch (this.$r8$classId) {
             case 0:
-                KeyguardSecIndicationController.m2961$$Nest$mupdateDefaultIndications(KeyguardSecIndicationController.this);
+                KeyguardSecIndicationController.m2959$$Nest$mupdateDefaultIndications(KeyguardSecIndicationController.this);
                 break;
             case 1:
                 KeyguardSecIndicationController keyguardSecIndicationController = KeyguardSecIndicationController.this;
@@ -40,7 +40,7 @@ public final /* synthetic */ class KeyguardSecIndicationController$SecKeyguardCa
                     keyguardSecIndicationController2.addIndicationTimeout(IndicationEventType.BIOMETRICS_HELP, string, keyguardSecIndicationController2.mErrorColor, false);
                     break;
                 } else {
-                    KeyguardSecIndicationController.m2961$$Nest$mupdateDefaultIndications(keyguardSecIndicationController2);
+                    KeyguardSecIndicationController.m2959$$Nest$mupdateDefaultIndications(keyguardSecIndicationController2);
                     break;
                 }
         }

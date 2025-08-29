@@ -95,7 +95,7 @@ public final class StateScopeImpl implements EvalScope, StateScope {
                     return Maybe.Absent.INSTANCE;
                 }
                 Maybe.Companion.getClass();
-                return Maybe.Present.m2590boximpl(pairAccess$applyPatchCalm);
+                return Maybe.Present.m2588boximpl(pairAccess$applyPatchCalm);
             }
         };
         final PullNodesKt$cached$$inlined$EventsImplCheap$1 pullNodesKt$cached$$inlined$EventsImplCheap$1Cached = PullNodesKt.cached(new EventsImpl() { // from class: com.android.systemui.kairos.internal.StateScopeImpl$foldStateMapIncrementally$$inlined$activatedIncremental$1

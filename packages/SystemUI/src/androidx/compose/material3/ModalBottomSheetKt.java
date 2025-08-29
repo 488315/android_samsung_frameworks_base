@@ -452,9 +452,9 @@ public abstract class ModalBottomSheetKt {
                                 companion2.getClass();
                                 long j9 = Color.Transparent;
                                 long j10 = jColor;
-                                boolean z6 = (ULong.m3447equalsimpl0(jM259contentColorForek8zF_U, j9) || ((double) ColorKt.m468luminance8_81llA(jM259contentColorForek8zF_U)) > 0.5d) ? false : z2;
+                                boolean z6 = (ULong.m3446equalsimpl0(jM259contentColorForek8zF_U, j9) || ((double) ColorKt.m468luminance8_81llA(jM259contentColorForek8zF_U)) > 0.5d) ? false : z2;
                                 companion2.getClass();
-                                modalBottomSheetProperties2 = new ModalBottomSheetProperties(false, z6, (ULong.m3447equalsimpl0(jM259contentColorForek8zF_U, j9) || ((double) ColorKt.m468luminance8_81llA(jM259contentColorForek8zF_U)) > 0.5d) ? false : z2, 1, null);
+                                modalBottomSheetProperties2 = new ModalBottomSheetProperties(false, z6, (ULong.m3446equalsimpl0(jM259contentColorForek8zF_U, j9) || ((double) ColorKt.m468luminance8_81llA(jM259contentColorForek8zF_U)) > 0.5d) ? false : z2, 1, null);
                                 i19 &= -897;
                                 function26 = function25;
                                 j4 = j10;

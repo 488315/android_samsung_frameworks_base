@@ -74,7 +74,7 @@ final class ConnectivityRepositoryImpl$defaultNetworkCapabilities$1 extends Susp
                     logMessageImpl.int1 = network.getNetId();
                     logMessageImpl.str1 = networkCapabilities.toString();
                     logBuffer.commit(logMessageObtain);
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(networkCapabilities);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(networkCapabilities);
                 }
 
                 @Override // android.net.ConnectivityManager.NetworkCallback
@@ -90,7 +90,7 @@ final class ConnectivityRepositoryImpl$defaultNetworkCapabilities$1 extends Susp
                     logMessageImpl.int1 = network.getNetId();
                     logMessageImpl.bool1 = true;
                     logBuffer.commit(logMessageObtain);
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(null);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(null);
                 }
             };
             this.this$0.connectivityManager.registerDefaultNetworkCallback(networkCallback);

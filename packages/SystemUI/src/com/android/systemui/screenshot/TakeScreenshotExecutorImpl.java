@@ -195,10 +195,10 @@ public final class TakeScreenshotExecutorImpl implements TakeScreenshotExecutor 
             failure = new Result.Failure(th);
             interactiveScreenshotHandler2 = interactiveScreenshotHandler;
         }
-        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
+        Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
         String str = TAG;
-        if (thM3442exceptionOrNullimpl != null) {
-            Log.e(str, "Failed to process screenshot request!", thM3442exceptionOrNullimpl);
+        if (thM3441exceptionOrNullimpl != null) {
+            Log.e(str, "Failed to process screenshot request!", thM3441exceptionOrNullimpl);
             this.uiEventLogger.log(ScreenshotEvent.getScreenshotSource(screenshotData.source), 0, screenshotData.getPackageNameString());
             this.onFailedScreenshotRequest(screenshotData, requestCallback);
         }

@@ -22,6 +22,7 @@ import android.graphics.Rect;
 import android.graphics.Region;
 import android.hardware.display.DisplayTopology;
 import android.hardware.input.InputManager;
+import android.os.Debug;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
@@ -541,14 +542,13 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:49:0x00bb, code lost:
         
-            if (r7 != 3) goto L128;
+            if (r7 != 3) goto L124;
          */
-        /* JADX WARN: Removed duplicated region for block: B:102:0x0200  */
-        /* JADX WARN: Removed duplicated region for block: B:202:0x04b4  */
-        /* JADX WARN: Removed duplicated region for block: B:204:0x04bf  */
-        /* JADX WARN: Removed duplicated region for block: B:211:0x04d6  */
-        /* JADX WARN: Removed duplicated region for block: B:213:0x04da  */
-        /* JADX WARN: Removed duplicated region for block: B:264:? A[RETURN, SYNTHETIC] */
+        /* JADX WARN: Removed duplicated region for block: B:198:0x049d  */
+        /* JADX WARN: Removed duplicated region for block: B:200:0x04a8  */
+        /* JADX WARN: Removed duplicated region for block: B:207:0x04bf  */
+        /* JADX WARN: Removed duplicated region for block: B:209:0x04c3  */
+        /* JADX WARN: Removed duplicated region for block: B:260:? A[RETURN, SYNTHETIC] */
         /* JADX WARN: Removed duplicated region for block: B:41:0x00a9 A[ADDED_TO_REGION] */
         /* JADX WARN: Removed duplicated region for block: B:46:0x00b5  */
         @Override // com.android.wm.shell.windowdecor.DragDetector.MotionEventHandler
@@ -560,8 +560,6 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
             int actionMasked;
             DesktopModeVisualIndicator visualIndicator;
             int i;
-            DesktopTasksController desktopTasksController;
-            ActivityManager.RunningTaskInfo runningTaskInfo;
             boolean z2;
             DesktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1;
             DesktopModeVisualIndicator.DragStartState dragStartState;
@@ -573,8 +571,8 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
             int i2 = 2;
             int i3 = 1;
             DesktopModeWindowDecoration desktopModeWindowDecoration = (DesktopModeWindowDecoration) DesktopModeWindowDecorViewModel.this.mWindowDecorByTaskId.get(this.mTaskId);
-            ActivityManager.RunningTaskInfo runningTaskInfo2 = desktopModeWindowDecoration.mTaskInfo;
-            if (!DesktopModeWindowDecorViewModel.this.mDesktopState.canEnterDesktopModeOrShowAppHandle() || runningTaskInfo2.isFreeform()) {
+            ActivityManager.RunningTaskInfo runningTaskInfo = desktopModeWindowDecoration.mTaskInfo;
+            if (!DesktopModeWindowDecorViewModel.this.mDesktopState.canEnterDesktopModeOrShowAppHandle() || runningTaskInfo.isFreeform()) {
                 int id = view.getId();
                 if (!this.mGestureDetector.onTouchEvent(motionEvent2)) {
                     if (id != R.id.close_window && id != R.id.maximize_window && id != R.id.open_menu_button && id != R.id.minimize_window) {
@@ -582,7 +580,7 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
                             DesktopModeWindowDecorViewModel.this.getClass();
                             if ((view instanceof CaptionButton) || (view instanceof CaptionAnimationButton)) {
                             }
-                            boolean zIsTaskInFullImmersiveState = DesktopModeWindowDecorViewModel.this.mDesktopUserRepositories.getProfile(runningTaskInfo2.userId).isTaskInFullImmersiveState(runningTaskInfo2.taskId);
+                            boolean zIsTaskInFullImmersiveState = DesktopModeWindowDecorViewModel.this.mDesktopUserRepositories.getProfile(runningTaskInfo.userId).isTaskInFullImmersiveState(runningTaskInfo.taskId);
                             boolean z3 = !desktopModeWindowDecoration.isDecorHandleState() && id == R.id.caption_handle;
                             actionMasked = motionEvent2.getActionMasked();
                             if (actionMasked == 0) {
@@ -605,26 +603,26 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
                                 if (CoreRune.MW_CAPTION_HANDLE && desktopModeWindowDecoration.isDecorHandleState() && z3) {
                                     return false;
                                 }
-                                DesktopTasksController desktopTasksController2 = DesktopModeWindowDecorViewModel.this.mDesktopTasksController;
-                                desktopTasksController2.getClass();
+                                DesktopTasksController desktopTasksController = DesktopModeWindowDecorViewModel.this.mDesktopTasksController;
+                                desktopTasksController.getClass();
                                 DesktopStateImpl.Companion companion = DesktopStateImpl.Companion;
-                                int i4 = runningTaskInfo2.displayId;
+                                int i4 = runningTaskInfo.displayId;
                                 companion.getClass();
-                                if (DesktopStateImpl.Companion.inDesktopWindowing(i4) && runningTaskInfo2.displayId == 0) {
-                                    Context displayContext = desktopTasksController2.displayController.getDisplayContext(runningTaskInfo2.getDisplayId());
+                                if (DesktopStateImpl.Companion.inDesktopWindowing(i4) && runningTaskInfo.displayId == 0) {
+                                    Context displayContext = desktopTasksController.displayController.getDisplayContext(runningTaskInfo.getDisplayId());
                                     if (displayContext == null) {
-                                        RecordingInputConnection$$ExternalSyntheticOutline0.m(runningTaskInfo2.getDisplayId(), "displayContext is null for ", "DesktopTasksController");
+                                        RecordingInputConnection$$ExternalSyntheticOutline0.m(runningTaskInfo.getDisplayId(), "displayContext is null for ", "DesktopTasksController");
                                     }
-                                    DragHintToFullscreenManager dragHintToFullscreenManager = desktopTasksController2.dragHintToFullscreenManager;
+                                    DragHintToFullscreenManager dragHintToFullscreenManager = desktopTasksController.dragHintToFullscreenManager;
                                     if (dragHintToFullscreenManager != null) {
                                         dragHintToFullscreenManager.removeWindow(true);
-                                        desktopTasksController2.dragHintToFullscreenManager = null;
+                                        desktopTasksController.dragHintToFullscreenManager = null;
                                     }
                                     if (displayContext == null) {
-                                        displayContext = desktopTasksController2.context;
+                                        displayContext = desktopTasksController.context;
                                     }
                                     DragHintToFullscreenManager dragHintToFullscreenManager2 = new DragHintToFullscreenManager(displayContext);
-                                    desktopTasksController2.dragHintToFullscreenManager = dragHintToFullscreenManager2;
+                                    desktopTasksController.dragHintToFullscreenManager = dragHintToFullscreenManager2;
                                     if (dragHintToFullscreenManager2.mView != null) {
                                         dragHintToFullscreenManager2.removeWindow(true);
                                         dragHintToFullscreenManager2.removeView(dragHintToFullscreenManager2.mView);
@@ -649,7 +647,7 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
                                     }
                                 }
                                 DesktopModeWindowDecorViewModel desktopModeWindowDecorViewModel = DesktopModeWindowDecorViewModel.this;
-                                desktopModeWindowDecorViewModel.mDragStartDisplayId = runningTaskInfo2.displayId;
+                                desktopModeWindowDecorViewModel.mDragStartDisplayId = runningTaskInfo.displayId;
                                 desktopModeWindowDecorViewModel.mNotifyOfMoveTask = false;
                                 boolean z4 = desktopModeWindowDecoration.mIsTaskMaximized;
                                 this.mDragMaximizeTaskAllowed = z4;
@@ -668,10 +666,10 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
                                             int scaledTouchSlop = ViewConfiguration.get(DesktopModeWindowDecorViewModel.this.mContext).getScaledTouchSlop();
                                             int iFindPointerIndex = motionEvent2.findPointerIndex(this.mDragPointerId);
                                             if (Math.hypot(motionEvent2.getRawX(iFindPointerIndex) - this.mInputDownPoint.x, motionEvent2.getRawY(iFindPointerIndex) - this.mInputDownPoint.y) > scaledTouchSlop && !this.mIsRestoreAnimRunning) {
-                                                Rect rect = new Rect((Rect) DesktopModeWindowDecorViewModel.this.mDesktopUserRepositories.getCurrent().boundsBeforeMaximizeByTaskId.removeReturnOld(runningTaskInfo2.taskId));
-                                                Rect bounds = runningTaskInfo2.configuration.windowConfiguration.getBounds();
-                                                if ((rect.isEmpty() || (bounds.width() == rect.width() && bounds.height() == rect.height())) && (displayLayout = DesktopModeWindowDecorViewModel.this.mDisplayController.getDisplayLayout(runningTaskInfo2.displayId)) != null) {
-                                                    rect.set(DesktopModeUtils.calculateInitialBounds$default(displayLayout, runningTaskInfo2, 0, null, 28));
+                                                Rect rect = new Rect((Rect) DesktopModeWindowDecorViewModel.this.mDesktopUserRepositories.getCurrent().boundsBeforeMaximizeByTaskId.removeReturnOld(runningTaskInfo.taskId));
+                                                Rect bounds = runningTaskInfo.configuration.windowConfiguration.getBounds();
+                                                if ((rect.isEmpty() || (bounds.width() == rect.width() && bounds.height() == rect.height())) && (displayLayout = DesktopModeWindowDecorViewModel.this.mDisplayController.getDisplayLayout(runningTaskInfo.displayId)) != null) {
+                                                    rect.set(DesktopModeUtils.calculateInitialBounds$default(displayLayout, runningTaskInfo, 0, null, 28));
                                                 }
                                                 rect.offsetTo((int) (motionEvent2.getRawX() - (rect.width() / 2.0f)), (int) motionEvent2.getRawY());
                                                 this.mTaskPositioner.playMaximizedTaskRestoreAnimation(rect, new DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda3(this, i3));
@@ -683,8 +681,7 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
                                                 return true;
                                             }
                                         } else {
-                                            boolean z5 = CoreRune.MW_CAPTION_FREEFORM_MOTION;
-                                            if (z5) {
+                                            if (CoreRune.MW_CAPTION_FREEFORM_MOTION) {
                                                 this.mFreeformCaptionTouchState.addMovementToVelocityTracker(motionEvent2);
                                             }
                                             if (!DesktopModeWindowDecorViewModel.this.mNotifyOfMoveTask) {
@@ -697,45 +694,38 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
                                             }
                                             int iFindPointerIndex2 = motionEvent2.findPointerIndex(this.mDragPointerId);
                                             Rect rectOnDragPositioningMove = this.mDragPositioningCallback.onDragPositioningMove(motionEvent2.getRawX(iFindPointerIndex2), motionEvent2.getRawY(iFindPointerIndex2), motionEvent2.getDisplayId());
-                                            DesktopTasksController desktopTasksController3 = DesktopModeWindowDecorViewModel.this.mDesktopTasksController;
+                                            DesktopTasksController desktopTasksController2 = DesktopModeWindowDecorViewModel.this.mDesktopTasksController;
                                             SurfaceControl surfaceControl = desktopModeWindowDecoration.mTaskSurface;
                                             float rawX = motionEvent2.getRawX(iFindPointerIndex2);
                                             DesktopModeWindowDecorViewModel desktopModeWindowDecorViewModel2 = DesktopModeWindowDecorViewModel.this;
-                                            boolean z6 = desktopModeWindowDecorViewModel2.mIsKeyguardShowing;
-                                            boolean z7 = desktopModeWindowDecorViewModel2.mDragStartDisplayId == motionEvent2.getDisplayId();
-                                            desktopTasksController3.getClass();
-                                            if (runningTaskInfo2.getWindowingMode() == 5) {
-                                                if (z5) {
-                                                    DesktopStateImpl.Companion companion2 = DesktopStateImpl.Companion;
-                                                    int i5 = runningTaskInfo2.displayId;
-                                                    companion2.getClass();
-                                                    if (DesktopStateImpl.Companion.inDesktopWindowing(i5)) {
-                                                        DesktopModeWindowDecorViewModel desktopModeWindowDecorViewModel3 = desktopTasksController3.snapEventHandler;
-                                                        if (desktopModeWindowDecorViewModel3 == null) {
-                                                            desktopModeWindowDecorViewModel3 = null;
+                                            boolean z5 = desktopModeWindowDecorViewModel2.mIsKeyguardShowing;
+                                            boolean z6 = desktopModeWindowDecorViewModel2.mDragStartDisplayId == motionEvent2.getDisplayId();
+                                            desktopTasksController2.getClass();
+                                            if (runningTaskInfo.getWindowingMode() == 5) {
+                                                DesktopModeWindowDecorViewModel desktopModeWindowDecorViewModel3 = desktopTasksController2.snapEventHandler;
+                                                if (desktopModeWindowDecorViewModel3 == null) {
+                                                    desktopModeWindowDecorViewModel3 = null;
+                                                }
+                                                desktopModeWindowDecorViewModel3.removeTaskIfTiled(runningTaskInfo.displayId, runningTaskInfo.taskId);
+                                                DesktopModeVisualIndicator.IndicatorType indicatorTypeUpdateVisualIndicator2 = desktopTasksController2.updateVisualIndicator(runningTaskInfo, surfaceControl, rawX, rectOnDragPositioningMove.top, DesktopModeVisualIndicator.DragStartState.FROM_FREEFORM, z5, z6, true);
+                                                DesktopStateImpl.Companion companion2 = DesktopStateImpl.Companion;
+                                                int i5 = runningTaskInfo.displayId;
+                                                companion2.getClass();
+                                                if (DesktopStateImpl.Companion.inDesktopWindowing(i5) && (visualIndicator2 = desktopTasksController2.getVisualIndicator()) != null) {
+                                                    if (indicatorTypeUpdateVisualIndicator2 != DesktopModeVisualIndicator.IndicatorType.NO_INDICATOR || visualIndicator2.fullscreenTransitionHeight <= rectOnDragPositioningMove.top) {
+                                                        DragHintToFullscreenManager dragHintToFullscreenManager3 = desktopTasksController2.dragHintToFullscreenManager;
+                                                        if (dragHintToFullscreenManager3 != null) {
+                                                            dragHintToFullscreenManager3.hide(null);
                                                         }
-                                                        desktopModeWindowDecorViewModel3.removeTaskIfTiled(runningTaskInfo2.displayId, runningTaskInfo2.taskId);
-                                                        DesktopModeVisualIndicator.IndicatorType indicatorTypeUpdateVisualIndicator2 = desktopTasksController3.updateVisualIndicator(runningTaskInfo2, surfaceControl, rawX, rectOnDragPositioningMove.top, DesktopModeVisualIndicator.DragStartState.FROM_FREEFORM, z6, z7, true);
-                                                        DesktopStateImpl.Companion companion3 = DesktopStateImpl.Companion;
-                                                        int i6 = runningTaskInfo2.displayId;
-                                                        companion3.getClass();
-                                                        if (DesktopStateImpl.Companion.inDesktopWindowing(i6) && (visualIndicator2 = desktopTasksController3.getVisualIndicator()) != null) {
-                                                            if (indicatorTypeUpdateVisualIndicator2 != DesktopModeVisualIndicator.IndicatorType.NO_INDICATOR || visualIndicator2.fullscreenTransitionHeight <= rectOnDragPositioningMove.top) {
-                                                                DragHintToFullscreenManager dragHintToFullscreenManager3 = desktopTasksController3.dragHintToFullscreenManager;
-                                                                if (dragHintToFullscreenManager3 != null) {
-                                                                    dragHintToFullscreenManager3.hide(null);
-                                                                }
-                                                            } else {
-                                                                DragHintToFullscreenManager dragHintToFullscreenManager4 = desktopTasksController3.dragHintToFullscreenManager;
-                                                                if (dragHintToFullscreenManager4 != null) {
-                                                                    dragHintToFullscreenManager4.setVisibility(0);
-                                                                    DragHintToFullscreen dragHintToFullscreen2 = dragHintToFullscreenManager4.mView;
-                                                                    if (!dragHintToFullscreen2.mVisible) {
-                                                                        dragHintToFullscreen2.mVisible = true;
-                                                                        Log.i("DragHintToFullscreen", "show");
-                                                                        dragHintToFullscreen2.startAnimation(dragHintToFullscreen2.mShowAnimation);
-                                                                    }
-                                                                }
+                                                    } else {
+                                                        DragHintToFullscreenManager dragHintToFullscreenManager4 = desktopTasksController2.dragHintToFullscreenManager;
+                                                        if (dragHintToFullscreenManager4 != null) {
+                                                            dragHintToFullscreenManager4.setVisibility(0);
+                                                            DragHintToFullscreen dragHintToFullscreen2 = dragHintToFullscreenManager4.mView;
+                                                            if (!dragHintToFullscreen2.mVisible) {
+                                                                dragHintToFullscreen2.mVisible = true;
+                                                                Log.i("DragHintToFullscreen", "show");
+                                                                dragHintToFullscreen2.startAnimation(dragHintToFullscreen2.mShowAnimation);
                                                             }
                                                         }
                                                     }
@@ -750,12 +740,12 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
                                 }
                             }
                             if (this.mIsDragging) {
-                                DesktopModeWindowDecorViewModel.this.mDesktopModeUiEventLogger.log(runningTaskInfo2, DesktopModeUiEventLogger.DesktopUiEventEnum.DESKTOP_WINDOW_MOVE_BY_HEADER_DRAG);
+                                DesktopModeWindowDecorViewModel.this.mDesktopModeUiEventLogger.log(runningTaskInfo, DesktopModeUiEventLogger.DesktopUiEventEnum.DESKTOP_WINDOW_MOVE_BY_HEADER_DRAG);
                                 if (motionEvent2.findPointerIndex(this.mDragPointerId) == -1) {
                                     this.mDragPointerId = motionEvent2.getPointerId(0);
                                 }
-                                boolean z8 = CoreRune.MW_CAPTION_FREEFORM_MOTION;
-                                if (z8) {
+                                boolean z7 = CoreRune.MW_CAPTION_FREEFORM_MOTION;
+                                if (z7) {
                                     this.mFreeformCaptionTouchState.addMovementToVelocityTracker(motionEvent2);
                                     FreeformCaptionTouchState freeformCaptionTouchState2 = this.mFreeformCaptionTouchState;
                                     VelocityTracker velocityTracker2 = freeformCaptionTouchState2.mVelocityTracker;
@@ -765,58 +755,56 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
                                     }
                                     this.mTaskPositioner.setFreeformCaptionTouchState(this.mFreeformCaptionTouchState);
                                 }
-                                int i7 = runningTaskInfo2.displayId;
+                                int i6 = runningTaskInfo.displayId;
                                 DesktopStateImpl.Companion.getClass();
-                                boolean z9 = (DesktopStateImpl.Companion.inDesktopWindowing(i7) && (dragStartState = DesktopModeVisualIndicator.DragStartState.getDragStartState(desktopModeWindowDecoration.mTaskInfo)) != null && ((indicatorTypeUpdateVisualIndicator = DesktopModeWindowDecorViewModel.this.mDesktopTasksController.updateVisualIndicator(desktopModeWindowDecoration.mTaskInfo, desktopModeWindowDecoration.mTaskSurface, motionEvent2.getRawX(), motionEvent2.getRawY(), dragStartState, false, true, false)) == DesktopModeVisualIndicator.IndicatorType.TO_SPLIT_LEFT_INDICATOR || indicatorTypeUpdateVisualIndicator == DesktopModeVisualIndicator.IndicatorType.TO_SPLIT_RIGHT_INDICATOR)) ? false : true;
+                                boolean z8 = (DesktopStateImpl.Companion.inDesktopWindowing(i6) && (dragStartState = DesktopModeVisualIndicator.DragStartState.getDragStartState(desktopModeWindowDecoration.mTaskInfo)) != null && ((indicatorTypeUpdateVisualIndicator = DesktopModeWindowDecorViewModel.this.mDesktopTasksController.updateVisualIndicator(desktopModeWindowDecoration.mTaskInfo, desktopModeWindowDecoration.mTaskSurface, motionEvent2.getRawX(), motionEvent2.getRawY(), dragStartState, false, true, false)) == DesktopModeVisualIndicator.IndicatorType.TO_SPLIT_LEFT_INDICATOR || indicatorTypeUpdateVisualIndicator == DesktopModeVisualIndicator.IndicatorType.TO_SPLIT_RIGHT_INDICATOR)) ? false : true;
                                 int iFindPointerIndex3 = motionEvent2.findPointerIndex(this.mDragPointerId);
-                                Rect rectOnDragPositioningEnd = this.mDragPositioningCallback.onDragPositioningEnd(motionEvent2.getRawX(iFindPointerIndex3), motionEvent2.getRawY(iFindPointerIndex3), motionEvent2.getDisplayId(), z9);
-                                DesktopTasksController desktopTasksController4 = DesktopModeWindowDecorViewModel.this.mDesktopTasksController;
+                                Rect rectOnDragPositioningEnd = this.mDragPositioningCallback.onDragPositioningEnd(motionEvent2.getRawX(iFindPointerIndex3), motionEvent2.getRawY(iFindPointerIndex3), motionEvent2.getDisplayId(), z8);
+                                DesktopTasksController desktopTasksController3 = DesktopModeWindowDecorViewModel.this.mDesktopTasksController;
                                 SurfaceControl surfaceControl2 = desktopModeWindowDecoration.mTaskSurface;
                                 PointF pointF = new PointF(motionEvent2.getRawX(iFindPointerIndex3), motionEvent2.getRawY(iFindPointerIndex3));
                                 Rect rectCalculateValidDragArea = desktopModeWindowDecoration.calculateValidDragArea();
                                 Rect rect2 = new Rect(this.mOnDragStartInitialBounds);
-                                boolean z10 = DesktopModeWindowDecorViewModel.this.mIsKeyguardShowing;
+                                boolean z9 = DesktopModeWindowDecorViewModel.this.mIsKeyguardShowing;
                                 boolean zIsStashed = desktopModeWindowDecoration.mFreeformStashState.isStashed();
-                                boolean z11 = DesktopModeWindowDecorViewModel.this.mDragStartDisplayId == motionEvent2.getDisplayId();
-                                desktopTasksController4.getClass();
-                                if (runningTaskInfo2.configuration.windowConfiguration.getWindowingMode() == 5 && (visualIndicator = desktopTasksController4.getVisualIndicator()) != null) {
+                                boolean z10 = DesktopModeWindowDecorViewModel.this.mDragStartDisplayId == motionEvent2.getDisplayId();
+                                desktopTasksController3.getClass();
+                                if (runningTaskInfo.configuration.windowConfiguration.getWindowingMode() == 5 && (visualIndicator = desktopTasksController3.getVisualIndicator()) != null) {
                                     i = -1;
-                                    DesktopModeVisualIndicator.IndicatorType indicatorTypeUpdateIndicatorType = visualIndicator.updateIndicatorType(new PointF(pointF.x, rectOnDragPositioningEnd.top), runningTaskInfo2, z10, zIsStashed, z11, true);
-                                    DragHintToFullscreenManager dragHintToFullscreenManager5 = desktopTasksController4.dragHintToFullscreenManager;
+                                    DesktopModeVisualIndicator.IndicatorType indicatorTypeUpdateIndicatorType = visualIndicator.updateIndicatorType(new PointF(pointF.x, rectOnDragPositioningEnd.top), runningTaskInfo, z9, zIsStashed, z10, true);
+                                    DragHintToFullscreenManager dragHintToFullscreenManager5 = desktopTasksController3.dragHintToFullscreenManager;
                                     if (dragHintToFullscreenManager5 != null) {
-                                        dragHintToFullscreenManager5.hide(new DesktopTasksController$onDragPositioningEnd$1(desktopTasksController4));
+                                        dragHintToFullscreenManager5.hide(new DesktopTasksController$onDragPositioningEnd$1(desktopTasksController3));
                                     }
-                                    int i8 = DesktopTasksController.WhenMappings.$EnumSwitchMapping$1[indicatorTypeUpdateIndicatorType.ordinal()];
-                                    DesktopModeUiEventLogger desktopModeUiEventLogger = desktopTasksController4.desktopModeUiEventLogger;
-                                    switch (i8) {
+                                    int i7 = DesktopTasksController.WhenMappings.$EnumSwitchMapping$1[indicatorTypeUpdateIndicatorType.ordinal()];
+                                    DesktopModeUiEventLogger desktopModeUiEventLogger = desktopTasksController3.desktopModeUiEventLogger;
+                                    switch (i7) {
                                         case 1:
-                                            desktopTasksController = desktopTasksController4;
-                                            runningTaskInfo = runningTaskInfo2;
                                             z2 = false;
-                                            DesktopConfigImpl desktopConfigImpl = (DesktopConfigImpl) desktopTasksController.desktopConfig;
+                                            DesktopConfigImpl desktopConfigImpl = (DesktopConfigImpl) desktopTasksController3.desktopConfig;
                                             desktopConfigImpl.getClass();
                                             if (!(!DesktopExperienceFlags.ENABLE_DRAG_TO_MAXIMIZE.isTrue() ? false : SystemProperties.getBoolean("persist.wm.debug.enable_drag_to_maximize", desktopConfigImpl.context.getResources().getBoolean(android.R.bool.config_earcFeatureEnabled_allowed)))) {
                                                 desktopModeUiEventLogger.log(runningTaskInfo, DesktopModeUiEventLogger.DesktopUiEventEnum.DESKTOP_WINDOW_APP_HEADER_DRAG_TO_FULL_SCREEN);
-                                                desktopTasksController.moveToFullscreenWithAnimation(runningTaskInfo, new Point(rectOnDragPositioningEnd.left, rectOnDragPositioningEnd.top), DesktopModeTransitionSource.TASK_DRAG, rectOnDragPositioningEnd);
-                                            } else if (DesktopModeUtils.isTaskMaximized(runningTaskInfo, desktopTasksController.displayController)) {
+                                                desktopTasksController3.moveToFullscreenWithAnimation(runningTaskInfo, new Point(rectOnDragPositioningEnd.left, rectOnDragPositioningEnd.top), DesktopModeTransitionSource.TASK_DRAG, rectOnDragPositioningEnd);
+                                            } else if (DesktopModeUtils.isTaskMaximized(runningTaskInfo, desktopTasksController3.displayController)) {
                                                 Rect bounds2 = runningTaskInfo.configuration.windowConfiguration.getBounds();
                                                 if (!Intrinsics.areEqual(bounds2, rectOnDragPositioningEnd)) {
-                                                    int i9 = runningTaskInfo.taskId;
-                                                    int i10 = ReturnToDragStartAnimator.$r8$clinit;
-                                                    desktopTasksController.returnToDragStartAnimator.start(i9, surfaceControl2, rectOnDragPositioningEnd, bounds2, null);
+                                                    int i8 = runningTaskInfo.taskId;
+                                                    int i9 = ReturnToDragStartAnimator.$r8$clinit;
+                                                    desktopTasksController3.returnToDragStartAnimator.start(i8, surfaceControl2, rectOnDragPositioningEnd, bounds2, null);
                                                 }
                                             } else {
                                                 ToggleTaskSizeInteraction.Direction direction = ToggleTaskSizeInteraction.Direction.MAXIMIZE;
                                                 ToggleTaskSizeInteraction.Source source = ToggleTaskSizeInteraction.Source.HEADER_DRAG_TO_TOP;
                                                 DesktopModeEventLogger.Companion.getClass();
-                                                desktopTasksController.toggleDesktopTaskSize(runningTaskInfo, new ToggleTaskSizeInteraction(direction, source, DesktopModeEventLogger.Companion.getInputMethodFromMotionEvent(motionEvent2), rectOnDragPositioningEnd));
+                                                desktopTasksController3.toggleDesktopTaskSize(runningTaskInfo, new ToggleTaskSizeInteraction(direction, source, DesktopModeEventLogger.Companion.getInputMethodFromMotionEvent(motionEvent2), rectOnDragPositioningEnd));
                                             }
-                                            desktopTasksController.releaseVisualIndicator();
-                                            desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 = desktopTasksController.taskbarDesktopTaskListener;
+                                            desktopTasksController3.releaseVisualIndicator();
+                                            desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 = desktopTasksController3.taskbarDesktopTaskListener;
                                             if (desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 != null) {
-                                                desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1.onTaskbarCornerRoundingUpdate(desktopTasksController.doesAnyTaskRequireTaskbarRounding(runningTaskInfo.displayId, null));
+                                                desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1.onTaskbarCornerRoundingUpdate(desktopTasksController3.doesAnyTaskRequireTaskbarRounding(runningTaskInfo.displayId, null));
                                             }
-                                            if (z8) {
+                                            if (z7) {
                                                 FreeformCaptionTouchState freeformCaptionTouchState3 = this.mFreeformCaptionTouchState;
                                                 VelocityTracker velocityTracker3 = freeformCaptionTouchState3.mVelocityTracker;
                                                 if (velocityTracker3 != null) {
@@ -832,34 +820,30 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
                                             updateDragStatus(desktopModeWindowDecoration, motionEvent2);
                                             return true;
                                         case 2:
-                                            desktopTasksController = desktopTasksController4;
                                             z2 = false;
-                                            runningTaskInfo = runningTaskInfo2;
                                             desktopModeUiEventLogger.log(runningTaskInfo, DesktopModeUiEventLogger.DesktopUiEventEnum.DESKTOP_WINDOW_APP_HEADER_DRAG_TO_TILE_TO_LEFT);
                                             motionEvent2 = motionEvent;
-                                            desktopTasksController.handleSnapResizingTaskOnDrag(runningTaskInfo, DesktopTasksController.SnapPosition.LEFT, surfaceControl2, rectOnDragPositioningEnd, rect2, motionEvent2);
-                                            desktopTasksController.releaseVisualIndicator();
-                                            desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 = desktopTasksController.taskbarDesktopTaskListener;
+                                            desktopTasksController3.handleSnapResizingTaskOnDrag(runningTaskInfo, DesktopTasksController.SnapPosition.LEFT, surfaceControl2, rectOnDragPositioningEnd, rect2, motionEvent2);
+                                            desktopTasksController3.releaseVisualIndicator();
+                                            desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 = desktopTasksController3.taskbarDesktopTaskListener;
                                             if (desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 != null) {
                                             }
-                                            if (z8) {
+                                            if (z7) {
                                             }
                                             DesktopModeWindowDecorViewModel.this.mDragStartDisplayId = i;
                                             if (!z) {
                                             }
                                             break;
                                         case 3:
-                                            desktopModeUiEventLogger.log(runningTaskInfo2, DesktopModeUiEventLogger.DesktopUiEventEnum.DESKTOP_WINDOW_APP_HEADER_DRAG_TO_TILE_TO_RIGHT);
-                                            desktopTasksController = desktopTasksController4;
+                                            desktopModeUiEventLogger.log(runningTaskInfo, DesktopModeUiEventLogger.DesktopUiEventEnum.DESKTOP_WINDOW_APP_HEADER_DRAG_TO_TILE_TO_RIGHT);
                                             z2 = false;
-                                            runningTaskInfo = runningTaskInfo2;
-                                            desktopTasksController.handleSnapResizingTaskOnDrag(runningTaskInfo, DesktopTasksController.SnapPosition.RIGHT, surfaceControl2, rectOnDragPositioningEnd, rect2, motionEvent2);
+                                            desktopTasksController3.handleSnapResizingTaskOnDrag(runningTaskInfo, DesktopTasksController.SnapPosition.RIGHT, surfaceControl2, rectOnDragPositioningEnd, rect2, motionEvent2);
                                             motionEvent2 = motionEvent;
-                                            desktopTasksController.releaseVisualIndicator();
-                                            desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 = desktopTasksController.taskbarDesktopTaskListener;
+                                            desktopTasksController3.releaseVisualIndicator();
+                                            desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 = desktopTasksController3.taskbarDesktopTaskListener;
                                             if (desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 != null) {
                                             }
-                                            if (z8) {
+                                            if (z7) {
                                             }
                                             DesktopModeWindowDecorViewModel.this.mDragStartDisplayId = i;
                                             if (!z) {
@@ -871,34 +855,32 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
                                             Rect rect3 = new Rect(rectOnDragPositioningEnd);
                                             DragPositioningCallbackUtility.snapTaskBoundsIfNecessary(rect3, rectCalculateValidDragArea);
                                             if (rect3.equals(rect2)) {
-                                                desktopTasksController4.releaseVisualIndicator();
-                                                int i11 = runningTaskInfo2.taskId;
-                                                int i12 = ReturnToDragStartAnimator.$r8$clinit;
-                                                desktopTasksController4.returnToDragStartAnimator.start(i11, surfaceControl2, rectOnDragPositioningEnd, rect2, null);
+                                                desktopTasksController3.releaseVisualIndicator();
+                                                int i10 = runningTaskInfo.taskId;
+                                                int i11 = ReturnToDragStartAnimator.$r8$clinit;
+                                                desktopTasksController3.returnToDragStartAnimator.start(i10, surfaceControl2, rectOnDragPositioningEnd, rect2, null);
                                                 break;
                                             } else {
                                                 int displayId = motionEvent2.getDisplayId();
-                                                DisplayAreaInfo displayAreaInfo = desktopTasksController4.rootTaskDisplayAreaOrganizer.getDisplayAreaInfo(displayId);
-                                                if (displayId == runningTaskInfo2.getDisplayId() || displayAreaInfo == null) {
+                                                DisplayAreaInfo displayAreaInfo = desktopTasksController3.rootTaskDisplayAreaOrganizer.getDisplayAreaInfo(displayId);
+                                                if (displayId == runningTaskInfo.getDisplayId() || displayAreaInfo == null) {
                                                     WindowContainerTransaction windowContainerTransaction = new WindowContainerTransaction();
-                                                    windowContainerTransaction.setBounds(runningTaskInfo2.token, rect3);
+                                                    windowContainerTransaction.setBounds(runningTaskInfo.token, rect3);
                                                     if (CoreRune.MW_CAPTION_FREEFORM) {
-                                                        desktopTasksController4.shellTaskOrganizer.applyTransaction(windowContainerTransaction);
+                                                        desktopTasksController3.shellTaskOrganizer.applyTransaction(windowContainerTransaction);
                                                     } else {
-                                                        desktopTasksController4.transitions.startTransition(6, windowContainerTransaction, null);
+                                                        desktopTasksController3.transitions.startTransition(6, windowContainerTransaction, null);
                                                     }
                                                 } else {
-                                                    desktopTasksController4.moveToDisplay(runningTaskInfo2, displayId, rect3, desktopTasksController4.dragToDisplayTransitionHandler);
+                                                    desktopTasksController3.moveToDisplay(runningTaskInfo, displayId, rect3, desktopTasksController3.dragToDisplayTransitionHandler);
                                                 }
-                                                desktopTasksController4.releaseVisualIndicator();
-                                                desktopTasksController = desktopTasksController4;
-                                                runningTaskInfo = runningTaskInfo2;
+                                                desktopTasksController3.releaseVisualIndicator();
                                                 z2 = false;
-                                                desktopTasksController.releaseVisualIndicator();
-                                                desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 = desktopTasksController.taskbarDesktopTaskListener;
+                                                desktopTasksController3.releaseVisualIndicator();
+                                                desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 = desktopTasksController3.taskbarDesktopTaskListener;
                                                 if (desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 != null) {
                                                 }
-                                                if (z8) {
+                                                if (z7) {
                                                 }
                                                 DesktopModeWindowDecorViewModel.this.mDragStartDisplayId = i;
                                                 if (!z) {
@@ -908,14 +890,12 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
                                         case 7:
                                             throw new IllegalArgumentException("Should not be receiving TO_DESKTOP_INDICATOR for a freeform task.");
                                         case 8:
-                                            desktopTasksController = desktopTasksController4;
-                                            runningTaskInfo = runningTaskInfo2;
                                             z2 = false;
-                                            desktopTasksController.releaseVisualIndicator();
-                                            desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 = desktopTasksController.taskbarDesktopTaskListener;
+                                            desktopTasksController3.releaseVisualIndicator();
+                                            desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 = desktopTasksController3.taskbarDesktopTaskListener;
                                             if (desktopTasksController$IDesktopModeImpl$taskbarDesktopTaskListener$1 != null) {
                                             }
-                                            if (z8) {
+                                            if (z7) {
                                             }
                                             DesktopModeWindowDecorViewModel.this.mDragStartDisplayId = i;
                                             if (!z) {
@@ -928,7 +908,7 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
                                     i = -1;
                                 }
                                 z2 = false;
-                                if (z8) {
+                                if (z7) {
                                 }
                                 DesktopModeWindowDecorViewModel.this.mDragStartDisplayId = i;
                                 if (!z) {
@@ -936,7 +916,7 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
                             }
                         }
                         z = false;
-                        boolean zIsTaskInFullImmersiveState2 = DesktopModeWindowDecorViewModel.this.mDesktopUserRepositories.getProfile(runningTaskInfo2.userId).isTaskInFullImmersiveState(runningTaskInfo2.taskId);
+                        boolean zIsTaskInFullImmersiveState2 = DesktopModeWindowDecorViewModel.this.mDesktopUserRepositories.getProfile(runningTaskInfo.userId).isTaskInFullImmersiveState(runningTaskInfo.taskId);
                         if (desktopModeWindowDecoration.isDecorHandleState()) {
                         }
                         actionMasked = motionEvent2.getActionMasked();
@@ -944,7 +924,7 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
                         }
                     }
                     z = true;
-                    boolean zIsTaskInFullImmersiveState22 = DesktopModeWindowDecorViewModel.this.mDesktopUserRepositories.getProfile(runningTaskInfo2.userId).isTaskInFullImmersiveState(runningTaskInfo2.taskId);
+                    boolean zIsTaskInFullImmersiveState22 = DesktopModeWindowDecorViewModel.this.mDesktopUserRepositories.getProfile(runningTaskInfo.userId).isTaskInFullImmersiveState(runningTaskInfo.taskId);
                     if (desktopModeWindowDecoration.isDecorHandleState()) {
                     }
                     actionMasked = motionEvent2.getActionMasked();
@@ -955,15 +935,15 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
             }
             if (view.getId() == R.id.caption_handle) {
                 DesktopModeWindowDecorViewModel.this.handleCaptionThroughStatusBar(motionEvent2, desktopModeWindowDecoration, new DesktopModeWindowDecorViewModel$$ExternalSyntheticLambda28(i2, this, desktopModeWindowDecoration));
-                boolean z12 = this.mIsDragging;
+                boolean z11 = this.mIsDragging;
                 updateDragStatus(desktopModeWindowDecoration, motionEvent2);
                 if (motionEvent2.getActionMasked() != 1 && motionEvent2.getActionMasked() != 3) {
                     i3 = 0;
                 }
-                if (z12 && i3 != 0) {
+                if (z11 && i3 != 0) {
                     view.setPressed(false);
                 }
-                return z12;
+                return z11;
             }
             return false;
         }
@@ -2122,16 +2102,15 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
     
         if ((r6 != null ? r6.contains(com.android.systemui.popup.util.PopupUIUtil.ACTION_MULTI_WINDOW_ENABLE_VALID_REQUESTER) : false) != false) goto L47;
      */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Removed duplicated region for block: B:156:0x03d2  */
-    /* JADX WARN: Removed duplicated region for block: B:159:0x040b  */
-    /* JADX WARN: Removed duplicated region for block: B:161:0x0414  */
-    /* JADX WARN: Removed duplicated region for block: B:170:0x0449  */
-    /* JADX WARN: Removed duplicated region for block: B:172:0x044e  */
-    /* JADX WARN: Removed duplicated region for block: B:180:0x046c  */
-    /* JADX WARN: Removed duplicated region for block: B:183:0x0479  */
-    /* JADX WARN: Removed duplicated region for block: B:208:0x04fe  */
-    /* JADX WARN: Removed duplicated region for block: B:216:0x0547  */
+    /* JADX WARN: Removed duplicated region for block: B:155:0x0407  */
+    /* JADX WARN: Removed duplicated region for block: B:158:0x0440  */
+    /* JADX WARN: Removed duplicated region for block: B:160:0x0449  */
+    /* JADX WARN: Removed duplicated region for block: B:169:0x047f  */
+    /* JADX WARN: Removed duplicated region for block: B:171:0x0484  */
+    /* JADX WARN: Removed duplicated region for block: B:179:0x04a2  */
+    /* JADX WARN: Removed duplicated region for block: B:182:0x04af  */
+    /* JADX WARN: Removed duplicated region for block: B:207:0x0534  */
+    /* JADX WARN: Removed duplicated region for block: B:215:0x057d  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
@@ -2167,11 +2146,11 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
                     z = windowingMode == 1 || windowingMode == 6;
                 }
             }
-            char c = (desktopModeWindowDecoration.checkTouchEventInFocusedCaptionHandle(motionEvent) || DesktopModeFlags.ENABLE_HANDLE_INPUT_FIX.isTrue()) ? (char) 1 : (char) 0;
-            if (!z || c == 0) {
+            boolean z2 = desktopModeWindowDecoration.checkTouchEventInFocusedCaptionHandle(motionEvent) || DesktopModeFlags.ENABLE_HANDLE_INPUT_FIX.isTrue();
+            if (z && z2) {
+                this.mTransitionDragActive = true;
                 return;
             }
-            this.mTransitionDragActive = true;
             return;
         }
         DesktopTasksController desktopTasksController = this.mDesktopTasksController;
@@ -2188,7 +2167,7 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
                                     }
                                 }
                             }
-                            if ((this.mContext.getResources().getConfiguration().smallestScreenWidthDp < 600) == true) {
+                            if (this.mContext.getResources().getConfiguration().smallestScreenWidthDp < 600) {
                                 i = R.string.mw_desktop_drag_handle_blocked_sw_600;
                             } else {
                                 int i3 = mDesktopDisabledFlags;
@@ -2260,7 +2239,7 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
                                         }
                                         int splitPosition = splitScreenController2.getSplitPosition(i6);
                                         if (splitPosition != -1) {
-                                            int i7 = splitPosition != 1 ? 1 : 0;
+                                            int i7 = splitPosition == 1 ? 0 : 1;
                                             SplitScreenController splitScreenController3 = dragToDesktopTransitionHandler.splitScreenController;
                                             if (splitScreenController3 == null) {
                                                 splitScreenController3 = null;
@@ -2283,6 +2262,8 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
                                         fromFullscreen = new DragToDesktopTransitionHandler.TransitionState.FromFullscreen(i9, moveToDesktopAnimator, iBinderStartTransition, null, null, null, null, null, null, null, null, false, desktopModeVisualIndicator, false, null, false, null, desktopModeWindowDecorViewModel$$ExternalSyntheticLambda31, null, null, 913400, null);
                                     }
                                     dragToDesktopTransitionHandler.transitionState = fromFullscreen;
+                                    dragToDesktopTransitionHandler.recordLogHistory("[S] " + fromFullscreen);
+                                    DragToDesktopTransitionHandler.logV$4("startDragToDesktopTransition: " + dragToDesktopTransitionHandler.transitionState + ", c=" + Debug.getCallers(2), new Object[0]);
                                 }
                             }
                         }
@@ -2392,7 +2373,7 @@ public class DesktopModeWindowDecorViewModel implements WindowDecorViewModel, Fo
                                                 DragToDesktopTransitionHandler.TransitionState transitionStateRequireTransitionState = dragToDesktopTransitionHandler2.requireTransitionState();
                                                 if (transitionStateRequireTransitionState.getStartAborted()) {
                                                     DragToDesktopTransitionHandler.logV$4("finishDragToDesktop: start was aborted, clearing state", new Object[0]);
-                                                    dragToDesktopTransitionHandler2.transitionState = null;
+                                                    dragToDesktopTransitionHandler2.clearState();
                                                 } else if (transitionStateRequireTransitionState.getStartInterrupted()) {
                                                     DragToDesktopTransitionHandler.logV$4("finishDragToDesktop: start was interrupted, returning", new Object[0]);
                                                 } else {

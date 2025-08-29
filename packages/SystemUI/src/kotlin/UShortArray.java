@@ -32,7 +32,7 @@ public final class UShortArray implements Collection, KMappedMarker {
                 throw new NoSuchElementException(String.valueOf(this.index));
             }
             this.index = i + 1;
-            return UShort.m3449boximpl(sArr[i]);
+            return UShort.m3448boximpl(sArr[i]);
         }
 
         @Override // java.util.Iterator

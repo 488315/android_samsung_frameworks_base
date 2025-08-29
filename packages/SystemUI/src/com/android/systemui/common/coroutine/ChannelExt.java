@@ -12,9 +12,9 @@ public final class ChannelExt {
     }
 
     public static void trySendWithFailureLogging(SendChannel sendChannel, Object obj, String str, String str2) {
-        Object objMo3476trySendJP2dKIU = sendChannel.mo3476trySendJP2dKIU(obj);
-        if (objMo3476trySendJP2dKIU instanceof ChannelResult.Failed) {
-            Log.e(str, "Failed to send " + str2 + " - downstream canceled or failed.", ChannelResult.m3478exceptionOrNullimpl((ChannelResult.Failed) objMo3476trySendJP2dKIU));
+        Object objMo3475trySendJP2dKIU = sendChannel.mo3475trySendJP2dKIU(obj);
+        if (objMo3475trySendJP2dKIU instanceof ChannelResult.Failed) {
+            Log.e(str, "Failed to send " + str2 + " - downstream canceled or failed.", ChannelResult.m3477exceptionOrNullimpl((ChannelResult.Failed) objMo3475trySendJP2dKIU));
         }
     }
 

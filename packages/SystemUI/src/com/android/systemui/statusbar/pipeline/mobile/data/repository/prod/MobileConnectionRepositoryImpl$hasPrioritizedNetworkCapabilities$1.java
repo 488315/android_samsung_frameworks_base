@@ -66,7 +66,7 @@ final class MobileConnectionRepositoryImpl$hasPrioritizedNetworkCapabilities$1 e
                     LogMessage logMessageObtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
                     ((LogMessageImpl) logMessageObtain).int1 = netId;
                     logBuffer.commit(logMessageObtain);
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.TRUE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.TRUE);
                 }
 
                 @Override // android.net.ConnectivityManager.NetworkCallback
@@ -80,7 +80,7 @@ final class MobileConnectionRepositoryImpl$hasPrioritizedNetworkCapabilities$1 e
                     LogMessage logMessageObtain = logBuffer.obtain("MobileInputLog", logLevel, mobileInputLogger$$ExternalSyntheticLambda0, null);
                     ((LogMessageImpl) logMessageObtain).int1 = netId;
                     logBuffer.commit(logMessageObtain);
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.FALSE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.FALSE);
                 }
             };
             this.$connectivityManager.registerNetworkCallback(this.this$0.networkSliceRequest, networkCallback);

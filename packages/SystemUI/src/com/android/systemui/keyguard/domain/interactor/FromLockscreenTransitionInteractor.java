@@ -202,17 +202,17 @@ public final class FromLockscreenTransitionInteractor extends TransitionInteract
 
     @Override // com.android.systemui.keyguard.domain.interactor.TransitionInteractor
     public final ValueAnimator getDefaultAnimatorForTransitionsToState(KeyguardState keyguardState) {
-        long jM3461plusLRDsOJo;
+        long jM3460plusLRDsOJo;
         ValueAnimator valueAnimator = new ValueAnimator();
         valueAnimator.setInterpolator(Interpolators.LINEAR);
         int i = WhenMappings.$EnumSwitchMapping$0[keyguardState.ordinal()];
         if (i != 1) {
-            jM3461plusLRDsOJo = i != 2 ? i != 3 ? i != 4 ? i != 5 ? DEFAULT_DURATION : TO_GLANCEABLE_HUB_DURATION : TO_DOZING_DURATION : ((WakefulnessModel) this.powerInteractor.detailedWakefulness.$$delegate_0.getValue()).lastSleepReason == WakeSleepReason.FOLD ? TO_AOD_FOLD_DURATION : TO_AOD_DURATION : TO_OCCLUDED_DURATION;
+            jM3460plusLRDsOJo = i != 2 ? i != 3 ? i != 4 ? i != 5 ? DEFAULT_DURATION : TO_GLANCEABLE_HUB_DURATION : TO_DOZING_DURATION : ((WakefulnessModel) this.powerInteractor.detailedWakefulness.$$delegate_0.getValue()).lastSleepReason == WakeSleepReason.FOLD ? TO_AOD_FOLD_DURATION : TO_AOD_DURATION : TO_OCCLUDED_DURATION;
         } else {
             Duration.Companion companion = Duration.Companion;
-            jM3461plusLRDsOJo = Duration.m3461plusLRDsOJo(TO_DREAMING_DURATION, DurationKt.toDuration(100, DurationUnit.MILLISECONDS));
+            jM3460plusLRDsOJo = Duration.m3460plusLRDsOJo(TO_DREAMING_DURATION, DurationKt.toDuration(100, DurationUnit.MILLISECONDS));
         }
-        valueAnimator.setDuration(Duration.m3457getInWholeMillisecondsimpl(jM3461plusLRDsOJo));
+        valueAnimator.setDuration(Duration.m3456getInWholeMillisecondsimpl(jM3460plusLRDsOJo));
         return valueAnimator;
     }
 

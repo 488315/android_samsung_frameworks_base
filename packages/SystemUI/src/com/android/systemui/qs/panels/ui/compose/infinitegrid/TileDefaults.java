@@ -35,7 +35,7 @@ public final class TileDefaults {
     }
 
     /* renamed from: animateShapeAsState-rAjV9yQ, reason: not valid java name */
-    public static MutableState m2907animateShapeAsStaterAjV9yQ(int i, float f, String str, Composer composer, int i2) {
+    public static MutableState m2905animateShapeAsStaterAjV9yQ(int i, float f, String str, Composer composer, int i2) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startReplaceGroup(-2105857704);
         if (ComposerKt.isTraceInProgress()) {
@@ -77,12 +77,12 @@ public final class TileDefaults {
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventStart("com.android.systemui.qs.panels.ui.compose.infinitegrid.TileDefaults.animateTileShapeAsState (Tile.kt:479)");
         }
-        MutableState mutableStateM2907animateShapeAsStaterAjV9yQ = m2907animateShapeAsStaterAjV9yQ(i, ActiveTileCornerRadius, "QSTileIconCornerRadius", composerImpl, 3456);
+        MutableState mutableStateM2905animateShapeAsStaterAjV9yQ = m2905animateShapeAsStaterAjV9yQ(i, ActiveTileCornerRadius, "QSTileIconCornerRadius", composerImpl, 3456);
         if (ComposerKt.isTraceInProgress()) {
             ComposerKt.traceEventEnd();
         }
         composerImpl.end(false);
-        return mutableStateM2907animateShapeAsStaterAjV9yQ;
+        return mutableStateM2905animateShapeAsStaterAjV9yQ;
     }
 
     public static TileColors getColorForState(TileUiState tileUiState, boolean z, Composer composer, int i) {

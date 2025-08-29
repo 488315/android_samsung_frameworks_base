@@ -98,7 +98,7 @@ public class QSTileCustomizerController extends ViewControllerBase {
     }
 
     /* renamed from: -$$Nest$mshowResetDialog, reason: not valid java name */
-    public static void m2902$$Nest$mshowResetDialog(QSTileCustomizerController qSTileCustomizerController) {
+    public static void m2900$$Nest$mshowResetDialog(QSTileCustomizerController qSTileCustomizerController) {
         if (qSTileCustomizerController.mResetDialog == null) {
             SystemUIDialog systemUIDialog = new SystemUIDialog(((QSTileCustomizerBase) qSTileCustomizerController.mView).getContext(), R.style.Theme_SystemUI_Dialog_Alert);
             qSTileCustomizerController.mResetDialog = systemUIDialog;
@@ -212,7 +212,7 @@ public class QSTileCustomizerController extends ViewControllerBase {
             public final void onClick(View view) {
                 SystemUIDialog systemUIDialog = QSTileCustomizerController.this.mResetDialog;
                 if (systemUIDialog == null || !systemUIDialog.isShowing()) {
-                    QSTileCustomizerController.m2902$$Nest$mshowResetDialog(QSTileCustomizerController.this);
+                    QSTileCustomizerController.m2900$$Nest$mshowResetDialog(QSTileCustomizerController.this);
                 }
             }
         };

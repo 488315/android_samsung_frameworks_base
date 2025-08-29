@@ -20,7 +20,7 @@ public final /* synthetic */ class SecQSPanelControllerBase$$ExternalSyntheticLa
         BarItemImpl barItemImpl = (BarItemImpl) obj;
         switch (i) {
             case 0:
-                SecQSPanelControllerBase.m2899$r8$lambda$DEp4lo7MDBmfDD2MwoTLB3AMIw(secQSPanelControllerBase, barItemImpl);
+                SecQSPanelControllerBase.m2897$r8$lambda$DEp4lo7MDBmfDD2MwoTLB3AMIw(secQSPanelControllerBase, barItemImpl);
                 break;
             default:
                 SecQSPanelControllerBase.$r8$lambda$1i4lGWbt4JPhc9SgoAITwPQZoew(secQSPanelControllerBase, barItemImpl);

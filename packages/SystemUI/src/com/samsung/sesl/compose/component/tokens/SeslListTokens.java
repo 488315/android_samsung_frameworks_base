@@ -61,7 +61,7 @@ public final class SeslListTokens {
         SeslListTokens seslListTokens = (SeslListTokens) obj;
         long j = seslListTokens.scrollbarThumbActivateColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.scrollbarThumbActivateColor, j) && ULong.m3447equalsimpl0(this.scrollbarThumbInactiveColor, seslListTokens.scrollbarThumbInactiveColor);
+        return ULong.m3446equalsimpl0(this.scrollbarThumbActivateColor, j) && ULong.m3446equalsimpl0(this.scrollbarThumbInactiveColor, seslListTokens.scrollbarThumbInactiveColor);
     }
 
     public final int hashCode() {

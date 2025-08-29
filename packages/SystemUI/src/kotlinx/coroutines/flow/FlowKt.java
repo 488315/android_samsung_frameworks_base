@@ -224,8 +224,8 @@ public abstract class FlowKt {
     }
 
     /* renamed from: debounce-HG0u8IE, reason: not valid java name */
-    public static final Flow m3482debounceHG0u8IE(Flow flow, long j) {
-        return debounce(flow, DelayKt.m3470toDelayMillisLRDsOJo(j));
+    public static final Flow m3481debounceHG0u8IE(Flow flow, long j) {
+        return debounce(flow, DelayKt.m3469toDelayMillisLRDsOJo(j));
     }
 
     public static final Flow distinctUntilChanged(Flow flow) {
@@ -493,7 +493,7 @@ public abstract class FlowKt {
     }
 
     /* renamed from: timeout-HG0u8IE, reason: not valid java name */
-    public static final FlowCoroutineKt$scopedFlow$$inlined$unsafeFlow$1 m3483timeoutHG0u8IE(ChannelLimitedFlowMerge channelLimitedFlowMerge, long j) {
+    public static final FlowCoroutineKt$scopedFlow$$inlined$unsafeFlow$1 m3482timeoutHG0u8IE(ChannelLimitedFlowMerge channelLimitedFlowMerge, long j) {
         return new FlowCoroutineKt$scopedFlow$$inlined$unsafeFlow$1(new FlowKt__DelayKt$timeoutInternal$1(j, channelLimitedFlowMerge, null));
     }
 

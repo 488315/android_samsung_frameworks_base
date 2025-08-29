@@ -48,10 +48,10 @@ final class StatusBarStateControllerExtKt$expansionChanges$1 extends SuspendLamb
             final ?? r1 = new StatusBarStateController.StateListener() { // from class: com.android.systemui.statusbar.StatusBarStateControllerExtKt$expansionChanges$1$listener$1
                 @Override // com.android.systemui.plugins.statusbar.StatusBarStateController.StateListener
                 public final void onExpandedChanged(boolean z) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(z));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(z));
                 }
             };
-            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.valueOf(this.$this_expansionChanges.isExpanded()));
+            ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.valueOf(this.$this_expansionChanges.isExpanded()));
             this.$this_expansionChanges.addCallback(r1);
             final StatusBarStateController statusBarStateController = this.$this_expansionChanges;
             Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.StatusBarStateControllerExtKt$expansionChanges$1$$ExternalSyntheticLambda0

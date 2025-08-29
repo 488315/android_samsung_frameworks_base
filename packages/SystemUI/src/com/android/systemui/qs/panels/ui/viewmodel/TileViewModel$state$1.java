@@ -48,7 +48,7 @@ final class TileViewModel$state$1 extends SuspendLambda implements Function2 {
             final ?? r1 = new QSTile.Callback() { // from class: com.android.systemui.qs.panels.ui.viewmodel.TileViewModel$state$1$callback$1
                 @Override // com.android.systemui.plugins.qs.QSTile.Callback
                 public final void onStateChanged(QSTile.State state) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(state.copy());
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(state.copy());
                 }
             };
             this.this$0.tile.addCallback(r1);

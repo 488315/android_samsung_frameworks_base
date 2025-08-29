@@ -55,7 +55,7 @@ public final class GlanceableHubToLockscreenTransitionViewModel implements Glanc
         SceneKey sceneKey = Scenes.Communal;
         KeyguardState keyguardState = KeyguardState.LOCKSCREEN;
         companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.GLANCEABLE_HUB, keyguardState, keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, new Edge.ContentToState(sceneKey, keyguardState)));
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.GLANCEABLE_HUB, keyguardState, keyguardTransitionAnimationFlow.m2613setupVtjQ1oo(j, new Edge.ContentToState(sceneKey, keyguardState)));
         this.transitionAnimation = flowBuilderM;
         communalSettingsInteractor.isV2FlagEnabled();
         Boolean bool = Boolean.FALSE;

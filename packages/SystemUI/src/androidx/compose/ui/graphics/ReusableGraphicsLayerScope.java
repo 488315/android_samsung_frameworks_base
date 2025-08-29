@@ -77,7 +77,7 @@ public final class ReusableGraphicsLayerScope implements GraphicsLayerScope {
     public final void m495setAmbientShadowColor8_81llA(long j) {
         long j2 = this.ambientShadowColor;
         Color.Companion companion = Color.Companion;
-        if (ULong.m3447equalsimpl0(j2, j)) {
+        if (ULong.m3446equalsimpl0(j2, j)) {
             return;
         }
         this.mutatedFields |= 64;
@@ -154,7 +154,7 @@ public final class ReusableGraphicsLayerScope implements GraphicsLayerScope {
     public final void m497setSpotShadowColor8_81llA(long j) {
         long j2 = this.spotShadowColor;
         Color.Companion companion = Color.Companion;
-        if (ULong.m3447equalsimpl0(j2, j)) {
+        if (ULong.m3446equalsimpl0(j2, j)) {
             return;
         }
         this.mutatedFields |= 128;

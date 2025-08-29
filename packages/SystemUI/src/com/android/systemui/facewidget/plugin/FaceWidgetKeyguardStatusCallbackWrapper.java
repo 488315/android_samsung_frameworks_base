@@ -63,6 +63,7 @@ public class FaceWidgetKeyguardStatusCallbackWrapper implements PluginKeyguardSt
 
     @Override // com.android.systemui.plugins.keyguardstatusview.PluginKeyguardStatusCallback
     public final void onMusicItemExpaned(boolean z) {
+        int i = 2;
         NotificationPanelViewController.AnonymousClass10 anonymousClass10 = this.mStatusCallback;
         if (anonymousClass10 != null) {
             NotificationPanelViewController notificationPanelViewController = NotificationPanelViewController.this;
@@ -87,7 +88,7 @@ public class FaceWidgetKeyguardStatusCallbackWrapper implements PluginKeyguardSt
             notificationPanelViewController.mStackScrollerAlphaAnimator = duration;
             duration.setStartDelay(z ? 0L : 150L);
             notificationPanelViewController.mStackScrollerAlphaAnimator.setInterpolator(InterpolatorUtils.SINE_OUT_60);
-            notificationPanelViewController.mStackScrollerAlphaAnimator.addUpdateListener(new NotificationPanelViewController$$ExternalSyntheticLambda7(notificationPanelViewController, 2));
+            notificationPanelViewController.mStackScrollerAlphaAnimator.addUpdateListener(new NotificationPanelViewController$$ExternalSyntheticLambda7(notificationPanelViewController, i));
             notificationPanelViewController.mStackScrollerAlphaAnimator.start();
         }
     }

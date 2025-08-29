@@ -228,7 +228,7 @@ public final class FromPrimaryBouncerTransitionInteractor extends TransitionInte
                 j = DEFAULT_DURATION;
                 break;
         }
-        valueAnimator.setDuration(Duration.m3457getInWholeMillisecondsimpl(j));
+        valueAnimator.setDuration(Duration.m3456getInWholeMillisecondsimpl(j));
         return valueAnimator;
     }
 

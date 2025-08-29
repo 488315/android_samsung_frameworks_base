@@ -148,7 +148,7 @@ public final class SecVendorServices extends VendorServices {
                         Item item = (Item) obj;
                         long jNanoTime = System.nanoTime() - item.startTime;
                         if (jNanoTime >= item.compareDuration) {
-                            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("** ", BinderCallMonitorImpl.m3127$$Nest$smgetCallers(item), " ");
+                            StringBuilder sbM = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("** ", BinderCallMonitorImpl.m3126$$Nest$smgetCallers(item), " ");
                             long j2 = jNanoTime / 1000000;
                             sbM.append(j2);
                             sbM.append("ms");
@@ -163,10 +163,10 @@ public final class SecVendorServices extends VendorServices {
                             logBuffer.commit(logBuffer.obtain("BinderCallMonitor", logLevel, keyguardUpdateMonitorLogger$$ExternalSyntheticLambda7, null));
                         }
                         if (BinderCallMonitorImpl.this.mBinderCallMonitorState == 1) {
-                            String strM3127$$Nest$smgetCallers = BinderCallMonitorImpl.m3127$$Nest$smgetCallers(item);
+                            String strM3126$$Nest$smgetCallers = BinderCallMonitorImpl.m3126$$Nest$smgetCallers(item);
                             BinderCallMonitorImpl.this.mBinderCallHistory.add("==================================================================");
                             CopyOnWriteArrayList copyOnWriteArrayList = BinderCallMonitorImpl.this.mBinderCallHistory;
-                            StringBuilder sbM2 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("** ", strM3127$$Nest$smgetCallers, " ");
+                            StringBuilder sbM2 = ActivityResultRegistry$register$3$$ExternalSyntheticOutline0.m("** ", strM3126$$Nest$smgetCallers, " ");
                             long j3 = jNanoTime / 1000000;
                             sbM2.append(j3);
                             sbM2.append("ms");

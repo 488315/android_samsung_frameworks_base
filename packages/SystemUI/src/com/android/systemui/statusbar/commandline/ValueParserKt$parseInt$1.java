@@ -10,7 +10,7 @@ public final class ValueParserKt$parseInt$1 implements ValueParser {
 
     @Override // com.android.systemui.statusbar.commandline.ValueParser
     /* renamed from: parseValue-IoAF18A */
-    public final Object mo2565parseValueIoAF18A(String str) {
+    public final Object mo2563parseValueIoAF18A(String str) {
         Integer intOrNull = StringsKt__StringNumberConversionsKt.toIntOrNull(10, str);
         if (intOrNull == null) {
             int i = Result.$r8$clinit;

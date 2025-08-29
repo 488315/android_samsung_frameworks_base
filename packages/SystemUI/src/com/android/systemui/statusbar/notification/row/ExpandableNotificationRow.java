@@ -1606,7 +1606,7 @@ public class ExpandableNotificationRow extends ActivatableNotificationView imple
             }
         }
         getShowingLayout().updateBackgroundColor(false);
-        this.mPrivateLayout.updateExpandButtonsDuringLayout(isExpandable(), false);
+        this.mPrivateLayout.updateExpandButtons(isExpandable());
         if (this.mIsSummaryWithChildren) {
             this.mChildrenContainer.updateChildrenAppearance();
         }
@@ -2080,11 +2080,11 @@ public class ExpandableNotificationRow extends ActivatableNotificationView imple
                     this.mExpandClickListener.onClick(this);
                     return true;
                 }
-                int identifier = (this.mEntry.mSbn.getNotification().contentIntent != null ? this.mEntry.mSbn.getNotification().contentIntent : this.mEntry.mSbn.getNotification().fullScreenIntent).getCreatorUserHandle().getIdentifier();
+                int userId = this.mEntry.mSbn.getUserId();
                 NotificationRemoteInputManager notificationRemoteInputManager = this.mNotificationRemoteInputManager;
-                UserInfo profileParent = notificationRemoteInputManager.mUserManager.getProfileParent(identifier);
+                UserInfo profileParent = notificationRemoteInputManager.mUserManager.getProfileParent(userId);
                 boolean z = profileParent != null && notificationRemoteInputManager.mKeyguardManager.isDeviceLocked(profileParent.id);
-                boolean z2 = (notificationRemoteInputManager.mUserManager.getUserInfo(identifier).isManagedProfile() || notificationRemoteInputManager.mUserManager.getUserInfo(identifier).isPrivateProfile()) && notificationRemoteInputManager.mKeyguardManager.isDeviceLocked(identifier);
+                boolean z2 = (notificationRemoteInputManager.mUserManager.getUserInfo(userId).isManagedProfile() || notificationRemoteInputManager.mUserManager.getUserInfo(userId).isPrivateProfile()) && notificationRemoteInputManager.mKeyguardManager.isDeviceLocked(userId);
                 KeyguardKnoxGuardViewController$$ExternalSyntheticOutline0.m(" summary clicked and isParentUserLocked - ", " isLockedManagedProfile : ", "NotifRemoteInputManager", z, z2);
                 if (!z && z2) {
                     NotificationRemoteInputManager notificationRemoteInputManager2 = this.mNotificationRemoteInputManager;
@@ -2092,7 +2092,7 @@ public class ExpandableNotificationRow extends ActivatableNotificationView imple
                     Log.d("NotifRemoteInputManager", " Unlock workprofile only for group summary clicking ");
                     StatusBarRemoteInputCallback statusBarRemoteInputCallback = (StatusBarRemoteInputCallback) notificationRemoteInputManager2.mCallback;
                     statusBarRemoteInputCallback.mCommandQueue.animateCollapsePanels();
-                    statusBarRemoteInputCallback.startWorkChallengeIfNecessary(identifier, null, null);
+                    statusBarRemoteInputCallback.startWorkChallengeIfNecessary(userId, null, null);
                     statusBarRemoteInputCallback.mPendingWorkRemoteInputView = null;
                 }
                 return super.performClick();
@@ -2873,7 +2873,7 @@ public class ExpandableNotificationRow extends ActivatableNotificationView imple
         this.mPublicLayout.setVisibility(this.mShowingPublic ? 0 : 4);
         updateChildrenVisibility();
         getShowingLayout().updateBackgroundColor(z2);
-        this.mPrivateLayout.updateExpandButtonsDuringLayout(isExpandable(), false);
+        this.mPrivateLayout.updateExpandButtons(isExpandable());
         updateShelfIconColor();
         this.mShowingPublicInitialized = true;
         if (!this.mIsSummaryWithChildren || (notificationChildrenContainer = this.mChildrenContainer) == null || this.mShowingPublic) {

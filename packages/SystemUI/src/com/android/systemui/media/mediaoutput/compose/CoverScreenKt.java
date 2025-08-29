@@ -95,9 +95,9 @@ public abstract class CoverScreenKt {
                     int i3 = Result.$r8$clinit;
                     failure = new Result.Failure(th);
                 }
-                Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-                if (thM3442exceptionOrNullimpl != null) {
-                    thM3442exceptionOrNullimpl.printStackTrace();
+                Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+                if (thM3441exceptionOrNullimpl != null) {
+                    thM3441exceptionOrNullimpl.printStackTrace();
                 }
                 if (failure instanceof Result.Failure) {
                     failure = null;
@@ -122,9 +122,9 @@ public abstract class CoverScreenKt {
                     int i4 = Result.$r8$clinit;
                     failure2 = new Result.Failure(th2);
                 }
-                Throwable thM3442exceptionOrNullimpl2 = Result.m3442exceptionOrNullimpl(failure2);
-                if (thM3442exceptionOrNullimpl2 != null) {
-                    thM3442exceptionOrNullimpl2.printStackTrace();
+                Throwable thM3441exceptionOrNullimpl2 = Result.m3441exceptionOrNullimpl(failure2);
+                if (thM3441exceptionOrNullimpl2 != null) {
+                    thM3441exceptionOrNullimpl2.printStackTrace();
                 }
                 if (failure2 instanceof Result.Failure) {
                     failure2 = null;
@@ -296,7 +296,7 @@ public abstract class CoverScreenKt {
                                                     Color.Companion.getClass();
                                                     long j = Color.Transparent;
                                                     seslTopAppBarDefaults.getClass();
-                                                    AppBarKt.m3337SeslTopAppBarau3_HiA(composableLambdaImpl, null, composableLambdaImplRememberComposableLambda2, null, windowInsetsM149onlybOOhFvg, SeslTopAppBarDefaults.m3345topAppBarColors5tl4gsc(j, composer3), 0.0f, composer3, 390, 74);
+                                                    AppBarKt.m3336SeslTopAppBarau3_HiA(composableLambdaImpl, null, composableLambdaImplRememberComposableLambda2, null, windowInsetsM149onlybOOhFvg, SeslTopAppBarDefaults.m3344topAppBarColors5tl4gsc(j, composer3), 0.0f, composer3, 390, 74);
                                                     if (ComposerKt.isTraceInProgress()) {
                                                         ComposerKt.traceEventEnd();
                                                     }
@@ -357,7 +357,7 @@ public abstract class CoverScreenKt {
                                                     Color.Companion.getClass();
                                                     long j = Color.Transparent;
                                                     SeslScaffoldTemplate$BackgroundScope.Companion companion2 = SeslScaffoldTemplate$BackgroundScope.Companion;
-                                                    seslScaffoldTemplate$BackgroundScope.m3356BackgroundFNF3uiM(paddingValues, modifierThen, j, composerImpl7, ((i5 >> 3) & 14) | 384 | ((i5 << 9) & 7168), 0);
+                                                    seslScaffoldTemplate$BackgroundScope.m3355BackgroundFNF3uiM(paddingValues, modifierThen, j, composerImpl7, ((i5 >> 3) & 14) | 384 | ((i5 << 9) & 7168), 0);
                                                     if (ComposerKt.isTraceInProgress()) {
                                                         ComposerKt.traceEventEnd();
                                                     }

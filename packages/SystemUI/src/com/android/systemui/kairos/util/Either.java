@@ -14,7 +14,7 @@ public interface Either {
         }
 
         /* renamed from: box-impl, reason: not valid java name */
-        public static final /* synthetic */ First m2588boximpl(Object obj) {
+        public static final /* synthetic */ First m2586boximpl(Object obj) {
             return new First(obj);
         }
 
@@ -46,7 +46,7 @@ public interface Either {
         }
 
         /* renamed from: box-impl, reason: not valid java name */
-        public static final /* synthetic */ Second m2589boximpl(FakeWifiEventModel.CarrierMerged carrierMerged) {
+        public static final /* synthetic */ Second m2587boximpl(FakeWifiEventModel.CarrierMerged carrierMerged) {
             return new Second(carrierMerged);
         }
 

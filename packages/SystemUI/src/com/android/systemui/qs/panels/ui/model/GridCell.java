@@ -5,5 +5,5 @@ public interface GridCell {
     int getRow();
 
     /* renamed from: getSpan-hRN5aJ8, reason: not valid java name */
-    long mo2908getSpanhRN5aJ8();
+    long mo2906getSpanhRN5aJ8();
 }

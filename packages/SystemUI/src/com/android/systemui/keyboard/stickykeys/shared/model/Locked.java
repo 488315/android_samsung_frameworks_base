@@ -11,7 +11,7 @@ public final class Locked {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ Locked m2600boximpl(boolean z) {
+    public static final /* synthetic */ Locked m2598boximpl(boolean z) {
         return new Locked(z);
     }
 

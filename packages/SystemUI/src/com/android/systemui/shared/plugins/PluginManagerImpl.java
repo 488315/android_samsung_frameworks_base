@@ -250,7 +250,7 @@ public class PluginManagerImpl extends BroadcastReceiver implements PluginManage
                             public final void run() {
                                 switch (i) {
                                     case 0:
-                                        PluginActionManager.m2955$r8$lambda$e2SW2bOJhdGs27PogmcioXOXds(pluginActionManager, encodedSchemeSpecificPart);
+                                        PluginActionManager.m2953$r8$lambda$e2SW2bOJhdGs27PogmcioXOXds(pluginActionManager, encodedSchemeSpecificPart);
                                         break;
                                     default:
                                         pluginActionManager.removePkg(encodedSchemeSpecificPart);
@@ -267,7 +267,7 @@ public class PluginManagerImpl extends BroadcastReceiver implements PluginManage
                             public final void run() {
                                 switch (i2) {
                                     case 0:
-                                        PluginActionManager.m2955$r8$lambda$e2SW2bOJhdGs27PogmcioXOXds(pluginActionManager2, encodedSchemeSpecificPart);
+                                        PluginActionManager.m2953$r8$lambda$e2SW2bOJhdGs27PogmcioXOXds(pluginActionManager2, encodedSchemeSpecificPart);
                                         break;
                                     default:
                                         pluginActionManager2.removePkg(encodedSchemeSpecificPart);

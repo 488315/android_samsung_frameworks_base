@@ -48,10 +48,10 @@ final class ConfigurationRepositoryImpl$configurationValues$1 extends SuspendLam
             ConfigurationController.ConfigurationListener configurationListener = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.common.ui.data.repository.ConfigurationRepositoryImpl$configurationValues$1$callback$1
                 @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
                 public final void onConfigChanged(Configuration configuration) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(configuration);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(configuration);
                 }
             };
-            ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(this.this$0.context.getResources().getConfiguration());
+            ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(this.this$0.context.getResources().getConfiguration());
             ((ConfigurationControllerImpl) this.this$0.configurationController).addCallback(configurationListener);
             ConfigurationRepositoryImpl$onMovedToDisplay$1$$ExternalSyntheticLambda0 configurationRepositoryImpl$onMovedToDisplay$1$$ExternalSyntheticLambda0 = new ConfigurationRepositoryImpl$onMovedToDisplay$1$$ExternalSyntheticLambda0(this.this$0, configurationListener, 1);
             this.label = 1;

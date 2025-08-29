@@ -641,7 +641,7 @@ public final class KeyboardTouchpadTutorialViewModel extends ViewModel implement
             ResultKt.throwOnFailure(obj);
             c08751.L$0 = this;
             c08751.label = 1;
-            if (DelayKt.m3469delayVtjQ1oo(AUTO_PROCEED_DELAY, c08751) == coroutineSingletons) {
+            if (DelayKt.m3468delayVtjQ1oo(AUTO_PROCEED_DELAY, c08751) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else {

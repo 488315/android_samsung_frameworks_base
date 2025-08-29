@@ -253,7 +253,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         public float mWindowDimAmount;
 
         /* renamed from: -$$Nest$mopenShadeAndDismiss, reason: not valid java name */
-        public static void m2582$$Nest$mopenShadeAndDismiss(ActionsDialogLite actionsDialogLite) {
+        public static void m2580$$Nest$mopenShadeAndDismiss(ActionsDialogLite actionsDialogLite) {
             actionsDialogLite.mUiEventLogger.log(GlobalActionsEvent.GA_CLOSE_TAP_OUTSIDE);
             if (((KeyguardStateControllerImpl) actionsDialogLite.mKeyguardStateController).mShowing) {
                 ((BaseShadeControllerImpl) actionsDialogLite.mShadeController).animateExpandQs();
@@ -292,7 +292,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
                     if (y > ((StatusBarWindowControllerImpl) actionsDialogLite.mStatusBarWindowController).mBarHeight) {
                         return false;
                     }
-                    ActionsDialogLite.m2582$$Nest$mopenShadeAndDismiss(actionsDialogLite);
+                    ActionsDialogLite.m2580$$Nest$mopenShadeAndDismiss(actionsDialogLite);
                     return true;
                 }
 
@@ -306,7 +306,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
                     if (y > ((StatusBarWindowControllerImpl) actionsDialogLite.mStatusBarWindowController).mBarHeight) {
                         return false;
                     }
-                    ActionsDialogLite.m2582$$Nest$mopenShadeAndDismiss(actionsDialogLite);
+                    ActionsDialogLite.m2580$$Nest$mopenShadeAndDismiss(actionsDialogLite);
                     return true;
                 }
 
@@ -654,7 +654,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
         public final void onToggle(boolean z) {
             GlobalActionsDialogLite globalActionsDialogLite = GlobalActionsDialogLite.this;
             if (!globalActionsDialogLite.mHasTelephony || !((Boolean) TelephonyProperties.in_ecm_mode().orElse(Boolean.FALSE)).booleanValue()) {
-                GlobalActionsDialogLite.m2581$$Nest$mchangeAirplaneModeSystemSetting(globalActionsDialogLite, z);
+                GlobalActionsDialogLite.m2579$$Nest$mchangeAirplaneModeSystemSetting(globalActionsDialogLite, z);
                 return;
             }
             globalActionsDialogLite.mIsWaitingForEcmExit = true;
@@ -1363,7 +1363,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
     }
 
     /* renamed from: -$$Nest$mchangeAirplaneModeSystemSetting, reason: not valid java name */
-    public static void m2581$$Nest$mchangeAirplaneModeSystemSetting(GlobalActionsDialogLite globalActionsDialogLite, boolean z) {
+    public static void m2579$$Nest$mchangeAirplaneModeSystemSetting(GlobalActionsDialogLite globalActionsDialogLite, boolean z) {
         globalActionsDialogLite.mGlobalSettings.putInt(SettingsHelper.INDEX_AIRPLANE_MODE_ON, z ? 1 : 0);
         Intent intent = new Intent("android.intent.action.AIRPLANE_MODE");
         intent.addFlags(VolumePanelValues.FLAG_SHOW_CSD_100_WARNINGS);
@@ -1401,7 +1401,7 @@ public class GlobalActionsDialogLite implements DialogInterface.OnDismissListene
                 GlobalActionsDialogLite globalActionsDialogLite = GlobalActionsDialogLite.this;
                 if (globalActionsDialogLite.mIsWaitingForEcmExit) {
                     globalActionsDialogLite.mIsWaitingForEcmExit = false;
-                    GlobalActionsDialogLite.m2581$$Nest$mchangeAirplaneModeSystemSetting(globalActionsDialogLite, true);
+                    GlobalActionsDialogLite.m2579$$Nest$mchangeAirplaneModeSystemSetting(globalActionsDialogLite, true);
                 }
             }
         };

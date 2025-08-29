@@ -12,6 +12,6 @@ public final class MuxPromptKt$switchPromptImplSingle$switchPromptImpl$2$1 imple
     public final Object invoke(Object obj, Object obj2, Object obj3) {
         ((Number) obj3).intValue();
         Maybe.Companion.getClass();
-        return new Single(Maybe.Present.m2590boximpl((EventsImpl) obj2)).getEntries();
+        return new Single(Maybe.Present.m2588boximpl((EventsImpl) obj2)).getEntries();
     }
 }

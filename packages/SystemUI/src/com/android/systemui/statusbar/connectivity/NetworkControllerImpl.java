@@ -241,7 +241,7 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
     }
 
     /* renamed from: -$$Nest$mgetProcessedTransportTypes, reason: not valid java name */
-    public static int[] m2965$$Nest$mgetProcessedTransportTypes(NetworkControllerImpl networkControllerImpl, NetworkCapabilities networkCapabilities) {
+    public static int[] m2963$$Nest$mgetProcessedTransportTypes(NetworkControllerImpl networkControllerImpl, NetworkCapabilities networkCapabilities) {
         networkControllerImpl.getClass();
         int[] transportTypes = networkCapabilities.getTransportTypes();
         for (int i = 0; i < transportTypes.length; i++) {
@@ -1035,14 +1035,14 @@ public class NetworkControllerImpl extends BroadcastReceiver implements NetworkC
                 boolean z = networkCapabilities2 != null && networkCapabilities2.hasCapability(16);
                 boolean zHasCapability = networkCapabilities.hasCapability(16);
                 if (network.equals(this.mLastNetwork) && zHasCapability == z) {
-                    int[] iArrM2965$$Nest$mgetProcessedTransportTypes = NetworkControllerImpl.m2965$$Nest$mgetProcessedTransportTypes(NetworkControllerImpl.this, networkCapabilities);
-                    Arrays.sort(iArrM2965$$Nest$mgetProcessedTransportTypes);
+                    int[] iArrM2963$$Nest$mgetProcessedTransportTypes = NetworkControllerImpl.m2963$$Nest$mgetProcessedTransportTypes(NetworkControllerImpl.this, networkCapabilities);
+                    Arrays.sort(iArrM2963$$Nest$mgetProcessedTransportTypes);
                     NetworkCapabilities networkCapabilities3 = this.mLastNetworkCapabilities;
-                    int[] iArrM2965$$Nest$mgetProcessedTransportTypes2 = networkCapabilities3 != null ? NetworkControllerImpl.m2965$$Nest$mgetProcessedTransportTypes(NetworkControllerImpl.this, networkCapabilities3) : null;
-                    if (iArrM2965$$Nest$mgetProcessedTransportTypes2 != null) {
-                        Arrays.sort(iArrM2965$$Nest$mgetProcessedTransportTypes2);
+                    int[] iArrM2963$$Nest$mgetProcessedTransportTypes2 = networkCapabilities3 != null ? NetworkControllerImpl.m2963$$Nest$mgetProcessedTransportTypes(NetworkControllerImpl.this, networkCapabilities3) : null;
+                    if (iArrM2963$$Nest$mgetProcessedTransportTypes2 != null) {
+                        Arrays.sort(iArrM2963$$Nest$mgetProcessedTransportTypes2);
                     }
-                    if (Arrays.equals(iArrM2965$$Nest$mgetProcessedTransportTypes, iArrM2965$$Nest$mgetProcessedTransportTypes2)) {
+                    if (Arrays.equals(iArrM2963$$Nest$mgetProcessedTransportTypes, iArrM2963$$Nest$mgetProcessedTransportTypes2)) {
                         return;
                     }
                 }

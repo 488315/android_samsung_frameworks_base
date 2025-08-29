@@ -61,7 +61,7 @@ public abstract class TextExtKt {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static final void m2637TextExtJKOsDoc(final CharSequence charSequence, Modifier modifier, int i, int i2, final TextStyle textStyle, Composer composer, final int i3, final int i4) {
+    public static final void m2635TextExtJKOsDoc(final CharSequence charSequence, Modifier modifier, int i, int i2, final TextStyle textStyle, Composer composer, final int i3, final int i4) {
         int i5;
         Modifier modifier2;
         int i6;
@@ -217,7 +217,7 @@ public abstract class TextExtKt {
                             ((Integer) obj2).getClass();
                             int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i3 | 1);
                             TextStyle textStyle2 = textStyle;
-                            TextExtKt.m2637TextExtJKOsDoc(charSequence, modifier5, i11, i12, textStyle2, (Composer) obj, iUpdateChangedFlags, i4);
+                            TextExtKt.m2635TextExtJKOsDoc(charSequence, modifier5, i11, i12, textStyle2, (Composer) obj, iUpdateChangedFlags, i4);
                             return Unit.INSTANCE;
                         }
                     };

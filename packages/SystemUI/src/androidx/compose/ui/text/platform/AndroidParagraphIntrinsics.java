@@ -375,7 +375,7 @@ public final class AndroidParagraphIntrinsics implements ParagraphIntrinsics {
         Color.Companion.getClass();
         long j6 = Color.Unspecified;
         long j7 = spanStyle2.background;
-        int i18 = (ULong.m3447equalsimpl0(j7, j6) || ULong.m3447equalsimpl0(j7, Color.Transparent)) ? 0 : i4;
+        int i18 = (ULong.m3446equalsimpl0(j7, j6) || ULong.m3446equalsimpl0(j7, Color.Transparent)) ? 0 : i4;
         BaselineShift baselineShift = spanStyle2.baselineShift;
         if (baselineShift != null) {
             BaselineShift.Companion.getClass();

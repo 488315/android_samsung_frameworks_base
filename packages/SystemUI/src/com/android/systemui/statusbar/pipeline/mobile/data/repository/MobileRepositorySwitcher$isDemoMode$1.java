@@ -69,7 +69,7 @@ final class MobileRepositorySwitcher$isDemoMode$1 extends SuspendLambda implemen
                     demoMobileConnectionsRepository._subscriptions.setValue(EmptyList.INSTANCE);
                     ((LinkedHashMap) demoMobileConnectionsRepository.connectionRepoCache).clear();
                     ((LinkedHashMap) demoMobileConnectionsRepository.subscriptionInfoCache).clear();
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Boolean.FALSE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Boolean.FALSE);
                 }
 
                 @Override // com.android.systemui.demomode.DemoModeCommandReceiver

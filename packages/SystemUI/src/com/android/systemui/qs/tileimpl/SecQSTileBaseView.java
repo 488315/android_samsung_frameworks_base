@@ -77,7 +77,7 @@ public class SecQSTileBaseView extends QSTileView implements LaunchableView {
     }
 
     /* renamed from: $r8$lambda$8PEmPle3qwT-ZBfqDAlQpjAmlGM, reason: not valid java name */
-    public static /* synthetic */ Unit m2917$r8$lambda$8PEmPle3qwTZBfqDAlQpjAmlGM(SecQSTileBaseView secQSTileBaseView, Integer num) {
+    public static /* synthetic */ Unit m2915$r8$lambda$8PEmPle3qwTZBfqDAlQpjAmlGM(SecQSTileBaseView secQSTileBaseView, Integer num) {
         super.setVisibility(num.intValue());
         return Unit.INSTANCE;
     }
@@ -348,7 +348,7 @@ public class SecQSTileBaseView extends QSTileView implements LaunchableView {
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
             public final Object mo781invoke(Object obj) {
-                return SecQSTileBaseView.m2917$r8$lambda$8PEmPle3qwTZBfqDAlQpjAmlGM(this.f$0, (Integer) obj);
+                return SecQSTileBaseView.m2915$r8$lambda$8PEmPle3qwTZBfqDAlQpjAmlGM(this.f$0, (Integer) obj);
             }
         });
         SecQSPanelResourcePicker secQSPanelResourcePicker = (SecQSPanelResourcePicker) Dependency.sDependency.getDependencyInner(SecQSPanelResourcePicker.class);

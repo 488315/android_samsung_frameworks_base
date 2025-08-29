@@ -49,12 +49,12 @@ final class DisplaysWithDecorationsRepositoryImpl$decorationEvents$1 extends Sus
             final ?? r1 = new CommandQueue.Callbacks() { // from class: com.android.systemui.display.data.repository.DisplaysWithDecorationsRepositoryImpl$decorationEvents$1$callback$1
                 @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
                 public final void onDisplayAddSystemDecorations(int i2) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new DisplaysWithDecorationsRepositoryImpl.Event.Add(i2));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new DisplaysWithDecorationsRepositoryImpl.Event.Add(i2));
                 }
 
                 @Override // com.android.systemui.statusbar.CommandQueue.Callbacks
                 public final void onDisplayRemoveSystemDecorations(int i2) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new DisplaysWithDecorationsRepositoryImpl.Event.Remove(i2));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new DisplaysWithDecorationsRepositoryImpl.Event.Remove(i2));
                 }
             };
             this.this$0.commandQueue.addCallback((CommandQueue.Callbacks) r1);

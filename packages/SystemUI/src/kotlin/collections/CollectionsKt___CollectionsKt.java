@@ -300,7 +300,7 @@ public class CollectionsKt___CollectionsKt extends CollectionsKt___CollectionsJv
     }
 
     /* renamed from: maxOrNull, reason: collision with other method in class */
-    public static Float m3450maxOrNull(Iterable iterable) {
+    public static Float m3449maxOrNull(Iterable iterable) {
         Iterator it = iterable.iterator();
         if (!it.hasNext()) {
             return null;

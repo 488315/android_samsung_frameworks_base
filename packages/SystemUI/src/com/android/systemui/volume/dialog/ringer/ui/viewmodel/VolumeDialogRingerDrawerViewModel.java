@@ -225,7 +225,7 @@ public final class VolumeDialogRingerDrawerViewModel {
     }
 
     /* renamed from: toButtonViewModel-L0tBgz0, reason: not valid java name */
-    public static RingerButtonViewModel m3217toButtonViewModelL0tBgz0(VolumeDialogRingerModel volumeDialogRingerModel, int i, boolean z, boolean z2) {
+    public static RingerButtonViewModel m3216toButtonViewModelL0tBgz0(VolumeDialogRingerModel volumeDialogRingerModel, int i, boolean z, boolean z2) {
         if (i == 0) {
             return new RingerButtonViewModel(R.drawable.ic_speaker_mute, z2 ? R.string.volume_ringer_status_silent : R.string.volume_ringer_hint_mute, R.string.volume_ringer_hint_unmute, i, null);
         }
@@ -247,7 +247,7 @@ public final class VolumeDialogRingerDrawerViewModel {
     }
 
     /* renamed from: onRingerButtonClicked-28s9KyU, reason: not valid java name */
-    public final void m3218onRingerButtonClicked28s9KyU(int i, boolean z) {
+    public final void m3217onRingerButtonClicked28s9KyU(int i, boolean z) {
         Object open;
         VibrationEffect vibrationEffect;
         long jCurrentTimeMillis = this.systemClock.currentTimeMillis();

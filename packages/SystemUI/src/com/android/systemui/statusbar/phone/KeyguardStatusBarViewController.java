@@ -277,7 +277,7 @@ public class KeyguardStatusBarViewController extends ViewController implements I
     }
 
     /* renamed from: $r8$lambda$SDjYX36TdSthdVP17CFw-x9k5IE, reason: not valid java name */
-    public static void m3091$r8$lambda$SDjYX36TdSthdVP17CFwx9k5IE(KeyguardStatusBarViewController keyguardStatusBarViewController, String str, Drawable drawable) {
+    public static void m3089$r8$lambda$SDjYX36TdSthdVP17CFwx9k5IE(KeyguardStatusBarViewController keyguardStatusBarViewController, String str, Drawable drawable) {
         KeyguardStatusBarView keyguardStatusBarView = (KeyguardStatusBarView) keyguardStatusBarViewController.mView;
         keyguardStatusBarView.mMultiUserAvatar.setImageDrawable(drawable);
         if (BasicRune.STATUS_LAYOUT_MUM_ICON) {
@@ -393,7 +393,7 @@ public class KeyguardStatusBarViewController extends ViewController implements I
         this.mOnUserInfoChangedListener = new UserInfoController.OnUserInfoChangedListener() { // from class: com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$$ExternalSyntheticLambda7
             @Override // com.android.systemui.statusbar.policy.UserInfoController.OnUserInfoChangedListener
             public final void onUserInfoChanged(String str, Drawable drawable, String str2) {
-                KeyguardStatusBarViewController.m3091$r8$lambda$SDjYX36TdSthdVP17CFwx9k5IE(this.f$0, str, drawable);
+                KeyguardStatusBarViewController.m3089$r8$lambda$SDjYX36TdSthdVP17CFwx9k5IE(this.f$0, str, drawable);
             }
         };
         this.mAnimatorUpdateListener = new Animator.AnimatorUpdateListener() { // from class: com.android.systemui.statusbar.phone.KeyguardStatusBarViewController$$ExternalSyntheticLambda8

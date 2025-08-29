@@ -495,7 +495,7 @@ public abstract class RouteDeviceController extends DeviceController {
                         RouteDeviceController.Companion.getClass();
                         FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(FlowKt.buffer$default(FlowKt.callbackFlow(new RouteDeviceController$Companion$routeDeviceChanges$1(router2Manager$1, null)), -1, 2), routeDeviceController.refreshRoutes, new RouteDeviceController$routeDevices$2$1(routeDeviceController, null));
                         MediaOutputConst.INSTANCE.getClass();
-                        final Flow flowM3482debounceHG0u8IE = FlowKt.m3482debounceHG0u8IE(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, MediaOutputConst.AUDIO_PATH_DEBOUNCE_TIMEOUT);
+                        final Flow flowM3481debounceHG0u8IE = FlowKt.m3481debounceHG0u8IE(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, MediaOutputConst.AUDIO_PATH_DEBOUNCE_TIMEOUT);
                         return new Flow() { // from class: com.android.systemui.media.mediaoutput.controller.device.RouteDeviceController$routeDevices_delegate$lambda$51$$inlined$map$1
 
                             /* renamed from: com.android.systemui.media.mediaoutput.controller.device.RouteDeviceController$routeDevices_delegate$lambda$51$$inlined$map$1$2, reason: invalid class name */
@@ -717,7 +717,7 @@ public abstract class RouteDeviceController extends DeviceController {
 
                                     @Override // kotlinx.coroutines.flow.Flow
                                     public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                                        Object objCollect = flowM3482debounceHG0u8IE.collect(new AnonymousClass2(flowCollector, routeDeviceController), continuation);
+                                        Object objCollect = flowM3481debounceHG0u8IE.collect(new AnonymousClass2(flowCollector, routeDeviceController), continuation);
                                         return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                                     }
                                 };
@@ -744,7 +744,7 @@ public abstract class RouteDeviceController extends DeviceController {
                                 RouteDeviceController.Companion.getClass();
                                 FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 flowKt__ZipKt$combine$$inlined$unsafeFlow$1 = new FlowKt__ZipKt$combine$$inlined$unsafeFlow$1(FlowKt.buffer$default(FlowKt.callbackFlow(new RouteDeviceController$Companion$routeDeviceChanges$1(router2Manager$1, null)), -1, 2), routeDeviceController.refreshRoutes, new RouteDeviceController$routeDevices$2$1(routeDeviceController, null));
                                 MediaOutputConst.INSTANCE.getClass();
-                                final Flow flowM3482debounceHG0u8IE = FlowKt.m3482debounceHG0u8IE(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, MediaOutputConst.AUDIO_PATH_DEBOUNCE_TIMEOUT);
+                                final Flow flowM3481debounceHG0u8IE = FlowKt.m3481debounceHG0u8IE(flowKt__ZipKt$combine$$inlined$unsafeFlow$1, MediaOutputConst.AUDIO_PATH_DEBOUNCE_TIMEOUT);
                                 return new Flow() { // from class: com.android.systemui.media.mediaoutput.controller.device.RouteDeviceController$routeDevices_delegate$lambda$51$$inlined$map$1
 
                                     /* renamed from: com.android.systemui.media.mediaoutput.controller.device.RouteDeviceController$routeDevices_delegate$lambda$51$$inlined$map$1$2, reason: invalid class name */
@@ -829,7 +829,7 @@ public abstract class RouteDeviceController extends DeviceController {
 
                                     @Override // kotlinx.coroutines.flow.Flow
                                     public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                                        Object objCollect = flowM3482debounceHG0u8IE.collect(new AnonymousClass2(flowCollector, routeDeviceController), continuation);
+                                        Object objCollect = flowM3481debounceHG0u8IE.collect(new AnonymousClass2(flowCollector, routeDeviceController), continuation);
                                         return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
                                     }
                                 };

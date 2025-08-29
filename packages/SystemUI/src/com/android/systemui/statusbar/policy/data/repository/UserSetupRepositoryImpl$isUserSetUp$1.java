@@ -49,7 +49,7 @@ final class UserSetupRepositoryImpl$isUserSetUp$1 extends SuspendLambda implemen
             final ?? r1 = new DeviceProvisionedController.DeviceProvisionedListener() { // from class: com.android.systemui.statusbar.policy.data.repository.UserSetupRepositoryImpl$isUserSetUp$1$callback$1
                 @Override // com.android.systemui.statusbar.policy.DeviceProvisionedController.DeviceProvisionedListener
                 public final void onUserSetupChanged() {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
             ((DeviceProvisionedControllerImpl) this.this$0.deviceProvisionedController).addCallback(r1);

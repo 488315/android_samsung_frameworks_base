@@ -70,7 +70,7 @@ public class SRotationLockTile extends SQSTileImpl implements BatteryController.
     public final QSTile.BooleanState mStateBeforeClick;
 
     /* renamed from: -$$Nest$mgetBackupData, reason: not valid java name */
-    public static String m2921$$Nest$mgetBackupData(SRotationLockTile sRotationLockTile, boolean z) {
+    public static String m2919$$Nest$mgetBackupData(SRotationLockTile sRotationLockTile, boolean z) {
         String str;
         String str2;
         String str3;
@@ -97,7 +97,7 @@ public class SRotationLockTile extends SQSTileImpl implements BatteryController.
     }
 
     /* renamed from: -$$Nest$msetRestoreData, reason: not valid java name */
-    public static void m2922$$Nest$msetRestoreData(SRotationLockTile sRotationLockTile, String str) {
+    public static void m2920$$Nest$msetRestoreData(SRotationLockTile sRotationLockTile, String str) {
         sRotationLockTile.getClass();
         String[] strArrSplit = str.split("::");
         Log.d("SRotationLockTile", "restoreData: ".concat(str));
@@ -211,12 +211,12 @@ public class SRotationLockTile extends SQSTileImpl implements BatteryController.
 
                 @Override // com.android.systemui.qs.QSBackupRestoreManager.Callback
                 public final String onBackup(boolean z) {
-                    return SRotationLockTile.m2921$$Nest$mgetBackupData(SRotationLockTile.this, z);
+                    return SRotationLockTile.m2919$$Nest$mgetBackupData(SRotationLockTile.this, z);
                 }
 
                 @Override // com.android.systemui.qs.QSBackupRestoreManager.Callback
                 public final void onRestore(String str) {
-                    SRotationLockTile.m2922$$Nest$msetRestoreData(SRotationLockTile.this, str);
+                    SRotationLockTile.m2920$$Nest$msetRestoreData(SRotationLockTile.this, str);
                 }
             });
         }

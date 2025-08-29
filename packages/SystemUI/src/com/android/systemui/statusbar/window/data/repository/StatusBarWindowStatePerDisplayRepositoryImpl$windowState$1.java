@@ -53,7 +53,7 @@ final class StatusBarWindowStatePerDisplayRepositoryImpl$windowState$1 extends S
                     StatusBarWindowStatePerDisplayRepositoryImpl statusBarWindowStatePerDisplayRepositoryImpl2 = statusBarWindowStatePerDisplayRepositoryImpl;
                     if (i2 == statusBarWindowStatePerDisplayRepositoryImpl2.thisDisplayId && i3 == 1) {
                         statusBarWindowStatePerDisplayRepositoryImpl2.getClass();
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(i4 != 0 ? i4 != 1 ? i4 != 2 ? StatusBarWindowState.Hidden : StatusBarWindowState.Hidden : StatusBarWindowState.Hiding : StatusBarWindowState.Showing);
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(i4 != 0 ? i4 != 1 ? i4 != 2 ? StatusBarWindowState.Hidden : StatusBarWindowState.Hidden : StatusBarWindowState.Hiding : StatusBarWindowState.Showing);
                     }
                 }
             };

@@ -19,6 +19,6 @@ public final class DreamingToGoneTransitionViewModel {
         KeyguardState keyguardState = KeyguardState.DREAMING;
         SceneKey sceneKey = Scenes.Gone;
         companion.getClass();
-        this.lockscreenAlpha = keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, new Edge.StateToContent(keyguardState, sceneKey)).setupWithoutSceneContainer(new Edge.StateToState(keyguardState, KeyguardState.GONE)).immediatelyTransitionTo(0.0f);
+        this.lockscreenAlpha = keyguardTransitionAnimationFlow.m2613setupVtjQ1oo(j, new Edge.StateToContent(keyguardState, sceneKey)).setupWithoutSceneContainer(new Edge.StateToState(keyguardState, KeyguardState.GONE)).immediatelyTransitionTo(0.0f);
     }
 }

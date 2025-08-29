@@ -46,7 +46,7 @@ final class AudioRepositoryImpl$mode$1 extends SuspendLambda implements Function
             AudioManager.OnModeChangedListener onModeChangedListener = new AudioManager.OnModeChangedListener() { // from class: com.android.settingslib.volume.data.repository.AudioRepositoryImpl$mode$1$listener$1
                 @Override // android.media.AudioManager.OnModeChangedListener
                 public final void onModeChanged(int i2) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Integer.valueOf(i2));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Integer.valueOf(i2));
                 }
             };
             this.this$0.audioManager.addOnModeChangedListener(ConcurrentUtils.DIRECT_EXECUTOR, onModeChangedListener);

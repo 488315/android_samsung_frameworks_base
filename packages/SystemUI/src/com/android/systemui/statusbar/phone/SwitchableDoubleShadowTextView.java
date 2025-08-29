@@ -22,7 +22,7 @@ public final class SwitchableDoubleShadowTextView extends TextView {
     public boolean shadowEnabled;
 
     /* renamed from: $r8$lambda$beoBxlXxQAhP91V-cdfHl-HB8rI, reason: not valid java name */
-    public static Unit m3094$r8$lambda$beoBxlXxQAhP91VcdfHlHB8rI(SwitchableDoubleShadowTextView switchableDoubleShadowTextView, Canvas canvas) {
+    public static Unit m3092$r8$lambda$beoBxlXxQAhP91VcdfHlHB8rI(SwitchableDoubleShadowTextView switchableDoubleShadowTextView, Canvas canvas) {
         super.onDraw(canvas);
         return Unit.INSTANCE;
     }
@@ -43,7 +43,7 @@ public final class SwitchableDoubleShadowTextView extends TextView {
         Function0 function0 = new Function0() { // from class: com.android.systemui.statusbar.phone.SwitchableDoubleShadowTextView$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function0
             public final Object invoke() {
-                return SwitchableDoubleShadowTextView.m3094$r8$lambda$beoBxlXxQAhP91VcdfHlHB8rI(this.f$0, canvas);
+                return SwitchableDoubleShadowTextView.m3092$r8$lambda$beoBxlXxQAhP91VcdfHlHB8rI(this.f$0, canvas);
             }
         };
         doubleShadowTextHelper.getClass();

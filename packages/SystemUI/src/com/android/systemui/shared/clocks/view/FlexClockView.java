@@ -67,8 +67,8 @@ public final class FlexClockView extends ViewGroup {
         }
 
         /* renamed from: updateDirectionalTargetTranslate-NvxBqkk, reason: not valid java name */
-        public static long m2950updateDirectionalTargetTranslateNvxBqkk(int i, long j) {
-            return VPointF.m2778timesb2IjXjg(j, i == R$id.HOUR_FIRST_DIGIT ? VPointF.m2752constructorimpl(-1, -1) : i == R$id.HOUR_SECOND_DIGIT ? VPointF.m2752constructorimpl(1, -1) : i == R$id.MINUTE_FIRST_DIGIT ? VPointF.m2752constructorimpl(-1, 1) : i == R$id.MINUTE_SECOND_DIGIT ? VPointF.m2752constructorimpl(1, 1) : i == R$id.HOUR_DIGIT_PAIR ? VPointF.m2752constructorimpl(-1, -1) : i == R$id.MINUTE_DIGIT_PAIR ? VPointF.m2752constructorimpl(-1, 1) : VPointF.m2752constructorimpl(1, 1));
+        public static long m2948updateDirectionalTargetTranslateNvxBqkk(int i, long j) {
+            return VPointF.m2776timesb2IjXjg(j, i == R$id.HOUR_FIRST_DIGIT ? VPointF.m2750constructorimpl(-1, -1) : i == R$id.HOUR_SECOND_DIGIT ? VPointF.m2750constructorimpl(1, -1) : i == R$id.MINUTE_FIRST_DIGIT ? VPointF.m2750constructorimpl(-1, 1) : i == R$id.MINUTE_SECOND_DIGIT ? VPointF.m2750constructorimpl(1, 1) : i == R$id.HOUR_DIGIT_PAIR ? VPointF.m2750constructorimpl(-1, -1) : i == R$id.MINUTE_DIGIT_PAIR ? VPointF.m2750constructorimpl(-1, 1) : VPointF.m2750constructorimpl(1, 1));
         }
 
         private Companion() {
@@ -81,15 +81,15 @@ public final class FlexClockView extends ViewGroup {
         simpleName.getClass();
         this.logger = new ClockLogger(this, clockContext.messageBuffer, simpleName);
         this.isAnimationEnabled = true;
-        this.maxChildSize = VPointF.m2752constructorimpl(-1, -1);
+        this.maxChildSize = VPointF.m2750constructorimpl(-1, -1);
         VPointF.Companion companion = VPointF.Companion;
-        this.lockscreenTranslate = companion.m2790getZEROJv7bpU8();
-        this.aodTranslate = companion.m2790getZEROJv7bpU8();
+        this.lockscreenTranslate = companion.m2788getZEROJv7bpU8();
+        this.aodTranslate = companion.m2788getZEROJv7bpU8();
         setWillNotDraw(false);
         setLayoutParams(new RelativeLayout.LayoutParams(-2, -2));
         updateLocale(Locale.getDefault());
         this.digitOffsets = new LinkedHashMap();
-        this.layoutBounds = VRectF.Companion.m2851getZERO3Hl7r_E();
+        this.layoutBounds = VRectF.Companion.m2849getZERO3Hl7r_E();
     }
 
     public static final void animateDoze$executeDozeAnimation(FlexClockView flexClockView, boolean z, boolean z2) {
@@ -97,7 +97,7 @@ public final class FlexClockView extends ViewGroup {
         while (it.hasNext()) {
             ((SimpleDigitalClockTextView) it.next()).animateDoze(z, z2);
         }
-        if (VPointF.m2762getXimpl(flexClockView.maxChildSize) < 0.0f || VPointF.m2763getYimpl(flexClockView.maxChildSize) < 0.0f) {
+        if (VPointF.m2760getXimpl(flexClockView.maxChildSize) < 0.0f || VPointF.m2761getYimpl(flexClockView.maxChildSize) < 0.0f) {
             flexClockView.measure(0, 0);
         }
         Iterator it2 = flexClockView.getChildViews().iterator();
@@ -112,7 +112,7 @@ public final class FlexClockView extends ViewGroup {
                     int id = flexClockView.getId();
                     long j2 = flexClockView.aodTranslate;
                     companion.getClass();
-                    DigitTranslateAnimator.m2949animatePositionWofAHi4$default(digitTranslateAnimator, z3, j, interpolator, Companion.m2950updateDirectionalTargetTranslateNvxBqkk(id, j2), null, 2);
+                    DigitTranslateAnimator.m2947animatePositionWofAHi4$default(digitTranslateAnimator, z3, j, interpolator, Companion.m2948updateDirectionalTargetTranslateNvxBqkk(id, j2), null, 2);
                 } else {
                     boolean z4 = z2 && flexClockView.isAnimationEnabled;
                     Interpolator interpolator2 = Interpolators.EMPHASIZED;
@@ -121,7 +121,7 @@ public final class FlexClockView extends ViewGroup {
                     int id2 = flexClockView.getId();
                     long j4 = flexClockView.lockscreenTranslate;
                     companion2.getClass();
-                    DigitTranslateAnimator.m2949animatePositionWofAHi4$default(digitTranslateAnimator, z4, j3, interpolator2, Companion.m2950updateDirectionalTargetTranslateNvxBqkk(id2, j4), null, 34);
+                    DigitTranslateAnimator.m2947animatePositionWofAHi4$default(digitTranslateAnimator, z4, j3, interpolator2, Companion.m2948updateDirectionalTargetTranslateNvxBqkk(id2, j4), null, 34);
                 }
             }
         }
@@ -178,7 +178,7 @@ public final class FlexClockView extends ViewGroup {
     @Override // android.view.ViewGroup, android.view.View
     public final void onLayout(boolean z, int i, int i2, int i3, int i4) throws Resources.NotFoundException {
         getLogger().onLayout(z, i, i2, i3, i4);
-        this.layoutBounds = VRectF.m2828constructorimpl(i, i2, i3, i4);
+        this.layoutBounds = VRectF.m2826constructorimpl(i, i2, i3, i4);
         updateChildFrames(true);
     }
 
@@ -207,7 +207,7 @@ public final class FlexClockView extends ViewGroup {
                 @Override // kotlin.jvm.functions.Function1
                 /* renamed from: invoke */
                 public final Object mo781invoke(Object obj) {
-                    ((VPointF) obj).m2784unboximpl();
+                    ((VPointF) obj).m2782unboximpl();
                     this.this$0.invalidate();
                     return Unit.INSTANCE;
                 }
@@ -246,30 +246,30 @@ public final class FlexClockView extends ViewGroup {
         for (SimpleDigitalClockTextView simpleDigitalClockTextView : getChildViews()) {
             long j = this.maxChildSize;
             int id = simpleDigitalClockTextView.getId();
-            long jM2749constructorimpl = id == R$id.HOUR_FIRST_DIGIT ? VPointF.Companion.m2790getZEROJv7bpU8() : id == R$id.HOUR_SECOND_DIGIT ? VPointF.m2749constructorimpl(VPointF.m2762getXimpl(j), 0.0f) : id == R$id.HOUR_DIGIT_PAIR ? VPointF.Companion.m2790getZEROJv7bpU8() : (id == R$id.MINUTE_DIGIT_PAIR || id == R$id.MINUTE_FIRST_DIGIT) ? VPointF.m2749constructorimpl(0.0f, VPointF.m2763getYimpl(j) + dimensionPixelSize) : id == R$id.MINUTE_SECOND_DIGIT ? VPointF.m2749constructorimpl(VPointF.m2762getXimpl(j), VPointF.m2763getYimpl(j) + dimensionPixelSize) : VPointF.Companion.m2790getZEROJv7bpU8();
+            long jM2747constructorimpl = id == R$id.HOUR_FIRST_DIGIT ? VPointF.Companion.m2788getZEROJv7bpU8() : id == R$id.HOUR_SECOND_DIGIT ? VPointF.m2747constructorimpl(VPointF.m2760getXimpl(j), 0.0f) : id == R$id.HOUR_DIGIT_PAIR ? VPointF.Companion.m2788getZEROJv7bpU8() : (id == R$id.MINUTE_DIGIT_PAIR || id == R$id.MINUTE_FIRST_DIGIT) ? VPointF.m2747constructorimpl(0.0f, VPointF.m2761getYimpl(j) + dimensionPixelSize) : id == R$id.MINUTE_SECOND_DIGIT ? VPointF.m2747constructorimpl(VPointF.m2760getXimpl(j), VPointF.m2761getYimpl(j) + dimensionPixelSize) : VPointF.Companion.m2788getZEROJv7bpU8();
             ViewUtils.INSTANCE.getClass();
-            long jM2752constructorimpl = VPointF.m2752constructorimpl(simpleDigitalClockTextView.getMeasuredWidth(), simpleDigitalClockTextView.getMeasuredHeight());
-            long jM2774plusb2IjXjg = VPointF.m2774plusb2IjXjg(VPointF.m2774plusb2IjXjg(jM2749constructorimpl, VPointF.m2745absJv7bpU8(this.aodTranslate)), VPointF.m2749constructorimpl((getChildViews().size() < 4 ? getMeasuredWidth() / 2.0f : getMeasuredWidth() / 4.0f) - (VPointF.m2762getXimpl(jM2752constructorimpl) / 2.0f), 0.0f));
-            (z ? new FlexClockView$updateChildFrames$1$setPos$1(simpleDigitalClockTextView) : new FlexClockView$updateChildFrames$1$setPos$2(simpleDigitalClockTextView)).invoke(Integer.valueOf(MathKt__MathJVMKt.roundToInt(VPointF.m2762getXimpl(jM2774plusb2IjXjg))), Integer.valueOf(MathKt__MathJVMKt.roundToInt(VPointF.m2763getYimpl(jM2774plusb2IjXjg))), Integer.valueOf(MathKt__MathJVMKt.roundToInt(VPointF.m2762getXimpl(jM2752constructorimpl) + VPointF.m2762getXimpl(jM2774plusb2IjXjg))), Integer.valueOf(MathKt__MathJVMKt.roundToInt(VPointF.m2763getYimpl(jM2752constructorimpl) + VPointF.m2763getYimpl(jM2774plusb2IjXjg))));
+            long jM2750constructorimpl = VPointF.m2750constructorimpl(simpleDigitalClockTextView.getMeasuredWidth(), simpleDigitalClockTextView.getMeasuredHeight());
+            long jM2772plusb2IjXjg = VPointF.m2772plusb2IjXjg(VPointF.m2772plusb2IjXjg(jM2747constructorimpl, VPointF.m2743absJv7bpU8(this.aodTranslate)), VPointF.m2747constructorimpl((getChildViews().size() < 4 ? getMeasuredWidth() / 2.0f : getMeasuredWidth() / 4.0f) - (VPointF.m2760getXimpl(jM2750constructorimpl) / 2.0f), 0.0f));
+            (z ? new FlexClockView$updateChildFrames$1$setPos$1(simpleDigitalClockTextView) : new FlexClockView$updateChildFrames$1$setPos$2(simpleDigitalClockTextView)).invoke(Integer.valueOf(MathKt__MathJVMKt.roundToInt(VPointF.m2760getXimpl(jM2772plusb2IjXjg))), Integer.valueOf(MathKt__MathJVMKt.roundToInt(VPointF.m2761getYimpl(jM2772plusb2IjXjg))), Integer.valueOf(MathKt__MathJVMKt.roundToInt(VPointF.m2760getXimpl(jM2750constructorimpl) + VPointF.m2760getXimpl(jM2772plusb2IjXjg))), Integer.valueOf(MathKt__MathJVMKt.roundToInt(VPointF.m2761getYimpl(jM2750constructorimpl) + VPointF.m2761getYimpl(jM2772plusb2IjXjg))));
         }
     }
 
     public final void updateLocation() {
         long j = this.layoutBounds;
         VRectF.Companion companion = VRectF.Companion;
-        long jM2835getCenterJv7bpU8 = VRectF.m2835getCenterJv7bpU8(j);
+        long jM2833getCenterJv7bpU8 = VRectF.m2833getCenterJv7bpU8(j);
         ViewUtils.INSTANCE.getClass();
-        long jM2848fromCentercwyIbD4 = companion.m2848fromCentercwyIbD4(jM2835getCenterJv7bpU8, VPointF.m2752constructorimpl(getMeasuredWidth(), getMeasuredHeight()));
-        setFrame(MathKt__MathJVMKt.roundToInt(VRectF.m2837getLeftimpl(jM2848fromCentercwyIbD4)), MathKt__MathJVMKt.roundToInt(VRectF.m2840getTopimpl(jM2848fromCentercwyIbD4)), MathKt__MathJVMKt.roundToInt(VRectF.m2838getRightimpl(jM2848fromCentercwyIbD4)), MathKt__MathJVMKt.roundToInt(VRectF.m2834getBottomimpl(jM2848fromCentercwyIbD4)));
+        long jM2846fromCentercwyIbD4 = companion.m2846fromCentercwyIbD4(jM2833getCenterJv7bpU8, VPointF.m2750constructorimpl(getMeasuredWidth(), getMeasuredHeight()));
+        setFrame(MathKt__MathJVMKt.roundToInt(VRectF.m2835getLeftimpl(jM2846fromCentercwyIbD4)), MathKt__MathJVMKt.roundToInt(VRectF.m2838getTopimpl(jM2846fromCentercwyIbD4)), MathKt__MathJVMKt.roundToInt(VRectF.m2836getRightimpl(jM2846fromCentercwyIbD4)), MathKt__MathJVMKt.roundToInt(VRectF.m2832getBottomimpl(jM2846fromCentercwyIbD4)));
         updateChildFrames(false);
         Function1 function1 = this.onViewBoundsChanged;
         if (function1 != null) {
-            function1.mo781invoke(VRectF.m2827boximpl(jM2848fromCentercwyIbD4));
+            function1.mo781invoke(VRectF.m2825boximpl(jM2846fromCentercwyIbD4));
         }
     }
 
     public final void updateMeasuredSize(boolean z) {
-        this.maxChildSize = VPointF.m2752constructorimpl(-1, -1);
+        this.maxChildSize = VPointF.m2750constructorimpl(-1, -1);
         for (SimpleDigitalClockTextView simpleDigitalClockTextView : getChildViews()) {
             if (z) {
                 simpleDigitalClockTextView.measure(0, 0);
@@ -277,11 +277,11 @@ public final class FlexClockView extends ViewGroup {
             VPointF.Companion companion = VPointF.Companion;
             long j = this.maxChildSize;
             ViewUtils.INSTANCE.getClass();
-            this.maxChildSize = companion.m2791max5C5yMpM(j, VPointF.m2752constructorimpl(simpleDigitalClockTextView.getMeasuredWidth(), simpleDigitalClockTextView.getMeasuredHeight()));
+            this.maxChildSize = companion.m2789max5C5yMpM(j, VPointF.m2750constructorimpl(simpleDigitalClockTextView.getMeasuredWidth(), simpleDigitalClockTextView.getMeasuredHeight()));
         }
-        this.aodTranslate = VPointF.Companion.m2790getZEROJv7bpU8();
-        long jM2774plusb2IjXjg = VPointF.m2774plusb2IjXjg(VPointF.m2778timesb2IjXjg(VPointF.m2774plusb2IjXjg(this.maxChildSize, VPointF.m2745absJv7bpU8(this.aodTranslate)), VPointF.m2749constructorimpl(getChildViews().size() < 4 ? 1.0f : 2.0f, 2.0f)), VPointF.m2750constructorimpl(0.0f, getContext().getResources().getDimensionPixelSize(R$dimen.clock_vertical_digit_buffer)));
-        setMeasuredDimension(MathKt__MathJVMKt.roundToInt(VPointF.m2762getXimpl(jM2774plusb2IjXjg)), MathKt__MathJVMKt.roundToInt(VPointF.m2763getYimpl(jM2774plusb2IjXjg)));
+        this.aodTranslate = VPointF.Companion.m2788getZEROJv7bpU8();
+        long jM2772plusb2IjXjg = VPointF.m2772plusb2IjXjg(VPointF.m2776timesb2IjXjg(VPointF.m2772plusb2IjXjg(this.maxChildSize, VPointF.m2743absJv7bpU8(this.aodTranslate)), VPointF.m2747constructorimpl(getChildViews().size() < 4 ? 1.0f : 2.0f, 2.0f)), VPointF.m2748constructorimpl(0.0f, getContext().getResources().getDimensionPixelSize(R$dimen.clock_vertical_digit_buffer)));
+        setMeasuredDimension(MathKt__MathJVMKt.roundToInt(VPointF.m2760getXimpl(jM2772plusb2IjXjg)), MathKt__MathJVMKt.roundToInt(VPointF.m2761getYimpl(jM2772plusb2IjXjg)));
     }
 
     public static /* synthetic */ void isAnimationEnabled$annotations() {

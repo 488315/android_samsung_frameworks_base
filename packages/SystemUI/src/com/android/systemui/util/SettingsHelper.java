@@ -29,6 +29,7 @@ import com.android.systemui.LsRune;
 import com.android.systemui.NotiRune;
 import com.android.systemui.QpRune;
 import com.android.systemui.Rune;
+import com.android.systemui.ScRune;
 import com.android.systemui.dump.DumpManager;
 import com.android.systemui.edgelighting.Feature;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
@@ -221,6 +222,7 @@ public class SettingsHelper implements Dumpable {
     public static final String INDEX_SHOW_KEYBOARD_BUTTON = "show_keyboard_button";
     public static final String INDEX_SHOW_NAVIGATION_FOR_SUBSCREEN = "show_navigation_for_subscreen";
     public static final String INDEX_SHOW_SILENT_NOTIFICATION_ON_LOCKSCREEN = "lock_screen_show_silent_notifications";
+    public static final String INDEX_SHOW_STATUS_BAR_LOCATION_ICON = "show_status_bar_location_icon";
     public static final String INDEX_SIDESYNC_SOURCE_CONNECT = "sidesync_source_connect";
     public static final String INDEX_SIM_SELECT_NAME_1 = "select_name_1";
     public static final String INDEX_SIM_SELECT_NAME_2 = "select_name_2";
@@ -931,6 +933,9 @@ public class SettingsHelper implements Dumpable {
         }
         if (Rune.SYSUI_BINDER_CALL_MONITOR) {
             this.mItemLists.add(new Item(this, SETTING_TYPE_SYSTEM, BINDER_CALL_MONITOR, DATA_TYPE_INT, num22, true));
+        }
+        if (ScRune.QUICK_SUPPORT_LOCATION_PRIVACY_CHIP) {
+            this.mItemLists.add(new Item(this, SETTING_TYPE_SYSTEM, INDEX_SHOW_STATUS_BAR_LOCATION_ICON, DATA_TYPE_INT, 1, true));
         }
     }
 
@@ -1697,6 +1702,10 @@ public class SettingsHelper implements Dumpable {
     public boolean isShowDate() {
         int intValue;
         return BasicRune.STATUS_LAYOUT_SHOW_DATE && ((intValue = this.mItemLists.get(INDEX_STATUSBAR_SHOW_DATE).getIntValue()) == -1 || intValue == 1);
+    }
+
+    public boolean isShowLocationSystemApps() {
+        return this.mItemLists.get(INDEX_SHOW_STATUS_BAR_LOCATION_ICON).getIntValue() == 1;
     }
 
     public boolean isShowMultiModalButton() {

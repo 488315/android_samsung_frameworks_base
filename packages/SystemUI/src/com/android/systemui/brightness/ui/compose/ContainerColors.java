@@ -34,7 +34,7 @@ public final class ContainerColors {
         ContainerColors containerColors = (ContainerColors) obj;
         long j = containerColors.idleColor;
         Color.Companion companion = Color.Companion;
-        return ULong.m3447equalsimpl0(this.idleColor, j) && ULong.m3447equalsimpl0(this.mirrorColor, containerColors.mirrorColor);
+        return ULong.m3446equalsimpl0(this.idleColor, j) && ULong.m3446equalsimpl0(this.mirrorColor, containerColors.mirrorColor);
     }
 
     public final int hashCode() {

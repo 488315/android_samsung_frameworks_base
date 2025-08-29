@@ -106,7 +106,7 @@ public final class ComposableSingletons$ActionBarKt {
                     Color.Companion.getClass();
                     long j = Color.Transparent;
                     SeslScaffoldTemplate$BackgroundScope.Companion companion = SeslScaffoldTemplate$BackgroundScope.Companion;
-                    seslScaffoldTemplate$BackgroundScope.m3356BackgroundFNF3uiM(paddingValues, null, j, composer, ((i >> 3) & 14) | 384 | ((i << 9) & 7168), 2);
+                    seslScaffoldTemplate$BackgroundScope.m3355BackgroundFNF3uiM(paddingValues, null, j, composer, ((i >> 3) & 14) | 384 | ((i << 9) & 7168), 2);
                     if (ComposerKt.isTraceInProgress()) {
                         ComposerKt.traceEventEnd();
                     }

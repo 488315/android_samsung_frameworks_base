@@ -359,9 +359,9 @@ public final class ScrollableNode extends DragGestureNode implements KeyInputMod
                     BufferedChannel bufferedChannel = mouseWheelScrollingLogic2.channel;
                     long j3 = ((PointerInputChange) CollectionsKt___CollectionsKt.first(pointerEvent.changes)).uptimeMillis;
                     scrollConfig.getClass();
-                    Object objMo3476trySendJP2dKIU = bufferedChannel.mo3476trySendJP2dKIU(new MouseWheelScrollingLogic.MouseWheelScrollDelta(jFloatToRawIntBits, j3, false, null));
+                    Object objMo3475trySendJP2dKIU = bufferedChannel.mo3475trySendJP2dKIU(new MouseWheelScrollingLogic.MouseWheelScrollDelta(jFloatToRawIntBits, j3, false, null));
                     ChannelResult.Companion companion = ChannelResult.Companion;
-                    z = !(objMo3476trySendJP2dKIU instanceof ChannelResult.Failed);
+                    z = !(objMo3475trySendJP2dKIU instanceof ChannelResult.Failed);
                 } else {
                     z = mouseWheelScrollingLogic2.isScrolling;
                 }

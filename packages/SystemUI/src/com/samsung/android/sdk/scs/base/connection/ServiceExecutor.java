@@ -45,7 +45,7 @@ public abstract class ServiceExecutor extends ThreadPoolExecutor implements Inte
     private final AtomicInteger mTaskCount;
 
     /* renamed from: -$$Nest$munlockConnection, reason: not valid java name */
-    public static void m3323$$Nest$munlockConnection(ServiceExecutor serviceExecutor, boolean z, String str) {
+    public static void m3322$$Nest$munlockConnection(ServiceExecutor serviceExecutor, boolean z, String str) {
         serviceExecutor.mConnectionLock.lock();
         try {
             serviceExecutor.mIsConnected = z;
@@ -68,7 +68,7 @@ public abstract class ServiceExecutor extends ThreadPoolExecutor implements Inte
                 Log.d(ServiceExecutor.TAG, "onConnected");
                 ServiceExecutor serviceExecutor = ServiceExecutor.this;
                 serviceExecutor.onConnected(componentName, iBinder);
-                ServiceExecutor.m3323$$Nest$munlockConnection(serviceExecutor, true, "connected, signal all");
+                ServiceExecutor.m3322$$Nest$munlockConnection(serviceExecutor, true, "connected, signal all");
             }
 
             @Override // com.samsung.android.sdk.scs.base.connection.InternalServiceConnectionListener
@@ -76,7 +76,7 @@ public abstract class ServiceExecutor extends ThreadPoolExecutor implements Inte
                 Log.d(ServiceExecutor.TAG, "onDisconnected");
                 ServiceExecutor serviceExecutor = ServiceExecutor.this;
                 serviceExecutor.onDisconnected(componentName);
-                ServiceExecutor.m3323$$Nest$munlockConnection(serviceExecutor, false, "disconnected, signal all");
+                ServiceExecutor.m3322$$Nest$munlockConnection(serviceExecutor, false, "disconnected, signal all");
             }
 
             @Override // com.samsung.android.sdk.scs.base.connection.InternalServiceConnectionListener
@@ -84,7 +84,7 @@ public abstract class ServiceExecutor extends ThreadPoolExecutor implements Inte
                 Log.d(ServiceExecutor.TAG, "onError");
                 ServiceExecutor serviceExecutor = ServiceExecutor.this;
                 serviceExecutor.onError();
-                ServiceExecutor.m3323$$Nest$munlockConnection(serviceExecutor, false, "onError, signal all");
+                ServiceExecutor.m3322$$Nest$munlockConnection(serviceExecutor, false, "onError, signal all");
             }
         };
         allowCoreThreadTimeOut(true);
@@ -370,7 +370,7 @@ public abstract class ServiceExecutor extends ThreadPoolExecutor implements Inte
                 Log.d(ServiceExecutor.TAG, "onConnected");
                 ServiceExecutor serviceExecutor = ServiceExecutor.this;
                 serviceExecutor.onConnected(componentName, iBinder);
-                ServiceExecutor.m3323$$Nest$munlockConnection(serviceExecutor, true, "connected, signal all");
+                ServiceExecutor.m3322$$Nest$munlockConnection(serviceExecutor, true, "connected, signal all");
             }
 
             @Override // com.samsung.android.sdk.scs.base.connection.InternalServiceConnectionListener
@@ -378,7 +378,7 @@ public abstract class ServiceExecutor extends ThreadPoolExecutor implements Inte
                 Log.d(ServiceExecutor.TAG, "onDisconnected");
                 ServiceExecutor serviceExecutor = ServiceExecutor.this;
                 serviceExecutor.onDisconnected(componentName);
-                ServiceExecutor.m3323$$Nest$munlockConnection(serviceExecutor, false, "disconnected, signal all");
+                ServiceExecutor.m3322$$Nest$munlockConnection(serviceExecutor, false, "disconnected, signal all");
             }
 
             @Override // com.samsung.android.sdk.scs.base.connection.InternalServiceConnectionListener
@@ -386,7 +386,7 @@ public abstract class ServiceExecutor extends ThreadPoolExecutor implements Inte
                 Log.d(ServiceExecutor.TAG, "onError");
                 ServiceExecutor serviceExecutor = ServiceExecutor.this;
                 serviceExecutor.onError();
-                ServiceExecutor.m3323$$Nest$munlockConnection(serviceExecutor, false, "onError, signal all");
+                ServiceExecutor.m3322$$Nest$munlockConnection(serviceExecutor, false, "onError, signal all");
             }
         };
         allowCoreThreadTimeOut(true);

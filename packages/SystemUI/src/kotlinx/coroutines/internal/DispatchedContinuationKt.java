@@ -30,8 +30,8 @@ public abstract class DispatchedContinuationKt {
             return;
         }
         DispatchedContinuation dispatchedContinuation = (DispatchedContinuation) continuation;
-        Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(obj);
-        Object completedExceptionally = thM3442exceptionOrNullimpl == null ? obj : new CompletedExceptionally(thM3442exceptionOrNullimpl, false, 2, null);
+        Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(obj);
+        Object completedExceptionally = thM3441exceptionOrNullimpl == null ? obj : new CompletedExceptionally(thM3441exceptionOrNullimpl, false, 2, null);
         if (safeIsDispatchNeeded(dispatchedContinuation.dispatcher, dispatchedContinuation.continuation.getContext())) {
             dispatchedContinuation._state = completedExceptionally;
             dispatchedContinuation.resumeMode = 1;

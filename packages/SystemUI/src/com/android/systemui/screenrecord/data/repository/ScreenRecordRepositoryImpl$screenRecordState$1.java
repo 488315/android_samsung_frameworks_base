@@ -49,7 +49,7 @@ final class ScreenRecordRepositoryImpl$screenRecordState$1 extends SuspendLambda
             final ?? r1 = new RecordingController.RecordingStateChangeCallback() { // from class: com.android.systemui.screenrecord.data.repository.ScreenRecordRepositoryImpl$screenRecordState$1$callback$1
                 @Override // com.android.systemui.screenrecord.RecordingController.RecordingStateChangeCallback
                 public final void onCountdown(long j) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new ScreenRecordModel.Starting(j));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new ScreenRecordModel.Starting(j));
                 }
 
                 @Override // com.android.systemui.screenrecord.RecordingController.RecordingStateChangeCallback
@@ -58,17 +58,17 @@ final class ScreenRecordRepositoryImpl$screenRecordState$1 extends SuspendLambda
                     if (screenRecordRepositoryImpl2.recordingController.isRecording() || screenRecordRepositoryImpl2.recordingController.mIsStarting) {
                         return;
                     }
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(ScreenRecordModel.DoingNothing.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(ScreenRecordModel.DoingNothing.INSTANCE);
                 }
 
                 @Override // com.android.systemui.screenrecord.RecordingController.RecordingStateChangeCallback
                 public final void onRecordingEnd() {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(ScreenRecordModel.DoingNothing.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(ScreenRecordModel.DoingNothing.INSTANCE);
                 }
 
                 @Override // com.android.systemui.screenrecord.RecordingController.RecordingStateChangeCallback
                 public final void onRecordingStart() {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(ScreenRecordModel.Recording.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(ScreenRecordModel.Recording.INSTANCE);
                 }
             };
             this.this$0.recordingController.mListeners.add(r1);

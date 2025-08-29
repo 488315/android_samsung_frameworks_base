@@ -104,7 +104,7 @@ public class DreamOverlayContainerViewController extends ViewController {
     }
 
     /* renamed from: -$$Nest$mupdateTransitionState, reason: not valid java name */
-    public static void m2569$$Nest$mupdateTransitionState(DreamOverlayContainerViewController dreamOverlayContainerViewController, float f) {
+    public static void m2567$$Nest$mupdateTransitionState(DreamOverlayContainerViewController dreamOverlayContainerViewController, float f) {
         float fAboutToShowBouncerProgress;
         dreamOverlayContainerViewController.getClass();
         Iterator it = Arrays.asList(1, 2).iterator();
@@ -156,7 +156,7 @@ public class DreamOverlayContainerViewController extends ViewController {
             public final void onExpansionChanged(float f) {
                 DreamOverlayContainerViewController dreamOverlayContainerViewController = DreamOverlayContainerViewController.this;
                 if (dreamOverlayContainerViewController.mBouncerAnimating) {
-                    DreamOverlayContainerViewController.m2569$$Nest$mupdateTransitionState(dreamOverlayContainerViewController, f);
+                    DreamOverlayContainerViewController.m2567$$Nest$mupdateTransitionState(dreamOverlayContainerViewController, f);
                 }
             }
 
@@ -180,7 +180,7 @@ public class DreamOverlayContainerViewController extends ViewController {
                 if (z) {
                     return;
                 }
-                DreamOverlayContainerViewController.m2569$$Nest$mupdateTransitionState(DreamOverlayContainerViewController.this, 1.0f);
+                DreamOverlayContainerViewController.m2567$$Nest$mupdateTransitionState(DreamOverlayContainerViewController.this, 1.0f);
             }
         };
         this.mDreamOverlayStateCallback = new DreamOverlayStateController.Callback() { // from class: com.android.systemui.dreams.DreamOverlayContainerViewController.3

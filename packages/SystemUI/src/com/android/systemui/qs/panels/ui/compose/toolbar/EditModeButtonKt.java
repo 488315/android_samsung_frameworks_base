@@ -76,7 +76,7 @@ public abstract class EditModeButtonKt {
                                 long j = MaterialTheme.getColorScheme(composerImpl3).secondary;
                                 CornerSize cornerSizeM186CornerSize0680j_42 = CornerSizeKt.m186CornerSize0680j_4(24);
                                 ComposableSingletons$EditModeButtonKt.INSTANCE.getClass();
-                                IconButtonKt.IconButton(1572864, 28, null, null, composerImpl3, BorderOnFocusKt.m2937borderOnFocusPOIbLQ4$default(companion, j, cornerSizeM186CornerSize0680j_42), roundedCornerShape2, (Function0) ((KFunction) objRememberedValue), ComposableSingletons$EditModeButtonKt.f99lambda1, false);
+                                IconButtonKt.IconButton(1572864, 28, null, null, composerImpl3, BorderOnFocusKt.m2935borderOnFocusPOIbLQ4$default(companion, j, cornerSizeM186CornerSize0680j_42), roundedCornerShape2, (Function0) ((KFunction) objRememberedValue), ComposableSingletons$EditModeButtonKt.f99lambda1, false);
                                 if (ComposerKt.isTraceInProgress()) {
                                     ComposerKt.traceEventEnd();
                                 }

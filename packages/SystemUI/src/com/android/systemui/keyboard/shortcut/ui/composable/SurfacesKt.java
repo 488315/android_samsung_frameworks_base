@@ -73,7 +73,7 @@ import kotlin.jvm.internal.Intrinsics;
 /* loaded from: classes2.dex */
 public abstract class SurfacesKt {
     /* renamed from: ClickableShortcutSurface-9FW6N_Y, reason: not valid java name */
-    public static final void m2595ClickableShortcutSurface9FW6N_Y(final Function0 function0, final Modifier modifier, boolean z, final RoundedCornerShape roundedCornerShape, final long j, BorderStroke borderStroke, final InteractionsConfig interactionsConfig, final ComposableLambdaImpl composableLambdaImpl, Composer composer, int i, int i2) {
+    public static final void m2593ClickableShortcutSurface9FW6N_Y(final Function0 function0, final Modifier modifier, boolean z, final RoundedCornerShape roundedCornerShape, final long j, BorderStroke borderStroke, final InteractionsConfig interactionsConfig, final ComposableLambdaImpl composableLambdaImpl, Composer composer, int i, int i2) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startReplaceGroup(732300793);
         final boolean z2 = (i2 & 4) != 0 ? true : z;
@@ -116,9 +116,9 @@ public abstract class SurfacesKt {
                         }
                         StaticProvidableCompositionLocal staticProvidableCompositionLocal = InteractiveComponentSizeKt.LocalMinimumInteractiveComponentSize;
                         Modifier modifierThen = modifier.then(MinimumInteractiveModifier.INSTANCE);
-                        long jM2599access$surfaceColorAtElevationCLU3JFs = SurfacesKt.m2599access$surfaceColorAtElevationCLU3JFs(j, f3, composer2);
+                        long jM2597access$surfaceColorAtElevationCLU3JFs = SurfacesKt.m2597access$surfaceColorAtElevationCLU3JFs(j, f3, composer2);
                         ComposerImpl composerImpl3 = (ComposerImpl) composer2;
-                        Modifier modifierM34clickableO2vRcR0$default = ClickableKt.m34clickableO2vRcR0$default(SurfacesKt.m2598access$surfaceXOJAsU(modifierThen, roundedCornerShape, jM2599access$surfaceColorAtElevationCLU3JFs, borderStroke2, ((Density) composerImpl3.consume(CompositionLocalsKt.LocalDensity)).mo58toPx0680j_4(f2)), mutableInteractionSource, new ShortcutHelperIndication(interactionsConfig), z2, null, null, function0, 24);
+                        Modifier modifierM34clickableO2vRcR0$default = ClickableKt.m34clickableO2vRcR0$default(SurfacesKt.m2596access$surfaceXOJAsU(modifierThen, roundedCornerShape, jM2597access$surfaceColorAtElevationCLU3JFs, borderStroke2, ((Density) composerImpl3.consume(CompositionLocalsKt.LocalDensity)).mo58toPx0680j_4(f2)), mutableInteractionSource, new ShortcutHelperIndication(interactionsConfig), z2, null, null, function0, 24);
                         Alignment.Companion.getClass();
                         MeasurePolicy measurePolicyMaybeCachedBoxMeasurePolicy = BoxKt.maybeCachedBoxMeasurePolicy(Alignment.Companion.TopStart, true);
                         int currentCompositeKeyHash = ComposablesKt.getCurrentCompositeKeyHash(composerImpl3);
@@ -249,7 +249,7 @@ public abstract class SurfacesKt {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static final void m2596ShortcutHelperButton01TuoB8(final Function0 function0, final long j, final long j2, final Modifier modifier, RoundedCornerShape roundedCornerShape, IconSource iconSource, String str, float f, float f2, boolean z, BorderStroke borderStroke, String str2, Composer composer, final int i, final int i2) {
+    public static final void m2594ShortcutHelperButton01TuoB8(final Function0 function0, final long j, final long j2, final Modifier modifier, RoundedCornerShape roundedCornerShape, IconSource iconSource, String str, float f, float f2, boolean z, BorderStroke borderStroke, String str2, Composer composer, final int i, final int i2) {
         Function0 function02;
         int i3;
         RoundedCornerShape roundedCornerShape2;
@@ -446,7 +446,7 @@ public abstract class SurfacesKt {
                 final String str7 = str3;
                 RoundedCornerShape roundedCornerShape5 = roundedCornerShape2;
                 composerImpl = composerImpl2;
-                m2595ClickableShortcutSurface9FW6N_Y(function02, modifierSemantics, z2, roundedCornerShape5, jColor, borderStroke2, new InteractionsConfig(MaterialTheme.getColorScheme(composerImpl2).onSurface, 0.11f, MaterialTheme.getColorScheme(composerImpl2).onSurface, 0.15f, MaterialTheme.getColorScheme(composerImpl2).secondary, 3, 2, 28, 33, 0.0f, 0.0f, 1536, null), ComposableLambdaKt.rememberComposableLambda(-115441137, new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.SurfacesKt$ShortcutHelperButton$2
+                m2593ClickableShortcutSurface9FW6N_Y(function02, modifierSemantics, z2, roundedCornerShape5, jColor, borderStroke2, new InteractionsConfig(MaterialTheme.getColorScheme(composerImpl2).onSurface, 0.11f, MaterialTheme.getColorScheme(composerImpl2).onSurface, 0.15f, MaterialTheme.getColorScheme(composerImpl2).secondary, 3, 2, 28, 33, 0.0f, 0.0f, 1536, null), ComposableLambdaKt.rememberComposableLambda(-115441137, new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.SurfacesKt$ShortcutHelperButton$2
                     /* JADX WARN: Removed duplicated region for block: B:8:0x001d  */
                     @Override // kotlin.jvm.functions.Function2
                     /*
@@ -491,7 +491,7 @@ public abstract class SurfacesKt {
                                 }
                                 Updater.m337setimpl(composer2, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
                                 RowScopeInstance rowScopeInstance = RowScopeInstance.INSTANCE;
-                                SurfacesKt.m2597ShortcutHelperButtonContent3IgeMak(iconSource5, j, str7, str6, composer2, 0);
+                                SurfacesKt.m2595ShortcutHelperButtonContent3IgeMak(iconSource5, j, str7, str6, composer2, 0);
                                 composerImpl4.end(true);
                                 if (ComposerKt.isTraceInProgress()) {
                                     ComposerKt.traceEventEnd();
@@ -522,7 +522,7 @@ public abstract class SurfacesKt {
                         int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(i | 1);
                         String str9 = str5;
                         int i16 = i2;
-                        SurfacesKt.m2596ShortcutHelperButton01TuoB8(function0, j, j2, modifier, roundedCornerShape4, iconSource4, str8, f6, f9, z3, borderStroke3, str9, (Composer) obj, iUpdateChangedFlags, i16);
+                        SurfacesKt.m2594ShortcutHelperButton01TuoB8(function0, j, j2, modifier, roundedCornerShape4, iconSource4, str8, f6, f9, z3, borderStroke3, str9, (Composer) obj, iUpdateChangedFlags, i16);
                         return Unit.INSTANCE;
                     }
                 };
@@ -594,7 +594,7 @@ public abstract class SurfacesKt {
                 final String str72 = str3;
                 RoundedCornerShape roundedCornerShape52 = roundedCornerShape2;
                 composerImpl = composerImpl2;
-                m2595ClickableShortcutSurface9FW6N_Y(function02, modifierSemantics2, z2, roundedCornerShape52, jColor, borderStroke2, new InteractionsConfig(MaterialTheme.getColorScheme(composerImpl2).onSurface, 0.11f, MaterialTheme.getColorScheme(composerImpl2).onSurface, 0.15f, MaterialTheme.getColorScheme(composerImpl2).secondary, 3, 2, 28, 33, 0.0f, 0.0f, 1536, null), ComposableLambdaKt.rememberComposableLambda(-115441137, new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.SurfacesKt$ShortcutHelperButton$2
+                m2593ClickableShortcutSurface9FW6N_Y(function02, modifierSemantics2, z2, roundedCornerShape52, jColor, borderStroke2, new InteractionsConfig(MaterialTheme.getColorScheme(composerImpl2).onSurface, 0.11f, MaterialTheme.getColorScheme(composerImpl2).onSurface, 0.15f, MaterialTheme.getColorScheme(composerImpl2).secondary, 3, 2, 28, 33, 0.0f, 0.0f, 1536, null), ComposableLambdaKt.rememberComposableLambda(-115441137, new Function2() { // from class: com.android.systemui.keyboard.shortcut.ui.composable.SurfacesKt$ShortcutHelperButton$2
                     /* JADX WARN: Removed duplicated region for block: B:8:0x001d  */
                     @Override // kotlin.jvm.functions.Function2
                     /*
@@ -639,7 +639,7 @@ public abstract class SurfacesKt {
                                 }
                                 Updater.m337setimpl(composer2, modifierMaterializeModifier, ComposeUiNode.Companion.SetModifier);
                                 RowScopeInstance rowScopeInstance = RowScopeInstance.INSTANCE;
-                                SurfacesKt.m2597ShortcutHelperButtonContent3IgeMak(iconSource52, j, str72, str62, composer2, 0);
+                                SurfacesKt.m2595ShortcutHelperButtonContent3IgeMak(iconSource52, j, str72, str62, composer2, 0);
                                 composerImpl4.end(true);
                                 if (ComposerKt.isTraceInProgress()) {
                                     ComposerKt.traceEventEnd();
@@ -667,7 +667,7 @@ public abstract class SurfacesKt {
     }
 
     /* renamed from: ShortcutHelperButtonContent-3IgeMak, reason: not valid java name */
-    public static final void m2597ShortcutHelperButtonContent3IgeMak(final IconSource iconSource, final long j, final String str, final String str2, Composer composer, final int i) {
+    public static final void m2595ShortcutHelperButtonContent3IgeMak(final IconSource iconSource, final long j, final String str, final String str2, Composer composer, final int i) {
         ComposerImpl composerImpl;
         ComposerImpl composerImpl2 = (ComposerImpl) composer;
         composerImpl2.startRestartGroup(-408906921);
@@ -724,7 +724,7 @@ public abstract class SurfacesKt {
                     int iUpdateChangedFlags = RecomposeScopeImplKt.updateChangedFlags(1);
                     String str3 = this.f$2;
                     String str4 = this.f$3;
-                    SurfacesKt.m2597ShortcutHelperButtonContent3IgeMak(this.f$0, this.f$1, str3, str4, (Composer) obj, iUpdateChangedFlags);
+                    SurfacesKt.m2595ShortcutHelperButtonContent3IgeMak(this.f$0, this.f$1, str3, str4, (Composer) obj, iUpdateChangedFlags);
                     return Unit.INSTANCE;
                 }
             };
@@ -732,7 +732,7 @@ public abstract class SurfacesKt {
     }
 
     /* renamed from: access$surface-XO-JAsU, reason: not valid java name */
-    public static final Modifier m2598access$surfaceXOJAsU(Modifier modifier, Shape shape, long j, BorderStroke borderStroke, float f) {
+    public static final Modifier m2596access$surfaceXOJAsU(Modifier modifier, Shape shape, long j, BorderStroke borderStroke, float f) {
         Modifier modifierThen = f > 0.0f ? modifier.then(GraphicsLayerModifierKt.m479graphicsLayer_6ThJ44$default(Modifier.Companion, 0.0f, 0.0f, 0.0f, f, 0.0f, shape, false, 0, 518111)) : modifier;
         if (borderStroke != null) {
             modifierThen = modifierThen.then(BorderKt.m29borderziNgDLE(Modifier.Companion, borderStroke.width, borderStroke.brush, shape));
@@ -741,7 +741,7 @@ public abstract class SurfacesKt {
     }
 
     /* renamed from: access$surfaceColorAtElevation-CLU3JFs, reason: not valid java name */
-    public static final long m2599access$surfaceColorAtElevationCLU3JFs(long j, float f, Composer composer) {
+    public static final long m2597access$surfaceColorAtElevationCLU3JFs(long j, float f, Composer composer) {
         ComposerImpl composerImpl = (ComposerImpl) composer;
         composerImpl.startReplaceGroup(1038469993);
         if (ComposerKt.isTraceInProgress()) {
@@ -756,7 +756,7 @@ public abstract class SurfacesKt {
         boolean zBooleanValue = ((Boolean) composerImpl.consume(ColorSchemeKt.LocalTonalElevationEnabled)).booleanValue();
         long j2 = colorScheme.surface;
         Color.Companion companion = Color.Companion;
-        if (ULong.m3447equalsimpl0(j, j2) && zBooleanValue) {
+        if (ULong.m3446equalsimpl0(j, j2) && zBooleanValue) {
             j = ColorSchemeKt.m261surfaceColorAtElevation3ABfNKs(colorScheme, f);
         }
         if (ComposerKt.isTraceInProgress()) {

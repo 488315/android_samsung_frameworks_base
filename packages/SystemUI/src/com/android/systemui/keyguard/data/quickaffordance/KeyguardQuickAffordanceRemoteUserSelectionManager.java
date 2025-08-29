@@ -165,7 +165,7 @@ public final class KeyguardQuickAffordanceRemoteUserSelectionManager implements 
 
     @Override // com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceSelectionManager
     /* renamed from: getSelections */
-    public final Flow mo2614getSelections() {
+    public final Flow mo2612getSelections() {
         return this.selections;
     }
 }

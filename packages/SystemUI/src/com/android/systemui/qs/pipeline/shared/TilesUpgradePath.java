@@ -33,7 +33,7 @@ public interface TilesUpgradePath {
         }
 
         /* renamed from: box-impl, reason: not valid java name */
-        public static final /* synthetic */ ReadFromSettings m2913boximpl(Set set) {
+        public static final /* synthetic */ ReadFromSettings m2911boximpl(Set set) {
             return new ReadFromSettings(set);
         }
 
@@ -58,7 +58,7 @@ public interface TilesUpgradePath {
         }
 
         /* renamed from: box-impl, reason: not valid java name */
-        public static final /* synthetic */ RestoreFromBackup m2914boximpl(Set set) {
+        public static final /* synthetic */ RestoreFromBackup m2912boximpl(Set set) {
             return new RestoreFromBackup(set);
         }
 

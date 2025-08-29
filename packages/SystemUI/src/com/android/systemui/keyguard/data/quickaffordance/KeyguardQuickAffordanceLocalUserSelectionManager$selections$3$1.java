@@ -63,7 +63,7 @@ final class KeyguardQuickAffordanceLocalUserSelectionManager$selections$3$1 exte
             onSharedPreferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() { // from class: com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceLocalUserSelectionManager$selections$3$1$listener$1
                 @Override // android.content.SharedPreferences.OnSharedPreferenceChangeListener
                 public final void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String str) {
-                    ((ChannelCoroutine) producerScope2).mo3476trySendJP2dKIU(keyguardQuickAffordanceLocalUserSelectionManager2.getSelections());
+                    ((ChannelCoroutine) producerScope2).mo3475trySendJP2dKIU(keyguardQuickAffordanceLocalUserSelectionManager2.getSelections());
                 }
             };
             this.this$0.sharedPrefs.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);

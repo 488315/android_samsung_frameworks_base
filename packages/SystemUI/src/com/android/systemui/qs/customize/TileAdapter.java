@@ -158,7 +158,7 @@ public class TileAdapter extends RecyclerView.Adapter {
     }
 
     /* renamed from: -$$Nest$mselectPosition, reason: not valid java name */
-    public static void m2901$$Nest$mselectPosition(TileAdapter tileAdapter, int i) {
+    public static void m2899$$Nest$mselectPosition(TileAdapter tileAdapter, int i) {
         if (tileAdapter.mAccessibilityAction == 1) {
             List list = tileAdapter.mTiles;
             int i2 = tileAdapter.mEditIndex;
@@ -439,7 +439,7 @@ public class TileAdapter extends RecyclerView.Adapter {
             qSTileViewImpl2.setOnClickListener(new View.OnClickListener() { // from class: com.android.systemui.qs.customize.TileAdapter.1
                 @Override // android.view.View.OnClickListener
                 public final void onClick(View view3) {
-                    TileAdapter.m2901$$Nest$mselectPosition(TileAdapter.this, holder.getLayoutPosition());
+                    TileAdapter.m2899$$Nest$mselectPosition(TileAdapter.this, holder.getLayoutPosition());
                 }
             });
             if (this.mNeedsFocus) {
@@ -512,7 +512,7 @@ public class TileAdapter extends RecyclerView.Adapter {
                         }
                         TileAdapter tileAdapter = TileAdapter.this;
                         if (tileAdapter.mAccessibilityAction != 0) {
-                            TileAdapter.m2901$$Nest$mselectPosition(tileAdapter, layoutPosition);
+                            TileAdapter.m2899$$Nest$mselectPosition(tileAdapter, layoutPosition);
                         }
                     }
                 });

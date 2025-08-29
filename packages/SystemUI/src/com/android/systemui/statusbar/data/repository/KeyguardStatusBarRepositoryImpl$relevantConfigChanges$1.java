@@ -49,12 +49,12 @@ final class KeyguardStatusBarRepositoryImpl$relevantConfigChanges$1 extends Susp
             final ?? r1 = new ConfigurationController.ConfigurationListener() { // from class: com.android.systemui.statusbar.data.repository.KeyguardStatusBarRepositoryImpl$relevantConfigChanges$1$callback$1
                 @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
                 public final void onDensityOrFontScaleChanged() {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                 }
 
                 @Override // com.android.systemui.statusbar.policy.ConfigurationController.ConfigurationListener
                 public final void onSmallestScreenWidthChanged() {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Unit.INSTANCE);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Unit.INSTANCE);
                 }
             };
             ((ConfigurationControllerImpl) this.$configurationController).addCallback(r1);

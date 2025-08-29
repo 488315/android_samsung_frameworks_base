@@ -32,7 +32,7 @@ public class PipExpandAnimator extends ValueAnimator {
     public final Rect mZeroInsets;
 
     /* renamed from: -$$Nest$monExpandAnimationUpdate, reason: not valid java name */
-    public static void m3275$$Nest$monExpandAnimationUpdate(PipExpandAnimator pipExpandAnimator, SurfaceControl.Transaction transaction, float f) {
+    public static void m3274$$Nest$monExpandAnimationUpdate(PipExpandAnimator pipExpandAnimator, SurfaceControl.Transaction transaction, float f) {
         Rect rectEvaluate = pipExpandAnimator.mInsetEvaluator.evaluate(f, pipExpandAnimator.mSourceRectHintInsets, pipExpandAnimator.mZeroInsets);
         int i = pipExpandAnimator.mRotation;
         if (i == 0) {
@@ -103,7 +103,7 @@ public class PipExpandAnimator extends ValueAnimator {
                 PipExpandAnimator pipExpandAnimator = PipExpandAnimator.this;
                 SurfaceControl.Transaction transaction3 = pipExpandAnimator.mFinishTransaction;
                 if (transaction3 != null) {
-                    PipExpandAnimator.m3275$$Nest$monExpandAnimationUpdate(pipExpandAnimator, transaction3, 1.0f);
+                    PipExpandAnimator.m3274$$Nest$monExpandAnimationUpdate(pipExpandAnimator, transaction3, 1.0f);
                 }
                 Runnable runnable = PipExpandAnimator.this.mAnimationEndCallback;
                 if (runnable != null) {
@@ -121,7 +121,7 @@ public class PipExpandAnimator extends ValueAnimator {
                 PipExpandAnimator pipExpandAnimator = PipExpandAnimator.this;
                 SurfaceControl.Transaction transaction3 = pipExpandAnimator.mStartTransaction;
                 if (transaction3 != null) {
-                    PipExpandAnimator.m3275$$Nest$monExpandAnimationUpdate(pipExpandAnimator, transaction3, 0.0f);
+                    PipExpandAnimator.m3274$$Nest$monExpandAnimationUpdate(pipExpandAnimator, transaction3, 0.0f);
                     PipExpandAnimator.this.mStartTransaction.apply();
                 }
             }
@@ -131,7 +131,7 @@ public class PipExpandAnimator extends ValueAnimator {
             @Override // android.animation.ValueAnimator.AnimatorUpdateListener
             public final void onAnimationUpdate(ValueAnimator valueAnimator) {
                 SurfaceControl.Transaction transaction3 = ((PipSurfaceTransactionHelper.VsyncSurfaceControlTransactionFactory) PipExpandAnimator.this.mSurfaceControlTransactionFactory).getTransaction();
-                PipExpandAnimator.m3275$$Nest$monExpandAnimationUpdate(PipExpandAnimator.this, transaction3, PipExpandAnimator.this.getAnimatedFraction());
+                PipExpandAnimator.m3274$$Nest$monExpandAnimationUpdate(PipExpandAnimator.this, transaction3, PipExpandAnimator.this.getAnimatedFraction());
                 transaction3.apply();
             }
         };

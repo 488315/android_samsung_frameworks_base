@@ -2462,7 +2462,7 @@ public final class AndroidComposeView extends ViewGroup implements Owner, ViewRo
         AndroidContentCaptureManager androidContentCaptureManager = this.contentCaptureManager;
         androidContentCaptureManager.currentSemanticsNodesInvalidated = true;
         if (androidContentCaptureManager.isEnabled$ui_release()) {
-            androidContentCaptureManager.boundsUpdateChannel.mo3476trySendJP2dKIU(Unit.INSTANCE);
+            androidContentCaptureManager.boundsUpdateChannel.mo3475trySendJP2dKIU(Unit.INSTANCE);
         }
     }
 

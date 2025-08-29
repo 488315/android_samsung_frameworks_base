@@ -14,7 +14,7 @@ public interface INeuralTranslationService extends IInterface {
 
     public class _Parcel {
         /* renamed from: -$$Nest$smreadTypedObject, reason: not valid java name */
-        public static Object m3330$$Nest$smreadTypedObject(Parcel parcel, Parcelable.Creator creator) {
+        public static Object m3329$$Nest$smreadTypedObject(Parcel parcel, Parcelable.Creator creator) {
             if (parcel.readInt() != 0) {
                 return creator.createFromParcel(parcel);
             }
@@ -22,7 +22,7 @@ public interface INeuralTranslationService extends IInterface {
         }
 
         /* renamed from: -$$Nest$smwriteTypedList, reason: not valid java name */
-        public static void m3331$$Nest$smwriteTypedList(Parcel parcel, List list) {
+        public static void m3330$$Nest$smwriteTypedList(Parcel parcel, List list) {
             if (list == null) {
                 parcel.writeInt(-1);
                 return;
@@ -200,7 +200,7 @@ public interface INeuralTranslationService extends IInterface {
                     parcel2.writeInt(zIsAvailableDirection ? 1 : 0);
                     return true;
                 case 8:
-                    String strIdentifyLanguage = identifyLanguage((Bundle) _Parcel.m3330$$Nest$smreadTypedObject(parcel, Bundle.CREATOR));
+                    String strIdentifyLanguage = identifyLanguage((Bundle) _Parcel.m3329$$Nest$smreadTypedObject(parcel, Bundle.CREATOR));
                     parcel2.writeNoException();
                     parcel2.writeString(strIdentifyLanguage);
                     return true;
@@ -224,7 +224,7 @@ public interface INeuralTranslationService extends IInterface {
                 case 12:
                     List listIdentifyLanguageAndGetCandidate = identifyLanguageAndGetCandidate();
                     parcel2.writeNoException();
-                    _Parcel.m3331$$Nest$smwriteTypedList(parcel2, listIdentifyLanguageAndGetCandidate);
+                    _Parcel.m3330$$Nest$smwriteTypedList(parcel2, listIdentifyLanguageAndGetCandidate);
                     return true;
                 case 13:
                     String strIdentifyLanguagePackCode = identifyLanguagePackCode();
@@ -237,7 +237,7 @@ public interface INeuralTranslationService extends IInterface {
                     parcel.readInt();
                     List listChunkText = chunkText();
                     parcel2.writeNoException();
-                    _Parcel.m3331$$Nest$smwriteTypedList(parcel2, listChunkText);
+                    _Parcel.m3330$$Nest$smwriteTypedList(parcel2, listChunkText);
                     return true;
                 case 15:
                     parcel.readString();

@@ -455,14 +455,13 @@ public final class SensitiveContentCoordinatorImpl extends Invalidator implement
         boolean zShouldHideNotiForAppLock;
         boolean z;
         boolean z2;
-        boolean z3;
-        boolean z4 = NotiRune.NOTI_LOCKSCREEN_ALWAYS_HIDE_SENSITIVE;
-        boolean z5 = false;
-        if (z4) {
+        boolean z3 = NotiRune.NOTI_LOCKSCREEN_ALWAYS_HIDE_SENSITIVE;
+        boolean z4 = false;
+        if (z3) {
             this.keyguardUpdateMonitor.setHasRedactedNotifications(false);
         }
         if (!isKeyguardGoingAway() || this.needUpdateNext) {
-            boolean z6 = true;
+            boolean z5 = true;
             if (this.statusBarStateController.getState() == 1 && this.keyguardUpdateMonitor.getUserUnlockedWithBiometricAndIsBypassing(this.selectedUserInteractor.getSelectedUserId())) {
                 return;
             }
@@ -471,42 +470,42 @@ public final class SensitiveContentCoordinatorImpl extends Invalidator implement
             NotificationLockscreenUserManagerImpl notificationLockscreenUserManagerImpl = (NotificationLockscreenUserManagerImpl) this.lockscreenUserManager;
             int i = notificationLockscreenUserManagerImpl.mCurrentUserId;
             boolean zIsLockscreenPublicMode = notificationLockscreenUserManagerImpl.isLockscreenPublicMode(i);
-            boolean z7 = (zIsLockscreenPublicMode && !((NotificationLockscreenUserManagerImpl) this.lockscreenUserManager).userAllowsPrivateNotificationsInPublic(i)) || zIsSensitiveStateActive;
+            boolean z6 = (zIsLockscreenPublicMode && !((NotificationLockscreenUserManagerImpl) this.lockscreenUserManager).userAllowsPrivateNotificationsInPublic(i)) || zIsSensitiveStateActive;
             boolean zIsDynamicallyUnlocked = this.dynamicPrivacyController.isDynamicallyUnlocked();
-            boolean zIsAllowPrivateNotificationsWhenUnsecure = z4 ? this.settingsHelper.isAllowPrivateNotificationsWhenUnsecure(i) : false;
+            boolean zIsAllowPrivateNotificationsWhenUnsecure = z3 ? this.settingsHelper.isAllowPrivateNotificationsWhenUnsecure(i) : false;
             FilteringSequence.AnonymousClass1 anonymousClass1 = SequencesKt___SequencesKt.filter(SensitiveContentCoordinatorKt.extractAllRepresentativeEntries(list), new SensitiveContentCoordinatorImpl$$ExternalSyntheticLambda0()).new AnonymousClass1();
             while (anonymousClass1.hasNext()) {
                 NotificationEntry notificationEntry = (NotificationEntry) anonymousClass1.next();
                 int identifier = notificationEntry.mSbn.getUser().getIdentifier();
-                boolean z8 = (zIsLockscreenPublicMode || ((NotificationLockscreenUserManagerImpl) this.lockscreenUserManager).isLockscreenPublicMode(identifier)) ? z6 : z5;
+                boolean z7 = (zIsLockscreenPublicMode || ((NotificationLockscreenUserManagerImpl) this.lockscreenUserManager).isLockscreenPublicMode(identifier)) ? z5 : z4;
                 if (NotiRune.NOTI_LOCKSCREEN_ALWAYS_HIDE_SENSITIVE && zIsAllowPrivateNotificationsWhenUnsecure) {
-                    if (z8) {
-                        z8 = !zIsDynamicallyUnlocked ? z6 : (identifier == i || identifier == -1) ? z5 : ((NotificationLockscreenUserManagerImpl) this.lockscreenUserManager).mUsersWithSeparateWorkChallenge.get(identifier, z5);
+                    if (z7) {
+                        z7 = !zIsDynamicallyUnlocked ? z5 : (identifier == i || identifier == -1) ? z4 : ((NotificationLockscreenUserManagerImpl) this.lockscreenUserManager).mUsersWithSeparateWorkChallenge.get(identifier, z4);
                     }
                 }
                 boolean zShouldProtectNotification = ((SensitiveNotificationProtectionControllerImpl) this.sensitiveNotificationProtectionController).shouldProtectNotification(notificationEntry);
-                boolean z9 = ((NotificationLockscreenUserManagerImpl) this.lockscreenUserManager).getRedactionType(notificationEntry) != 0 ? z6 : z5;
-                boolean z10 = (z8 && z9) ? z6 : z5;
+                boolean z8 = ((NotificationLockscreenUserManagerImpl) this.lockscreenUserManager).getRedactionType(notificationEntry) != 0 ? z5 : z4;
+                boolean z9 = (z7 && z8) ? z5 : z4;
                 ExpandableNotificationRow expandableNotificationRow = notificationEntry.row;
-                if (expandableNotificationRow == null || expandableNotificationRow.isInsignificantSummary() != z6) {
+                if (expandableNotificationRow == null || expandableNotificationRow.isInsignificantSummary() != z5) {
                     if (NotiRune.NOTI_SUBSCREEN_NOTIFICATION_FIFTH) {
-                        notificationEntry.mUserPublic = z8;
+                        notificationEntry.mUserPublic = z7;
                     }
-                    boolean z11 = NotiRune.NOTI_STYLE_APP_LOCK;
-                    if (z11) {
+                    boolean z10 = NotiRune.NOTI_STYLE_APP_LOCK;
+                    if (z10) {
                         zShouldHideNotiForAppLock = ((AppLockNotificationControllerImpl) this.appLockNotificationController).shouldHideNotiForAppLock(notificationEntry);
                         ExpandableNotificationRow expandableNotificationRow2 = notificationEntry.row;
                         if (expandableNotificationRow2 != null && expandableNotificationRow2.mShowPublicExpander != (!zShouldHideNotiForAppLock)) {
-                            expandableNotificationRow2.mShowPublicExpander = z3;
-                            expandableNotificationRow2.mPublicLayout.updateExpandButtonsDuringLayout(z3, false);
+                            expandableNotificationRow2.mShowPublicExpander = z2;
+                            expandableNotificationRow2.mPublicLayout.updateExpandButtons(z2);
                         }
                     } else {
                         zShouldHideNotiForAppLock = false;
                     }
-                    notificationEntry.setSensitive(z10 || zShouldProtectNotification || (z11 && zShouldHideNotiForAppLock), z7);
-                    boolean z12 = z9 || zShouldProtectNotification || (z11 && zShouldHideNotiForAppLock);
-                    if (notificationEntry.mRawValueHide != z12) {
-                        notificationEntry.mRawValueHide = z12;
+                    notificationEntry.setSensitive(z9 || zShouldProtectNotification || (z10 && zShouldHideNotiForAppLock), z6);
+                    boolean z11 = z8 || zShouldProtectNotification || (z10 && zShouldHideNotiForAppLock);
+                    if (notificationEntry.mRawValueHide != z11) {
+                        notificationEntry.mRawValueHide = z11;
                         Iterator it = notificationEntry.mOnHideRawValueChangedListeners.iterator();
                         while (it.hasNext()) {
                             ((OngoingActivityDataHelper$mOnHideRawValueChangedListener$1) ((NotificationEntry.OnHideRawValueChangedListener) it.next())).getClass();
@@ -525,20 +524,17 @@ public final class SensitiveContentCoordinatorImpl extends Invalidator implement
                         }
                     }
                     ExpandableNotificationRow expandableNotificationRow3 = notificationEntry.row;
-                    if (expandableNotificationRow3 == null || expandableNotificationRow3.mShowPublicExpander == (!zShouldProtectNotification)) {
-                        z = false;
-                    } else {
-                        expandableNotificationRow3.mShowPublicExpander = z2;
-                        z = false;
-                        expandableNotificationRow3.mPublicLayout.updateExpandButtonsDuringLayout(z2, false);
+                    if (expandableNotificationRow3 != null && expandableNotificationRow3.mShowPublicExpander != (!zShouldProtectNotification)) {
+                        expandableNotificationRow3.mShowPublicExpander = z;
+                        expandableNotificationRow3.mPublicLayout.updateExpandButtons(z);
                     }
-                    if (NotiRune.NOTI_LOCKSCREEN_ALWAYS_HIDE_SENSITIVE && !this.keyguardUpdateMonitor.hasRedactedNotifications() && z9) {
-                        this.keyguardUpdateMonitor.setHasRedactedNotifications(z9);
+                    if (NotiRune.NOTI_LOCKSCREEN_ALWAYS_HIDE_SENSITIVE && !this.keyguardUpdateMonitor.hasRedactedNotifications() && z8) {
+                        this.keyguardUpdateMonitor.setHasRedactedNotifications(z8);
                     }
-                    z5 = z;
-                    z6 = true;
+                    z4 = false;
+                    z5 = true;
                 } else {
-                    notificationEntry.setSensitive(z5, z7);
+                    notificationEntry.setSensitive(z4, z6);
                 }
             }
         }

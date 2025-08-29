@@ -365,7 +365,7 @@ public final class NotificationEntry extends ListEntry {
             NotificationContentView notificationContentView = expandableNotificationRow.mPrivateLayout;
             notificationContentView.mIsHeadsUp = z;
             notificationContentView.selectLayout(false, true);
-            notificationContentView.updateExpandButtonsDuringLayout(notificationContentView.mExpandable, false);
+            notificationContentView.updateExpandButtons(notificationContentView.mExpandable);
             if (expandableNotificationRow.mIsSummaryWithChildren) {
                 expandableNotificationRow.mChildrenContainer.updateGroupOverflow();
             }

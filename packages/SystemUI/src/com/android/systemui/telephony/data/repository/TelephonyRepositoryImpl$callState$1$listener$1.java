@@ -16,7 +16,7 @@ final /* synthetic */ class TelephonyRepositoryImpl$callState$1$listener$1 exten
     /* renamed from: invoke */
     public final Object mo781invoke(Object obj) {
         int iIntValue = ((Number) obj).intValue();
-        ((ChannelCoroutine) ((ProducerScope) this.receiver)).mo3476trySendJP2dKIU(Integer.valueOf(iIntValue));
+        ((ChannelCoroutine) ((ProducerScope) this.receiver)).mo3475trySendJP2dKIU(Integer.valueOf(iIntValue));
         return Unit.INSTANCE;
     }
 }

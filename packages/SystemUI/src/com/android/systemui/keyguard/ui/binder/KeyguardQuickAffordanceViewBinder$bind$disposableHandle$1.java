@@ -187,7 +187,7 @@ final class KeyguardQuickAffordanceViewBinder$bind$disposableHandle$1 extends Su
                                             float f = 2;
                                             ObjectAnimator objectAnimatorOfFloat = ObjectAnimator.ofFloat(imageView2, "translationX", (-dimensionPixelSize) / f, dimensionPixelSize / f);
                                             KeyguardBottomAreaVibrations.INSTANCE.getClass();
-                                            objectAnimatorOfFloat.m896setDuration(Duration.m3457getInWholeMillisecondsimpl(KeyguardBottomAreaVibrations.ShakeAnimationDuration));
+                                            objectAnimatorOfFloat.m896setDuration(Duration.m3456getInWholeMillisecondsimpl(KeyguardBottomAreaVibrations.ShakeAnimationDuration));
                                             objectAnimatorOfFloat.mInterpolator = new CycleInterpolator(KeyguardBottomAreaVibrations.ShakeAnimationCycles);
                                             final ImageView imageView4 = imageView2;
                                             objectAnimatorOfFloat.addListener(new Animator.AnimatorListener() { // from class: com.android.systemui.keyguard.ui.binder.KeyguardQuickAffordanceViewBinder$updateButton$2$onClick$$inlined$doOnEnd$1

@@ -334,7 +334,7 @@ public final class InfiniteGridLayout implements PaginatableGridLayout {
             composerImpl.updateRememberedValue(objRememberedValue8);
         }
         composerImpl.end(false);
-        SpannedGridsKt.m2584VerticalSpannedGridKhTvWYU(columns, fDimensionResource, fDimensionResource2, list5, null, (Function1) objRememberedValue8, ComposableLambdaKt.rememberComposableLambda(-1998267123, new Function7() { // from class: com.android.systemui.qs.panels.ui.compose.infinitegrid.InfiniteGridLayout.TileGrid.2
+        SpannedGridsKt.m2582VerticalSpannedGridKhTvWYU(columns, fDimensionResource, fDimensionResource2, list5, null, (Function1) objRememberedValue8, ComposableLambdaKt.rememberComposableLambda(-1998267123, new Function7() { // from class: com.android.systemui.qs.panels.ui.compose.infinitegrid.InfiniteGridLayout.TileGrid.2
             /* JADX WARN: Removed duplicated region for block: B:37:0x0098  */
             @Override // kotlin.jvm.functions.Function7
             /*

@@ -81,7 +81,7 @@ public abstract class MessageNano {
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public MessageNano m3289clone() throws CloneNotSupportedException {
+    public MessageNano m3288clone() throws CloneNotSupportedException {
         return (MessageNano) super.clone();
     }
 

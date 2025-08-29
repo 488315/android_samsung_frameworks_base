@@ -46,7 +46,7 @@ final class PrivacyChipRepositoryImpl$privacyItems$1 extends SuspendLambda imple
             PrivacyItemController.Callback callback = new PrivacyItemController.Callback() { // from class: com.android.systemui.shade.data.repository.PrivacyChipRepositoryImpl$privacyItems$1$callback$1
                 @Override // com.android.systemui.privacy.PrivacyItemController.Callback
                 public final void onPrivacyItemsChanged(List list) {
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(list);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(list);
                 }
             };
             this.this$0.privacyItemController.addCallback(callback);

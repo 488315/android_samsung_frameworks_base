@@ -119,7 +119,7 @@ public final class FromOccludedTransitionInteractor extends TransitionInteractor
             Duration.Companion companion = Duration.Companion;
             duration = DurationKt.toDuration(0, DurationUnit.MILLISECONDS);
         }
-        valueAnimator.setDuration(Duration.m3457getInWholeMillisecondsimpl(duration));
+        valueAnimator.setDuration(Duration.m3456getInWholeMillisecondsimpl(duration));
         return valueAnimator;
     }
 

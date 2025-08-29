@@ -108,14 +108,14 @@ public final class TileVisibilityInteractorImpl implements TileVisibilityInterac
                                 Context context = tileVisibilityInteractorImpl2.context;
                                 tileVisibilityInteractorImpl2.resourcePicker.resourcePickHelper.getTargetPicker().getClass();
                                 SecQSPanelResourceCommon.Companion.getClass();
-                                int iM2904int = SecQSPanelResourceCommon.Companion.m2904int(R.integer.sec_quick_qs_panel_max_columns, context);
+                                int iM2902int = SecQSPanelResourceCommon.Companion.m2902int(R.integer.sec_quick_qs_panel_max_columns, context);
                                 int tileIndex2 = tileVisibilityInteractorImpl2.getTileIndex("QQsWifiCallingTileIndex", intExtra, componentName, stringExtra4, defaultTiles2);
                                 if ("WifiCalling".equals(stringExtra4)) {
                                     if (z || i3 != -1) {
-                                        if (i3 != -1 && ((List) currentTilesInteractor2.getCurrentTiles().getValue()).size() < iM2904int) {
+                                        if (i3 != -1 && ((List) currentTilesInteractor2.getCurrentTiles().getValue()).size() < iM2902int) {
                                             currentTilesInteractor2.addTile(customTileSpecCreate, tileIndex2);
                                         }
-                                    } else if (tileIndex2 != -1 && tileIndex2 < iM2904int) {
+                                    } else if (tileIndex2 != -1 && tileIndex2 < iM2902int) {
                                         currentTilesInteractor2.addTile(customTileSpecCreate, tileIndex2);
                                     }
                                     qSPipelineLogger.logTileVisibilityUpdated(true, customTileSpecCreate, tileIndex2, QSType.QQS);

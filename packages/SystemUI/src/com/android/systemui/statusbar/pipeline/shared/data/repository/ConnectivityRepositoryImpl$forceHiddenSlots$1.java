@@ -77,7 +77,7 @@ final class ConnectivityRepositoryImpl$forceHiddenSlots$1 extends SuspendLambda 
                         if (str2 == null || (listSplit$default = StringsKt__StringsKt.split$default(str2, new String[]{","}, 0, 6)) == null || (setAccess$toSlotSet = ConnectivityRepositoryImpl.Companion.access$toSlotSet(ConnectivityRepositoryImpl.Companion, listSplit$default, connectivityRepositoryImpl2.connectivitySlots)) == null) {
                             setAccess$toSlotSet = connectivityRepositoryImpl2.defaultHiddenIcons;
                         }
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(setAccess$toSlotSet);
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(setAccess$toSlotSet);
                     }
                 }
             };

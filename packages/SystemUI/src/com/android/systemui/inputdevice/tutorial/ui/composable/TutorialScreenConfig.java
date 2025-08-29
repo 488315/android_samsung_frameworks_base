@@ -70,7 +70,7 @@ public final class TutorialScreenConfig {
             Colors colors = (Colors) obj;
             long j = colors.background;
             Color.Companion companion = Color.Companion;
-            return ULong.m3447equalsimpl0(this.background, j) && ULong.m3447equalsimpl0(this.title, colors.title) && ULong.m3447equalsimpl0(this.bodyText, colors.bodyText) && Intrinsics.areEqual(this.animationColors, colors.animationColors);
+            return ULong.m3446equalsimpl0(this.background, j) && ULong.m3446equalsimpl0(this.title, colors.title) && ULong.m3446equalsimpl0(this.bodyText, colors.bodyText) && Intrinsics.areEqual(this.animationColors, colors.animationColors);
         }
 
         public final int hashCode() {

@@ -461,10 +461,10 @@ public final class UserTileSpecRepository {
                 }
                 if (changeAction instanceof RestoreTiles) {
                     BufferedChannel bufferedChannel = userTileSpecRepository._tilesUpgradePath;
-                    TilesUpgradePath.RestoreFromBackup restoreFromBackupM2914boximpl = TilesUpgradePath.RestoreFromBackup.m2914boximpl(CollectionsKt___CollectionsKt.toSet(listApply));
+                    TilesUpgradePath.RestoreFromBackup restoreFromBackupM2912boximpl = TilesUpgradePath.RestoreFromBackup.m2912boximpl(CollectionsKt___CollectionsKt.toSet(listApply));
                     this.L$0 = listApply;
                     this.label = 1;
-                    if (bufferedChannel.send(restoreFromBackupM2914boximpl, this) == coroutineSingletons) {
+                    if (bufferedChannel.send(restoreFromBackupM2912boximpl, this) == coroutineSingletons) {
                         return coroutineSingletons;
                     }
                     list = listApply;
@@ -656,7 +656,7 @@ public final class UserTileSpecRepository {
             c09901.label = 3;
         } else {
             BufferedChannel bufferedChannel2 = this._tilesUpgradePath;
-            TilesUpgradePath.ReadFromSettings readFromSettingsM2913boximpl = TilesUpgradePath.ReadFromSettings.m2913boximpl(CollectionsKt___CollectionsKt.toSet(list2));
+            TilesUpgradePath.ReadFromSettings readFromSettingsM2911boximpl = TilesUpgradePath.ReadFromSettings.m2911boximpl(CollectionsKt___CollectionsKt.toSet(list2));
             c09901.L$0 = this;
             c09901.L$1 = list2;
             c09901.I$0 = i;

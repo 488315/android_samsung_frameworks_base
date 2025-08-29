@@ -15,7 +15,7 @@ public final /* synthetic */ class EmergencyButtonController$$ExternalSyntheticL
     }
 
     @Override // java.lang.Runnable
-    public final void run() throws NumberFormatException {
+    public final void run() {
         switch (this.$r8$classId) {
             case 0:
                 EmergencyButtonController emergencyButtonController = this.f$0;

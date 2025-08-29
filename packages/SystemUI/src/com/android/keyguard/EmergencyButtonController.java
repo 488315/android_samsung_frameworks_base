@@ -155,7 +155,7 @@ public class EmergencyButtonController extends ViewController {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static void $r8$lambda$W1zTNNSQ2hmvDBkhwJsvlM1sA5k(EmergencyButtonController emergencyButtonController, boolean z, boolean z2) throws NumberFormatException {
+    public static void $r8$lambda$W1zTNNSQ2hmvDBkhwJsvlM1sA5k(EmergencyButtonController emergencyButtonController, boolean z, boolean z2) {
         boolean z3;
         boolean zIsOutOfService;
         boolean zIsAirplaneModeOn;

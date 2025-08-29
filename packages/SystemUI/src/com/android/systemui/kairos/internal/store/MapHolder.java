@@ -17,7 +17,7 @@ public final class MapHolder implements MapK, Map, KMappedMarker {
     }
 
     /* renamed from: box-impl, reason: not valid java name */
-    public static final /* synthetic */ MapHolder m2586boximpl(Map map) {
+    public static final /* synthetic */ MapHolder m2584boximpl(Map map) {
         return new MapHolder(map);
     }
 

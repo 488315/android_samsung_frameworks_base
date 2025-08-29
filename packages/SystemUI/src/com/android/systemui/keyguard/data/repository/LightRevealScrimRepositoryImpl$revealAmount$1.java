@@ -54,7 +54,7 @@ final class LightRevealScrimRepositoryImpl$revealAmount$1 extends SuspendLambda 
                 public final void onAnimationUpdate(Animator animator) {
                     Float f = (Float) ((ValueAnimator) animator).getAnimatedValue();
                     float fFloatValue = f.floatValue();
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(f);
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(f);
                     if (fFloatValue <= 0.0f || fFloatValue >= 1.0f) {
                         ScrimLogger scrimLogger = lightRevealScrimRepositoryImpl.scrimLogger;
                         LightRevealScrimRepositoryImpl.Companion.getClass();

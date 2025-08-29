@@ -63,13 +63,13 @@ public final class HearingDevicesTileDataInteractor implements QSTileDataInterac
                     @Override // com.android.systemui.statusbar.policy.BluetoothController.Callback
                     public final void onBluetoothDevicesChanged() {
                         HearingDevicesChecker hearingDevicesChecker = hearingDevicesTileDataInteractor.hearingDevicesChecker;
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new HearingDevicesTileModel(hearingDevicesChecker.isAnyActiveHearingDevice(), hearingDevicesChecker.isAnyPairedHearingDevice()));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new HearingDevicesTileModel(hearingDevicesChecker.isAnyActiveHearingDevice(), hearingDevicesChecker.isAnyPairedHearingDevice()));
                     }
 
                     @Override // com.android.systemui.statusbar.policy.BluetoothController.Callback
                     public final void onBluetoothStateChange(boolean z) {
                         HearingDevicesChecker hearingDevicesChecker = hearingDevicesTileDataInteractor.hearingDevicesChecker;
-                        ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(new HearingDevicesTileModel(hearingDevicesChecker.isAnyActiveHearingDevice(), hearingDevicesChecker.isAnyPairedHearingDevice()));
+                        ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(new HearingDevicesTileModel(hearingDevicesChecker.isAnyActiveHearingDevice(), hearingDevicesChecker.isAnyPairedHearingDevice()));
                     }
                 };
                 HearingDevicesTileDataInteractor.this.bluetoothController.addCallback(r1);

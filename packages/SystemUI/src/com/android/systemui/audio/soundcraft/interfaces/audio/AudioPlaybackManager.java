@@ -61,9 +61,9 @@ public final class AudioPlaybackManager {
             concurrentHashMap = PlaybackPackageUtils.gamePackageHashMap;
         } catch (Throwable th) {
             int i2 = Result.$r8$clinit;
-            Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(new Result.Failure(th));
-            if (thM3442exceptionOrNullimpl != null) {
-                thM3442exceptionOrNullimpl.printStackTrace();
+            Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(new Result.Failure(th));
+            if (thM3441exceptionOrNullimpl != null) {
+                thM3441exceptionOrNullimpl.printStackTrace();
             }
         }
         if (concurrentHashMap.containsKey(str)) {

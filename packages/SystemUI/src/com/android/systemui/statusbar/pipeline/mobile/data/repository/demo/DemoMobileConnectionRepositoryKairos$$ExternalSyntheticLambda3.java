@@ -145,10 +145,10 @@ public final /* synthetic */ class DemoMobileConnectionRepositoryKairos$$Externa
                 return Boolean.valueOf(((FakeNetworkEventModel.Mobile) obj2).inflateStrength);
             case 15:
                 int i17 = DemoMobileConnectionRepositoryKairos.$r8$clinit;
-                return Either.First.m2588boximpl((FakeNetworkEventModel.Mobile) obj2);
+                return Either.First.m2586boximpl((FakeNetworkEventModel.Mobile) obj2);
             case 16:
                 int i18 = DemoMobileConnectionRepositoryKairos.$r8$clinit;
-                return Either.Second.m2589boximpl((FakeWifiEventModel.CarrierMerged) obj2);
+                return Either.Second.m2587boximpl((FakeWifiEventModel.CarrierMerged) obj2);
             case 17:
                 int i19 = DemoMobileConnectionRepositoryKairos.$r8$clinit;
                 return Boolean.valueOf(((FakeNetworkEventModel.Mobile) obj2).ntn);

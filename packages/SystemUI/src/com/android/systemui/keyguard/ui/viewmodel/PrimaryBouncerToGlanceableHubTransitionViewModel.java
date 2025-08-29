@@ -22,7 +22,7 @@ public final class PrimaryBouncerToGlanceableHubTransitionViewModel implements D
         FromPrimaryBouncerTransitionInteractor.Companion.getClass();
         long j = FromPrimaryBouncerTransitionInteractor.TO_GLANCEABLE_HUB_DURATION;
         Edge.Companion.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.PRIMARY_BOUNCER, KeyguardState.GLANCEABLE_HUB, keyguardTransitionAnimationFlow.m2615setupVtjQ1oo(j, Edge.INVALID));
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM = AlternateBouncerToGoneTransitionViewModel$$ExternalSyntheticOutline0.m(KeyguardState.PRIMARY_BOUNCER, KeyguardState.GLANCEABLE_HUB, keyguardTransitionAnimationFlow.m2613setupVtjQ1oo(j, Edge.INVALID));
         this.transitionAnimation = flowBuilderM;
         this.deviceEntryParentViewAlpha = flowBuilderM.immediatelyTransitionTo(1.0f);
         this.windowBlurRadius = flowBuilderM.immediatelyTransitionTo(blurConfig.minBlurRadiusPx);

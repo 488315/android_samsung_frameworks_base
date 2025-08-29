@@ -100,7 +100,7 @@ public abstract class SwitchKt {
             long j = z ? seslSwitchColors.uncheckedThumbColor : seslSwitchColors.disabledUncheckedThumbColor;
             long j2 = z ? seslSwitchColors.checkedThumbColor : seslSwitchColors.disabledCheckedThumbColor;
             Color.Companion companion2 = Color.Companion;
-            State stateM7animateColorAsStateeuL9pac = SingleValueAnimationKt.m7animateColorAsStateeuL9pac(ColorUtilKt.m3359lerpIbeAmgk(j, j2, f), null, "", composerImpl, 384, 10);
+            State stateM7animateColorAsStateeuL9pac = SingleValueAnimationKt.m7animateColorAsStateeuL9pac(ColorUtilKt.m3358lerpIbeAmgk(j, j2, f), null, "", composerImpl, 384, 10);
             composerImpl = composerImpl;
             Modifier modifierM136requiredSize3ABfNKs = SizeKt.m136requiredSize3ABfNKs(modifier, f3);
             Alignment.Companion.getClass();
@@ -167,9 +167,9 @@ public abstract class SwitchKt {
             long j = z ? seslSwitchColors.checkedTrackColor : seslSwitchColors.disabledCheckedTrackColor;
             long j2 = z ? seslSwitchColors.uncheckedTrackColor : seslSwitchColors.disabledUncheckedTrackColor;
             Color.Companion companion = Color.Companion;
-            long jM3359lerpIbeAmgk = ColorUtilKt.m3359lerpIbeAmgk(j2, j, f);
+            long jM3358lerpIbeAmgk = ColorUtilKt.m3358lerpIbeAmgk(j2, j, f);
             if (z) {
-                j = jM3359lerpIbeAmgk;
+                j = jM3358lerpIbeAmgk;
             } else if (f < 0.5f) {
                 j = j2;
             }

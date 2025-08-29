@@ -14,7 +14,7 @@ public interface IDpsC2pa extends IInterface {
 
     public class _Parcel {
         /* renamed from: -$$Nest$smwriteTypedObject, reason: not valid java name */
-        public static void m3332$$Nest$smwriteTypedObject(Parcel parcel, Parcelable parcelable) {
+        public static void m3331$$Nest$smwriteTypedObject(Parcel parcel, Parcelable parcelable) {
             if (parcelable == null) {
                 parcel.writeInt(0);
             } else {
@@ -95,7 +95,7 @@ public interface IDpsC2pa extends IInterface {
                 Parcel parcelObtain2 = Parcel.obtain();
                 try {
                     parcelObtain.writeInterfaceToken("com.samsung.android.visual.ai.sdkcommon.IDpsC2pa");
-                    _Parcel.m3332$$Nest$smwriteTypedObject(parcelObtain, bundle);
+                    _Parcel.m3331$$Nest$smwriteTypedObject(parcelObtain, bundle);
                     parcelObtain.writeStrongInterface(iC2paEmbedCallback);
                     this.mRemote.transact(8, parcelObtain, parcelObtain2, 0);
                     parcelObtain2.readException();
@@ -111,7 +111,7 @@ public interface IDpsC2pa extends IInterface {
                 Parcel parcelObtain2 = Parcel.obtain();
                 try {
                     parcelObtain.writeInterfaceToken("com.samsung.android.visual.ai.sdkcommon.IDpsC2pa");
-                    _Parcel.m3332$$Nest$smwriteTypedObject(parcelObtain, bundle);
+                    _Parcel.m3331$$Nest$smwriteTypedObject(parcelObtain, bundle);
                     parcelObtain.writeStrongInterface(iC2paManifestsCallback);
                     this.mRemote.transact(7, parcelObtain, parcelObtain2, 0);
                     parcelObtain2.readException();
@@ -127,7 +127,7 @@ public interface IDpsC2pa extends IInterface {
                 Parcel parcelObtain2 = Parcel.obtain();
                 try {
                     parcelObtain.writeInterfaceToken("com.samsung.android.visual.ai.sdkcommon.IDpsC2pa");
-                    _Parcel.m3332$$Nest$smwriteTypedObject(parcelObtain, bundle);
+                    _Parcel.m3331$$Nest$smwriteTypedObject(parcelObtain, bundle);
                     this.mRemote.transact(10, parcelObtain, parcelObtain2, 0);
                     parcelObtain2.readException();
                     return parcelObtain2.readInt() != 0;
@@ -143,7 +143,7 @@ public interface IDpsC2pa extends IInterface {
                 Parcel parcelObtain2 = Parcel.obtain();
                 try {
                     parcelObtain.writeInterfaceToken("com.samsung.android.visual.ai.sdkcommon.IDpsC2pa");
-                    _Parcel.m3332$$Nest$smwriteTypedObject(parcelObtain, bundle);
+                    _Parcel.m3331$$Nest$smwriteTypedObject(parcelObtain, bundle);
                     this.mRemote.transact(9, parcelObtain, parcelObtain2, 0);
                     parcelObtain2.readException();
                     return parcelObtain2.readString();

@@ -41,7 +41,7 @@ public final class BouncerToGoneFlows {
     }
 
     /* renamed from: createScrimAlphaFlow-KLykuaI, reason: not valid java name */
-    public final ChannelFlowTransformLatest m2621createScrimAlphaFlowKLykuaI(long j, KeyguardState keyguardState, Function0 function0) {
+    public final ChannelFlowTransformLatest m2619createScrimAlphaFlowKLykuaI(long j, KeyguardState keyguardState, Function0 function0) {
         Edge stateToContent;
         Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
         Ref$BooleanRef ref$BooleanRef2 = new Ref$BooleanRef();
@@ -55,11 +55,11 @@ public final class BouncerToGoneFlows {
             companion.getClass();
             stateToContent = new Edge.StateToContent(keyguardState, sceneKey);
         }
-        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM2615setupVtjQ1oo = this.animationFlow.m2615setupVtjQ1oo(j, stateToContent);
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM2613setupVtjQ1oo = this.animationFlow.m2613setupVtjQ1oo(j, stateToContent);
         Edge.Companion companion2 = Edge.Companion;
         KeyguardState keyguardState2 = KeyguardState.GONE;
         companion2.getClass();
-        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilder = flowBuilderM2615setupVtjQ1oo.setupWithoutSceneContainer(new Edge.StateToState(keyguardState, keyguardState2));
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilder = flowBuilderM2613setupVtjQ1oo.setupWithoutSceneContainer(new Edge.StateToState(keyguardState, keyguardState2));
         final StateFlow anyExpansion = ((ShadeInteractorImpl) this.shadeInteractor).baseShadeInteractor.getAnyExpansion();
         return FlowKt.transformLatest(FlowKt.distinctUntilChanged(new Flow() { // from class: com.android.systemui.keyguard.ui.viewmodel.BouncerToGoneFlows$createScrimAlphaFlow-KLykuaI$$inlined$map$1
 
@@ -134,7 +134,7 @@ public final class BouncerToGoneFlows {
     }
 
     /* renamed from: showAllNotifications-VtjQ1oo, reason: not valid java name */
-    public final Flow m2622showAllNotificationsVtjQ1oo(long j, KeyguardState keyguardState) {
+    public final Flow m2620showAllNotificationsVtjQ1oo(long j, KeyguardState keyguardState) {
         Edge stateToContent;
         final Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();
         if (keyguardState == KeyguardState.PRIMARY_BOUNCER) {
@@ -146,11 +146,11 @@ public final class BouncerToGoneFlows {
             companion.getClass();
             stateToContent = new Edge.StateToContent(keyguardState, sceneKey);
         }
-        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM2615setupVtjQ1oo = this.animationFlow.m2615setupVtjQ1oo(j, stateToContent);
+        KeyguardTransitionAnimationFlow.FlowBuilder flowBuilderM2613setupVtjQ1oo = this.animationFlow.m2613setupVtjQ1oo(j, stateToContent);
         Edge.Companion companion2 = Edge.Companion;
         KeyguardState keyguardState2 = KeyguardState.GONE;
         companion2.getClass();
-        final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2616sharedFlow74qcysc$default = KeyguardTransitionAnimationFlow.FlowBuilder.m2616sharedFlow74qcysc$default(flowBuilderM2615setupVtjQ1oo.setupWithoutSceneContainer(new Edge.StateToState(keyguardState, keyguardState2)), j, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.BouncerToGoneFlows$$ExternalSyntheticLambda0
+        final KeyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1 keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2614sharedFlow74qcysc$default = KeyguardTransitionAnimationFlow.FlowBuilder.m2614sharedFlow74qcysc$default(flowBuilderM2613setupVtjQ1oo.setupWithoutSceneContainer(new Edge.StateToState(keyguardState, keyguardState2)), j, new Function1() { // from class: com.android.systemui.keyguard.ui.viewmodel.BouncerToGoneFlows$$ExternalSyntheticLambda0
             @Override // kotlin.jvm.functions.Function1
             /* renamed from: invoke */
             public final Object mo781invoke(Object obj) {
@@ -230,7 +230,7 @@ public final class BouncerToGoneFlows {
 
             @Override // kotlinx.coroutines.flow.Flow
             public final Object collect(FlowCollector flowCollector, Continuation continuation) {
-                Object objCollect = keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2616sharedFlow74qcysc$default.collect(new AnonymousClass2(flowCollector), continuation);
+                Object objCollect = keyguardTransitionAnimationFlow$FlowBuilder$sharedFlow74qcysc$$inlined$mapNotNull$1M2614sharedFlow74qcysc$default.collect(new AnonymousClass2(flowCollector), continuation);
                 return objCollect == CoroutineSingletons.COROUTINE_SUSPENDED ? objCollect : Unit.INSTANCE;
             }
         });

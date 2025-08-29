@@ -114,6 +114,7 @@ public class ExpandableNotificationRowController implements NotifViewController 
                     notificationContentView.mBubblesEnabledForUser = "1".equals(str);
                     notificationContentView.applyBubbleAction(notificationContentView.mExpandedChild, notificationContentView.mNotificationEntry);
                     notificationContentView.applyBubbleAction(notificationContentView.mHeadsUpChild, notificationContentView.mNotificationEntry);
+                    notificationContentView.updateSystemActionsMargin();
                 }
             }
         }

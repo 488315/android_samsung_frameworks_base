@@ -73,9 +73,9 @@ public final class GWStubPluginStateRequester extends GWStubServiceRequester {
                         int i3 = Result.$r8$clinit;
                         failure = new Result.Failure(th);
                     }
-                    Throwable thM3442exceptionOrNullimpl = Result.m3442exceptionOrNullimpl(failure);
-                    if (thM3442exceptionOrNullimpl != null) {
-                        Log.e("SoundCraft.wearable.GWStubPluginStateRequester", "failed : e=" + thM3442exceptionOrNullimpl);
+                    Throwable thM3441exceptionOrNullimpl = Result.m3441exceptionOrNullimpl(failure);
+                    if (thM3441exceptionOrNullimpl != null) {
+                        Log.e("SoundCraft.wearable.GWStubPluginStateRequester", "failed : e=" + thM3441exceptionOrNullimpl);
                         function12.mo781invoke(EmptyList.INSTANCE);
                     }
                 }
@@ -101,7 +101,7 @@ public final class GWStubPluginStateRequester extends GWStubServiceRequester {
             int i2 = Result.$r8$clinit;
             failure = new Result.Failure(th);
         }
-        if (Result.m3442exceptionOrNullimpl(failure) != null) {
+        if (Result.m3441exceptionOrNullimpl(failure) != null) {
             Log.e("SoundCraft.wearable.GWStubPluginStateRequester", "execute : onFailure");
         }
     }

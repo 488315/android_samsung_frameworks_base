@@ -339,7 +339,7 @@ public abstract class SurfaceKt {
         boolean zBooleanValue = ((Boolean) ((ComposerImpl) composer).consume(ColorSchemeKt.LocalTonalElevationEnabled)).booleanValue();
         long j2 = colorScheme.surface;
         Color.Companion companion = Color.Companion;
-        if (ULong.m3447equalsimpl0(j, j2) && zBooleanValue) {
+        if (ULong.m3446equalsimpl0(j, j2) && zBooleanValue) {
             j = ColorSchemeKt.m261surfaceColorAtElevation3ABfNKs(colorScheme, f);
         }
         if (ComposerKt.isTraceInProgress()) {

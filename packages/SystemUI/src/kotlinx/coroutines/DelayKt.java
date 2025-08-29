@@ -83,8 +83,8 @@ public abstract class DelayKt {
     }
 
     /* renamed from: delay-VtjQ1oo, reason: not valid java name */
-    public static final Object m3469delayVtjQ1oo(long j, Continuation continuation) {
-        Object objDelay = delay(m3470toDelayMillisLRDsOJo(j), continuation);
+    public static final Object m3468delayVtjQ1oo(long j, Continuation continuation) {
+        Object objDelay = delay(m3469toDelayMillisLRDsOJo(j), continuation);
         return objDelay == CoroutineSingletons.COROUTINE_SUSPENDED ? objDelay : Unit.INSTANCE;
     }
 
@@ -95,11 +95,11 @@ public abstract class DelayKt {
     }
 
     /* renamed from: toDelayMillis-LRDsOJo, reason: not valid java name */
-    public static final long m3470toDelayMillisLRDsOJo(long j) {
+    public static final long m3469toDelayMillisLRDsOJo(long j) {
         Duration.Companion companion = Duration.Companion;
         boolean z = j > 0;
         if (z) {
-            return Duration.m3457getInWholeMillisecondsimpl(Duration.m3461plusLRDsOJo(j, DurationKt.toDuration(999999L, DurationUnit.NANOSECONDS)));
+            return Duration.m3456getInWholeMillisecondsimpl(Duration.m3460plusLRDsOJo(j, DurationKt.toDuration(999999L, DurationUnit.NANOSECONDS)));
         }
         if (z) {
             throw new NoWhenBranchMatchedException();

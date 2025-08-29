@@ -49,7 +49,7 @@ public class DataUsageLabelView extends DataUsageLabelCommonView {
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
-    public static String m3097$$Nest$mgetDataUsageResult(DataUsageLabelView dataUsageLabelView) throws Throwable {
+    public static String m3095$$Nest$mgetDataUsageResult(DataUsageLabelView dataUsageLabelView) throws Throwable {
         Exception exc;
         String str;
         Throwable th;
@@ -225,7 +225,7 @@ public class DataUsageLabelView extends DataUsageLabelCommonView {
                 @Override // java.lang.Thread, java.lang.Runnable
                 public final void run() {
                     DataUsageLabelView dataUsageLabelView = DataUsageLabelView.this;
-                    dataUsageLabelView.mDataUsage = DataUsageLabelView.m3097$$Nest$mgetDataUsageResult(dataUsageLabelView);
+                    dataUsageLabelView.mDataUsage = DataUsageLabelView.m3095$$Nest$mgetDataUsageResult(dataUsageLabelView);
                     DataUsageLabelView dataUsageLabelView2 = DataUsageLabelView.this;
                     dataUsageLabelView2.mHandler.post(dataUsageLabelView2.mUpdateRunnable);
                 }

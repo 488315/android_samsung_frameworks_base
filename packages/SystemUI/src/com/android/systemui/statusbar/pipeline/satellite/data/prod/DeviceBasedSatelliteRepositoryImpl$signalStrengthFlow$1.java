@@ -64,7 +64,7 @@ final class DeviceBasedSatelliteRepositoryImpl$signalStrengthFlow$1 extends Susp
                     logMessageObtain.setInt1(ntnSignalStrength.getLevel());
                     Unit unit = Unit.INSTANCE;
                     logBuffer.commit(logMessageObtain);
-                    ((ChannelCoroutine) producerScope).mo3476trySendJP2dKIU(Integer.valueOf(ntnSignalStrength.getLevel()));
+                    ((ChannelCoroutine) producerScope).mo3475trySendJP2dKIU(Integer.valueOf(ntnSignalStrength.getLevel()));
                 }
             };
             Ref$BooleanRef ref$BooleanRef = new Ref$BooleanRef();

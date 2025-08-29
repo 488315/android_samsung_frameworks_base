@@ -97,7 +97,7 @@ public final class MobileSignalTransitionManager {
                 }
                 MobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$1 mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$1 = this.updateCallback;
                 mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$1.getClass();
-                ((ChannelCoroutine) mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$1.$$this$conflatedCallbackFlow).mo3476trySendJP2dKIU(-1);
+                ((ChannelCoroutine) mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$1.$$this$conflatedCallbackFlow).mo3475trySendJP2dKIU(-1);
                 return;
             }
             MobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$1 mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$12 = this.updateCallback;
@@ -155,7 +155,7 @@ public final class MobileSignalTransitionManager {
         }
         MobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$1 mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$14 = this.updateCallback;
         mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$14.getClass();
-        ((ChannelCoroutine) mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$14.$$this$conflatedCallbackFlow).mo3476trySendJP2dKIU(Integer.valueOf(this.currentSignalStrength));
+        ((ChannelCoroutine) mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$14.$$this$conflatedCallbackFlow).mo3475trySendJP2dKIU(Integer.valueOf(this.currentSignalStrength));
         MobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$1 mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$15 = this.updateCallback;
         mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$15.getClass();
         final MobileIconInteractorImpl mobileIconInteractorImpl3 = mobileIconInteractorImpl$signalLevelUpdate$1$mSignalUpdateCallback$15.this$0;

@@ -8,7 +8,7 @@ public final class ValueParserKt$parseString$1 implements ValueParser {
 
     @Override // com.android.systemui.statusbar.commandline.ValueParser
     /* renamed from: parseValue-IoAF18A */
-    public final Object mo2565parseValueIoAF18A(String str) {
+    public final Object mo2563parseValueIoAF18A(String str) {
         int i = Result.$r8$clinit;
         return str;
     }

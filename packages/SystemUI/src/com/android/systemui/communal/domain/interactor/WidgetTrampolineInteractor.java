@@ -333,7 +333,7 @@ public final class WidgetTrampolineInteractor {
 
     /* JADX WARN: Code restructure failed: missing block: B:38:0x00bd, code lost:
     
-        if (kotlinx.coroutines.DelayKt.m3469delayVtjQ1oo(r5, r0) != r1) goto L13;
+        if (kotlinx.coroutines.DelayKt.m3468delayVtjQ1oo(r5, r0) != r1) goto L13;
      */
     /* JADX WARN: Path cross not found for [B:27:0x0086, B:30:0x0090], limit reached: 41 */
     /* JADX WARN: Removed duplicated region for block: B:20:0x0063  */
@@ -551,8 +551,8 @@ public final class WidgetTrampolineInteractor {
             long duration = DurationKt.toDuration(1, DurationUnit.SECONDS);
             C08382 c08382 = new C08382(jCurrentTimeMillis, null);
             c08371.label = 1;
-            Object objM3471withTimeoutKLykuaI = TimeoutKt.m3471withTimeoutKLykuaI(duration, c08382, c08371);
-            return objM3471withTimeoutKLykuaI == coroutineSingletons ? coroutineSingletons : objM3471withTimeoutKLykuaI;
+            Object objM3470withTimeoutKLykuaI = TimeoutKt.m3470withTimeoutKLykuaI(duration, c08382, c08371);
+            return objM3470withTimeoutKLykuaI == coroutineSingletons ? coroutineSingletons : objM3470withTimeoutKLykuaI;
         } catch (TimeoutCancellationException unused) {
             return Boolean.FALSE;
         }

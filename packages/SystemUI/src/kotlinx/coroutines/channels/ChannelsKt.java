@@ -18,8 +18,8 @@ public abstract class ChannelsKt {
     }
 
     public static final void trySendBlocking(SendChannel sendChannel, Object obj) {
-        Object objMo3476trySendJP2dKIU = sendChannel.mo3476trySendJP2dKIU(obj);
-        if (objMo3476trySendJP2dKIU instanceof ChannelResult.Failed) {
+        Object objMo3475trySendJP2dKIU = sendChannel.mo3475trySendJP2dKIU(obj);
+        if (objMo3475trySendJP2dKIU instanceof ChannelResult.Failed) {
             Object obj2 = ((ChannelResult) BuildersKt.runBlocking(EmptyCoroutineContext.INSTANCE, new ChannelsKt__ChannelsKt$trySendBlocking$2(sendChannel, obj, null))).holder;
         } else {
             ChannelResult.Companion companion = ChannelResult.Companion;
